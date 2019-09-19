@@ -35,4 +35,7 @@ void taskMain()
 // main operation function. will be called upon software boot.
 int main()
 {
+	xTaskHandle taskMainHandle;
+	int i = 10;
+
 }

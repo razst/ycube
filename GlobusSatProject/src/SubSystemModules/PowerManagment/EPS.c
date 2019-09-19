@@ -25,7 +25,7 @@ int GetBatteryVoltage(voltage_t *vbatt)
 
 int EPS_Init()
 {
-	IsisSolarPanelv2_initialize()
+	//IsisSolarPanelv2_initialize()
 	return 0;
 }
 
