@@ -15,6 +15,7 @@
 // y[i] = a * x[i] +(1-a) * y[i-1]
 voltage_t prev_avg = 0;		// y[i-1]
 float alpha = 0;			//<! smoothing constant
+int error;
 
 voltage_t eps_threshold_voltages[NUMBER_OF_THRESHOLD_VOLTAGES];	// saves the current EPS logic threshold voltages
 
@@ -25,7 +26,12 @@ int GetBatteryVoltage(voltage_t *vbatt)
 
 int EPS_Init()
 {
-	IsisSolarPanelv2_initialize()
+
+	error = IsisEPS_initialize(&EPS_I2C_ADDR);
+	logError(error);
+
+	error = IsisSolarPanelv2_initialize(slave0_spi);
+	logError(error);
 	return 0;
 }
 
