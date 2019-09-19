@@ -38,7 +38,7 @@ src/InitSystem.d: ../src/InitSystem.c \
  ../src/SubSystemModules/Maintenance/Maintenance.h ../src/InitSystem.h \
  ../src/TLM_management.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hal/include/hal/Boolean.h \
- C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/GomEPS.h
+ C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisEPS.h
 
 C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/freertos/include/freertos/FreeRTOS.h:
 
@@ -122,4 +122,4 @@ C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subs
 
 C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hal/include/hal/Boolean.h:
 
-C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/GomEPS.h:
+C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisEPS.h:
