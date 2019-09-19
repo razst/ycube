@@ -96,8 +96,10 @@ C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_rand.o)
                               C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o) (psp_getrand)
 C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_rtc.o)
                               C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o) (psp_getcurrenttimedate)
-C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
-                              ./src/TestingDemos/TrxvuTestingDemo.o (GomEpsResetWDT)
+C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+                              ./src/SubSystemModules/PowerManagment/EPS.o (IsisEPS_initialize)
+C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+                              ./src/SubSystemModules/PowerManagment/EPS.o (IsisSolarPanelv2_initialize)
 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o)
                               ./src/TestingDemos/TrxvuTestingDemo.o (IsisTrxvu_initialize)
 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXCommon.o)
@@ -224,6 +226,7 @@ state               0x1               ./src/SubSystemModules/PowerManagment/EPSO
 f_format_progress   0x4               C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o)
 eps_threshold_voltages
                     0xc               ./src/SubSystemModules/PowerManagment/EPS.o
+error               0x4               ./src/SubSystemModules/PowerManagment/EPS.o
 
 Discarded input sections
 
@@ -557,7 +560,7 @@ Discarded input sections
  .text.TestBeaconLogic
                 0x00000000       0xd8 ./src/TestingDemos/TrxvuTestingDemo.o
  .text.TestMuteTrxvu
-                0x00000000      0x120 ./src/TestingDemos/TrxvuTestingDemo.o
+                0x00000000      0x128 ./src/TestingDemos/TrxvuTestingDemo.o
  .text.TestUnMuteTrxvu
                 0x00000000       0x30 ./src/TestingDemos/TrxvuTestingDemo.o
  .text.TestGetNumberOfFramesInBuffer
@@ -572,25 +575,25 @@ Discarded input sections
                 0x00000000      0x28c ./src/TestingDemos/TrxvuTestingDemo.o
  .text.MainTrxvuTestBench
                 0x00000000       0x44 ./src/TestingDemos/TrxvuTestingDemo.o
- .debug_info    0x00000000      0x8bf ./src/TestingDemos/TrxvuTestingDemo.o
- .debug_abbrev  0x00000000      0x187 ./src/TestingDemos/TrxvuTestingDemo.o
+ .debug_info    0x00000000      0x956 ./src/TestingDemos/TrxvuTestingDemo.o
+ .debug_abbrev  0x00000000      0x1b1 ./src/TestingDemos/TrxvuTestingDemo.o
  .debug_loc     0x00000000      0x370 ./src/TestingDemos/TrxvuTestingDemo.o
  .debug_aranges
                 0x00000000       0xb8 ./src/TestingDemos/TrxvuTestingDemo.o
  .debug_ranges  0x00000000       0xa8 ./src/TestingDemos/TrxvuTestingDemo.o
- .debug_line    0x00000000      0x557 ./src/TestingDemos/TrxvuTestingDemo.o
- .debug_str     0x00000000      0x879 ./src/TestingDemos/TrxvuTestingDemo.o
+ .debug_line    0x00000000      0x564 ./src/TestingDemos/TrxvuTestingDemo.o
+ .debug_str     0x00000000      0x8bd ./src/TestingDemos/TrxvuTestingDemo.o
  .comment       0x00000000       0x71 ./src/TestingDemos/TrxvuTestingDemo.o
  .ARM.attributes
                 0x00000000       0x32 ./src/TestingDemos/TrxvuTestingDemo.o
  .debug_frame   0x00000000      0x240 ./src/TestingDemos/TrxvuTestingDemo.o
  .text          0x00000000        0x0 ./src/SubSystemModules/PowerManagment/EPS.o
- .data          0x00000000        0x0 ./src/SubSystemModules/PowerManagment/EPS.o
+ .data          0x00000000        0x1 ./src/SubSystemModules/PowerManagment/EPS.o
  .bss           0x00000000        0x8 ./src/SubSystemModules/PowerManagment/EPS.o
  .text.GetBatteryVoltage
                 0x00000000       0x24 ./src/SubSystemModules/PowerManagment/EPS.o
  .text.EPS_Init
-                0x00000000       0x1c ./src/SubSystemModules/PowerManagment/EPS.o
+                0x00000000       0x90 ./src/SubSystemModules/PowerManagment/EPS.o
  .text.EPS_Conditioning
                 0x00000000       0x1c ./src/SubSystemModules/PowerManagment/EPS.o
  .text.UpdateAlpha
@@ -605,19 +608,19 @@ Discarded input sections
                 0x00000000       0x1c ./src/SubSystemModules/PowerManagment/EPS.o
  .text.RestoreDefaultThresholdVoltages
                 0x00000000       0x1c ./src/SubSystemModules/PowerManagment/EPS.o
- .debug_info    0x00000000      0x227 ./src/SubSystemModules/PowerManagment/EPS.o
- .debug_abbrev  0x00000000       0xa8 ./src/SubSystemModules/PowerManagment/EPS.o
+ .debug_info    0x00000000      0x29c ./src/SubSystemModules/PowerManagment/EPS.o
+ .debug_abbrev  0x00000000       0xf0 ./src/SubSystemModules/PowerManagment/EPS.o
  .debug_loc     0x00000000      0x18c ./src/SubSystemModules/PowerManagment/EPS.o
  .debug_aranges
                 0x00000000       0x60 ./src/SubSystemModules/PowerManagment/EPS.o
  .debug_ranges  0x00000000       0x50 ./src/SubSystemModules/PowerManagment/EPS.o
- .debug_line    0x00000000      0x128 ./src/SubSystemModules/PowerManagment/EPS.o
- .debug_str     0x00000000      0x22c ./src/SubSystemModules/PowerManagment/EPS.o
+ .debug_line    0x00000000      0x182 ./src/SubSystemModules/PowerManagment/EPS.o
+ .debug_str     0x00000000      0x2a9 ./src/SubSystemModules/PowerManagment/EPS.o
  .comment       0x00000000       0x71 ./src/SubSystemModules/PowerManagment/EPS.o
  .ARM.attributes
                 0x00000000       0x32 ./src/SubSystemModules/PowerManagment/EPS.o
- .debug_frame   0x00000000       0xe8 ./src/SubSystemModules/PowerManagment/EPS.o
- COMMON         0x00000000        0xc ./src/SubSystemModules/PowerManagment/EPS.o
+ .debug_frame   0x00000000       0xec ./src/SubSystemModules/PowerManagment/EPS.o
+ COMMON         0x00000000       0x10 ./src/SubSystemModules/PowerManagment/EPS.o
  .text          0x00000000        0x0 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .data          0x00000000        0x0 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .bss           0x00000000        0x4 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
@@ -639,14 +642,14 @@ Discarded input sections
                 0x00000000       0x1c ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .text.EpsSetLowVoltageFlag
                 0x00000000       0x1c ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
- .debug_info    0x00000000      0x1df ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+ .debug_info    0x00000000      0x1d8 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .debug_abbrev  0x00000000       0xbd ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .debug_loc     0x00000000      0x18c ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .debug_aranges
                 0x00000000       0x60 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .debug_ranges  0x00000000       0x50 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .debug_line    0x00000000      0x19a ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
- .debug_str     0x00000000      0x22a ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+ .debug_str     0x00000000      0x225 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .comment       0x00000000       0x71 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .ARM.attributes
                 0x00000000       0x32 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
@@ -2112,70 +2115,135 @@ Discarded input sections
  .ARM.attributes
                 0x00000000       0x32 C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_rtc.o)
  .debug_frame   0x00000000       0x2c C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_rtc.o)
- .text          0x00000000        0x0 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .data          0x00000000        0x0 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .bss           0x00000000        0x8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsInitialize
-                0x00000000      0x148 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.makeEPStransfer
-                0x00000000       0x3c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsPing
-                0x00000000       0xf8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .rodata        0x00000000       0x20 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsSoftReset
-                0x00000000       0xc4 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsHardReset
-                0x00000000       0xa8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsGetHkData_param
-                0x00000000      0x29c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsGetHkData_general
-                0x00000000      0x45c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsGetHkData_vi
-                0x00000000      0x188 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsGetHkData_out
-                0x00000000      0x21c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsGetHkData_wdt
-                0x00000000      0x2b4 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsGetHkData_basic
-                0x00000000      0x22c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsSetOutput
-                0x00000000       0xbc C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsSetSingleOutput
-                0x00000000       0xe4 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsSetPhotovoltaicInputs
-                0x00000000      0x11c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsSetPptMode
-                0x00000000       0xc0 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsSetHeaterAutoMode
-                0x00000000       0xe8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsResetCounters
-                0x00000000       0xc4 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsResetWDT
-                0x00000000       0xc4 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsConfigCMD
-                0x00000000       0xb8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsConfigGet
-                0x00000000      0x16c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsConfigSet
-                0x00000000      0x184 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsConfig2CMD
-                0x00000000       0xb8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsConfig2Get
-                0x00000000      0x16c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .text.GomEpsConfig2Set
-                0x00000000      0x184 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .debug_info    0x00000000     0x16bc C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .debug_abbrev  0x00000000      0x1bc C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .debug_loc     0x00000000      0x420 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
+ .text          0x00000000        0x0 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .data          0x00000000        0x0 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .bss           0x00000000        0x8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text._make_IsisEPStransfer
+                0x00000000       0x3c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_initialize
+                0x00000000      0x18c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .rodata        0x00000000       0x80 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_hardReset
+                0x00000000       0xc8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_noOperation
+                0x00000000       0xac C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_cancelOperation
+                0x00000000       0xac C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_resetWDT
+                0x00000000       0xac C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_outputBusGroupOn
+                0x00000000       0xc4 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_outputBusGroupOff
+                0x00000000       0xc4 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_outputBusGroupState
+                0x00000000       0xc4 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_outputBus3v3On
+                0x00000000       0xbc C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_outputBus3v3Off
+                0x00000000       0xbc C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_outputBus5vOn
+                0x00000000       0xbc C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_outputBus5vOff
+                0x00000000       0xbc C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_outputBusHvOn
+                0x00000000       0xbc C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_outputBusHvOff
+                0x00000000       0xbc C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_getSystemState
+                0x00000000      0x138 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_getRawHKDataMB
+                0x00000000       0xf8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_getEngHKDataMB
+                0x00000000       0xf8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_getRAEngHKDataMB
+                0x00000000       0xf8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_getRawHKDataCDB
+                0x00000000      0x154 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_getEngHKDataCDB
+                0x00000000      0x154 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_getRAEngHKDataCDB
+                0x00000000      0x154 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_getLOState3V3
+                0x00000000      0x12c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_getLOState5V
+                0x00000000      0x12c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_getLOStateBV
+                0x00000000      0x12c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_getLOStateHV
+                0x00000000      0x12c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_getParSize
+                0x00000000      0x124 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_getParameter
+                0x00000000      0x238 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_setParameter
+                0x00000000      0x264 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_resetParameter
+                0x00000000      0x238 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_resetConfig
+                0x00000000       0xf4 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_loadConfig
+                0x00000000       0xf4 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text.IsisEPS_saveConfig
+                0x00000000      0x118 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .debug_info    0x00000000     0x1eca C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .debug_abbrev  0x00000000      0x21d C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .debug_loc     0x00000000      0x5ac C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
  .debug_aranges
-                0x00000000       0xd8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .debug_ranges  0x00000000       0xc8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .debug_line    0x00000000      0x67c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .debug_str     0x00000000      0xafc C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .comment       0x00000000       0x71 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
+                0x00000000      0x120 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .debug_ranges  0x00000000      0x110 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .debug_line    0x00000000      0x578 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .debug_str     0x00000000      0xf3f C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .comment       0x00000000       0x71 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
  .ARM.attributes
-                0x00000000       0x32 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
- .debug_frame   0x00000000      0x2b4 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(GomEPS.o)
+                0x00000000       0x32 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .debug_frame   0x00000000      0x3b0 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisEPS.o)
+ .text          0x00000000        0x0 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .data          0x00000000       0x28 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .bss           0x00000000        0x1 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .rodata        0x00000000       0x50 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text.IsisSolarPanelv2_initialize
+                0x00000000       0xb4 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text.IsisSolarPanelv2_getTemperature
+                0x00000000       0xc8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text.IsisSolarPanelv2_sleep
+                0x00000000       0xbc C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text.IsisSolarPanelv2_wakeup
+                0x00000000       0x80 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text.IsisSolarPanelv2_getState
+                0x00000000       0x24 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text._Reset   0x00000000       0x20 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text._WaitForStartup
+                0x00000000       0x90 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text._AssignAllChannels
+                0x00000000       0x90 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text._AssignThisChannel
+                0x00000000       0xe8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text._InitiateConversion
+                0x00000000       0xac C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text._WaitForConversionComplete
+                0x00000000      0x100 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text._ReadResult
+                0x00000000      0x158 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text._ExtractByte
+                0x00000000       0x38 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text._ExtendSign
+                0x00000000       0x6c C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text._PinsInit
+                0x00000000       0x50 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .text._SpiWriteRead
+                0x00000000       0x70 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .debug_info    0x00000000      0xbd2 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .debug_abbrev  0x00000000      0x22b C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .debug_loc     0x00000000      0x2c0 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .debug_aranges
+                0x00000000       0x98 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .debug_ranges  0x00000000       0x88 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .debug_line    0x00000000      0x466 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .debug_str     0x00000000      0x8dd C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .comment       0x00000000       0x71 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .ARM.attributes
+                0x00000000       0x32 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .debug_frame   0x00000000      0x1c4 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
  .text          0x00000000        0x0 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o)
  .data          0x00000000        0x0 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o)
  .bss           0x00000000        0x8 C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o)
