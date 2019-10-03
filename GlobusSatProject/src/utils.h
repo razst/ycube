@@ -12,7 +12,7 @@
 
 #endif /* UTILS_H_ */
 
-void logError(int error);
+int logError(int error);
 
 
 

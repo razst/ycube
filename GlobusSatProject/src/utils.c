@@ -6,7 +6,14 @@
  */
 
 #include "utils.h"
+#include <hal/errors.h>
 
-void logError(int error){
+
+int logError(int error){
+
+
+//TODO LOG TO FILE
+	if(error != E_NO_SS_ERR) return 1;
+	return 0;
 
 }

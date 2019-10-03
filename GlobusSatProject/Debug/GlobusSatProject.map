@@ -161,11 +161,13 @@ c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_arm_f
 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_arm_truncdfsf2.o)
                               c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libc_s.a(lib_a-vfscanf_float.o) (__aeabi_d2f)
 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_arm_addsubsf3.o)
-                              C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o) (__aeabi_fadd)
+                              ./src/SubSystemModules/PowerManagment/EPS.o (__aeabi_fsub)
 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_arm_muldivsf3.o)
-                              C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTC.o) (__aeabi_fmul)
+                              ./src/SubSystemModules/PowerManagment/EPS.o (__aeabi_fmul)
+c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_arm_cmpsf2.o)
+                              ./src/SubSystemModules/PowerManagment/EPS.o (__aeabi_fcmplt)
 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_arm_fixunssfsi.o)
-                              C:/ISIS/workspace/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o) (__aeabi_f2uiz)
+                              ./src/SubSystemModules/PowerManagment/EPS.o (__aeabi_f2uiz)
 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libc_s.a(lib_a-errno.o)
                               C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(syscalls.o) (__errno)
 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libc_s.a(lib_a-memcmp.o)
@@ -224,9 +226,6 @@ xQueueRegistry      0x100             C:/ISIS/workspace/ycube/GlobusSatProject/.
 __hexdig            0x100             c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libc_s.a(lib_a-gdtoa-gethex.o)
 state               0x1               ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
 f_format_progress   0x4               C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o)
-eps_threshold_voltages
-                    0xc               ./src/SubSystemModules/PowerManagment/EPS.o
-error               0x4               ./src/SubSystemModules/PowerManagment/EPS.o
 
 Discarded input sections
 
@@ -588,39 +587,39 @@ Discarded input sections
                 0x00000000       0x32 ./src/TestingDemos/TrxvuTestingDemo.o
  .debug_frame   0x00000000      0x240 ./src/TestingDemos/TrxvuTestingDemo.o
  .text          0x00000000        0x0 ./src/SubSystemModules/PowerManagment/EPS.o
- .data          0x00000000        0x1 ./src/SubSystemModules/PowerManagment/EPS.o
+ .data          0x00000000        0xc ./src/SubSystemModules/PowerManagment/EPS.o
  .bss           0x00000000        0x8 ./src/SubSystemModules/PowerManagment/EPS.o
  .text.GetBatteryVoltage
-                0x00000000       0x24 ./src/SubSystemModules/PowerManagment/EPS.o
+                0x00000000       0x68 ./src/SubSystemModules/PowerManagment/EPS.o
  .text.EPS_Init
-                0x00000000       0x90 ./src/SubSystemModules/PowerManagment/EPS.o
+                0x00000000       0xe0 ./src/SubSystemModules/PowerManagment/EPS.o
  .text.EPS_Conditioning
-                0x00000000       0x1c ./src/SubSystemModules/PowerManagment/EPS.o
+                0x00000000      0x1a8 ./src/SubSystemModules/PowerManagment/EPS.o
  .text.UpdateAlpha
-                0x00000000       0x24 ./src/SubSystemModules/PowerManagment/EPS.o
+                0x00000000       0xa8 ./src/SubSystemModules/PowerManagment/EPS.o
  .text.UpdateThresholdVoltages
-                0x00000000       0x24 ./src/SubSystemModules/PowerManagment/EPS.o
+                0x00000000      0x204 ./src/SubSystemModules/PowerManagment/EPS.o
  .text.GetThresholdVoltages
-                0x00000000       0x24 ./src/SubSystemModules/PowerManagment/EPS.o
+                0x00000000       0x70 ./src/SubSystemModules/PowerManagment/EPS.o
  .text.GetAlpha
-                0x00000000       0x24 ./src/SubSystemModules/PowerManagment/EPS.o
+                0x00000000       0x6c ./src/SubSystemModules/PowerManagment/EPS.o
  .text.RestoreDefaultAlpha
-                0x00000000       0x1c ./src/SubSystemModules/PowerManagment/EPS.o
+                0x00000000       0x50 ./src/SubSystemModules/PowerManagment/EPS.o
+ .rodata        0x00000000        0xc ./src/SubSystemModules/PowerManagment/EPS.o
  .text.RestoreDefaultThresholdVoltages
-                0x00000000       0x1c ./src/SubSystemModules/PowerManagment/EPS.o
- .debug_info    0x00000000      0x29c ./src/SubSystemModules/PowerManagment/EPS.o
- .debug_abbrev  0x00000000       0xf0 ./src/SubSystemModules/PowerManagment/EPS.o
+                0x00000000       0x6c ./src/SubSystemModules/PowerManagment/EPS.o
+ .debug_info    0x00000000      0x667 ./src/SubSystemModules/PowerManagment/EPS.o
+ .debug_abbrev  0x00000000      0x1ae ./src/SubSystemModules/PowerManagment/EPS.o
  .debug_loc     0x00000000      0x18c ./src/SubSystemModules/PowerManagment/EPS.o
  .debug_aranges
                 0x00000000       0x60 ./src/SubSystemModules/PowerManagment/EPS.o
  .debug_ranges  0x00000000       0x50 ./src/SubSystemModules/PowerManagment/EPS.o
- .debug_line    0x00000000      0x182 ./src/SubSystemModules/PowerManagment/EPS.o
- .debug_str     0x00000000      0x2a9 ./src/SubSystemModules/PowerManagment/EPS.o
+ .debug_line    0x00000000      0x312 ./src/SubSystemModules/PowerManagment/EPS.o
+ .debug_str     0x00000000      0x57c ./src/SubSystemModules/PowerManagment/EPS.o
  .comment       0x00000000       0x71 ./src/SubSystemModules/PowerManagment/EPS.o
  .ARM.attributes
                 0x00000000       0x32 ./src/SubSystemModules/PowerManagment/EPS.o
- .debug_frame   0x00000000       0xec ./src/SubSystemModules/PowerManagment/EPS.o
- COMMON         0x00000000       0x10 ./src/SubSystemModules/PowerManagment/EPS.o
+ .debug_frame   0x00000000      0x110 ./src/SubSystemModules/PowerManagment/EPS.o
  .text          0x00000000        0x0 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .data          0x00000000        0x0 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .bss           0x00000000        0x4 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
@@ -1171,14 +1170,14 @@ Discarded input sections
  .data          0x00000000        0x0 ./src/utils.o
  .bss           0x00000000        0x0 ./src/utils.o
  .text.logError
-                0x00000000       0x1c ./src/utils.o
- .debug_info    0x00000000       0x5a ./src/utils.o
- .debug_abbrev  0x00000000       0x4a ./src/utils.o
+                0x00000000       0x38 ./src/utils.o
+ .debug_info    0x00000000       0x5e ./src/utils.o
+ .debug_abbrev  0x00000000       0x4c ./src/utils.o
  .debug_loc     0x00000000       0x2c ./src/utils.o
  .debug_aranges
                 0x00000000       0x20 ./src/utils.o
  .debug_ranges  0x00000000       0x10 ./src/utils.o
- .debug_line    0x00000000       0x3f ./src/utils.o
+ .debug_line    0x00000000       0x48 ./src/utils.o
  .debug_str     0x00000000       0x96 ./src/utils.o
  .comment       0x00000000       0x71 ./src/utils.o
  .ARM.attributes
@@ -2793,6 +2792,11 @@ Discarded input sections
  .bss           0x00000000        0x0 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_arm_muldivsf3.o)
  .ARM.attributes
                 0x00000000       0x18 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_arm_muldivsf3.o)
+ .text          0x00000000      0x114 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_arm_cmpsf2.o)
+ .data          0x00000000        0x0 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_arm_cmpsf2.o)
+ .bss           0x00000000        0x0 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_arm_cmpsf2.o)
+ .ARM.attributes
+                0x00000000       0x18 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_arm_cmpsf2.o)
  .text          0x00000000       0x54 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_arm_fixunssfsi.o)
  .data          0x00000000        0x0 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_arm_fixunssfsi.o)
  .bss           0x00000000        0x0 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_arm_fixunssfsi.o)

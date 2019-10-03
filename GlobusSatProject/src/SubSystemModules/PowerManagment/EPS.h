@@ -33,12 +33,26 @@
 #define DEFAULT_EPS_THRESHOLD_VOLTAGES 	{(voltage_t)6500, (voltage_t)7100, (voltage_t)7300,	 \
 										  (voltage_t)6600, (voltage_t)7200, (voltage_t)7400}
 
-#define INDEX_UP_FULL		5
-#define INDEX_UP_CRUISE		4
-#define INDEX_UP_SAFE		3
-#define INDEX_DOWN_FULL		2
-#define INDEX_DOWN_CRUISE	1
-#define INDEX_DOWN_SAFE		0
+typedef enum __attribute__ ((__packed__)){
+	INDEX_DOWN_SAFE,
+	INDEX_DOWN_CRUISE,
+	INDEX_DOWN_FULL,
+	INDEX_UP_SAFE,
+	INDEX_UP_CRUISE,
+	INDEX_UP_FULL
+}EpsThresholdsIndex;
+
+typedef union __attribute__ ((__packed__)){
+	voltage_t raw[NUMBER_OF_THRESHOLD_VOLTAGES];
+	struct {
+		voltage_t Vdown_safe;
+		voltage_t Vdown_cruise;
+		voltage_t Vdown_full;
+		voltage_t Vup_safe;
+		voltage_t Vup_cruise;
+		voltage_t Vup_full;
+	}fields;
+}EpsThreshVolt_t;
 
 /*!
  * @brief initializes the EPS subsystem.
@@ -71,7 +85,7 @@ int GetBatteryVoltage(voltage_t *vbat);
  * 			-2 on invalid thresholds
  * 			ERR according to <hal/errors.h>
  */
-int UpdateThresholdVoltages(voltage_t thresh_volts[NUMBER_OF_THRESHOLD_VOLTAGES]);
+int UpdateThresholdVoltages(EpsThreshVolt_t *thresh_volts);
 
 /*!
  * @brief getting the EPS logic threshold  voltages on the FRAM.
@@ -80,7 +94,7 @@ int UpdateThresholdVoltages(voltage_t thresh_volts[NUMBER_OF_THRESHOLD_VOLTAGES]
  * 			-1 on NULL input array
  * 			-2 on FRAM read errors
  */
-int GetThresholdVoltages(voltage_t thresh_volts[NUMBER_OF_THRESHOLD_VOLTAGES]);
+int GetThresholdVoltages(EpsThreshVolt_t thresh_volts[NUMBER_OF_THRESHOLD_VOLTAGES]);
 
 /*!
  * @brief getting the smoothing factor (alpha) from the FRAM.
