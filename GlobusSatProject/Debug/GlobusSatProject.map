@@ -614,7 +614,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x60 ./src/SubSystemModules/PowerManagment/EPS.o
  .debug_ranges  0x00000000       0x50 ./src/SubSystemModules/PowerManagment/EPS.o
- .debug_line    0x00000000      0x312 ./src/SubSystemModules/PowerManagment/EPS.o
+ .debug_line    0x00000000      0x313 ./src/SubSystemModules/PowerManagment/EPS.o
  .debug_str     0x00000000      0x57c ./src/SubSystemModules/PowerManagment/EPS.o
  .comment       0x00000000       0x71 ./src/SubSystemModules/PowerManagment/EPS.o
  .ARM.attributes
@@ -624,35 +624,35 @@ Discarded input sections
  .data          0x00000000        0x0 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .bss           0x00000000        0x4 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .text.EnterFullMode
-                0x00000000       0x1c ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+                0x00000000       0x6c ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .text.EnterCruiseMode
-                0x00000000       0x1c ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+                0x00000000       0x6c ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .text.EnterSafeMode
-                0x00000000       0x1c ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+                0x00000000       0x6c ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .text.EnterCriticalMode
-                0x00000000       0x1c ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+                0x00000000       0x6c ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .text.SetEPS_Channels
-                0x00000000       0x28 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+                0x00000000       0xbc ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .text.GetSystemState
                 0x00000000       0x24 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .text.GetSystemChannelState
                 0x00000000       0x24 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .text.EpsGetLowVoltageFlag
-                0x00000000       0x1c ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+                0x00000000       0x24 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .text.EpsSetLowVoltageFlag
-                0x00000000       0x1c ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
- .debug_info    0x00000000      0x1d8 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
- .debug_abbrev  0x00000000       0xbd ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+                0x00000000       0x2c ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+ .debug_info    0x00000000      0x33b ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+ .debug_abbrev  0x00000000      0x165 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .debug_loc     0x00000000      0x18c ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .debug_aranges
                 0x00000000       0x60 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .debug_ranges  0x00000000       0x50 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
- .debug_line    0x00000000      0x19a ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
- .debug_str     0x00000000      0x225 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+ .debug_line    0x00000000      0x266 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+ .debug_str     0x00000000      0x2eb ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .comment       0x00000000       0x71 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .ARM.attributes
                 0x00000000       0x32 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
- .debug_frame   0x00000000       0xe8 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+ .debug_frame   0x00000000       0xfc ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  COMMON         0x00000000        0x2 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .text          0x00000000        0x0 ./src/SubSystemModules/Maintenance/Maintenance.o
  .data          0x00000000        0x0 ./src/SubSystemModules/Maintenance/Maintenance.o
