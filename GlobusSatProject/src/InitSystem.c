@@ -12,6 +12,7 @@
 #include "SubSystemModules/Maintenance/Maintenance.h"
 #include "InitSystem.h"
 #include "TLM_management.h"
+#include "utils.h"
 
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
@@ -38,17 +39,26 @@ void WriteDefaultValuesToFRAM()
 
 int StartFRAM()
 {
-	return 0;
+	if(logError(FRAM_start()))
+		return -1;
+	else
+		return 0;
 }
 
 int StartI2C()
 {
-	return 0;
+	if(logError(I2C_start(I2c_SPEED_Hz, I2c_Timeout)))
+		return -1;
+	else
+		return 0;
 }
 
 int StartSPI()
 {
-	return 0;
+	if(logError(SPI_start(bus1_spi, slave1_spi)))
+		return -1;
+	else
+		return 0;
 }
 
 int StartTIME()
@@ -64,6 +74,10 @@ int DeploySystem()
 #define PRINT_IF_ERR(method) if(0 != err)printf("error in '" #method  "' err = %d\n",err);
 int InitSubsystems()
 {
+	StartFRAM();
+	StartI2C();
+	EPS_Init();
+
 	return 0;
 }
 

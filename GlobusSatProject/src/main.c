@@ -32,7 +32,30 @@ void taskMain()
 }
 #endif //! TESTING
 
+
+void taskMain()
+{
+	printf("starting taskMain \n");
+	WDT_startWatchdogKickTask(10 / portTICK_RATE_MS, FALSE);
+	InitSubsystems();
+
+	vTaskDelay(100);
+
+	EPS_Conditioning();
+}
+
 // main operation function. will be called upon software boot.
 int main()
 {
+	TRACE_CONFIGURE_ISP(DBGU_STANDARD, 2000000, BOARD_MCK);
+	// Enable the Instruction cache of the ARM9 core. Keep the MMU and Data Cache disabled.
+	CP15_Enable_I_Cache();
+
+	WDT_start();
+
+	printf("About to start the main task\n");
+	xTaskGenericCreate(taskMain, (const signed char *)("taskMain"), 2048, NULL, configMAX_PRIORITIES - 2, NULL, NULL, NULL);
+	vTaskStartScheduler();
+	printf("started Scheduler\n");
+	return 0;
 }

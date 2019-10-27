@@ -40,7 +40,7 @@ int EPS_Init()
 
 
 	if(logError(IsisSolarPanelv2_initialize(slave0_spi))) return -1;
-//	IsisSolarPanelv2_sleep(); cheek
+//	IsisSolarPanelv2_sleep(); //TODO cheek why need this sleep??
 
 
 	if(GetThresholdVoltages(&eps_threshold_voltages)) return -1;
@@ -95,6 +95,7 @@ int EPS_Conditioning()
 
 int UpdateAlpha(float new_alpha)
 {
+	// alpha should be between 0 and 1
 	if(new_alpha < 0 || new_alpha > 1){
 		return logError(-2);
 	}
