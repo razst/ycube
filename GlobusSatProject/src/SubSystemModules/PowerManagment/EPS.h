@@ -27,7 +27,7 @@
  	 	 	 |	CRITICAL	|
  	 	 	 |______________|
  */
-#define DEFAULT_ALPHA_VALUE 0.95
+#define DEFAULT_ALPHA_VALUE 0.95 // this the default alpha value
 
 #define NUMBER_OF_THRESHOLD_VOLTAGES 	6 		///< first 3 are charging voltages, last 3 are discharging voltages
 #define DEFAULT_EPS_THRESHOLD_VOLTAGES 	{(voltage_t)6500, (voltage_t)7100, (voltage_t)7300,	 \
