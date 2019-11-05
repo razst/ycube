@@ -44,6 +44,26 @@ void InitSemaphores()
 }
 
 int InitTrxvu() {
+	ISIStrxvuI2CAddress myTRXVUAddress;
+	ISIStrxvuFrameLengths myTRXVUBuffers;
+
+	int retValInt = 0;
+
+	//Buffer definition
+	myTRXVUBuffers.maxAX25frameLengthTX = SIZE_TXFRAME;//SIZE_TXFRAME;
+	myTRXVUBuffers.maxAX25frameLengthRX = SIZE_RXFRAME;
+
+	//I2C addresses defined
+	myTRXVUAddress.addressVu_rc = I2C_TRXVU_RC_ADDR;
+	myTRXVUAddress.addressVu_tc = I2C_TRXVU_TC_ADDR;
+
+
+	//Bitrate definition
+	ISIStrxvuBitrate myTRXVUBitrates;
+	myTRXVUBitrates = trxvu_bitrate_9600; // TODO should we use bit rate 1200?? for beacon??
+	retValInt = IsisTrxvu_initialize(&myTRXVUAddress, &myTRXVUBuffers,
+			&myTRXVUBitrates, 1);
+
 	return 0;
 }
 
