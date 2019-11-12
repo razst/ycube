@@ -45,13 +45,12 @@ void InitSemaphores()
 
 int InitTrxvu() {
 	ISIStrxvuI2CAddress myTRXVUAddress;
-	ISIStrxvuFrameLengths myTRXVUBuffers;
+	ISIStrxvuFrameLengths myTRXVUFramesLenght;
 
-	int retValInt = 0;
 
 	//Buffer definition
-	myTRXVUBuffers.maxAX25frameLengthTX = SIZE_TXFRAME;//SIZE_TXFRAME;
-	myTRXVUBuffers.maxAX25frameLengthRX = SIZE_RXFRAME;
+	myTRXVUFramesLenght.maxAX25frameLengthTX = SIZE_TXFRAME;//SIZE_TXFRAME;
+	myTRXVUFramesLenght.maxAX25frameLengthRX = SIZE_RXFRAME;
 
 	//I2C addresses defined
 	myTRXVUAddress.addressVu_rc = I2C_TRXVU_RC_ADDR;
@@ -61,13 +60,30 @@ int InitTrxvu() {
 	//Bitrate definition
 	ISIStrxvuBitrate myTRXVUBitrates;
 	myTRXVUBitrates = trxvu_bitrate_9600; // TODO should we use bit rate 1200?? for beacon??
-	retValInt = IsisTrxvu_initialize(&myTRXVUAddress, &myTRXVUBuffers,
-			&myTRXVUBitrates, 1);
+	if (logError(IsisTrxvu_initialize(&myTRXVUAddress, &myTRXVUFramesLenght,&myTRXVUBitrates, 1))) return -1;
+
+	vTaskDelay(100); //why 100?? 100 what??
+
+	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,myTRXVUBitrates))) return -1;
+	vTaskDelay(100);
+
+	ISISantsI2Caddress myAntennaAddress;
+	myAntennaAddress.addressSideA = ANTS_I2C_SIDE_A_ADDR;
+	myAntennaAddress.addressSideB = ANTS_I2C_SIDE_B_ADDR;
+
+	//Initialize the AntS system
+	if (logError(IsisAntS_initialize(&myAntennaAddress, 1))) return -1;
+
+		InitTxModule();
+		InitBeaconParams();
+		InitSemaphores();
+
 
 	return 0;
 }
 
 int TRX_Logic() {
+
 	return 0;
 }
 
