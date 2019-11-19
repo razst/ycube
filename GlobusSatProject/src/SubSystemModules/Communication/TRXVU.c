@@ -16,6 +16,7 @@
 #include "ActUponCommand.h"
 #include "SatCommandHandler.h"
 #include "TLM_management.h"
+#include "CommunicationHelper.h"
 
 #include "SubSystemModules/PowerManagment/EPS.h"
 #include "SubSystemModules/Maintenance/Maintenance.h"
@@ -41,7 +42,12 @@ xSemaphoreHandle xIsTransmitting = NULL; // mutex on transmission.
 
 void InitSemaphores()
 {
+	if(NULL == xDumpLock)
+		vSemaphoreCreateBinary(xDumpLock);
+	if(NULL == xDumpQueue)
+		xDumpQueue = xQueueCreate(1, sizeof(Boolean));
 }
+
 
 int InitTrxvu() {
 	ISIStrxvuI2CAddress myTRXVUAddress;
@@ -66,6 +72,7 @@ int InitTrxvu() {
 
 	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,myTRXVUBitrates))) return -1;
 	vTaskDelay(100);
+
 
 	ISISantsI2Caddress myAntennaAddress;
 	myAntennaAddress.addressSideA = ANTS_I2C_SIDE_A_ADDR;
