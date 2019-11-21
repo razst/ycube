@@ -61,6 +61,7 @@ static int setNumOfFilesInFS(int new_num_of_files)
 }
 FileSystemResult InitializeFS(Boolean first_time)
 {
+
 	return FS_SUCCSESS;
 }
 
@@ -70,6 +71,9 @@ FileSystemResult c_fileCreate(char* c_file_name,
 {
 	return FS_SUCCSESS;
 }
+
+
+
 //write element with timestamp to file
 static void writewithEpochtime(F_FILE* file, byte* data, int size,unsigned int time)
 {
@@ -93,14 +97,18 @@ FileSystemResult c_fileReset(char* c_file_name)
 	return FS_SUCCSESS;
 }
 
-FileSystemResult c_fileWrite(char* c_file_name, void* element)
+FileSystemResult c_fileWrite(void* element)
 {
+	Time t;
+	Time_get(&t);
+
 	return FS_SUCCSESS;
 }
 FileSystemResult fileWrite(char* file_name, void* element,int size)
 {
 	return FS_SUCCSESS;
 }
+
 static FileSystemResult deleteElementsFromFile(char* file_name,unsigned long from_time,
 		unsigned long to_time,int full_element_size)
 {
