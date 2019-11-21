@@ -16,6 +16,7 @@
 #include "ActUponCommand.h"
 #include "SatCommandHandler.h"
 #include "TLM_management.h"
+#include "CommunicationHelper.h"
 
 #include "SubSystemModules/PowerManagment/EPS.h"
 #include "SubSystemModules/Maintenance/Maintenance.h"
@@ -41,13 +42,55 @@ xSemaphoreHandle xIsTransmitting = NULL; // mutex on transmission.
 
 void InitSemaphores()
 {
+	if(NULL == xDumpLock)
+		vSemaphoreCreateBinary(xDumpLock);
+	if(NULL == xDumpQueue)
+		xDumpQueue = xQueueCreate(1, sizeof(Boolean));
 }
 
+
 int InitTrxvu() {
+	ISIStrxvuI2CAddress myTRXVUAddress;
+	ISIStrxvuFrameLengths myTRXVUFramesLenght;
+
+
+	//Buffer definition
+	myTRXVUFramesLenght.maxAX25frameLengthTX = SIZE_TXFRAME;//SIZE_TXFRAME;
+	myTRXVUFramesLenght.maxAX25frameLengthRX = SIZE_RXFRAME;
+
+	//I2C addresses defined
+	myTRXVUAddress.addressVu_rc = I2C_TRXVU_RC_ADDR;
+	myTRXVUAddress.addressVu_tc = I2C_TRXVU_TC_ADDR;
+
+
+	//Bitrate definition
+	ISIStrxvuBitrate myTRXVUBitrates;
+	myTRXVUBitrates = trxvu_bitrate_9600; // TODO should we use bit rate 1200?? for beacon??
+	if (logError(IsisTrxvu_initialize(&myTRXVUAddress, &myTRXVUFramesLenght,&myTRXVUBitrates, 1))) return -1;
+
+	vTaskDelay(100); //why 100?? 100 what??
+
+	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,myTRXVUBitrates))) return -1;
+	vTaskDelay(100);
+
+
+	ISISantsI2Caddress myAntennaAddress;
+	myAntennaAddress.addressSideA = ANTS_I2C_SIDE_A_ADDR;
+	myAntennaAddress.addressSideB = ANTS_I2C_SIDE_B_ADDR;
+
+	//Initialize the AntS system
+	if (logError(IsisAntS_initialize(&myAntennaAddress, 1))) return -1;
+
+		InitTxModule();
+		InitBeaconParams();
+		InitSemaphores();
+
+
 	return 0;
 }
 
 int TRX_Logic() {
+
 	return 0;
 }
 
