@@ -20,7 +20,7 @@
 #include <GlobalStandards.h>
 
 #define SKIP_FILE_TIME_SEC 1000000
-#define _SD_CARD 0
+#define SD_CARD_DRIVER_PARMS 0
 #define FIRST_TIME -1
 #define FILE_NAME_WITH_INDEX_SIZE MAX_F_FILE_NAME_SIZE+sizeof(int)*2
 
@@ -47,6 +47,7 @@ typedef struct
 
 void delete_allTMFilesFromSD()
 {
+
 }
 // return -1 for FRAM fail
 static int getNumOfFilesInFS()
@@ -61,6 +62,24 @@ static int setNumOfFilesInFS(int new_num_of_files)
 }
 FileSystemResult InitializeFS(Boolean first_time)
 {
+
+	// Initialize the memory for the FS
+	if(logError(hcc_mem_init()))return -1;
+
+	// Initialize the FS
+	if(logError(fs_init()))return -1;
+
+	// Tell the OS (freeRTOS) about our FS
+	if(logError(f_enterFS()))return -1;
+
+	// Initialize the volume of SD card 0 (A)
+	// TODO should we also init the volume of SD card 1 (B)???
+	if(logError(f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_PARMS )))return -1;
+
+
+
+
+
 	return FS_SUCCSESS;
 }
 
@@ -70,9 +89,13 @@ FileSystemResult c_fileCreate(char* c_file_name,
 {
 	return FS_SUCCSESS;
 }
+
+
+
 //write element with timestamp to file
 static void writewithEpochtime(F_FILE* file, byte* data, int size,unsigned int time)
 {
+
 }
 // get C_FILE struct from FRAM by name
 static Boolean get_C_FILE_struct(char* name,C_FILE* c_file,unsigned int *address)
@@ -93,14 +116,18 @@ FileSystemResult c_fileReset(char* c_file_name)
 	return FS_SUCCSESS;
 }
 
-FileSystemResult c_fileWrite(char* c_file_name, void* element)
+FileSystemResult c_fileWrite(void* element)
 {
+	Time t;
+	Time_get(&t);
+
 	return FS_SUCCSESS;
 }
 FileSystemResult fileWrite(char* file_name, void* element,int size)
 {
 	return FS_SUCCSESS;
 }
+
 static FileSystemResult deleteElementsFromFile(char* file_name,unsigned long from_time,
 		unsigned long to_time,int full_element_size)
 {

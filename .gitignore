@@ -11,6 +11,7 @@ GlobusSatProject/Debug/src/main.o
 GlobusSatProject/Debug/src/TLM_management.d
 GlobusSatProject/Debug/src/TLM_management.o
 GlobusSatProject/Debug/src/InitSystem.d
+<<<<<<< HEAD
 hal/demo/.settings/language.settings.xml
 satellite-subsystems/demo/.settings/language.settings.xml
 satellite-subsystems/demo/Debug/Hoopoe3.elf
@@ -23,3 +24,10 @@ GlobusSatProject/.settings/language.settings.xml
 GlobusSatProject/Debug/GlobusSatProject.bin
 GlobusSatProject/Debug/GlobusSatProject.map
 GlobusSatProject/Debug/src/InitSystem.d
+=======
+GlobusSatProject/.settings/language.settings.xml
+GlobusSatProject/.settings/language.settings.xml
+hal/demo/.settings/language.settings.xml
+satellite-subsystems/demo/.settings/language.settings.xml
+GlobusSatProject/Debug/sources.mk
+>>>>>>> ea4a15d7a8df1d2e92c592e162e7030ed7ec5cd0

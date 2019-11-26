@@ -12,9 +12,6 @@
 #include <GlobalStandards.h>
 
 #define MAX_F_FILE_NAME_SIZE 7
-#define FIRST_ELEMENT_IN_C_FILE 0
-#define LAST_ELEMENT_IN_C_FILE 0
-#define DEFAULT_NUM_OF_FILES 0
 
 #define FS_FILE_ENDING	"TLM"
 #define FS_FILE_ENDING_SIZE	3
@@ -22,6 +19,7 @@
 #ifndef FSFRAM
 #define FSFRAM 0x20000
 #endif
+
 typedef enum
 {
 	FS_SUCCSESS,
@@ -73,7 +71,7 @@ FileSystemResult c_fileCreate(char* c_file_name,
  * FS_LOCKED if c_file used by other thread,
  * FS_SUCCSESS on success.
  */
-FileSystemResult c_fileWrite(char* c_file_name, void* element);
+FileSystemResult c_fileWrite(void* element);
 
 /*!
  * Delete elements from c_file from "from_time" to "to_time".
@@ -110,9 +108,14 @@ int c_fileGetNumOfElements(char* c_file_name,time_unix from_time
 FileSystemResult c_fileRead(char* c_file_name, byte* buffer, int size_of_buffer,
 		time_unix from_time, time_unix to_time, int* read,time_unix* last_read_time);
 
+char* getName();
 //print c_file for testing
 void print_file(char* c_file_name);
 FileSystemResult c_fileReset(char* c_file_name);
 int FS_test();
 void test_i();
 #endif /* TM_MANAGMENT_H_ */
+
+
+
+
