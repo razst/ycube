@@ -1,6 +1,5 @@
 
 #include <satellite-subsystems/IsisSolarPanelv2.h>
-#include <satellite-subsustems/GomSolarPanelv2>
 #include <hal/errors.h>
 #include <utils.h>
 #include <string.h>
@@ -26,16 +25,10 @@ int GetBatteryVoltage(voltage_t *vbatt)
 	ieps_enghk_data_cdb_t hk_tlm;
 	ieps_statcmd_t cmd;
 	ieps_board_t board = ieps_board_cdb1;
-	//gom
-//	if(logError(IsisEPS_getEngHKDataCDB(EPS_I2C_BUS_INDEX, board, &hk_tlm, &cmd)))return -1;
 
-	gom_eps_hk_vi_t  data;
+	if(logError(IsisEPS_getEngHKDataCDB(EPS_I2C_BUS_INDEX, board, &hk_tlm, &cmd)))return -1;
 
-	if(logError(GomEpsGetHkData_vi(EPS_I2C_BUS_INDEX, &data)))return -1;
-
-
-	*vbatt = data.fields.vbatt;//hk_tlm.fields.bat_voltage;
-
+	*vbatt = hk_tlm.fields.bat_voltage;
 
 	return 0;
 }
@@ -43,11 +36,9 @@ int GetBatteryVoltage(voltage_t *vbatt)
 int EPS_Init()
 {
 	unsigned char i2c_address = EPS_I2C_ADDR;
-//	if(logError(IsisEPS_initialize(&i2c_address , 1))) return -1;
+	if(logError(IsisEPS_initialize(&i2c_address , 1))) return -1;
 
-	if(logError(GomEpsInitialize(&i2c_address , 1))) return -1;
 
-	//TODO to find include gom solar
 	if(logError(IsisSolarPanelv2_initialize(slave0_spi))) return -1;
 //	IsisSolarPanelv2_sleep(); cheek
 

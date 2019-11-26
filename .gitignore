@@ -11,3 +11,15 @@ GlobusSatProject/Debug/src/main.o
 GlobusSatProject/Debug/src/TLM_management.d
 GlobusSatProject/Debug/src/TLM_management.o
 GlobusSatProject/Debug/src/InitSystem.d
+hal/demo/.settings/language.settings.xml
+satellite-subsystems/demo/.settings/language.settings.xml
+satellite-subsystems/demo/Debug/Hoopoe3.elf
+satellite-subsystems/demo/Debug/Hoopoe3.map
+satellite-subsystems/demo/Debug/makefile
+satellite-subsystems/demo/Debug/src/main.d
+satellite-subsystems/demo/Debug/src/main.o
+satellite-subsystems/demo/Debug/src/subdir.mk
+GlobusSatProject/.settings/language.settings.xml
+GlobusSatProject/Debug/GlobusSatProject.bin
+GlobusSatProject/Debug/GlobusSatProject.map
+GlobusSatProject/Debug/src/InitSystem.d
