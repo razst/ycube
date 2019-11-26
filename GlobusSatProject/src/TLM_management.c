@@ -47,7 +47,6 @@ typedef struct
 
 void delete_allTMFilesFromSD()
 {
-
 }
 // return -1 for FRAM fail
 static int getNumOfFilesInFS()
