@@ -77,6 +77,7 @@ FileSystemResult c_fileCreate(char* c_file_name,
 //write element with timestamp to file
 static void writewithEpochtime(F_FILE* file, byte* data, int size,unsigned int time)
 {
+
 }
 // get C_FILE struct from FRAM by name
 static Boolean get_C_FILE_struct(char* name,C_FILE* c_file,unsigned int *address)
