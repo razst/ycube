@@ -20,7 +20,7 @@
 #include <GlobalStandards.h>
 
 #define SKIP_FILE_TIME_SEC 1000000
-#define _SD_CARD 0
+#define SD_CARD_DRIVER_PARMS 0
 #define FIRST_TIME -1
 #define FILE_NAME_WITH_INDEX_SIZE MAX_F_FILE_NAME_SIZE+sizeof(int)*2
 
@@ -47,7 +47,7 @@ typedef struct
 
 void delete_allTMFilesFromSD()
 {
-// test5
+
 }
 // return -1 for FRAM fail
 static int getNumOfFilesInFS()
@@ -62,6 +62,23 @@ static int setNumOfFilesInFS(int new_num_of_files)
 }
 FileSystemResult InitializeFS(Boolean first_time)
 {
+
+	// Initialize the memory for the FS
+	if(logError(hcc_mem_init()))return -1;
+
+	// Initialize the FS
+	if(logError(fs_init()))return -1;
+
+	// Tell the OS (freeRTOS) about our FS
+	if(logError(f_enterFS()))return -1;
+
+	// Initialize the volume of SD card 0 (A)
+	// TODO should we also init the volume of SD card 1 (B)???
+	if(logError(f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_PARMS )))return -1;
+
+
+
+
 
 	return FS_SUCCSESS;
 }
