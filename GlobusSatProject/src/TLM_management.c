@@ -47,7 +47,14 @@ typedef struct
 
 void delete_allTMFilesFromSD()
 {
-
+	F_FIND find;
+	if (!f_findfirst("A:/*.*",&find))
+	{
+		do
+		{
+			f_delete(find.filename);
+		} while (!f_findnext(&find));
+	}
 }
 // return -1 for FRAM fail
 static int getNumOfFilesInFS()
@@ -64,21 +71,20 @@ FileSystemResult InitializeFS(Boolean first_time)
 {
 
 	// Initialize the memory for the FS
-	if(logError(hcc_mem_init()))return -1;
+	if(logError(hcc_mem_init())) return -1;
 
 	// Initialize the FS
-	if(logError(fs_init()))return -1;
+	if(logError(fs_init())) return -1;
 
 	// Tell the OS (freeRTOS) about our FS
-	if(logError(f_enterFS()))return -1;
+	if(logError(f_enterFS())) return -1;
 
 	// Initialize the volume of SD card 0 (A)
 	// TODO should we also init the volume of SD card 1 (B)???
-	if(logError(f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_PARMS )))return -1;
+	if(logError(f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_PARMS ))) return -1;
 
-
-
-
+	//In the first time the SD on. if there is file on the SD delete it.
+	if(first_time) delete_allTMFilesFromSD();
 
 	return FS_SUCCSESS;
 }
@@ -90,6 +96,17 @@ FileSystemResult c_fileCreate(char* c_file_name,
 	return FS_SUCCSESS;
 }
 
+static void write2File(char* data, int size)
+{
+	F_FILE *file;
+	Time curr_time;
+	Time_get(&curr_time);
+	char[8] file_name = curr_time.year; //<==== year/month/day
+
+	file = f_open(&file_name, ”a”);
+	f_write(data, 1, size, file);
+	f_close(file);
+}
 
 
 //write element with timestamp to file
