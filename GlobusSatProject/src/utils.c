@@ -16,3 +16,7 @@ int logError(int error){
 	return 0;
 
 }
+
+int logInfo(char *info , int size){
+return 0;
+}
