@@ -14,6 +14,9 @@
 #define MUTE_ON 		TRUE	///< mute is on flag
 #define MUTE_OFF 		FALSE	///< mute is off flag
 
+#define SIZE_RXFRAME	200
+#define SIZE_TXFRAME	235
+
 typedef struct __attribute__ ((__packed__))
 {
 	sat_packet_t *cmd;

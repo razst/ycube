@@ -24,8 +24,6 @@
 #ifdef TESTING_TRXVU_FRAME_LENGTH
 #include <hal/Utility/util.h>
 #endif
-#define SIZE_RXFRAME	200
-#define SIZE_TXFRAME	235
 
 
 Boolean 		g_mute_flag = MUTE_OFF;				// mute flag - is the mute enabled
@@ -42,16 +40,14 @@ xSemaphoreHandle xIsTransmitting = NULL; // mutex on transmission.
 
 void InitSemaphores()
 {
-	if(NULL == xDumpLock)
+	if(xDumpLock == NULL)
 		vSemaphoreCreateBinary(xDumpLock);
-	if(NULL == xDumpQueue)
+	if(xDumpQueue == NULL)
 		xDumpQueue = xQueueCreate(1, sizeof(Boolean));
 }
 
 
 int InitTrxvu() {
-<<<<<<< HEAD
-=======
 	ISIStrxvuI2CAddress myTRXVUAddress;
 	ISIStrxvuFrameLengths myTRXVUFramesLenght;
 
@@ -70,7 +66,7 @@ int InitTrxvu() {
 	myTRXVUBitrates = trxvu_bitrate_9600; // TODO should we use bit rate 1200?? for beacon??
 	if (logError(IsisTrxvu_initialize(&myTRXVUAddress, &myTRXVUFramesLenght,&myTRXVUBitrates, 1))) return -1;
 
-	vTaskDelay(100); //why 100?? 100 what??
+	vTaskDelay(100); //TODO why 100?? 100 what??
 
 	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,myTRXVUBitrates))) return -1;
 	vTaskDelay(100);
@@ -83,18 +79,47 @@ int InitTrxvu() {
 	//Initialize the AntS system
 	if (logError(IsisAntS_initialize(&myAntennaAddress, 1))) return -1;
 
-		InitTxModule();
-		InitBeaconParams();
-		InitSemaphores();
+	InitTxModule();
+	InitBeaconParams();
+	InitSemaphores();
 
 
->>>>>>> ea4a15d7a8df1d2e92c592e162e7030ed7ec5cd0
 	return 0;
 }
 
 int TRX_Logic() {
+	int err = 0;
+	// check if we have frames (data) waiting in the TRXVU
+	int frameCount = GetNumberOfFramesInBuffer();
+	sat_packet_t cmd = { 0 }; // holds the SPL command data
 
-	return 0;
+	if (frameCount > 0) {
+		// we have data that came from grand station
+		err = GetOnlineCommand(&cmd); //--> check - don't reset WDT if we got error getting the frame becuase we will never get a reset !
+		ResetGroundCommWDT();
+		SendAckPacket(ACK_RECEIVE_COMM, &cmd, NULL, 0);
+
+	} else if (GetDelayedCommandBufferCount() > 0) {
+		err = GetDelayedCommand(&cmd);
+	}
+
+
+
+
+	if (cmd_command_found == err) {
+		err = ActUponCommand(&cmd);
+		//TODO: log error
+		//TODO: send message to ground when a delayed command was not executed-> add to log
+	}
+	BeaconLogic();
+
+	if (cmd_command_found != err)
+		return err;
+
+	return cmd_command_succsess;
+
+
+
 }
 
 int GetNumberOfFramesInBuffer() {
