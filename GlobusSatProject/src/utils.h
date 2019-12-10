@@ -14,5 +14,5 @@
 
 int logError(int error);
 
-
+int logInfo(char *info , int size);
 

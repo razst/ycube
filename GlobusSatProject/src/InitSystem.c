@@ -40,7 +40,7 @@ void firstActivationProcedure()
 	int err = 0;
 
 	time_unix seconds_since_deploy = 0;
-	err = FRAM_read((unsigned char*) seconds_since_deploy , SECONDS_SINCE_DEPLOY_ADDR , SECONDS_SINCE_DEPLOY_SIZE);
+	err = logError(FRAM_read((unsigned char*) seconds_since_deploy , SECONDS_SINCE_DEPLOY_ADDR , SECONDS_SINCE_DEPLOY_SIZE));
 	if (0 != err) {
 		seconds_since_deploy = MINUTES_TO_SECONDS(30);	// deploy immediately. No mercy
 	}
@@ -74,9 +74,9 @@ void WriteDefaultValuesToFRAM()
 	default_no_comm_thresh = DEFAULT_NO_COMM_WDT_KICK_TIME;
 	FRAM_write((unsigned char*) &default_no_comm_thresh , NO_COMM_WDT_KICK_TIME_ADDR , NO_COMM_WDT_KICK_TIME_SIZE);
 
-	voltage_t def_thresg_volt;
-	def_thresg_volt = { .raw = DEFAULT_EPS_THRESHOLD_VOLTAGES};
-	FRAM_write((unsigned char*) &def_thresg_volt ,EPS_THRESH_VOLTAGES_ADDR , EPS_THRESH_VOLTAGES_SIZE);
+	EpsThreshVolt_t def_thresh_volt = { .raw = DEFAULT_EPS_THRESHOLD_VOLTAGES};
+		FRAM_write((unsigned char*)def_thresh_volt.raw, EPS_THRESH_VOLTAGES_ADDR,
+		EPS_THRESH_VOLTAGES_SIZE);
 
 	float def_alpha;
 	def_alpha = DEFAULT_ALPHA_VALUE;
@@ -90,17 +90,17 @@ void WriteDefaultValuesToFRAM()
 
 int StartFRAM()
 {
-	return FRAM_start();
+	return logError(FRAM_start());
 }
 
 int StartI2C()
 {
-	return I2C_start(I2c_SPEED_Hz , I2c_Timeout);
+	return logError(I2C_start(I2c_SPEED_Hz , I2c_Timeout));
 }
 
 int StartSPI()
 {
-	return SPI_start(bus1_spi , slave1_spi);
+	return logError(SPI_start(bus1_spi , slave1_spi));
 }
 
 int StartTIME()
@@ -109,7 +109,7 @@ int StartTIME()
 		Time expected_deploy_time = UNIX_DATE_JAN_D1_Y2000;
 		error = Time_start(&expected_deploy_time, 0);
 		if (0 != error) {
-			return error;
+			return logError(error);
 		}
 		time_unix time_before_wakeup = 0;
 		if (!isFirstActivation()) {
@@ -147,7 +147,21 @@ int DeploySystem()
 #define PRINT_IF_ERR(method) if(0 != err)printf("error in '" #method  "' err = %d\n",err);
 int InitSubsystems()
 {
+	StartI2C();
+
+	StartSPI();
+
+	StartFRAM();
+
+	StartTIME();
+
+	InitializeFS(isFirstActivation());
+
 	EPS_Init();
+
+	InitTrxvu();
+
+	DeploySystem();
 
 	return 0;
 }
