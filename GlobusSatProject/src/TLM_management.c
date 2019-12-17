@@ -103,6 +103,27 @@ static void write2File(char* data, int size)
 	Time_get(&curr_time);
 	char[8] file_name = curr_time.year; //<==== year/month/day
 
+	String date = curr_time.year + "/" + curr_time.month + "/" + curr_time.day;
+
+//	char buf[11];
+//	  char day[3] = "7";
+//	  char month[3] = "2";
+//	  char year[5] = "2019";
+//
+//	  if(!day[1] && !month[1]){
+//	    printf("1\n");
+//	    snprintf(buf, sizeof buf, "%s/0%s/0%s", year,  month,  day);
+//	  } else if (!day[1]){
+//	    printf("2\n");
+//	    snprintf(buf, sizeof buf, "%s/%s/0%s", year,  month,  day);
+//	  } else if (!month[1]){
+//	    printf("3\n");
+//	    snprintf(buf, sizeof buf, "%s/0%s/%s", year,  month,  day);
+//	  } else {
+//	    printf("4\n");
+//	    snprintf(buf, sizeof buf, "%s/%s/%s", year,  month,  day);
+//	  }
+
 	file = f_open(&file_name, ”a”);
 	f_write(data, 1, size, file);
 	f_close(file);
