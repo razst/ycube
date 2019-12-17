@@ -54,10 +54,6 @@ int GetDelayedCommandBufferCount()
 
 }
 
-int GetOnlineCommand(sat_packet_t *cmd)
-{
-	return 0;
-}
 
 int GetDelayedCommandByIndex(unsigned int index, sat_packet_t *cmd)
 {

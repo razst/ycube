@@ -69,13 +69,6 @@ int AddDelayedCommand(sat_packet_t *cmd);
  */
 int GetDelayedCommandBufferCount();
 
-/*!
- * @brief returns an online(immediate) command to be executed if there is one in the command buffer
- * @param[out] cmd pointer to parsed command from online TRXVU frame buffer
- * @note cmd is set
- * @return	errors according to CMD_ERR
- */
-int GetOnlineCommand(sat_packet_t *cmd);
 
 //TODO: document
 int GetDelayedCommandByIndex(unsigned int index, sat_packet_t *cmd);

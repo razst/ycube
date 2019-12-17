@@ -10,6 +10,7 @@
 #include "AckHandler.h"
 #include "SatCommandHandler.h"
 
+
 #define MAX_MUTE_TIME 	(5400) 	///< max mute duration will be 90 minutes = 60 *90 [sec]
 #define MUTE_ON 		TRUE	///< mute is on flag
 #define MUTE_OFF 		FALSE	///< mute is off flag
@@ -120,6 +121,14 @@ Boolean CheckForMuteEnd();
  * 			-1 in case of failure
  */
 int GetNumberOfFramesInBuffer();
+
+/*!
+ * @brief returns an online(immediate) command to be executed if there is one in the command buffer
+ * @param[out] cmd pointer to parsed command from online TRXVU frame buffer
+ * @note cmd is set
+ * @return	errors according to CMD_ERR
+ */
+int GetOnlineCommand(sat_packet_t *cmd);
 
 /*!
  * @brief returns the current baud rate of the TX

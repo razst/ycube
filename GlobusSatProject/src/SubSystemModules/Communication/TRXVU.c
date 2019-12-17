@@ -106,24 +106,56 @@ int TRX_Logic() {
 
 
 
-	if (cmd_command_found == err) {
+	if (err == command_found) {
 		err = ActUponCommand(&cmd);
 		//TODO: log error
 		//TODO: send message to ground when a delayed command was not executed-> add to log
 	}
 	BeaconLogic();
 
-	if (cmd_command_found != err)
-		return err;
+	if (logError(err)) return -1;
 
-	return cmd_command_succsess;
+
+	return command_succsess;
 
 
 
 }
 
 int GetNumberOfFramesInBuffer() {
-	return 0;
+	unsigned short frameCounter = 0;
+	if (logError(IsisTrxvu_rcGetFrameCount(0, &frameCounter))) return -1;
+
+	return frameCounter;
+}
+
+
+int GetOnlineCommand(sat_packet_t *cmd)
+{
+	if (NULL == cmd) {
+		return null_pointer_error;
+	}
+	int err = 0;
+
+	unsigned short frameCount = 0;
+	unsigned char receivedFrameData[MAX_COMMAND_DATA_LENGTH];
+
+	if (logError(IsisTrxvu_rcGetFrameCount(0, &frameCount))) return -1;
+
+	if (0 == frameCount) {
+		return no_command_found;
+	}
+
+	ISIStrxvuRxFrame rxFrameCmd = { 0, 0, 0,
+			(unsigned char*) receivedFrameData }; // for getting raw data from Rx, nullify values
+
+	if (logError(IsisTrxvu_rcGetCommandFrame(0, &rxFrameCmd))) return -1;
+
+	if (logError(ParseDataToCommand(receivedFrameData,cmd))) return -1;
+
+
+	return command_found;
+
 }
 
 Boolean CheckTransmitionAllowed() {
