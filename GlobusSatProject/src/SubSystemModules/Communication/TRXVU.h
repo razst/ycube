@@ -9,6 +9,7 @@
 #include "GlobalStandards.h"
 #include "AckHandler.h"
 #include "SatCommandHandler.h"
+#include "utils.h"
 
 
 #define MAX_MUTE_TIME 	(5400) 	///< max mute duration will be 90 minutes = 60 *90 [sec]
@@ -69,18 +70,9 @@ void SendDumpAbortRequest();
 void AbortDump();
 
 /*!
- * @brief dump telemetry to the ground station with telemetry in time range specified in 'cmd'
- * @param[in] cmd the dump command
- * @note this function starts a new dump task
- * @return	0 on success
- * 			-1 on failure
- */
-int DumpTelemetry(sat_packet_t *cmd);
-
-/*!
  * @brief transmits beacon according to beacon logic
  */
-void BeaconLogic();
+int BeaconLogic();
 
 //TODO:document
 int UpdateBeaconBaudCycle(unsigned char cycle);

@@ -16,3 +16,5 @@ int logError(int error);
 
 int logInfo(char *info , int size);
 
+#define E_CANT_TRANSMIT    		-200
+#define E_TOO_EARLY_4_BEACON    -201

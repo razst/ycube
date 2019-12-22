@@ -18,7 +18,17 @@
 
 Boolean CheckExecutionTime(time_unix prev_time, time_unix period)
 {
+	time_unix curr = 0;
+	int err = Time_getUnixEpoch(&curr);
+	if(0 != err){
+		return FALSE;
+	}
+
+	if(curr - prev_time >= period){
+		return TRUE;
+	}
 	return FALSE;
+
 }
 
 Boolean CheckExecTimeFromFRAM(unsigned int fram_time_addr, time_unix period)
@@ -28,6 +38,10 @@ Boolean CheckExecTimeFromFRAM(unsigned int fram_time_addr, time_unix period)
 
 void SaveSatTimeInFRAM(unsigned int time_addr, unsigned int time_size)
 {
+	time_unix current_time = 0;
+	Time_getUnixEpoch(&current_time);
+
+	FRAM_write((unsigned char*) &current_time, time_addr, time_size);
 }
 
 Boolean IsFS_Corrupted()
@@ -42,6 +56,9 @@ int WakeupFromResetCMD()
 
 void ResetGroundCommWDT()
 {
+	SaveSatTimeInFRAM(LAST_COMM_TIME_ADDR,
+			LAST_COMM_TIME_SIZE);
+
 }
 
 // check if last communication with the ground station has passed WDT kick time

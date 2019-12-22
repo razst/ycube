@@ -18,15 +18,69 @@ int ClearDelayedCMD_FromBuffer(unsigned int start_addr, unsigned int end_addr)
 	return 0;
 }
 
-int ParseDataToCommand(unsigned char * data, unsigned int length, sat_packet_t *cmd)
+int ParseDataToCommand(unsigned char * data, sat_packet_t *cmd)
 {
-	return 0;
+	if(NULL == data || NULL == cmd){
+		return null_pointer_error;
+	}
+	void *err = NULL;
+
+	unsigned int offset = 0;
+
+	unsigned int id = 0;
+	err = memcpy(&id,data,sizeof(id));
+	if (NULL == err) {
+		return execution_error;
+	}
+	offset += sizeof(id);
+
+	char type;
+	err = memcpy(&type,data+offset,sizeof(type));
+	if (NULL == err) {
+		return execution_error;
+	}
+	offset += sizeof(type);
+
+	char subtype;
+	err = memcpy(&subtype, data + offset,sizeof(subtype));
+	if (NULL == err) {
+		return execution_error;
+	}
+	offset += sizeof(subtype);
+
+	unsigned int data_length = 0; // TODO in the SPL presentation, it says that length is 16bits and note 32 bits, who is correct??
+	err = memcpy(&data_length, data + offset,sizeof(data_length));
+		if (NULL == err) {
+			return execution_error;
+		}
+	offset += sizeof(data_length);
+
+	return AssembleCommand(data+offset,data_length,type,subtype,id,cmd);
+
 }
 
-int AssmbleCommand(unsigned char *data, unsigned int data_length, char type,
+int AssembleCommand(unsigned char *data, unsigned int data_length, char type,
 		char subtype, unsigned int id, sat_packet_t *cmd)
 {
-	return 0;
+	if (NULL == cmd) {
+		return null_pointer_error;
+	}
+	cmd->ID = id;
+	cmd->cmd_type = type;
+	cmd->cmd_subtype = subtype;
+	cmd->length = 0;
+
+	if (NULL != data) {
+		unsigned int size =(data_length > MAX_COMMAND_DATA_LENGTH) ?
+				MAX_COMMAND_DATA_LENGTH :data_length; // TODO, if data_length > MAX_COMMAND_DATA_LENGTH than log an error
+		cmd->length = size;
+		void *err = memcpy(cmd->data, data, size);
+
+		if (NULL == err) {
+			return execution_error;
+		}
+	}
+	return command_succsess;
 }
 
 // checks if a cmd time is valid for execution -> execution time has passed and command not expired
@@ -68,4 +122,36 @@ int DeleteDelayedCommandByIndex(unsigned int index)
 int DeleteDelayedBuffer()
 {
 	return 0;
+}
+
+
+int ActUponCommand(sat_packet_t *cmd)
+{
+	int err = 0;
+	if (NULL == cmd){
+		return E_NOT_INITIALIZED;
+	}
+
+	switch ((spl_command_type) cmd->cmd_type)
+	{
+	case trxvu_cmd_type:
+		err = trxvu_command_router(cmd);
+		break;
+	case eps_cmd_type:
+		err = eps_command_router(cmd);
+		break;
+	case telemetry_cmd_type:
+		err = telemetry_command_router(cmd);
+		break;
+	case filesystem_cmd_type:
+		err = filesystem_command_router(cmd);
+		break;
+	case managment_cmd_type:
+		err = managment_command_router(cmd);
+		break;
+	case ack_type: 								//this command is a ping function
+		SendAckPacket(ACK_PING, cmd,NULL,0);
+		break;
+	}
+	return err;
 }

@@ -6,6 +6,7 @@
 #include <hal/errors.h>
 
 #include <satellite-subsystems/IsisTRXVU.h>
+#include <satellite-subsystems/IsisAntS.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +14,7 @@
 #include "GlobalStandards.h"
 #include "TRXVU.h"
 #include "AckHandler.h"
-#include "ActUponCommand.h"
+
 #include "SatCommandHandler.h"
 #include "TLM_management.h"
 #include "CommunicationHelper.h"
@@ -103,9 +104,6 @@ int TRX_Logic() {
 		err = GetDelayedCommand(&cmd);
 	}
 
-
-
-
 	if (err == command_found) {
 		err = ActUponCommand(&cmd);
 		//TODO: log error
@@ -142,7 +140,7 @@ int GetOnlineCommand(sat_packet_t *cmd)
 
 	if (logError(IsisTrxvu_rcGetFrameCount(0, &frameCount))) return -1;
 
-	if (0 == frameCount) {
+	if (frameCount==0) {
 		return no_command_found;
 	}
 
@@ -150,7 +148,7 @@ int GetOnlineCommand(sat_packet_t *cmd)
 			(unsigned char*) receivedFrameData }; // for getting raw data from Rx, nullify values
 
 	if (logError(IsisTrxvu_rcGetCommandFrame(0, &rxFrameCmd))) return -1;
-
+	// TODO log the RSSI from the frame
 	if (logError(ParseDataToCommand(receivedFrameData,cmd))) return -1;
 
 
@@ -158,8 +156,23 @@ int GetOnlineCommand(sat_packet_t *cmd)
 
 }
 
+// check the txSemaphore & low_voltage_flag
 Boolean CheckTransmitionAllowed() {
+	Boolean low_voltage_flag = TRUE;
+
+	low_voltage_flag = EpsGetLowVoltageFlag();
+
+	if (g_mute_flag == MUTE_OFF && low_voltage_flag == FALSE) {
+		return TRUE;
+	}
+
+	// chec kthat we can take the tx Semaphore
+	if(pdTRUE == xSemaphoreTake(xIsTransmitting,0)){
+		xSemaphoreGive(xIsTransmitting);
+		return TRUE;
+	}
 	return FALSE;
+
 }
 
 
@@ -181,16 +194,39 @@ Boolean CheckDumpAbort() {
 void DumpTask(void *args) {
 }
 
-int DumpTelemetry(sat_packet_t *cmd) {
-	return 0;
-}
 
 //Sets the bitrate to 1200 every third beacon and to 9600 otherwise
 int BeaconSetBitrate() {
 	return 0;
 }
 
-void BeaconLogic() {
+int BeaconLogic() {
+	sdfjkgh/// we stopped here !
+	if(!CheckTransmitionAllowed()){
+		return E_CANT_TRANSMIT;
+	}
+	// TODO get and set g_prev_beacon_time
+	int err = 0;
+	if (!CheckExecutionTime(g_prev_beacon_time, g_beacon_interval_time)) {
+		return E_TOO_EARLY_4_BEACON;
+	}
+
+	WOD_Telemetry_t wod = { 0 };
+	GetCurrentWODTelemetry(&wod);
+
+	sat_packet_t cmd = { 0 };
+	err = AssembleCommand((unsigned char*) &wod, sizeof(wod), trxvu_cmd_type,
+			BEACON_SUBTYPE, 0xFFFFFFFF, &cmd); //TODO do we send beacon as SPL ???? there is no global standart ???
+	if (0 != err) {
+		return err;
+	}
+
+	Time_getUnixEpoch(&g_prev_beacon_time);
+
+	BeaconSetBitrate();
+
+	TransmitSplPacket(&cmd, NULL);
+	IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, trxvu_bitrate_9600);
 }
 
 int muteTRXVU(time_unix duration) {
@@ -218,7 +254,29 @@ int TransmitDataAsSPL_Packet(sat_packet_t *cmd, unsigned char *data,
 }
 
 int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
-	return 0;
+	if (!CheckTransmitionAllowed()) {
+		return E_CANT_TRANSMIT;
+	}
+
+	if ( packet == NULL) {
+		return E_NOT_INITIALIZED;
+	}
+
+	int err = 0;
+	unsigned int data_length = packet->length + sizeof(packet->length)
+			+ sizeof(packet->cmd_subtype) + sizeof(packet->cmd_type)
+			+ sizeof(packet->ID);
+
+	if (xSemaphoreTake(xIsTransmitting,SECONDS_TO_TICKS(1)) != pdTRUE) { // TODO ask: isn't one tick too low ??
+		return E_GET_SEMAPHORE_FAILED;
+	}
+	err = IsisTrxvu_tcSendAX25DefClSign(ISIS_TRXVU_I2C_BUS_INDEX,
+			(unsigned char*) packet, data_length, (unsigned char*) &avalFrames); // TOD ask: avalFrames null or zero ??
+
+	xSemaphoreGive(xIsTransmitting);
+
+	return err;
+
 }
 
 int UpdateBeaconBaudCycle(unsigned char cycle)

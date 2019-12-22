@@ -2,6 +2,9 @@
 #ifndef SATCOMMANDS_H_
 #define SATCOMMANDS_H_
 
+#include "GlobalStandards.h"
+#include "SatCommandHandler.h"
+
 #define MAX_COMMAND_DATA_LENGTH 200 ///< maximum AX25 data field available for downlink
 
 //<! how many command can be saved in the buffer
@@ -34,7 +37,7 @@ typedef struct __attribute__ ((__packed__)) sat_packet_t
  * @param[out] cmd pointer to parsed command buffer
  * @return	errors according to CMD_ERR
  */
-int ParseDataToCommand(unsigned char * data, unsigned int length, sat_packet_t *cmd);
+int ParseDataToCommand(unsigned char * data, sat_packet_t *cmd);
 
 /*!
  * @brief parses given frame from TRXVU into 'sat_command_t' structure.
@@ -76,5 +79,7 @@ int GetDelayedCommandByIndex(unsigned int index, sat_packet_t *cmd);
 int DeleteDelayedCommandByIndex(unsigned int index);
 
 int DeleteDelayedBuffer();
+
+int ActUponCommand(sat_packet_t *cmd);
 
 #endif /* SATCOMMANDS_H_ */

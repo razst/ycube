@@ -9,7 +9,7 @@ typedef enum __attribute__ ((__packed__)) spl_command_type_t {
 	filesystem_cmd_type,
 	managment_cmd_type,
 	ack_type
-}spl_command_type_t;
+}spl_command_type;
 
 //TODO: set all sub-types to be different from one another
 
