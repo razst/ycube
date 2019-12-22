@@ -6,18 +6,21 @@
  */
 
 
-#include <satellite-subsystems/GomEPS.h>
+//#include <at91/utility/trace.h>
+//#include <GlobalStandards.h>
+//#include <hal/errors.h>
+//#include <hal/Storage/FRAM.h>
 #include <hal/Timing/Time.h>
 #include <hcc/api_fat.h>
-#include <hal/errors.h>
 #include <hcc/api_hcc_mem.h>
-#include <string.h>
 #include <hcc/api_mdriver_atmel_mcipdc.h>
-#include <hal/Storage/FRAM.h>
-#include <at91/utility/trace.h>
-#include "TLM_management.h"
-#include <stdlib.h>
-#include <GlobalStandards.h>
+//#include <satellite-subsystems/GomEPS.h>
+#include <stdio.h>
+//#include <stdlib.h>
+//#include <string.h>
+#include <SubSystemModules/Communication/SPL.h>
+#include <TLM_management.h>
+#include <utils.h>
 
 #define SKIP_FILE_TIME_SEC 1000000
 #define SD_CARD_DRIVER_PARMS 0
@@ -96,39 +99,86 @@ FileSystemResult c_fileCreate(char* c_file_name,
 	return FS_SUCCSESS;
 }
 
+char* calculateFileName(char year, char month, char day)
+{
+	char file_name[11];
+
+	if(day < 10 && month < 10){
+		snprintf(file_name, sizeof file_name, "%i0%i0%i.%s", year, month, day, FS_FILE_ENDING);
+	} else if (day < 10) {
+		snprintf(file_name, sizeof file_name, "%i%i0%i.%s", year, month, day, FS_FILE_ENDING);
+	} else if (month < 10){
+		snprintf(file_name, sizeof file_name, "%i0%i%i.%s", year, month, day, FS_FILE_ENDING);
+	} else {
+		snprintf(file_name, sizeof file_name, "%i%i%i.%s", year, month, day, FS_FILE_ENDING);
+	}
+
+	return &file_name;
+}
+
+char* calculateData2Write2File(char hours, char minutes, char seconds, char data, int size)
+{
+	char data2Write2File[size + 6];
+
+	if(hours < 10 && minutes < 10 && seconds){
+		snprintf(data2Write2File, sizeof data2Write2File, "0%i0%i0%i%s" , hours, minutes, seconds, data);
+	} else if (hours < 10 && minutes<10) {
+		snprintf(data2Write2File, sizeof data2Write2File, "0%i0%i%i%s" , hours, minutes, seconds, data);
+	} else if (hours < 10 && seconds<10) {
+		snprintf(data2Write2File, sizeof data2Write2File, "0%i%i0%i%s" , hours, minutes, seconds, data);
+	} else if (minutes < 10 && seconds<10){
+		snprintf(data2Write2File, sizeof data2Write2File, "%i0%i0%i%s" , hours, minutes, seconds, data);
+	} else if (minutes < 10){
+		snprintf(data2Write2File, sizeof data2Write2File, "%i0%i%i%s" , hours, minutes, seconds, data);
+	} else if (hours < 10){
+		snprintf(data2Write2File, sizeof data2Write2File, "0%i%i%i%s" , hours, minutes, seconds, data);
+	} else if (seconds < 10){
+		snprintf(data2Write2File, sizeof data2Write2File, "%i%i0%i%s" , hours, minutes, seconds, data);
+	} else {
+		snprintf(data2Write2File, sizeof data2Write2File, "%i%i%i%s" , hours, minutes, seconds, data);
+	}
+
+	return &data2Write2File;
+}
+
 static void write2File(char* data, int size)
 {
-	F_FILE *file;
 	Time curr_time;
 	Time_get(&curr_time);
-	char[8] file_name = curr_time.year; //<==== year/month/day
 
-	String date = curr_time.year + "/" + curr_time.month + "/" + curr_time.day;
-
-//	char buf[11];
-//	  char day[3] = "7";
-//	  char month[3] = "2";
-//	  char year[5] = "2019";
-//
-//	  if(!day[1] && !month[1]){
-//	    printf("1\n");
-//	    snprintf(buf, sizeof buf, "%s/0%s/0%s", year,  month,  day);
-//	  } else if (!day[1]){
-//	    printf("2\n");
-//	    snprintf(buf, sizeof buf, "%s/%s/0%s", year,  month,  day);
-//	  } else if (!month[1]){
-//	    printf("3\n");
-//	    snprintf(buf, sizeof buf, "%s/0%s/%s", year,  month,  day);
-//	  } else {
-//	    printf("4\n");
-//	    snprintf(buf, sizeof buf, "%s/%s/%s", year,  month,  day);
-//	  }
-
-	file = f_open(&file_name, ”a”);
-	f_write(data, 1, size, file);
+	F_FILE *file;
+	file = f_open(calculateFileName(curr_time.year, curr_time.month, curr_time.date), "a");
+	f_write(calculateData2Write2File(curr_time.hours, curr_time.minutes, curr_time.seconds, data, size), 1, size, file);
 	f_close(file);
 }
 
+char* getFileData(char year, char month, char day)
+{
+	{
+		F_FILE *file = f_open(calculateFileName(year, month, day),"r");
+		long size = f_filelength(calculateFileName(year, month, day));
+
+		if (!file)
+		{
+			// log...
+			char error[40] = "Error, there is no log file to this day";
+			return &error;
+		}
+
+		char data[size];
+		if (f_read(data,1,size,file)!=size)
+		{
+			// log...
+			char errorAndData[size + 62];
+			snprintf(errorAndData, sizeof errorAndData, "%s%s", "Error, can't get all log data! \nbut this is what I read:\n\n", data);
+			f_close(file);
+			return &errorAndData;
+		}
+
+		f_close(file);
+		return &data;
+	}
+}
 
 //write element with timestamp to file
 static void writewithEpochtime(F_FILE* file, byte* data, int size,unsigned int time)
