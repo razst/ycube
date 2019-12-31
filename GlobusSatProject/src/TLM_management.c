@@ -14,13 +14,11 @@
 #include <hcc/api_fat.h>
 #include <hcc/api_hcc_mem.h>
 #include <hcc/api_mdriver_atmel_mcipdc.h>
-//#include <satellite-subsystems/GomEPS.h>
 #include <stdio.h>
-//#include <stdlib.h>
-//#include <string.h>
-#include <SubSystemModules/Communication/SPL.h>
+//#include <SubSystemModules/Communication/SPL.h>
 #include <TLM_management.h>
 #include <utils.h>
+#include <string.h>
 
 #define SKIP_FILE_TIME_SEC 1000000
 #define SD_CARD_DRIVER_PARMS 0
@@ -116,28 +114,13 @@ char* calculateFileName(char year, char month, char day)
 	return &file_name;
 }
 
-char* calculateData2Write2File(char hours, char minutes, char seconds, char data, int size)
+char* calculateData2Write2File(char data, int size)
 {
-	char data2Write2File[size + 6];
-
-	if(hours < 10 && minutes < 10 && seconds){
-		snprintf(data2Write2File, sizeof data2Write2File, "0%i0%i0%i%s" , hours, minutes, seconds, data);
-	} else if (hours < 10 && minutes<10) {
-		snprintf(data2Write2File, sizeof data2Write2File, "0%i0%i%i%s" , hours, minutes, seconds, data);
-	} else if (hours < 10 && seconds<10) {
-		snprintf(data2Write2File, sizeof data2Write2File, "0%i%i0%i%s" , hours, minutes, seconds, data);
-	} else if (minutes < 10 && seconds<10){
-		snprintf(data2Write2File, sizeof data2Write2File, "%i0%i0%i%s" , hours, minutes, seconds, data);
-	} else if (minutes < 10){
-		snprintf(data2Write2File, sizeof data2Write2File, "%i0%i%i%s" , hours, minutes, seconds, data);
-	} else if (hours < 10){
-		snprintf(data2Write2File, sizeof data2Write2File, "0%i%i%i%s" , hours, minutes, seconds, data);
-	} else if (seconds < 10){
-		snprintf(data2Write2File, sizeof data2Write2File, "%i%i0%i%s" , hours, minutes, seconds, data);
-	} else {
-		snprintf(data2Write2File, sizeof data2Write2File, "%i%i%i%s" , hours, minutes, seconds, data);
-	}
-
+	unsigned int curr_time;
+	Time_getUnixEpoch(&curr_time);
+	char data2Write2File[size + 32];
+	//max!
+	snprintf(data2Write2File, sizeof data2Write2File, "%i;%s" , curr_time , data);
 	return &data2Write2File;
 }
 
@@ -148,36 +131,85 @@ static void write2File(char* data, int size)
 
 	F_FILE *file;
 	file = f_open(calculateFileName(curr_time.year, curr_time.month, curr_time.date), "a");
-	f_write(calculateData2Write2File(curr_time.hours, curr_time.minutes, curr_time.seconds, data, size), 1, size, file);
+	f_write(calculateData2Write2File(data, size), 1, size, file);
 	f_close(file);
 }
 
 char* getFileData(char year, char month, char day)
 {
+	F_FILE *file = f_open(calculateFileName(year, month, day),"r");
+	long size = f_filelength(calculateFileName(year, month, day));
+
+	if (!file)
 	{
-		F_FILE *file = f_open(calculateFileName(year, month, day),"r");
-		long size = f_filelength(calculateFileName(year, month, day));
-
-		if (!file)
-		{
-			// log...
-			char error[40] = "Error, there is no log file to this day";
-			return &error;
-		}
-
-		char data[size];
-		if (f_read(data,1,size,file)!=size)
-		{
-			// log...
-			char errorAndData[size + 62];
-			snprintf(errorAndData, sizeof errorAndData, "%s%s", "Error, can't get all log data! \nbut this is what I read:\n\n", data);
-			f_close(file);
-			return &errorAndData;
-		}
-
-		f_close(file);
-		return &data;
+		// log...
+		char error[40] = "Error, there is no log file to this day";
+		return &error;
 	}
+
+	char data[size];
+	if (f_read(data,1,size,file)!=size)
+	{
+		// log...
+		char errorAndData[size + 62];
+		snprintf(errorAndData, sizeof errorAndData, "%s%s", "Error, can't get all log data! \nbut this is what I read:\n\n", data);
+		f_close(file);
+		return &errorAndData;
+	}
+
+	f_close(file);
+	return &data;
+}
+
+char* getFilesData(Time fileDay, time_unix fromTime, time_unix toTime)
+{
+	F_FILE *file = f_open(calculateFileName(fileDay.year, fileDay.month, fileDay.day),"r");
+	long size = f_filelength(calculateFileName(fileDay.year, fileDay.month, fileDay.day));
+
+	if (!file)
+	{
+		// log...
+		char error[40] = "Error, there is no log file to this day";
+		return &error;
+	}
+
+	char data[size];
+	if (f_read(data,1,size,file)!=size)
+	{
+		// log...
+		char errorAndData[size + 62];
+		snprintf(errorAndData, sizeof errorAndData, "%s%s", "Error, can't get all log data! \nbut this is what I read:\n\n", data);
+		f_close(file);
+		return &errorAndData;
+	}
+
+	f_close(file);
+
+	  char file_data[] ="1;data\n2;data\n3;data";
+	  char line_date[18], line_data[100];
+
+	  printf("%lu", sizeof(file_data));
+
+	  //while EOF
+
+	  for(int i = 0; i < sizeof(file_data); i++){
+	    for(; i < sizeof(file_data); i++){ //time (;)
+	      if(file_data[i] == ";")
+	        break;
+	      snprintf(line_date, sizeof line_date, "%s%c", line_date, file_data[i]);
+	    }
+
+	    for(; i < sizeof(file_data); i++){ //time (;)
+	      if(file_data[i] == "\n")
+	        break;
+	      snprintf(line_data, sizeof line_data, "%s%c", line_data, file_data[i]);
+	    }
+
+	    // if() //add to return data!
+	  }
+
+
+	return &data;
 }
 
 //write element with timestamp to file
