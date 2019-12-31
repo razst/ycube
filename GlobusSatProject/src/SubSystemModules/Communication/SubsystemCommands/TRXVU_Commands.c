@@ -7,6 +7,13 @@
 #include "SubSystemModules/Communication/TRXVU.h"
 #include "TRXVU_Commands.h"
 
+xTaskHandle xDumpHandle = NULL;			 //task handle for dump task
+
+
+void DumpTask(void *args) {
+}
+
+
 int CMD_StartDump(sat_packet_t *cmd)
 {
 
@@ -36,6 +43,8 @@ int CMD_StartDump(sat_packet_t *cmd)
 
 	return 0;
 }
+
+
 
 int CMD_SendDumpAbortRequest(sat_packet_t *cmd)
 {

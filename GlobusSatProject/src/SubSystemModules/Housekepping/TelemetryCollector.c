@@ -62,11 +62,15 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 	FN_SPACE space = { 0 };
 	int drivenum = f_getdrive();
 
+	// get the free space of the SD card
 	err = f_getfreespace(drivenum, &space);
+
 	if (err == F_NO_ERROR){
 		wod->free_memory = space.free;
 		wod->corrupt_bytes = space.bad;
-	}
+	}else
+		logError(err);
+
 	time_unix current_time = 0;
 	Time_getUnixEpoch(&current_time);
 	wod->sat_time = current_time;
@@ -86,7 +90,9 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 		wod->volt_5V = hk_tlm.fields.obus5V_volt;
 		wod->charging_power = hk_tlm.fields.pwr_generating;
 		wod->consumed_power = hk_tlm.fields.pwr_delivering;
-	}
+	}else
+		logError(err);
+
 	FRAM_read((unsigned char*)&wod->number_of_resets,
 	NUMBER_OF_RESETS_ADDR, NUMBER_OF_RESETS_SIZE);
 

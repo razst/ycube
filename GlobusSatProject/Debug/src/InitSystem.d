@@ -35,6 +35,7 @@ src/InitSystem.d: ../src/InitSystem.c \
  ../src/SubSystemModules/Communication/AckHandler.h \
  ../src/SubSystemModules/Communication/SatCommandHandler.h \
  ../src/SubSystemModules/Communication/SPL.h \
+ C:\ISIS\workspace\ycube\GlobusSatProject\src/utils.h \
  ../src/SubSystemModules/Maintenance/Maintenance.h ../src/InitSystem.h \
  ../src/TLM_management.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hal/include/hal/Boolean.h \
@@ -113,6 +114,8 @@ C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subs
 ../src/SubSystemModules/Communication/SatCommandHandler.h:
 
 ../src/SubSystemModules/Communication/SPL.h:
+
+C:\ISIS\workspace\ycube\GlobusSatProject\src/utils.h:
 
 ../src/SubSystemModules/Maintenance/Maintenance.h:
 

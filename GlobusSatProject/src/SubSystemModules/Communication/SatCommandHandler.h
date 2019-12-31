@@ -40,7 +40,7 @@ typedef struct __attribute__ ((__packed__)) sat_packet_t
 int ParseDataToCommand(unsigned char * data, sat_packet_t *cmd);
 
 /*!
- * @brief parses given frame from TRXVU into 'sat_command_t' structure.
+ * @brief parses given frame from TRXVU into 'sat_command_t' SPL structure.
  * @param[in] data data field of the SPL packet
  * @param[in] data_length length of data packet in bytes
  * @param[in] type command type
@@ -49,7 +49,7 @@ int ParseDataToCommand(unsigned char * data, sat_packet_t *cmd);
  * @param[out] cmd pointer to parsed command buffer
  * @return	errors according to CMD_ERR
  */
-int AssmbleCommand(unsigned char *data, unsigned int data_length, char type, char subtype,unsigned int id, sat_packet_t *cmd);
+int AssembleCommand(unsigned char *data, unsigned int data_length, char type, char subtype,unsigned int id, sat_packet_t *cmd);
 
 /*!
  * @brief returns a command to be executed if there is one in the delayed command buffer

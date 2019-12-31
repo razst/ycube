@@ -6,6 +6,8 @@
 #include "SubSystemModules/Communication/AckHandler.h"
 #include "SubSystemModules/Communication/SatCommandHandler.h"
 
+xSemaphoreHandle xDumpLock = NULL;
+
 int CMD_StartDump(sat_packet_t *cmd);
 
 int CMD_SendDumpAbortRequest(sat_packet_t *cmd);

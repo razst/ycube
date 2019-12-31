@@ -45,6 +45,7 @@ src/main.d: ../src/main.c \
  ../src/SubSystemModules/Communication/AckHandler.h \
  ../src/SubSystemModules/Communication/SatCommandHandler.h \
  ../src/SubSystemModules/Communication/SPL.h \
+ C:\ISIS\workspace\ycube\GlobusSatProject\src/utils.h \
  ../src/SubSystemModules/Housekepping/TelemetryCollector.h \
  ../src/SubSystemModules/Housekepping/TelemetryFiles.h \
  C:\ISIS\workspace\ycube\GlobusSatProject\src/TLM_management.h \
@@ -151,6 +152,8 @@ C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subs
 ../src/SubSystemModules/Communication/SatCommandHandler.h:
 
 ../src/SubSystemModules/Communication/SPL.h:
+
+C:\ISIS\workspace\ycube\GlobusSatProject\src/utils.h:
 
 ../src/SubSystemModules/Housekepping/TelemetryCollector.h:
 

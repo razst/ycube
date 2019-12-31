@@ -29,6 +29,12 @@ typedef struct __attribute__ ((__packed__))
 
 
 /*!
+ * @breif Initializes data filed for transmission - semaphores, parameters from the FRAM
+ * @return
+ */
+void InitTxModule();
+
+/*!
  * @brief initializes the TRXVU subsystem
  * @return	0 on successful init
  * 			errors according to <hal/errors.h>

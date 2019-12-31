@@ -131,11 +131,6 @@ int eps_command_router(sat_packet_t *cmd)
 
 }
 
-int eps_command_router(sat_packet_t *cmd)
-{
-	return 0;
-}
-
 int telemetry_command_router(sat_packet_t *cmd)
 {
 	return 0;

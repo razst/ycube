@@ -5,6 +5,7 @@
 
 #include "GlobalStandards.h"
 #include "SatCommandHandler.h"
+#include "SPL.h"
 
 
 typedef struct __attribute__ ((__packed__)) delayed_cmd_t
@@ -132,7 +133,7 @@ int ActUponCommand(sat_packet_t *cmd)
 		return E_NOT_INITIALIZED;
 	}
 
-	switch ((spl_command_type) cmd->cmd_type)
+	switch (cmd->cmd_type)
 	{
 	case trxvu_cmd_type:
 		err = trxvu_command_router(cmd);

@@ -14,10 +14,9 @@
 #include "GlobalStandards.h"
 #include "TRXVU.h"
 #include "AckHandler.h"
-
+#include "SubsystemCommands/TRXVU_Commands.h"
 #include "SatCommandHandler.h"
 #include "TLM_management.h"
-#include "CommunicationHelper.h"
 
 #include "SubSystemModules/PowerManagment/EPS.h"
 #include "SubSystemModules/Maintenance/Maintenance.h"
@@ -29,15 +28,34 @@
 
 Boolean 		g_mute_flag = MUTE_OFF;				// mute flag - is the mute enabled
 time_unix 		g_mute_end_time = 0;				// time at which the mute will end
-time_unix 		g_prev_beacon_time = 0;				// the time at which the previous beacon occured
-time_unix 		g_beacon_interval_time = 0;			// seconds between each beacon
 unsigned char	g_current_beacon_period = 0;		// marks the current beacon cycle(how many were transmitted before change in baud)
 unsigned char 	g_beacon_change_baud_period = 0;	// every 'g_beacon_change_baud_period' beacon will be in 1200Bps and not 9600Bps
 
 xQueueHandle xDumpQueue = NULL;
-xSemaphoreHandle xDumpLock = NULL;
-xTaskHandle xDumpHandle = NULL;			 //task handle for dump task
 xSemaphoreHandle xIsTransmitting = NULL; // mutex on transmission.
+
+time_unix g_prev_beacon_time = 0;				// the time at which the previous beacon occured
+time_unix g_beacon_interval_time = 0;			// seconds between each beacon
+
+
+
+void InitTxModule()
+{
+	if(xIsTransmitting == NULL)
+		vSemaphoreCreateBinary(xIsTransmitting);
+}
+
+
+void InitBeaconParams()
+{
+	if(0!= FRAM_read(&g_beacon_change_baud_period,BEACON_BITRATE_CYCLE_ADDR,BEACON_BITRATE_CYCLE_SIZE)){
+		g_beacon_change_baud_period = DEFALUT_BEACON_BITRATE_CYCLE;
+	}
+
+	if (0	!= FRAM_read((unsigned char*) &g_beacon_interval_time,BEACON_INTERVAL_TIME_ADDR,BEACON_INTERVAL_TIME_SIZE)){
+		g_beacon_interval_time = DEFAULT_BEACON_INTERVAL_TIME;
+	}
+}
 
 void InitSemaphores()
 {
@@ -113,11 +131,7 @@ int TRX_Logic() {
 
 	if (logError(err)) return -1;
 
-
 	return command_succsess;
-
-
-
 }
 
 int GetNumberOfFramesInBuffer() {
@@ -191,17 +205,29 @@ Boolean CheckDumpAbort() {
 	return FALSE;
 }
 
-void DumpTask(void *args) {
-}
 
 
 //Sets the bitrate to 1200 every third beacon and to 9600 otherwise
 int BeaconSetBitrate() {
-	return 0;
+
+	int err=0;
+	if (g_current_beacon_period % g_beacon_change_baud_period == 0){
+		// bitrate 1200
+		err = IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,
+				trxvu_bitrate_1200);
+		g_current_beacon_period = 1;
+	}else{
+		// bitrate 9600
+		err = IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,
+				trxvu_bitrate_9600);
+		g_current_beacon_period++;
+	}
+
+	return err;
 }
 
 int BeaconLogic() {
-	sdfjkgh/// we stopped here !
+
 	if(!CheckTransmitionAllowed()){
 		return E_CANT_TRANSMIT;
 	}
@@ -215,17 +241,17 @@ int BeaconLogic() {
 	GetCurrentWODTelemetry(&wod);
 
 	sat_packet_t cmd = { 0 };
-	err = AssembleCommand((unsigned char*) &wod, sizeof(wod), trxvu_cmd_type,
-			BEACON_SUBTYPE, 0xFFFFFFFF, &cmd); //TODO do we send beacon as SPL ???? there is no global standart ???
-	if (0 != err) {
-		return err;
-	}
+	//TODO do we send beacon as SPL ???? there is no global standart ???
 
+	if (logError(AssembleCommand((unsigned char*) &wod, sizeof(wod), trxvu_cmd_type,BEACON_SUBTYPE, 0xFFFFFFFF, &cmd))) return -1;
+
+	// set the current time as the previous beacon time
 	Time_getUnixEpoch(&g_prev_beacon_time);
 
 	BeaconSetBitrate();
 
 	TransmitSplPacket(&cmd, NULL);
+	// make sure we switch back to 9600 if we used 1200 in the beacon
 	IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, trxvu_bitrate_9600);
 }
 
