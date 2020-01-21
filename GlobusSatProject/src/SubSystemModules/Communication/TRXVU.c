@@ -82,7 +82,7 @@ int InitTrxvu() {
 
 	//Bitrate definition
 	ISIStrxvuBitrate myTRXVUBitrates;
-	myTRXVUBitrates = trxvu_bitrate_9600; // TODO should we use bit rate 1200?? for beacon??
+	myTRXVUBitrates = trxvu_bitrate_9600;
 	if (logError(IsisTrxvu_initialize(&myTRXVUAddress, &myTRXVUFramesLenght,&myTRXVUBitrates, 1))) return -1;
 
 	vTaskDelay(100); //TODO why 100?? 100 what??
@@ -207,24 +207,6 @@ Boolean CheckDumpAbort() {
 
 
 
-//Sets the bitrate to 1200 every third beacon and to 9600 otherwise
-int BeaconSetBitrate() {
-
-	int err=0;
-	if (g_current_beacon_period % g_beacon_change_baud_period == 0){
-		// bitrate 1200
-		err = IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,
-				trxvu_bitrate_1200);
-		g_current_beacon_period = 1;
-	}else{
-		// bitrate 9600
-		err = IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,
-				trxvu_bitrate_9600);
-		g_current_beacon_period++;
-	}
-
-	return err;
-}
 
 int BeaconLogic() {
 
@@ -247,8 +229,6 @@ int BeaconLogic() {
 
 	// set the current time as the previous beacon time
 	Time_getUnixEpoch(&g_prev_beacon_time);
-
-	BeaconSetBitrate();
 
 	TransmitSplPacket(&cmd, NULL);
 	// make sure we switch back to 9600 if we used 1200 in the beacon
