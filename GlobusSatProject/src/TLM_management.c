@@ -19,6 +19,7 @@
 #include <TLM_management.h>
 #include <utils.h>
 #include <string.h>
+#include <time.h>
 
 #define SKIP_FILE_TIME_SEC 1000000
 #define SD_CARD_DRIVER_PARMS 0
@@ -29,14 +30,14 @@
 typedef enum {EPS,TRXVU,LOG} tlm_t;
 
 typedef struct  {
-    float vBat;
-    int satState;
+	float vBat;
+	int satState;
 } EPS_TLM;
 
 typedef struct  {
-    int bytesTX;
-    int bytesRX;
-    int txBaud;
+	int bytesTX;
+	int bytesRX;
+	int txBaud;
 } TRXVU_TLM;
 
 
@@ -112,31 +113,21 @@ FileSystemResult c_fileCreate(char* c_file_name,
 	return FS_SUCCSESS;
 }
 
-char* calculateFileName(char year, char month, char day, char endFileName)
-{
-	char file_name[11];
 
-	if(day < 10 && month < 10){
-		snprintf(file_name, sizeof file_name, "%i0%i0%i.%s", year, month, day, endFileName);
-	} else if (day < 10) {
-		snprintf(file_name, sizeof file_name, "%i%i0%i.%s", year, month, day, endFileName);
-	} else if (month < 10){
-		snprintf(file_name, sizeof file_name, "%i0%i%i.%s", year, month, day, endFileName);
-	} else {
-		snprintf(file_name, sizeof file_name, "%i%i%i.%s", year, month, day, endFileName);
-	}
+//TODO when we get the Sat, check if we get 01 or 1 for the day and update the code
+char* calculateFileName(Time curr_date, char endFileName, int dayBack)
+{
+	/* initialize */
+	struct tm t = { .tm_year = curr_date.year + 100, .tm_mon = curr_date.month - 1, .tm_mday = curr_date.date };
+	/* modify */
+	t.tm_mday += dayBack;
+	mktime(&t);
+
+	char file_name[11], buff[7];
+	strftime(buff, sizeof buff, "%y%0m%0d", &t);
+	snprintf(file_name, sizeof file_name, "%s.%s", buff, endFileName);
 
 	return &file_name;
-}
-
-char* calculateData2Write2File(char data, int size)
-{
-	unsigned int curr_time;
-	Time_getUnixEpoch(&curr_time);
-	char data2Write2File[size + 32];
-	//max!
-	snprintf(data2Write2File, sizeof data2Write2File, "%i;%s" , curr_time , data);
-	return &data2Write2File;
 }
 
 int write2File(void* data, tlm_t tlmType){
@@ -152,42 +143,31 @@ int write2File(void* data, tlm_t tlmType){
 	int size;
 	F_FILE *fp;
 
-   /* open the file for writing in append mode*/
+	/* open the file for writing in append mode*/
 	if (tlmType==EPS){
-		fp = f_open(calculateFileName(curr_date.year, curr_date.month, curr_date.date, "eps"), "ab");
+		fp = f_open(calculateFileName(curr_date, "eps", 0), "a");
 		size = sizeof(EPS_TLM);
 	}else if (tlmType==TRXVU){
-		fp = f_open(calculateFileName(curr_date.year, curr_date.month, curr_date.date, "trx"), "ab");
+		fp = f_open(calculateFileName(curr_date, "trx", 0), "a");
 		size = sizeof(TRXVU_TLM);
 	}
 
-   if (!fp)
+	if (!fp)
 	{
 		printf("Unable to open file!");
 		return 1;
 	}
 
-   f_write(&curr_time , sizeof(curr_time) ,1, fp );
-   f_write(data , size , 1, fp );
+	f_write(&curr_time , sizeof(curr_time) ,1, fp );
+	f_write(data , size , 1, fp );
 
-   /* close the file*/
-   f_flush(fp);
-   f_close (fp);
-   return 0;
+	/* close the file*/
+	f_flush(fp);
+	f_close (fp);
+	return 0;
 }
 
-//static void write2File(char* data, int size)
-//{
-//	Time curr_time;
-//	Time_get(&curr_time);
-//
-//	F_FILE *file;
-//	file = f_open(calculateFileName(curr_time.year, curr_time.month, curr_time.date), "a");
-//	f_write(calculateData2Write2File(data, size), 1, size, file);
-//	f_close(file);
-//}
-
-int readTLMFile(Time curr_date, tlm_t tlmType){
+int readTLMFile(Time curr_date, tlm_t tlmType, int numOfDays){
 	//TODO check for unsupported tlmType
 	printf("reading from file...\n");
 	unsigned int current_time;
@@ -199,55 +179,9 @@ int readTLMFile(Time curr_date, tlm_t tlmType){
 
 	/* open the file for writing in append mode*/
 	if (tlmType==EPS){
-		fp = f_open(calculateFileName(curr_date.year, curr_date.month, curr_date.date, "eps"), "rb");
+		fp = f_open(calculateFileName(curr_date, "eps", numOfDays), "r");
 	}else if (tlmType==TRXVU){
-		fp = f_open(calculateFileName(curr_date.year, curr_date.month, curr_date.date, "trx"), "rb");
-	}
-
-   if (!fp)
-	{
-		printf("Unable to open file!");
-		return 1;
-	}
-
-
-   char buffer[(sizeof(current_time)+sizeof(epsData))*NUM_ELEMENTS_READ_AT_ONCE];
-   int readElemnts = f_read(&buffer , sizeof(current_time)+sizeof(epsData) , NUM_ELEMENTS_READ_AT_ONCE, fp );
-   // TODO what if readElemnts==0...
-   f_close (fp);
-   for (;readElemnts>0;readElemnts--){
-		memcpy( &current_time, buffer + offset, sizeof(current_time) );
-		printf("tlm time is:%d\n",current_time);
-		offset += sizeof(current_time);
-		if (tlmType==EPS){
-			memcpy ( &epsData, buffer + offset, sizeof(epsData) );
-			 printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-			offset += sizeof(epsData);
-		}else if (tlmType==TRXVU){
-				// TODO ...
-		}
-   }
-
-   /* close the file*/
-   f_close (fp);
-   return 0;
-}
-
-
-int readTLMFileTimeRange(tlm_t tlmType,time_t from_time,time_t to_time, Time curr_date){
-//TODO check for unsupported tlmType
-	printf("reading from file...\n");
-	unsigned int current_time;
-	EPS_TLM epsData;
-	TRXVU_TLM trxvuData;
-
-	FILE * fp;
-
-   /* open the file for writing in append mode*/
-	if (tlmType==EPS){
-		fp = f_open(calculateFileName(curr_date.year, curr_date.month, curr_date.date, "eps"), "rb");
-	}else if (tlmType==TRXVU){
-		fp = f_open(calculateFileName(curr_date.year, curr_date.month, curr_date.date, "trx"), "rb");
+		fp = f_open(calculateFileName(curr_date, "trx", numOfDays), "r");
 	}
 
 	if (!fp)
@@ -256,114 +190,96 @@ int readTLMFileTimeRange(tlm_t tlmType,time_t from_time,time_t to_time, Time cur
 		return 1;
 	}
 
-   while (f_read(&current_time , sizeof(current_time) , 1, fp ) == 1){
+	char buffer[(sizeof(current_time)+sizeof(epsData))*NUM_ELEMENTS_READ_AT_ONCE];
+
+	while(1)
+	{
+		int readElemnts = f_read(&buffer , sizeof(current_time)+sizeof(epsData) , NUM_ELEMENTS_READ_AT_ONCE, fp );
+
+		if(!readElemnts) break;
+
+		// TODO what if readElemnts==0...
+		f_close (fp);
+		for (;readElemnts>0;readElemnts--){
+			memcpy( &current_time, buffer + offset, sizeof(current_time) );
+			printf("tlm time is:%d\n",current_time);
+			offset += sizeof(current_time);
+			if (tlmType==EPS){
+				memcpy ( &epsData, buffer + offset, sizeof(epsData) );
+				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
+				offset += sizeof(epsData);
+			}else if (tlmType==TRXVU){
+				// TODO ...
+			}
+		}
+	}
+
+
+	/* close the file*/
+	f_close (fp);
+	return 0;
+}
+
+int readTLMFiles(Time curr_date, tlm_t tlmType, int numOfDays){
+	for(int i = 0; i < numOfDays; i++){
+		readTLMFile(curr_date, tlmType, i);
+	}
+
+	return 0;
+}
+
+int readTLMFileTimeRange(tlm_t tlmType,time_t from_time,time_t to_time, Time curr_date){
+	//TODO check for unsupported tlmType
+	printf("reading from file...\n");
+	unsigned int current_time;
+	EPS_TLM epsData;
+	TRXVU_TLM trxvuData;
+
+	FILE * fp;
+
+	/* open the file for writing in append mode*/
+	if (tlmType==EPS){
+		fp = f_open(calculateFileName(curr_date,"eps", 0), "rb");
+	}else if (tlmType==TRXVU){
+		fp = f_open(calculateFileName(curr_date,"trx", 0), "rb");
+	}
+
+	if (!fp)
+	{
+		printf("Unable to open file!");
+		return 1;
+	}
+
+	while (f_read(&current_time , sizeof(current_time) , 1, fp ) == 1){
 		printf("tlm time is:%d\n",current_time);
 		if (tlmType==EPS){
-			   if (current_time>=from_time && current_time<=to_time){
-				   f_read(&epsData , sizeof(epsData) , 1, fp );
-				   printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-			   }else if (current_time<=to_time){
-				   f_seek (fp, sizeof(epsData), SEEK_CUR);
-			   }else{
-				   break; // we passed over the date we needed, no need to look anymore...
-			   }
+			if (current_time>=from_time && current_time<=to_time){
+				f_read(&epsData , sizeof(epsData) , 1, fp );
+				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
+			}else if (current_time<=to_time){
+				f_seek (fp, sizeof(epsData), SEEK_CUR);
+			}else{
+				break; // we passed over the date we needed, no need to look anymore...
+			}
 		} else if (tlmType==TRXVU){
-				// TODO check from_time && to_time like EPS
-			   f_read(&trxvuData , sizeof(trxvuData) , 1, fp );
-			   printf("TRXVO data = %d,%f\n",trxvuData.bytesRX,trxvuData.bytesTX);
+			// TODO check from_time && to_time like EPS
+			f_read(&trxvuData , sizeof(trxvuData) , 1, fp );
+			printf("TRXVO data = %d,%f\n",trxvuData.bytesRX,trxvuData.bytesTX);
 		}
-   }
-
-   if (f_eof(fp))
-   {
-     // hit end of file
-   }
-   else
-   {
-
-   }
-
-   /* close the file*/
-   f_close (fp);
-   return 0;
-}
-
-
-char* getFileData(char year, char month, char day)
-{
-	F_FILE *file = f_open(calculateFileName(year, month, day),"r");
-	long size = f_filelength(calculateFileName(year, month, day));
-
-	if (!file)
-	{
-		// log...
-		char error[40] = "Error, there is no log file to this day";
-		return &error;
 	}
 
-	char data[size];
-	if (f_read(data,1,size,file)!=size)
+	if (f_eof(fp))
 	{
-		// log...
-		char errorAndData[size + 62];
-		snprintf(errorAndData, sizeof errorAndData, "%s%s", "Error, can't get all log data! \nbut this is what I read:\n\n", data);
-		f_close(file);
-		return &errorAndData;
+		// hit end of file
+	}
+	else
+	{
+
 	}
 
-	f_close(file);
-	return &data;
-}
-
-char* getFilesData(Time fileDay, time_unix fromTime, time_unix toTime)
-{
-	F_FILE *file = f_open(calculateFileName(fileDay.year, fileDay.month, fileDay.day),"r");
-	long size = f_filelength(calculateFileName(fileDay.year, fileDay.month, fileDay.day));
-
-	if (!file)
-	{
-		// log...
-		char error[40] = "Error, there is no log file to this day";
-		return &error;
-	}
-
-	char data[size];
-	if (f_read(data,1,size,file)!=size)
-	{
-		// log...
-		char errorAndData[size + 62];
-		snprintf(errorAndData, sizeof errorAndData, "%s%s", "Error, can't get all log data! \nbut this is what I read:\n\n", data);
-		f_close(file);
-		return &errorAndData;
-	}
-
-	f_close(file);
-
-	  char file_data[] ="1;data\n2;data\n3;data";
-	  char line_date[18], line_data[100];
-
-	  printf("%lu", sizeof(file_data));
-
-	  //while EOF
-
-	  for(int i = 0; i < sizeof(file_data); i++){
-	    for(; i < sizeof(file_data); i++){ //time (;)
-	      if(file_data[i] == ";")
-	        break;
-	      snprintf(line_date, sizeof line_date, "%s%c", line_date, file_data[i]);
-	    }
-
-	    for(; i < sizeof(file_data); i++){ //time (;)
-	      if(file_data[i] == "\n")
-	        break;
-	      snprintf(line_data, sizeof line_data, "%s%c", line_data, file_data[i]);
-	    }
-
-	    // if() //add to return data!
-	  }
-
-
-	return &data;
+	/* close the file*/
+	f_close (fp);
+	return 0;
 }
 
 //write element with timestamp to file
