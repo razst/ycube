@@ -105,8 +105,10 @@ int AddDelayedCommand(sat_packet_t *cmd)
 
 int GetDelayedCommandBufferCount()
 {
-	return 0;
-
+	unsigned char frame_count = 0;
+	int err = FRAM_read(&frame_count, DELAYED_CMD_FRAME_COUNT_ADDR,
+	DELAYED_CMD_FRAME_COUNT_SIZE);
+	return err ? -1 : frame_count;
 }
 
 

@@ -79,26 +79,17 @@ int CMD_UnMuteTRXVU(sat_packet_t *cmd)
 
 int CMD_GetBaudRate(sat_packet_t *cmd)
 {
-	int err = 0;
 	ISIStrxvuBitrateStatus bitrate;
-	err = GetTrxvuBitrate(&bitrate);
+	ISIStrxvuTransmitterState trxvu_state;
+	if (logError(IsisTrxvu_tcGetState(ISIS_TRXVU_I2C_BUS_INDEX, &trxvu_state))) return -1;
+
+	*bitrate = trxvu_state.fields.transmitter_bitrate;
 	TransmitDataAsSPL_Packet(cmd, &bitrate, sizeof(bitrate));
 
-	return err;
+	return 0;
 }
 
 
-int CMD_SetBeaconCycleTime(sat_packet_t *cmd)
-{
-	int err = 0;
-	ISIStrxvuBitrate bitrate = 0;
-
-	err =  FRAM_write(cmd->data, BEACON_BITRATE_CYCLE_ADDR, BEACON_BITRATE_CYCLE_SIZE);
-	err += FRAM_read(&bitrate, BEACON_BITRATE_CYCLE_ADDR, BEACON_BITRATE_CYCLE_SIZE);
-	TransmitDataAsSPL_Packet(cmd,(unsigned char*)&bitrate, sizeof(bitrate));
-
-	return err;
-}
 
 int CMD_GetBeaconInterval(sat_packet_t *cmd)
 {
@@ -130,11 +121,10 @@ int CMD_SetBeaconInterval(sat_packet_t *cmd)
 
 int CMD_SetBaudRate(sat_packet_t *cmd)
 {
-	int err = 0;
+	// TODO do want to save the new bit rate in the FRAME so after restart (init_logic) we will continute to use the new rate??
 	ISIStrxvuBitrateStatus bitrate;
-	bitrate = (ISIStrxvuBitrateStatus) cmd->data[0];
-	err = IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, bitrate);
-	return err;
+	bitrate = (ISIStrxvuBitrateStatus) cmd->data[0]; // TODO why do we take only the first byte?? we need more, no? to get 9600 for example.
+	return IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, bitrate);
 }
 
 
@@ -229,6 +219,7 @@ int CMD_AntGetUptime(sat_packet_t *cmd)
 	ISISantsSide ant_side;
 	memcpy(&ant_side, cmd->data, sizeof(ant_side));
 	err = IsisAntS_getUptime(ISIS_TRXVU_I2C_BUS_INDEX, ant_side,(unsigned int*) &uptime);
+	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &uptime, sizeof(uptime));
 	return err;
 }
 

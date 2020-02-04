@@ -55,10 +55,6 @@ int trxvu_command_router(sat_packet_t *cmd)
 		err = CMD_SetBaudRate(cmd);
 		break;
 
-	case SET_BEACON_CYCLE_TIME:
-		err = CMD_SetBeaconCycleTime(cmd);
-		break;
-
 	case GET_TX_UPTIME:
 		err = CMD_GetTxUptime(cmd);
 		break;
@@ -67,7 +63,7 @@ int trxvu_command_router(sat_packet_t *cmd)
 		err = CMD_GetRxUptime(cmd);
 		break;
 
-	case GET_NUM_OF_DELAYED_CMD:
+	case GET_NUM_OF_DELAYED_CMD: // TODO
 		err = CMD_GetNumOfDelayedCommands(cmd);
 		break;
 
@@ -107,7 +103,10 @@ int trxvu_command_router(sat_packet_t *cmd)
 		break;
 	}
 
-	SendErrorMSG_IfError(ACK_ERROR_MSG,cmd,err);
+	if (err != 0) {
+		SendAckPacket(ACK_ERROR_MSG, cmd, (unsigned char*) &err, sizeof(err));
+	}
+
 	return err;
 }
 
@@ -120,12 +119,14 @@ int eps_command_router(sat_packet_t *cmd)
 	{
 	case 0:
 		err = UpdateAlpha(*(float*)cmd->data);
-		SendErrorMSG(ACK_ERROR_MSG, ACK_UPDATE_EPS_ALPHA,cmd, err);
 		break;
 
 	default:
 		SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
 		break;
+	}
+	if (err != 0) {
+		SendAckPacket(ACK_ERROR_MSG, cmd, (unsigned char*) &err, sizeof(err));
 	}
 	return err;
 

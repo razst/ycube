@@ -13,8 +13,6 @@
 
 
 #define MAX_MUTE_TIME 	(5400) 	///< max mute duration will be 90 minutes = 60 *90 [sec]
-#define MUTE_ON 		TRUE	///< mute is on flag
-#define MUTE_OFF 		FALSE	///< mute is off flag
 
 #define SIZE_RXFRAME	200
 #define SIZE_TXFRAME	235
@@ -80,11 +78,6 @@ void AbortDump();
  */
 int BeaconLogic();
 
-//TODO:document
-int UpdateBeaconBaudCycle(unsigned char cycle);
-
-//TODO:document
-int UpdateBeaconInterval(time_unix intrvl);
 
 /*!
  * @brief	mutes the TRXVU for a specified time frame
@@ -99,12 +92,7 @@ int muteTRXVU(time_unix duration);
  */
 void UnMuteTRXVU();
 
-/*!
- * @brief returns the current state of the mute flag
- * @return	MUTE_ON if mute is on
- * 			MUTE_OFF if mute is off
- */
-Boolean GetMuteFlag();
+
 
 /*!
  * @brief checks if the Trxvu mute time has terminated
@@ -128,12 +116,6 @@ int GetNumberOfFramesInBuffer();
  */
 int GetOnlineCommand(sat_packet_t *cmd);
 
-/*!
- * @brief returns the current baud rate of the TX
- * @param[out] bitrate the current baud rate of the satellite
- * @return errors according to <hal/errors.h>
- */
-int GetTrxvuBitrate(ISIStrxvuBitrateStatus *bitrate);
 
 /*!
  * @brief transmits data as SPL packet

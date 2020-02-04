@@ -26,10 +26,7 @@
 #endif
 
 
-Boolean 		g_mute_flag = MUTE_OFF;				// mute flag - is the mute enabled
 time_unix 		g_mute_end_time = 0;				// time at which the mute will end
-unsigned char	g_current_beacon_period = 0;		// marks the current beacon cycle(how many were transmitted before change in baud)
-unsigned char 	g_beacon_change_baud_period = 0;	// every 'g_beacon_change_baud_period' beacon will be in 1200Bps and not 9600Bps
 
 xQueueHandle xDumpQueue = NULL;
 xSemaphoreHandle xIsTransmitting = NULL; // mutex on transmission.
@@ -48,9 +45,6 @@ void InitTxModule()
 
 void InitBeaconParams()
 {
-	if(0!= FRAM_read(&g_beacon_change_baud_period,BEACON_BITRATE_CYCLE_ADDR,BEACON_BITRATE_CYCLE_SIZE)){
-		g_beacon_change_baud_period = DEFALUT_BEACON_BITRATE_CYCLE;
-	}
 
 	if (0	!= FRAM_read((unsigned char*) &g_beacon_interval_time,BEACON_INTERVAL_TIME_ADDR,BEACON_INTERVAL_TIME_SIZE)){
 		g_beacon_interval_time = DEFAULT_BEACON_INTERVAL_TIME;
@@ -175,10 +169,14 @@ Boolean CheckTransmitionAllowed() {
 	Boolean low_voltage_flag = TRUE;
 
 	low_voltage_flag = EpsGetLowVoltageFlag();
+	if (low_voltage_flag) return FALSE;
 
-	if (g_mute_flag == MUTE_OFF && low_voltage_flag == FALSE) {
-		return TRUE;
-	}
+	// get current unix time
+	time_unix curr_tick_time = 0;
+	Time_getUnixEpoch(&curr_tick_time);
+
+	if (curr_tick_time < g_mute_end_time) return FALSE;
+
 
 	// chec kthat we can take the tx Semaphore
 	if(pdTRUE == xSemaphoreTake(xIsTransmitting,0)){
@@ -236,27 +234,42 @@ int BeaconLogic() {
 }
 
 int muteTRXVU(time_unix duration) {
+	if (duration > MAX_MUTE_TIME) {
+		logError(TRXVU_MUTE_TOO_LOMG);
+		return -1;
+	}
+	// get current unix time
+	time_unix curr_tick_time = 0;
+	Time_getUnixEpoch(&curr_tick_time);
+
+	// set mute end time
+	g_mute_end_time = curr_tick_time + duration;
 	return 0;
+
 }
 
 void UnMuteTRXVU() {
+	g_mute_end_time = 0;
+
 }
 
-Boolean GetMuteFlag() {
-	return FALSE;
-}
-
-Boolean CheckForMuteEnd() {
-	return FALSE;
-}
-
-int GetTrxvuBitrate(ISIStrxvuBitrateStatus *bitrate) {
-	return 0;
-}
 
 int TransmitDataAsSPL_Packet(sat_packet_t *cmd, unsigned char *data,
 		unsigned int length) {
-	return 0;
+	int err = 0;
+	sat_packet_t packet = { 0 };
+	if (NULL != cmd) {
+		err = AssembleCommand(data, length, cmd->cmd_type, cmd->cmd_subtype,
+				cmd->ID, &packet);
+	} else {
+		err = AssembleCommand(data, length, 0xFF, 0xFF, 0xFFFFFFFF, &packet); //TODO: figure out what should be the 'FF'
+	}
+	if (err != 0) {
+		return err;
+	}
+	err = TransmitSplPacket(&packet, NULL);
+	return err;
+
 }
 
 int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
@@ -285,11 +298,3 @@ int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
 
 }
 
-int UpdateBeaconBaudCycle(unsigned char cycle)
-{
-	return 0;
-}
-
-int UpdateBeaconInterval(time_unix intrvl) {
-	return 0;
-}

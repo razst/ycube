@@ -24,12 +24,3 @@ int SendAckPacket(ack_subtype_t acksubtype, sat_packet_t *cmd,
 	return err;
 }
 
-void SendErrorMSG(ack_subtype_t fail_subt, ack_subtype_t succ_subt,
-		sat_packet_t *cmd, int err)
-{
-}
-
-void SendErrorMSG_IfError(ack_subtype_t subtype, sat_packet_t *cmd, int err)
-{
-}
-

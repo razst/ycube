@@ -147,4 +147,5 @@ void Maintenance()
 	logError(IsFS_Corrupted());
 
 	logError(IsGroundCommunicationWDTKick());
+}
 

@@ -22,8 +22,6 @@ int CMD_GetBaudRate(sat_packet_t *cmd);
 
 int CMD_SetBaudRate(sat_packet_t *cmd);
 
-int CMD_SetBeaconCycleTime(sat_packet_t *cmd);
-
 int CMD_GetBeaconInterval(sat_packet_t *cmd);
 
 int CMD_SetBeaconInterval(sat_packet_t *cmd);

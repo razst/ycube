@@ -18,3 +18,4 @@ int logInfo(char *info , int size);
 
 #define E_CANT_TRANSMIT    		-200
 #define E_TOO_EARLY_4_BEACON    -201
+#define TRXVU_MUTE_TOO_LOMG    -202

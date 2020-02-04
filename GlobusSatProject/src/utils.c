@@ -9,6 +9,7 @@
 #include <hal/errors.h>
 
 
+
 int logError(int error){
 
 //TODO LOG TO FILE
