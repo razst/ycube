@@ -79,12 +79,12 @@ int CMD_UnMuteTRXVU(sat_packet_t *cmd)
 
 int CMD_GetBaudRate(sat_packet_t *cmd)
 {
-	ISIStrxvuBitrateStatus bitrate;
+	//ISIStrxvuBitrateStatus bitrate;
 	ISIStrxvuTransmitterState trxvu_state;
 	if (logError(IsisTrxvu_tcGetState(ISIS_TRXVU_I2C_BUS_INDEX, &trxvu_state))) return -1;
 
-	*bitrate = trxvu_state.fields.transmitter_bitrate;
-	TransmitDataAsSPL_Packet(cmd, &bitrate, sizeof(bitrate));
+	int bitrate = trxvu_state.fields.transmitter_bitrate;
+	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &bitrate, sizeof(bitrate));
 
 	return 0;
 }
