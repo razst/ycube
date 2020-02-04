@@ -29,65 +29,259 @@
 
 int CMD_GenericI2C(sat_packet_t *cmd)
 {
-	return 0;
+	if(cmd == NULL || cmd->data == NULL){
+		return E_INPUT_POINTER_NULL;
+	}
+	int err = 0;
+	unsigned char slaveAddr = 0;
+	unsigned int size = 0;
+	unsigned char *i2c_data = malloc(size);
+
+	memcpy(&slaveAddr,cmd->data,sizeof(slaveAddr));
+	memcpy(&size,cmd->data + sizeof(slaveAddr),sizeof(size));
+
+	unsigned int offset = sizeof(slaveAddr) + sizeof(size);
+	err = I2C_write((unsigned int)slaveAddr,cmd->data + offset, cmd->length);
+	I2C_read((unsigned int)slaveAddr,i2c_data,size);
+
+	return err;
 }
 
 int CMD_FRAM_ReadAndTransmitt(sat_packet_t *cmd)
 {
-	return 0;
+	if (cmd == NULL || cmd->data == NULL){
+		return E_INPUT_POINTER_NULL;
+	}
+	int err = 0;
+	unsigned int addr = 0;
+	unsigned int size = 0;
+
+	memcpy(&addr, cmd->data, sizeof(addr));
+	memcpy(&size, cmd->data + sizeof(addr),sizeof(size));
+
+	unsigned char *read_data = malloc(size);
+	if(NULL == read_data){
+		return E_MEM_ALLOC;
+	}
+
+	err = FRAM_read(read_data, addr, size);
+	if (err != 0){
+		return err;
+	}
+
+	TransmitDataAsSPL_Packet(cmd, read_data, size);
+	free(read_data);
+	return err;
 }
 
 int CMD_FRAM_WriteAndTransmitt(sat_packet_t *cmd)
 {
-	return 0;
+	if (cmd == NULL || cmd->data == NULL){
+		return E_INPUT_POINTER_NULL;
+	}
+	int err = 0;
+	unsigned int addr = 0;
+	unsigned int length = cmd->length;
+	unsigned char *data = cmd->data;
+
+	memcpy(&addr, cmd->data, sizeof(addr));
+
+	err = FRAM_write(data + sizeof(addr), addr, length - sizeof(addr));
+	if (err != 0){
+		return err;
+	}
+	err = FRAM_read(data, addr, length - sizeof(addr));
+	if (err != 0){
+		return err;
+	}
+	TransmitDataAsSPL_Packet(cmd, data, length);
+	return err;
 }
 
 int CMD_FRAM_Start(sat_packet_t *cmd)
 {
-	return 0;
+	int err = 0;
+	err = FRAM_start();
+	TransmitDataAsSPL_Packet(cmd, (unsigned char*)&err, sizeof(err));
+	return err;
 }
 
 int CMD_FRAM_Stop(sat_packet_t *cmd)
 {
-	return 0;
+	(void)cmd;
+	int err = 0;
+	FRAM_stop();
+	return err;
 }
 
 int CMD_FRAM_GetDeviceID(sat_packet_t *cmd)
 {
-	return 0;
+	int err = 0;
+	unsigned char id;
+	FRAM_getDeviceID(&id);
+	TransmitDataAsSPL_Packet(cmd, &id, sizeof(id));
+	return err;
 }
 
 int CMD_UpdateSatTime(sat_packet_t *cmd)
 {
-	return 0;
+	if (cmd == NULL || cmd->data == NULL){
+		return E_INPUT_POINTER_NULL;
+	}
+	int err = 0;
+	time_unix set_time = 0;
+	memcpy(&set_time, cmd->data, sizeof(set_time));
+	err = Time_setUnixEpoch(set_time);
+	TransmitDataAsSPL_Packet(cmd, (unsigned char*)&set_time, sizeof(set_time));
+	return err;
 }
 
 int CMD_GetSatTime(sat_packet_t *cmd)
 {
-	return 0;
+	int err = 0;
+	time_unix curr_time = 0;
+	err = Time_getUnixEpoch(&curr_time);
+	if (err != 0)
+	{
+		return err;
+	}
+	TransmitDataAsSPL_Packet(cmd, (unsigned char*)&curr_time, sizeof(curr_time));
+
+	return err;
 }
 
 int CMD_GetSatUptime(sat_packet_t *cmd)
 {
-	return 0;
+	int err = 0;
+	time_unix uptime = 0;
+	uptime = Time_getUptimeSeconds();
+	TransmitDataAsSPL_Packet(cmd, (unsigned char*)&uptime, sizeof(uptime));
+	return err;
 }
 
 int CMD_SoftTRXVU_ComponenetReset(sat_packet_t *cmd)
 {
-	return 0;
+	if (cmd == NULL || cmd->data == NULL)
+	{
+		return E_INPUT_POINTER_NULL;
+	}
+
+	int err = 0;
+	ISIStrxvuComponent component;
+	memcpy(&component, cmd->data, sizeof(component));
+
+	err = IsisTrxvu_componentSoftReset(ISIS_TRXVU_I2C_BUS_INDEX, component);
+	return err;
 }
 
 int CMD_HardTRXVU_ComponenetReset(sat_packet_t *cmd)
 {
-	return 0;
+	if (cmd == NULL || cmd->data == NULL)
+	{
+		return E_INPUT_POINTER_NULL;
+	}
+
+	int err = 0;
+	ISIStrxvuComponent component;
+	memcpy(&component, cmd->data, sizeof(component));
+
+	err = IsisTrxvu_componentHardReset(ISIS_TRXVU_I2C_BUS_INDEX, component);
+	return err;
 }
 
 int CMD_AntennaDeploy(sat_packet_t *cmd)
 {
-	return 0;
+	(void)cmd;
+	int err = 0;
+	err = IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideA, isisants_arm);
+	if(err != E_NO_SS_ERR ){
+		return err;
+	}
+
+	err = IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideB, isisants_arm);
+	if(err != E_NO_SS_ERR ){
+		return err;
+	}
+
+	err = IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA,
+			ANTENNA_DEPLOYMENT_TIMEOUT);
+	if(err != E_NO_SS_ERR ){
+		return err;
+	}
+	err = IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB,
+				ANTENNA_DEPLOYMENT_TIMEOUT);
+	return err;
 }
 
 int CMD_ResetComponent(reset_type_t rst_type)
 {
-	return 0;
+	int err = 0;
+
+	Boolean8bit reset_flag = TRUE_8BIT;
+
+	switch (rst_type)
+	{
+	case reset_software:
+		SendAnonymosAck(ACK_SOFT_RESET);
+		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
+		vTaskDelay(10);
+		restart();
+		break;
+
+	case reset_hardware:
+		SendAnonymosAck(ACK_HARD_RESET);
+		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
+		vTaskDelay(10);
+		//TODO: obc hard reset
+		break;
+
+	case reset_eps:
+		SendAnonymosAck(ACK_EPS_RESET);
+		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
+		vTaskDelay(10);
+#ifdef ISISEPS
+		ieps_statcmd_t ieps_cmd;
+		err = IsisEPS_hardReset(EPS_I2C_BUS_INDEX, &ieps_cmd);
+#endif
+#ifdef GOMEPS
+	//TODO:
+#endif
+		break;
+
+	case reset_trxvu_hard:
+		SendAnonymosAck(ACK_TRXVU_HARD_RESET);
+		err = IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX);
+		vTaskDelay(100);
+		break;
+
+	case reset_trxvu_soft:
+		SendAnonymosAck(ACK_TRXVU_SOFT_RESET);
+		err = IsisTrxvu_softReset(ISIS_TRXVU_I2C_BUS_INDEX);
+		vTaskDelay(100);
+		break;
+
+	case reset_filesystem:
+		DeInitializeFS();
+		vTaskDelay(10);
+		err = (unsigned int) InitializeFS(FALSE);
+		vTaskDelay(10);
+		SendAckPacket(ACK_FS_RESET, NULL, (unsigned char*) &err, sizeof(err));
+		break;
+
+	case reset_ant_SideA:
+		err = IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA);
+		SendAckPacket(ACK_ANTS_RESET, NULL, (unsigned char*) &err, sizeof(err));
+		break;
+
+	case reset_ant_SideB:
+		err = IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB);
+		SendAckPacket(ACK_ANTS_RESET, NULL, (unsigned char*) &err, sizeof(err));
+		break;
+
+	default:
+		SendAnonymosAck(ACK_UNKNOWN_SUBTYPE);
+		break;
+	}
+	vTaskDelay(10);
+	return err;
 }
