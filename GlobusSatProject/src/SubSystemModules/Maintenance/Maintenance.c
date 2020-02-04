@@ -142,9 +142,11 @@ void Maintenance()
 	MOST_UPDATED_SAT_TIME_SIZE);
 
 	//TODO: do error log file
-	WakeupFromResetCMD();
+	logError(WakeupFromResetCMD());
+	//TODO do someting
+	logError(IsFS_Corrupted());
 
-	if (IsFS_Corrupted()) {
-		//TODO: something
-	}
+	logError(IsGroundCommunicationWDTKick());
+	CheckForMuteEnd();
+	UnMuteTRXVU();
 }
