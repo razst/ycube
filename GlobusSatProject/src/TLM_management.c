@@ -31,7 +31,7 @@
 #define FIRST_TIME -1
 #define FILE_NAME_WITH_INDEX_SIZE MAX_F_FILE_NAME_SIZE+sizeof(int)*2
 
-#define NUM_ELEMENTS_READ_AT_ONCE 400
+#define NUM_ELEMENTS_READ_AT_ONCE 400 // TODO check if 400 is the right number !!!
 //typedef enum {EPS,TRXVU,LOG} tlm_type_t;
 
 //typedef struct  {
@@ -158,25 +158,57 @@ int write2File(void* data, tlm_type_t tlmType){
 	//	}
 
 	if (tlmType==tlm_tx_revc){
-		fp = f_open(calculateFileName(curr_date, TX_REVC_END_FILE_NAME, 0), "a");
+		fp = f_open(calculateFileName(curr_date, END_FILE_NAME_TX_REVC, 0), "a");
 		size = sizeof(ISIStrxvuTxTelemetry_revC);
 	}
 	else if (tlmType==tlm_tx){
-		fp = f_open(calculateFileName(curr_date, TX_END_FILE_NAME, 0), "a");
+		fp = f_open(calculateFileName(curr_date, END_FILE_NAME_TX, 0), "a");
 		size = sizeof(ISIStrxvuTxTelemetry);
 	}
 	else if (tlmType==tlm_rx){
-		fp = f_open(calculateFileName(curr_date, RX_END_FILE_NAME, 0), "a");
+		fp = f_open(calculateFileName(curr_date, END_FILE_NAME_RX, 0), "a");
 		size = sizeof(ISIStrxvuRxTelemetry);
 	}
 	else if (tlmType==tlm_rx_revc){
-		fp = f_open(calculateFileName(curr_date, RX_REVC_END_FILE_NAME, 0), "a");
+		fp = f_open(calculateFileName(curr_date, END_FILE_NAME_RX_REVC, 0), "a");
 		size = sizeof(ISIStrxvuRxTelemetry_revC);
 	}
 	else if (tlmType==tlm_rx_frame){
-		fp = f_open(calculateFileName(curr_date, RX_FRAME_END_FILE_NAME, 0), "a");
+		fp = f_open(calculateFileName(curr_date, END_FILE_NAME_RX_FRAME, 0), "a");
 		size = sizeof(ISIStrxvuRxFrame);
 	}
+	else if (tlmType==tlm_antenna){
+		fp = f_open(calculateFileName(curr_date, END_FILE_NAME_ANTENNA, 0), "a");
+		size = sizeof(ISISantsTelemetry);
+	}
+	else if (tlmType==tlm_eps_raw_mb){
+		fp = f_open(calculateFileName(curr_date, END_FILENAME_EPS_RAW_MB_TLM, 0), "a");
+		size = sizeof(ieps_rawhk_data_mb_t);
+	}
+	else if (tlmType==tlm_eps_raw_cdb){
+		fp = f_open(calculateFileName(curr_date, END_FILENAME_EPS_RAW_CDB_TLM, 0), "a");
+		size = sizeof(ieps_rawhk_data_cdb_t);
+	}
+	else if (tlmType==tlm_eps_eng_mb){
+		fp = f_open(calculateFileName(curr_date, END_FILENAME_EPS_ENG_MB_TLM, 0), "a");
+		size = sizeof(ieps_enghk_data_mb_t);
+	}
+	else if (tlmType==tlm_eps_eng_cdb){
+		fp = f_open(calculateFileName(curr_date, END_FILENAME_EPS_ENG_CDB_TLM, 0), "a");
+		size = sizeof(ieps_enghk_data_cdb_t);
+	}
+	else if (tlmType==tlm_wod){
+		fp = f_open(calculateFileName(curr_date, END_FILENAME_WOD_TLM, 0), "a");
+		size = sizeof(WOD_Telemetry_t);
+	}
+	else if (tlmType==tlm_solar){
+		fp = f_open(calculateFileName(curr_date, END_FILENAME_SOLAR_PANELS_TLM, 0), "a");
+		size = sizeof(solar_tlm_t);
+	}
+
+
+
+
 	if (!fp)
 	{
 		printf("Unable to open file!");
@@ -192,6 +224,7 @@ int write2File(void* data, tlm_type_t tlmType){
 	return 0;
 }
 
+
 int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays){
 	//TODO check for unsupported tlmType
 	printf("reading from file...\n");
@@ -199,43 +232,89 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays){
 	unsigned int current_time;
 	Time_getUnixEpoch(&current_time);
 
+
 	ISIStrxvuTxTelemetry_revC txRevcData;
 	ISIStrxvuTxTelemetry txData;
 	ISIStrxvuRxTelemetry rxData;
 	ISIStrxvuRxTelemetry_revC rxRevcData;
 	ISIStrxvuRxFrame rxFrameData;
+	ISISantsTelemetry antData;
+	ieps_rawhk_data_mb_t rawMbData;
+	ieps_rawhk_data_cdb_t rawCdbData;
+	ieps_enghk_data_mb_t engMbData;
+	ieps_enghk_data_cdb_t engCdbData;
+	WOD_Telemetry_t wodData;
+	solar_tlm_t solarData;
+
+
 	unsigned int offset = 0;
 
 	FILE * fp;
+	int size=0;
 
-	/* open the file for writing in append mode*/
+
 	if (tlmType==tlm_tx_revc){
-		fp = f_open(calculateFileName(date, TX_REVC_END_FILE_NAME, numOfDays), "r");
+		fp = f_open(calculateFileName(date, END_FILE_NAME_TX_REVC, 0), "r");
+		size = sizeof(ISIStrxvuTxTelemetry_revC);
 	}
 	else if (tlmType==tlm_tx){
-		fp = f_open(calculateFileName(date, TX_END_FILE_NAME, numOfDays), "r");
+		fp = f_open(calculateFileName(date, END_FILE_NAME_TX, 0), "r");
+		size = sizeof(ISIStrxvuTxTelemetry);
 	}
 	else if (tlmType==tlm_rx){
-		fp = f_open(calculateFileName(date, RX_END_FILE_NAME, numOfDays), "r");
+		fp = f_open(calculateFileName(date, END_FILE_NAME_RX, 0), "r");
+		size = sizeof(ISIStrxvuRxTelemetry);
 	}
 	else if (tlmType==tlm_rx_revc){
-		fp = f_open(calculateFileName(date, RX_REVC_END_FILE_NAME, numOfDays), "r");
+		fp = f_open(calculateFileName(date, END_FILE_NAME_RX_REVC, 0), "r");
+		size = sizeof(ISIStrxvuRxTelemetry_revC);
 	}
 	else if (tlmType==tlm_rx_frame){
-		fp = f_open(calculateFileName(date, RX_FRAME_END_FILE_NAME, numOfDays), "r");
+		fp = f_open(calculateFileName(date, END_FILE_NAME_RX_FRAME, 0), "r");
+		size = sizeof(ISIStrxvuRxFrame);
 	}
+	else if (tlmType==tlm_antenna){
+		fp = f_open(calculateFileName(date, END_FILE_NAME_ANTENNA, 0), "r");
+		size = sizeof(ISISantsTelemetry);
+	}
+	else if (tlmType==tlm_eps_raw_mb){
+		fp = f_open(calculateFileName(date, END_FILENAME_EPS_RAW_MB_TLM, 0), "r");
+		size = sizeof(ieps_rawhk_data_mb_t);
+	}
+	else if (tlmType==tlm_eps_raw_cdb){
+		fp = f_open(calculateFileName(date, END_FILENAME_EPS_RAW_CDB_TLM, 0), "r");
+		size = sizeof(ieps_rawhk_data_cdb_t);
+	}
+	else if (tlmType==tlm_eps_eng_mb){
+		fp = f_open(calculateFileName(date, END_FILENAME_EPS_ENG_MB_TLM, 0), "r");
+		size = sizeof(ieps_enghk_data_mb_t);
+	}
+	else if (tlmType==tlm_eps_eng_cdb){
+		fp = f_open(calculateFileName(date, END_FILENAME_EPS_ENG_CDB_TLM, 0), "r");
+		size = sizeof(ieps_enghk_data_cdb_t);
+	}
+	else if (tlmType==tlm_wod){
+		fp = f_open(calculateFileName(date, END_FILENAME_WOD_TLM, 0), "r");
+		size = sizeof(WOD_Telemetry_t);
+	}
+	else if (tlmType==tlm_solar){
+		fp = f_open(calculateFileName(date, END_FILENAME_SOLAR_PANELS_TLM, 0), "r");
+		size = sizeof(solar_tlm_t);
+	}
+
+
 	if (!fp)
 	{
-		printf("Unable to open file!");
+		printf("Unable to open file!");// TODO: log error in all printf in the file!
 		return 1;
 	}
 
-	//TODO: if ...
-	char buffer[(sizeof(current_time)+sizeof(txRevcData))*NUM_ELEMENTS_READ_AT_ONCE];
+
+	char buffer[(sizeof(current_time)+size) * NUM_ELEMENTS_READ_AT_ONCE];
 
 	while(1)
 	{
-		int readElemnts = f_read(&buffer , sizeof(current_time)+sizeof(txRevcData) , NUM_ELEMENTS_READ_AT_ONCE, fp );
+		int readElemnts = f_read(&buffer , sizeof(current_time)+size , NUM_ELEMENTS_READ_AT_ONCE, fp );
 
 		if(!readElemnts) break;
 
@@ -267,14 +346,54 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays){
 					memcpy ( &rxData, buffer + offset, sizeof(rxFrameData) );
 					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
 					offset += sizeof(rxFrameData);
-				}
-		}
+			}
+			else if (tlmType==tlm_wod){
+				memcpy ( &wodData, buffer + offset, sizeof(wodData) );
+				//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
+				offset += sizeof(wodData);
+			}
+			else if (tlmType==tlm_eps_raw_mb){
+				memcpy ( &engMbData, buffer + offset, sizeof(engMbData) );
+				//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
+				offset += sizeof(engMbData);
+			}
+			else if (tlmType==tlm_eps_eng_mb){
+				memcpy ( &rxData, buffer + offset, sizeof(rxRevcData) );
+				//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
+				offset += sizeof(rxRevcData);
+			}
+			else if (tlmType==tlm_eps_raw_cdb){
+					memcpy ( &rawCdbData, buffer + offset, sizeof(rawCdbData) );
+					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
+					offset += sizeof(rawCdbData);
+			}
+			else if (tlmType==tlm_eps_eng_cdb){
+				memcpy ( &engCdbData, buffer + offset, sizeof(engCdbData) );
+				//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
+				offset += sizeof(engCdbData);
+			}
+			else if (tlmType==tlm_antenna){
+				memcpy ( &antData, buffer + offset, sizeof(antData) );
+				//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
+				offset += sizeof(antData);
+			}
+			else if (tlmType==tlm_solar){
+							memcpy ( &solarData, buffer + offset, sizeof(solarData) );
+							//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
+							offset += sizeof(solarData);
+						}
 
+
+		}// end for loop...
+
+	}
 
 		/* close the file*/
 		f_close (fp);
 		return 0;
-	}
+}
+
+
 
 	int readTLMFiles(tlm_type_t tlmType, Time date, int numOfDays){
 		for(int i = 0; i < numOfDays; i++){
@@ -285,94 +404,6 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays){
 	}
 
 	int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, Time date){
-		//TODO check for unsupported tlmType
-		printf("reading from file...\n");
-
-		unsigned int current_time;
-		Time_getUnixEpoch(&current_time);
-
-		ISIStrxvuTxTelemetry_revC txRevcData;
-		ISIStrxvuTxTelemetry txData;
-		ISIStrxvuRxTelemetry rxData;
-		ISIStrxvuRxTelemetry_revC rxRevcData;
-		ISIStrxvuRxFrame rxFrameData;
-
-		FILE * fp;
-
-		/* open the file for writing in append mode*/
-		if (tlmType==tlm_tx_revc){
-			fp = f_open(calculateFileName(date, TX_REVC_END_FILE_NAME, 0), "r");
-		}
-		else if (tlmType==tlm_tx){
-			fp = f_open(calculateFileName(date, TX_END_FILE_NAME, 0), "r");
-		}
-		else if (tlmType==tlm_rx){
-			fp = f_open(calculateFileName(date, RX_END_FILE_NAME, 0), "r");
-		}
-		else if (tlmType==tlm_rx_revc){
-			fp = f_open(calculateFileName(date, RX_REVC_END_FILE_NAME, 0), "r");
-		}
-		else if (tlmType==tlm_rx_frame){
-			fp = f_open(calculateFileName(date, RX_FRAME_END_FILE_NAME, 0), "r");
-		}
-		if (!fp)
-		{
-			printf("Unable to open file!");
-			return 1;
-		}
-
-		while (f_read(&current_time , sizeof(current_time) , 1, fp ) == 1){
-			printf("tlm time is:%d\n",current_time);
-			if (tlmType==tlm_tx_revc){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&txRevcData , sizeof(txRevcData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(txRevcData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_tx){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&txData , sizeof(txData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(txData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_rx){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&rxData , sizeof(rxData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(rxData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_rx_revc){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&rxRevcData , sizeof(rxRevcData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(rxRevcData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_rx_frame){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&rxFrameData , sizeof(rxFrameData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(rxFrameData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			}
-		}
-
-		/* close the file*/
-		f_close (fp);
 		return 0;
 	}
 

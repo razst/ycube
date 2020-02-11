@@ -24,6 +24,10 @@ typedef struct __attribute__ ((__packed__)) WOD_Telemetry_t
 } WOD_Telemetry_t;
 
 
+typedef struct solar_tlm { int32_t x[ISIS_SOLAR_PANEL_COUNT]; } solar_tlm_t;
+
+
+
 int GetTelemetryFilenameByType(tlm_type_t tlm_type,char filename[MAX_F_FILE_NAME_SIZE]);
 
 /*!

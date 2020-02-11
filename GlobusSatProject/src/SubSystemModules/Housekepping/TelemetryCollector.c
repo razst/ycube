@@ -44,6 +44,41 @@ void TelemetrySaveANT()
 
 void TelemetrySaveSolarPanels()
 {
+	solar_tlm_t data;
+	int err = 0;
+	uint8_t fault;
+	if (IsisSolarPanelv2_getState() == ISIS_SOLAR_PANEL_STATE_AWAKE)
+	{
+		err =  IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_0, &data[0],
+				&fault);
+		err += IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_1, &data[1],
+				&fault);
+		err += IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_2, &data[2],
+				&fault);
+		err += IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_3, &data[3],
+				&fault);
+		err += IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_4, &data[4],
+				&fault);
+		err += IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_5, &data[5],
+				&fault);
+		err += IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_6, &data[6],
+				&fault);
+		err += IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_7, &data[7],
+				&fault);
+		err += IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_8, &data[8],
+				&fault);
+
+		if (err == ISIS_SOLAR_PANEL_STATE_AWAKE * ISIS_SOLAR_PANEL_COUNT)
+		{
+			write2File(&data,tlm_solar);
+		}
+	}
+
+
+
+
+
+
 }
 
 void TelemetrySaveWOD()
