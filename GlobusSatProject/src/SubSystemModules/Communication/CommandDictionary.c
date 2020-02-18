@@ -134,7 +134,8 @@ int eps_command_router(sat_packet_t *cmd)
 
 int telemetry_command_router(sat_packet_t *cmd)
 {
-	// delete files
+	// delete 	files
+	// change
 	return 0;
 }
 
