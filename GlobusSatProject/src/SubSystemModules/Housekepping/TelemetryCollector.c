@@ -44,7 +44,9 @@ void TelemetrySaveANT()
 
 void TelemetrySaveSolarPanels()
 {
+	/*
 	solar_tlm_t data;
+	//int32_t data[ISIS_SOLAR_PANEL_COUNT] ;
 	int err = 0;
 	uint8_t fault;
 	if (IsisSolarPanelv2_getState() == ISIS_SOLAR_PANEL_STATE_AWAKE)
@@ -72,13 +74,7 @@ void TelemetrySaveSolarPanels()
 		{
 			write2File(&data,tlm_solar);
 		}
-	}
-
-
-
-
-
-
+	}*/
 }
 
 void TelemetrySaveWOD()

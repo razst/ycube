@@ -4,6 +4,8 @@
 #include "GlobalStandards.h"
 #include "TelemetryFiles.h"
 #include "TLM_management.h"
+#include <satellite-subsystems/IsisSolarPanelv2.h>
+
 
 //TODO: finish WOD telemetry according to requirements... TRX TLM...
 typedef struct __attribute__ ((__packed__)) WOD_Telemetry_t
@@ -24,7 +26,7 @@ typedef struct __attribute__ ((__packed__)) WOD_Telemetry_t
 } WOD_Telemetry_t;
 
 
-typedef struct solar_tlm { int32_t x[ISIS_SOLAR_PANEL_COUNT]; } solar_tlm_t;
+typedef struct solar_tlm { int32_t values[ISIS_SOLAR_PANEL_COUNT]; } solar_tlm_t;
 
 
 
@@ -51,7 +53,7 @@ void TelemetrySaveTRXVU();
 void TelemetrySaveANT();
 
 /*!
- *  @brief saves current solar panel telemetry into file
+ *  @brief saves current solar panel telemetry (temparture of each panel) into file
  */
 void TelemetrySaveSolarPanels();
 

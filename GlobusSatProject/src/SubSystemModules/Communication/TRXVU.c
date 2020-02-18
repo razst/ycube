@@ -29,6 +29,7 @@
 time_unix 		g_mute_end_time = 0;				// time at which the mute will end
 
 xQueueHandle xDumpQueue = NULL;
+xSemaphoreHandle xDumpLock = NULL;
 xSemaphoreHandle xIsTransmitting = NULL; // mutex on transmission.
 
 time_unix g_prev_beacon_time = 0;				// the time at which the previous beacon occured
@@ -53,6 +54,7 @@ void InitBeaconParams()
 
 void InitSemaphores()
 {
+
 	if(xDumpLock == NULL)
 		vSemaphoreCreateBinary(xDumpLock);
 	if(xDumpQueue == NULL)

@@ -1,7 +1,6 @@
 #include "CommandsTestingDemo.h"
 
 #include "SubSystemModules/Communication/TRXVU.h"
-#include "SubSystemModules/Communication/ActUponCommand.h"
 #include "SubSystemModules/Communication/CommandDictionary.h"
 #include "SubSystemModules/Communication/AckHandler.h"
 #include "SubSystemModules/Communication/SPL.h"

@@ -4,11 +4,10 @@
 #include <satellite-subsystems/IsisAntS.h>
 
 #include "GlobalStandards.h"
-#include "SubSystemModules/Communication/TRXVU.h"
 #include "TRXVU_Commands.h"
 
 xTaskHandle xDumpHandle = NULL;			 //task handle for dump task
-
+extern xSemaphoreHandle xDumpLock; // this global lock is defined once in TRXVU.c
 
 void DumpTask(void *args) {
 }

@@ -16,7 +16,6 @@
 #include "SubSystemModules/PowerManagment/EPS.h"	// for EPS_Conditioning
 
 #include "SubSystemModules/Communication/TRXVU.h"
-#include "SubSystemModules/Communication/ActUponCommand.h"
 #include "SubSystemModules/Communication/CommandDictionary.h"
 #include "SubSystemModules/Communication/AckHandler.h"
 #include "SubSystemModules/Communication/SPL.h"
@@ -209,6 +208,7 @@ Boolean TestDumpTelemetry()
 
 Boolean TestRestoreDefaultBeaconParameters()
 {
+	/*
 	printf("Restoring to default beacon parameters\n");
 
 	time_unix beacon_interval_time = 0;
@@ -232,7 +232,7 @@ Boolean TestRestoreDefaultBeaconParameters()
 	FRAM_read((unsigned char*) &cycle, BEACON_BITRATE_CYCLE_ADDR,
 	BEACON_BITRATE_CYCLE_SIZE);
 	printf("Value of beacon cycle after: %d\n",cycle);
-
+*/
 	return TRUE;
 }
 
