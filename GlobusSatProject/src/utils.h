@@ -8,10 +8,6 @@
 #ifndef UTILS_H_
 #define UTILS_H_
 
-
-
-#endif /* UTILS_H_ */
-
 int logError(int error);
 
 int logInfo(char *info);
@@ -26,3 +22,7 @@ typedef struct data
 	int error;
 	char data[MAX_LOG_STR];
 } logData;
+
+
+#endif /* UTILS_H_ */
+

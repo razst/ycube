@@ -228,11 +228,13 @@ int BeaconLogic() {
 	if (logError(AssembleCommand((unsigned char*) &wod, sizeof(wod), trxvu_cmd_type,BEACON_SUBTYPE, 0xFFFFFFFF, &cmd))) return -1;
 
 	// set the current time as the previous beacon time
-	Time_getUnixEpoch(&g_prev_beacon_time);
+	if (logError(Time_getUnixEpoch(&g_prev_beacon_time))) return -1;
+
 
 	TransmitSplPacket(&cmd, NULL);
 	// make sure we switch back to 9600 if we used 1200 in the beacon
-	IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, trxvu_bitrate_9600);
+	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, trxvu_bitrate_9600))) return -1;
+	return 0;
 }
 
 int muteTRXVU(time_unix duration) {

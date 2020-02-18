@@ -47,11 +47,12 @@ Boolean TestAssmbleCommand()
 	unsigned int id = 0x12345678;
 
 	sat_packet_t cmd = {0};
-	int err = AssmbleCommand(data,length,type,subtype,id,&cmd);
+	//int err = AssmbleCommand(data,length,type,subtype,id,&cmd);
+	/*
 	if(0 != err){
 		printf("error in 'AssmbleCommand' = %d\n",err);
 		return TRUE;
-	}
+	}*/
 	printf("id = %d\n",			cmd.ID);
 	printf("type = %d\n",		cmd.cmd_type);
 	printf("subtype = %d\n",	cmd.cmd_subtype);

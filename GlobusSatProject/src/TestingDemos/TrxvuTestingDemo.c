@@ -202,7 +202,7 @@ Boolean TestDumpTelemetry()
 	while(UTIL_DbguGetIntegerMinMax(&temp,0,0xFFFFFFFF));
 	cmd.ID = temp;
 
-	DumpTelemetry(&cmd);
+	//DumpTelemetry(&cmd);
 	return TRUE;
 }
 
@@ -306,6 +306,7 @@ Boolean TestMuteTrxvu()
 #ifdef ISISEPS
 	ieps_statcmd_t cmd;
 #endif
+	/*
 	while(!CheckForMuteEnd()){
 
 		printf("current tick = %d\n",(int)xTaskGetTickCount());
@@ -323,6 +324,7 @@ Boolean TestMuteTrxvu()
 	UnMuteTRXVU();
 	Boolean mute_flag = GetMuteFlag();
 	SendAckPacket(ACK_MUTE,NULL,(unsigned char*)&mute_flag,sizeof(mute_flag));
+	*/
 	return TRUE;
 }
 
@@ -383,7 +385,7 @@ Boolean TestGetTrxvuBitrate()
 {
 	int err = 0;
 	ISIStrxvuBitrateStatus bitrate = 0;
-	err = GetTrxvuBitrate(&bitrate);
+	//err = GetTrxvuBitrate(&bitrate);
 	if(0 != err){
 		printf("error in 'GetTrxvuBitrate' = %d\n",err);
 		return TRUE;

@@ -50,6 +50,7 @@ src/main.d: ../src/main.c \
  ../src/SubSystemModules/Housekepping/TelemetryFiles.h \
  C:\ISIS\workspace\ycube\GlobusSatProject\src/TLM_management.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hal/include/hal/Boolean.h \
+ C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryFiles.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisSolarPanelv2.h \
  ../src/SubSystemModules/Maintenance/Maintenance.h ../src/InitSystem.h \
  ../src/main.h ../src/TestingDemos/MainTest.h \
@@ -163,6 +164,8 @@ C:\ISIS\workspace\ycube\GlobusSatProject\src/utils.h:
 C:\ISIS\workspace\ycube\GlobusSatProject\src/TLM_management.h:
 
 C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hal/include/hal/Boolean.h:
+
+C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryFiles.h:
 
 C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisSolarPanelv2.h:
 
