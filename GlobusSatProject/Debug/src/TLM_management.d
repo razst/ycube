@@ -13,7 +13,6 @@ src/TLM_management.d: ../src/TLM_management.c \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/include/hcc/../psp/include/../../version/ver_psp_types.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/include/hcc/../version/ver_hcc_mem.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/include/hcc/../version/ver_oal.h \
- C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryFiles.h \
  C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h \
  C:\ISIS\workspace\ycube\GlobusSatProject\src/GlobalStandards.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/at91/include/at91/utility/exithandler.h \
@@ -25,6 +24,7 @@ src/TLM_management.d: ../src/TLM_management.c \
  C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryFiles.h \
  C:\ISIS\workspace\ycube\GlobusSatProject\src/TLM_management.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hal/include/hal/Boolean.h \
+ C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryFiles.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisSolarPanelv2.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hal/include/hal/Drivers/SPI.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/at91/include/at91/commons.h \
@@ -78,8 +78,6 @@ C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/include/hcc/../version/ver_
 
 C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/include/hcc/../version/ver_oal.h:
 
-C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryFiles.h:
-
 C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:
 
 C:\ISIS\workspace\ycube\GlobusSatProject\src/GlobalStandards.h:
@@ -101,6 +99,8 @@ C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Housekepping/Telem
 C:\ISIS\workspace\ycube\GlobusSatProject\src/TLM_management.h:
 
 C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hal/include/hal/Boolean.h:
+
+C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryFiles.h:
 
 C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisSolarPanelv2.h:
 

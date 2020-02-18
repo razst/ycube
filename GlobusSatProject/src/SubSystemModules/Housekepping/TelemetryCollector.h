@@ -6,6 +6,7 @@
 #include "TLM_management.h"
 #include <satellite-subsystems/IsisSolarPanelv2.h>
 
+#define NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS 5
 
 //TODO: finish WOD telemetry according to requirements... TRX TLM...
 typedef struct __attribute__ ((__packed__)) WOD_Telemetry_t
@@ -28,9 +29,10 @@ typedef struct __attribute__ ((__packed__)) WOD_Telemetry_t
 
 typedef struct solar_tlm { int32_t values[ISIS_SOLAR_PANEL_COUNT]; } solar_tlm_t;
 
-
-
-int GetTelemetryFilenameByType(tlm_type_t tlm_type,char filename[MAX_F_FILE_NAME_SIZE]);
+/**
+ * get all tlm save time periods from FRAM
+ */
+void InitSavePeriodTimes();
 
 /*!
  * @brief saves all telemetries into the appropriate TLM files

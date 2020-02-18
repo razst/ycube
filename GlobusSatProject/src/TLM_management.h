@@ -10,6 +10,8 @@
 
 #include <hal/Boolean.h>
 #include <GlobalStandards.h>
+#include "SubSystemModules/Housekepping/TelemetryFiles.h"
+
 
 #define MAX_F_FILE_NAME_SIZE 7
 
@@ -33,6 +35,11 @@ typedef enum
 	FS_FAT_API_FAIL,
 	FS_FAIL
 } FileSystemResult;
+
+/**
+ * write telematry data to file
+ */
+int write2File(void* data, tlm_type_t tlmType);
 
 /*
  *

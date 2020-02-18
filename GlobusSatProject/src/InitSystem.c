@@ -82,10 +82,30 @@ void WriteDefaultValuesToFRAM()
 	def_alpha = DEFAULT_ALPHA_VALUE;
 	FRAM_write((unsigned char*) &def_alpha ,EPS_ALPHA_FILTER_VALUE_ADDR , EPS_ALPHA_FILTER_VALUE_SIZE);
 
-	time_unix tim_save_period;
-	tim_save_period = DEFAULT_WOD_SAVE_TLM_TIME;
-	FRAM_write((unsigned char*) &tim_save_period , DEFAULT_WOD_SAVE_TLM_TIME , sizeof(tim_save_period));
+	time_unix tlm_save_period = DEFAULT_EPS_SAVE_TLM_TIME;
+	FRAM_write((unsigned char*) &tlm_save_period, EPS_SAVE_TLM_PERIOD_ADDR,
+			sizeof(tlm_save_period));
 
+	tlm_save_period = DEFAULT_TRXVU_SAVE_TLM_TIME;
+	FRAM_write((unsigned char*) &tlm_save_period, TRXVU_SAVE_TLM_PERIOD_ADDR,
+			sizeof(tlm_save_period));
+
+	tlm_save_period = DEFAULT_ANT_SAVE_TLM_TIME;
+	FRAM_write((unsigned char*) &tlm_save_period, ANT_SAVE_TLM_PERIOD_ADDR,
+			sizeof(tlm_save_period));
+
+	tlm_save_period = DEFAULT_SOLAR_SAVE_TLM_TIME;
+	FRAM_write((unsigned char*) &tlm_save_period, SOLAR_SAVE_TLM_PERIOD_ADDR,
+			sizeof(tlm_save_period));
+
+	tlm_save_period = DEFAULT_WOD_SAVE_TLM_TIME;
+	FRAM_write((unsigned char*) &tlm_save_period, WOD_SAVE_TLM_PERIOD_ADDR,
+			sizeof(tlm_save_period));
+
+	time_unix beacon_interval = 0;
+	beacon_interval = DEFAULT_BEACON_INTERVAL_TIME;
+	FRAM_write((unsigned char*) &beacon_interval, BEACON_INTERVAL_TIME_ADDR,
+			BEACON_INTERVAL_TIME_SIZE);
 }
 
 int StartFRAM()
@@ -156,6 +176,8 @@ int InitSubsystems()
 	StartTIME();
 
 	InitializeFS(isFirstActivation());
+
+	InitSavePeriodTimes();
 
 	EPS_Init();
 

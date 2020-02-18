@@ -13,40 +13,139 @@
 #include <satellite-subsystems/IsisAntS.h>
 #include <satellite-subsystems/IsisSolarPanelv2.h>
 #include <hal/Timing/Time.h>
+#include "utils.h"
 
 #include <string.h>
 
 #include "TelemetryCollector.h"
 #include "TelemetryFiles.h"
 #include "TLM_management.h"
+#include "FRAM_FlightParameters.h"
 #include "SubSystemModules/Maintenance/Maintenance.h"
 
-int GetTelemetryFilenameByType(tlm_type_t tlm_type, char filename[MAX_F_FILE_NAME_SIZE])
-{
-	return 0;
+
+time_unix tlm_save_periods[NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS] = {0};
+time_unix tlm_last_save_time[NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS]= {0};
+
+void InitSavePeriodTimes(){
+	FRAM_read((unsigned char*)tlm_save_periods,TLM_SAVE_PERIOD_START_ADDR,NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS*sizeof(time_unix));
 }
 
 void TelemetryCollectorLogic()
 {
+	if (CheckExecutionTime(tlm_last_save_time[tlm_eps],tlm_save_periods[tlm_eps])){
+		TelemetrySaveEPS();
+		Time_getUnixEpoch(tlm_last_save_time[tlm_eps]);
+	}
+
+	if (CheckExecutionTime(tlm_last_save_time[tlm_tx],tlm_save_periods[tlm_tx])){
+		TelemetrySaveTRXVU();
+		Time_getUnixEpoch(tlm_last_save_time[tlm_tx]);
+	}
+
+	if (CheckExecutionTime(tlm_last_save_time[tlm_antenna],tlm_save_periods[tlm_antenna])){
+		TelemetrySaveANT();
+		Time_getUnixEpoch(tlm_last_save_time[tlm_antenna]);
+	}
+
+	if (CheckExecutionTime(tlm_last_save_time[tlm_solar],tlm_save_periods[tlm_solar])){
+		TelemetrySaveSolarPanels();
+		Time_getUnixEpoch(tlm_last_save_time[tlm_solar]);
+	}
+
+	if (CheckExecutionTime(tlm_last_save_time[tlm_wod],tlm_save_periods[tlm_wod])){
+		TelemetrySaveWOD();
+		Time_getUnixEpoch(tlm_last_save_time[tlm_wod]);
+	}
+
+
 }
 
 void TelemetrySaveEPS()
 {
+
+	ieps_statcmd_t cmd;
+	ieps_board_t brd = ieps_board_cdb1;
+
+	ieps_rawhk_data_mb_t tlm_mb_raw;
+
+	if (logError(IsisEPS_getRawHKDataMB(EPS_I2C_BUS_INDEX, &tlm_mb_raw, &cmd)) == 0)
+		write2File(&tlm_mb_raw,tlm_eps_raw_mb);
+
+	ieps_enghk_data_mb_t tlm_mb_eng;
+
+	if (logError(IsisEPS_getEngHKDataMB(EPS_I2C_BUS_INDEX, &tlm_mb_eng, &cmd)) == 0)
+	{
+		write2File(&tlm_mb_eng , tlm_eps_eng_cdb);
+	}
+
+	ieps_rawhk_data_cdb_t tlm_cdb_raw;
+
+	if (logError(IsisEPS_getRawHKDataCDB(EPS_I2C_BUS_INDEX, brd, &tlm_cdb_raw, &cmd)) == 0)
+	{
+		write2File(&tlm_cdb_raw , tlm_eps_raw_cdb);
+	}
+
+	ieps_enghk_data_cdb_t tlm_cdb_eng;
+
+	if (logError(IsisEPS_getEngHKDataCDB(EPS_I2C_BUS_INDEX, brd, &tlm_cdb_eng, &cmd)) == 0)
+	{
+		write2File(&tlm_cdb_eng , tlm_eps_eng_cdb);
+	}
+
 }
 
 void TelemetrySaveTRXVU()
 {
-}
 
-void TelemetrySaveANT()
-{
-}
+		ISIStrxvuTxTelemetry tx_tlm;
+
+		if (logError(IsisTrxvu_tcGetTelemetryAll(ISIS_TRXVU_I2C_BUS_INDEX, &tx_tlm))== 0)
+		{
+			write2File(&tx_tlm , tlm_tx);
+		}
+
+		ISIStrxvuTxTelemetry_revC revc_tx_tlm;
+
+		if (logError(IsisTrxvu_tcGetTelemetryAll_revC(ISIS_TRXVU_I2C_BUS_INDEX,
+				&revc_tx_tlm)) == 0)
+		{
+			write2File(&revc_tx_tlm , tlm_tx_revc);
+		}
+
+		ISIStrxvuRxTelemetry rx_tlm;
+
+		if (logError(IsisTrxvu_rcGetTelemetryAll(ISIS_TRXVU_I2C_BUS_INDEX, &rx_tlm)) == 0)
+		{
+			write2File(&rx_tlm , tlm_rx);
+		}
+
+		ISIStrxvuRxTelemetry_revC revc_rx_tlm;
+		if (logError(IsisTrxvu_rcGetTelemetryAll_revC(ISIS_TRXVU_I2C_BUS_INDEX,
+				&revc_rx_tlm)) == 0)
+		{
+			write2File(&revc_rx_tlm , tlm_rx_revc);
+		}
+	}
+
+	void TelemetrySaveANT()
+	{
+		int err = 0;
+		ISISantsTelemetry ant_tlmA, ant_tlmB;
+		if(logError(IsisAntS_getAlltelemetry(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA,
+				&ant_tlmA) == 0)){
+			write2File(&ant_tlmA , tlm_antenna);
+		}
+		if(logError(IsisAntS_getAlltelemetry(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB,
+				&ant_tlmB)) == 0){
+			write2File(&ant_tlmB , tlm_antenna);
+		}
+	}
 
 void TelemetrySaveSolarPanels()
 {
-	/*
-	solar_tlm_t data;
-	//int32_t data[ISIS_SOLAR_PANEL_COUNT] ;
+	//solar_tlm_t data;
+	int32_t data[ISIS_SOLAR_PANEL_COUNT] ;
 	int err = 0;
 	uint8_t fault;
 	if (IsisSolarPanelv2_getState() == ISIS_SOLAR_PANEL_STATE_AWAKE)
@@ -74,11 +173,14 @@ void TelemetrySaveSolarPanels()
 		{
 			write2File(&data,tlm_solar);
 		}
-	}*/
+	}
 }
 
 void TelemetrySaveWOD()
 {
+	WOD_Telemetry_t wod = { 0 };
+	GetCurrentWODTelemetry(&wod);
+	write2File(&wod , tlm_wod);
 }
 
 void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)

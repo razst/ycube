@@ -15,15 +15,12 @@
 #include "SubSystemModules/Communication/TRXVU.h"
 #include "TLM_management.h"
 #include "Maintenance.h"
+#include "utils.h"
 
 Boolean CheckExecutionTime(time_unix prev_time, time_unix period)
 {
 	time_unix curr = 0;
-	int err = Time_getUnixEpoch(&curr);
-	if(0 != err){
-		return FALSE;
-	}
-
+	if (logError(Time_getUnixEpoch(&curr)) == 1) return -1;
 	if(curr - prev_time >= period){
 		return TRUE;
 	}

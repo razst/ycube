@@ -30,6 +30,8 @@
 #define RESET_CMD_FLAG_ADDR				0x105		//<! the flag is raised whenever a restart is commissioned
 #define RESET_CMD_FLAG_SIZE				1			//<! size of the parameter in bytes
 
+#define TLM_SAVE_PERIOD_START_ADDR		0x30		//<! start of the save periods in the FRAM
+
 #define DEFAULT_EPS_SAVE_TLM_TIME		20			//<! save EPS TLM every 20 seconds
 #define EPS_SAVE_TLM_PERIOD_ADDR		0x33		//<! address where the save tlm period will be
 #define LAST_EPS_TLM_SAVE_TIME_ADDR		0x20		//<! time of last EPS TLM save inot files
