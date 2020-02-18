@@ -14,8 +14,15 @@
 
 int logError(int error);
 
-int logInfo(char *info , int size);
+int logInfo(char *info);
 
 #define E_CANT_TRANSMIT    		-200
 #define E_TOO_EARLY_4_BEACON    -201
 #define TRXVU_MUTE_TOO_LOMG    -202
+#define MAX_LOG_STR				40
+
+typedef struct data
+{
+	int error;
+	char data[MAX_LOG_STR];
+} logData;
