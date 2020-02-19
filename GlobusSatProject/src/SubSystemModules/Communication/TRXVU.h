@@ -10,6 +10,7 @@
 #include "AckHandler.h"
 #include "SatCommandHandler.h"
 #include "utils.h"
+#include <hal/Timing/Time.h>
 
 
 #define MAX_MUTE_TIME 	(5400) 	///< max mute duration will be 90 minutes = 60 *90 [sec]
@@ -23,6 +24,8 @@ typedef struct __attribute__ ((__packed__))
 	unsigned char dump_type;
 	time_unix t_start;
 	time_unix t_end;
+	Time day;
+	int numberOfDays;
 } dump_arguments_t;
 
 
@@ -46,6 +49,7 @@ int InitTrxvu();
  * @see "SatCommandHandler.h"
  */
 int TRX_Logic();
+
 
 /*!
  * @brief checks if transmission is possible on grounds of low voltage and TX mute

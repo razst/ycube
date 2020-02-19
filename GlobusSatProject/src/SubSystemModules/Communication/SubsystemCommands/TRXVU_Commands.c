@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdlib.h>
 
 #include <satellite-subsystems/IsisTRXVU.h>
 #include <satellite-subsystems/IsisAntS.h>
@@ -10,13 +11,36 @@ xTaskHandle xDumpHandle = NULL;			 //task handle for dump task
 extern xSemaphoreHandle xDumpLock; // this global lock is defined once in TRXVU.c
 
 void DumpTask(void *args) {
+	if (NULL == args) {
+		FinishDump(NULL, NULL, ACK_DUMP_ABORT, NULL, 0);
+		return;
+	}
+	dump_arguments_t *task_args = (dump_arguments_t *) args;
+
+
+	/* TODO: add this to readTLMFile function
+	sat_packet_t dump_tlm = { 0 };
+
+	SendAckPacket(ACK_DUMP_START, task_args->cmd,
+			(unsigned char*) &num_of_elements, sizeof(num_of_elements));
+
+	AssembleCommand((unsigned char*)buffer, size_of_element,
+			(char) DUMP_SUBTYPE, (char) (task_args->dump_type),
+			task_args->cmd->ID, &dump_tlm);
+
+
+	TransmitSplPacket(&dump_tlm, &availFrames);
+
+	FinishDump(task_args, buffer, ACK_DUMP_FINISHED, NULL, 0);
+
+	*/
+
+	readTLMFile(task_args->dump_type,task_args->day,task_args->numberOfDays);
 }
 
 
 int CMD_StartDump(sat_packet_t *cmd)
 {
-
-	// TODO implement dump
 	if (NULL == cmd) {
 		return -1;
 	}
@@ -33,6 +57,14 @@ int CMD_StartDump(sat_packet_t *cmd)
 	offset += sizeof(dmp_pckt->t_start);
 
 	memcpy(&dmp_pckt->t_end, cmd->data + offset, sizeof(dmp_pckt->t_end));
+	offset += sizeof(dmp_pckt->t_end);
+
+	memcpy(&dmp_pckt->day, cmd->data + offset, sizeof(dmp_pckt->day));
+	offset += sizeof(dmp_pckt->day);
+
+	memcpy(&dmp_pckt->numberOfDays, cmd->data + offset, sizeof(dmp_pckt->numberOfDays));
+
+
 
 	if (xSemaphoreTake(xDumpLock,SECONDS_TO_TICKS(1)) != pdTRUE) {
 		return E_GET_SEMAPHORE_FAILED;
