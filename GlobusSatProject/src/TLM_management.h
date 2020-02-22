@@ -13,7 +13,7 @@
 #include "SubSystemModules/Housekepping/TelemetryFiles.h"
 
 
-#define MAX_F_FILE_NAME_SIZE 7
+#define MAX_FILE_NAME_SIZE 11
 
 #define FS_FILE_ENDING	"TLM"
 #define FS_FILE_ENDING_SIZE	3

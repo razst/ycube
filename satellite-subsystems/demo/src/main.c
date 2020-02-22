@@ -35,11 +35,8 @@
 #include "sub-systemCode/Global/Global.h"
 #include "sub-systemCode/EPS.h"
 
-#define DEBUGMODE
-
-#ifndef DEBUGMODE
-	#define DEBUGMODE
-#endif
+#define FIRST_ACTIVATION_FLAG_ADDR		0x42		//<! is this the first activation after launch flag
+#define FIRST_ACTIVATION_FLAG_SIZE		4			//<! length in bytes of FIRST_ACTIVATION_FLAG
 
 
 #define HK_DELAY_SEC 10
@@ -98,17 +95,34 @@ void taskMain()
 	}
 }
 
+Boolean getFirstActivation()
+{
+	Boolean flag = FALSE;
+	FRAM_read((unsigned char*) &flag, FIRST_ACTIVATION_FLAG_ADDR,
+	FIRST_ACTIVATION_FLAG_SIZE);
+	return flag;
+}
+
+
+void setFirstActivation(Boolean value){
+	FRAM_write((unsigned char*) &value,
+	FIRST_ACTIVATION_FLAG_ADDR, FIRST_ACTIVATION_FLAG_SIZE);
+
+}
+
 int main()
 {
 	TRACE_CONFIGURE_ISP(DBGU_STANDARD, 2000000, BOARD_MCK);
 	// Enable the Instruction cache of the ARM9 core. Keep the MMU and Data Cache disabled.
 	CP15_Enable_I_Cache();
 
-	WDT_start();
+	printf("Start FirstActivation program \n");
 
-	printf("Task Main 2121\n");
-	xTaskGenericCreate(taskMain, (const signed char *)("taskMain"), 2048, NULL, configMAX_PRIORITIES - 2, NULL, NULL, NULL);
-	printf("start sch\n");
-	vTaskStartScheduler();
+	Boolean firstActivationValue = getFirstActivation();
+	printf("First activation value in FRAM:%d \n",firstActivationValue);
+
+	setFirstActivation(TRUE);
+
+	printf("First activation value in FRAM:%d \n",firstActivationValue);
 	return 0;
 }

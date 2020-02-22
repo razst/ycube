@@ -14,7 +14,7 @@
 #define I2C_TRXVU_RC_ADDR 0x60		//!< I2C address of the receiver
 
 #define EPS_I2C_BUS_INDEX 0			//!< index of the EPS I2C
-#define EPS_I2C_ADDR 0x02			//!< I2C address of the EPS
+#define EPS_I2C_ADDR 0x20			//!< I2C address of the EPS
 
 #define ANTS_I2C_SIDE_A_ADDR 0000 // TODO check the antenna address values
 #define ANTS_I2C_SIDE_B_ADDR 0000 // TODO check the antenna address values
