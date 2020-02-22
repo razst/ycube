@@ -189,20 +189,44 @@ Boolean CheckTransmitionAllowed() {
 
 }
 
-
-
-
-
-
 void FinishDump(dump_arguments_t *task_args,unsigned char *buffer, ack_subtype_t acktype,
 		unsigned char *err, unsigned int size) {
+
+	SendAckPacket(acktype, task_args->cmd, err, size);
+	if (NULL != task_args) {
+		free(task_args); // TODO: check why we need this?
+	}
+	if (NULL != xDumpLock) {
+		xSemaphoreGive(xDumpLock);
+	}
+	if (xDumpHandle != NULL) {
+		vTaskDelete(xDumpHandle);
+	}
+	if(NULL != buffer){
+		free(buffer);
+	}
 }
+
 
 void AbortDump()
 {
+	FinishDump(NULL,NULL,ACK_DUMP_ABORT,NULL,0);
 }
 
 void SendDumpAbortRequest() {
+	if (eTaskGetState(xDumpHandle) == eDeleted) {
+		return;
+	}
+	Boolean queue_msg = TRUE;
+	int err = xQueueSend(xDumpQueue, &queue_msg, SECONDS_TO_TICKS(1));
+	if (0 != err) {
+		if (NULL != xDumpLock) {
+			xSemaphoreGive(xDumpLock);
+		}
+		if (xDumpHandle != NULL) {
+			vTaskDelete(xDumpHandle);
+		}
+	}
 }
 
 Boolean CheckDumpAbort() {
