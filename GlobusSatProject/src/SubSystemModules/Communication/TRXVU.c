@@ -31,6 +31,7 @@ time_unix 		g_mute_end_time = 0;				// time at which the mute will end
 xQueueHandle xDumpQueue = NULL;
 xSemaphoreHandle xDumpLock = NULL;
 xSemaphoreHandle xIsTransmitting = NULL; // mutex on transmission.
+xTaskHandle xDumpHandle = NULL;
 
 time_unix g_prev_beacon_time = 0;				// the time at which the previous beacon occured
 time_unix g_beacon_interval_time = 0;			// seconds between each beacon

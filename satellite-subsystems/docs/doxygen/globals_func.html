@@ -79,6 +79,12 @@
 <li>cspaceADCS_deployMagBoomADCS()
 : <a class="el" href="cspace_a_d_c_s_8h.html#a0a0a53c98f3c6686da61d3ec419f7d99">cspaceADCS.h</a>
 </li>
+<li>cspaceADCS_eraseFile()
+: <a class="el" href="cspace_a_d_c_s_8h.html#a3dac6d434fe54ec88841674cd877b317">cspaceADCS.h</a>
+</li>
+<li>cspaceADCS_finalizeUploadBlock()
+: <a class="el" href="cspace_a_d_c_s_8h.html#a1232d2a97e7506755b05beb3474abd22">cspaceADCS.h</a>
+</li>
 <li>cspaceADCS_getACPExecutionState()
 : <a class="el" href="cspace_a_d_c_s_8h.html#a0cb92f512667f112b370a9360a4b6784">cspaceADCS.h</a>
 </li>
@@ -96,6 +102,9 @@
 </li>
 <li>cspaceADCS_getADCSMeasurements()
 : <a class="el" href="cspace_a_d_c_s_8h.html#a4fef9e58eeb423a4b1b683909171189e">cspaceADCS.h</a>
+</li>
+<li>cspaceADCS_getADCSRateSensorRaw()
+: <a class="el" href="cspace_a_d_c_s_8h.html#a225ed670e27c627f716fc730e42b384c">cspaceADCS.h</a>
 </li>
 <li>cspaceADCS_getADCSRawGPSMeas()
 : <a class="el" href="cspace_a_d_c_s_8h.html#ade7cfdd2e3349b080d7fa21d1614c5c5">cspaceADCS.h</a>
@@ -132,6 +141,27 @@
 </li>
 <li>cspaceADCS_getEstimationMetadata()
 : <a class="el" href="cspace_a_d_c_s_8h.html#a3bc75fa32aa45e23f556b31639590bfa">cspaceADCS.h</a>
+</li>
+<li>cspaceADCS_getFileDownloadBlock()
+: <a class="el" href="cspace_a_d_c_s_8h.html#a2c58f6a551dc951a418a8c532929930d">cspaceADCS.h</a>
+</li>
+<li>cspaceADCS_getFileDownloadBlockReady()
+: <a class="el" href="cspace_a_d_c_s_8h.html#a8f6e559f2ec23e4b9b8d40e7b1dff4da">cspaceADCS.h</a>
+</li>
+<li>cspaceADCS_getFileHolemap()
+: <a class="el" href="cspace_a_d_c_s_8h.html#afc76d1ab50e451e250f721bca6fcfbc7">cspaceADCS.h</a>
+</li>
+<li>cspaceADCS_getFileUploadBlockComplete()
+: <a class="el" href="cspace_a_d_c_s_8h.html#aee26f031da8c828242944b83b7e6fc7d">cspaceADCS.h</a>
+</li>
+<li>cspaceADCS_getFileUploadBlockCRC()
+: <a class="el" href="cspace_a_d_c_s_8h.html#ac23f35c23dc71e9f5f401150b4d0225b">cspaceADCS.h</a>
+</li>
+<li>cspaceADCS_getFileUploadInitComplete()
+: <a class="el" href="cspace_a_d_c_s_8h.html#a5b788e40354da53037a62d8a3dbbf0ed">cspaceADCS.h</a>
+</li>
+<li>cspaceADCS_getFineEstimatedAngRates()
+: <a class="el" href="cspace_a_d_c_s_8h.html#a7d2f84733edf180045271a36f05208c4">cspaceADCS.h</a>
 </li>
 <li>cspaceADCS_getFineSunVec()
 : <a class="el" href="cspace_a_d_c_s_8h.html#a80f1e72f983fff00552a8ffdcc7ee5aa">cspaceADCS.h</a>
@@ -220,6 +250,15 @@
 <li>cspaceADCS_initialize()
 : <a class="el" href="cspace_a_d_c_s_8h.html#accb3e14e55e79164e7fd01011aa013ca">cspaceADCS.h</a>
 </li>
+<li>cspaceADCS_initiateFileUpload()
+: <a class="el" href="cspace_a_d_c_s_8h.html#ab98d9723bae627ed812f7656bda7dde8">cspaceADCS.h</a>
+</li>
+<li>cspaceADCS_loadFileDownloadBlock()
+: <a class="el" href="cspace_a_d_c_s_8h.html#a5ba738f26a5d42b67bb3875262ea7b6f">cspaceADCS.h</a>
+</li>
+<li>cspaceADCS_resetHolemap()
+: <a class="el" href="cspace_a_d_c_s_8h.html#a194fea3de212ad25ead3b32b1903f8a3">cspaceADCS.h</a>
+</li>
 <li>cspaceADCS_saveConfig()
 : <a class="el" href="cspace_a_d_c_s_8h.html#abf4e35cc9a7eb4e744a34d1595b51d31">cspaceADCS.h</a>
 </li>
@@ -244,12 +283,6 @@
 <li>cspaceADCS_setCurrentTime()
 : <a class="el" href="cspace_a_d_c_s_8h.html#a524335bdb84bee0c5474bde51c821ffa">cspaceADCS.h</a>
 </li>
-<li>cspaceADCS_setEstimationParam1()
-: <a class="el" href="cspace_a_d_c_s_8h.html#a130fd665d72fe2b36fd1e2ab7c984d2e">cspaceADCS.h</a>
-</li>
-<li>cspaceADCS_setEstimationParam2()
-: <a class="el" href="cspace_a_d_c_s_8h.html#ae7dd01b3bec54da6d8ec6b96e74fdc40">cspaceADCS.h</a>
-</li>
 <li>cspaceADCS_setMagMountConfig()
 : <a class="el" href="cspace_a_d_c_s_8h.html#a1bf05ba72d5e56347bf8219e877ed2e5">cspaceADCS.h</a>
 </li>
@@ -265,11 +298,17 @@
 <li>cspaceADCS_setMagSensConfig()
 : <a class="el" href="cspace_a_d_c_s_8h.html#a4f0ed3b2c8d7f823a0f102130a9c8670">cspaceADCS.h</a>
 </li>
+<li>cspaceADCS_setMomentsInertia()
+: <a class="el" href="cspace_a_d_c_s_8h.html#a147e404da95b2bcb79cab5ec4488b900">cspaceADCS.h</a>
+</li>
 <li>cspaceADCS_setPwrCtrlDevice()
 : <a class="el" href="cspace_a_d_c_s_8h.html#abe29a8cdf79206c8eec73645eafeaea8">cspaceADCS.h</a>
 </li>
 <li>cspaceADCS_setRateSensorConfig()
 : <a class="el" href="cspace_a_d_c_s_8h.html#a0f6ade5ad052d47a61304eb17db9d1c2">cspaceADCS.h</a>
+</li>
+<li>cspaceADCS_setReactionWheeCtrl()
+: <a class="el" href="cspace_a_d_c_s_8h.html#ab8333f14849d32fcc5964df15a998f0f">cspaceADCS.h</a>
 </li>
 <li>cspaceADCS_setRunMode()
 : <a class="el" href="cspace_a_d_c_s_8h.html#ae33207e4295a335fffa1b2ce45d989bf">cspaceADCS.h</a>
@@ -283,11 +322,14 @@
 <li>cspaceADCS_setWheelSpeed()
 : <a class="el" href="cspace_a_d_c_s_8h.html#a271698a510d932817a0d86f11213164b">cspaceADCS.h</a>
 </li>
+<li>cspaceADCS_uploadFilePacket()
+: <a class="el" href="cspace_a_d_c_s_8h.html#a6ddb42ccf4ebcc660de18802006d2e6b">cspaceADCS.h</a>
+</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 14 2018 08:20:21 for ISIS-OBC Programmers Reference (SSU) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 15 2020 12:25:48 for ISIS-OBC Programmers Reference (SSU) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

@@ -6,7 +6,7 @@
 
 #include "EPS.h"
 #ifdef ISISEPS
-	#include <satellite-subsystems/IsisEPS.h>
+	#include <satellite-subsystems/isis_eps_driver.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
@@ -22,21 +22,20 @@ EpsThreshVolt_t eps_threshold_voltages = {.raw = DEFAULT_EPS_THRESHOLD_VOLTAGES}
 
 int GetBatteryVoltage(voltage_t *vbatt)
 {
-	ieps_enghk_data_cdb_t hk_tlm;
-	ieps_statcmd_t cmd;
-	ieps_board_t board = ieps_board_cdb1;
+	isis_eps__gethousekeepingengincdb__from_t hk_tlm;
 
-	if(logError(IsisEPS_getEngHKDataCDB(EPS_I2C_BUS_INDEX, board, &hk_tlm, &cmd)))return -1;
+	if(logError(isis_eps__gethousekeepingengincdb__tm(EPS_I2C_BUS_INDEX, &hk_tlm)))return -1;
 
-	*vbatt = hk_tlm.fields.bat_voltage;
+	*vbatt = hk_tlm.fields.batt_input.fields.volt;
 
 	return 0;
 }
 
 int EPS_Init()
 {
-	unsigned char i2c_address = EPS_I2C_ADDR;
-	if(logError(IsisEPS_initialize(&i2c_address , 1))) return -1;
+	unsigned char i2c_address3 = EPS_I2C_ADDR;
+	ISIS_EPS_t i2c_address[1];
+	if(logError(ISIS_EPS_Init(&i2c_address , 1))) return -1;
 
 
 	if(logError(IsisSolarPanelv2_initialize(slave0_spi))) return -1;

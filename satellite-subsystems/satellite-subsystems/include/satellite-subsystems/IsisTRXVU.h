@@ -314,9 +314,8 @@ int IsisTrxvu_tcSetAx25Bitrate(unsigned char index, ISIStrxvuBitrate bitrate);
 
 /**
  *  @brief       Retrieve the current time of operation of the TRXVU transmitter.
- *  @note		 use this version with TRXVU revA/revB boards
  *  @param[in]   index index of ISIS TRXVU I2C bus address.
- *  @param[out]  uptime This array of 4 characters contains the operation time of the transmitter (Seconds, Minutes, Hours and Days, in that order).
+ *  @param[in]   uptime Pointer to location where to store uptime in seconds
  *  @return      Error code according to <hal/errors.h>
  */
 int IsisTrxvu_tcGetUptime(unsigned char index, unsigned int *uptime);
@@ -331,7 +330,7 @@ int IsisTrxvu_tcGetState(unsigned char index, ISIStrxvuTransmitterState *current
 
 /**
  *  @brief       Retrieve a block of telemetry from the TRXVU transmitter.
- *  @note		 use this version with TRXVU revA/revB boards
+ *  @note		 use this version with TRXVU revD boards
  *  @param[in]   index index of ISIS TRXVU I2C bus address.
  *  @param[out]  telemetry Pointer to the union where the telemetry should be stored.
  *  @return      Error code according to <hal/errors.h>
@@ -340,7 +339,7 @@ int IsisTrxvu_tcGetTelemetryAll(unsigned char index, ISIStrxvuTxTelemetry *telem
 
 /**
  *  @brief       Retrieve a block of telemetry from the TRXVU transmitter.
- *  @note		 use this version with TRXVU revC or later
+ *  @note		 use this version with TRXVU revC boards
  *  @param[in]   index index of ISIS TRXVU I2C bus address.
  *  @param[out]  telemetry Pointer to the union where the telemetry should be stored.
  *  @return      Error code according to <hal/errors.h>
@@ -349,7 +348,7 @@ int IsisTrxvu_tcGetTelemetryAll_revC(unsigned char index, ISIStrxvuTxTelemetry_r
 
 /**
  *  @brief       Retrieve a block of telemetry from the TRXVU transmitter stored on the last transmission.
- *  @note		 use this version with TRXVU revA/revB boards
+ *  @note		 use this version with TRXVU revD boards
  *  @param[in]   index index of ISIS TRXVU I2C bus address.
  *  @param[out]  last_telemetry Pointer to the union where the telemetry should be stored.
  *  @return      Error code according to <hal/errors.h>
@@ -358,7 +357,7 @@ int IsisTrxvu_tcGetLastTxTelemetry(unsigned char index, ISIStrxvuTxTelemetry *la
 
 /**
  *  @brief       Retrieve a block of telemetry from the TRXVU transmitter stored on the last transmission.
- *  @note		 use this version with TRXVU revC or later
+ *  @note		 use this version with TRXVU revC boards
  *  @param[in]   index index of ISIS TRXVU I2C bus address.
  *  @param[out]  last_telemetry Pointer to the union where the telemetry should be stored.
  *  @return      Error code according to <hal/errors.h>
@@ -392,7 +391,7 @@ int IsisTrxvu_rcGetCommandFrame(unsigned char index, ISIStrxvuRxFrame *rx_frame)
 
 /**
  *  @brief       Retrieve a block of telemetry from the TRXVU receiver.
- *  @note		 use this version with TRXVU revA/revB boards
+ *  @note		 use this version with TRXVU revD boards
  *  @param[in]   index index of ISIS TRXVU I2C bus address.
  *  @param[out]  telemetry Pointer to the union where the telemetry should be stored.
  *  @return      Error code according to <hal/errors.h>
@@ -401,7 +400,7 @@ int IsisTrxvu_rcGetTelemetryAll(unsigned char index, ISIStrxvuRxTelemetry *telem
 
 /**
  *  @brief       Retrieve a block of telemetry from the TRXVU receiver.
- *  @note		 use this version with TRXVU revC or later
+ *  @note		 use this version with TRXVU revC boards
  *  @param[in]   index index of ISIS TRXVU I2C bus address.
  *  @param[out]  telemetry Pointer to the union where the telemetry should be stored.
  *  @return      Error code according to <hal/errors.h>
@@ -410,9 +409,8 @@ int IsisTrxvu_rcGetTelemetryAll_revC(unsigned char index, ISIStrxvuRxTelemetry_r
 
 /**
  *  @brief       Retrieve the current time of operation of the TRXVU receiver.
- *  @note		 use this version with TRXVU revA/revB boards
  *  @param[in]   index index of ISIS TRXVU I2C bus address.
- *  @param[out]  uptime This array of 4 characters contains the operation time of the receiver (Seconds, Minutes, Hours and Days, in that order).
+ *  @param[in]   uptime Pointer to location where to store uptime in seconds
  *  @return      Error code according to <hal/errors.h>
  */
 int IsisTrxvu_rcGetUptime(unsigned char index, unsigned int *uptime);

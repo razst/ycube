@@ -7,7 +7,7 @@
 #include <hal/Timing/Time.h>
 
 #ifdef ISISEPS
-	#include <satellite-subsystems/IsisEPS.h>
+	#include <satellite-subsystems/isis_eps_driver.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
@@ -304,7 +304,7 @@ Boolean TestMuteTrxvu()
 	Time_getUnixEpoch(&curr);
 
 #ifdef ISISEPS
-	ieps_statcmd_t cmd;
+	//ieps_statcmd_t cmd;
 #endif
 	/*
 	while(!CheckForMuteEnd()){

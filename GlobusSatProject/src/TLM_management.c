@@ -26,7 +26,7 @@
 
 #include <satellite-subsystems/IsisTRXVU.h>
 #include <satellite-subsystems/IsisAntS.h>
-#include <satellite-subsystems/IsisEPS.h>
+#include <satellite-subsystems/isis_eps_driver.h>
 
 #define SKIP_FILE_TIME_SEC 1000000
 #define SD_CARD_DRIVER_PARMS 0
@@ -192,10 +192,10 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays){
 	ISIStrxvuRxTelemetry_revC rxRevcData;
 	ISIStrxvuRxFrame rxFrameData;
 	ISISantsTelemetry antData;
-	ieps_rawhk_data_mb_t rawMbData;
-	ieps_rawhk_data_cdb_t rawCdbData;
-	ieps_enghk_data_mb_t engMbData;
-	ieps_enghk_data_cdb_t engCdbData;
+	isis_eps__gethousekeepingraw__from_t rawMbData;
+	isis_eps__gethousekeepingrawincdb__from_t rawCdbData;
+	isis_eps__gethousekeepingeng__from_t engMbData;
+	isis_eps__gethousekeepingengincdb__from_t engCdbData;
 	WOD_Telemetry_t wodData;
 	solar_tlm_t solarData;
 
@@ -306,7 +306,7 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays){
 				offset += sizeof(wodData);
 			}
 			else if (tlmType==tlm_eps_raw_mb){
-				memcpy ( &engMbData, buffer + offset, sizeof(engMbData) );
+				memcpy ( &engMbData, buffer + offset, sizeof(rawMbData) );
 				//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
 				offset += sizeof(engMbData);
 			}

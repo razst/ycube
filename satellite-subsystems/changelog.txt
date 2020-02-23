@@ -3,6 +3,8 @@ Changelog for ISIS OBC Satellite Subsystems library
 Table of contents
 
 Changelog for:
+- Version 0.1.11 (15 Jan 2020)
+- Version 0.1.10 (04 Oct 2019)
 - Version 0.1.9 (25 Oct 2018)
 - Version 0.1.8 (03 Aug 2018)
 - Version 0.1.7 (30 Oct 2017)
@@ -13,6 +15,70 @@ Changelog for:
 - Version 0.1.2 (13 Jul 2015)
 - Version 0.1.1 (10 Jul 2015)
 - Version 0.1.0 (13 Mar 2015)
+
+Version 0.1.11
+============= 
+
+Summary: updated ISIS EPS demo, several small subsystem fixes
+Release date: 15th of January 2020
+Prepared by: Gerard Aalbers
+
+Specific changes:
+
+cspaceADCS_types.h
+
+* Fixed incorrect struct member size for command to finalize upload block
+
+GomEPS.h
+
+* Fixed issue with endianness in channel state structure
+
+Demos/GomEPSdemo.c
+
+* Added additional print outs for the hk_param struct
+
+Demos/isis_eps_demo.c
+
+* Simplified and clarified the entire demo for the ISIS EPS
+
+Version 0.1.10
+============= 
+
+Summary: Support for changes in ISIS EPS hardware, significant updates for SCS Gecko, several updates for Cubespace ADCS, demo code updates
+Release date: 4th of October 2019
+Prepared by: Alf Henrik Sauge, Pieter Botma, Gerard Aalbers
+
+General changes:
+
+* This version of satellite subsystems supports the new, fully redesigned, version of the ISIS EPS while dropping support for the obsolete hardware. The name of the module has changed from IsisEPS to isis_eps_driver.
+
+* Significant updates to the SCS Gecko driver as a result of more intense testing, including, but not limited, to:
+	- Added support for handling multiple cameras
+	- More robust commanding and data retrieval over the SPI interface while introducing several speed-ups
+	- Ability to command LVDS data output on the camera
+	- Fixed camera telemetry read-out
+
+* The Cubespace ADCS driver has been updated to be compatible with version 3.11 of the ICD, which includes two new telemetry retrieval functions and a few changed telemetry sizes
+
+Specific changes:
+
+cspaceADCS.h / cspaceADCS.c
+
+* Added commands to support file transfers to and from the Cubespace ADCS
+
+cspaceADCS_types.h
+
+* Fixed signedness of altitude telemetry field
+
+Demos/GomEPSdemo.c
+
+* Added demostration of reboot functionality
+
+Demos/IsisTRXVUdemo.c
+
+* Added task to ensure receiver watchdog gets kicked
+* Added code to demonstrate rev. D 'frame ready' pin functionality
+* Fixed bug in rev. D telemetry printout
 
 Version 0.1.9
 ============= 

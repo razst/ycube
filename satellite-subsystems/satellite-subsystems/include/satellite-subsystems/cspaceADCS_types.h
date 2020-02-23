@@ -19,8 +19,8 @@
 #define CSPACE_ADCS_RATESENCONF_SIZE 	 		7
 #define CSPACE_ADCS_MAGOFFSCAL_SIZE 	 		12
 #define CSPACE_ADCS_MAGSENSCONF_SIZE 	 		12
-#define CSPACE_ADCS_ESTPARAM1_SIZE		 	 	16
-#define CSPACE_ADCS_ESTPARAM2_SIZE		 	 	14
+#define CSPACE_ADCS_REACTWHEELCMD_SIZE		 	12
+#define CSPACE_ADCS_MOMINERTIA_SIZE		 	 	12
 #define CSPACE_ADCS_MAGMODE_SIZE				1
 #define CSPACE_ADCS_SG4ORBITPARAMS_SIZE			64
 #define CSPACE_ADCS_CAMCONFPARAM_SIZE 	 		15
@@ -35,11 +35,12 @@
 #define CSPACE_ADCS_GENDATA_SIZE 	 		 	6
 #define CSPACE_ADCS_MISCURR_SIZE 	 		 	4
 #define CSPACE_ADCS_CMDANGLES_SIZE				6
+#define CSPACE_ADCS_FINEESTANGRATE_SIZE			6
 #define CSPACE_ADCS_REDMAGMEAS_SIZE 	 		9
 #define CSPACE_ADCS_GENCMDS_SIZE 	 		 	12
 #define CSPACE_ADCS_CURRSTATE_SIZE				48
 #define CSPACE_ADCS_MEASUREMENTS_SIZE			72
-#define CSPACE_ADCS_RAWSENSORMEASUREMENT_SIZE	28
+#define CSPACE_ADCS_RAWSENSORMEASUREMENT_SIZE	34
 #define CSPACE_ADCS_POWTEMPMEAS_SIZE			34
 #define CSPACE_ADCS_RAWGPSMEAS_SIZE				42
 #define CSPACE_ADCS_STARTRACKERTLM_SIZE			36
@@ -179,6 +180,65 @@ typedef enum __attribute__ ((__packed__)) _cspace_adcs_bootprogram
 	program_flash_ext7 = 9, ///< External flash program 7
 } cspace_adcs_bootprogram;
 
+typedef enum __attribute__ ((__packed__)) _cspace_adcs_fileupdestination
+{
+	fileupdest_eeprom = 2, ///< EEPROM
+	fileupdest_flash1 = 3, ///< Flash program 1
+	fileupdest_flash2 = 4, ///< Flash program 2
+	fileupdest_flash3 = 5, ///< Flash program 3
+	fileupdest_flash4 = 6, ///< Flash program 4
+	fileupdest_flash5 = 7, ///< Flash program 5
+	fileupdest_flash6 = 8, ///< Flash program 6
+	fileupdest_flash7 = 9, ///< Flash program 7
+	fileupdest_sdfile1 = 10, ///< SD user file 1
+	fileupdest_sdfile2 = 11, ///< SD user file 2
+	fileupdest_sdfile3 = 12, ///< SD user file 3
+	fileupdest_sdfile4 = 13, ///< SD user file 4
+	fileupdest_sdfile5 = 14, ///< SD user file 5
+	fileupdest_sdfile6 = 15, ///< SD user file 6
+	fileupdest_sdfile7 = 16, ///< SD user file 7
+	fileupdest_sdfile8 = 17, ///< SD user file 8
+} cspace_adcs_fileupdestination;
+
+typedef struct __attribute__ ((__packed__)) _cspace_adcs_fileerase_t
+{
+	cspace_adcs_fileupdestination filetype;
+	unsigned char filecounter;
+	unsigned char erase_all;
+} cspace_adcs_fileerase_t;
+
+typedef struct __attribute__ ((__packed__)) _cspace_adcs_filedownblock_t
+{
+	cspace_adcs_fileupdestination filetype;
+	unsigned char counter;
+	unsigned int offset;
+	unsigned short blocklength;
+} cspace_adcs_filedownblock_t;
+
+typedef struct __attribute__ ((__packed__)) _cspace_adcs_fileupinit_t
+{
+	cspace_adcs_fileupdestination fileupdestination;
+	unsigned char blocksize;
+} cspace_adcs_fileupinit_t;
+
+typedef struct __attribute__ ((__packed__)) _cspace_adcs_filedatapacket_t
+{
+	unsigned short packetnumber;
+	unsigned char filebytes[20];
+} cspace_adcs_filedatapacket_t;
+
+typedef struct __attribute__ ((__packed__)) _cspace_adcs_fileupblock_t
+{
+	cspace_adcs_fileupdestination destination;
+	unsigned int fileoffset;
+	unsigned short blocklength;
+} cspace_adcs_fileupblock_t;
+
+typedef struct __attribute__ ((__packed__)) _cspace_adcs_holemap_t
+{
+	unsigned char holes[16];
+} cspace_adcs_holemap_t;
+
 ///////////////////////////////////////////////////////////
 
 typedef union __attribute__ ((__packed__)) _cspace_adcs_clearflags_t
@@ -203,7 +263,7 @@ typedef union __attribute__ ((__packed__)) _cspace_adcs_refllhcoord_t
 	{
 		short latitude; ///< Latitude angle ((formatted value) [deg] = RAWVAL * 0.01)
 		short longitude; ///< Longitude angle ((formatted value) [deg] = RAWVAL * 0.01)
-		short altitude; ///< Altitude angle ((formatted value) [deg] = RAWVAL * 0.01)
+		unsigned short altitude; ///< Altitude ((formatted value) [km] = RAWVAL * 0.01)
 	} fields;
 } cspace_adcs_refllhcoord_t;
 
@@ -875,6 +935,17 @@ typedef union __attribute__ ((__packed__)) _cspace_adcs_rawmagmeter_t
 	} fields;
 } cspace_adcs_rawmagmeter_t;
 
+typedef union __attribute__ ((__packed__)) _cspace_adcs_rawmratesensor_t
+{
+	unsigned char raw[CSPACE_ADCS_GENDATA_SIZE];
+	struct __attribute__ ((__packed__))
+	{
+		short rate_x; ///< Sampled A/D value
+		short rate_y; ///< Sampled A/D value
+		short rate_z; ///< Sampled A/D value
+	} fields;
+} cspace_adcs_rawratesensor_t;
+
 typedef union __attribute__ ((__packed__)) _cspace_adcs_rawgpssta_t
 {
 	unsigned char raw[CSPACE_ADCS_GENPARAM_SIZE];
@@ -919,6 +990,7 @@ typedef union __attribute__ ((__packed__)) _cspace_adcs_rawsenms_t
 		cspace_adcs_rawcss1_6_t css_raw1_6; ///< CSS raw measurements 1 to 6
 		cspace_adcs_rawcss7_10_t css_raw7_10; ///< CSS raw measurements 7 to 10
 		cspace_adcs_rawmagmeter_t magmeter_raw; ///< Magnetometer raw measurements
+		cspace_adcs_rawratesensor_t rate_raw; ///< Rate sensor raw measurements
 	} fields;
 } cspace_adcs_rawsenms_t;
 
@@ -1001,6 +1073,19 @@ typedef union __attribute__ ((__packed__)) _cspace_adcs_cmdangles_t
 		short angle_yaw; ///< Commanded yaw angle ((formatted value)[degrees] = RAWVAL * 0.01)
 	} fields;
 } cspace_adcs_cmdangles_t;
+
+typedef union __attribute__ ((__packed__)) _cspace_adcs_fine_estang_t
+{
+	/** Raw value array of data*/
+	unsigned char raw[CSPACE_ADCS_FINEESTANGRATE_SIZE];
+	/** Parameter values*/
+	struct __attribute__ ((__packed__))
+	{
+		short est_angrate_x; ///< Estimated X angular rate ((formatted value)[deg/s] = RAWVAL * 0.001)
+		short est_angrate_y; ///< Estimated Y angular rate ((formatted value)[deg/s] = RAWVAL * 0.001)
+		short est_angrate_z; ///< Estimated Z angular rate ((formatted value)[deg/s] = RAWVAL * 0.001)
+	} fields;
+} cspace_adcs_fine_estang_t;
 
 typedef union __attribute__ ((__packed__)) _cspace_adcs_pwtempms_t
 {
@@ -1134,33 +1219,31 @@ typedef union __attribute__ ((__packed__)) _cspace_adcs_startrkcfg_t
 	} fields;
 } cspace_adcs_startrkcfg_t;
 
-typedef union __attribute__ ((__packed__)) _cspace_adcs_estparam1_t
+typedef union __attribute__ ((__packed__)) _cspace_adcs_reactwheelparam_t
 {
 	/** Raw value array of data*/
-	unsigned char raw[CSPACE_ADCS_ESTPARAM1_SIZE];
+	unsigned char raw[CSPACE_ADCS_REACTWHEELCMD_SIZE];
 	/** Parameter values*/
 	struct __attribute__ ((__packed__))
 	{
-		float mag_ratefilt_systnoise; ///< Magnetometer rate filter system noise.
-		float ekf_sysnoise; ///< EKF system noise
-		float css_measnoise; ///< CSS measurement noise
-		float sunsen_measnoise; ///< Sun sensor measurement noise
+		float rwheel_prop_gain; ///< RWheel Proportional Gain (Kp2).
+		float rwheel_deriv_gain; ///< RWheel Derivative Gain (Kd2).
+		float y_wheel_momentum; ///< Y-Wheel Bias Momentum (H-bias [Nms]).
 	} fields;
-} cspace_adcs_estparam1_t;
+} cspace_adcs_reactwheelparam_t;
 
-typedef union __attribute__ ((__packed__)) _cspace_adcs_estparam2_t
+typedef union __attribute__ ((__packed__)) _cspace_adcs_setmominertia_t
 {
 	/** Raw value array of data*/
-	unsigned char raw[CSPACE_ADCS_ESTPARAM2_SIZE];
+	unsigned char raw[CSPACE_ADCS_MOMINERTIA_SIZE];
 	/** Parameter values*/
 	struct __attribute__ ((__packed__))
 	{
-		float nadirsen_measnoise; ///< Magnetometer rate filter system noise.
-		float mag_measnoise; ///< EKF system noise
-		float startrk_measnoise; ///< CSS measurement noise
-		unsigned short use_sunsen; ///< Sun sensor measurement noise
+		float mom_inertia_Ixx; ///< Moment of Inertia - Ixx (Unit of measure is [Kgm^2])
+		float mom_inertia_Iyy; ///< Moment of Inertia - Iyy (Unit of measure is [Kgm^2])
+		float mom_inertia_Izz; ///< Moment of Inertia - Izz (Unit of measure is [Kgm^2])
 	} fields;
-} cspace_adcs_estparam2_t;
+} cspace_adcs_setmominertia_t;
 
 typedef union __attribute__ ((__packed__)) _cspace_adcs_magmode_t
 {

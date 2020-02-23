@@ -12,12 +12,13 @@
 #include "SubSystemModules/Maintenance/Maintenance.h"
 #include "InitSystem.h"
 #include "TLM_management.h"
+#include <SubSystemModules/Housekepping/TelemetryCollector.h>
 
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
 #endif
 #ifdef ISISEPS
-	#include <satellite-subsystems/IsisEPS.h>
+	#include <satellite-subsystems/isis_eps_driver.h>
 #endif
 #define I2c_SPEED_Hz 100000
 #define I2c_Timeout 10
@@ -33,9 +34,6 @@ Boolean isFirstActivation()
 
 void firstActivationProcedure()
 {
-#ifdef ISISEPS
-	ieps_statcmd_t eps_cmd;
-#endif
 
 	int err = 0;
 
@@ -57,7 +55,8 @@ void firstActivationProcedure()
 
 		seconds_since_deploy += 10;
 
-		IsisEPS_resetWDT(EPS_I2C_BUS_INDEX, &eps_cmd);
+		isis_eps__watchdog__from_t eps_cmd;
+		isis_eps__watchdog__tm(EPS_I2C_BUS_INDEX, &eps_cmd);
 
 	}
 

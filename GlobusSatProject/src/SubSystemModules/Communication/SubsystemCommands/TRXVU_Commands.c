@@ -7,7 +7,7 @@
 #include "GlobalStandards.h"
 #include "TRXVU_Commands.h"
 
-xTaskHandle xDumpHandle = NULL;			 //task handle for dump task
+extern xTaskHandle xDumpHandle;			 //task handle for dump task
 extern xSemaphoreHandle xDumpLock; // this global lock is defined once in TRXVU.c
 
 void DumpTask(void *args) {

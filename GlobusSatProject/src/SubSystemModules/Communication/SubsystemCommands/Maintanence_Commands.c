@@ -9,7 +9,7 @@
 #include <satellite-subsystems/IsisTRXVU.h>
 #include <satellite-subsystems/IsisAntS.h>
 #ifdef ISISEPS
-	#include <satellite-subsystems/IsisEPS.h>
+	#include <satellite-subsystems/isis_eps_driver.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
@@ -26,6 +26,8 @@
 #include "SubSystemModules/Communication/AckHandler.h"
 #include "SubSystemModules/Maintenance/Maintenance.h"
 #include "Maintanence_Commands.h"
+
+#define RESET_KEY 0xA6 // need to sed this key to the reset command otherwise reset will not happen
 
 int CMD_GenericI2C(sat_packet_t *cmd)
 {
@@ -240,8 +242,10 @@ int CMD_ResetComponent(reset_type_t rst_type)
 		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
 		vTaskDelay(10);
 #ifdef ISISEPS
-		ieps_statcmd_t ieps_cmd;
-		err = IsisEPS_hardReset(EPS_I2C_BUS_INDEX, &ieps_cmd);
+		isis_eps__reset__to_t cmd_t;
+		cmd_t.fields.rst_key = RESET_KEY;
+		isis_eps__reset__from_t cmd_f;
+		err = IsisEPS_hardReset(EPS_I2C_BUS_INDEX, &cmd_t, &cmd_f);
 #endif
 #ifdef GOMEPS
 	//TODO:

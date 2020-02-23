@@ -49,7 +49,7 @@ src/TLM_management.d: ../src/TLM_management.c \
  C:\ISIS\workspace\ycube\GlobusSatProject\src/utils.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisTRXVU.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisAntS.h \
- C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisEPS.h
+ C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/isis_eps_driver.h
 
 C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:
 
@@ -151,4 +151,4 @@ C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subs
 
 C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisAntS.h:
 
-C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisEPS.h:
+C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/isis_eps_driver.h:

@@ -17,10 +17,6 @@ S_UPPER_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-src/sub-systemCode/Main \
-src/sub-systemCode/Main/CMD \
-src/sub-systemCode/Global \
-src/sub-systemCode/COMM \
-src/sub-systemCode/ADCS \
 src \
+src/Demos \
 

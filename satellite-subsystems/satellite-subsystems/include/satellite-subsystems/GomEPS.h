@@ -24,15 +24,15 @@ typedef union __attribute__ ((__packed__)) _gom_eps_channelstates_t
 	unsigned char raw; //!< Unformatted GOM EPS channel status
 	struct __attribute__ ((__packed__))
 	{
-		unsigned char channel5V_1 : 1,
-		channel5V_2 : 1,
-		channel5V_3 : 1,
-		channel3V3_1 : 1,
-		channel3V3_2 : 1,
-		channel3V3_3 : 1,
+		unsigned char quadbatHeater : 1,
 		quadbatSwitch : 1,
-		quadbatHeater : 1;
-	}fields; //!< Struct with individual fields of GOM EPS channel status
+		channel3V3_3 : 1,
+		channel3V3_2 : 1,
+		channel3V3_1 : 1,
+		channel5V_3 : 1,
+		channel5V_2 : 1,
+		channel5V_1 : 1;
+	} fields; //!< Struct with individual fields of GOM EPS channel status
 } gom_eps_channelstates_t;
 
 /**

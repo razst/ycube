@@ -1,7 +1,7 @@
 #include "GlobalStandards.h"
 
 #ifdef ISISEPS
-	#include <satellite-subsystems/IsisEPS.h>
+	#include <satellite-subsystems/isis_eps_driver.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>

@@ -797,7 +797,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieve a block of telemetry from the TRXVU receiver. </p>
-<dl class="section note"><dt>Note</dt><dd>use this version with TRXVU revA/revB boards </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>use this version with TRXVU revD boards </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>index of ISIS TRXVU I2C bus address. </td></tr>
@@ -834,7 +834,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieve a block of telemetry from the TRXVU receiver. </p>
-<dl class="section note"><dt>Note</dt><dd>use this version with TRXVU revC or later </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>use this version with TRXVU revC boards </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>index of ISIS TRXVU I2C bus address. </td></tr>
@@ -871,11 +871,10 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieve the current time of operation of the TRXVU receiver. </p>
-<dl class="section note"><dt>Note</dt><dd>use this version with TRXVU revA/revB boards </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>index of ISIS TRXVU I2C bus address. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">uptime</td><td>This array of 4 characters contains the operation time of the receiver (Seconds, Minutes, Hours and Days, in that order). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">uptime</td><td>Pointer to location where to store uptime in seconds </td></tr>
   </table>
   </dd>
 </dl>
@@ -994,7 +993,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieve a block of telemetry from the TRXVU transmitter stored on the last transmission. </p>
-<dl class="section note"><dt>Note</dt><dd>use this version with TRXVU revA/revB boards </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>use this version with TRXVU revD boards </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>index of ISIS TRXVU I2C bus address. </td></tr>
@@ -1031,7 +1030,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieve a block of telemetry from the TRXVU transmitter stored on the last transmission. </p>
-<dl class="section note"><dt>Note</dt><dd>use this version with TRXVU revC or later </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>use this version with TRXVU revC boards </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>index of ISIS TRXVU I2C bus address. </td></tr>
@@ -1104,7 +1103,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieve a block of telemetry from the TRXVU transmitter. </p>
-<dl class="section note"><dt>Note</dt><dd>use this version with TRXVU revA/revB boards </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>use this version with TRXVU revD boards </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>index of ISIS TRXVU I2C bus address. </td></tr>
@@ -1141,7 +1140,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieve a block of telemetry from the TRXVU transmitter. </p>
-<dl class="section note"><dt>Note</dt><dd>use this version with TRXVU revC or later </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>use this version with TRXVU revC boards </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>index of ISIS TRXVU I2C bus address. </td></tr>
@@ -1178,11 +1177,10 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Retrieve the current time of operation of the TRXVU transmitter. </p>
-<dl class="section note"><dt>Note</dt><dd>use this version with TRXVU revA/revB boards </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>index of ISIS TRXVU I2C bus address. </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">uptime</td><td>This array of 4 characters contains the operation time of the transmitter (Seconds, Minutes, Hours and Days, in that order). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">uptime</td><td>Pointer to location where to store uptime in seconds </td></tr>
   </table>
   </dd>
 </dl>
@@ -1565,7 +1563,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 14 2018 08:20:21 for ISIS-OBC Programmers Reference (SSU) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jan 15 2020 12:25:48 for ISIS-OBC Programmers Reference (SSU) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

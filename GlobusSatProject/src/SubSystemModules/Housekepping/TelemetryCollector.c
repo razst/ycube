@@ -3,7 +3,7 @@
 #include "GlobalStandards.h"
 
 #ifdef ISISEPS
-	#include <satellite-subsystems/IsisEPS.h>
+	#include <satellite-subsystems/isis_eps_driver.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
@@ -64,31 +64,28 @@ void TelemetryCollectorLogic()
 void TelemetrySaveEPS()
 {
 
-	ieps_statcmd_t cmd;
-	ieps_board_t brd = ieps_board_cdb1;
+	isis_eps__gethousekeepingraw__from_t tlm_mb_raw;
 
-	ieps_rawhk_data_mb_t tlm_mb_raw;
-
-	if (logError(IsisEPS_getRawHKDataMB(EPS_I2C_BUS_INDEX, &tlm_mb_raw, &cmd)) == 0)
+	if (logError(isis_eps__gethousekeepingraw__tm(EPS_I2C_BUS_INDEX, &tlm_mb_raw)) == 0)
 		write2File(&tlm_mb_raw,tlm_eps_raw_mb);
 
-	ieps_enghk_data_mb_t tlm_mb_eng;
+	isis_eps__gethousekeepingeng__from_t tlm_mb_eng;
 
-	if (logError(IsisEPS_getEngHKDataMB(EPS_I2C_BUS_INDEX, &tlm_mb_eng, &cmd)) == 0)
+	if (logError(isis_eps__gethousekeepingeng__tm(EPS_I2C_BUS_INDEX, &tlm_mb_eng)) == 0)
 	{
 		write2File(&tlm_mb_eng , tlm_eps_eng_cdb);
 	}
 
-	ieps_rawhk_data_cdb_t tlm_cdb_raw;
+	isis_eps__gethousekeepingrawincdb__from_t tlm_cdb_raw;
 
-	if (logError(IsisEPS_getRawHKDataCDB(EPS_I2C_BUS_INDEX, brd, &tlm_cdb_raw, &cmd)) == 0)
+	if (logError(isis_eps__gethousekeepingrawincdb__tm(EPS_I2C_BUS_INDEX,&tlm_cdb_raw)) == 0)
 	{
 		write2File(&tlm_cdb_raw , tlm_eps_raw_cdb);
 	}
 
-	ieps_enghk_data_cdb_t tlm_cdb_eng;
+	isis_eps__gethousekeepingengincdb__from_t tlm_cdb_eng;
 
-	if (logError(IsisEPS_getEngHKDataCDB(EPS_I2C_BUS_INDEX, brd, &tlm_cdb_eng, &cmd)) == 0)
+	if (logError(isis_eps__gethousekeepingengincdb__tm(EPS_I2C_BUS_INDEX, &tlm_cdb_eng)) == 0)
 	{
 		write2File(&tlm_cdb_eng , tlm_eps_eng_cdb);
 	}
@@ -207,22 +204,21 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 	time_unix current_time = 0;
 	Time_getUnixEpoch(&current_time);
 	wod->sat_time = current_time;
-	ieps_statcmd_t cmd;
-	ieps_enghk_data_mb_t hk_tlm;
-	ieps_enghk_data_cdb_t hk_tlm_cdb;
-	ieps_board_t board = ieps_board_cdb1;
+	isis_eps__gethousekeepingeng__from_t hk_tlm;
+	isis_eps__gethousekeepingengincdb__from_t hk_tlm_cdb;
 
-	err =  IsisEPS_getEngHKDataCDB(EPS_I2C_BUS_INDEX, board, &hk_tlm_cdb, &cmd);
-	err += IsisEPS_getRAEngHKDataMB(EPS_I2C_BUS_INDEX, &hk_tlm, &cmd);
+	err =  isis_eps__gethousekeepingengincdb__tm(EPS_I2C_BUS_INDEX, &hk_tlm_cdb);
+	err += isis_eps__gethousekeepingeng__tm(EPS_I2C_BUS_INDEX, &hk_tlm);
 
 	if(err == 0){
-		wod->vbat = hk_tlm_cdb.fields.bat_voltage;
-		wod->current_3V3 = hk_tlm.fields.obus3V3_curr;
-		wod->current_5V = hk_tlm.fields.obus5V_curr;
-		wod->volt_3V3 = hk_tlm.fields.obus3V3_volt;
-		wod->volt_5V = hk_tlm.fields.obus5V_volt;
-		wod->charging_power = hk_tlm.fields.pwr_generating;
-		wod->consumed_power = hk_tlm.fields.pwr_delivering;
+		// TODO: check if which values do we need to use and are we using the right ones??
+		wod->vbat = hk_tlm_cdb.fields.batt_input.fields.volt;
+		//wod->current_3V3 = hk_tlm.fields.obus3V3_curr;
+		wod->current_5V = hk_tlm_cdb.fields.batt_input.fields.current; // TODO: this is the total current and not the 5V current
+		//wod->volt_3V3 = hk_tlm.fields.obus3V3_volt;
+		//wod->volt_5V = hk_tlm.fields.obus5V_volt;
+		//wod->charging_power = hk_tlm.fields.pwr_generating;
+		wod->consumed_power = hk_tlm_cdb.fields.batt_input.fields.power;
 	}else
 		logError(err);
 
