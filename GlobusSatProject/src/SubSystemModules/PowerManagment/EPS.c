@@ -33,8 +33,9 @@ int GetBatteryVoltage(voltage_t *vbatt)
 
 int EPS_Init()
 {
-	unsigned char i2c_address3 = EPS_I2C_ADDR;
+
 	ISIS_EPS_t i2c_address[1];
+	i2c_address[0].i2cAddr = EPS_I2C_ADDR;
 	if(logError(ISIS_EPS_Init(&i2c_address , 1))) return -1;
 
 
