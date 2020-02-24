@@ -44,6 +44,9 @@ src/TLM_management.d: ../src/TLM_management.c \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/freertos/include/freertos/mpu_wrappers.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/freertos/include/freertos/semphr.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/freertos/include/freertos/queue.h \
+ C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Communication/SatCommandHandler.h \
+ C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Communication/SatCommandHandler.h \
+ C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Communication/SPL.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_mdriver_atmel_mcipdc.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/include/hcc/../version/ver_mdriver_atmel_mcipdc.h \
  C:\ISIS\workspace\ycube\GlobusSatProject\src/utils.h \
@@ -140,6 +143,12 @@ C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/freertos/include/freertos/mpu_w
 C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/freertos/include/freertos/semphr.h:
 
 C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/freertos/include/freertos/queue.h:
+
+C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Communication/SatCommandHandler.h:
+
+C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Communication/SatCommandHandler.h:
+
+C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Communication/SPL.h:
 
 C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_mdriver_atmel_mcipdc.h:
 

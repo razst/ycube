@@ -7,35 +7,27 @@
 #include "GlobalStandards.h"
 #include "TRXVU_Commands.h"
 
+
 extern xTaskHandle xDumpHandle;			 //task handle for dump task
 extern xSemaphoreHandle xDumpLock; // this global lock is defined once in TRXVU.c
 
 void DumpTask(void *args) {
-	if (NULL == args) {
+	if (args == NULL) {
 		FinishDump(NULL, NULL, ACK_DUMP_ABORT, NULL, 0);
 		return;
 	}
 	dump_arguments_t *task_args = (dump_arguments_t *) args;
 
-
-	/* TODO: add this to readTLMFile function
-	sat_packet_t dump_tlm = { 0 };
-
 	SendAckPacket(ACK_DUMP_START, task_args->cmd,
-			(unsigned char*) &num_of_elements, sizeof(num_of_elements));
+			NULL, 0);
 
-	AssembleCommand((unsigned char*)buffer, size_of_element,
-			(char) DUMP_SUBTYPE, (char) (task_args->dump_type),
-			task_args->cmd->ID, &dump_tlm);
+	int numOfElementsSent = 0;
+	if (task_args->numberOfDays != 0)
+		numOfElementsSent = readTLMFile(task_args->dump_type,task_args->day,task_args->numberOfDays);
+	//TODO: else call time range read function...
 
+	FinishDump(NULL, NULL, ACK_DUMP_FINISHED, &numOfElementsSent, sizeof(numOfElementsSent));
 
-	TransmitSplPacket(&dump_tlm, &availFrames);
-
-	FinishDump(task_args, buffer, ACK_DUMP_FINISHED, NULL, 0);
-
-	*/
-
-	readTLMFile(task_args->dump_type,task_args->day,task_args->numberOfDays);
 }
 
 
