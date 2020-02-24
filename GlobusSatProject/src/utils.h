@@ -21,7 +21,7 @@ typedef struct data
 {
 	int error;
 	char data[MAX_LOG_STR];
-} logData;
+} logData_t;
 
 
 #endif /* UTILS_H_ */

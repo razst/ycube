@@ -158,10 +158,15 @@ int write2File(void* data, tlm_type_t tlmType){
 		fp = f_open(file_name, "a");
 		size = sizeof(WOD_Telemetry_t);
 	}
-	if (tlmType==tlm_solar){
+	else if (tlmType==tlm_solar){
 		calculateFileName(curr_date,&file_name, &END_FILENAME_SOLAR_PANELS_TLM, 0);
 		fp = f_open(file_name, "a");
 		size = sizeof(solar_tlm_t);
+	}
+	else if (tlmType==tlm_log){
+		calculateFileName(curr_date,&file_name, &END_FILENAME_LOGS, 0);
+		fp = f_open(file_name, "a");
+		size = sizeof(logData_t);
 	}
 
 
@@ -252,8 +257,13 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,sat_packet_t *cmd){
 	}
 	else if (tlmType==tlm_solar){
 		calculateFileName(date,&file_name, &END_FILENAME_SOLAR_PANELS_TLM, 0);
-		fp = f_open(file_name, "r");
+		fp = f_open(file_name, "a");
 		size = sizeof(solar_tlm_t);
+	}
+	else if (tlmType==tlm_log){
+		calculateFileName(date,&file_name, &END_FILENAME_LOGS, 0);
+		fp = f_open(file_name, "a");
+		size = sizeof(logData_t);
 	}
 
 

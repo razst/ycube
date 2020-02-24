@@ -67,7 +67,7 @@ int WakeupFromResetCMD()
 	unsigned int num_of_resets = 0;
 	FRAM_read(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
 
-	if (reset_flag) {
+	if (reset_flag) { // TODO: verify this function !
 		time_unix curr_time = 0;
 		Time_getUnixEpoch(&curr_time);
 

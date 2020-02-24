@@ -18,7 +18,7 @@ int logError(int error){
 	{
 		printf("%d", error); // TODO: remove before prod...
 
-		logData log_;
+		logData_t log_;
 		memcpy(log_.data, "there was a error", MAX_LOG_STR);
 		log_.error = error;
 		write2File(&log_ , tlm_log);
@@ -29,7 +29,7 @@ int logError(int error){
 }
 
 int logInfo(char *info){
-	logData log_;
+	logData_t log_;
 	memcpy(log_.data, info, MAX_LOG_STR);
 	log_.error = 0;
 	write2File(&log_ , tlm_log);

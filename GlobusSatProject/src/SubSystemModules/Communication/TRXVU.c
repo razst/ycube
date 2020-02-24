@@ -104,7 +104,7 @@ int InitTrxvu() {
 }
 
 int TRX_Logic() {
-	int err = 0;
+	int err = -1;
 	// check if we have frames (data) waiting in the TRXVU
 	int frameCount = GetNumberOfFramesInBuffer();
 	sat_packet_t cmd = { 0 }; // holds the SPL command data
