@@ -50,12 +50,29 @@ void listFiels(){
 
 }
 
+void changeFirstActivation(Boolean value){
+
+	Boolean flag;
+	FRAM_read((unsigned char*) &flag, FIRST_ACTIVATION_FLAG_ADDR,
+	FIRST_ACTIVATION_FLAG_SIZE);
+	printf("first activation value before:%d \n",flag);
+
+	FRAM_write((unsigned char*) &value,
+	FIRST_ACTIVATION_FLAG_ADDR, FIRST_ACTIVATION_FLAG_SIZE);
+
+	FRAM_read((unsigned char*) &flag, FIRST_ACTIVATION_FLAG_ADDR,
+	FIRST_ACTIVATION_FLAG_SIZE);
+	printf("first activation value after:%d \n",flag);
+
+}
+
 void taskMain()
 {
 	WDT_startWatchdogKickTask(10 / portTICK_RATE_MS, FALSE);
 
 	InitSubsystems();
 	listFiels();
+	//changeFirstActivation(TRUE);
 
 }
 

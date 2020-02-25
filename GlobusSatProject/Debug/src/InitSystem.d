@@ -40,6 +40,7 @@ src/InitSystem.d: ../src/InitSystem.c \
  ../src/TLM_management.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hal/include/hal/Boolean.h \
  ../src/SubSystemModules/Housekepping/TelemetryFiles.h \
+ C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisAntS.h \
  C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h \
  C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryFiles.h \
  C:\ISIS\workspace\ycube\GlobusSatProject\src/TLM_management.h \
@@ -131,6 +132,8 @@ C:\ISIS\workspace\ycube\GlobusSatProject\src/utils.h:
 C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hal/include/hal/Boolean.h:
 
 ../src/SubSystemModules/Housekepping/TelemetryFiles.h:
+
+C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisAntS.h:
 
 C:\ISIS\workspace\ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:
 

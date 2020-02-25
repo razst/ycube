@@ -12,6 +12,7 @@
 #include "SubSystemModules/Maintenance/Maintenance.h"
 #include "InitSystem.h"
 #include "TLM_management.h"
+#include <satellite-subsystems/IsisAntS.h>
 #include <SubSystemModules/Housekepping/TelemetryCollector.h>
 
 #ifdef GOMEPS
@@ -32,40 +33,6 @@ Boolean isFirstActivation()
 	return flag;
 }
 
-void firstActivationProcedure()
-{
-
-	int err = 0;
-
-	time_unix seconds_since_deploy = 0;
-	err = logError(FRAM_read((unsigned char*) seconds_since_deploy , SECONDS_SINCE_DEPLOY_ADDR , SECONDS_SINCE_DEPLOY_SIZE));
-	if (0 != err) {
-		seconds_since_deploy = MINUTES_TO_SECONDS(30);	// deploy immediately. No mercy
-	}
-
-	while (seconds_since_deploy < MINUTES_TO_SECONDS(30)) {
-		vTaskDelay(SECONDS_TO_TICKS(10));
-
-		FRAM_write((unsigned char*)&seconds_since_deploy, SECONDS_SINCE_DEPLOY_ADDR,
-				SECONDS_SINCE_DEPLOY_SIZE);
-		if (0 != err) {
-			break;
-		}
-		TelemetryCollectorLogic();
-
-		seconds_since_deploy += 10;
-
-		isis_eps__watchdog__from_t eps_cmd;
-		isis_eps__watchdog__tm(EPS_I2C_BUS_INDEX, &eps_cmd);
-
-	}
-
-#ifndef TESTING
-	IsisAntS_autoDeployment(0, isisants_sideA, 10);
-	IsisAntS_autoDeployment(0, isisants_sideB, 10);
-#endif
-	//TODO: log
-}
 
 void WriteDefaultValuesToFRAM()
 {
@@ -144,23 +111,54 @@ int DeploySystem()
 {
 	Boolean first_activation = isFirstActivation();
 
-		if (first_activation) {
+	// if this is not a first activation, than nothing to do here... return
+	if (!first_activation) return 0;
 
-			firstActivationProcedure();
+	// if we are here...it means we are in the first activatio, wait 30min, deploy and make firstActivation flag=false
+	int err = 0;
 
-			time_unix deploy_time = 0;
-			Time_getUnixEpoch(&deploy_time);
-			FRAM_write((unsigned char*) deploy_time, DEPLOYMENT_TIME_ADDR,
-			DEPLOYMENT_TIME_SIZE);
+	time_unix seconds_since_deploy = 0;
+	err = logError(FRAM_read((unsigned char*) seconds_since_deploy , SECONDS_SINCE_DEPLOY_ADDR , SECONDS_SINCE_DEPLOY_SIZE));
+	if (0 != err) {
+		seconds_since_deploy = MINUTES_TO_SECONDS(30);	// deploy immediately. No mercy
+	}
 
+	// wait 30 min + log telm
+	while (seconds_since_deploy < MINUTES_TO_SECONDS(30)) {
+		vTaskDelay(SECONDS_TO_TICKS(10));
 
-			first_activation = FALSE;
-			FRAM_write((unsigned char*) &first_activation,
-			FIRST_ACTIVATION_FLAG_ADDR, FIRST_ACTIVATION_FLAG_SIZE);
-
-			WriteDefaultValuesToFRAM();
+		FRAM_write((unsigned char*)&seconds_since_deploy, SECONDS_SINCE_DEPLOY_ADDR,
+				SECONDS_SINCE_DEPLOY_SIZE);
+		if (0 != err) {
+			break;
 		}
-		return 0;
+		TelemetryCollectorLogic();
+
+		seconds_since_deploy += 10;
+
+		isis_eps__watchdog__from_t eps_cmd;
+		isis_eps__watchdog__tm(EPS_I2C_BUS_INDEX, &eps_cmd);
+
+	}
+
+	// open ants !
+	IsisAntS_autoDeployment(0, isisants_sideA, 10);
+	IsisAntS_autoDeployment(0, isisants_sideB, 10);
+
+	// set deploy time in FRAM
+	time_unix deploy_time = 0;
+	Time_getUnixEpoch(&deploy_time);
+	FRAM_write((unsigned char*) deploy_time, DEPLOYMENT_TIME_ADDR,
+	DEPLOYMENT_TIME_SIZE);
+
+	// set first activation false in FRAM
+	first_activation = FALSE;
+	FRAM_write((unsigned char*) &first_activation,
+	FIRST_ACTIVATION_FLAG_ADDR, FIRST_ACTIVATION_FLAG_SIZE);
+
+	// write default values to FRAM
+	WriteDefaultValuesToFRAM();
+	return 0;
 }
 
 #define PRINT_IF_ERR(method) if(0 != err)printf("error in '" #method  "' err = %d\n",err);

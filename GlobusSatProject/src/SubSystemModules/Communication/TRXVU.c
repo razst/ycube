@@ -84,6 +84,7 @@ int InitTrxvu() {
 
 	vTaskDelay(100); //TODO why 100?? 100 what??
 
+	// make sure we use 9600 bit rate
 	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,myTRXVUBitrates))) return -1;
 	vTaskDelay(100);
 
