@@ -24,6 +24,10 @@
 #include "InitSystem.h"
 #include "main.h"
 
+#ifdef TESTING
+	#include "TestingDemos/MainTest.h"
+#else
+
 void taskMain()
 {
 	WDT_startWatchdogKickTask(10 / portTICK_RATE_MS, FALSE);
@@ -43,6 +47,7 @@ void taskMain()
 		// Payload_Logic();
 	}
 }
+#endif
 
 // main operation function. will be called upon software boot.
 int main()
@@ -57,7 +62,16 @@ int main()
 		WDT_start();
 
 		// create the main operation task of the satellite
-		xTaskGenericCreate(taskMain, (const signed char*) "taskMain", 4096, NULL,
-				configMAX_PRIORITIES - 2, &taskMainHandle, NULL, NULL);
+		#ifdef TESTING
+			xTaskGenericCreate(taskTesting, (const signed char*) "taskTesting", 4096,
+					NULL,
+					configMAX_PRIORITIES - 2, &taskMainHandle, NULL, NULL);
+		#else
+			xTaskGenericCreate(taskMain, (const signed char*) "taskMain", 4096, NULL,
+					configMAX_PRIORITIES - 2, &taskMainHandle, NULL, NULL);
+		#endif
+
+
+
 		vTaskStartScheduler();
 }

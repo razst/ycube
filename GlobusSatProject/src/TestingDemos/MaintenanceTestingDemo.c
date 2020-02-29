@@ -99,6 +99,23 @@ Boolean TestMaintenanceMainLoop()
 	return TRUE;
 }
 
+Boolean changeFirstActivation(Boolean value){
+
+	Boolean flag;
+	FRAM_read((unsigned char*) &flag, FIRST_ACTIVATION_FLAG_ADDR,
+	FIRST_ACTIVATION_FLAG_SIZE);
+	printf("first activation value before:%d \n",flag);
+
+	FRAM_write((unsigned char*) &value,
+	FIRST_ACTIVATION_FLAG_ADDR, FIRST_ACTIVATION_FLAG_SIZE);
+
+	FRAM_read((unsigned char*) &flag, FIRST_ACTIVATION_FLAG_ADDR,
+	FIRST_ACTIVATION_FLAG_SIZE);
+	printf("first activation value after:%d \n",flag);
+
+	return TRUE;
+}
+
 Boolean selectAndExecuteMaintenanceDemoTest()
 {
 	unsigned int selection = 0;
@@ -112,6 +129,8 @@ Boolean selectAndExecuteMaintenanceDemoTest()
 	printf("\t 4) Test IsGroundCommunicationWDTKick\n\r");
 	printf("\t 5) Test SaveSatTimeInFRAM\n\r");
 	printf("\t 6) Maintenance Main Loop\n\r");
+	printf("\t 7) Set FirstActivation TRUE\n\r");
+	printf("\t 8) Set FirstActivation FALSE\n\r");
 
 	unsigned int number_of_tests = 8;
 	while (UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
@@ -140,10 +159,10 @@ Boolean selectAndExecuteMaintenanceDemoTest()
 		offerMoreTests = FALSE;
 		break;
 	case 7:
-		offerMoreTests = FALSE;
+		offerMoreTests = changeFirstActivation(TRUE);
 		break;
 	case 8:
-		offerMoreTests = FALSE;
+		offerMoreTests = changeFirstActivation(FALSE);
 		break;
 	default:
 		break;

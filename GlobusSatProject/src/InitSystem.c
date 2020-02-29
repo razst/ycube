@@ -142,8 +142,8 @@ int DeploySystem()
 	}
 
 	// open ants !
-	IsisAntS_autoDeployment(0, isisants_sideA, 10);
-	IsisAntS_autoDeployment(0, isisants_sideB, 10);
+	//IsisAntS_autoDeployment(0, isisants_sideA, 10); // TODO: RBF
+	//IsisAntS_autoDeployment(0, isisants_sideB, 10);// TODO: RBF
 
 	// set deploy time in FRAM
 	time_unix deploy_time = 0;
