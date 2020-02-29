@@ -90,7 +90,7 @@ void calculateFileName(Time curr_date,char* file_name, char* endFileName, int da
 
 int write2File(void* data, tlm_type_t tlmType){
 	// TODO what happens if there was an error writing to SD, the whole file will be corrupted for us.
-	printf("writing 2 file...\n");
+	printf("writing tlm: %d to SD\n",tlmType);
 
 	unsigned int curr_time;
 	Time_getUnixEpoch(&curr_time);
@@ -281,10 +281,11 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,sat_packet_t *cmd){
 	while(1)
 	{
 		int readElemnts = f_read(&buffer , sizeof(int)+size , NUM_ELEMENTS_READ_AT_ONCE, fp );
-
+		offset = 0;
 		if(!readElemnts) break;
 
 		for (;readElemnts>0;readElemnts--){
+
 			memcpy( &element, buffer + offset, sizeof(int) );
 			printf("tlm time is:%d\n",element);
 			offset += sizeof(int);

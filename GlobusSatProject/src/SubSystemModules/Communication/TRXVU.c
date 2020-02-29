@@ -84,7 +84,6 @@ int InitTrxvu() {
 
 	vTaskDelay(100); //TODO why 100?? 100 what??
 
-	// make sure we use 9600 bit rate
 	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,myTRXVUBitrates))) return -1;
 	vTaskDelay(100);
 
@@ -105,22 +104,23 @@ int InitTrxvu() {
 }
 
 int TRX_Logic() {
-	int err = -1;
+	int err = 0;
+	int cmdFound=-1;
 	// check if we have frames (data) waiting in the TRXVU
 	int frameCount = GetNumberOfFramesInBuffer();
 	sat_packet_t cmd = { 0 }; // holds the SPL command data
 
 	if (frameCount > 0) {
 		// we have data that came from grand station
-		err = GetOnlineCommand(&cmd); //--> check - don't reset WDT if we got error getting the frame becuase we will never get a reset !
+		cmdFound = GetOnlineCommand(&cmd); //--> check - don't reset WDT if we got error getting the frame becuase we will never get a reset !
 		ResetGroundCommWDT();
-		SendAckPacket(ACK_RECEIVE_COMM, &cmd, NULL, 0);
+		err = SendAckPacket(ACK_RECEIVE_COMM, &cmd, NULL, 0);
 
 	} else if (GetDelayedCommandBufferCount() > 0) {
-		err = GetDelayedCommand(&cmd);
+		cmdFound = GetDelayedCommand(&cmd);
 	}
 
-	if (err == command_found) {
+	if (cmdFound == command_found) {
 		err = ActUponCommand(&cmd);
 		//TODO: log error
 		//TODO: send message to ground when a delayed command was not executed-> add to log
@@ -261,9 +261,11 @@ int BeaconLogic() {
 	if (logError(Time_getUnixEpoch(&g_prev_beacon_time))) return -1;
 
 
-	TransmitSplPacket(&cmd, NULL);
+	if (logError(TransmitSplPacket(&cmd, NULL))) return -1;
 	// make sure we switch back to 9600 if we used 1200 in the beacon
 	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, trxvu_bitrate_9600))) return -1;
+
+	printf("***************** beacon sent *****************\n");
 	return 0;
 }
 

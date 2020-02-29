@@ -20,19 +20,23 @@
 
 
 typedef enum {
+// don't change the position of these
+	tlm_eps = 0,
 	tlm_tx,
+	tlm_antenna,
+	tlm_solar,
+	tlm_wod,
+// don't change the position of these
+
+
 	tlm_tx_revc,
 	tlm_rx,
 	tlm_rx_revc,
 	tlm_rx_frame,
-	tlm_eps,
-	tlm_wod,
 	tlm_eps_raw_mb,
 	tlm_eps_eng_mb,
 	tlm_eps_raw_cdb,
 	tlm_eps_eng_cdb,
-	tlm_solar,
-	tlm_antenna,
 	tlm_log
 }tlm_type_t;
 #endif /* TELEMETRYFILES_H_ */

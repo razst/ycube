@@ -66,14 +66,62 @@ void changeFirstActivation(Boolean value){
 
 }
 
+void test(){
+
+
+	time_unix tlm_save_period = DEFAULT_EPS_SAVE_TLM_TIME;
+	FRAM_write((unsigned char*) &tlm_save_period, EPS_SAVE_TLM_PERIOD_ADDR,
+			sizeof(tlm_save_period));
+
+	tlm_save_period = DEFAULT_TRXVU_SAVE_TLM_TIME;
+	FRAM_write((unsigned char*) &tlm_save_period, TRXVU_SAVE_TLM_PERIOD_ADDR,
+			sizeof(tlm_save_period));
+
+	tlm_save_period = DEFAULT_ANT_SAVE_TLM_TIME;
+	FRAM_write((unsigned char*) &tlm_save_period, ANT_SAVE_TLM_PERIOD_ADDR,
+			sizeof(tlm_save_period));
+
+	tlm_save_period = DEFAULT_SOLAR_SAVE_TLM_TIME;
+	FRAM_write((unsigned char*) &tlm_save_period, SOLAR_SAVE_TLM_PERIOD_ADDR,
+			sizeof(tlm_save_period));
+
+	tlm_save_period = DEFAULT_WOD_SAVE_TLM_TIME;
+	FRAM_write((unsigned char*) &tlm_save_period, WOD_SAVE_TLM_PERIOD_ADDR,
+			sizeof(tlm_save_period));
+
+	time_unix tlm_save_periods[NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS] = {0};
+	time_unix tlm_last_save_time[NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS]= {0};
+
+	time_unix value;
+	FRAM_read((unsigned char*) &tlm_save_periods[tlm_eps], EPS_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+	printf("test value:%d \n",value);
+
+	FRAM_read((unsigned char*) &tlm_save_periods[tlm_tx], TRXVU_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+	printf("test value:%d \n",value);
+
+	FRAM_read((unsigned char*) &tlm_save_periods[tlm_antenna], ANT_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+	printf("test value:%d \n",value);
+
+	FRAM_read((unsigned char*) &tlm_save_periods[tlm_solar], SOLAR_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+	printf("test value:%d \n",value);
+
+	FRAM_read((unsigned char*) &tlm_save_periods[tlm_wod], WOD_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+	printf("test value:%d \n",value);
+
+
+	printf("test value:%d \n",value);
+
+}
+
+
 void taskMain()
 {
 	WDT_startWatchdogKickTask(10 / portTICK_RATE_MS, FALSE);
 
 	InitSubsystems();
-	listFiels();
+	//listFiels();
 	//changeFirstActivation(TRUE);
-
+	test();
 }
 
 // main operation function. will be called upon software boot.

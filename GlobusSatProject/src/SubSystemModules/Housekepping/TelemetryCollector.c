@@ -28,34 +28,62 @@ time_unix tlm_save_periods[NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS] = {0};
 time_unix tlm_last_save_time[NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS]= {0};
 
 void InitSavePeriodTimes(){
-	FRAM_read((unsigned char*)tlm_save_periods,TLM_SAVE_PERIOD_START_ADDR,NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS*sizeof(time_unix));
+	time_unix value;
+	FRAM_read((unsigned char*) &tlm_save_periods[tlm_eps], EPS_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+	printf("test value:%d \n",value);
+
+	FRAM_read((unsigned char*) &tlm_save_periods[tlm_tx], TRXVU_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+	printf("test value:%d \n",value);
+
+	FRAM_read((unsigned char*) &tlm_save_periods[tlm_antenna], ANT_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+	printf("test value:%d \n",value);
+
+	FRAM_read((unsigned char*) &tlm_save_periods[tlm_solar], SOLAR_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+	printf("test value:%d \n",value);
+
+	FRAM_read((unsigned char*) &tlm_save_periods[tlm_wod], WOD_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+	printf("test value:%d \n",value);
+
+	//FRAM_read((unsigned char*)tlm_save_periods,TLM_SAVE_PERIOD_START_ADDR,NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS*sizeof(time_unix));
 }
 
 void TelemetryCollectorLogic()
 {
+	time_unix curr = 0;
 	if (CheckExecutionTime(tlm_last_save_time[tlm_eps],tlm_save_periods[tlm_eps])){
 		TelemetrySaveEPS();
-		Time_getUnixEpoch(tlm_last_save_time[tlm_eps]);
+		if (logError(Time_getUnixEpoch(&curr)) == 0){
+			tlm_last_save_time[tlm_eps] = curr;
+		}
+
 	}
 
 	if (CheckExecutionTime(tlm_last_save_time[tlm_tx],tlm_save_periods[tlm_tx])){
 		TelemetrySaveTRXVU();
-		Time_getUnixEpoch(tlm_last_save_time[tlm_tx]);
+		if (logError(Time_getUnixEpoch(&curr)) == 0){
+			tlm_last_save_time[tlm_tx] = curr;
+		}
 	}
 
 	if (CheckExecutionTime(tlm_last_save_time[tlm_antenna],tlm_save_periods[tlm_antenna])){
 		TelemetrySaveANT();
-		Time_getUnixEpoch(tlm_last_save_time[tlm_antenna]);
+		if (logError(Time_getUnixEpoch(&curr)) == 0){
+			tlm_last_save_time[tlm_antenna] = curr;
+		}
 	}
 
 	if (CheckExecutionTime(tlm_last_save_time[tlm_solar],tlm_save_periods[tlm_solar])){
 		TelemetrySaveSolarPanels();
-		Time_getUnixEpoch(tlm_last_save_time[tlm_solar]);
+		if (logError(Time_getUnixEpoch(&curr)) == 0){
+			tlm_last_save_time[tlm_solar] = curr;
+		}
 	}
 
 	if (CheckExecutionTime(tlm_last_save_time[tlm_wod],tlm_save_periods[tlm_wod])){
 		TelemetrySaveWOD();
-		Time_getUnixEpoch(tlm_last_save_time[tlm_wod]);
+		if (logError(Time_getUnixEpoch(&curr)) == 0){
+			tlm_last_save_time[tlm_wod] = curr;
+		}
 	}
 
 
@@ -212,13 +240,13 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 
 	if(err == 0){
 		// TODO: check if which values do we need to use and are we using the right ones??
-		wod->vbat = hk_tlm_cdb.fields.batt_input.fields.volt;
-		//wod->current_3V3 = hk_tlm.fields.obus3V3_curr;
-		wod->current_5V = hk_tlm_cdb.fields.batt_input.fields.current; // TODO: this is the total current and not the 5V current
-		//wod->volt_3V3 = hk_tlm.fields.obus3V3_volt;
-		//wod->volt_5V = hk_tlm.fields.obus5V_volt;
-		//wod->charging_power = hk_tlm.fields.pwr_generating;
-		wod->consumed_power = hk_tlm_cdb.fields.batt_input.fields.power;
+		wod->vbat = hk_tlm_cdb.fields.dist_input.fields.volt;
+		wod->current_3V3 = hk_tlm.fields.vip_obc05.fields.current;
+		wod->current_5V = hk_tlm.fields.vip_obc01.fields.current;
+		wod->volt_3V3 = hk_tlm.fields.vip_obc05.fields.volt;
+		wod->volt_5V = hk_tlm.fields.vip_obc01.fields.volt;
+		wod->charging_power = hk_tlm_cdb.fields.batt_input.fields.volt;
+		wod->consumed_power = hk_tlm_cdb.fields.dist_input.fields.power;
 	}else
 		logError(err);
 
