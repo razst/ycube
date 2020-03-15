@@ -120,11 +120,11 @@ int DeploySystem()
 	time_unix seconds_since_deploy = 0;
 	err = logError(FRAM_read((unsigned char*) seconds_since_deploy , SECONDS_SINCE_DEPLOY_ADDR , SECONDS_SINCE_DEPLOY_SIZE));
 	if (0 != err) {
-		seconds_since_deploy = MINUTES_TO_SECONDS(30);	// deploy immediately. No mercy
+		seconds_since_deploy = MINUTES_TO_SECONDS(1);	// RBF to 30 min
 	}
 
 	// wait 30 min + log telm
-	while (seconds_since_deploy < MINUTES_TO_SECONDS(30)) {
+	while (seconds_since_deploy < MINUTES_TO_SECONDS(1)) { // RBF to 30 min
 		vTaskDelay(SECONDS_TO_TICKS(10));
 
 		FRAM_write((unsigned char*)&seconds_since_deploy, SECONDS_SINCE_DEPLOY_ADDR,

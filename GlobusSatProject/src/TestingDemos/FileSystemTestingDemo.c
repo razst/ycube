@@ -1,6 +1,8 @@
 #include "FileSystemTestingDemo.h"
 #include "GlobalStandards.h"
 #include <hcc/api_fat.h>
+#include <hal/Timing/Time.h>
+#include <SubSystemModules/Housekepping/TelemetryFiles.h>
 
 Boolean TestlistFiels(){
 
@@ -26,6 +28,15 @@ Boolean TestlistFiels(){
 	return TRUE;
 }
 
+Boolean TestReadWODFile(){
+	Time theDay;
+	theDay.year = 0;
+	theDay.date = 1;
+	theDay.month = 1;
+
+	int numOfElementsSent = readTLMFile(tlm_wod,theDay,1);
+
+}
 
 Boolean selectAndExecuteFSTest()
 {
@@ -35,8 +46,9 @@ Boolean selectAndExecuteFSTest()
 	printf( "\n\r Select a test to perform: \n\r");
 	printf("\t 0) Return to main menu \n\r");
 	printf("\t 1) List files \n\r");
+	printf("\t 2) Print: 000101.WOD \n\r");
 
-	unsigned int number_of_tests = 1;
+	unsigned int number_of_tests = 2;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -45,6 +57,9 @@ Boolean selectAndExecuteFSTest()
 		break;
 	case 1:
 		offerMoreTests = TestlistFiels();
+		break;
+	case 2:
+		offerMoreTests = TestReadWODFile();
 		break;
 	default:
 		break;

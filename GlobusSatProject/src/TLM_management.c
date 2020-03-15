@@ -287,11 +287,11 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,sat_packet_t *cmd){
 		for (;readElemnts>0;readElemnts--){
 
 			memcpy( &element, buffer + offset, sizeof(int) );
-			printf("tlm time is:%d\n",element);
+			printf("Tlm time is:%d\n",element);
 			offset += sizeof(int);
 
 			memcpy ( &element+offset, buffer + offset, size );
-			//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
+			//printf("Data = %d,%f\n",epsData.satState,epsData.vBat);
 			offset += size;
 
 			sat_packet_t dump_tlm = { 0 };

@@ -29,7 +29,7 @@ typedef enum {
 // don't change the position of these
 
 
-	tlm_tx_revc,
+	tlm_tx_revc, // 5
 	tlm_rx,
 	tlm_rx_revc,
 	tlm_rx_frame,
@@ -37,6 +37,6 @@ typedef enum {
 	tlm_eps_eng_mb,
 	tlm_eps_raw_cdb,
 	tlm_eps_eng_cdb,
-	tlm_log
+	tlm_log //13
 }tlm_type_t;
 #endif /* TELEMETRYFILES_H_ */
