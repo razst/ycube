@@ -6,6 +6,10 @@
 #include "SubSystemModules/Communication/AckHandler.h"
 #include "SubSystemModules/Communication/SatCommandHandler.h"
 
+// wait time for taking semaphores
+#define WAIT_TIME_SEM_DUMP	1 //TODO: verify how much time we need to wait
+#define WAIT_TIME_SEM_TX	1 //TODO: verify how much time we need to wait
+
 int CMD_StartDump(sat_packet_t *cmd);
 
 int CMD_SendDumpAbortRequest(sat_packet_t *cmd);
@@ -13,6 +17,11 @@ int CMD_SendDumpAbortRequest(sat_packet_t *cmd);
 int CMD_ForceDumpAbort(sat_packet_t *cmd);
 
 int CMD_MuteTRXVU(sat_packet_t *cmd);
+/**
+ * set trxvu idle state
+ * cmd data should include 0x01 (On) or 0x00 (Off). if sent ON than also pass the duration (4 bytes int)
+ */
+int CMD_SetIdleState(sat_packet_t *cmd);
 
 int CMD_UnMuteTRXVU(sat_packet_t *cmd);
 
@@ -22,7 +31,6 @@ int CMD_SetBaudRate(sat_packet_t *cmd);
 
 int CMD_GetBeaconInterval(sat_packet_t *cmd);
 
-int CMD_SetBeaconInterval(sat_packet_t *cmd);
 
 int CMD_GetTxUptime(sat_packet_t *cmd);
 

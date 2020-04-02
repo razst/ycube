@@ -130,13 +130,6 @@ void TelemetrySaveTRXVU()
 			write2File(&tx_tlm , tlm_tx);
 		}
 
-		ISIStrxvuTxTelemetry_revC revc_tx_tlm;
-
-		if (logError(IsisTrxvu_tcGetTelemetryAll_revC(ISIS_TRXVU_I2C_BUS_INDEX,
-				&revc_tx_tlm)) == 0)
-		{
-			write2File(&revc_tx_tlm , tlm_tx_revc);
-		}
 
 		ISIStrxvuRxTelemetry rx_tlm;
 
@@ -145,12 +138,6 @@ void TelemetrySaveTRXVU()
 			write2File(&rx_tlm , tlm_rx);
 		}
 
-		ISIStrxvuRxTelemetry_revC revc_rx_tlm;
-		if (logError(IsisTrxvu_rcGetTelemetryAll_revC(ISIS_TRXVU_I2C_BUS_INDEX,
-				&revc_rx_tlm)) == 0)
-		{
-			write2File(&revc_rx_tlm , tlm_rx_revc);
-		}
 	}
 
 	void TelemetrySaveANT()
@@ -247,11 +234,14 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 		wod->volt_5V = hk_tlm.fields.vip_obc01.fields.volt;
 		wod->charging_power = hk_tlm_cdb.fields.batt_input.fields.volt;
 		wod->consumed_power = hk_tlm_cdb.fields.dist_input.fields.power;
+		//wod->electric_current = TODO TBD
 	}else
 		logError(err);
 
-	FRAM_read((unsigned char*)&wod->number_of_resets,
-	NUMBER_OF_RESETS_ADDR, NUMBER_OF_RESETS_SIZE);
-
+	int reset=0;
+	err = FRAM_read(&reset,NUMBER_OF_RESETS_ADDR, NUMBER_OF_RESETS_SIZE);
+	wod->number_of_resets = reset;
+	err = FRAM_read(&reset,NUMBER_OF_CMD_RESETS_ADDR, NUMBER_OF_CMD_RESETS_SIZE);
+	wod->num_of_cmd_resets = reset;
 }
 

@@ -43,7 +43,8 @@ Boolean selectAndExecuteTest()
 	printf("\t 3) TRXVU Testing\n\r");
 	printf("\t 4) Commands Handeling Testing\n\r");
 	printf("\t 5) Managment Testing\n\r");
-	printf("\t 6) File System Testing\n\r");
+	printf("\t 6) TLM - File System Testing\n\r");
+
 
 
 	while (UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);

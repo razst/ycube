@@ -39,6 +39,10 @@ int trxvu_command_router(sat_packet_t *cmd)
 		err = CMD_UnMuteTRXVU(cmd);
 		break;
 
+	case TRXVU_IDLE:
+		err = CMD_SetIdleState(cmd);
+		break;
+
 	case GET_BAUD_RATE:
 		err = CMD_GetBaudRate(cmd);
 		break;
@@ -141,6 +145,7 @@ int telemetry_command_router(sat_packet_t *cmd)
 
 int managment_command_router(sat_packet_t *cmd)
 {
+	CMD_ResetComponent(cmd->cmd_subtype);
 	return 0;
 }
 

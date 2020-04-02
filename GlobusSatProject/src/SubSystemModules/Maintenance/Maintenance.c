@@ -67,7 +67,16 @@ int WakeupFromResetCMD()
 	unsigned int num_of_resets = 0;
 	FRAM_read(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
 
-	if (reset_flag) { // TODO: verify this function !
+	// first incfease the number of total resets
+	FRAM_read((unsigned char*) &num_of_resets,
+	NUMBER_OF_RESETS_ADDR, NUMBER_OF_RESETS_SIZE);
+	num_of_resets++;
+
+	FRAM_write((unsigned char*) &num_of_resets,
+	NUMBER_OF_RESETS_ADDR, NUMBER_OF_RESETS_SIZE);
+
+	// if we came back from a reset command we got from ground station, increase the number of cmd resets
+	if (reset_flag) {
 		time_unix curr_time = 0;
 		Time_getUnixEpoch(&curr_time);
 
@@ -78,11 +87,11 @@ int WakeupFromResetCMD()
 		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
 
 		FRAM_read((unsigned char*) &num_of_resets,
-		NUMBER_OF_RESETS_ADDR, NUMBER_OF_RESETS_SIZE);
+		NUMBER_OF_CMD_RESETS_ADDR, NUMBER_OF_CMD_RESETS_SIZE);
 		num_of_resets++;
 
 		FRAM_write((unsigned char*) &num_of_resets,
-		NUMBER_OF_RESETS_ADDR, NUMBER_OF_RESETS_SIZE);
+		NUMBER_OF_CMD_RESETS_ADDR, NUMBER_OF_CMD_RESETS_SIZE);
 		if (0 != err) {
 			return err;
 		}
@@ -138,10 +147,7 @@ void Maintenance()
 	SaveSatTimeInFRAM(MOST_UPDATED_SAT_TIME_ADDR,
 	MOST_UPDATED_SAT_TIME_SIZE);
 
-	//TODO: do error log file
-	logError(WakeupFromResetCMD());
-	//TODO do someting
-	logError(IsFS_Corrupted());
+	//logError(IsFS_Corrupted());-> we send corrupted bytes over beacon, no need to log in error file all the time
 
 	logError(IsGroundCommunicationWDTKick());
 }

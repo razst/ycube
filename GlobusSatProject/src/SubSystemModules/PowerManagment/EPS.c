@@ -78,6 +78,8 @@ int EPS_Conditioning()
 			 EnterSafeMode();
 		 }else if(filtered_voltage < eps_threshold_voltages.fields.Vdown_full){
 			 EnterCruiseMode();
+		 }else if(filtered_voltage > eps_threshold_voltages.fields.Vup_full){ // TODO: happened in testing - check with Amitay
+			 EnterFullMode();
 		 }
 
 		}else if(filtered_voltage > prev_avg){

@@ -27,6 +27,9 @@
 #define NUMBER_OF_RESETS_ADDR			0x60		//<! counts how many restarts did the satellite endure
 #define NUMBER_OF_RESETS_SIZE			4			//<! size of the parameter in bytes
 
+#define NUMBER_OF_CMD_RESETS_ADDR		0x160		//<! counts how many restarts did the satellite endure from ground command
+#define NUMBER_OF_CMD_RESETS_SIZE		4			//<! size of the parameter in bytes
+
 #define RESET_CMD_FLAG_ADDR				0x105		//<! the flag is raised whenever a restart is commissioned
 #define RESET_CMD_FLAG_SIZE				1			//<! size of the parameter in bytes
 

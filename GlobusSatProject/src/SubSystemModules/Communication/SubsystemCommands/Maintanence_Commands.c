@@ -29,7 +29,7 @@
 
 #define RESET_KEY 0xA6 // need to sed this key to the reset command otherwise reset will not happen
 
-int CMD_GenericI2C(sat_packet_t *cmd)
+int CMD_GenericI2C(sat_packet_t *cmd) // TODO: why do we need this funcation?? it is using malloc
 {
 	if(cmd == NULL || cmd->data == NULL){
 		return E_INPUT_POINTER_NULL;
@@ -49,7 +49,7 @@ int CMD_GenericI2C(sat_packet_t *cmd)
 	return err;
 }
 
-int CMD_FRAM_ReadAndTransmitt(sat_packet_t *cmd)
+int CMD_FRAM_ReadAndTransmitt(sat_packet_t *cmd) // TODO: why do we need this funcation?? it is using malloc
 {
 	if (cmd == NULL || cmd->data == NULL){
 		return E_INPUT_POINTER_NULL;
@@ -76,7 +76,7 @@ int CMD_FRAM_ReadAndTransmitt(sat_packet_t *cmd)
 	return err;
 }
 
-int CMD_FRAM_WriteAndTransmitt(sat_packet_t *cmd)
+int CMD_FRAM_WriteAndTransmitt(sat_packet_t *cmd) // TODO: why do we need this funcation??
 {
 	if (cmd == NULL || cmd->data == NULL){
 		return E_INPUT_POINTER_NULL;
@@ -234,38 +234,32 @@ int CMD_ResetComponent(reset_type_t rst_type)
 		SendAnonymosAck(ACK_HARD_RESET);
 		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
 		vTaskDelay(10);
-		//TODO: obc hard reset
+		//TODO: ASK if we need this as we have the eps reset
 		break;
 
-	case reset_eps:
+	case reset_eps: // this is a HW reset of the iOBC
 		SendAnonymosAck(ACK_EPS_RESET);
 		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
 		vTaskDelay(10);
-#ifdef ISISEPS
 		isis_eps__reset__to_t cmd_t;
-		cmd_t.fields.rst_key = RESET_KEY;
 		isis_eps__reset__from_t cmd_f;
-		err = IsisEPS_hardReset(EPS_I2C_BUS_INDEX, &cmd_t, &cmd_f);
-#endif
-#ifdef GOMEPS
-	//TODO:
-#endif
+		logError(isis_eps__reset__tmtc(EPS_I2C_BUS_INDEX, &cmd_t, &cmd_f));
 		break;
 
 	case reset_trxvu_hard:
 		SendAnonymosAck(ACK_TRXVU_HARD_RESET);
-		err = IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX);
+		logError(IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX));
 		vTaskDelay(100);
 		break;
 
 	case reset_trxvu_soft:
 		SendAnonymosAck(ACK_TRXVU_SOFT_RESET);
-		err = IsisTrxvu_softReset(ISIS_TRXVU_I2C_BUS_INDEX);
+		logError(IsisTrxvu_softReset(ISIS_TRXVU_I2C_BUS_INDEX));
 		vTaskDelay(100);
 		break;
 
 	case reset_filesystem:
-		DeInitializeFS();
+		DeInitializeFS(); //TODO
 		vTaskDelay(10);
 		err = (unsigned int) InitializeFS(FALSE);
 		vTaskDelay(10);
@@ -273,12 +267,12 @@ int CMD_ResetComponent(reset_type_t rst_type)
 		break;
 
 	case reset_ant_SideA:
-		err = IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA);
+		logError(IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA));
 		SendAckPacket(ACK_ANTS_RESET, NULL, (unsigned char*) &err, sizeof(err));
 		break;
 
 	case reset_ant_SideB:
-		err = IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB);
+		logError(IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB));
 		SendAckPacket(ACK_ANTS_RESET, NULL, (unsigned char*) &err, sizeof(err));
 		break;
 

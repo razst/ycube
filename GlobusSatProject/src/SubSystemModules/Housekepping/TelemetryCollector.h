@@ -23,7 +23,8 @@ typedef struct __attribute__ ((__packed__)) WOD_Telemetry_t
 	time_unix sat_time;				///< current Unix time of the satellites clock [sec]
 	unsigned int free_memory;		///< number of bytes free in the satellites SD [byte]
 	unsigned int corrupt_bytes;		///< number of currpted bytes in the memory	[bytes]
-	unsigned short number_of_resets;///< counts the number of resets the satellite has gone through [#]
+	unsigned int number_of_resets;///< counts the number of resets the satellite has gone through [#]
+	unsigned int num_of_cmd_resets;///< counts the number of resets the satellite has gone through [#]
 } WOD_Telemetry_t;
 
 

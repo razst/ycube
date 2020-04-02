@@ -72,6 +72,16 @@ void WriteDefaultValuesToFRAM()
 	beacon_interval = DEFAULT_BEACON_INTERVAL_TIME;
 	FRAM_write((unsigned char*) &beacon_interval, BEACON_INTERVAL_TIME_ADDR,
 			BEACON_INTERVAL_TIME_SIZE);
+
+	// set the reset counter to zero
+	unsigned int num_of_resets = 0;
+	FRAM_write((unsigned char*) &num_of_resets,
+	NUMBER_OF_RESETS_ADDR, NUMBER_OF_RESETS_SIZE);
+
+	FRAM_write((unsigned char*) &num_of_resets,
+	NUMBER_OF_CMD_RESETS_ADDR, NUMBER_OF_CMD_RESETS_SIZE);
+
+
 }
 
 int StartFRAM()
@@ -104,6 +114,12 @@ int StartTIME()
 
 			Time_setUnixEpoch(time_before_wakeup);
 		}
+		printf("********** size of time unix: %d\n",sizeof(time_unix));
+		printf("********** size of time int: %d\n",sizeof(int));
+		printf("********** size of time long: %d\n",sizeof(long));
+		printf("********** size of time unsigned long int : %d\n",sizeof(unsigned long int));
+		printf("********** size of time unsigned long int : %d\n",sizeof(unsigned short));
+
 		return 0;
 }
 
@@ -113,6 +129,8 @@ int DeploySystem()
 
 	// if this is not a first activation, than nothing to do here... return
 	if (!first_activation) return 0;
+
+
 
 	// if we are here...it means we are in the first activatio, wait 30min, deploy and make firstActivation flag=false
 	int err = 0;
@@ -161,6 +179,7 @@ int DeploySystem()
 	return 0;
 }
 
+
 #define PRINT_IF_ERR(method) if(0 != err)printf("error in '" #method  "' err = %d\n",err);
 int InitSubsystems()
 {
@@ -181,6 +200,8 @@ int InitSubsystems()
 	InitTrxvu();
 
 	DeploySystem();
+
+	WakeupFromResetCMD();
 
 	return 0;
 }

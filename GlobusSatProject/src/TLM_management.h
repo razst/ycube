@@ -11,6 +11,7 @@
 #include <hal/Boolean.h>
 #include <GlobalStandards.h>
 #include "SubSystemModules/Housekepping/TelemetryFiles.h"
+#include <hal/Timing/Time.h>
 
 
 #define MAX_FILE_NAME_SIZE 11
@@ -41,6 +42,17 @@ typedef enum
  */
 int write2File(void* data, tlm_type_t tlmType);
 
+void deleteTLMFiles(tlm_type_t tlmType, Time date, int numOfDays);
+
+/*
+ * delete a single file from the SD
+ */
+void deleteTLMFile(tlm_type_t tlmType, Time date, int days2Add);
+
+/*
+ * Read telematry file and send it to ground station over RF
+ */
+int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id);
 /*
  *
  */

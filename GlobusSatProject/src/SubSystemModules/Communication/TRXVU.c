@@ -27,6 +27,7 @@
 
 
 time_unix 		g_mute_end_time = 0;				// time at which the mute will end
+time_unix 		g_idle_end_time = 0;				// time at which the idel will end
 
 xQueueHandle xDumpQueue = NULL;
 xSemaphoreHandle xDumpLock = NULL;
@@ -43,6 +44,24 @@ void InitTxModule()
 	if(xIsTransmitting == NULL)
 		vSemaphoreCreateBinary(xIsTransmitting);
 }
+
+int CMD_SetBeaconInterval(sat_packet_t *cmd)
+{
+	int err = 0;
+	time_unix interval = 0;
+	err =  FRAM_write((unsigned char*) &cmd->data,
+			BEACON_INTERVAL_TIME_ADDR,
+			BEACON_INTERVAL_TIME_SIZE);
+
+	err += FRAM_read((unsigned char*) &interval,
+			BEACON_INTERVAL_TIME_ADDR,
+			BEACON_INTERVAL_TIME_SIZE);
+
+	g_beacon_interval_time=interval;
+	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &interval,sizeof(interval));
+	return err;
+}
+
 
 
 void InitBeaconParams()
@@ -116,8 +135,6 @@ int TRX_Logic() {
 		ResetGroundCommWDT();
 		err = SendAckPacket(ACK_RECEIVE_COMM, &cmd, NULL, 0);
 
-	} else if (GetDelayedCommandBufferCount() > 0) {
-		cmdFound = GetDelayedCommand(&cmd);
 	}
 
 	if (cmdFound == command_found) {
@@ -182,8 +199,8 @@ Boolean CheckTransmitionAllowed() {
 	if (curr_tick_time < g_mute_end_time) return FALSE;
 
 
-	// chec kthat we can take the tx Semaphore
-	if(pdTRUE == xSemaphoreTake(xIsTransmitting,0)){
+	// check that we can take the tx Semaphore
+	if(pdTRUE == xSemaphoreTake(xIsTransmitting,WAIT_TIME_SEM_TX)){
 		xSemaphoreGive(xIsTransmitting);
 		return TRUE;
 	}
@@ -269,6 +286,27 @@ int BeaconLogic() {
 	return 0;
 }
 
+
+int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
+
+	if (logError(IsisTrxvu_tcSetIdlestate(ISIS_TRXVU_I2C_BUS_INDEX, state))) return -1;
+
+	if (state == trxvu_idle_state_on){
+		if (duration > MAX_IDLE_TIME) {
+			logError(TRXVU_IDLE_TOO_LOMG);
+			return -1;
+		}
+		// get current unix time
+		time_unix curr_tick_time = 0;
+		Time_getUnixEpoch(&curr_tick_time);
+
+		// set mute end time
+		g_idle_end_time = curr_tick_time + duration;
+	}
+	return 0;
+
+}
+
 int muteTRXVU(time_unix duration) {
 	if (duration > MAX_MUTE_TIME) {
 		logError(TRXVU_MUTE_TOO_LOMG);
@@ -322,11 +360,22 @@ int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
 			+ sizeof(packet->cmd_subtype) + sizeof(packet->cmd_type)
 			+ sizeof(packet->ID);
 
-	if (xSemaphoreTake(xIsTransmitting,SECONDS_TO_TICKS(1)) != pdTRUE) { // TODO ask: isn't one tick too low ??
+	if (xSemaphoreTake(xIsTransmitting,SECONDS_TO_TICKS(WAIT_TIME_SEM_TX)) != pdTRUE) { // TODO ask: isn't one tick too low ??
 		return E_GET_SEMAPHORE_FAILED;
 	}
+
 	err = IsisTrxvu_tcSendAX25DefClSign(ISIS_TRXVU_I2C_BUS_INDEX,
-			(unsigned char*) packet, data_length, (unsigned char*) &avalFrames); // TOD ask: avalFrames null or zero ??
+			(unsigned char*) packet, data_length, (unsigned char*) avalFrames); // TOD ask: avalFrames null or zero ??
+
+#ifdef TESTING
+	printf("trxvu send ax25 error= %d",err);
+	// display cmd packet values to screen
+	printf(" id= %d",packet->ID);
+	printf(" cmd type= %d",packet->cmd_type);
+	printf(" cmd sub type= %d",packet->cmd_subtype);
+	printf(" length= %d\n",packet->length);
+	//printf(" data= %s\n",packet->data);
+#endif
 
 	xSemaphoreGive(xIsTransmitting);
 

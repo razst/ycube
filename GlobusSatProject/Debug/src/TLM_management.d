@@ -1,6 +1,4 @@
 src/TLM_management.d: ../src/TLM_management.c \
- C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h \
- C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/boolean.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/../config/config_fat.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/../config/../version/ver_fat.h \
@@ -16,6 +14,7 @@ src/TLM_management.d: ../src/TLM_management.c \
  C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryFiles.h \
  C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h \
  C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h \
+ C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/boolean.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include/at91/utility/exithandler.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/errors.h \
  C:\ISIS\workspace_ycube\GlobusSatProject\src/FRAM_FlightParameters.h \
@@ -26,6 +25,7 @@ src/TLM_management.d: ../src/TLM_management.c \
  C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Boolean.h \
  C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryFiles.h \
+ C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisSolarPanelv2.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Drivers/SPI.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include/at91/commons.h \
@@ -50,13 +50,15 @@ src/TLM_management.d: ../src/TLM_management.c \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_mdriver_atmel_mcipdc.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/../version/ver_mdriver_atmel_mcipdc.h \
  C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h \
+ ../src/SubSystemModules/Communication/TRXVU.h \
+ C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include/freertos/task.h \
+ C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include/freertos/list.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisTRXVU.h \
+ ../src/SubSystemModules/Communication/AckHandler.h \
+ ../src/SubSystemModules/Communication/SatCommandHandler.h \
+ ../src/SubSystemModules/Communication/SPL.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisAntS.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/isis_eps_driver.h
-
-C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:
-
-C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/boolean.h:
 
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:
 
@@ -88,6 +90,8 @@ C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/Telem
 
 C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:
 
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/boolean.h:
+
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include/at91/utility/exithandler.h:
 
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/errors.h:
@@ -107,6 +111,8 @@ C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Boolean.h:
 
 C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryFiles.h:
+
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:
 
 C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisSolarPanelv2.h:
 
@@ -156,7 +162,19 @@ C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/../version/ver_
 
 C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:
 
+../src/SubSystemModules/Communication/TRXVU.h:
+
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include/freertos/task.h:
+
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include/freertos/list.h:
+
 C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisTRXVU.h:
+
+../src/SubSystemModules/Communication/AckHandler.h:
+
+../src/SubSystemModules/Communication/SatCommandHandler.h:
+
+../src/SubSystemModules/Communication/SPL.h:
 
 C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisAntS.h:
 

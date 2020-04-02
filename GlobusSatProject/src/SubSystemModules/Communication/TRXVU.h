@@ -14,6 +14,7 @@
 
 
 #define MAX_MUTE_TIME 	(5400) 	///< max mute duration will be 90 minutes = 60 *90 [sec]
+#define MAX_IDLE_TIME 	(600) 	///< max IDLE duration will be 10 minutes = 60 *10 [sec]
 
 #define SIZE_RXFRAME	200
 #define SIZE_TXFRAME	235
@@ -41,6 +42,8 @@ void InitTxModule();
  * 			errors according to <hal/errors.h>
  */
 int InitTrxvu();
+
+int CMD_SetBeaconInterval(sat_packet_t *cmd);
 
 /*!
  * @brief The TRXVU logic according to the sub-system flowchart
@@ -85,6 +88,14 @@ void FinishDump(dump_arguments_t *task_args,unsigned char *buffer, ack_subtype_t
  */
 int BeaconLogic();
 
+/*
+ * @brief set the idle state of the trxvu
+ * @param[in] state ON/OFF
+ * @param[in] duration for how long will the satellite be in idle state, if state is OFF than this value is ignored
+ * @return	0 in successful
+ * 			-1 in failure
+ */
+int SetIdleState(ISIStrxvuIdleState state, time_unix duration);
 
 /*!
  * @brief	mutes the TRXVU for a specified time frame

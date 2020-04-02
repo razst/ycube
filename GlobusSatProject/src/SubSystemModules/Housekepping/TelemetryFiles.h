@@ -29,9 +29,9 @@ typedef enum {
 // don't change the position of these
 
 
-	tlm_tx_revc, // 5
+	tlm_tx_revc_NO_USE, // 5
 	tlm_rx,
-	tlm_rx_revc,
+	tlm_rx_revc_NO_USE,
 	tlm_rx_frame,
 	tlm_eps_raw_mb,
 	tlm_eps_eng_mb,

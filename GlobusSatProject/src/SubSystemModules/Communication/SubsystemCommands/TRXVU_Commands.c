@@ -6,6 +6,7 @@
 
 #include "GlobalStandards.h"
 #include "TRXVU_Commands.h"
+#include "TLM_management.h"
 
 
 extern xTaskHandle xDumpHandle;			 //task handle for dump task
@@ -23,7 +24,7 @@ void DumpTask(void *args) {
 
 	int numOfElementsSent = 0;
 	if (task_args->numberOfDays != 0)
-		numOfElementsSent = readTLMFile(task_args->dump_type,task_args->day,task_args->numberOfDays);
+		numOfElementsSent = readTLMFile(task_args->dump_type,task_args->day,task_args->numberOfDays,task_args->cmd->ID);
 	//TODO: else call time range read function...
 
 	FinishDump(NULL, NULL, ACK_DUMP_FINISHED, &numOfElementsSent, sizeof(numOfElementsSent));
@@ -37,32 +38,32 @@ int CMD_StartDump(sat_packet_t *cmd)
 		return -1;
 	}
 
-	dump_arguments_t *dmp_pckt = malloc(sizeof(*dmp_pckt));
+	dump_arguments_t dmp_pckt;
 	unsigned int offset = 0;
 
-	dmp_pckt->cmd = cmd;
+	dmp_pckt.cmd = cmd;
 
-	memcpy(&dmp_pckt->dump_type, cmd->data, sizeof(dmp_pckt->dump_type));
-	offset += sizeof(dmp_pckt->dump_type);
+	memcpy(&dmp_pckt.dump_type, cmd->data, sizeof(dmp_pckt.dump_type));
+	offset += sizeof(dmp_pckt.dump_type);
 
-	memcpy(&dmp_pckt->t_start, cmd->data + offset, sizeof(dmp_pckt->t_start));
-	offset += sizeof(dmp_pckt->t_start);
+	memcpy(&dmp_pckt.t_start, cmd->data + offset, sizeof(dmp_pckt.t_start));
+	offset += sizeof(dmp_pckt.t_start);
 
-	memcpy(&dmp_pckt->t_end, cmd->data + offset, sizeof(dmp_pckt->t_end));
-	offset += sizeof(dmp_pckt->t_end);
+	memcpy(&dmp_pckt.t_end, cmd->data + offset, sizeof(dmp_pckt.t_end));
+	offset += sizeof(dmp_pckt.t_end);
 
-	memcpy(&dmp_pckt->day, cmd->data + offset, sizeof(dmp_pckt->day));
-	offset += sizeof(dmp_pckt->day);
+	memcpy(&dmp_pckt.day, cmd->data + offset, sizeof(dmp_pckt.day));
+	offset += sizeof(dmp_pckt.day);
 
-	memcpy(&dmp_pckt->numberOfDays, cmd->data + offset, sizeof(dmp_pckt->numberOfDays));
+	memcpy(&dmp_pckt.numberOfDays, cmd->data + offset, sizeof(dmp_pckt.numberOfDays));
 
 
 
-	if (xSemaphoreTake(xDumpLock,SECONDS_TO_TICKS(1)) != pdTRUE) {
+	if (xSemaphoreTake(xDumpLock,SECONDS_TO_TICKS(WAIT_TIME_SEM_DUMP)) != pdTRUE) {
 		return E_GET_SEMAPHORE_FAILED;
 	}
 	xTaskCreate(DumpTask, (const signed char* const )"DumpTask", 2000,
-			(void* )dmp_pckt, configMAX_PRIORITIES - 2, xDumpHandle);
+			&dmp_pckt, configMAX_PRIORITIES - 2, xDumpHandle);
 
 	return 0;
 }
@@ -92,6 +93,19 @@ int CMD_MuteTRXVU(sat_packet_t *cmd)
 	err = muteTRXVU(mute_duaration);
 	return err;
 }
+
+int CMD_SetIdleState(sat_packet_t *cmd)
+{
+	char state;
+	memcpy(&state,cmd->data,sizeof(state));
+	time_unix duaration = 0;
+	if (state == trxvu_idle_state_on){
+		memcpy(&duaration,cmd->data+sizeof(state),sizeof(duaration));
+	}
+	SetIdleState(state,duaration);
+	return 0;
+}
+
 
 int CMD_UnMuteTRXVU(sat_packet_t *cmd)
 {
@@ -126,27 +140,12 @@ int CMD_GetBeaconInterval(sat_packet_t *cmd)
 	return err;
 }
 
-int CMD_SetBeaconInterval(sat_packet_t *cmd)
-{
-	int err = 0;
-	time_unix interval = 0;
-	err =  FRAM_write((unsigned char*) &cmd->data,
-			BEACON_INTERVAL_TIME_ADDR,
-			BEACON_INTERVAL_TIME_SIZE);
-
-	err += FRAM_read((unsigned char*) &interval,
-			BEACON_INTERVAL_TIME_ADDR,
-			BEACON_INTERVAL_TIME_SIZE);
-
-	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &interval,sizeof(interval));
-	return err;
-}
 
 int CMD_SetBaudRate(sat_packet_t *cmd)
 {
 	// TODO do want to save the new bit rate in the FRAME so after restart (init_logic) we will continute to use the new rate??
 	ISIStrxvuBitrateStatus bitrate;
-	bitrate = (ISIStrxvuBitrateStatus) cmd->data[0]; // TODO why do we take only the first byte?? we need more, no? to get 9600 for example.
+	bitrate = (ISIStrxvuBitrateStatus) cmd->data[0];
 	return IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, bitrate);
 }
 
