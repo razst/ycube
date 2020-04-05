@@ -114,11 +114,6 @@ int StartTIME()
 
 			Time_setUnixEpoch(time_before_wakeup);
 		}
-		printf("********** size of time unix: %d\n",sizeof(time_unix));
-		printf("********** size of time int: %d\n",sizeof(int));
-		printf("********** size of time long: %d\n",sizeof(long));
-		printf("********** size of time unsigned long int : %d\n",sizeof(unsigned long int));
-		printf("********** size of time unsigned long int : %d\n",sizeof(unsigned short));
 
 		return 0;
 }

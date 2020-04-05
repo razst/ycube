@@ -37,8 +37,7 @@
 
 #define NUM_ELEMENTS_READ_AT_ONCE 400 // TODO check if 400 is the right number !!!
 
-// TODO: check the MAX size of the largest element type
-static char buffer[(sizeof(logData_t)) * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
+static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
 
 
 void delete_allTMFilesFromSD()
@@ -297,7 +296,7 @@ void printTLM(void* element, tlm_type_t tlmType){
 
 
 
-int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id){
+int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int resolution){
 	//TODO check for unsupported tlmType
 	printf("reading from file...\n");
 
@@ -321,6 +320,8 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id){
 
 	char element[(sizeof(int)+size)];// buffer for a single element that we will tx
 	int numOfElementsSent=0;
+	time_unix currTime = 0;
+	time_unix lastSentTime = 0;
 
 	while(1)
 	{
@@ -334,16 +335,22 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id){
 			memcpy( &element, buffer + offset, sizeof(int) + size); // copy time+data
 			offset += (size + sizeof(int));
 
-			printTLM(&element,tlmType);
+			// get the time of the current element and check if we need to send it or not based on the resolution
+			memcpy(&currTime, &element, sizeof(int));
+			if (currTime - lastSentTime >= resolution){
+				// time to send the data
+				lastSentTime = currTime;
+				printTLM(&element,tlmType);
 
-			sat_packet_t dump_tlm = { 0 };
+				sat_packet_t dump_tlm = { 0 };
 
-			AssembleCommand((unsigned char*)element, sizeof(int)+size,
-					trxvu_cmd_type,DUMP_SUBTYPE,
-					cmd_id, &dump_tlm);
+				AssembleCommand((unsigned char*)element, sizeof(int)+size,
+						trxvu_cmd_type,DUMP_SUBTYPE,
+						cmd_id, &dump_tlm);
 
-			TransmitSplPacket(&dump_tlm, NULL);
-			numOfElementsSent++;
+				TransmitSplPacket(&dump_tlm, NULL);
+				numOfElementsSent++;
+			}
 
 		}// end for loop...
 
@@ -356,228 +363,73 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id){
 
 
 
-int readTLMFiles(tlm_type_t tlmType, Time date, int numOfDays,sat_packet_t *cmd){
+int readTLMFiles(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id,int resolution){
 	for(int i = 0; i < numOfDays; i++){
-		readTLMFile(tlmType, date, i,cmd);
+		readTLMFile(tlmType, date, i,cmd_id,resolution);
 	}
 
 	return 0;
 }
 
-/*
-	int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, Time date){
-		//TODO check for unsupported tlmType
-		printf("reading from file...\n");
 
-		unsigned int current_time;
-		Time_getUnixEpoch(&current_time);
+int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, Time date, int cmd_id, int resolution){
 
-		ISIStrxvuTxTelemetry_revC txRevcData;
-		ISIStrxvuTxTelemetry txData;
-		ISIStrxvuRxTelemetry rxData;
-		ISIStrxvuRxTelemetry_revC rxRevcData;
-		ISIStrxvuRxFrame rxFrameData;
-		ISISantsTelemetry antData;
-		ieps_rawhk_data_mb_t rawMbData;
-		ieps_rawhk_data_cdb_t rawCdbData;
-		ieps_enghk_data_mb_t engMbData;
-		ieps_enghk_data_cdb_t engCdbData;
-		WOD_Telemetry_t wodData;
-		solar_tlm_t solarData;
-		logData_t logsData;
+	if (from_time >= to_time)
+		return E_INVALID_PARAMETERS;
 
-		FILE * fp;
-		int size=0;
+	//TODO check for unsupported tlmType
+	printf("reading from file...\n");
 
+	FILE * fp;
+	int size=0;
+	char file_name[MAX_FILE_NAME_SIZE] = {0};
+	char end_file_name[3] = {0};
 
-		if (tlmType==tlm_tx_revc){
-			fp = f_open(calculateFileName(date, END_FILE_NAME_TX_REVC, 0), "r");
-			size = sizeof(ISIStrxvuTxTelemetry_revC);
-		}
-		else if (tlmType==tlm_tx){
-			fp = f_open(calculateFileName(date, END_FILE_NAME_TX, 0), "r");
-			size = sizeof(ISIStrxvuTxTelemetry);
-		}
-		else if (tlmType==tlm_rx){
-			fp = f_open(calculateFileName(date, END_FILE_NAME_RX, 0), "r");
-			size = sizeof(ISIStrxvuRxTelemetry);
-		}
-		else if (tlmType==tlm_rx_revc){
-			fp = f_open(calculateFileName(date, END_FILE_NAME_RX_REVC, 0), "r");
-			size = sizeof(ISIStrxvuRxTelemetry_revC);
-		}
-		else if (tlmType==tlm_rx_frame){
-			fp = f_open(calculateFileName(date, END_FILE_NAME_RX_FRAME, 0), "r");
-			size = sizeof(ISIStrxvuRxFrame);
-		}
-		else if (tlmType==tlm_antenna){
-			fp = f_open(calculateFileName(date, END_FILE_NAME_ANTENNA, 0), "r");
-			size = sizeof(ISISantsTelemetry);
-		}
-		else if (tlmType==tlm_eps_raw_mb){
-			fp = f_open(calculateFileName(date, END_FILENAME_EPS_RAW_MB_TLM, 0), "r");
-			size = sizeof(ieps_rawhk_data_mb_t);
-		}
-		else if (tlmType==tlm_eps_raw_cdb){
-			fp = f_open(calculateFileName(date, END_FILENAME_EPS_RAW_CDB_TLM, 0), "r");
-			size = sizeof(ieps_rawhk_data_cdb_t);
-		}
-		else if (tlmType==tlm_eps_eng_mb){
-			fp = f_open(calculateFileName(date, END_FILENAME_EPS_ENG_MB_TLM, 0), "r");
-			size = sizeof(ieps_enghk_data_mb_t);
-		}
-		else if (tlmType==tlm_eps_eng_cdb){
-			fp = f_open(calculateFileName(date, END_FILENAME_EPS_ENG_CDB_TLM, 0), "r");
-			size = sizeof(ieps_enghk_data_cdb_t);
-		}
-		else if (tlmType==tlm_wod){
-			fp = f_open(calculateFileName(date, END_FILENAME_WOD_TLM, 0), "r");
-			size = sizeof(WOD_Telemetry_t);
-		}
-		else if (tlmType==tlm_solar){
-			fp = f_open(calculateFileName(date, END_FILENAME_SOLAR_PANELS_TLM, 0), "r");
-			size = sizeof(solar_tlm_t);
-		}
-		if (tlmType==tlm_log){
-			fp = f_open(calculateFileName(date, END_FILENAME_LOGS, 0), "r"); // TODO: check if we can pass char* to f_open  not sure
-			size = sizeof(logData_t);
-		}
+	getTlmTypeInfo(tlmType,end_file_name,&size);
+	calculateFileName(date,&file_name,end_file_name ,0);
+	fp = f_open(file_name, "r");
 
-		if (!fp)
-		{
-			printf("Unable to open file!");
-			return 1;
-		}
-
-		while (f_read(&current_time , sizeof(current_time) , 1, fp ) == 1){
-			printf("tlm time is:%d\n",current_time);
-			if (tlmType==tlm_tx_revc){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&txRevcData , sizeof(txRevcData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(txRevcData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_tx){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&txData , sizeof(txData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(txData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_rx){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&rxData , sizeof(rxData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(rxData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_rx_revc){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&rxRevcData , sizeof(rxRevcData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(rxRevcData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_rx_frame){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&rxFrameData , sizeof(rxFrameData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(rxFrameData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_wod){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&wodData , sizeof(wodData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(wodData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_eps_raw_mb){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&rawMbData , sizeof(rawMbData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(rawMbData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_eps_eng_mb){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&engMbData , sizeof(engMbData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(engMbData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_eps_eng_cdb){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&engCdbData , sizeof(engCdbData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(engCdbData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_eps_raw_cdb){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&rawCdbData , sizeof(rawCdbData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(rawCdbData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_solar){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&solarData , sizeof(solarData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(solarData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_antenna){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&antData , sizeof(antData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(antData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-			} else if (tlmType==tlm_log){
-				if (current_time>=from_time && current_time<=to_time){
-					f_read(&antData , sizeof(antData) , 1, fp );
-					//				printf("EPS data = %d,%f\n",epsData.satState,epsData.vBat);
-				}else if (current_time<=to_time){
-					f_seek (fp, sizeof(antData), SEEK_CUR);
-				}else{
-					break; // we passed over the date we needed, no need to look anymore...
-				}
-
-			}
-		}
-
-
-		f_close (fp);
-		return 0;
+	if (!fp)
+	{
+		printf("Unable to open file!");// TODO: log error in all printf in the file!
+		return 1;
 	}
 
- */
+
+	int numOfElementsSent = 0;
+	char element[(sizeof(int)+size)];// buffer for a single element that we will tx
+	time_unix current_time=0;
+	time_unix lastSentTime=0;
+	while (f_read(&element , sizeof(int)+size , 1, fp ) == 1){
+		// get the time of the current element and check if we need to send it or not based on the resolution
+		memcpy(&current_time, &element, sizeof(int));
+		printf("tlm time is:%d\n",current_time);
+		if (current_time>=from_time && current_time<=to_time && ((current_time - lastSentTime) >= resolution)){
+			lastSentTime = current_time;
+
+			printTLM(&element,tlmType);
+			sat_packet_t dump_tlm = { 0 };
+
+			AssembleCommand((unsigned char*)element, sizeof(int)+size,
+					trxvu_cmd_type,DUMP_SUBTYPE,
+					cmd_id, &dump_tlm);
+
+			TransmitSplPacket(&dump_tlm, NULL);
+			numOfElementsSent++;
+
+		//}else if (current_time<=to_time){
+		//	f_seek (fp, size, SEEK_CUR);
+		}if (current_time>to_time){
+			break; // we passed over the date we needed, no need to look anymore...
+		}
+	}
+
+
+	f_close (fp);
+	return numOfElementsSent;
+}
+
+
 void DeInitializeFS( void )
 {
 }

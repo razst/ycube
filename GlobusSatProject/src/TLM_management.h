@@ -12,6 +12,7 @@
 #include <GlobalStandards.h>
 #include "SubSystemModules/Housekepping/TelemetryFiles.h"
 #include <hal/Timing/Time.h>
+#include <time.h>
 
 
 #define MAX_FILE_NAME_SIZE 11
@@ -52,10 +53,15 @@ void deleteTLMFile(tlm_type_t tlmType, Time date, int days2Add);
 /*
  * Read telematry file and send it to ground station over RF
  */
-int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id);
+int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id,int resolution);
 /*
  *
  */
+int readTLMFiles(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id,int resolution);
+
+int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, Time date, int cmd_id,int resolution);
+
+
 void delete_allTMFilesFromSD();
 /*!
  * Initializes the file system.

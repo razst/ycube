@@ -14,8 +14,11 @@ int logInfo(char *info);
 
 #define E_CANT_TRANSMIT    		-200
 #define E_TOO_EARLY_4_BEACON    -201
+#define E_INVALID_PARAMETERS    -204
 #define TRXVU_MUTE_TOO_LOMG    -202
 #define TRXVU_IDLE_TOO_LOMG    -203
+
+
 #define MAX_LOG_STR				40
 
 typedef struct data

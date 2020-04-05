@@ -24,7 +24,7 @@ void DumpTask(void *args) {
 
 	int numOfElementsSent = 0;
 	if (task_args->numberOfDays != 0)
-		numOfElementsSent = readTLMFile(task_args->dump_type,task_args->day,task_args->numberOfDays,task_args->cmd->ID);
+		numOfElementsSent = readTLMFile(task_args->dump_type,task_args->day,task_args->numberOfDays,task_args->cmd->ID,0);
 	//TODO: else call time range read function...
 
 	FinishDump(NULL, NULL, ACK_DUMP_FINISHED, &numOfElementsSent, sizeof(numOfElementsSent));
