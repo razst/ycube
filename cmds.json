@@ -1,0 +1,86 @@
+{
+  types: [
+    {
+      "id": "0",
+      name: "TRXVU",
+      subtypes: [
+        {
+          "id": "17",
+          name: "mute","desc":"mute the TRXVU",
+          inParams:[{"name":"duration","desc":"number of seconds to mute the TRXVU","type":"int"}]	
+        },
+       {
+          "id": "35",
+          name: "get beacon intreval","desc":"get the beacon intreval time in seconds"
+        },
+       {
+          "id": "36",
+          name: "set beacon intreval",
+	"desc":"set the beacon intreval time in seconds",	
+          inParams:[{"name":"seconds","desc":"number of seconds for beacon intreaval ","type":"int"}]	
+        },
+       {
+          "id": "135",
+          name: "set idel state",
+	"desc":"set the TRXVU idel state",	
+          inParams:[{"name":"state","desc":"00 (on) / 01 (off)","type":"char"},
+		  {"name":"duration","desc":"idle duration time (max 10 minutes) apply only for state ON","type":"int"}]	
+        },
+		{
+          "id": "105",
+          name: "DUMP",
+	"desc":"start the dump task",	
+          inParams:[
+		  
+		  {"name":"dump_type","desc":"the type of the dump ","type":"char"},
+		  {"name":"start time","desc":"start time in unix time ","type":"int"},
+		{"name":"end time","desc":"end time in unix time ","type":"int"},
+		  {"name":"seconds","desc":"seconds of the minute","type":"char"},
+		  {"name":"minutes","desc":"minutes of the hour ","type":"char"},
+		  {"name":"hours","desc":"hour of the start day ","type":"char"},
+		  {"name":"day","desc":"Day of the week (Sunday=1, Monday=2, ..., Saturday=7) ","type":"char"},
+		  {"name":"date","desc":"Date of the month. ","type":"char"},
+		  {"name":"month","desc": "Month of the year (January = 1) ","type":"char"},
+		  {"name":"year","desc": "Year since 2000 (2000 = 0) ","type":"char"}, 
+		  {"name":"secondsOfYear","desc":"number of seconds since the start of the year ","type":"int"},
+		  {"name":"number of days","desc":"number of days to get add in the dump (0 will get only the asked day)","type":"int"}
+		  
+		  ]	
+        }
+
+      ]
+    },
+
+
+
+
+
+    {
+      "id": "1",
+      name: "EPS",
+      subtypes: [
+        {
+          "id": "0",
+          name: "restert","desc":"restart the OBC with the EPS",
+          inParams:[]	
+        }
+      ]
+    }
+	
+   {
+      "id": "2",
+      name: "Telemetry",
+      subtypes: [
+        {
+          "id": "0",
+          name: "restert","desc":"restart the OBC with the EPS",
+          inParams:[]	
+        }
+      ]
+    }
+	
+	
+	
+	
+  ]
+}

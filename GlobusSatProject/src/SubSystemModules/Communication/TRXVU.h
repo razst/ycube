@@ -14,7 +14,7 @@
 
 
 #define MAX_MUTE_TIME 	(5400) 	///< max mute duration will be 90 minutes = 60 *90 [sec]
-#define MAX_IDLE_TIME 	(600) 	///< max IDLE duration will be 10 minutes = 60 *10 [sec]
+#define MAX_IDLE_TIME 	(1200) 	///< max IDLE duration will be 20 minutes = 120 *10 [sec]
 
 #define SIZE_RXFRAME	200
 #define SIZE_TXFRAME	235

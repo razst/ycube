@@ -122,6 +122,17 @@ int InitTrxvu() {
 	return 0;
 }
 
+void checkIdleFinish(){
+	time_unix curr_tick_time = 0;
+	Time_getUnixEpoch(&curr_tick_time);
+
+	// check if it is time to turn off the idle...
+	if (g_idle_end_time !=0 && g_idle_end_time < curr_tick_time){
+		g_idle_end_time = 0;
+		SetIdleState(trxvu_idle_state_off,0);
+	}
+}
+
 int TRX_Logic() {
 	int err = 0;
 	int cmdFound=-1;
@@ -142,6 +153,8 @@ int TRX_Logic() {
 		//TODO: log error
 		//TODO: send message to ground when a delayed command was not executed-> add to log
 	}
+
+	checkIdleFinish();
 	BeaconLogic();
 
 	if (logError(err)) return -1;
@@ -289,13 +302,14 @@ int BeaconLogic() {
 
 int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
 
+	if (duration > MAX_IDLE_TIME) {
+		logError(TRXVU_IDLE_TOO_LOMG);
+		return TRXVU_IDLE_TOO_LOMG;
+	}
+
 	if (logError(IsisTrxvu_tcSetIdlestate(ISIS_TRXVU_I2C_BUS_INDEX, state))) return -1;
 
 	if (state == trxvu_idle_state_on){
-		if (duration > MAX_IDLE_TIME) {
-			logError(TRXVU_IDLE_TOO_LOMG);
-			return -1;
-		}
 		// get current unix time
 		time_unix curr_tick_time = 0;
 		Time_getUnixEpoch(&curr_tick_time);
