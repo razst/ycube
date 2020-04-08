@@ -3,84 +3,220 @@
     {
       "id": "0",
       name: "TRXVU",
+      desc: "All TRXVU function calls",
       subtypes: [
         {
           "id": "17",
-          name: "mute","desc":"mute the TRXVU",
-          inParams:[{"name":"duration","desc":"number of seconds to mute the TRXVU","type":"int"}]	
+          name: "mute",
+          "desc": "mute the TRXVU",
+          inParams: [
+            {
+              "name": "duration",
+              "desc": "number of seconds to mute the TRXVU",
+              "type": "int"
+            }
+          ]
         },
-       {
+        {
+          "id": "136",
+          name: "unmute",
+          "desc": "unmute the TRXVU",
+          
+        },
+        {
           "id": "35",
-          name: "get beacon intreval","desc":"get the beacon intreval time in seconds"
+          name: "get beacon interval",
+          "desc": "get the beacon interval time in seconds",
+          
         },
-       {
+        {
           "id": "36",
-          name: "set beacon intreval",
-	"desc":"set the beacon intreval time in seconds",	
-          inParams:[{"name":"seconds","desc":"number of seconds for beacon intreaval ","type":"int"}]	
+          name: "set beacon interval",
+          "desc": "set the beacon interval time in seconds",
+          inParams: [
+            {
+              "name": "seconds",
+              "desc": "number of seconds for beacon interval ",
+              "type": "int"
+            }
+          ]
         },
-       {
+        {
           "id": "135",
           name: "set idel state",
-	"desc":"set the TRXVU idel state",	
-          inParams:[{"name":"state","desc":"00 (on) / 01 (off)","type":"char"},
-		  {"name":"duration","desc":"idle duration time (max 10 minutes) apply only for state ON","type":"int"}]	
+          "desc": "set the TRXVU idel state",
+          inParams: [
+            {
+              "name": "state",
+              "desc": "00 (on) / 01 (off)",
+              "type": "char"
+            },
+            {
+              "name": "duration",
+              "desc": "idle duration time (max 10 minutes) apply only for state ON",
+              "type": "int"
+            }
+          ]
         },
-		{
+        {
           "id": "105",
           name: "DUMP",
-	"desc":"start the dump task",	
-          inParams:[
-		  
-		  {"name":"dump_type","desc":"the type of the dump ","type":"char"},
-		  {"name":"start time","desc":"start time in unix time ","type":"int"},
-		{"name":"end time","desc":"end time in unix time ","type":"int"},
-		  {"name":"seconds","desc":"seconds of the minute","type":"char"},
-		  {"name":"minutes","desc":"minutes of the hour ","type":"char"},
-		  {"name":"hours","desc":"hour of the start day ","type":"char"},
-		  {"name":"day","desc":"Day of the week (Sunday=1, Monday=2, ..., Saturday=7) ","type":"char"},
-		  {"name":"date","desc":"Date of the month. ","type":"char"},
-		  {"name":"month","desc": "Month of the year (January = 1) ","type":"char"},
-		  {"name":"year","desc": "Year since 2000 (2000 = 0) ","type":"char"}, 
-		  {"name":"secondsOfYear","desc":"number of seconds since the start of the year ","type":"int"},
-		  {"name":"number of days","desc":"number of days to get add in the dump (0 will get only the asked day)","type":"int"}
-		  
-		  ]	
-        }
-
-      ]
-    },
-
-
-
-
-
-    {
-      "id": "1",
-      name: "EPS",
-      subtypes: [
+          "desc": "start the dump task",
+          inParams: [
+            {
+              "name": "dump_type",
+              "desc": "the type of the dump ",
+              "type": "char"
+            },
+            {
+              "name": "start time",
+              "desc": "start time in unix time ",
+              "type": "int"
+            },
+            {
+              "name": "end time",
+              "desc": "end time in unix time ",
+              "type": "int"
+            },
+            {
+              "name": "seconds",
+              "desc": "seconds of the minute",
+              "type": "char"
+            },
+            {
+              "name": "minutes",
+              "desc": "minutes of the hour ",
+              "type": "char"
+            },
+            {
+              "name": "hours",
+              "desc": "hour of the start day ",
+              "type": "char"
+            },
+            {
+              "name": "day",
+              "desc": "Day of the week (Sunday=1, Monday=2, ..., Saturday=7) ",
+              "type": "char"
+            },
+            {
+              "name": "date",
+              "desc": "Date of the month. ",
+              "type": "char"
+            },
+            {
+              "name": "month",
+              "desc": "Month of the year (January = 1) ",
+              "type": "char"
+            },
+            {
+              "name": "year",
+              "desc": "Year since 2000 (2000 = 0) ",
+              "type": "char"
+            },
+            {
+              "name": "secondsOfYear",
+              "desc": "number of seconds since the start of the year ",
+              "type": "int"
+            },
+            {
+              "name": "number of days",
+              "desc": "number of days to get add in the dump (0 will get only the asked day)",
+              "type": "int"
+            }
+          ]
+        },
         {
-          "id": "0",
-          name: "restert","desc":"restart the OBC with the EPS",
-          inParams:[]	
-        }
-      ]
-    }
-	
-   {
-      "id": "2",
-      name: "Telemetry",
-      subtypes: [
+          "id": "34",
+          name: "abort dump",
+          "desc": "ask to stop the dump",
+          
+        },
         {
-          "id": "0",
-          name: "restert","desc":"restart the OBC with the EPS",
-          inParams:[]	
-        }
-      ]
-    }
-	
-	
-	
-	
-  ]
+          "id": "19",
+          name: "get baud rate",
+          "desc": "get the bitrate of the trxvu",
+          
+        },
+        {
+          "id": "21",
+          name: "set baud rate",
+          "desc": "set the bitrate of the trxvu",
+          inParams: [
+            {
+              "name": "bitrate",
+              "desc": "the bitrate we want to set in the trxvu (1200 - 00 \ 2400 - 01 \ 4800 - 02 \ 9600 - 03",
+              "type": "ISIStrxvuBitrateStatus"
+            }
+            
+          ]
+        },
+          {
+          "id": "51",
+          name: "force abort dump",
+          "desc": "stop the dump",
+          
+        },
+          {
+          "id": "102",
+          name: "Get TX uptime",
+          "desc": "get how much time the satellite is on",
+          
+        },
+          {
+          "id": "104",
+          name: "Get RX uptime",
+          "desc": "get how much time the satellite is on?",
+          
+        },
+          {
+          "id": "167",
+          name: "Get num of online commands",
+          "desc": "get how much commands do the satellite needs to do now",
+          
+        },
+          {
+          "id": "178",
+          name: "ANT get arm status", //not finished TODO: check if there are inparams
+          "desc": "get ",
+          inParams: [
+            {
+              "name": "ant side",
+              "desc": "what side we want to know the status (side A - 00 \ side B - 01) ",
+              "type": "ISISantsSide"
+            }
+          ]
+        },
+      }
+    ]
+  },
+  {
+    "id": "1",
+    name: "EPS",
+    desc: "All EPS function calls",
+    subtypes: [
+      {
+        "id": "0",
+        name: "restert",
+        "desc": "restart the OBC with the EPS",
+        inParams: [
+          
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2",
+    name: "Telemetry",
+    subtypes: [
+      {
+        "id": "0",
+        name: "restert",
+        "desc": "restart the OBC with the EPS",
+        inParams: [
+          
+        ]
+      }
+    ]
+  }
+]
 }
