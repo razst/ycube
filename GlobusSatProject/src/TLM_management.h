@@ -59,7 +59,7 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id,int reso
  */
 int readTLMFiles(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id,int resolution);
 
-int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, Time date, int cmd_id,int resolution);
+int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int cmd_id,int resolution);
 
 
 void delete_allTMFilesFromSD();

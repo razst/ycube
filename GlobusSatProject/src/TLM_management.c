@@ -372,10 +372,13 @@ int readTLMFiles(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id,int res
 }
 
 
-int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, Time date, int cmd_id, int resolution){
+int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int cmd_id, int resolution){
 
 	if (from_time >= to_time)
 		return E_INVALID_PARAMETERS;
+
+	Time date;
+	timeU2time(from_time,&date);
 
 	//TODO check for unsupported tlmType
 	printf("reading from file...\n");

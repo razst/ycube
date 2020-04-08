@@ -50,6 +50,7 @@ src/TLM_management.d: ../src/TLM_management.c \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_mdriver_atmel_mcipdc.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/../version/ver_mdriver_atmel_mcipdc.h \
  C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h \
+ C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h \
  ../src/SubSystemModules/Communication/TRXVU.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include/freertos/task.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include/freertos/list.h \
@@ -161,6 +162,8 @@ C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_mdriver_atm
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/../version/ver_mdriver_atmel_mcipdc.h:
 
 C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:
+
+C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:
 
 ../src/SubSystemModules/Communication/TRXVU.h:
 
