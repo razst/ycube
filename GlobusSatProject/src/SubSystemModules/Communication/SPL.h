@@ -62,7 +62,8 @@ typedef enum __attribute__ ((__packed__)) trxvu_subtypes_t
 	MUTE_TRXVU = 			0x11,	//0b00010001
 	UNMUTE_TRXVU = 			0x88,	//0b10001000
 	TRXVU_IDLE = 			0x87,
-	DUMP_SUBTYPE =			0x69,	//0b01101001
+	DUMP_DAYS =				0x69,	//0b01101001
+	DUMP_TIME_RANGE =		0x70,
 	ABORT_DUMP_SUBTYPE= 	0x22,	//0b00100010
 	GET_BAUD_RATE = 		0x13,	//0b00010011
 	GET_BEACON_INTERVAL = 	0x23,	//0b00100011
