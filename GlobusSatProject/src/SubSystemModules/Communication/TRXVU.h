@@ -24,9 +24,8 @@ typedef struct __attribute__ ((__packed__))
 	sat_packet_t *cmd;
 	unsigned char dump_type;
 	time_unix t_start;
-	time_unix t_end;
-	Time day;
-	int numberOfDays;
+	time_unix t_end; // if passed 0 we use the readTLMFiles function. Otherwise, we use the time range function
+	int resulotion;
 } dump_arguments_t;
 
 

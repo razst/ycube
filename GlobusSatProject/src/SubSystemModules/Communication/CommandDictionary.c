@@ -19,10 +19,12 @@ int trxvu_command_router(sat_packet_t *cmd)
 	//TODO: finish 'trxvu_command_router'
 	switch (cmd->cmd_subtype)
 	{
-	case DUMP_SUBTYPE:
+	case DUMP_DAYS:
 		err = CMD_StartDump(cmd);
 		break;
-
+	case DUMP_TIME_RANGE:
+		err = CMD_StartDump(cmd);
+		break;
 	case ABORT_DUMP_SUBTYPE:
 		err = CMD_SendDumpAbortRequest(cmd);
 		break;
@@ -67,23 +69,8 @@ int trxvu_command_router(sat_packet_t *cmd)
 		err = CMD_GetRxUptime(cmd);
 		break;
 
-	case GET_NUM_OF_DELAYED_CMD: // TODO
-		err = CMD_GetNumOfDelayedCommands(cmd);
-		break;
-
 	case GET_NUM_OF_ONLINE_CMD:
 		err = CMD_GetNumOfOnlineCommands(cmd);
-		break;
-	case ADD_DELAYED_COMMAND_CMD:
-		ParseDataToCommand(cmd->data,&delayed_cmd);
-		err = AddDelayedCommand(&delayed_cmd);
-		break;
-	case DELETE_DELAYED_CMD:
-		err = CMD_DeleteDelyedCmdByID(cmd);
-		break;
-
-	case DELETE_ALL_DELAYED_CMD:
-		err = CMD_DeleteAllDelyedBuffer(cmd);
 		break;
 
 	case ANT_SET_ARM_STATUS:

@@ -13,6 +13,24 @@
 #include <SubSystemModules/Housekepping/TelemetryFiles.h>
 
 
+void timeU2time(time_unix utime, Time *time){
+    struct tm  ts;
+    char       buf[80];
+
+	ts = *localtime(&utime);
+	time->seconds = ts.tm_sec;
+	time->minutes = ts.tm_min;
+	time->hours = ts.tm_hour;
+	time->date = ts.tm_mday;
+	time->month = ts.tm_mon+1;
+	time->year = ts.tm_year-100;
+
+    //strftime(buf, sizeof(buf), "%a %Y-%m-%d %H:%M:%S", &ts);
+    //printf("Local Time %s\n", buf);
+	//printf("year: %d\n", time->year);
+
+}
+
 int logError(int error){
 	if(error != E_NO_SS_ERR)
 	{

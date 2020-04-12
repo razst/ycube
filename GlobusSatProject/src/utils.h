@@ -8,9 +8,9 @@
 #ifndef UTILS_H_
 #define UTILS_H_
 
-int logError(int error);
+#include "GlobalStandards.h"
+#include <hal/Timing/Time.h>
 
-int logInfo(char *info);
 
 #define E_CANT_TRANSMIT    		-200
 #define E_TOO_EARLY_4_BEACON    -201
@@ -27,6 +27,20 @@ typedef struct data
 	char msg[MAX_LOG_STR];
 } logData_t;
 
+
+/*
+ * convert unix time to Time struct
+ */
+void timeU2time(time_unix utime, Time *time);
+/*
+ * log error message
+ */
+int logError(int error);
+
+/*
+ * log info message
+ */
+int logInfo(char *info);
 
 #endif /* UTILS_H_ */
 

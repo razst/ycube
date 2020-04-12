@@ -345,7 +345,7 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 				sat_packet_t dump_tlm = { 0 };
 
 				AssembleCommand((unsigned char*)element, sizeof(int)+size,
-						trxvu_cmd_type,DUMP_SUBTYPE,
+						trxvu_cmd_type,DUMP_DAYS,
 						cmd_id, &dump_tlm);
 
 				TransmitSplPacket(&dump_tlm, NULL);
@@ -372,10 +372,13 @@ int readTLMFiles(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id,int res
 }
 
 
-int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, Time date, int cmd_id, int resolution){
+int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int cmd_id, int resolution){
 
 	if (from_time >= to_time)
 		return E_INVALID_PARAMETERS;
+
+	Time date;
+	timeU2time(from_time,&date);
 
 	//TODO check for unsupported tlmType
 	printf("reading from file...\n");
@@ -411,7 +414,7 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, Tim
 			sat_packet_t dump_tlm = { 0 };
 
 			AssembleCommand((unsigned char*)element, sizeof(int)+size,
-					trxvu_cmd_type,DUMP_SUBTYPE,
+					trxvu_cmd_type,DUMP_TIME_RANGE,
 					cmd_id, &dump_tlm);
 
 			TransmitSplPacket(&dump_tlm, NULL);

@@ -50,6 +50,10 @@ src/TLM_management.d: ../src/TLM_management.c \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_mdriver_atmel_mcipdc.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/include/hcc/../version/ver_mdriver_atmel_mcipdc.h \
  C:\ISIS\workspace\ycube\GlobusSatProject\src/utils.h \
+<<<<<<< HEAD
+=======
+ C:\ISIS\workspace\ycube\GlobusSatProject\src/GlobalStandards.h \
+>>>>>>> 174a3e7ce94c54b0ca0a3778c9097864c861ec34
  ../src/SubSystemModules/Communication/TRXVU.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/freertos/include/freertos/task.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/freertos/include/freertos/list.h \
@@ -161,6 +165,11 @@ C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_mdriver_atm
 C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hcc/include/hcc/../version/ver_mdriver_atmel_mcipdc.h:
 
 C:\ISIS\workspace\ycube\GlobusSatProject\src/utils.h:
+<<<<<<< HEAD
+=======
+
+C:\ISIS\workspace\ycube\GlobusSatProject\src/GlobalStandards.h:
+>>>>>>> 174a3e7ce94c54b0ca0a3778c9097864c861ec34
 
 ../src/SubSystemModules/Communication/TRXVU.h:
 

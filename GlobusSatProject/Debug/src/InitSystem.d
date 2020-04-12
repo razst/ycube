@@ -36,6 +36,10 @@ src/InitSystem.d: ../src/InitSystem.c \
  ../src/SubSystemModules/Communication/SatCommandHandler.h \
  ../src/SubSystemModules/Communication/SPL.h \
  C:\ISIS\workspace\ycube\GlobusSatProject\src/utils.h \
+<<<<<<< HEAD
+=======
+ C:\ISIS\workspace\ycube\GlobusSatProject\src/GlobalStandards.h \
+>>>>>>> 174a3e7ce94c54b0ca0a3778c9097864c861ec34
  ../src/SubSystemModules/Maintenance/Maintenance.h ../src/InitSystem.h \
  ../src/TLM_management.h \
  C:/ISIS/workspace/ycube/GlobusSatProject/..//hal/hal/include/hal/Boolean.h \
@@ -122,6 +126,11 @@ C:/ISIS/workspace/ycube/GlobusSatProject/..//satellite-subsystems/satellite-subs
 ../src/SubSystemModules/Communication/SPL.h:
 
 C:\ISIS\workspace\ycube\GlobusSatProject\src/utils.h:
+<<<<<<< HEAD
+=======
+
+C:\ISIS\workspace\ycube\GlobusSatProject\src/GlobalStandards.h:
+>>>>>>> 174a3e7ce94c54b0ca0a3778c9097864c861ec34
 
 ../src/SubSystemModules/Maintenance/Maintenance.h:
 

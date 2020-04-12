@@ -123,9 +123,9 @@ Boolean TestReadTimeRangeTLMRes(){
 	Time_setUnixEpoch(current_time);
 
 	printf("***** reading data with range and resolution 0 ***** \n");
-	numOfElementsSent0 = readTLMFileTimeRange( tlm_log ,1893456003,1893456009,theDay,3,0);
+	numOfElementsSent0 = readTLMFileTimeRange( tlm_log ,1893456003,1893456009,3,0);
 	printf("***** reading data with range and resolution 2 ***** \n");
-	numOfElementsSent2 = readTLMFileTimeRange( tlm_log ,1893456003,1893456009,theDay,3,2);
+	numOfElementsSent2 = readTLMFileTimeRange( tlm_log ,1893456003,1893456009,3,2);
 	if (numOfElementsSent0 == 5 && numOfElementsSent2 == 3){
 		printf("*******  PASS (2 of 2) ***********\n");
 	}else{
@@ -172,7 +172,7 @@ Boolean TestReadTimeRangeTLM(){
 	printf("***** reading full day data ***** \n");
 	int numOfElementsSent0 = readTLMFile(tlm_log,theDay,0,2,0);
 	printf("***** reading data with range ***** \n");
-	int numOfElementsSent2 = readTLMFileTimeRange( tlm_log ,1893456003,1893456009,theDay,3,0);
+	int numOfElementsSent2 = readTLMFileTimeRange( tlm_log ,1893456003,1893456009,3,0);
 	if (numOfElementsSent0 == 10 && numOfElementsSent2 == 5){
 		printf("*******  PASS ***********\n");
 	}else{
@@ -462,7 +462,7 @@ Boolean selectAndExecuteFSTest()
 	printf("\t 0) Return to main menu \n\r");
 	printf("\t 1) List files \n\r");
 	printf("\t 2) Delete files \n\r");
-	printf("\t 3) LOG TLM \n\r");
+	printf("\t 3) LOG TLM (write & read 1 file with 2 lines)\n\r");
 	printf("\t 4) WOD TLM \n\r");
 	printf("\t 5) TRXVU TLM \n\r");
 	printf("\t 6) Read multi files \n\r");

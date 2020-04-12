@@ -23,9 +23,15 @@ void DumpTask(void *args) {
 			NULL, 0);
 
 	int numOfElementsSent = 0;
-	if (task_args->numberOfDays != 0)
-		numOfElementsSent = readTLMFile(task_args->dump_type,task_args->day,task_args->numberOfDays,task_args->cmd->ID,0);
-	//TODO: else call time range read function...
+	// calculate how many days we were asked to dump (every day has 86400 seconds)
+	int numberOfDays = (task_args->t_end - task_args->t_start)/86400;
+	if (task_args->cmd->cmd_subtype == DUMP_DAYS){
+		Time date;
+		timeU2time(task_args->t_start,&date);
+		numOfElementsSent = readTLMFiles(task_args->dump_type,date,numberOfDays,task_args->cmd->ID,task_args->resulotion);
+	}else{
+		numOfElementsSent = readTLMFileTimeRange(task_args->dump_type,task_args->t_start,task_args->t_end,task_args->cmd->ID,task_args->resulotion);
+	}
 
 	FinishDump(NULL, NULL, ACK_DUMP_FINISHED, &numOfElementsSent, sizeof(numOfElementsSent));
 
@@ -52,11 +58,7 @@ int CMD_StartDump(sat_packet_t *cmd)
 	memcpy(&dmp_pckt.t_end, cmd->data + offset, sizeof(dmp_pckt.t_end));
 	offset += sizeof(dmp_pckt.t_end);
 
-	memcpy(&dmp_pckt.day, cmd->data + offset, sizeof(dmp_pckt.day));
-	offset += sizeof(dmp_pckt.day);
-
-	memcpy(&dmp_pckt.numberOfDays, cmd->data + offset, sizeof(dmp_pckt.numberOfDays));
-
+	memcpy(&dmp_pckt.resulotion, cmd->data + offset, sizeof(dmp_pckt.resulotion));
 
 
 	if (xSemaphoreTake(xDumpLock,SECONDS_TO_TICKS(WAIT_TIME_SEM_DUMP)) != pdTRUE) {
