@@ -141,7 +141,7 @@
           inParams: [
             {
               "name": "bitrate",
-              "desc": "the bitrate we want to set in the trxvu (1200 - 00 \ 2400 - 01 \ 4800 - 02 \ 9600 - 03",
+              "desc": "the bitrate we want to set in the trxvu (1200 - 00 | 2400 - 01 | 4800 - 02 | 9600 - 03)",
               "type": "char"
             }
           ]
@@ -173,7 +173,7 @@
           inParams: [
             {
               "name": "ant side",
-              "desc": "what side we want to know the status (side A - 00 \ side B - 01) ",
+              "desc": "what side we want to know the status (side A - 00 | side B - 01) ",
               "type": "char"
             }
           ]
@@ -185,12 +185,12 @@
           inParams: [
             {
               "name": "ant side",
-              "desc": "what side we want to change the status (side A - 00 \ side B - 01) ",
+              "desc": "what side we want to change the status (side A - 00 | side B - 01) ",
               "type": "char"
             },
             {
               "name": "status",
-              "desc": "what status we want the antenna side to be (disarm = 172 \ arm = 173) ",
+              "desc": "what status we want the antenna side to be (disarm = 172 | arm = 173) ",
               "type": "char"
             }
           ]
@@ -202,7 +202,7 @@
           inParams: [
             {
               "name": "ant side",
-              "desc": "what side we want to know the UPTIME (side A - 00 \ side B - 01) ",
+              "desc": "what side we want to know the UPTIME (side A - 00 | side B - 01) ",
               "type": "char"
             }
           ]
@@ -214,7 +214,7 @@
           inParams: [
             {
               "name": "ant side",
-              "desc": "what side we want to cancel the deployment (side A - 00 \ side B - 01) ",
+              "desc": "what side we want to cancel the deployment (side A - 00 | side B - 01) ",
               "type": "char"
             }
           ]
