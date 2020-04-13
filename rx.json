@@ -1,0 +1,34 @@
+{
+  'types': [
+    {
+      'id': '0',
+      'name': 'TRXVU',
+	  'desc': 'All TRXVU function calls',
+      'subtypes': [
+       {
+          'id': '35',
+          'name': 'get beacon intreval','desc':'get the beacon intreval time in seconds',
+          'inParams':[{'name':'seconds','desc':'number of seconds for beacon intreaval ','type':'int'}]	
+        },
+       {
+          'id': '1',
+          'name': 'Beacon ',
+          'inParams':[
+		  {'name':'vcat','desc':'battery voltage ','type':'short'}
+		  ]	
+        }
+      ]
+    },
+  {
+      'id': '5',
+      'name': 'ACK',
+      'subtypes': [
+        {
+          'id': '0',
+          'name': 'ACK_RECEIVE_COMM',
+          'inParams':[]	
+        }
+      ]
+    }
+  ]
+}

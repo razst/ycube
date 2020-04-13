@@ -20,13 +20,18 @@
         {
           "id": "136",
           name: "unmute",
-          "desc": "unmute the TRXVU"
+          "desc": "unmute the TRXVU",
+          inParams: [
+            
+          ]
         },
         {
           "id": "35",
           name: "get beacon interval",
           "desc": "get the beacon interval time in seconds",
-          
+          inParams: [
+            
+          ]
         },
         {
           "id": "36",
@@ -58,81 +63,74 @@
           ]
         },
         {
-          "id": "105",
-          name: "DUMP",
-          "desc": "start the dump task",
-          inParams: [
+          'id': '105',
+          'name': 'DUMP_TIME_RANGE',
+          'desc': 'start the dump task',
+          'inParams': [
             {
-              "name": "dump_type",
-              "desc": "the type of the dump ",
-              "type": "char"
+              'name': 'dump_type',
+              'desc': 'the type of the dump ',
+              'type': 'char',
+              values: [
+                "0",
+                "1",
+                "2"
+              ]
             },
             {
-              "name": "start time",
-              "desc": "start time in unix time ",
-              "type": "int"
+              'name': 'start time',
+              'desc': 'start time of dump ',
+              'type': 'datetime'
             },
             {
-              "name": "end time",
-              "desc": "end time in unix time ",
-              "type": "int"
+              'name': 'end time',
+              'desc': 'end time of dump ',
+              'type': 'datetime'
+            }
+          ]
+        },
+        {
+          'id': '112',
+          'name': 'DUMP_DAYS',
+          'desc': 'start the dump task',
+          'inParams': [
+            {
+              'name': 'dump_type',
+              'desc': 'the type of the dump ',
+              'type': 'char',
+              values: [
+                "0",
+                "1",
+                "2"
+              ]
             },
             {
-              "name": "seconds",
-              "desc": "seconds of the minute",
-              "type": "char"
+              'name': 'start time',
+              'desc': 'start date of dump ',
+              'type': 'date'
             },
             {
-              "name": "minutes",
-              "desc": "minutes of the hour ",
-              "type": "char"
-            },
-            {
-              "name": "hours",
-              "desc": "hour of the start day ",
-              "type": "char"
-            },
-            {
-              "name": "day",
-              "desc": "Day of the week (Sunday=1, Monday=2, ..., Saturday=7) ",
-              "type": "char"
-            },
-            {
-              "name": "date",
-              "desc": "Date of the month. ",
-              "type": "char"
-            },
-            {
-              "name": "month",
-              "desc": "Month of the year (January = 1) ",
-              "type": "char"
-            },
-            {
-              "name": "year",
-              "desc": "Year since 2000 (2000 = 0) ",
-              "type": "char"
-            },
-            {
-              "name": "secondsOfYear",
-              "desc": "number of seconds since the start of the year ",
-              "type": "int"
-            },
-            {
-              "name": "number of days",
-              "desc": "number of days to get add in the dump (0 will get only the asked day)",
-              "type": "int"
+              'name': 'end time',
+              'desc': 'end date of dump ',
+              'type': 'date'
             }
           ]
         },
         {
           "id": "34",
           name: "abort dump",
-          "desc": "ask to stop the dump"
+          "desc": "ask to stop the dump",
+          inParams: [
+            
+          ]
         },
         {
           "id": "19",
           name: "get baud rate",
-          "desc": "get the bitrate of the trxvu"
+          "desc": "get the bitrate of the trxvu",
+          inParams: [
+            
+          ]
         },
         {
           "id": "21",
@@ -149,22 +147,34 @@
         {
           "id": "51",
           name: "force abort dump",
-          "desc": "stop the dump"
+          "desc": "stop the dump",
+          inParams: [
+            
+          ]
         },
         {
           "id": "102",
           name: "Get TX uptime",
-          "desc": "get how much time the satellite is on"
+          "desc": "get how much time the satellite is on",
+          inParams: [
+            
+          ]
         },
         {
           "id": "104",
           name: "Get RX uptime",
-          "desc": "get how much time the satellite is on?"
+          "desc": "get how much time the satellite is on?",
+          inParams: [
+            
+          ]
         },
         {
           "id": "167",
           name: "Get num of online commands",
-          "desc": "get how much commands do the satellite needs to do now"
+          "desc": "get how much commands do the satellite needs to do now",
+          inParams: [
+            
+          ]
         },
         {
           "id": "178",
