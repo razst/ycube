@@ -20,8 +20,7 @@
         {
           "id": "136",
           name: "unmute",
-          "desc": "unmute the TRXVU",
-          
+          "desc": "unmute the TRXVU"
         },
         {
           "id": "35",
@@ -128,14 +127,12 @@
         {
           "id": "34",
           name: "abort dump",
-          "desc": "ask to stop the dump",
-          
+          "desc": "ask to stop the dump"
         },
         {
           "id": "19",
           name: "get baud rate",
-          "desc": "get the bitrate of the trxvu",
-          
+          "desc": "get the bitrate of the trxvu"
         },
         {
           "id": "21",
@@ -145,65 +142,60 @@
             {
               "name": "bitrate",
               "desc": "the bitrate we want to set in the trxvu (1200 - 00 \ 2400 - 01 \ 4800 - 02 \ 9600 - 03",
-              "type": "ISIStrxvuBitrateStatus"
+              "type": "char"
             }
-            
           ]
         },
-          {
+        {
           "id": "51",
           name: "force abort dump",
-          "desc": "stop the dump",
-          
+          "desc": "stop the dump"
         },
-          {
+        {
           "id": "102",
           name: "Get TX uptime",
-          "desc": "get how much time the satellite is on",
-          
+          "desc": "get how much time the satellite is on"
         },
-          {
+        {
           "id": "104",
           name: "Get RX uptime",
-          "desc": "get how much time the satellite is on?",
-          
+          "desc": "get how much time the satellite is on?"
         },
-          {
+        {
           "id": "167",
           name: "Get num of online commands",
-          "desc": "get how much commands do the satellite needs to do now",
-          
+          "desc": "get how much commands do the satellite needs to do now"
         },
-          {
+        {
           "id": "178",
-          name: "ANT get arm status", //not finished TODO: check if there are inparams
+          name: "ANT get arm status",
           "desc": "get the status of one side in the antenna",
           inParams: [
             {
               "name": "ant side",
               "desc": "what side we want to know the status (side A - 00 \ side B - 01) ",
-              "type": "ISISantsSide"
+              "type": "char"
             }
           ]
         },
-         {
+        {
           "id": "176",
-          name: "ANT set arm status", 
-          "desc": "set the status of one side in the antenna ",
+          name: "ANT set arm status",
+          "desc": "set the status of one side in the antenna",
           inParams: [
             {
               "name": "ant side",
               "desc": "what side we want to change the status (side A - 00 \ side B - 01) ",
-              "type": "ISISantsSide"
+              "type": "char"
             },
             {
               "name": "status",
               "desc": "what status we want the antenna side to be (disarm = 172 \ arm = 173) ",
-              "type": "ISISantsArmStatus"
+              "type": "char"
             }
           ]
         },
-         {
+        {
           "id": "179",
           name: "ANT get UPTIME",
           "desc": "get the UPTIME of one side in the antenna",
@@ -211,7 +203,7 @@
             {
               "name": "ant side",
               "desc": "what side we want to know the UPTIME (side A - 00 \ side B - 01) ",
-              "type": "ISISantsSide"
+              "type": "char"
             }
           ]
         },
@@ -223,41 +215,40 @@
             {
               "name": "ant side",
               "desc": "what side we want to cancel the deployment (side A - 00 \ side B - 01) ",
-              "type": "ISISantsSide"
+              "type": "char"
             }
           ]
-        },
-      }
-    ]
-  },
-  {
-    "id": "1",
-    name: "EPS",
-    desc: "All EPS function calls",
-    subtypes: [
-      {
-        "id": "0",
-        name: "restert",
-        "desc": "restart the OBC with the EPS",
-        inParams: [
-          
-        ]
-      }
-    ]
-  },
-  {
-    "id": "2",
-    name: "Telemetry",
-    subtypes: [
-      {
-        "id": "0",
-        name: "restert",
-        "desc": "restart the OBC with the EPS",
-        inParams: [
-          
-        ]
-      }
-    ]
-  }
-]
+        }
+      ]
+    },
+    {
+      "id": "1",
+      name: "EPS",
+      desc: "All EPS function calls",
+      subtypes: [
+        {
+          "id": "0",
+          name: "restert",
+          "desc": "restart the OBC with the EPS",
+          inParams: [
+            
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      name: "Telemetry",
+      subtypes: [
+        {
+          "id": "0",
+          name: "restert",
+          "desc": "restart the OBC with the EPS",
+          inParams: [
+            
+          ]
+        }
+      ]
+    }
+  ]
 }
