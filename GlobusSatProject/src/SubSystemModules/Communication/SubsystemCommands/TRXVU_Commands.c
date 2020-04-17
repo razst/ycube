@@ -93,6 +93,7 @@ int CMD_MuteTRXVU(sat_packet_t *cmd)
 	time_unix mute_duaration = 0;
 	memcpy(&mute_duaration,cmd->data,sizeof(mute_duaration));
 	err = muteTRXVU(mute_duaration);
+	SendAckPacket(MUTE_TRXVU,cmd,NULL,0); //trying to add the ack functions
 	return err;
 }
 

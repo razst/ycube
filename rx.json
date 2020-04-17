@@ -1,10 +1,81 @@
 {
-  'types': [
+  "types": [
     {
-      'id': '0',
-      'name': 'TRXVU',
-      'desc': 'All TRXVU function calls',
-      'subtypes': [
+      "id": "0",
+      "name": "TRXVU",
+      "desc": "All TRXVU function calls",
+      "subtypes": [
+        {
+          "id": "1",
+          "name": "Beacon",
+          "inParams": [
+            {
+              "name": "vbat",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+            "name": "volt_5v",
+            "desc": "5v bus voltage",
+            "type": "short"
+            },
+            {
+            "name": "volt_3v3",
+            "desc": "3v3 bus voltage",
+            "type": "short"
+            },
+            {
+            "name": "charging_power",
+            "desc": "the current charging power",
+            "type": "short"
+            },
+            {
+            "name": "consumed_power",
+            "desc": "the satellite consumed power",
+            "type": "short"
+            },
+            {
+            'name': 'electric_current',
+            'desc': 'the battery's up-to-date electric current',
+            'type': 'short'
+            },
+            {
+            'name': 'current_3v3',
+            'desc': '3.3 volt bus up-to-date battery',
+            'type': 'short'
+            },
+            {
+            'name': 'current_5v',
+            'desc': '5 volt bus up-to-date battery',
+            'type': 'short'
+            },
+            {
+            'name': 'sat_time',
+            'desc': 'satellite's clock current unix time',
+            'type': 'int'
+            },
+            {
+            'name': 'free_memory',
+            'desc': 'the satellite's Sd's free bytes',
+            'type': 'int'
+            },
+            {
+            'name': 'corrupt_bytes',
+            'desc': 'the memory's corrupted bytes'
+            'type': 'int'
+            },
+            {
+            'name': 'number_of_resets',
+            'desc': 'number of resets the satellite has gone through',
+            'type': 'int'
+            },
+            {
+            'name': 'number_of_cmd_resets',
+            'desc': 'number of resets the satellite has gone through',
+            'type': 'int'
+            }
+          ]
+        },
         {
           'id': '35',
           'name': 'get beacon intreval',
@@ -17,19 +88,11 @@
             }
           ]
         },
-        {
-          'id': '1',
-          'name': 'Beacon ',
-          'inParams': [
-            {
-              'name': 'vcat',
-              'desc': 'battery voltage ',
-              'type': 'short'
-            }
-          ]
-        }
+        
+        
       ]
-    },
+    }
+        
     {
       'id': '5',
       'name': 'ACK',
@@ -126,7 +189,7 @@
         {
           'id': '19',
           'name': 'ACK_UPDATE_BEACON_BIT_RATE',
-          'desc': '',
+          'desc': 'after updating beacon bitrate',
           'inParams': [
             
           ]
@@ -134,7 +197,7 @@
         {
           'id': '20',
           'name': 'ACK_UPDATE_BEACON_TIME_DELAY',
-          'desc': '',
+          'desc': '**********',
           'inParams': [
             
           ]
@@ -142,7 +205,7 @@
         {
           'id': '21',
           'name': 'ACK_UPDATE_EPS_VOLTAGES',
-          'desc': '',
+          'desc': '*********',
           'inParams': [
             
           ]
@@ -150,7 +213,7 @@
         {
           'id': '22',
           'name': 'ACK_UPDATE_EPS_HEATER_VALUES',
-          'desc': '',
+          'desc': '*****************',
           'inParams': [
             
           ]
@@ -158,7 +221,7 @@
         {
           'id': '23',
           'name': 'ACK_UPDATE_EPS_ALPHA',
-          'desc': '',
+          'desc': '************',
           'inParams': [
             
           ]
@@ -166,7 +229,7 @@
         {
           'id': '141',
           'name': 'ACK_MUTE',
-          'desc': '',
+          'desc': 'before trxvu is getting muted',
           'inParams': [
             
           ]
@@ -174,7 +237,7 @@
         {
           'id': '142',
           'name': 'ACK_UNMUTE',
-          'desc': '',
+          'desc': 'after trxvu got unmuted',
           'inParams': [
             
           ]
@@ -182,7 +245,7 @@
         {
           'id': '143',
           'name': 'ACK_ALLOW_TRANSPONDER',
-          'desc': '',
+          'desc': '*************',
           'inParams': [
             
           ]
@@ -214,7 +277,7 @@
         {
           'id': '147',
           'name': 'ACK_GENERIC_I2C_CMD',
-          'desc': '',
+          'desc': '*********',
           'inParams': [
             
           ]
@@ -230,7 +293,7 @@
         {
           'id': '149',
           'name': 'ACK_REDEPLOY',
-          'desc': '',
+          'desc': '*****',
           'inParams': [
             
           ]
@@ -238,7 +301,7 @@
         {
           'id': '158',
           'name': 'ACK_RESET_DELAYED_CMD',
-          'desc': '',
+          'desc': 'dont need it???',
           'inParams': [
             
           ]
@@ -252,26 +315,26 @@
           ]
         },
         {
-          'id': '170',
-          'name': 'ACK_PING',
-          'desc': '',
-          'inParams': [
+          "id": "170",
+          "name": "ACK_PING",
+          "desc": "*****",
+          "inParams": [
             
           ]
         },
         {
-          'id': '187',
-          'name': 'ACK_UNKNOWN_SUBTYPE',
-          'desc': 'when the given subtype is unknown',
-          'inParams': [
+          "id": "187",
+          "name": "ACK_UNKNOWN_SUBTYPE",
+          "desc": "when the given subtype is unknown",
+          "inParams": [
             
           ]
         },
         {
-          'id': '255',
-          'name': 'ACK_ERROR_MSG',
-          'desc': 'when error has occurred',
-          'inParams': [
+          "id": "255",
+          "name": "ACK_ERROR_MSG",
+          "desc": "when error has occurred",
+          "inParams": [
             
           ]
         }

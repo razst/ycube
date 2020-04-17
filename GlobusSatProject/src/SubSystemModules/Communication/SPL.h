@@ -47,7 +47,7 @@ typedef enum __attribute__ ((__packed__)) ack_subtype_t
 	ACK_GENERIC_I2C_CMD = 0x93,
 	ACK_ARM_DISARM = 0x94,					//after changing arm state of the ants
 	ACK_REDEPLOY = 0x95,
-	ACK_RESET_DELAYED_CMD = 0x9E,
+	ACK_RESET_DELAYED_CMD = 0x9E,			//maybe we dont need
 	ACK_FRAM_RESET = 0xA0,
 
 	ACK_PING = 0xAA,
