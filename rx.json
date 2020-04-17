@@ -3,30 +3,277 @@
     {
       'id': '0',
       'name': 'TRXVU',
-	  'desc': 'All TRXVU function calls',
+      'desc': 'All TRXVU function calls',
       'subtypes': [
-       {
+        {
           'id': '35',
-          'name': 'get beacon intreval','desc':'get the beacon intreval time in seconds',
-          'inParams':[{'name':'seconds','desc':'number of seconds for beacon intreaval ','type':'int'}]	
+          'name': 'get beacon intreval',
+          'desc': 'get the beacon intreval time in seconds',
+          'inParams': [
+            {
+              'name': 'seconds',
+              'desc': 'number of seconds for beacon intreaval ',
+              'type': 'int'
+            }
+          ]
         },
-       {
+        {
           'id': '1',
           'name': 'Beacon ',
-          'inParams':[
-		  {'name':'vcat','desc':'battery voltage ','type':'short'}
-		  ]	
+          'inParams': [
+            {
+              'name': 'vcat',
+              'desc': 'battery voltage ',
+              'type': 'short'
+            }
+          ]
         }
       ]
     },
-  {
+    {
       'id': '5',
       'name': 'ACK',
+      'desc': 'All ACKNOWLEDGE function calls',
       'subtypes': [
         {
           'id': '0',
           'name': 'ACK_RECEIVE_COMM',
-          'inParams':[]	
+          'desc': 'when receive any packet',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '127',
+          'name': 'ACK_RESET_WAKEUP',
+          'desc': 'after waking up from reset',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '112',
+          'name': 'ACK_FS_RESET',
+          'desc': 'before going to filesystem reset',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '113',
+          'name': 'ACK_TRXVU_SOFT_RESET',
+          'desc': 'before going to trxvu reset',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '114',
+          'name': 'ACK_TRXVU_HARD_RESET',
+          'desc': 'before going to trxvu reset',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '115',
+          'name': 'ACK_ANTS_RESET',
+          'desc': 'before reseting antennas',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '128',
+          'name': 'ACK_EPS_RESET',
+          'desc': 'before going to eps reset',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '129',
+          'name': 'ACK_SOFT_RESET',
+          'desc': 'before going to reset',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '130',
+          'name': 'ACK_HARD_RESET',
+          'desc': 'before starting hardware reset',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '131',
+          'name': 'ACK_MEMORY_DELETE',
+          'desc': 'when memory delete is completed success',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '18',
+          'name': 'ACK_UPDATE_TIME',
+          'desc': 'after updating time',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '19',
+          'name': 'ACK_UPDATE_BEACON_BIT_RATE',
+          'desc': '',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '20',
+          'name': 'ACK_UPDATE_BEACON_TIME_DELAY',
+          'desc': '',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '21',
+          'name': 'ACK_UPDATE_EPS_VOLTAGES',
+          'desc': '',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '22',
+          'name': 'ACK_UPDATE_EPS_HEATER_VALUES',
+          'desc': '',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '23',
+          'name': 'ACK_UPDATE_EPS_ALPHA',
+          'desc': '',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '141',
+          'name': 'ACK_MUTE',
+          'desc': '',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '142',
+          'name': 'ACK_UNMUTE',
+          'desc': '',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '143',
+          'name': 'ACK_ALLOW_TRANSPONDER',
+          'desc': '',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '144',
+          'name': 'ACK_DUMP_START',
+          'desc': 'when starting a dump',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '145',
+          'name': 'ACK_DUMP_ABORT',
+          'desc': 'when a dump has stopped',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '146',
+          'name': 'ACK_DUMP_FINISHED',
+          'desc': 'when a dump has finished',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '147',
+          'name': 'ACK_GENERIC_I2C_CMD',
+          'desc': '',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '148',
+          'name': 'ACK_ARM_DISARM',
+          'desc': 'after changing arm state of the ants',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '149',
+          'name': 'ACK_REDEPLOY',
+          'desc': '',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '158',
+          'name': 'ACK_RESET_DELAYED_CMD',
+          'desc': '',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '160',
+          'name': 'ACK_FRAM_RESET',
+          'desc': ' before going to FRAM reset',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '170',
+          'name': 'ACK_PING',
+          'desc': '',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '187',
+          'name': 'ACK_UNKNOWN_SUBTYPE',
+          'desc': 'when the given subtype is unknown',
+          'inParams': [
+            
+          ]
+        },
+        {
+          'id': '255',
+          'name': 'ACK_ERROR_MSG',
+          'desc': 'when error has occurred',
+          'inParams': [
+            
+          ]
         }
       ]
     }
