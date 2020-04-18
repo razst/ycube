@@ -35,282 +35,282 @@
             "type": "short"
             },
             {
-            'name': 'electric_current',
-            'desc': 'the battery's up-to-date electric current',
-            'type': 'short'
+            "name": "electric_current",
+            "desc": "the battery's up-to-date electric current",
+            "type": "short"
             },
             {
-            'name': 'current_3v3',
-            'desc': '3.3 volt bus up-to-date battery',
-            'type': 'short'
+            "name": "current_3v3",
+            "desc": "3.3 volt bus up-to-date battery",
+            "type": "short"
             },
             {
-            'name': 'current_5v',
-            'desc': '5 volt bus up-to-date battery',
-            'type': 'short'
+            "name": "current_5v",
+            "desc": "5 volt bus up-to-date battery",
+            "type": "short"
             },
             {
-            'name': 'sat_time',
-            'desc': 'satellite's clock current unix time',
-            'type': 'int'
+            "name": "sat_time",
+            "desc": "satellite's clock current unix time",
+            "type": "int"
             },
             {
-            'name': 'free_memory',
-            'desc': 'the satellite's Sd's free bytes',
-            'type': 'int'
+            "name": "free_memory",
+            "desc": "the satellite's Sd's free bytes",
+            "type": "int"
             },
             {
-            'name': 'corrupt_bytes',
-            'desc': 'the memory's corrupted bytes'
-            'type': 'int'
+            "name": "corrupt_bytes",
+            "desc": "the memory's corrupted bytes",
+            "type": "int"
             },
             {
-            'name': 'number_of_resets',
-            'desc': 'number of resets the satellite has gone through',
-            'type': 'int'
+            "name": "number_of_resets",
+            "desc": "number of resets the satellite has gone through",
+            "type": "int"
             },
             {
-            'name': 'number_of_cmd_resets',
-            'desc': 'number of resets the satellite has gone through',
-            'type': 'int'
+            "name": "number_of_cmd_resets",
+            "desc": "number of resets the satellite has gone through",
+            "type": "int"
             }
           ]
         },
         {
-          'id': '35',
-          'name': 'get beacon intreval',
-          'desc': 'get the beacon intreval time in seconds',
-          'inParams': [
+          "id": "35",
+          "name": "get beacon intreval",
+          "desc": "get the beacon intreval time in seconds",
+          "inParams": [
             {
-              'name': 'seconds',
-              'desc': 'number of seconds for beacon intreaval ',
-              'type': 'int'
+              "name": "seconds",
+              "desc": "number of seconds for beacon intreaval ",
+              "type": "int"
             }
           ]
-        },
+        }
         
         
       ]
-    }
+    },
         
     {
-      'id': '5',
-      'name': 'ACK',
-      'desc': 'All ACKNOWLEDGE function calls',
-      'subtypes': [
+      "id": "5",
+      "name": "ACK",
+      "desc": "All ACKNOWLEDGE function calls",
+      "subtypes": [
         {
-          'id': '0',
-          'name': 'ACK_RECEIVE_COMM',
-          'desc': 'when receive any packet',
-          'inParams': [
+          "id": "0",
+          "name": "ACK_RECEIVE_COMM",
+          "desc": "when receive any packet",
+          "inParams": [
             
           ]
         },
         {
-          'id': '127',
-          'name': 'ACK_RESET_WAKEUP',
-          'desc': 'after waking up from reset',
-          'inParams': [
+          "id": "127",
+          "name": "ACK_RESET_WAKEUP",
+          "desc": "after waking up from reset",
+          "inParams": [
             
           ]
         },
         {
-          'id': '112',
-          'name': 'ACK_FS_RESET',
-          'desc': 'before going to filesystem reset',
-          'inParams': [
+          "id": "112",
+          "name": "ACK_FS_RESET",
+          "desc": "before going to filesystem reset",
+          "inParams": [
             
           ]
         },
         {
-          'id': '113',
-          'name': 'ACK_TRXVU_SOFT_RESET',
-          'desc': 'before going to trxvu reset',
-          'inParams': [
+          "id": "113",
+          "name": "ACK_TRXVU_SOFT_RESET",
+          "desc": "before going to trxvu reset",
+          "inParams": [
             
           ]
         },
         {
-          'id': '114',
-          'name': 'ACK_TRXVU_HARD_RESET',
-          'desc': 'before going to trxvu reset',
-          'inParams': [
+          "id": "114",
+          "name": "ACK_TRXVU_HARD_RESET",
+          "desc": "before going to trxvu reset",
+          "inParams": [
             
           ]
         },
         {
-          'id': '115',
-          'name': 'ACK_ANTS_RESET',
-          'desc': 'before reseting antennas',
-          'inParams': [
+          "id": "115",
+          "name": "ACK_ANTS_RESET",
+          "desc": "before reseting antennas",
+          "inParams": [
             
           ]
         },
         {
-          'id': '128',
-          'name': 'ACK_EPS_RESET',
-          'desc': 'before going to eps reset',
-          'inParams': [
+          "id": "128",
+          "name": "ACK_EPS_RESET",
+          "desc": "before going to eps reset",
+          "inParams": [
             
           ]
         },
         {
-          'id': '129',
-          'name': 'ACK_SOFT_RESET',
-          'desc': 'before going to reset',
-          'inParams': [
+          "id": "129",
+          "name": "ACK_SOFT_RESET",
+          "desc": "before going to reset",
+          "inParams": [
             
           ]
         },
         {
-          'id': '130',
-          'name': 'ACK_HARD_RESET',
-          'desc': 'before starting hardware reset',
-          'inParams': [
+          "id": "130",
+          "name": "ACK_HARD_RESET",
+          "desc": "before starting hardware reset",
+          "inParams": [
             
           ]
         },
         {
-          'id': '131',
-          'name': 'ACK_MEMORY_DELETE',
-          'desc': 'when memory delete is completed success',
-          'inParams': [
+          "id": "131",
+          "name": "ACK_MEMORY_DELETE",
+          "desc": "when memory delete is completed success",
+          "inParams": [
             
           ]
         },
         {
-          'id': '18',
-          'name': 'ACK_UPDATE_TIME',
-          'desc': 'after updating time',
-          'inParams': [
+          "id": "18",
+          "name": "ACK_UPDATE_TIME",
+          "desc": "after updating time",
+          "inParams": [
             
           ]
         },
         {
-          'id': '19',
-          'name': 'ACK_UPDATE_BEACON_BIT_RATE',
-          'desc': 'after updating beacon bitrate',
-          'inParams': [
+          "id": "19",
+          "name": "ACK_UPDATE_BEACON_BIT_RATE",
+          "desc": "after updating beacon bitrate",
+          "inParams": [
             
           ]
         },
         {
-          'id': '20',
-          'name': 'ACK_UPDATE_BEACON_TIME_DELAY',
-          'desc': '**********',
-          'inParams': [
+          "id": "20",
+          "name": "ACK_UPDATE_BEACON_TIME_DELAY",
+          "desc": "**********",
+          "inParams": [
             
           ]
         },
         {
-          'id': '21',
-          'name': 'ACK_UPDATE_EPS_VOLTAGES',
-          'desc': '*********',
-          'inParams': [
+          "id": "21",
+          "name": "ACK_UPDATE_EPS_VOLTAGES",
+          "desc": "*********",
+          "inParams": [
             
           ]
         },
         {
-          'id': '22',
-          'name': 'ACK_UPDATE_EPS_HEATER_VALUES',
-          'desc': '*****************',
-          'inParams': [
+          "id": "22",
+          "name": "ACK_UPDATE_EPS_HEATER_VALUES",
+          "desc": "*****************",
+          "inParams": [
             
           ]
         },
         {
-          'id': '23',
-          'name': 'ACK_UPDATE_EPS_ALPHA',
-          'desc': '************',
-          'inParams': [
+          "id": "23",
+          "name": "ACK_UPDATE_EPS_ALPHA",
+          "desc": "************",
+          "inParams": [
             
           ]
         },
         {
-          'id': '141',
-          'name': 'ACK_MUTE',
-          'desc': 'before trxvu is getting muted',
-          'inParams': [
+          "id": "141",
+          "name": "ACK_MUTE",
+          "desc": "before trxvu is getting muted",
+          "inParams": [
             
           ]
         },
         {
-          'id': '142',
-          'name': 'ACK_UNMUTE',
-          'desc': 'after trxvu got unmuted',
-          'inParams': [
+          "id": "142",
+          "name": "ACK_UNMUTE",
+          "desc": "after trxvu got unmuted",
+          "inParams": [
             
           ]
         },
         {
-          'id': '143',
-          'name': 'ACK_ALLOW_TRANSPONDER',
-          'desc': '*************',
-          'inParams': [
+          "id": "143",
+          "name": "ACK_ALLOW_TRANSPONDER",
+          "desc": "*************",
+          "inParams": [
             
           ]
         },
         {
-          'id': '144',
-          'name': 'ACK_DUMP_START',
-          'desc': 'when starting a dump',
-          'inParams': [
+          "id": "144",
+          "name": "ACK_DUMP_START",
+          "desc": "when starting a dump",
+          "inParams": [
             
           ]
         },
         {
-          'id': '145',
-          'name': 'ACK_DUMP_ABORT',
-          'desc': 'when a dump has stopped',
-          'inParams': [
+          "id": "145",
+          "name": "ACK_DUMP_ABORT",
+          "desc": "when a dump has stopped",
+          "inParams": [
             
           ]
         },
         {
-          'id': '146',
-          'name': 'ACK_DUMP_FINISHED',
-          'desc': 'when a dump has finished',
-          'inParams': [
+          "id": "146",
+          "name": "ACK_DUMP_FINISHED",
+          "desc": "when a dump has finished",
+          "inParams": [
             
           ]
         },
         {
-          'id': '147',
-          'name': 'ACK_GENERIC_I2C_CMD',
-          'desc': '*********',
-          'inParams': [
+          "id": "147",
+          "name": "ACK_GENERIC_I2C_CMD",
+          "desc": "*********",
+          "inParams": [
             
           ]
         },
         {
-          'id': '148',
-          'name': 'ACK_ARM_DISARM',
-          'desc': 'after changing arm state of the ants',
-          'inParams': [
+          "id": "148",
+          "name": "ACK_ARM_DISARM",
+          "desc": "after changing arm state of the ants",
+          "inParams": [
             
           ]
         },
         {
-          'id': '149',
-          'name': 'ACK_REDEPLOY',
-          'desc': '*****',
-          'inParams': [
+          "id": "149",
+          "name": "ACK_REDEPLOY",
+          "desc": "*****",
+          "inParams": [
             
           ]
         },
         {
-          'id': '158',
-          'name': 'ACK_RESET_DELAYED_CMD',
-          'desc': 'dont need it???',
-          'inParams': [
+          "id": "158",
+          "name": "ACK_RESET_DELAYED_CMD",
+          "desc": "dont need it???",
+          "inParams": [
             
           ]
         },
         {
-          'id': '160',
-          'name': 'ACK_FRAM_RESET',
-          'desc': ' before going to FRAM reset',
-          'inParams': [
+          "id": "160",
+          "name": "ACK_FRAM_RESET",
+          "desc": " before going to FRAM reset",
+          "inParams": [
             
           ]
         },
