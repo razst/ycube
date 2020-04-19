@@ -123,7 +123,7 @@ int CMD_GetBaudRate(sat_packet_t *cmd)
 	ISIStrxvuTransmitterState trxvu_state;
 	if (logError(IsisTrxvu_tcGetState(ISIS_TRXVU_I2C_BUS_INDEX, &trxvu_state))) return -1;
 
-	int bitrate = trxvu_state.fields.transmitter_bitrate;
+	int bitrate = trxvu_state.fields.transmitter_bitrate; //isn't bitrate a char?
 	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &bitrate, sizeof(bitrate));
 
 	return 0;
@@ -229,7 +229,7 @@ int CMD_AntGetArmStatus(sat_packet_t *cmd)
 	int err = 0;
 	ISISantsStatus status;
 	ISISantsSide ant_side;
-	memcpy(&ant_side, cmd->data, sizeof(ant_side));
+	memcpy(&ant_side, cmd->data, sizeof(ant_side)); //why memcpy? its a char, only one bit
 
 	err = IsisAntS_getStatusData(ISIS_TRXVU_I2C_BUS_INDEX, ant_side, &status);
 	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &status, sizeof(status));
