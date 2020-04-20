@@ -41,3 +41,9 @@ hal/demo/.settings/language.settings.xml
 satellite-subsystems/demo/.settings/language.settings.xml
 GlobusSatProject/.settings/language.settings.xml
 GlobusSatProject/.settings/language.settings.xml
+GlobusSatProject/.settings/language.settings.xml
+GlobusSatProject/Debug/GlobusSatProject.map
+GlobusSatProject/Debug/src/InitSystem.d
+GlobusSatProject/Debug/src/main.d
+GlobusSatProject/Debug/src/TLM_management.d
+GlobusSatProject/GlobusSatProject-debug.launch

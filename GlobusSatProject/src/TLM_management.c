@@ -290,7 +290,18 @@ void printTLM(void* element, tlm_type_t tlmType){
 		offset += sizeof(data.fields.bus_volt);
 		printf("bus_volt: %d\n ",data.fields.bus_volt);
 	}
+	else if (tlmType==tlm_eps_raw_cdb){
+		isis_eps__gethousekeepingrawincdb__from_t data;
+			offset += (sizeof(isis_eps__replyheader_t));// skip 1 unsigned short fields
+			offset += (sizeof(uint8_t));// skip 1 unsigned short fields
+			memcpy(&data.fields.volt_brdsup ,element+offset,sizeof(data.fields.volt_brdsup));
+			offset += sizeof(data.fields.volt_brdsup);
+			printf("volt_brdsup: %d\n ",data.fields.volt_brdsup);
 
+			memcpy(&data.fields.temp,element+offset,sizeof(data.fields.temp));
+			offset += sizeof(data.fields.temp);
+			printf("temp: %d\n ",data.fields.temp);
+		}
 #endif
 }
 

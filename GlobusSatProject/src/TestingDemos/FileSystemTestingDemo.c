@@ -80,7 +80,35 @@ Boolean TestLOGTLM(){
 
 }
 
+Boolean TestEPSTLM(){
 
+	// save current time
+	time_unix current_time = 0;
+	Time_getUnixEpoch(&current_time);
+
+	// set time to 2030/1/1
+	Time_setUnixEpoch(1893456000);
+
+	//delete the file
+	Time theDay;
+	theDay.year = 30;
+	theDay.date = 1;
+	theDay.month = 1;
+
+	deleteTLMFile(tlm_eps_raw_cdb,theDay,0);
+
+	// write some LOG elements in TLM file
+	TelemetrySaveEPS();
+	// read the data
+	int numOfElementsSent = readTLMFile(tlm_eps_raw_cdb,theDay,0,2,0);
+
+	// set the time back
+	Time_setUnixEpoch(current_time);
+
+	return TRUE;
+
+
+}
 Boolean TestReadTimeRangeTLMRes(){
 	// save current time
 	time_unix current_time = 0;
@@ -468,8 +496,9 @@ Boolean selectAndExecuteFSTest()
 	printf("\t 6) Read multi files \n\r");
 	printf("\t 7) Read with time range \n\r");
 	printf("\t 8) Resolution (2 tests: full day & time range) \n\r");
+	printf("\t 9) EPSTLM \n\r");
 
-	unsigned int number_of_tests = 8;
+	unsigned int number_of_tests = 9;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -500,7 +529,9 @@ Boolean selectAndExecuteFSTest()
 	case 8:
 		offerMoreTests = TestReadTimeRangeTLMRes();
 		break;
-
+	case 9:
+			offerMoreTests = TestEPSTLM();
+			break;
 	default:
 		break;
 	}
