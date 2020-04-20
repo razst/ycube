@@ -17,6 +17,7 @@ void DumpTask(void *args) {
 		FinishDump(NULL, NULL, ACK_DUMP_ABORT, NULL, 0);
 		return;
 	}
+	//dump_arguments_t t = *((dump_arguments_t*)args);
 	dump_arguments_t *task_args = (dump_arguments_t *) args;
 
 	SendAckPacket(ACK_DUMP_START, task_args->cmd,
@@ -29,11 +30,11 @@ void DumpTask(void *args) {
 		Time date;
 		timeU2time(task_args->t_start,&date);
 		numOfElementsSent = readTLMFiles(task_args->dump_type,date,numberOfDays,task_args->cmd->ID,task_args->resulotion);
-	}else{
+	}else{ // DUMP_TIME_RANGE
 		numOfElementsSent = readTLMFileTimeRange(task_args->dump_type,task_args->t_start,task_args->t_end,task_args->cmd->ID,task_args->resulotion);
 	}
 
-	FinishDump(NULL, NULL, ACK_DUMP_FINISHED, &numOfElementsSent, sizeof(numOfElementsSent));
+	FinishDump(task_args, NULL, ACK_DUMP_FINISHED, &numOfElementsSent, sizeof(numOfElementsSent));
 
 }
 
@@ -44,28 +45,29 @@ int CMD_StartDump(sat_packet_t *cmd)
 		return -1;
 	}
 
-	dump_arguments_t dmp_pckt;
+	//dump_arguments_t dmp_pckt;
+	dump_arguments_t *dmp_pckt = malloc(sizeof(*dmp_pckt));
 	unsigned int offset = 0;
 
-	dmp_pckt.cmd = cmd;
+	dmp_pckt->cmd = cmd;
 
-	memcpy(&dmp_pckt.dump_type, cmd->data, sizeof(dmp_pckt.dump_type));
-	offset += sizeof(dmp_pckt.dump_type);
+	memcpy(&dmp_pckt->dump_type, cmd->data, sizeof(dmp_pckt->dump_type));
+	offset += sizeof(dmp_pckt->dump_type);
 
-	memcpy(&dmp_pckt.t_start, cmd->data + offset, sizeof(dmp_pckt.t_start));
-	offset += sizeof(dmp_pckt.t_start);
+	memcpy(&dmp_pckt->t_start, cmd->data + offset, sizeof(dmp_pckt->t_start));
+	offset += sizeof(dmp_pckt->t_start);
 
-	memcpy(&dmp_pckt.t_end, cmd->data + offset, sizeof(dmp_pckt.t_end));
-	offset += sizeof(dmp_pckt.t_end);
+	memcpy(&dmp_pckt->t_end, cmd->data + offset, sizeof(dmp_pckt->t_end));
+	offset += sizeof(dmp_pckt->t_end);
 
-	memcpy(&dmp_pckt.resulotion, cmd->data + offset, sizeof(dmp_pckt.resulotion));
+	memcpy(&dmp_pckt->resulotion, cmd->data + offset, sizeof(dmp_pckt->resulotion));
 
 
 	if (xSemaphoreTake(xDumpLock,SECONDS_TO_TICKS(WAIT_TIME_SEM_DUMP)) != pdTRUE) {
 		return E_GET_SEMAPHORE_FAILED;
 	}
 	xTaskCreate(DumpTask, (const signed char* const )"DumpTask", 2000,
-			&dmp_pckt, configMAX_PRIORITIES - 2, xDumpHandle);
+			(void *)dmp_pckt, configMAX_PRIORITIES - 2, xDumpHandle);
 
 	return 0;
 }

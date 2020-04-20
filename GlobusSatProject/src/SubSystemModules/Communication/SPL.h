@@ -8,7 +8,8 @@ typedef enum __attribute__ ((__packed__)) spl_command_type_t {
 	telemetry_cmd_type,
 	filesystem_cmd_type,
 	managment_cmd_type,
-	ack_type
+	ack_type,
+	dump_type
 }spl_command_type;
 
 //TODO: set all sub-types to be different from one another

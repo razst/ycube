@@ -15,64 +15,64 @@
               "type": "short"
             },
             {
-            "name": "volt_5v",
-            "desc": "5v bus voltage",
-            "type": "short"
+              "name": "volt_5v",
+              "desc": "5v bus voltage",
+              "type": "short"
             },
             {
-            "name": "volt_3v3",
-            "desc": "3v3 bus voltage",
-            "type": "short"
+              "name": "volt_3v3",
+              "desc": "3v3 bus voltage",
+              "type": "short"
             },
             {
-            "name": "charging_power",
-            "desc": "the current charging power",
-            "type": "short"
+              "name": "charging_power",
+              "desc": "the current charging power",
+              "type": "short"
             },
             {
-            "name": "consumed_power",
-            "desc": "the satellite consumed power",
-            "type": "short"
+              "name": "consumed_power",
+              "desc": "the satellite consumed power",
+              "type": "short"
             },
             {
-            "name": "electric_current",
-            "desc": "the battery's up-to-date electric current",
-            "type": "short"
+              "name": "electric_current",
+              "desc": "the battery's up-to-date electric current",
+              "type": "short"
             },
             {
-            "name": "current_3v3",
-            "desc": "3.3 volt bus up-to-date battery",
-            "type": "short"
+              "name": "current_3v3",
+              "desc": "3.3 volt bus up-to-date battery",
+              "type": "short"
             },
             {
-            "name": "current_5v",
-            "desc": "5 volt bus up-to-date battery",
-            "type": "short"
+              "name": "current_5v",
+              "desc": "5 volt bus up-to-date battery",
+              "type": "short"
             },
             {
-            "name": "sat_time",
-            "desc": "satellite's clock current unix time",
-            "type": "int"
+              "name": "sat_time",
+              "desc": "satellite's clock current unix time",
+              "type": "int"
             },
             {
-            "name": "free_memory",
-            "desc": "the satellite's Sd's free bytes",
-            "type": "int"
+              "name": "free_memory",
+              "desc": "the satellite's Sd's free bytes",
+              "type": "int"
             },
             {
-            "name": "corrupt_bytes",
-            "desc": "the memory's corrupted bytes",
-            "type": "int"
+              "name": "corrupt_bytes",
+              "desc": "the memory's corrupted bytes",
+              "type": "int"
             },
             {
-            "name": "number_of_resets",
-            "desc": "number of resets the satellite has gone through",
-            "type": "int"
+              "name": "number_of_resets",
+              "desc": "number of resets the satellite has gone through",
+              "type": "int"
             },
             {
-            "name": "number_of_cmd_resets",
-            "desc": "number of resets the satellite has gone through",
-            "type": "int"
+              "name": "number_of_cmd_resets",
+              "desc": "number of resets the satellite has gone through",
+              "type": "int"
             }
           ]
         },
@@ -94,9 +94,9 @@
           "desc": "get the bitrate of the trxvu",
           "inParams": [
             {
-            "name": "bitrate",
-            "desc": "the bitrate we want to get (1200 - 00 | 2400 - 01 | 4800 - 02 | 9600 - 03)",
-            "type": "char?" 
+              "name": "bitrate",
+              "desc": "the bitrate we want to get (1200 - 00 | 2400 - 01 | 4800 - 02 | 9600 - 03)",
+              "type": "char?"
             }
           ]
         },
@@ -106,9 +106,9 @@
           "desc": "get how much time the satellite is on",
           "inParams": [
             {
-            "name": "uptime",
-            "desc": "how much time the satellite is on",
-            "type": "long int?" 
+              "name": "uptime",
+              "desc": "how much time the satellite is on",
+              "type": "int?"
             }
           ]
         },
@@ -118,9 +118,9 @@
           "desc": "get how much time the satellite is on?",
           "inParams": [
             {
-            "name": "uptime",
-            "desc": "how much time the satellite is on",
-            "type": "long int?" 
+              "name": "uptime",
+              "desc": "how much time the satellite is on",
+              "type": "int?"
             }
           ]
         },
@@ -130,9 +130,9 @@
           "desc": "get how much commands do the satellite needs to do now",
           "inParams": [
             {
-            "name": "num of online cmd",
-            "desc": "how much online cmds the satellite needs to do",
-            "type": "short int?" 
+              "name": "num of online cmd",
+              "desc": "how much online cmds the satellite needs to do",
+              "type": "short int?"
             }
           ]
         },
@@ -154,15 +154,14 @@
           "desc": "get the UPTIME of one side in the antenna",
           "inParams": [
             {
-            "name": "uptime",
-            "desc": "how much time the antenna is on",
-            "type": "long int" 
+              "name": "uptime",
+              "desc": "how much time the antenna is on",
+              "type": "int"
             }
           ]
         }
       ]
     },
-        
     {
       "id": "5",
       "name": "ACK",
@@ -172,240 +171,271 @@
           "id": "0",
           "name": "ACK_RECEIVE_COMM",
           "desc": "when receive any packet",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "127",
           "name": "ACK_RESET_WAKEUP",
           "desc": "after waking up from reset",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "112",
           "name": "ACK_FS_RESET",
           "desc": "before going to filesystem reset",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "113",
           "name": "ACK_TRXVU_SOFT_RESET",
           "desc": "before going to trxvu reset",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "114",
           "name": "ACK_TRXVU_HARD_RESET",
           "desc": "before going to trxvu reset",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "115",
           "name": "ACK_ANTS_RESET",
           "desc": "before reseting antennas",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "128",
           "name": "ACK_EPS_RESET",
           "desc": "before going to eps reset",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "129",
           "name": "ACK_SOFT_RESET",
           "desc": "before going to reset",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "130",
           "name": "ACK_HARD_RESET",
           "desc": "before starting hardware reset",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "131",
           "name": "ACK_MEMORY_DELETE",
           "desc": "when memory delete is completed success",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "18",
           "name": "ACK_UPDATE_TIME",
           "desc": "after updating time",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "19",
           "name": "ACK_UPDATE_BEACON_BIT_RATE",
           "desc": "after updating beacon bitrate",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "20",
           "name": "ACK_UPDATE_BEACON_TIME_DELAY",
           "desc": "**********",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "21",
           "name": "ACK_UPDATE_EPS_VOLTAGES",
           "desc": "*********",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "22",
           "name": "ACK_UPDATE_EPS_HEATER_VALUES",
           "desc": "*****************",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "23",
           "name": "ACK_UPDATE_EPS_ALPHA",
           "desc": "************",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "141",
           "name": "ACK_MUTE",
           "desc": "before trxvu is getting muted",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "142",
           "name": "ACK_UNMUTE",
           "desc": "after trxvu got unmuted",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "143",
           "name": "ACK_ALLOW_TRANSPONDER",
           "desc": "*************",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "144",
           "name": "ACK_DUMP_START",
           "desc": "when starting a dump",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "145",
           "name": "ACK_DUMP_ABORT",
           "desc": "when a dump has stopped",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "146",
           "name": "ACK_DUMP_FINISHED",
           "desc": "when a dump has finished",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "147",
           "name": "ACK_GENERIC_I2C_CMD",
           "desc": "*********",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "148",
           "name": "ACK_ARM_DISARM",
           "desc": "after changing arm state of the ants",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "149",
           "name": "ACK_REDEPLOY",
           "desc": "*****",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "158",
           "name": "ACK_RESET_DELAYED_CMD",
           "desc": "dont need it???",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "160",
           "name": "ACK_FRAM_RESET",
           "desc": " before going to FRAM reset",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "170",
           "name": "ACK_PING",
           "desc": "*****",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "187",
           "name": "ACK_UNKNOWN_SUBTYPE",
           "desc": "when the given subtype is unknown",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "255",
           "name": "ACK_ERROR_MSG",
           "desc": "when error has occurred",
+          "inParams": []
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "name": "DUMP",
+      "desc": "All DUMP Types",
+      "subtypes": [
+        {
+          "id": "10",
+          "name": "tlm_eps_eng_mb",
+          "desc": "EPS eng data",
           "inParams": [
-            
+            {
+              "name": "TODO",
+              "desc": "TODO",
+              "type": "char"
+            }
+          ]
+        },
+        {
+          "id": "4",
+          "name": "WOD",
+          "desc": "World orbit data",
+          "inParams": [
+            {
+              "name": "vbat",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "volt_5v",
+              "desc": "5v bus voltage",
+              "type": "short"
+            },
+            {
+              "name": "volt_3v3",
+              "desc": "3v3 bus voltage",
+              "type": "short"
+            },
+            {
+              "name": "charging_power",
+              "desc": "the current charging power",
+              "type": "short"
+            },
+            {
+              "name": "consumed_power",
+              "desc": "the satellite consumed power",
+              "type": "short"
+            },
+            {
+              "name": "electric_current",
+              "desc": "the battery's up-to-date electric current",
+              "type": "short"
+            },
+            {
+              "name": "current_3v3",
+              "desc": "3.3 volt bus up-to-date battery",
+              "type": "short"
+            },
+            {
+              "name": "current_5v",
+              "desc": "5 volt bus up-to-date battery",
+              "type": "short"
+            },
+            {
+              "name": "sat_time",
+              "desc": "satellite's clock current unix time",
+              "type": "int"
+            },
+            {
+              "name": "free_memory",
+              "desc": "the satellite's Sd's free bytes",
+              "type": "int"
+            },
+            {
+              "name": "corrupt_bytes",
+              "desc": "the memory's corrupted bytes",
+              "type": "int"
+            },
+            {
+              "name": "number_of_resets",
+              "desc": "number of resets the satellite has gone through",
+              "type": "int"
+            },
+            {
+              "name": "number_of_cmd_resets",
+              "desc": "number of resets the satellite has gone through",
+              "type": "int"
+            }
           ]
         }
       ]

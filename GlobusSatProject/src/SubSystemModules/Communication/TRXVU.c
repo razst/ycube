@@ -285,7 +285,7 @@ int BeaconLogic() {
 	sat_packet_t cmd = { 0 };
 	//TODO do we send beacon as SPL ???? there is no global standart ???
 
-	if (logError(AssembleCommand((unsigned char*) &wod, sizeof(wod), trxvu_cmd_type,BEACON_SUBTYPE, 0xFFFFFFFF, &cmd))) return -1;
+	if (logError(AssembleCommand((unsigned char*) &wod, sizeof(wod), trxvu_cmd_type,BEACON_SUBTYPE, 0x02FFFFFF, &cmd))) return -1;
 
 	// set the current time as the previous beacon time
 	if (logError(Time_getUnixEpoch(&g_prev_beacon_time))) return -1;

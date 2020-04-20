@@ -35,6 +35,12 @@ int ParseDataToCommand(unsigned char * data, sat_packet_t *cmd)
 	}
 	offset += sizeof(id);
 
+
+	if (id>>24 != YCUBE_SAT_ID && id>>24 != ALL_SAT_ID){
+		return invalid_sat_id;
+	}
+
+
 	char type;
 	err = memcpy(&type,data+offset,sizeof(type));
 	if (NULL == err) {

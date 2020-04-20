@@ -9,6 +9,8 @@
 
 //<! how many command can be saved in the buffer
 #define MAX_NUM_OF_DELAYED_CMD (100)
+#define YCUBE_SAT_ID	2
+#define ALL_SAT_ID 		0
 
 
 typedef enum __attribute__ ((__packed__)) CMD_ERR{
@@ -17,7 +19,8 @@ typedef enum __attribute__ ((__packed__)) CMD_ERR{
 	no_command_found ,					///< no commands were found in command buffers
 	index_out_of_bound,					///< index out of bound error
 	null_pointer_error,					///< input parameter pointer is null
-	execution_error 					///< an execution error has occured
+	execution_error, 					///< an execution error has occured
+	invalid_sat_id 					///<
 }CMD_ERR;
 
 typedef struct __attribute__ ((__packed__)) sat_packet_t

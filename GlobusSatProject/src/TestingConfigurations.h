@@ -2,7 +2,7 @@
 #ifndef TESTINGCONFIGURATIONS_H_
 #define TESTINGCONFIGURATIONS_H_
 
-#define TESTING	// currently in testing mode
+//#define TESTING	// currently in testing mode
 
 #define ISISEPS	// using the isisEPS subsystem
 //#define GOMEPS	// using the GonEPS subsystem

@@ -14,7 +14,7 @@ int SendAckPacket(ack_subtype_t acksubtype, sat_packet_t *cmd,
 	if (cmd != NULL) {
 		id = cmd->ID;
 	}else{
-		id = 0xFFFFFFFF; //default ID. system ACK. not a response to any command
+		id = 0x02FFFFFF; //default ID. system ACK. not a response to any command
 	}
 
 	AssembleCommand(data, length, (char)ack_type, (char)acksubtype, id, &ack);
