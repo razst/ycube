@@ -1,32 +1,412 @@
 {
-  'types': [
+  "types": [
     {
-      'id': '0',
-      'name': 'TRXVU',
-	  'desc': 'All TRXVU function calls',
-      'subtypes': [
-       {
-          'id': '35',
-          'name': 'get beacon intreval','desc':'get the beacon intreval time in seconds',
-          'inParams':[{'name':'seconds','desc':'number of seconds for beacon intreaval ','type':'int'}]	
+      "id": "0",
+      "name": "TRXVU",
+      "desc": "All TRXVU function calls",
+      "subtypes": [
+        {
+          "id": "1",
+          "name": "Beacon",
+          "inParams": [
+            {
+              "name": "vbat",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+            "name": "volt_5v",
+            "desc": "5v bus voltage",
+            "type": "short"
+            },
+            {
+            "name": "volt_3v3",
+            "desc": "3v3 bus voltage",
+            "type": "short"
+            },
+            {
+            "name": "charging_power",
+            "desc": "the current charging power",
+            "type": "short"
+            },
+            {
+            "name": "consumed_power",
+            "desc": "the satellite consumed power",
+            "type": "short"
+            },
+            {
+            "name": "electric_current",
+            "desc": "the battery's up-to-date electric current",
+            "type": "short"
+            },
+            {
+            "name": "current_3v3",
+            "desc": "3.3 volt bus up-to-date battery",
+            "type": "short"
+            },
+            {
+            "name": "current_5v",
+            "desc": "5 volt bus up-to-date battery",
+            "type": "short"
+            },
+            {
+            "name": "sat_time",
+            "desc": "satellite's clock current unix time",
+            "type": "int"
+            },
+            {
+            "name": "free_memory",
+            "desc": "the satellite's Sd's free bytes",
+            "type": "int"
+            },
+            {
+            "name": "corrupt_bytes",
+            "desc": "the memory's corrupted bytes",
+            "type": "int"
+            },
+            {
+            "name": "number_of_resets",
+            "desc": "number of resets the satellite has gone through",
+            "type": "int"
+            },
+            {
+            "name": "number_of_cmd_resets",
+            "desc": "number of resets the satellite has gone through",
+            "type": "int"
+            }
+          ]
         },
-       {
-          'id': '1',
-          'name': 'Beacon ',
-          'inParams':[
-		  {'name':'vcat','desc':'battery voltage ','type':'short'}
-		  ]	
+        {
+          "id": "35",
+          "name": "get beacon interval",
+          "desc": "get the beacon interval time in seconds",
+          "inParams": [
+            {
+              "name": "seconds",
+              "desc": "number of seconds for beacon interval ",
+              "type": "int"
+            }
+          ]
+        },
+        {
+          "id": "19",
+          "name": "get baud rate",
+          "desc": "get the bitrate of the trxvu",
+          "inParams": [
+            {
+            "name": "bitrate",
+            "desc": "the bitrate we want to get (1200 - 00 | 2400 - 01 | 4800 - 02 | 9600 - 03)",
+            "type": "char?" 
+            }
+          ]
+        },
+        {
+          "id": "102",
+          "name": "Get TX uptime",
+          "desc": "get how much time the satellite is on",
+          "inParams": [
+            {
+            "name": "uptime",
+            "desc": "how much time the satellite is on",
+            "type": "long int?" 
+            }
+          ]
+        },
+        {
+          "id": "104",
+          "name": "Get RX uptime",
+          "desc": "get how much time the satellite is on?",
+          "inParams": [
+            {
+            "name": "uptime",
+            "desc": "how much time the satellite is on",
+            "type": "long int?" 
+            }
+          ]
+        },
+        {
+          "id": "167",
+          "name": "Get num of online commands",
+          "desc": "get how much commands do the satellite needs to do now",
+          "inParams": [
+            {
+            "name": "num of online cmd",
+            "desc": "how much online cmds the satellite needs to do",
+            "type": "short int?" 
+            }
+          ]
+        },
+        {
+          "id": "178",
+          "name": "ANT get arm status",
+          "desc": "get the status of one side in the antenna",
+          "inParams": [
+            {
+              "name": "status",
+              "desc": "what is the status (disarm = 172 | arm = 173)",
+              "type": "char"
+            }
+          ]
+        },
+        {
+          "id": "179",
+          "name": "ANT get UPTIME",
+          "desc": "get the UPTIME of one side in the antenna",
+          "inParams": [
+            {
+            "name": "uptime",
+            "desc": "how much time the antenna is on",
+            "type": "long int" 
+            }
+          ]
         }
       ]
     },
-  {
-      'id': '5',
-      'name': 'ACK',
-      'subtypes': [
+        
+    {
+      "id": "5",
+      "name": "ACK",
+      "desc": "All ACKNOWLEDGE function calls",
+      "subtypes": [
         {
-          'id': '0',
-          'name': 'ACK_RECEIVE_COMM',
-          'inParams':[]	
+          "id": "0",
+          "name": "ACK_RECEIVE_COMM",
+          "desc": "when receive any packet",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "127",
+          "name": "ACK_RESET_WAKEUP",
+          "desc": "after waking up from reset",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "112",
+          "name": "ACK_FS_RESET",
+          "desc": "before going to filesystem reset",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "113",
+          "name": "ACK_TRXVU_SOFT_RESET",
+          "desc": "before going to trxvu reset",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "114",
+          "name": "ACK_TRXVU_HARD_RESET",
+          "desc": "before going to trxvu reset",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "115",
+          "name": "ACK_ANTS_RESET",
+          "desc": "before reseting antennas",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "128",
+          "name": "ACK_EPS_RESET",
+          "desc": "before going to eps reset",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "129",
+          "name": "ACK_SOFT_RESET",
+          "desc": "before going to reset",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "130",
+          "name": "ACK_HARD_RESET",
+          "desc": "before starting hardware reset",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "131",
+          "name": "ACK_MEMORY_DELETE",
+          "desc": "when memory delete is completed success",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "18",
+          "name": "ACK_UPDATE_TIME",
+          "desc": "after updating time",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "19",
+          "name": "ACK_UPDATE_BEACON_BIT_RATE",
+          "desc": "after updating beacon bitrate",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "20",
+          "name": "ACK_UPDATE_BEACON_TIME_DELAY",
+          "desc": "**********",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "21",
+          "name": "ACK_UPDATE_EPS_VOLTAGES",
+          "desc": "*********",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "22",
+          "name": "ACK_UPDATE_EPS_HEATER_VALUES",
+          "desc": "*****************",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "23",
+          "name": "ACK_UPDATE_EPS_ALPHA",
+          "desc": "************",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "141",
+          "name": "ACK_MUTE",
+          "desc": "before trxvu is getting muted",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "142",
+          "name": "ACK_UNMUTE",
+          "desc": "after trxvu got unmuted",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "143",
+          "name": "ACK_ALLOW_TRANSPONDER",
+          "desc": "*************",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "144",
+          "name": "ACK_DUMP_START",
+          "desc": "when starting a dump",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "145",
+          "name": "ACK_DUMP_ABORT",
+          "desc": "when a dump has stopped",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "146",
+          "name": "ACK_DUMP_FINISHED",
+          "desc": "when a dump has finished",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "147",
+          "name": "ACK_GENERIC_I2C_CMD",
+          "desc": "*********",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "148",
+          "name": "ACK_ARM_DISARM",
+          "desc": "after changing arm state of the ants",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "149",
+          "name": "ACK_REDEPLOY",
+          "desc": "*****",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "158",
+          "name": "ACK_RESET_DELAYED_CMD",
+          "desc": "dont need it???",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "160",
+          "name": "ACK_FRAM_RESET",
+          "desc": " before going to FRAM reset",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "170",
+          "name": "ACK_PING",
+          "desc": "*****",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "187",
+          "name": "ACK_UNKNOWN_SUBTYPE",
+          "desc": "when the given subtype is unknown",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "255",
+          "name": "ACK_ERROR_MSG",
+          "desc": "when error has occurred",
+          "inParams": [
+            
+          ]
         }
       ]
     }
