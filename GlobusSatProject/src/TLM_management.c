@@ -322,9 +322,11 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 	calculateFileName(date,&file_name,end_file_name , numOfDays);
 	fp = f_open(file_name, "r");
 
+	int err = f_getlasterror();
+
 	if (!fp)
 	{
-		printf("Unable to open file!");// TODO: log error in all printf in the file!
+		printf("Unable to open file!, f_open error=%d\n",err);// TODO: log error in all printf in the file!
 		return 1;
 	}
 

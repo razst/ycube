@@ -12,11 +12,18 @@
 extern xTaskHandle xDumpHandle;			 //task handle for dump task
 extern xSemaphoreHandle xDumpLock; // this global lock is defined once in TRXVU.c
 
+static dump_arguments_t dmp_pckt;
+
 void DumpTask(void *args) {
 	if (args == NULL) {
 		FinishDump(NULL, NULL, ACK_DUMP_ABORT, NULL, 0);
 		return;
 	}
+
+
+	// start the SD FS for this dump task
+	logError(f_enterFS());
+
 	//dump_arguments_t t = *((dump_arguments_t*)args);
 	dump_arguments_t *task_args = (dump_arguments_t *) args;
 
@@ -35,6 +42,7 @@ void DumpTask(void *args) {
 	}
 
 	FinishDump(task_args, NULL, ACK_DUMP_FINISHED, &numOfElementsSent, sizeof(numOfElementsSent));
+	vTaskDelete(NULL); // kill the dump task
 
 }
 
@@ -46,28 +54,28 @@ int CMD_StartDump(sat_packet_t *cmd)
 	}
 
 	//dump_arguments_t dmp_pckt;
-	dump_arguments_t *dmp_pckt = malloc(sizeof(*dmp_pckt));
+	//dump_arguments_t *dmp_pckt = malloc(sizeof(*dmp_pckt));
 	unsigned int offset = 0;
 
-	dmp_pckt->cmd = cmd;
+	dmp_pckt.cmd = cmd;
 
-	memcpy(&dmp_pckt->dump_type, cmd->data, sizeof(dmp_pckt->dump_type));
-	offset += sizeof(dmp_pckt->dump_type);
+	memcpy(&dmp_pckt.dump_type, cmd->data, sizeof(dmp_pckt.dump_type));
+	offset += sizeof(dmp_pckt.dump_type);
 
-	memcpy(&dmp_pckt->t_start, cmd->data + offset, sizeof(dmp_pckt->t_start));
-	offset += sizeof(dmp_pckt->t_start);
+	memcpy(&dmp_pckt.t_start, cmd->data + offset, sizeof(dmp_pckt.t_start));
+	offset += sizeof(dmp_pckt.t_start);
 
-	memcpy(&dmp_pckt->t_end, cmd->data + offset, sizeof(dmp_pckt->t_end));
-	offset += sizeof(dmp_pckt->t_end);
+	memcpy(&dmp_pckt.t_end, cmd->data + offset, sizeof(dmp_pckt.t_end));
+	offset += sizeof(dmp_pckt.t_end);
 
-	memcpy(&dmp_pckt->resulotion, cmd->data + offset, sizeof(dmp_pckt->resulotion));
+	memcpy(&dmp_pckt.resulotion, cmd->data + offset, sizeof(dmp_pckt.resulotion));
 
 
 	if (xSemaphoreTake(xDumpLock,SECONDS_TO_TICKS(WAIT_TIME_SEM_DUMP)) != pdTRUE) {
 		return E_GET_SEMAPHORE_FAILED;
 	}
 	xTaskCreate(DumpTask, (const signed char* const )"DumpTask", 2000,
-			(void *)dmp_pckt, configMAX_PRIORITIES - 2, xDumpHandle);
+			&dmp_pckt, configMAX_PRIORITIES - 2, xDumpHandle);
 
 	return 0;
 }
