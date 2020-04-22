@@ -213,6 +213,43 @@ Boolean TestReadTimeRangeTLM(){
 
 
 
+Boolean GenerateWODTLM(){
+
+	// save current time
+	time_unix current_time = 0;
+	Time_getUnixEpoch(&current_time);
+
+	// set time to 2040/1/1
+	Time_setUnixEpoch(1924992000);
+
+	//delete the file
+	Time theDay;
+	theDay.year = 31;
+	theDay.date = 1;
+	theDay.month = 1;
+
+	deleteTLMFile(tlm_wod,theDay,0);
+
+	// write some WOD elements in TLM file
+	TelemetrySaveWOD();
+	vTaskDelay(1500); // wait 1.5 sec, so we see a different timestamp in the file...
+	TelemetrySaveWOD();
+	vTaskDelay(1500); // wait 1.5 sec, so we see a different timestamp in the file...
+	TelemetrySaveWOD();
+	vTaskDelay(1500); // wait 1.5 sec, so we see a different timestamp in the file...
+	TelemetrySaveWOD();
+
+	// read the data
+	int numOfElementsSent = readTLMFile(tlm_wod,theDay,0,2,0);
+
+	// set the time back
+	Time_setUnixEpoch(current_time);
+
+	return TRUE;
+
+
+}
+
 
 
 
@@ -496,9 +533,10 @@ Boolean selectAndExecuteFSTest()
 	printf("\t 6) Read multi files \n\r");
 	printf("\t 7) Read with time range \n\r");
 	printf("\t 8) Resolution (2 tests: full day & time range) \n\r");
-	printf("\t 9) EPSTLM \n\r");
+	printf("\t 9) EPS TLM \n\r");
+	printf("\t 10) Generate WOD TLM files \n\r");
 
-	unsigned int number_of_tests = 9;
+	unsigned int number_of_tests = 10;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -531,6 +569,9 @@ Boolean selectAndExecuteFSTest()
 		break;
 	case 9:
 			offerMoreTests = TestEPSTLM();
+			break;
+	case 10:
+			offerMoreTests = GenerateWODTLM();
 			break;
 	default:
 		break;

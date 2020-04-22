@@ -461,14 +461,14 @@ Discarded input sections
                 0x00000000      0x170 ./src/TestingDemos/CommandsTestingDemo.o
  .text.MainCommandsTestBench
                 0x00000000       0x44 ./src/TestingDemos/CommandsTestingDemo.o
- .debug_info    0x00000000      0x4ad ./src/TestingDemos/CommandsTestingDemo.o
+ .debug_info    0x00000000      0x4b3 ./src/TestingDemos/CommandsTestingDemo.o
  .debug_abbrev  0x00000000       0xf4 ./src/TestingDemos/CommandsTestingDemo.o
  .debug_loc     0x00000000      0x1b8 ./src/TestingDemos/CommandsTestingDemo.o
  .debug_aranges
                 0x00000000       0x68 ./src/TestingDemos/CommandsTestingDemo.o
  .debug_ranges  0x00000000       0x58 ./src/TestingDemos/CommandsTestingDemo.o
  .debug_line    0x00000000      0x339 ./src/TestingDemos/CommandsTestingDemo.o
- .debug_str     0x00000000      0x333 ./src/TestingDemos/CommandsTestingDemo.o
+ .debug_str     0x00000000      0x342 ./src/TestingDemos/CommandsTestingDemo.o
  .comment       0x00000000       0x71 ./src/TestingDemos/CommandsTestingDemo.o
  .ARM.attributes
                 0x00000000       0x32 ./src/TestingDemos/CommandsTestingDemo.o
@@ -512,7 +512,7 @@ Discarded input sections
  .text          0x00000000        0x0 ./src/TestingDemos/FileSystemTestingDemo.o
  .data          0x00000000        0x0 ./src/TestingDemos/FileSystemTestingDemo.o
  .bss           0x00000000        0x0 ./src/TestingDemos/FileSystemTestingDemo.o
- .rodata        0x00000000      0x414 ./src/TestingDemos/FileSystemTestingDemo.o
+ .rodata        0x00000000      0x434 ./src/TestingDemos/FileSystemTestingDemo.o
  .text.TestlistFiels
                 0x00000000       0xa8 ./src/TestingDemos/FileSystemTestingDemo.o
  .text.TestReadWODFile
@@ -525,6 +525,8 @@ Discarded input sections
                 0x00000000      0x210 ./src/TestingDemos/FileSystemTestingDemo.o
  .text.TestReadTimeRangeTLM
                 0x00000000      0x178 ./src/TestingDemos/FileSystemTestingDemo.o
+ .text.GenerateWODTLM
+                0x00000000       0xd0 ./src/TestingDemos/FileSystemTestingDemo.o
  .text.TestWODTLM
                 0x00000000       0xa8 ./src/TestingDemos/FileSystemTestingDemo.o
  .text.TestDeleteFiels
@@ -534,21 +536,21 @@ Discarded input sections
  .text.TestTRXVUTLM
                 0x00000000      0x11c ./src/TestingDemos/FileSystemTestingDemo.o
  .text.selectAndExecuteFSTest
-                0x00000000      0x190 ./src/TestingDemos/FileSystemTestingDemo.o
+                0x00000000      0x1ac ./src/TestingDemos/FileSystemTestingDemo.o
  .text.MainFileSystemTestBench
                 0x00000000       0x44 ./src/TestingDemos/FileSystemTestingDemo.o
- .debug_info    0x00000000      0xaec ./src/TestingDemos/FileSystemTestingDemo.o
+ .debug_info    0x00000000      0xb82 ./src/TestingDemos/FileSystemTestingDemo.o
  .debug_abbrev  0x00000000      0x1c5 ./src/TestingDemos/FileSystemTestingDemo.o
- .debug_loc     0x00000000      0x210 ./src/TestingDemos/FileSystemTestingDemo.o
+ .debug_loc     0x00000000      0x23c ./src/TestingDemos/FileSystemTestingDemo.o
  .debug_aranges
-                0x00000000       0x78 ./src/TestingDemos/FileSystemTestingDemo.o
- .debug_ranges  0x00000000       0x68 ./src/TestingDemos/FileSystemTestingDemo.o
- .debug_line    0x00000000      0x420 ./src/TestingDemos/FileSystemTestingDemo.o
- .debug_str     0x00000000      0x4e3 ./src/TestingDemos/FileSystemTestingDemo.o
+                0x00000000       0x80 ./src/TestingDemos/FileSystemTestingDemo.o
+ .debug_ranges  0x00000000       0x70 ./src/TestingDemos/FileSystemTestingDemo.o
+ .debug_line    0x00000000      0x446 ./src/TestingDemos/FileSystemTestingDemo.o
+ .debug_str     0x00000000      0x4f2 ./src/TestingDemos/FileSystemTestingDemo.o
  .comment       0x00000000       0x71 ./src/TestingDemos/FileSystemTestingDemo.o
  .ARM.attributes
                 0x00000000       0x32 ./src/TestingDemos/FileSystemTestingDemo.o
- .debug_frame   0x00000000      0x160 ./src/TestingDemos/FileSystemTestingDemo.o
+ .debug_frame   0x00000000      0x17c ./src/TestingDemos/FileSystemTestingDemo.o
  .text          0x00000000        0x0 ./src/TestingDemos/MainTest.o
  .data          0x00000000        0x0 ./src/TestingDemos/MainTest.o
  .bss           0x00000000        0x0 ./src/TestingDemos/MainTest.o
