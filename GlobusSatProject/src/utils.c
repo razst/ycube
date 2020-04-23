@@ -12,6 +12,8 @@
 #include "TLM_management.h"
 #include <SubSystemModules/Housekepping/TelemetryFiles.h>
 
+int errCount[2000] = {0};
+int errFirstTime[2000] = {0};
 
 void timeU2time(time_unix utime, Time *time){
     struct tm  ts;
@@ -32,15 +34,32 @@ void timeU2time(time_unix utime, Time *time){
 }
 
 int logError(int error){
-	if(error != E_NO_SS_ERR)
-	{
+//TODO if this funchin Time_getUptimeSeconds() get time we want?
+	if(error != E_NO_SS_ERR){
+		if(error < 0 ){
+		    error = abs(error) + 1000;
+		 }
+
+		if(errCount[error] == 0){
+		    errFirstTime[error] = Time_getUptimeSeconds();
+		 }
+		errCount[error]++;
+
+		int totalTime = Time_getUptimeSeconds() - errFirstTime[error];
+
+		if ((totalTime / errCount[error]) < MAX_ERRORS){
+			logData_t log_;
+			memcpy(log_.msg, "there was a error", MAX_LOG_STR);
+			log_.error = error;
+			write2File(&log_ , tlm_log);
+			return 1;
+
+		} else{
+
+		  }
 		printf("%d", error); // TODO: remove before prod...
 
-		logData_t log_;
-		memcpy(log_.msg, "there was a error", MAX_LOG_STR);
-		log_.error = error;
-		write2File(&log_ , tlm_log);
-		return 1;
+
 	}
 	return 0;
 
