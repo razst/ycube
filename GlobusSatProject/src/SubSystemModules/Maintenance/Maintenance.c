@@ -142,6 +142,37 @@ time_unix GetGsWdtKickTime()
 	return no_comm_thresh;
 }
 
+
+int DeleteOldFiels(){
+	// check how much free space we have in the SD
+	FN_SPACE space = { 0 };
+	int drivenum = f_getdrive();
+
+	// get the free space of the SD card
+	int err = f_getfreespace(drivenum, &space);
+
+	// if needed, clean old files
+	Time theDay;
+	theDay.year = 0;
+	theDay.date = 1;
+	theDay.month = 1;
+	int numOfDays = 0;
+	if (space.free < MIN_FREE_SPACE){
+		while (1){
+			if(!calculateFileName(theDay,&tlm_wod,tlm_wod, numOfDays)){
+				numOfDays++;
+				}else{
+					deleteTLMFile(tlm_wod,calculateFileName(theDay,&tlm_wod,tlm_wod, numOfDays),0);
+
+					break;
+				}
+			}
+		}
+
+
+
+}
+//palmon is not a gever
 void Maintenance()
 {
 	SaveSatTimeInFRAM(MOST_UPDATED_SAT_TIME_ADDR,

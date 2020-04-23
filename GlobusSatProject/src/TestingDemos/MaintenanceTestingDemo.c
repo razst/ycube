@@ -9,6 +9,24 @@
 #include <hal/Timing/Time.h>
 #include <hcc/api_fat.h>
 
+
+
+
+Boolean printSDINfo()
+{
+	FN_SPACE space;
+	int drivenum = f_getdrive();
+
+	f_getfreespace(drivenum, &space);
+
+	printf("Number of 'total' bits: %d\n",space.total);
+	printf("Number of 'used' bits: %d\n",space.used);
+	printf("Number of 'free' bits: %d\n",space.free);
+	printf("Number of 'bad' bits: %d\n",space.bad);
+
+	return TRUE;
+}
+
 Boolean TestIsFS_Corrupted()
 {
 	FN_SPACE space;
@@ -131,8 +149,9 @@ Boolean selectAndExecuteMaintenanceDemoTest()
 	printf("\t 6) Maintenance Main Loop\n\r");
 	printf("\t 7) Set FirstActivation TRUE\n\r");
 	printf("\t 8) Set FirstActivation FALSE\n\r");
+	printf("\t 9) Print SD space info\n\r");
 
-	unsigned int number_of_tests = 8;
+	unsigned int number_of_tests = 9;
 	while (UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch (selection)
@@ -163,6 +182,9 @@ Boolean selectAndExecuteMaintenanceDemoTest()
 		break;
 	case 8:
 		offerMoreTests = changeFirstActivation(FALSE);
+		break;
+	case 9:
+		offerMoreTests = printSDINfo();
 		break;
 	default:
 		break;

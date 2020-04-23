@@ -4,6 +4,7 @@
 
 #include "GlobalStandards.h"
 
+#define MIN_FREE_SPACE 300000000
 
 /*!
  * @brief checks if the period time has passed

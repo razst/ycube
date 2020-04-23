@@ -535,6 +535,7 @@ Boolean selectAndExecuteFSTest()
 	printf("\t 8) Resolution (2 tests: full day & time range) \n\r");
 	printf("\t 9) EPS TLM \n\r");
 	printf("\t 10) Generate WOD TLM files \n\r");
+	//palmon is not a gever
 
 	unsigned int number_of_tests = 10;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
