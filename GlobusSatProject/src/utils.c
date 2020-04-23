@@ -11,7 +11,7 @@
 #include <hal/errors.h>
 #include "TLM_management.h"
 #include <SubSystemModules/Housekepping/TelemetryFiles.h>
-
+//TODO save in FRAM?
 int errCount[2000] = {0};
 int errFirstTime[2000] = {0};
 
