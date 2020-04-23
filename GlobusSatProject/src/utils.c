@@ -55,7 +55,7 @@ int logError(int error){
 			return 1;
 
 		} else{
-
+//TODO what we want do
 		  }
 		printf("%d", error); // TODO: remove before prod...
 
