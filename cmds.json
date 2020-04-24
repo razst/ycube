@@ -18,20 +18,10 @@
           ]
         },
         {
-          "id": "136",
-          "name": "unmute",
-          "desc": "unmute the TRXVU",
-          "inParams": [
-            
-          ]
-        },
-        {
           "id": "35",
           "name": "get beacon interval",
           "desc": "get the beacon interval time in seconds",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "36",
@@ -120,17 +110,13 @@
           "id": "34",
           "name": "abort dump",
           "desc": "ask to stop the dump",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "19",
           "name": "get baud rate",
           "desc": "get the bitrate of the trxvu",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "21",
@@ -148,33 +134,25 @@
           "id": "51",
           "name": "force abort dump",
           "desc": "stop the dump",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "102",
           "name": "Get TX uptime",
           "desc": "get how much time the satellite is on",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "104",
           "name": "Get RX uptime",
           "desc": "get how much time the satellite is on?",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "167",
           "name": "Get num of online commands",
           "desc": "get how much commands do the satellite needs to do now",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "178",
@@ -238,11 +216,9 @@
       "subtypes": [
         {
           "id": "0",
-          "name": "restert",
+          "name": "restart",
           "desc": "restart the OBC with the EPS",
-          "inParams": [
-            
-          ]
+          "inParams": []
         }
       ]
     },
@@ -252,10 +228,26 @@
       "subtypes": [
         {
           "id": "0",
-          "name": "restert",
+          "name": "restart",
           "desc": "restart the OBC with the EPS",
+          "inParams": []
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "management",
+      "subtypes": [
+        {
+          "id": "222",
+          "name": "UPDATE_SAT_TIME",
+          "desc": "update the time in the satellite",
           "inParams": [
-            
+            {
+              "name": "time",
+              "desc": "what time we want to set",
+              "type": "int"
+            }
           ]
         }
       ]
