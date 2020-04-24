@@ -132,10 +132,27 @@ int telemetry_command_router(sat_packet_t *cmd)
 
 int managment_command_router(sat_packet_t *cmd)
 {
-	CMD_ResetComponent(cmd->cmd_subtype);
-	return 0;
-}
+	int err = 0;
 
+		switch (cmd->cmd_subtype)
+		{
+		case RESET_COMPONENT:
+			err = CMD_ResetComponent(cmd->cmd_subtype);
+			break;
+		case UPDATE_SAT_TIME:
+			err = CMD_UpdateSatTime(cmd->cmd_subtype);;
+					break;
+		default:
+			err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
+			break;
+		}
+
+		if (err != 0) {
+			SendAckPacket(ACK_ERROR_MSG, cmd, (unsigned char*) &err, sizeof(err));
+		}
+
+			return err;
+}
 int filesystem_command_router(sat_packet_t *cmd)
 {
 	return 0;
