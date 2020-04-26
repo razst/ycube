@@ -1,6 +1,7 @@
 #include <freertos/FreeRTOS.h>
 #include <freertos/semphr.h>
 #include <freertos/task.h>
+#include <hcc/api_fat.h>
 
 #include <hal/Timing/Time.h>
 
@@ -16,6 +17,7 @@
 #include "TLM_management.h"
 #include "Maintenance.h"
 #include "utils.h"
+#include <math.h>
 
 Boolean CheckExecutionTime(time_unix prev_time, time_unix period)
 {
@@ -143,34 +145,50 @@ time_unix GetGsWdtKickTime()
 }
 
 
-int DeleteOldFiels(){
+int DeleteOldFiels(int minFreeSpace){
 	// check how much free space we have in the SD
 	FN_SPACE space = { 0 };
 	int drivenum = f_getdrive();
 
 	// get the free space of the SD card
-	int err = f_getfreespace(drivenum, &space);
+
+	if (logError(f_getfreespace(drivenum, &space))) return -1;
 
 	// if needed, clean old files
-	Time theDay;
-	theDay.year = 0;
-	theDay.date = 1;
-	theDay.month = 1;
-	int numOfDays = 0;
-	if (space.free < MIN_FREE_SPACE){
-		while (1){
-			if(!calculateFileName(theDay,&tlm_wod,tlm_wod, numOfDays)){
-				numOfDays++;
-				}else{
-					deleteTLMFile(tlm_wod,calculateFileName(theDay,&tlm_wod,tlm_wod, numOfDays),0);
+	if (space.free < minFreeSpace){
+		Time theDay;
+		theDay.year = 25;
+		theDay.date = 1;
+		theDay.month = 1;
+		int numOfDays = 0;
+		//read the last numOfDays from FRAM
+		FRAM_read((unsigned char*) &numOfDays,
+		DEL_OLD_FILES_NUM_DAYS_ADDR, DEL_OLD_FILES_NUM_DAYS_SIZE);
 
-					break;
-				}
+		while (numOfDays < (365*5)){ // just in case that we won't get into endless loop, stop after 5 years
+			int err = deleteTLMFile(tlm_wod,theDay,numOfDays);
+			err *= deleteTLMFile(tlm_antenna,theDay,numOfDays);
+			err *= deleteTLMFile(tlm_eps,theDay,numOfDays);
+			err *= deleteTLMFile(tlm_eps_eng_cdb,theDay,numOfDays);
+			err *= deleteTLMFile(tlm_eps_eng_mb,theDay,numOfDays);
+			err *= deleteTLMFile(tlm_eps_raw_cdb,theDay,numOfDays);
+			err *= deleteTLMFile(tlm_eps_raw_mb,theDay,numOfDays);
+			err *= deleteTLMFile(tlm_log,theDay,numOfDays);
+			err *= deleteTLMFile(tlm_rx,theDay,numOfDays);
+			err *= deleteTLMFile(tlm_rx_frame,theDay,numOfDays);
+			err *= deleteTLMFile(tlm_solar,theDay,numOfDays);
+			err *= deleteTLMFile(tlm_tx,theDay,numOfDays);
+			if(err != pow(F_ERR_NOTFOUND,12)){
+				break;
 			}
+			numOfDays++;
 		}
 
+		//write the numOfDays into FRAM
+		FRAM_write((unsigned char*) &numOfDays,
+		DEL_OLD_FILES_NUM_DAYS_ADDR, DEL_OLD_FILES_NUM_DAYS_SIZE);
 
-
+	}
 }
 //palmon is not a gever
 void Maintenance()
@@ -181,5 +199,7 @@ void Maintenance()
 	//logError(IsFS_Corrupted());-> we send corrupted bytes over beacon, no need to log in error file all the time
 
 	logError(IsGroundCommunicationWDTKick());
+
+	DeleteOldFiels(MIN_FREE_SPACE);
 }
 

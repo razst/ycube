@@ -4,6 +4,7 @@
 #include <hal/Timing/Time.h>
 #include <SubSystemModules/Housekepping/TelemetryFiles.h>
 #include "utils.h"
+#include "SubSystemModules/Maintenance/Maintenance.h"
 
 Boolean TestlistFiels(){
 
@@ -252,6 +253,58 @@ Boolean GenerateWODTLM(){
 
 
 
+
+Boolean DeleteOldFiles(){
+
+	// save current time
+	time_unix current_time = 0;
+	Time_getUnixEpoch(&current_time);
+
+	// set time to 2030/1/1
+	Time_setUnixEpoch(1735689600);
+
+	//delete the file
+	Time theDay;
+	theDay.year = 25;
+	theDay.date = 1;
+	theDay.month = 1;
+
+	// delete all WOD files
+	for (int i=0;i<5;i++){
+		int err = deleteTLMFile(tlm_wod,theDay,i);
+		err *= deleteTLMFile(tlm_antenna,theDay,i);
+		err *= deleteTLMFile(tlm_eps,theDay,i);
+		err *= deleteTLMFile(tlm_eps_eng_cdb,theDay,i);
+		err *= deleteTLMFile(tlm_eps_eng_mb,theDay,i);
+		err *= deleteTLMFile(tlm_eps_raw_cdb,theDay,i);
+		err *= deleteTLMFile(tlm_log,theDay,i);
+		err *= deleteTLMFile(tlm_rx,theDay,i);
+		err *= deleteTLMFile(tlm_rx_frame,theDay,i);
+		err *= deleteTLMFile(tlm_solar,theDay,i);
+		err *= deleteTLMFile(tlm_tx,theDay,i);
+	}
+
+	// write some WOD elements in TLM file
+	for (int i=0;i<5;i++){
+		// set time to 2030/1/1
+		Time_setUnixEpoch(1735689600 + (60*60*24*i));
+
+		TelemetrySaveWOD();
+		TelemetrySaveEPS();
+		TelemetrySaveTRXVU();
+		TelemetrySaveANT();
+		TelemetrySaveSolarPanels();
+	}
+
+	DeleteOldFiels(MIN_FREE_SPACE*1000);
+
+	// set the time back
+	Time_setUnixEpoch(current_time);
+
+	return TRUE;
+
+
+}
 
 
 Boolean TestWODTLM(){
@@ -535,9 +588,10 @@ Boolean selectAndExecuteFSTest()
 	printf("\t 8) Resolution (2 tests: full day & time range) \n\r");
 	printf("\t 9) EPS TLM \n\r");
 	printf("\t 10) Generate WOD TLM files \n\r");
-	//palmon is not a gever
+	printf("\t 11) Delete OLD files \n\r");
+	//palmon is not a gever??
 
-	unsigned int number_of_tests = 10;
+	unsigned int number_of_tests = 11;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -573,6 +627,9 @@ Boolean selectAndExecuteFSTest()
 			break;
 	case 10:
 			offerMoreTests = GenerateWODTLM();
+			break;
+	case 11:
+			offerMoreTests = DeleteOldFiles();
 			break;
 	default:
 		break;

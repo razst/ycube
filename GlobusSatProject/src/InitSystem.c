@@ -81,6 +81,9 @@ void WriteDefaultValuesToFRAM()
 	FRAM_write((unsigned char*) &num_of_resets,
 	NUMBER_OF_CMD_RESETS_ADDR, NUMBER_OF_CMD_RESETS_SIZE);
 
+	FRAM_write((unsigned char*) &num_of_resets,
+	DEL_OLD_FILES_NUM_DAYS_ADDR, DEL_OLD_FILES_NUM_DAYS_SIZE);
+
 
 }
 

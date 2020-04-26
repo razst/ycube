@@ -78,6 +78,9 @@
 #define DELAYED_CMD_FRAME_COUNT_ADDR	0X200		//<! Address where amount of frames in delayed buffer is held
 #define DELAYED_CMD_FRAME_COUNT_SIZE	1			//<! number of bytes describing the frame count of delayed buffer
 
+#define DEL_OLD_FILES_NUM_DAYS_ADDR		0X210		//<! Address where amount of frames in delayed buffer is held
+#define DEL_OLD_FILES_NUM_DAYS_SIZE		4			//<! number of bytes describing the frame count of delayed buffer
+
 #define TRANS_ABORT_FLAG_ADDR			0x500		//<! transmission abort request flag
 #define TRANS_ABORT_FLAG_SIZE			1			//<! size of mute flag in bytes
 // </TRXVU>

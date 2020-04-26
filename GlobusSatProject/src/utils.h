@@ -18,7 +18,7 @@
 #define TRXVU_MUTE_TOO_LOMG    -202
 #define TRXVU_IDLE_TOO_LOMG    -203
 
-#define MAX_ERRORS          10
+#define MAX_ERRORS          10 // max errors per second we allow
 #define MAX_LOG_STR				40
 
 typedef struct data

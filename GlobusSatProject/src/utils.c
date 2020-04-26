@@ -12,8 +12,8 @@
 #include "TLM_management.h"
 #include <SubSystemModules/Housekepping/TelemetryFiles.h>
 //TODO save in FRAM?
-int errCount[2000] = {0};
-int errFirstTime[2000] = {0};
+static int errCount[2000] = {0};
+static int errFirstTime[2000] = {0};
 
 void timeU2time(time_unix utime, Time *time){
     struct tm  ts;

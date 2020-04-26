@@ -48,7 +48,7 @@ void deleteTLMFiles(tlm_type_t tlmType, Time date, int numOfDays);
 /*
  * delete a single file from the SD
  */
-void deleteTLMFile(tlm_type_t tlmType, Time date, int days2Add);
+int deleteTLMFile(tlm_type_t tlmType, Time date, int days2Add);
 
 /*
  * Read telematry file and send it to ground station over RF

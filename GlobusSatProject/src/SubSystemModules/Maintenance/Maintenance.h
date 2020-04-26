@@ -6,6 +6,14 @@
 
 #define MIN_FREE_SPACE 300000000
 
+
+/*
+ * delete onld files from SD card
+ * minFreeSpace - the minimum free space in bytes we want to keep in the SD in all times.
+ * If free space<minFreeSpace we start deleteing old TLM files
+ */
+int DeleteOldFiels(int minFreeSpace);
+
 /*!
  * @brief checks if the period time has passed
  * @param[in] prev_exec_time last sample time (last execution time)

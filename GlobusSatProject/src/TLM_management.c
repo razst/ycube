@@ -61,7 +61,7 @@ void deleteTLMFiles(tlm_type_t tlmType, Time date, int numOfDays){
 }
 
 
-void deleteTLMFile(tlm_type_t tlmType, Time date, int days2Add){
+int deleteTLMFile(tlm_type_t tlmType, Time date, int days2Add){
 
 	char endFileName [3] = {0};
 	int size;
@@ -70,7 +70,7 @@ void deleteTLMFile(tlm_type_t tlmType, Time date, int days2Add){
 	char file_name[MAX_FILE_NAME_SIZE] = {0};
 	calculateFileName(date,&file_name, endFileName, days2Add);
 
-	f_delete(file_name);
+	return f_delete(file_name);
 }
 
 FileSystemResult InitializeFS(Boolean first_time)
