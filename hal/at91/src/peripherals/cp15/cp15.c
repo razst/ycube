@@ -74,11 +74,11 @@
 #define CP15_C_BIT   2 // C bit DCache enable/disable: 
                        // 0 = Cache disabled 
                        // 1 = Cache enabled
-/*
+
 #define CP15_A_BIT   1 // A bit Alignment fault enable/disable:
                        // 0 = Data address alignment fault checking disabled
                        // 1 = Data address alignment fault checking enabled
-*/
+
 #define CP15_M_BIT   0 // M bit MMU enable/disable: 0 = disabled 1 = enabled.
                        // 0 = disabled 
                        // 1 = enabled
@@ -206,7 +206,7 @@ unsigned int CP15_Is_DCacheEnabled(void)
     unsigned int control;
 
     control = _readControlRegister();
-    return ((control & ((1 << CP15_C_BIT)||(1 << CP15_M_BIT))) != 0);
+    return ((control & ((1 << CP15_C_BIT) | (1 << CP15_M_BIT))) != 0);
 } 
 
 //------------------------------------------------------------------------------
@@ -255,6 +255,62 @@ void CP15_Disable_D_Cache(void)
     else {
 
         TRACE_INFO("D cache is already disabled.\n\r");
+    }
+}
+
+//------------------------------------------------------------------------------
+/// Check if Alignment fault is enabled
+/// \return 0 if Alignment fault disabled, 1 if Alignment fault enabled
+//------------------------------------------------------------------------------
+unsigned int CP15_Is_AlignmentFaultEnabled(void)
+{
+    unsigned int control;
+
+    control = _readControlRegister();
+    return ((control & (1 << CP15_A_BIT)) != 0);
+}
+
+//------------------------------------------------------------------------------
+/// Enable Alignment fault
+//------------------------------------------------------------------------------
+void CP15_Enable_AlignmentFault(void)
+{
+    unsigned int control;
+
+    control = _readControlRegister();
+
+	// Check if alignment fault is disabled
+	if ((control & (1 << CP15_A_BIT)) == 0) {
+
+		control |= (1 << CP15_A_BIT);
+		_writeControlRegister(control);
+		TRACE_INFO("Alignment fault enabled.\n\r");
+	}
+	else {
+
+		TRACE_INFO("Alignment fault is already enabled.\n\r");
+	}
+}
+
+//------------------------------------------------------------------------------
+/// Disable Alignment fault
+//------------------------------------------------------------------------------
+void CP15_Disable_AlignmentFault(void)
+{
+    unsigned int control;
+
+    control = _readControlRegister();
+
+    // Check if alignment fault is enabled
+    if ((control & (1 << CP15_A_BIT)) != 0) {
+
+        control &= ~(1 << CP15_A_BIT);
+        _writeControlRegister(control);
+        TRACE_INFO("Alignment fault disabled.\n\r");
+    }
+    else {
+
+        TRACE_INFO("Alignment fault is already disabled.\n\r");
     }
 }
 

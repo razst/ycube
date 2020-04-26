@@ -60,8 +60,8 @@ Data Fields</h2></td></tr>
 <tr class="memdesc:a1157ca1b7439c4f1e9c6139c0c60e28e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bytes to be written to the I2C slave (used for write_i2cDir and writeRead_i2cDir).  <a href="#a1157ca1b7439c4f1e9c6139c0c60e28e"></a><br/></td></tr>
 <tr class="memitem:af04ece647c72a6eb378cf9a171bec214"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___i2_cgeneric_transfer.html#af04ece647c72a6eb378cf9a171bec214">readSize</a></td></tr>
 <tr class="memdesc:af04ece647c72a6eb378cf9a171bec214"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bytes to be read from the I2C slave (used for read_i2cDir and writeRead_i2cDir).  <a href="#af04ece647c72a6eb378cf9a171bec214"></a><br/></td></tr>
-<tr class="memitem:a6fb9669eb580c3126eaa1168a5bc9405"><td class="memItemLeft" align="right" valign="top">unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___i2_cgeneric_transfer.html#a6fb9669eb580c3126eaa1168a5bc9405">writeData</a></td></tr>
-<tr class="memdesc:a6fb9669eb580c3126eaa1168a5bc9405"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory location of the data to be written to the I2C slave (used for write_i2cDir and writeRead_i2cDir).  <a href="#a6fb9669eb580c3126eaa1168a5bc9405"></a><br/></td></tr>
+<tr class="memitem:a2df2f9d3db61d80e4c5ee7d56afb1fc9"><td class="memItemLeft" align="right" valign="top">const unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___i2_cgeneric_transfer.html#a2df2f9d3db61d80e4c5ee7d56afb1fc9">writeData</a></td></tr>
+<tr class="memdesc:a2df2f9d3db61d80e4c5ee7d56afb1fc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory location of the data to be written to the I2C slave (used for write_i2cDir and writeRead_i2cDir).  <a href="#a2df2f9d3db61d80e4c5ee7d56afb1fc9"></a><br/></td></tr>
 <tr class="memitem:a87cf403fd07d4aaf4519e16f479ee168"><td class="memItemLeft" align="right" valign="top">volatile unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___i2_cgeneric_transfer.html#a87cf403fd07d4aaf4519e16f479ee168">readData</a></td></tr>
 <tr class="memdesc:a87cf403fd07d4aaf4519e16f479ee168"><td class="mdescLeft">&#160;</td><td class="mdescRight">Memory location to store the data read from the I2C slave (used for read_i2cDir and writeRead_i2cDir).  <a href="#a87cf403fd07d4aaf4519e16f479ee168"></a><br/></td></tr>
 <tr class="memitem:a77857e05ee3765d8ef3f793bb1a3bbd0"><td class="memItemLeft" align="right" valign="top">portTickType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___i2_cgeneric_transfer.html#a77857e05ee3765d8ef3f793bb1a3bbd0">writeReadDelay</a></td></tr>
@@ -206,12 +206,12 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a6fb9669eb580c3126eaa1168a5bc9405"></a>
+<a class="anchor" id="a2df2f9d3db61d80e4c5ee7d56afb1fc9"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned char* _I2CgenericTransfer::writeData</td>
+          <td class="memname">const unsigned char* _I2CgenericTransfer::writeData</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -254,7 +254,7 @@ Data Fields</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 25 2018 07:30:42 for ISIS-OBC Programmers Reference (HAL) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 4 2019 09:53:54 for ISIS-OBC Programmers Reference (HAL) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

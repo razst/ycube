@@ -13,13 +13,6 @@
 #include <freertos/FreeRTOS.h>
 
 /*!
- * Size of the buffer used to store receive commands. Commands larger than this may cause problems.
- * This size should not be too large either, as these buffers are stored on the small internal SRAM of the CPU to keep things fast.
- * @note Customers should not modify this value, it will have no effect if the driver is provided as a library.
- */
-#define I2C_SLAVE_RECEIVE_BUFFER_SIZE	512
-
-/*!
  * @brief Describes the I2C Slave Driver state.
  */
 typedef enum _I2CslaveDriverState {
@@ -40,10 +33,12 @@ typedef enum _I2CslaveDriverState {
  * Therefore, an I2C slave never tries to write data on the I2C bus on its own.\n
  * 2) Commands may or may not have a response.
  */
-typedef struct _I2Cslave_CommandList {
-	unsigned char command; //!< Command code (first byte sent by the I2C master).
-	unsigned int  commandParameterSize; //!< Number of bytes to read after receiving the command. If the command does not have any parameters, this should be 0.
-	Boolean hasResponse; //!< The user code replies to to this command with a response data packet i.e. I2Cslave_write is called in response to this command.
+typedef struct _I2Cslave_CommandList
+{
+    unsigned char command; //!< Command code (first byte sent by the I2C master).
+    //One byte of padding will occur here
+    unsigned short commandParameterSize; //!< Number of bytes to read after receiving the command. If the command does not have any parameters, this should be 0.
+    Boolean hasResponse; //!< The user code replies to to this command with a response data packet i.e. I2Cslave_write is called in response to this command.
 } I2CslaveCommandList;
 
 /*!
@@ -74,6 +69,13 @@ int I2Cslave_start(unsigned char address, I2CslaveCommandList *commandList, unsi
 void I2Cslave_stop(void);
 
 /*!
+ * Returns the internal receive buffer size. This is identical to the largest
+ * command provided in I2Cslave_start
+ * @return Buffer sized used for receiving messages
+ */
+unsigned short I2Cslave_getBufferSize(void);
+
+/*!
  * @brief Writes data TO the master on the I2C bus.
  * @param data Pointer to a location where the data to write is stored.
  * @param size Number of bytes to transfer.
@@ -95,7 +97,7 @@ void I2Cslave_stop(void);
  * If this timeout is reached, the driver will send 0xEE to the I2C master (indicating an error).
  *
  */
-int I2Cslave_write(unsigned char *data, unsigned long size, portTickType timeout);
+int I2Cslave_write(const unsigned char *data, unsigned long size, portTickType timeout);
 
 /*!
  * @brief Reads data from the I2C bus.

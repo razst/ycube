@@ -3,6 +3,10 @@ Changelog for ISIS OBC HAL library
 Table of contents
 
 Changelog for:
+- version 0.3.1 (04 Nov 2019)
+- version 0.3.0 (11 Oct 2019)
+- version 0.2.8 (06 Aug 2018)
+- version 0.2.7 (02 Aug 2018)
 - version 0.2.6 (25 Apr 2018)
 - version 0.2.5 (12 Dec 2017)
 - version 0.2.4 (11 Dec 2015)
@@ -21,11 +25,106 @@ Changelog for:
 - Version 0.1.1b (24 Oct 2014)
 - Version 0.1.0 (15 Oct 2014)
 
+Version 0.3.1
+==============
+
+Summary: memory allocation changes, improvements to I2Cslave, SPI, and FRAM drivers
+Release date: 4th of November 2019
+Prepared by: Gerard Aalbers, Alf Henrik Sauge
+
+General changes:
+
+* Reduced system stack space from 9 MB to 1 MB (this is only used by code not running in FreeRTOS tasks)
+* Added stack space for FIQ (fast IRQ)
+
+Specific changes:
+
+Drivers/I2Cslave.h & I2Cslave.c
+
+* Removed 512 byte restriction on the size of I2C slave commands
+
+Drivers/SPI.c
+
+* Fixed issue with calling SPI_stop on an already stopped bus
+* Improved input checking
+
+Storage/FRAM.h & FRAM.c
+
+* Improved error handling
+* Removed unnecessary packing of structures
+
+Version 0.3.0
+==============
+
+Summary: switched to newlib, FreeRTOS and HCC configuration changes, various small fixes
+Release date: 11th of October 2019
+Prepared by: Gerard Aalbers, Alf Henrik Sauge
+
+General changes:
+
+* Switched from newlib-nano to newlib so malloc and free are now re-entrant safe. Please note that this means any project using this HAL will need to be updated, specifically the project's linker settings [adding the -lc flag and removing newlib-nano related flags like --specs=nano.specs] and main.c [replacing return 0 by exit(0), which must also not be optimized way by the compiler]. Please look at the HAL demo project as a reference.
+* Enabled software timers and queue sets in FreeRTOS, also added support for a malloc failed hook
+* Increased maximum number of task contexts in HCC from 8 to 16
+* More strict input checking and improved error handling in peripheral drivers
+* Added stack space for abort mode
+
+Specific changes:
+
+supervisor.c
+
+* Fixed issue with interal buffers that could lead to misleading telemetry values being returned
+
+Timing/Time.h
+
+* Added functions to convert a Time struct to an epoch and vice versa
+
+Drivers/SPI.h & SPI.c
+
+* Replaced binary constant definitions with hexadecimal ones
+* Fixed issues where the driver would affect the SPI bus that was not being started or stopped
+
+Drivers/PWM.c
+
+* Fixed unaligned pointer issues inside the set duty cycle functions
+
+Version 0.2.8
+==============
+
+Summary: hardware revision split improvements
+Release date: 6th of August 2018
+Prepared by: Gerard Aalbers, Jonathan Ward
+
+General changes:
+
+* Fixed issue where iOBC hardware revision may not be respected during library build process
+
+Specific changes:
+
+hal/include/hal/version/version.h
+* Added hardware revision string to library version information
+
+Version 0.2.7
+==============
+
+Summary: Cleaner split between rev. B and rev. C versions of HAL, start-up script issue fixed
+Release date: 2nd of August 2018
+Prepared by: Gerard Aalbers, Jonathan Ward and Pieter Botma
+
+General changes:
+
+* There are now separate HAL libraries for the B and C hardware revisions of the iOBC
+* Fixed issue with startup script not loading .ARM.exidx/tab into memory
+
+Specific changes:
+
+hal/include/hal/Storage/FRAM.h
+* Define for maximum FRAM address has been removed and replaced by API function
+
 Version 0.2.6
 ==============
 
 Summary: Includes support for iOBC Rev C which includes larger FRAM.
-Release data 25th of April 2018
+Release date: 25th of April 2018
 Prepared by: Gerard Aalbers, Jonathan Ward and Pieter Botma
 
 General changes

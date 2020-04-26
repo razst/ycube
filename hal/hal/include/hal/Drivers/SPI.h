@@ -40,10 +40,10 @@ typedef enum _SPIdriverState {
  * The SPI mode in which a transfer should take place.
  */
 typedef enum _SPItransferMode {
-	mode0_spi = 0b10,//!< mode0_spi
-	mode1_spi = 0b00,//!< mode1_spi
-	mode2_spi = 0b11,//!< mode2_spi
-	mode3_spi = 0b01 //!< mode3_spi
+	mode0_spi = 0x2,//!< mode0_spi
+	mode1_spi = 0x0,//!< mode1_spi
+	mode2_spi = 0x3,//!< mode2_spi
+	mode3_spi = 0x1 //!< mode3_spi
 } SPImode;
 
 /*!
@@ -85,10 +85,10 @@ typedef struct _SPIslaveParameters {
 
 typedef struct _SPItransfer {
 	unsigned int transferSize; //!< Number of bytes to transfer.
-	unsigned char *writeData; //!< Location of the data to be written. Both buffers must be provided and must accommodate transferSize bytes.
+	const unsigned char *writeData; //!< Location of the data to be written. Both buffers must be provided and must accommodate transferSize bytes.
 	volatile unsigned char *readData; //!< Location where the driver can write the data read from the SPI bus. Both buffers must be provided and must accommodate transferSize bytes.
 
-	SPIslaveParameters *slaveParams; //!< SPI transaction parameters that usually stay the same for a given slave.
+	const SPIslaveParameters *slaveParams; //!< SPI transaction parameters that usually stay the same for a given slave.
 
 	// Following members are not inputs for SPI_writeRead
 	xSemaphoreHandle semaphore; //!< This binary sempahore will be passed to the callback. If the task is blocking on this semaphore for the transfer to complete, the callback can release it to unblock the task.

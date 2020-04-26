@@ -199,7 +199,7 @@ void taskFRAMtest() {
 	{
 		retVal = FRAM_getDeviceID(deviceID);
 		if(retVal != 0) {
-			TRACE_WARNING(" Error during FRAM_protectBlocks: %d \n\r", retVal);
+			TRACE_WARNING(" Error during FRAM_getDeviceID: %d \n\r", retVal);
 			while(1);
 
 		}
@@ -208,6 +208,7 @@ void taskFRAMtest() {
 			TRACE_DEBUG_WP("0x%02X ", deviceID[i]);
 		}
 		TRACE_DEBUG_WP("\n\r");
+		TRACE_DEBUG_WP("Maximum address: 0x%08x\n\r", FRAM_getMaxAddress());
 		vTaskDelay(500);
 	}
 

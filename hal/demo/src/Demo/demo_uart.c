@@ -56,7 +56,7 @@ static void _VariablePacketTask( void* pvParameters )
 
 	(void)pvParameters;
 
-	writeStringLen = sprintf( writeString, "Task is waiting for variable packet with maximum size of %d!\n\r", PACKET_SIZE_MAX );
+	writeStringLen = snprintf( writeString, sizeof(writeString), "Task is waiting for variable packet with maximum size of %d!\n\r", PACKET_SIZE_MAX );
 
 	while(1)
 	{
@@ -208,7 +208,7 @@ static void _UnknownPacketTask( void* pvParameters )
 	int writeStringLen;
 	char writeString[128];
 
-	writeStringLen = sprintf( writeString, "Task is waiting for unknown batch of bytes!\n\r");
+	writeStringLen = snprintf( writeString, sizeof(writeString), "Task is waiting for unknown batch of bytes!\n\r");
 	retVal = UART_write( UART_BUS, (unsigned char*)writeString, (unsigned int)writeStringLen );
 	if( retVal != 0 )
 	{
@@ -282,7 +282,7 @@ static void _ProcessTransfer( UARTgenericTransfer *transfer )
 {
 	char string[128];
 
-	int length = sprintf( string, "Task received %d byte(s) [%s] with result [%d]!\n\r", UART_getPrevBytesRead( transfer->bus ), transfer->readData, *(transfer->result) );
+	int length = snprintf( string, sizeof(string), "Task received %d byte(s) [%s] with result [%d]!\n\r", UART_getPrevBytesRead( transfer->bus ), transfer->readData, *(transfer->result) );
 	UART_write( UART_BUS, (unsigned char*)string, length );
 
 //	printf( "Task received %d byte(s) [%s] with result [%d]!\n\r", UART_getPrevBytesRead( transfer->bus ), transfer->readData, *(transfer->result) );

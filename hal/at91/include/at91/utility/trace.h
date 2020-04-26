@@ -91,7 +91,7 @@
 
 // By default, all traces are output except the debug one.
 #if !defined(TRACE_LEVEL)
-#define TRACE_LEVEL TRACE_LEVEL_INFO
+#define TRACE_LEVEL TRACE_LEVEL_WARNING
 #endif
 
 // By default, trace level is static (not dynamic)
@@ -193,49 +193,51 @@
 
 #else
 
+#define TRACE_BASIC(level, formatLiteral, ...)  do{ printf("-" level "- %s - " formatLiteral "\n\r", __func__, ##__VA_ARGS__); fflush(stdout); } while(0)
+#define TRACE_BASIC_WP(...)   					do{ printf(__VA_ARGS__); } while(0)
+
 // Trace compilation depends on TRACE_LEVEL value
 #if (TRACE_LEVEL >= TRACE_LEVEL_DEBUG)
-#define TRACE_DEBUG(...)      { printf("-D- " __VA_ARGS__); }
-#define TRACE_DEBUG_WP(...)   { printf(__VA_ARGS__); }
+#define TRACE_DEBUG(formatLiteral, ...)     TRACE_BASIC("D", formatLiteral, ##__VA_ARGS__)
+#define TRACE_DEBUG_WP(...)   				TRACE_BASIC_WP(__VA_ARGS__)
 #else
 #define TRACE_DEBUG(...)      { }
 #define TRACE_DEBUG_WP(...)   { }
 #endif
 
 #if (TRACE_LEVEL >= TRACE_LEVEL_INFO)
-#define TRACE_INFO(...)       { printf("-I- " __VA_ARGS__); }
-#define TRACE_INFO_WP(...)    { printf(__VA_ARGS__); }
+#define TRACE_INFO(formatLiteral, ...)  	TRACE_BASIC("I", formatLiteral, ##__VA_ARGS__)
+#define TRACE_INFO_WP(...)	 				TRACE_BASIC_WP(__VA_ARGS__)
 #else
 #define TRACE_INFO(...)       { }
 #define TRACE_INFO_WP(...)    { }
 #endif
 
 #if (TRACE_LEVEL >= TRACE_LEVEL_WARNING)
-#define TRACE_WARNING(...)    { printf("-W- " __VA_ARGS__); }
-#define TRACE_WARNING_WP(...) { printf(__VA_ARGS__); }
+#define TRACE_WARNING(formatLiteral, ...)	TRACE_BASIC("W", formatLiteral, ##__VA_ARGS__)
+#define TRACE_WARNING_WP(...)	 			TRACE_BASIC_WP(__VA_ARGS__)
 #else
 #define TRACE_WARNING(...)    { }
 #define TRACE_WARNING_WP(...) { }
 #endif
 
 #if (TRACE_LEVEL >= TRACE_LEVEL_ERROR)
-#define TRACE_ERROR(...)      { printf("-E- " __VA_ARGS__); }
-#define TRACE_ERROR_WP(...)   { printf(__VA_ARGS__); }
+#define TRACE_ERROR(formatLiteral, ...)		TRACE_BASIC("E", formatLiteral, ##__VA_ARGS__)
+#define TRACE_ERROR_WP(...)	 				TRACE_BASIC_WP(__VA_ARGS__)
 #else
 #define TRACE_ERROR(...)      { }
 #define TRACE_ERROR_WP(...)   { }
 #endif
 
 #if (TRACE_LEVEL >= TRACE_LEVEL_FATAL)
-#define TRACE_FATAL(...)      { printf("-F- " __VA_ARGS__); while(1); }
-#define TRACE_FATAL_WP(...)   { printf(__VA_ARGS__); while(1); }
+#define TRACE_FATAL(formatLiteral, ...)		do{ TRACE_BASIC("F", formatLiteral, ##__VA_ARGS__); while(1); }while(0)
+#define TRACE_FATAL_WP(...)	 				do{ TRACE_BASIC_WP(__VA_ARGS__); while(1); }while(0)
 #else
 #define TRACE_FATAL(...)      { while(1); }
 #define TRACE_FATAL_WP(...)   { while(1); }
 #endif
 
 #endif
-
 
 //------------------------------------------------------------------------------
 //         Exported variables

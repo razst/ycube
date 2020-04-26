@@ -23,6 +23,7 @@
 #include "SubSystemModules/Maintenance/Maintenance.h"
 #include "InitSystem.h"
 #include "main.h"
+#include <stdlib.h>
 
 #ifdef TESTING
 	#include "TestingDemos/MainTest.h"
@@ -75,4 +76,5 @@ int main()
 
 
 		vTaskStartScheduler();
+		exit(0);
 }

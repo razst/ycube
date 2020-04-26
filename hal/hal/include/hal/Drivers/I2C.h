@@ -58,7 +58,7 @@ typedef struct _I2CgenericTransfer {
 	I2Cdirection direction; //!< Direction of the I2C transfer.
 	unsigned int writeSize; //!< Number of bytes to be written to the I2C slave (used for write_i2cDir and writeRead_i2cDir).
 	unsigned int readSize; //!< Number of bytes to be read from the I2C slave (used for read_i2cDir and writeRead_i2cDir).
-	unsigned char *writeData; //!< Memory location of the data to be written to the I2C slave (used for write_i2cDir and writeRead_i2cDir).
+	const unsigned char *writeData; //!< Memory location of the data to be written to the I2C slave (used for write_i2cDir and writeRead_i2cDir).
 	volatile unsigned char *readData; //!< Memory location to store the data read from the I2C slave (used for read_i2cDir and writeRead_i2cDir).
 	portTickType writeReadDelay; //!< A delay inserted between writing to an I2C slave and reading back from it (used only for writeRead_i2cDir).
 
@@ -144,7 +144,7 @@ void I2C_releaseBus(void);
  * positive values mean a transfer was attempted on the I2C bus but failed.
  * @note Positive error values correspond in value to the members of I2CtransferStatus.
  */
-int I2C_write(unsigned int slaveAddress, unsigned char *data, unsigned int size);
+int I2C_write(unsigned int slaveAddress, const unsigned char *data, unsigned int size);
 
 /*!
  * Reads data from a slave on the I2C bus using DMA.

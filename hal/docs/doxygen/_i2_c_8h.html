@@ -112,7 +112,7 @@ Functions</h2></td></tr>
 <tr class="memitem:af6b4e1bf114a26416938dff94e24f3a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_c_8h.html#af6b4e1bf114a26416938dff94e24f3a5">I2C_stop</a> (void)</td></tr>
 <tr class="memitem:ad9502ab7119ccb02a19a9de53e367e27"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_c_8h.html#ad9502ab7119ccb02a19a9de53e367e27">I2C_blockBus</a> (portTickType timeout)</td></tr>
 <tr class="memitem:a53e7a5ef4e7af2a4fdcffb48b655b2ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_c_8h.html#a53e7a5ef4e7af2a4fdcffb48b655b2ee">I2C_releaseBus</a> (void)</td></tr>
-<tr class="memitem:a680da3f3cd98dd6405ca84f3b213f897"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_c_8h.html#a680da3f3cd98dd6405ca84f3b213f897">I2C_write</a> (unsigned int slaveAddress, unsigned char *data, unsigned int size)</td></tr>
+<tr class="memitem:a43ccb031ff3c0251efc1c5904f9b9563"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_c_8h.html#a43ccb031ff3c0251efc1c5904f9b9563">I2C_write</a> (unsigned int slaveAddress, const unsigned char *data, unsigned int size)</td></tr>
 <tr class="memitem:a7d296bfe1a9376cfa82e51905ee163f3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_c_8h.html#a7d296bfe1a9376cfa82e51905ee163f3">I2C_read</a> (unsigned int slaveAddress, unsigned char *data, unsigned int size)</td></tr>
 <tr class="memitem:a512d7a469a99986b5114fd9a4a82ecf7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_c_8h.html#a512d7a469a99986b5114fd9a4a82ecf7">I2C_writeRead</a> (<a class="el" href="_i2_c_8h.html#a840075b2cb814b7f60cb4b3f7b008ca7">I2Ctransfer</a> *tx)</td></tr>
 <tr class="memitem:ac769cd828a95d1c7b378f08790a30d94"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_i2_c_8h.html#ac769cd828a95d1c7b378f08790a30d94">I2C_queueTransfer</a> (<a class="el" href="_i2_c_8h.html#ac4736aff929a2cd0f4d67724c85259b0">I2CgenericTransfer</a> *tx)</td></tr>
@@ -514,7 +514,7 @@ Positive error values correspond in value to the members of I2CtransferStatus. <
 
 </div>
 </div>
-<a class="anchor" id="a680da3f3cd98dd6405ca84f3b213f897"></a>
+<a class="anchor" id="a43ccb031ff3c0251efc1c5904f9b9563"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -527,7 +527,7 @@ Positive error values correspond in value to the members of I2CtransferStatus. <
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramtype">const unsigned char *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
@@ -590,7 +590,7 @@ Positive error values correspond in value to the members of I2CtransferStatus. <
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 25 2018 07:30:42 for ISIS-OBC Programmers Reference (HAL) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 4 2019 09:53:54 for ISIS-OBC Programmers Reference (HAL) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

@@ -27,9 +27,9 @@
  *
  * pwm_frequency = timerClockSpeed / maxUpCount
  *
- * @param maxUpCount The maximum value up to which the timer will count.
+ * @param[in] maxUpCount The maximum value up to which the timer will count.
  * The maximum value of this input is 0xFFFF and minimum 1.
- * @param timerClock The input clock of the timers to be used.
+ * @param[in] timerClock The input clock of the timers to be used.
  * The input value selects the timerClockSpeed by the following factors:
  * 0 = BOARD_MCK/2, 1 = BOARD_MCK/8, 2 = BOARD_MCK/32, 3 = BOARD_MCK/128
  * Other values are invalid. Normally, BOARD_MCK = 132MHz.
@@ -51,7 +51,7 @@ int PWM_start(unsigned short maxUpCount, unsigned int timerClock);
  * The PWM lines are set when the counter reaches maxUpCount and cleared
  * when the counter reaches the specified duty-cycle values.
  *
- * @param frequency The desired frequency of the PWM signal. Maximum: BOARD_MCK/4
+ * @param[in] frequency The desired frequency of the PWM signal. Maximum: BOARD_MCK/4
  * minimum BOARD_MCK/(128*0xFFFF). Normally, BOARD_MCK = 132MHz.
  * Note that BOARD_MCK is not the processor clock, which is normally 400MHz.
  * @return Negative values signify error, positive values signify the MaxUpCount value.
@@ -63,7 +63,7 @@ int PWM_startAuto(unsigned int frequency);
 
 /*!
  * Sets the duty cycle of 6 PWM channels based on the input.
- * @param channels Pointer to an array of 6 unsigned integers containing DutyCycle values in percent.
+ * @param[in] channels Pointer to an array of 6 unsigned integers containing DutyCycle values in percent.
  * @return -1 if any of the input duty cycles is >100,
  * 0 on success.
  */
@@ -71,7 +71,7 @@ int PWM_setDutyCycles(unsigned int *channels);
 
 /*!
  * Sets the duty cycle of 6 PWM channels based on the input.
- * @param channels Pointer to an array of 6 unsigned integers containing
+ * @param[in] channels Pointer to an array of 6 unsigned integers containing
  * DutyCycle values in raw form. The relation between raw inputs and percentage is:
  * @verbatim
    channelsRaw[i] = channels[i] * maxUpCount / 100;

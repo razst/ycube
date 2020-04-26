@@ -6,6 +6,7 @@
 #include "SatCommandHandler.h"
 
 #define MAX_COMMAND_DATA_LENGTH 200 ///< maximum AX25 data field available for downlink
+#define FRAM_MAX_ADDRESS 539216400
 
 //<! how many command can be saved in the buffer
 #define MAX_NUM_OF_DELAYED_CMD (100)

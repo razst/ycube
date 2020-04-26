@@ -9,10 +9,16 @@
 #include "freertos/task.h"
 #include <at91/utility/exithandler.h>
 
+#include <errno.h>
 #include <stdio.h>
+#include <unistd.h>
 
 extern void vApplicationStackOverflowHook( xTaskHandle pxTask, signed char *pcTaskName) __attribute__ ((weak));
 extern void vApplicationIdleHook( void ) __attribute__ ((weak));
+extern void vApplicationMallocFailedHook( void ) __attribute__ ((weak));
+
+//Subtracting 1 from size to avoid printing null characters
+#define STATIC_PRINT(txt) write(1, txt, sizeof(txt)-1)
 
 /*
  * This hook is provided by FreeRTOS as a way for the upper layer (user code) to
@@ -21,9 +27,9 @@ extern void vApplicationIdleHook( void ) __attribute__ ((weak));
  */
 void vApplicationStackOverflowHook( xTaskHandle pxTask, signed char *pcTaskName)
 {
-	printf("\n\r STACK OVERFLOW DETECTED!! \n\r");
+	STATIC_PRINT("\n\r STACK OVERFLOW DETECTED!! \n\r");
 	printf(" Culprit task %p name: %s \n\r", pxTask, pcTaskName);
-	printf(" !!Restarting Now!! \n\r");
+	STATIC_PRINT(" !!Restarting Now!! \n\r");
 	restart();
 }
 
@@ -40,3 +46,11 @@ void vApplicationIdleHook( void )
 	return;
 }
 
+/*
+ * This is a hook provided to run code when running out of heap memory
+ */
+void vApplicationMallocFailedHook( void )
+{
+	STATIC_PRINT("\n\r vApplicationMallocFailedHook: Out of heap-space! \n\r");
+	errno = ENOMEM;
+}

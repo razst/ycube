@@ -130,7 +130,7 @@ Functions</h2></td></tr>
 <tr class="memitem:aaea9533803a3bd566cca6d490ef85a03"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_a_r_t_8h.html#aaea9533803a3bd566cca6d490ef85a03">UART_setRxEnabled</a> (<a class="el" href="_u_a_r_t_8h.html#af4154fb6169e326005248f613cde178e">UARTbus</a> bus, <a class="el" href="boolean_8h.html#aaf6c4bb4bb851743d716f9e2d2b53fad">Boolean</a> enable)</td></tr>
 <tr class="memitem:a563534892bde8ccf220f1ef8ce943137"><td class="memItemLeft" align="right" valign="top"><a class="el" href="boolean_8h.html#aaf6c4bb4bb851743d716f9e2d2b53fad">Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_a_r_t_8h.html#a563534892bde8ccf220f1ef8ce943137">UART_isRxEnabled</a> (<a class="el" href="_u_a_r_t_8h.html#af4154fb6169e326005248f613cde178e">UARTbus</a> bus)</td></tr>
 <tr class="memitem:a74c858cd60826e8a44d11c3289394070"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_a_r_t_8h.html#a74c858cd60826e8a44d11c3289394070">UART_queueTransfer</a> (<a class="el" href="_u_a_r_t_8h.html#a76970f4a5a147835e50759266bfdd58c">UARTgenericTransfer</a> *tx)</td></tr>
-<tr class="memitem:a3c4df4621a8918b716b2457755c7feec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_a_r_t_8h.html#a3c4df4621a8918b716b2457755c7feec">UART_write</a> (<a class="el" href="_u_a_r_t_8h.html#af4154fb6169e326005248f613cde178e">UARTbus</a> bus, unsigned char *data, unsigned int size)</td></tr>
+<tr class="memitem:a754562c6b67bfd1ae9b6a25ab5722013"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_a_r_t_8h.html#a754562c6b67bfd1ae9b6a25ab5722013">UART_write</a> (<a class="el" href="_u_a_r_t_8h.html#af4154fb6169e326005248f613cde178e">UARTbus</a> bus, const unsigned char *data, unsigned int size)</td></tr>
 <tr class="memitem:a08b324eb8209083f4493d131733c0b19"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_a_r_t_8h.html#a08b324eb8209083f4493d131733c0b19">UART_read</a> (<a class="el" href="_u_a_r_t_8h.html#af4154fb6169e326005248f613cde178e">UARTbus</a> bus, unsigned char *data, unsigned int size)</td></tr>
 <tr class="memitem:a9a11bb00c561bd64dbd52b42aa20c105"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_a_r_t_8h.html#a9a11bb00c561bd64dbd52b42aa20c105">UART_setPostTransferDelay</a> (<a class="el" href="_u_a_r_t_8h.html#af4154fb6169e326005248f613cde178e">UARTbus</a> bus, portTickType delay)</td></tr>
 <tr class="memitem:ab4587f7d21f5e9eb459d00c94acb1843"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_u_a_r_t_8h.html#ab4587f7d21f5e9eb459d00c94acb1843">UART_getPrevBytesRead</a> (<a class="el" href="_u_a_r_t_8h.html#af4154fb6169e326005248f613cde178e">UARTbus</a> bus)</td></tr>
@@ -774,7 +774,7 @@ The positive error values correspond to the members of UARTtransferStatus enumer
 
 </div>
 </div>
-<a class="anchor" id="a3c4df4621a8918b716b2457755c7feec"></a>
+<a class="anchor" id="a754562c6b67bfd1ae9b6a25ab5722013"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -787,7 +787,7 @@ The positive error values correspond to the members of UARTtransferStatus enumer
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramtype">const unsigned char *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
@@ -822,7 +822,7 @@ The positive error values correspond to the members of UARTtransferStatus enumer
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 25 2018 07:30:42 for ISIS-OBC Programmers Reference (HAL) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 4 2019 09:53:54 for ISIS-OBC Programmers Reference (HAL) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

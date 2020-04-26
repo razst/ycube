@@ -13,5 +13,6 @@ extern const char HalCompileTime[];
 extern const char HalVersionMajor[];
 extern const char HalVersionMinor[];
 extern const char HalVersionRevision[];
+extern const char HalOBCHardwareRevision[];
 
 #endif /* HAL_VERSION_H_ */

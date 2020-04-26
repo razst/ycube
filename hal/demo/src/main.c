@@ -174,8 +174,9 @@ void taskMain() {
 
 }
 
-int main() {
-	unsigned int i = 0;
+int main()
+{
+	unsigned int i;
 	xTaskHandle taskMainHandle;
 
 	TRACE_CONFIGURE_ISP(DBGU_STANDARD, 2000000, BOARD_MCK);
@@ -206,12 +207,13 @@ int main() {
 	vTaskStartScheduler();
 
 	// This part should never be reached.
-	MAIN_TRACE_DEBUG("\t main: Waiting in an infinite loop. \n\r");
-	while(1) {
+	MAIN_TRACE_DEBUG("\t main: Unexpected end of scheduling \n\r");
+
+	//Flash some LEDs for about 100 seconds
+	for (i=0; i < 2500; i++)
+	{
 		LED_wave(1);
 		MAIN_TRACE_DEBUG("MAIN: STILL ALIVE %d\n\r", i);
-		i++;
 	}
-
-	return 0;
+	exit(0);
 }

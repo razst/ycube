@@ -63,7 +63,7 @@ typedef struct __attribute__ ((__packed__)) _Time {
  *
  * @see Time_setSyncInterval
  */
-int Time_start(Time *time, unsigned int syncInterval);
+int Time_start(Time *time, const unsigned int syncInterval);
 
 /*!
  * @brief Sets the given time at the RTC and resets the RTT.
@@ -82,7 +82,7 @@ int Time_set(Time *time);
  * @return 1 if setting time at the RTC fails (invalid input time),
  * 0 on success.
  */
-int Time_setUnixEpoch(unsigned int epochTime);
+int Time_setUnixEpoch(const unsigned int epochTime);
 
 /*!
  * @brief Provides the current time by adding the value at RTT as an offset
@@ -93,6 +93,23 @@ int Time_setUnixEpoch(unsigned int epochTime);
  */
 int Time_get(Time *time);
 
+/*!
+ * @brief Convert a Unix epoch to a Time struct
+ * @param[in] epoch Epoch to be converted, this has to be >= 2000-01-01 00:00:00
+ * @param[out] time A time struct corresponding to the input Epoch
+ * @note This function does not modify any of the system timers
+ * @return 0 if conversion went ok, 1 if epoch could not be converted
+ */
+int Time_convertEpochToTime(unsigned int epoch, Time* time);
+
+/*!
+ * @brief Convert a Time struct to Unix epoch
+ * @param[in] time Pointer to a Time structure filled with time values, which has to be >= 2000-01-01 00:00:00
+ * @return Unix epoch corresponding to the input time structure, if the returned
+ * epoch is 0 then the input time was invalid
+ * @note This function does not modify any of the system timers
+ */
+unsigned int Time_convertTimeToEpoch(Time* time);
 
 /*!
  * Returns the uptime of this program in seconds retrieved using FreeRTOS libraries.
@@ -130,7 +147,7 @@ int Time_syncIfNeeded(void);
  * @param[in] seconds Time in seconds[from now] between automatic time synchronization.
  * 0 disables RTT.
  */
-void Time_setSyncInterval(unsigned int seconds);
+void Time_setSyncInterval(const unsigned int seconds);
 
 /*!
  * @brief Takes year value and returns 1 if the given year is a leap year,
@@ -140,7 +157,7 @@ void Time_setSyncInterval(unsigned int seconds);
  * @return 1 if it is a leap year, 0 otherwise.
  * @note input is an unsigned char so maximum value is 255.
  */
-Boolean Time_isLeapYear(unsigned int year);
+Boolean Time_isLeapYear(const unsigned int year);
 
 /*!
  * @brief Returns the difference between the two input time values in seconds.
@@ -154,7 +171,7 @@ Boolean Time_isLeapYear(unsigned int year);
  * @note The function only uses the year and secondsOfYear fields of the Time
  * inputs.
  */
-unsigned int Time_diff(Time *newTime, Time *oldTime);
+unsigned int Time_diff(const Time *newTime, const Time *oldTime);
 
 /*!
  * @brief Returns an important system health flag indicating if the RTC

@@ -88,7 +88,7 @@ SECTIONS
         _sprerelocate = .;
         . = ALIGN(4);
         _eprerelocate = .;
-    }
+    } >sram0
 
     .postrelocate : AT (_eextab + SIZEOF(.prerelocate))
     {
@@ -129,7 +129,7 @@ SECTIONS
     } >sdram
     
     _sheap_ = .;
-    _eheap_ = 0x21700000;
+    _eheap_ = 0x21F00000;
     
     /* Stack starts 1024 bytes before the end of SDRAM. This 1kB of space can be used for special purposes. */
     _sstack = 0x22000000 - 1024;

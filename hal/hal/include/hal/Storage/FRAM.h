@@ -7,26 +7,18 @@
 #ifndef FRAM_H_
 #define FRAM_H_
 
-#if !defined(IOBC_REV)
-#define FRAM_MAX_ADDRESS	0x0003FFFF //!< Highest memory address available in FRAM memory */
-#elif IOBC_REV=='B'
-#define FRAM_MAX_ADDRESS	0x0003FFFF //!< Highest memory address available in FRAM memory */
-#elif IOBC_REV=='C'
-#define FRAM_MAX_ADDRESS	0x0007FFFF //!< Highest memory address available in FRAM memory */
-#else
-#error Unknown IOBC Revision!
-#endif
-
 /*!
  * Used by the FRAM_protectBlocks function to protect certain blocks of the FRAM from write operations.
  * blockProtect Values: 0 = None,
- * 						1 = upper 1/4 protected (0x60000 to 0x7FFFF),
- * 						2 = upper 1/2 protected (0x40000 to 0x7FFFF),
- * 						3 = Entire FRAM protected (0x00000 to 0x7FFFF)
+ * 						1 = upper 1/4 protected,
+ * 						2 = upper 1/2 protected,
+ * 						3 = Entire FRAM protected
  */
-typedef union __attribute__((__packed__)) _FRAMblockProtect {
+typedef union _FRAMblockProtect
+{
 	unsigned char rawValue;
-	struct __attribute__((__packed__)) {
+	struct
+	{
 		unsigned char	reserved1 : 2,
 						blockProtect: 2,
 						reserved2 : 4;
@@ -51,23 +43,23 @@ void FRAM_stop(void);
  * @param data Address where data to be written is stored.
  * @param address Location in the FRAM where data should be written.
  * @param size Number of bytes to write.
- * @return -2 if the specified address and size are out of range,
+ * @return * -3 if write to FRAM failed
+ * -2 if the specified address and size are out of range or input parameters are not valid,
  * -1 if obtaining lock for FRAM access fails,
  * 0 on success.
  */
-int FRAM_write(unsigned char *data, unsigned int address, unsigned int size);
+int FRAM_write(const unsigned char *data, unsigned int address, unsigned int size);
 
 /*!
  * Reads data from the FRAM.
  * @param data Address where read data will be stored, this location must be able to accommodate size bytes.
  * @param address Location in the FRAM from which the data should be read.
  * @param size Number of bytes to read.
- * @return -2 if the specified address and size are out of range of the FRAM space.
+ * @return-2 if the specified address and size are out of range of the FRAM space or input parameters are not valid
  * -1 if obtaining lock for FRAM access fails,
  * 0 on success.
  */
 int FRAM_read(unsigned char *data, unsigned int address, unsigned int size);
-
 
 /*!
  * Writes data to the FRAM and reads it back to verify that it was written correctly.
@@ -75,11 +67,11 @@ int FRAM_read(unsigned char *data, unsigned int address, unsigned int size);
  * @param address Location in the FRAM where data should be written.
  * @param size Number of bytes to write.
  * @return -3 written data didn't match the data read back from the FRAM,
- * -2 if the specified address and size are out of range,
+ * -2 if the specified address and size are out of range or input parameters are not valid,
  * -1 if obtaining lock for FRAM access fails,
  * 0 on success.
  */
-int FRAM_writeAndVerify(unsigned char *data, unsigned int address, unsigned int size);
+int FRAM_writeAndVerify(const unsigned char *data, unsigned int address, unsigned int size);
 
 /*!
  * Write protects or un-protects blocks of the FRAM.
@@ -94,7 +86,8 @@ int FRAM_protectBlocks(FRAMblockProtect blocks);
 /*!
  * Reads the write protection status of the blocks of the FRAM.
  * @return blocks FRAMblockProtect structure specifying the blocks that are protected.
- * @return  -2 if obtaining lock for FRAM access fails,
+ * @return -3 if the input parameter is not valid
+ * -2 if obtaining lock for FRAM access fails,
  * 0 on success.
  */
 int FRAM_getProtectedBlocks(FRAMblockProtect* blocks);
@@ -102,11 +95,20 @@ int FRAM_getProtectedBlocks(FRAMblockProtect* blocks);
 /*!
  * Retrieves the Device ID of the FRAM chip.
  * @param deviceID Pointer to where the retrieved device ID should be stored
- * @return -2 if obtaining lock for FRAM access fails,
+ * @return -3 if the input parameter is not valid
+ * -2 if obtaining lock for FRAM access fails,
  * 0 on success.
  *
  * @note This function will copy 9 bytes to the memory location indicated by deviceID
  */
 int FRAM_getDeviceID(unsigned char *deviceID);
+
+/*!
+ * Returns the highest address that is available in the FRAM memory. Please note that
+ * this does not take protected areas into account.
+ *
+ * @return The highest available address in FRAM memory
+ */
+unsigned int FRAM_getMaxAddress(void);
 
 #endif /* FRAM_H_ */

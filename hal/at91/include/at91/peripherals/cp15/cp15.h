@@ -66,6 +66,9 @@ extern void CP15_DisableMMU(void);
 extern unsigned int CP15_Is_DCacheEnabled(void);
 extern void CP15_Enable_D_Cache(void);
 extern void CP15_Disable_D_Cache(void);
+extern unsigned int CP15_Is_AlignmentFaultEnabled(void);
+extern void CP15_Enable_AlignmentFault(void);
+extern void CP15_Disable_AlignmentFault(void);
 
 //-----------------------------------------------------------------------------
 //         External functions defined in cp15.S

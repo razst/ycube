@@ -54,8 +54,8 @@
 Data Fields</h2></td></tr>
 <tr class="memitem:aab2726461a04d6bdd44aefafa4a3f15b"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___i2_cslave___command_list.html#aab2726461a04d6bdd44aefafa4a3f15b">command</a></td></tr>
 <tr class="memdesc:aab2726461a04d6bdd44aefafa4a3f15b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command code (first byte sent by the I2C master).  <a href="#aab2726461a04d6bdd44aefafa4a3f15b"></a><br/></td></tr>
-<tr class="memitem:affd994af6818c48069f7903a4c8b0b94"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___i2_cslave___command_list.html#affd994af6818c48069f7903a4c8b0b94">commandParameterSize</a></td></tr>
-<tr class="memdesc:affd994af6818c48069f7903a4c8b0b94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bytes to read after receiving the command. If the command does not have any parameters, this should be 0.  <a href="#affd994af6818c48069f7903a4c8b0b94"></a><br/></td></tr>
+<tr class="memitem:ad184428db75d23acc1512671646138d2"><td class="memItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___i2_cslave___command_list.html#ad184428db75d23acc1512671646138d2">commandParameterSize</a></td></tr>
+<tr class="memdesc:ad184428db75d23acc1512671646138d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bytes to read after receiving the command. If the command does not have any parameters, this should be 0.  <a href="#ad184428db75d23acc1512671646138d2"></a><br/></td></tr>
 <tr class="memitem:aaf6cf95026b525f64430498b9e80da8b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="boolean_8h.html#aaf6c4bb4bb851743d716f9e2d2b53fad">Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___i2_cslave___command_list.html#aaf6cf95026b525f64430498b9e80da8b">hasResponse</a></td></tr>
 <tr class="memdesc:aaf6cf95026b525f64430498b9e80da8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The user code replies to to this command with a response data packet i.e. I2Cslave_write is called in response to this command.  <a href="#aaf6cf95026b525f64430498b9e80da8b"></a><br/></td></tr>
 </table>
@@ -79,12 +79,12 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="affd994af6818c48069f7903a4c8b0b94"></a>
+<a class="anchor" id="ad184428db75d23acc1512671646138d2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int _I2Cslave_CommandList::commandParameterSize</td>
+          <td class="memname">unsigned short _I2Cslave_CommandList::commandParameterSize</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -113,7 +113,7 @@ Data Fields</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 25 2018 07:30:42 for ISIS-OBC Programmers Reference (HAL) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 4 2019 09:53:54 for ISIS-OBC Programmers Reference (HAL) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

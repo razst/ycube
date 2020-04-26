@@ -31,7 +31,7 @@
 //         Headers
 //------------------------------------------------------------------------------
 
-#include "at91/boards/ISIS_OBC_G20/board.h"
+#include <at91/boards/ISIS_OBC_G20/board.h>
 
 //------------------------------------------------------------------------------
 //         Definitions
@@ -39,8 +39,8 @@
 // If you change any of these from 0 to non-zero,
 // make sure to add instructions to actually reserve this stack space
 #define UND_STACK_SIZE	0x00000000		/* Stack size for "undefined instruction" interrupts		*/
-#define ABT_STACK_SIZE	0x00000000		/* Stack size for "abort" interrupts						*/
-#define FIQ_STACK_SIZE	0x00000000		/* Stack size for "FIQ" interrupts						*/
+#define ABT_STACK_SIZE	0x00028000		/* Stack size for "abort" interrupts						*/
+#define FIQ_STACK_SIZE	0x00018000		/* Stack size for "FIQ" interrupts						*/
 #define IRQ_STACK_SIZE	0x00018000		/* Stack size for "IRQ" normal interrupts				*/
 #define SVC_STACK_SIZE	0x00018000		/* Stack size for "SVC" supervisor mode					*/
 
@@ -201,7 +201,7 @@ resetHandler:
 
 /* Initialize the prerelocate segment */
 1:
-        ldr     r0, =_efixed
+        ldr     r0, =_eextab
         ldr     r1, =_sprerelocate
         ldr     r2, =_eprerelocate
 1:
@@ -279,10 +279,20 @@ resetHandler:
         mov     sp, r0
         sub     r0, r0, #IRQ_STACK_SIZE
 
+/* ABT mode */
+        msr     CPSR_c, #ARM_MODE_ABT | I_BIT | F_BIT
+        mov     sp, r0
+        sub     r0, r0, #ABT_STACK_SIZE
+
 /* Supervisor mode (interrupts enabled) */
         msr     CPSR_c, #ARM_MODE_SVC |I_BIT | F_BIT
         mov     sp, r0
         sub     r0, r0, #SVC_STACK_SIZE
+
+ /* FIQ mode */
+        msr     CPSR_c, #ARM_MODE_FIQ |I_BIT | F_BIT
+        mov     sp, r0
+        sub     r0, r0, #FIQ_STACK_SIZE
 
 /* System mode, the normal mode of operation */
         msr     CPSR_c, #ARM_MODE_SYS | I_BIT | F_BIT

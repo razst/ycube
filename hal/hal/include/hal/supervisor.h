@@ -7,7 +7,7 @@
 #ifndef SUPERVISOR_H_
 #define SUPERVISOR_H_
 
-#include <stdint-gcc.h>
+#include <stdint.h>
 
 #define SUPERVISOR_COMMUNICATION_SPI      1
 #define SUPERVISOR_COMMUNICATION_I2C      2
@@ -280,7 +280,7 @@ int Supervisor_getVersion(supervisor_version_configuration_t* versionReply, uint
  *      @brief      Getting Housekeeping from Supervisor Controller.
  *      @param[out] housekeepingReply Housekeeping read back from the Supervisor Controller.
  *      @param[in]  index Index of the Supervisor Controller. Values >=0 are for I2C communication.
- *      Negative values are for communicating to the supervisor on the same board over SPI.
+ *                  An index value of 255 is for communicating to the supervisor on the same board over SPI.
  *		@return		Error code as specified in errors.h
  */
 int Supervisor_getHousekeeping(supervisor_housekeeping_t* housekeepingReply, uint8_t index);

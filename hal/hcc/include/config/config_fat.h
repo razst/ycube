@@ -126,7 +126,7 @@ typedef unsigned short  wchar;
  *
  ***************************************************************************/
  #define FAT_MAXVOLUME     2        /* maximum number of volumes */
- #define FAT_MAXTASK       8        /* maximum number of tasks */
+ #define FAT_MAXTASK       16        /* maximum number of tasks */
 
  #if !USE_MALLOC
   #define FN_MAXVOLUME     FAT_MAXVOLUME

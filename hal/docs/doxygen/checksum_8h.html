@@ -68,15 +68,15 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a38748e03843d8618e5c405a1d65e4b83"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#a38748e03843d8618e5c405a1d65e4b83">checksum_prepareLUTCRC32</a> (unsigned int polynomial, unsigned int *LUT)</td></tr>
-<tr class="memitem:a0cd4fe60f69e114a8f412a31a10f628c"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#a0cd4fe60f69e114a8f412a31a10f628c">checksum_calculateCRC32LUT</a> (unsigned char *data, unsigned int length, unsigned int *LUT, unsigned int start_remainder)</td></tr>
-<tr class="memitem:a69bbbe20604b98e12220bf0cd094648a"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#a69bbbe20604b98e12220bf0cd094648a">checksum_calculateCRC32</a> (unsigned char *data, unsigned int length, unsigned int polynomial, unsigned int start_remainder)</td></tr>
-<tr class="memitem:ac366c925cc68064184afa0e19e335638"><td class="memItemLeft" align="right" valign="top"><a class="el" href="boolean_8h.html#aaf6c4bb4bb851743d716f9e2d2b53fad">Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#ac366c925cc68064184afa0e19e335638">checksum_verifyCRC32</a> (unsigned char *data, unsigned int length, unsigned int polynomial)</td></tr>
-<tr class="memdesc:ac366c925cc68064184afa0e19e335638"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies CRC32 Calculation by comparing a calculated CRC frame with input CRC frame, using bitwise calculation.  <a href="#ac366c925cc68064184afa0e19e335638"></a><br/></td></tr>
+<tr class="memitem:ac1794694d2f31e4720f66c8c759443d8"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#ac1794694d2f31e4720f66c8c759443d8">checksum_calculateCRC32LUT</a> (const unsigned char *data, unsigned int length, const unsigned int *LUT, unsigned int start_remainder)</td></tr>
+<tr class="memitem:a92b48a730e2f0ee4469fcfb529a369d7"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#a92b48a730e2f0ee4469fcfb529a369d7">checksum_calculateCRC32</a> (const unsigned char *data, unsigned int length, unsigned int polynomial, unsigned int start_remainder)</td></tr>
+<tr class="memitem:a6462bac8a7057ed990f8d34fd819c13a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="boolean_8h.html#aaf6c4bb4bb851743d716f9e2d2b53fad">Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#a6462bac8a7057ed990f8d34fd819c13a">checksum_verifyCRC32</a> (const unsigned char *data, unsigned int length, unsigned int polynomial)</td></tr>
+<tr class="memdesc:a6462bac8a7057ed990f8d34fd819c13a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies CRC32 Calculation by comparing a calculated CRC frame with input CRC frame, using bitwise calculation.  <a href="#a6462bac8a7057ed990f8d34fd819c13a"></a><br/></td></tr>
 <tr class="memitem:a68370a32bfbf3a346dfacf4d762bd128"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#a68370a32bfbf3a346dfacf4d762bd128">checksum_prepareLUTCRC16</a> (unsigned short polynomial, unsigned short *LUT)</td></tr>
-<tr class="memitem:aa7c324184fba5e3e63906ae311436449"><td class="memItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#aa7c324184fba5e3e63906ae311436449">checksum_calculateCRC16LUT</a> (unsigned char *data, unsigned int length, unsigned short *LUT, unsigned short start_remainder, <a class="el" href="boolean_8h.html#aaf6c4bb4bb851743d716f9e2d2b53fad">Boolean</a> endofdata)</td></tr>
-<tr class="memitem:a073716da9d1a56ad04e543ab596bd2e2"><td class="memItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#a073716da9d1a56ad04e543ab596bd2e2">checksum_calculateCRC16</a> (unsigned char *data, unsigned int length, unsigned short polynomial, unsigned short start_remainder, <a class="el" href="boolean_8h.html#aaf6c4bb4bb851743d716f9e2d2b53fad">Boolean</a> endofdata)</td></tr>
-<tr class="memitem:a90870b3421d3c26dd7a3c386409a70a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="boolean_8h.html#aaf6c4bb4bb851743d716f9e2d2b53fad">Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#a90870b3421d3c26dd7a3c386409a70a6">checksum_verifyCRC16</a> (unsigned char *data, unsigned int length, unsigned short polynomial)</td></tr>
-<tr class="memdesc:a90870b3421d3c26dd7a3c386409a70a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies CRC16 Calculation by comparing a calculated CRC frame with input CRC frame, using bitwise calculation.  <a href="#a90870b3421d3c26dd7a3c386409a70a6"></a><br/></td></tr>
+<tr class="memitem:a6380172509f0a2ea1df9a3c1fde20771"><td class="memItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#a6380172509f0a2ea1df9a3c1fde20771">checksum_calculateCRC16LUT</a> (const unsigned char *data, unsigned int length, const unsigned short *LUT, unsigned short start_remainder, <a class="el" href="boolean_8h.html#aaf6c4bb4bb851743d716f9e2d2b53fad">Boolean</a> endofdata)</td></tr>
+<tr class="memitem:a58556685c55205440586d5063539ed7a"><td class="memItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#a58556685c55205440586d5063539ed7a">checksum_calculateCRC16</a> (const unsigned char *data, unsigned int length, unsigned short polynomial, unsigned short start_remainder, <a class="el" href="boolean_8h.html#aaf6c4bb4bb851743d716f9e2d2b53fad">Boolean</a> endofdata)</td></tr>
+<tr class="memitem:a4ddb5f618644a64e0c5b9d6a66c63b5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="boolean_8h.html#aaf6c4bb4bb851743d716f9e2d2b53fad">Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#a4ddb5f618644a64e0c5b9d6a66c63b5e">checksum_verifyCRC16</a> (const unsigned char *data, unsigned int length, unsigned short polynomial)</td></tr>
+<tr class="memdesc:a4ddb5f618644a64e0c5b9d6a66c63b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies CRC16 Calculation by comparing a calculated CRC frame with input CRC frame, using bitwise calculation.  <a href="#a4ddb5f618644a64e0c5b9d6a66c63b5e"></a><br/></td></tr>
 <tr class="memitem:ae682ee3bf28a32f07462c7ceb6b24fe7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#ae682ee3bf28a32f07462c7ceb6b24fe7">checksum_prepareLUTCRC8</a> (unsigned char polynomial, unsigned char *LUT)</td></tr>
 <tr class="memitem:a55180083159614c16e7ce9398983e264"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#a55180083159614c16e7ce9398983e264">checksum_calculateCRC8LUT</a> (unsigned char *data, unsigned int length, unsigned char *LUT, unsigned char start_remainder, <a class="el" href="boolean_8h.html#aaf6c4bb4bb851743d716f9e2d2b53fad">Boolean</a> endofdata)</td></tr>
 <tr class="memitem:a68f2c84e05df8c63583e7a3c67098058"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="checksum_8h.html#a68f2c84e05df8c63583e7a3c67098058">checksum_calculateCRC8</a> (unsigned char *data, unsigned int length, unsigned char polynomial, unsigned char start_remainder, <a class="el" href="boolean_8h.html#aaf6c4bb4bb851743d716f9e2d2b53fad">Boolean</a> endofdata)</td></tr>
@@ -171,14 +171,14 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2>Function Documentation</h2>
-<a class="anchor" id="a073716da9d1a56ad04e543ab596bd2e2"></a>
+<a class="anchor" id="a58556685c55205440586d5063539ed7a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">unsigned short checksum_calculateCRC16 </td>
           <td>(</td>
-          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramtype">const unsigned char *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
@@ -227,14 +227,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa7c324184fba5e3e63906ae311436449"></a>
+<a class="anchor" id="a6380172509f0a2ea1df9a3c1fde20771"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">unsigned short checksum_calculateCRC16LUT </td>
           <td>(</td>
-          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramtype">const unsigned char *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
@@ -246,7 +246,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned short *&#160;</td>
+          <td class="paramtype">const unsigned short *&#160;</td>
           <td class="paramname"><em>LUT</em>, </td>
         </tr>
         <tr>
@@ -283,14 +283,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a69bbbe20604b98e12220bf0cd094648a"></a>
+<a class="anchor" id="a92b48a730e2f0ee4469fcfb529a369d7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">unsigned int checksum_calculateCRC32 </td>
           <td>(</td>
-          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramtype">const unsigned char *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
@@ -332,14 +332,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0cd4fe60f69e114a8f412a31a10f628c"></a>
+<a class="anchor" id="ac1794694d2f31e4720f66c8c759443d8"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">unsigned int checksum_calculateCRC32LUT </td>
           <td>(</td>
-          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramtype">const unsigned char *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
@@ -351,7 +351,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned int *&#160;</td>
+          <td class="paramtype">const unsigned int *&#160;</td>
           <td class="paramname"><em>LUT</em>, </td>
         </tr>
         <tr>
@@ -595,14 +595,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a90870b3421d3c26dd7a3c386409a70a6"></a>
+<a class="anchor" id="a4ddb5f618644a64e0c5b9d6a66c63b5e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="boolean_8h.html#aaf6c4bb4bb851743d716f9e2d2b53fad">Boolean</a> checksum_verifyCRC16 </td>
           <td>(</td>
-          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramtype">const unsigned char *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
@@ -638,14 +638,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac366c925cc68064184afa0e19e335638"></a>
+<a class="anchor" id="a6462bac8a7057ed990f8d34fd819c13a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="boolean_8h.html#aaf6c4bb4bb851743d716f9e2d2b53fad">Boolean</a> checksum_verifyCRC32 </td>
           <td>(</td>
-          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramtype">const unsigned char *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
@@ -727,7 +727,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 25 2018 07:30:42 for ISIS-OBC Programmers Reference (HAL) by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 4 2019 09:53:54 for ISIS-OBC Programmers Reference (HAL) by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

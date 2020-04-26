@@ -28,14 +28,18 @@ I2CslaveCommandList CommandList[] = {	{.command = 0xAA, .commandParameterSize = 
 										{.command = 0x0A, .commandParameterSize = 1, .hasResponse = FALSE},
 									};
 
-static unsigned char I2CcommandBuffer[I2C_SLAVE_RECEIVE_BUFFER_SIZE] = {0};
+static unsigned char* I2CcommandBuffer = NULL;
 
 // A task to read commands from the driver and responds back to them if the command is supposed to carry a response.
 void taskI2CslaveTest() {
 	int bytesRead, bytesWritten, bytesToWrite;
 	unsigned int i, commandListSize = sizeof(CommandList) / sizeof(CommandList[0]);
 	unsigned int commandCount = 0;
-	unsigned char WriteBuffer[I2C_SLAVE_RECEIVE_BUFFER_SIZE + sizeof(unsigned int)];
+	unsigned char* WriteBuffer = malloc(I2Cslave_getBufferSize() + sizeof(unsigned int));
+    if (WriteBuffer == NULL)
+    {
+        TRACE_FATAL("\n\r taskI2CslaveTest: Unable to allocate memory for WriteBuffer\n\r");
+    }
 
 	while(1) {
 		// Call I2Cslave_read which will block (make this task sleep until I2C master sends a command).
@@ -97,6 +101,11 @@ Boolean I2CslaveTest() {
 	retValInt = I2Cslave_start(0x5D, CommandList, commandListSize);
 	if(retValInt != 0) {
 		TRACE_FATAL("\n\r I2CslaveTest: I2Cslave_start returned: %d! \n\r", retValInt);
+	}
+	I2CcommandBuffer = malloc(I2Cslave_getBufferSize());
+	if (I2CcommandBuffer == NULL)
+	{
+	    TRACE_FATAL("\n\r I2CslaveTest: Unable to allocate memory for I2CcommandBuffer\n\r");
 	}
 
 	xTaskGenericCreate(taskI2CslaveTest, (const signed char*)"taskI2CslaveTest", 1024, NULL, 2, &taskI2CslaveTestHandle, NULL, NULL);
