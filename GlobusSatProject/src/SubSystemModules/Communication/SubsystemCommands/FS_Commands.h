@@ -3,6 +3,11 @@
 #define FS_COMMANDS_H_
 #include "SubSystemModules/Communication/SatCommandHandler.h"
 
+/**
+ * delete files from SD by passinf tlmtype, frotime, totime
+ */
+int CMD_DeleteTLM(sat_packet_t *cmd);
+
 int CMD_DeleteFileByTime(sat_packet_t *cmd);
 
 int CMD_DeleteFilesOfType(sat_packet_t *cmd);

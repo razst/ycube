@@ -307,6 +307,43 @@ Boolean DeleteOldFiles(){
 }
 
 
+
+Boolean CreateFiles4DeleteTest(){
+
+	// save current time
+	time_unix current_time = 0;
+	Time_getUnixEpoch(&current_time);
+
+	// set time to 2025/1/1
+	Time_setUnixEpoch(1735689600);
+
+	//delete the file
+	Time theDay;
+	theDay.year = 25;
+	theDay.date = 1;
+	theDay.month = 1;
+
+	// delete all WOD files
+	for (int i=0;i<10;i++){
+		int err = deleteTLMFile(tlm_wod,theDay,i);
+
+	}
+
+	// write some WOD elements in TLM file
+	for (int i=0;i<10;i++){
+		// set time to 2030/1/1
+		Time_setUnixEpoch(1735689600 + (60*60*24*i));
+		TelemetrySaveWOD();
+	}
+
+	// set the time back
+	Time_setUnixEpoch(current_time);
+
+	return TRUE;
+
+
+}
+
 Boolean TestWODTLM(){
 
 	// save current time
@@ -589,9 +626,10 @@ Boolean selectAndExecuteFSTest()
 	printf("\t 9) EPS TLM \n\r");
 	printf("\t 10) Generate WOD TLM files \n\r");
 	printf("\t 11) Delete OLD files \n\r");
+	printf("\t 12) create files for delete test \n\r");
 	//palmon is not a gever??
 
-	unsigned int number_of_tests = 11;
+	unsigned int number_of_tests = 12;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -630,6 +668,9 @@ Boolean selectAndExecuteFSTest()
 			break;
 	case 11:
 			offerMoreTests = DeleteOldFiles();
+			break;
+	case 12:
+			offerMoreTests = CreateFiles4DeleteTest();
 			break;
 	default:
 		break;

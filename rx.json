@@ -52,7 +52,7 @@
             {
               "name": "sat_time",
               "desc": "satellite's clock current unix time",
-              "type": "int"
+              "type": "datetime"
             },
             {
               "name": "free_memory",
@@ -336,6 +336,16 @@
           "inParams": []
         },
         {
+          "id": "192",
+          "name": "ACK_DELETE_TLM",
+          "desc": "after deleting TLM file(s)",
+          "inParams": [            {
+              "name": "deleted files",
+              "desc": "how many TLM files were actually deleted from SD",
+              "type": "int"
+            }]
+        },
+        {
           "id": "187",
           "name": "ACK_UNKNOWN_SUBTYPE",
           "desc": "when the given subtype is unknown",
@@ -371,6 +381,11 @@
           "name": "WOD",
           "desc": "World orbit data",
           "inParams": [
+            {
+              "name": "timestamp",
+              "desc": "timestamp",
+              "type": "datetime"
+            },
             {
               "name": "vbat",
               "desc": "battery voltage",

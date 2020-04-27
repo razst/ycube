@@ -53,11 +53,14 @@ void delete_allTMFilesFromSD()
 }
 
 
-void deleteTLMFiles(tlm_type_t tlmType, Time date, int numOfDays){
+int deleteTLMFiles(tlm_type_t tlmType, Time date, int numOfDays){
+	int deletedFiles = 0;
 	for(int i = 0; i < numOfDays; i++){
-		deleteTLMFile(tlmType,date,i);
+		if (deleteTLMFile(tlmType,date,i) == F_NO_ERROR){
+			deletedFiles++;
+		}
 	}
-
+	return deletedFiles;
 }
 
 

@@ -51,6 +51,8 @@ typedef enum __attribute__ ((__packed__)) ack_subtype_t
 	ACK_RESET_DELAYED_CMD = 0x9E,			//maybe we dont need
 	ACK_FRAM_RESET = 0xA0,
 
+	ACK_DELETE_TLM = 0xC0,					// after deleting TLM file(s)
+
 	ACK_PING = 0xAA,
 	ACK_UNKNOWN_SUBTYPE = 0xBB,				//when the given subtype is unknown
 	ACK_ERROR_MSG = 0XFF 					// send this ACK when error has occurred
@@ -93,7 +95,7 @@ typedef enum __attribute__ ((__packed__)) eps_subtypes_t
 
 typedef enum __attribute__ ((__packed__)) telemetry_subtypes_t
 {
-	aa,
+	DELETE_FILE = 0xAA,		//0b10101010
 	ba
 }telemetry_subtypes_t;
 

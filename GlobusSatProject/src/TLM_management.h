@@ -43,7 +43,7 @@ typedef enum
  */
 int write2File(void* data, tlm_type_t tlmType);
 
-void deleteTLMFiles(tlm_type_t tlmType, Time date, int numOfDays);
+int deleteTLMFiles(tlm_type_t tlmType, Time date, int numOfDays);
 
 /*
  * delete a single file from the SD
