@@ -10,6 +10,9 @@
 #define WAIT_TIME_SEM_DUMP	1 //TODO: verify how much time we need to wait
 #define WAIT_TIME_SEM_TX	1 //TODO: verify how much time we need to wait
 
+#define ANTENNA_DEPLOYMENT_TIMEOUT 10 //<! in seconds
+
+
 int CMD_StartDump(sat_packet_t *cmd);
 
 int CMD_SendDumpAbortRequest(sat_packet_t *cmd);
@@ -51,6 +54,8 @@ int CMD_AntGetArmStatus(sat_packet_t *cmd);
 int CMD_AntGetUptime(sat_packet_t *cmd);
 
 int CMD_AntCancelDeployment(sat_packet_t *cmd);
+
+int CMD_AntennaDeploy(sat_packet_t *cmd);
 
 #endif
 /*COMMANDS_H_ */

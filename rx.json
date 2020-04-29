@@ -429,7 +429,7 @@
             {
               "name": "sat_time",
               "desc": "satellite's clock current unix time",
-              "type": "int"
+              "type": "datetime"
             },
             {
               "name": "free_memory",

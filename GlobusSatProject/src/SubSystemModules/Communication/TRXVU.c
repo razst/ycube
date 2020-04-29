@@ -144,11 +144,11 @@ int TRX_Logic() {
 		// we have data that came from grand station
 		cmdFound = GetOnlineCommand(&cmd); //--> check - don't reset WDT if we got error getting the frame becuase we will never get a reset !
 		ResetGroundCommWDT();
-		err = SendAckPacket(ACK_RECEIVE_COMM, &cmd, NULL, 0);
 
 	}
 
 	if (cmdFound == command_found) {
+		SendAckPacket(ACK_RECEIVE_COMM, &cmd, NULL, 0);
 		err = ActUponCommand(&cmd);
 		//TODO: log error
 		//TODO: send message to ground when a delayed command was not executed-> add to log
@@ -225,9 +225,10 @@ void FinishDump(dump_arguments_t *task_args,unsigned char *buffer, ack_subtype_t
 		unsigned char *err, unsigned int size) {
 
 	SendAckPacket(acktype, task_args->cmd, err, size);
+	/*
 	if (NULL != task_args) {
-		free(task_args); // TODO: check why we need this?
-	}
+		free(task_args); // TODO: we don't use malloc so do we need to use free?
+	}*/
 	if (NULL != xDumpLock) {
 		xSemaphoreGive(xDumpLock);
 	}

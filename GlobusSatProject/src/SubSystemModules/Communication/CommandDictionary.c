@@ -88,6 +88,9 @@ int trxvu_command_router(sat_packet_t *cmd)
 	case ANT_CANCEL_DEPLOY:
 		err = CMD_AntCancelDeployment(cmd);
 		break;
+	case ANT_DEPLOY:
+		err = CMD_AntennaDeploy(cmd);
+		break;
 
 	default:
 		err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
@@ -155,6 +158,9 @@ int managment_command_router(sat_packet_t *cmd)
 			break;
 		case UPDATE_SAT_TIME:
 			err = CMD_UpdateSatTime(cmd);
+					break;
+		case GENERIC_I2C_CMD:
+			err = CMD_GenericI2C(cmd);
 					break;
 		default:
 			err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);

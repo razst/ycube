@@ -80,6 +80,7 @@ typedef enum __attribute__ ((__packed__)) trxvu_subtypes_t
 	ANT_GET_ARM_STATUS = 	0xB2,	//0b10110010 =
 	ANT_GET_UPTIME =		0xB3,	//0b10110011 = //long int
 	ANT_CANCEL_DEPLOY = 	0xB7,	//0b10110111 *
+	ANT_DEPLOY = 			0xB9,	//0b10110111 *
 	FORCE_ABORT_DUMP_SUBTYPE = 0x33,//0b00110011 *
 	DELETE_DUMP_TASK = 0x44			//0b00100010 //its not in the cmd dictionary
 
@@ -109,6 +110,7 @@ typedef enum __attribute__ ((__packed__)) management_subtypes_t
 	EPS_RESET_SUBTYPE =			0xBB,		//0b10111011
 	FS_RESET_SUBTYPE =			0xCC,		//0b11001100
 	UPDATE_SAT_TIME =           0xDD,       //0b‭11011101‬
+	GENERIC_I2C_CMD =           0xDF,       //0b‭11011101‬
 	RESET_COMPONENT =           0xDE        //0b‭11011110
 }management_subtypes_t;
 //-----------------

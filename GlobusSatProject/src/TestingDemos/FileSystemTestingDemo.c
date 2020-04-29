@@ -334,6 +334,11 @@ Boolean CreateFiles4DeleteTest(){
 		// set time to 2030/1/1
 		Time_setUnixEpoch(1735689600 + (60*60*24*i));
 		TelemetrySaveWOD();
+		vTaskDelay(1000);
+		TelemetrySaveWOD();
+		vTaskDelay(1000);
+		TelemetrySaveWOD();
+
 	}
 
 	// set the time back

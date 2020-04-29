@@ -187,22 +187,16 @@ Boolean TestExitDump()
 Boolean TestDumpTelemetry()
 {
 	sat_packet_t cmd = {0};
-	unsigned int temp = 0;
-	printf("Starting Dump. Please Insert Dump Parameter:\n");
-
-	printf("Please Insert Command Type:\n");
-	while(UTIL_DbguGetIntegerMinMax(&temp,0,255));
-	cmd.cmd_type = temp;
-
-	printf("Please Insert Command Subtype:\n");
-	while(UTIL_DbguGetIntegerMinMax(&temp,0,255));
-	cmd.cmd_subtype = temp;
-
-	printf("Please Insert Command ID:\n");
-	while(UTIL_DbguGetIntegerMinMax(&temp,0,0xFFFFFFFF));
-	cmd.ID = temp;
-
-	//DumpTelemetry(&cmd);
+	cmd.cmd_type = 0;
+	cmd.cmd_subtype = 0x69;
+	cmd.ID = 0x02000008;
+	cmd.length = 0x0D;
+	char data[13] = {4, // dump type WOD
+			0x80,0x85,0x74,0x67, // start time 1/1/2025
+			0x80,0xCB,0x79,0x67, // end time 5/1/2025
+			0,0,0,0}; // resultion 0
+	memcpy(&cmd.data,data,sizeof(data));
+	CMD_StartDump(&cmd);
 	return TRUE;
 }
 

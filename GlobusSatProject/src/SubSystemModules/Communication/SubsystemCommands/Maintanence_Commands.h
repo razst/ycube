@@ -4,7 +4,6 @@
 
 #include "SubSystemModules/Communication/SatCommandHandler.h"
 
-#define ANTENNA_DEPLOYMENT_TIMEOUT 10 //<! in seconds
 
 typedef enum __attribute__ ((__packed__)) reset_type_t
 {
@@ -41,7 +40,7 @@ int CMD_SoftTRXVU_ComponenetReset(sat_packet_t *cmd);
 
 int CMD_HardTRXVU_ComponenetReset(sat_packet_t *cmd);
 
-int CMD_AntennaDeploy(sat_packet_t *cmd);
+
 
 
 /*!

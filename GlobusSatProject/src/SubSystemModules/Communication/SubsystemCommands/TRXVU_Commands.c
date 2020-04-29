@@ -46,6 +46,30 @@ void DumpTask(void *args) {
 
 }
 
+int CMD_AntennaDeploy(sat_packet_t *cmd)
+{
+	(void)cmd;
+	int err = 0;
+	err = IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideA, isisants_arm);
+	if(err != E_NO_SS_ERR ){
+		return err;
+	}
+
+	err = IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideB, isisants_arm);
+	if(err != E_NO_SS_ERR ){
+		return err;
+	}
+
+	err = IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA,
+			ANTENNA_DEPLOYMENT_TIMEOUT);
+	if(err != E_NO_SS_ERR ){
+		return err;
+	}
+	err = IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB,
+				ANTENNA_DEPLOYMENT_TIMEOUT);
+	return err;
+}
+
 
 int CMD_StartDump(sat_packet_t *cmd)
 {

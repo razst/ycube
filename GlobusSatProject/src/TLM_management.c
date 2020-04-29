@@ -380,11 +380,12 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 
 
 int readTLMFiles(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id,int resolution){
+	int totalReads=0;
 	for(int i = 0; i < numOfDays; i++){
-		readTLMFile(tlmType, date, i,cmd_id,resolution);
+		totalReads+=readTLMFile(tlmType, date, i,cmd_id,resolution);
 	}
 
-	return 0;
+	return totalReads;
 }
 
 
