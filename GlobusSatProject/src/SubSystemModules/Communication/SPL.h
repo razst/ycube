@@ -110,8 +110,10 @@ typedef enum __attribute__ ((__packed__)) management_subtypes_t
 	EPS_RESET_SUBTYPE =			0xBB,		//0b10111011
 	FS_RESET_SUBTYPE =			0xCC,		//0b11001100
 	UPDATE_SAT_TIME =           0xDD,       //0b‭11011101‬
-	GENERIC_I2C_CMD =           0xDF,       //0b‭11011101‬
-	RESET_COMPONENT =           0xDE        //0b‭11011110
+	GENERIC_I2C_CMD =           0xDF,       //0b‭11011111‬
+	RESET_COMPONENT =           0xDE,       //0b‭11011110
+	FRAM_WRITE_AND_TRANSMIT =   0xE0,       //0b11100000
+	FRAM_READ_AND_TRANSMIT =    0xE1        //0b11100001
 }management_subtypes_t;
 //-----------------
 

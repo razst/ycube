@@ -158,10 +158,16 @@ int managment_command_router(sat_packet_t *cmd)
 			break;
 		case UPDATE_SAT_TIME:
 			err = CMD_UpdateSatTime(cmd);
-					break;
+			break;
 		case GENERIC_I2C_CMD:
 			err = CMD_GenericI2C(cmd);
-					break;
+			break;
+		case FRAM_WRITE_AND_TRANSMIT:
+			err = CMD_FRAM_WriteAndTransmitt(cmd);
+			break;
+		case FRAM_READ_AND_TRANSMIT:
+			err = CMD_FRAM_ReadAndTransmitt(cmd);
+			break;
 		default:
 			err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
 			break;
