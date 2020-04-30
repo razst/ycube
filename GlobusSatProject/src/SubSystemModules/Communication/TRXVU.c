@@ -224,7 +224,7 @@ Boolean CheckTransmitionAllowed() {
 void FinishDump(dump_arguments_t *task_args,unsigned char *buffer, ack_subtype_t acktype,
 		unsigned char *err, unsigned int size) {
 
-	SendAckPacket(acktype, task_args->cmd, err, size);
+	SendAckPacket(acktype, &task_args->cmd, err, size);
 	/*
 	if (NULL != task_args) {
 		free(task_args); // TODO: we don't use malloc so do we need to use free?

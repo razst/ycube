@@ -27,18 +27,18 @@ void DumpTask(void *args) {
 	//dump_arguments_t t = *((dump_arguments_t*)args);
 	dump_arguments_t *task_args = (dump_arguments_t *) args;
 
-	SendAckPacket(ACK_DUMP_START, task_args->cmd,
+	SendAckPacket(ACK_DUMP_START, &task_args->cmd,
 			NULL, 0);
 
 	int numOfElementsSent = 0;
 	// calculate how many days we were asked to dump (every day has 86400 seconds)
 	int numberOfDays = (task_args->t_end - task_args->t_start)/86400;
-	if (task_args->cmd->cmd_subtype == DUMP_DAYS){
+	if (task_args->cmd.cmd_subtype == DUMP_DAYS){
 		Time date;
 		timeU2time(task_args->t_start,&date);
-		numOfElementsSent = readTLMFiles(task_args->dump_type,date,numberOfDays,task_args->cmd->ID,task_args->resulotion);
+		numOfElementsSent = readTLMFiles(task_args->dump_type,date,numberOfDays,task_args->cmd.ID,task_args->resulotion);
 	}else{ // DUMP_TIME_RANGE
-		numOfElementsSent = readTLMFileTimeRange(task_args->dump_type,task_args->t_start,task_args->t_end,task_args->cmd->ID,task_args->resulotion);
+		numOfElementsSent = readTLMFileTimeRange(task_args->dump_type,task_args->t_start,task_args->t_end,task_args->cmd.ID,task_args->resulotion);
 	}
 
 	FinishDump(task_args, NULL, ACK_DUMP_FINISHED, &numOfElementsSent, sizeof(numOfElementsSent));
@@ -77,11 +77,14 @@ int CMD_StartDump(sat_packet_t *cmd)
 		return -1;
 	}
 
+
 	//dump_arguments_t dmp_pckt;
 	//dump_arguments_t *dmp_pckt = malloc(sizeof(*dmp_pckt));
 	unsigned int offset = 0;
 
-	dmp_pckt.cmd = cmd;
+	//dmp_pckt.cmd.ID = cmd->ID;
+	// copy all cmd data...
+	AssembleCommand(&cmd->data,cmd->length,cmd->cmd_type,cmd->cmd_subtype,cmd->ID, &dmp_pckt.cmd);
 
 	memcpy(&dmp_pckt.dump_type, cmd->data, sizeof(dmp_pckt.dump_type));
 	offset += sizeof(dmp_pckt.dump_type);

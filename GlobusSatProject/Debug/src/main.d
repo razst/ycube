@@ -54,7 +54,13 @@ src/main.d: ../src/main.c \
  C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryFiles.h \
  C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include/satellite-subsystems/IsisSolarPanelv2.h \
  ../src/SubSystemModules/Maintenance/Maintenance.h ../src/InitSystem.h \
- ../src/main.h
+ ../src/main.h ../src/TestingDemos/MainTest.h \
+ C:\ISIS\workspace_ycube\GlobusSatProject\src/TestingDemos/EpsTestingDemo.h \
+ C:\ISIS\workspace_ycube\GlobusSatProject\src/TestingDemos/FileSystemTestingDemo.h \
+ C:\ISIS\workspace_ycube\GlobusSatProject\src/TestingDemos/MaintenanceTestingDemo.h \
+ C:\ISIS\workspace_ycube\GlobusSatProject\src/TestingDemos/TrxvuTestingDemo.h \
+ C:\ISIS\workspace_ycube\GlobusSatProject\src/TestingDemos/CommandsTestingDemo.h \
+ C:\ISIS\workspace_ycube\GlobusSatProject\src/TestingDemos/TelemetryTestingDemo.h
 
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include/freertos/FreeRTOS.h:
 
@@ -171,3 +177,17 @@ C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subs
 ../src/InitSystem.h:
 
 ../src/main.h:
+
+../src/TestingDemos/MainTest.h:
+
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TestingDemos/EpsTestingDemo.h:
+
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TestingDemos/FileSystemTestingDemo.h:
+
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TestingDemos/MaintenanceTestingDemo.h:
+
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TestingDemos/TrxvuTestingDemo.h:
+
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TestingDemos/CommandsTestingDemo.h:
+
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TestingDemos/TelemetryTestingDemo.h:
