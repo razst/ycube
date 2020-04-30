@@ -14,10 +14,6 @@ typedef struct __attribute__ ((__packed__)) delayed_cmd_t
 	sat_packet_t cmd;		///< command data
 } delayed_cmd_t;
 
-int ClearDelayedCMD_FromBuffer(unsigned int start_addr, unsigned int end_addr)
-{
-	return 0;
-}
 
 int ParseDataToCommand(unsigned char * data, sat_packet_t *cmd)
 {
@@ -132,6 +128,12 @@ int DeleteDelayedBuffer()
 {
 	return 0;
 }
+
+int ClearDelayedCMD_FromBuffer(unsigned int start_addr, unsigned int end_addr)
+{
+	return 0;
+}
+
 
 
 int ActUponCommand(sat_packet_t *cmd)
