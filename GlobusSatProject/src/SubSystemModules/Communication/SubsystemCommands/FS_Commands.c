@@ -14,7 +14,7 @@ int CMD_DeleteTLM(sat_packet_t *cmd)
 	dump_arguments_t dmp_pckt;
 	unsigned int offset = 0;
 
-	dmp_pckt.cmd = cmd;
+	AssembleCommand(&cmd->data,cmd->length,cmd->cmd_type,cmd->cmd_subtype,cmd->ID, &dmp_pckt.cmd);
 
 	memcpy(&dmp_pckt.dump_type, cmd->data, sizeof(dmp_pckt.dump_type));
 	offset += sizeof(dmp_pckt.dump_type);

@@ -18,7 +18,7 @@ Boolean TestlistFiels(){
 
 			if (find.attr&F_ATTR_DIR)
 			{
-				printf ("directory\n");
+				printf ("directory \n");
 			}
 			else
 			{
@@ -612,6 +612,33 @@ Boolean TestTRXVUTLM(){
 
 }
 
+Boolean LogErrorRateTest(){
+
+	printf("ERROR 20 - should log only the first 20 errors\n");
+	for(int i=0;i<100;i++){
+		logError(-20);
+	}
+
+	printf("ERROR 21 - should log all errors\n");
+	for(int i=0;i<5;i++){
+		logError(-21);
+	}
+
+	vTaskDelay((MAX_TIME_BETWEEN_ERRORS+1) * 1000);
+
+
+	printf("ERROR 20 - should start logging again only the first 20 errors\n");
+	for(int i=0;i<100;i++){
+		logError(-20);
+	}
+
+	printf("ERROR 0 (sucsess) - shouldn't log anything\n");
+	for(int i=0;i<10;i++){
+		logError(0);
+	}
+
+	return TRUE;
+}
 
 Boolean selectAndExecuteFSTest()
 {
@@ -632,9 +659,10 @@ Boolean selectAndExecuteFSTest()
 	printf("\t 10) Generate WOD TLM files \n\r");
 	printf("\t 11) Delete OLD files \n\r");
 	printf("\t 12) create files for delete test \n\r");
+	printf("\t 13) LOG error rate test\n\r");
 	//palmon is not a gever??
 
-	unsigned int number_of_tests = 12;
+	unsigned int number_of_tests = 13;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -676,6 +704,9 @@ Boolean selectAndExecuteFSTest()
 			break;
 	case 12:
 			offerMoreTests = CreateFiles4DeleteTest();
+			break;
+	case 13:
+			offerMoreTests = LogErrorRateTest();
 			break;
 	default:
 		break;

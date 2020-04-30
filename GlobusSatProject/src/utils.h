@@ -18,7 +18,8 @@
 #define TRXVU_MUTE_TOO_LOMG    -202
 #define TRXVU_IDLE_TOO_LOMG    -203
 
-#define MAX_ERRORS          10 // max errors per second we allow
+#define MAX_ERRORS       				 20 // max errors we want to log from the same type toghether
+#define MAX_TIME_BETWEEN_ERRORS          2 // max seconds we allow between errors
 #define MAX_LOG_STR				40
 
 typedef struct data

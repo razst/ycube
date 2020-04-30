@@ -13,7 +13,7 @@
 #include <SubSystemModules/Housekepping/TelemetryFiles.h>
 //TODO save in FRAM?
 static int errCount[2000] = {0};
-static int errFirstTime[2000] = {0};
+static int errLastTime[2000] = {0};
 
 void timeU2time(time_unix utime, Time *time){
     struct tm  ts;
@@ -40,27 +40,28 @@ int logError(int error){
 		    error = abs(error) + 1000;
 		 }
 
-		if(errCount[error] == 0){
-		    errFirstTime[error] = Time_getUptimeSeconds();
-		 }
-		errCount[error]++;
 
-		int totalTime = Time_getUptimeSeconds() - errFirstTime[error];
+		int timeFromLastError = Time_getUptimeSeconds() - errLastTime[error];
 
-		if ((totalTime / errCount[error]) < MAX_ERRORS){
+		if (timeFromLastError > MAX_TIME_BETWEEN_ERRORS){
+			errCount[error] = 0;
+		}else{
+			errCount[error]++;
+		}
+
+		if (errCount[error] < MAX_ERRORS){
 			logData_t log_;
 			memcpy(log_.msg, "there was a error", MAX_LOG_STR);
 			log_.error = error;
 			write2File(&log_ , tlm_log);
-			return 1;
+		}
+		errLastTime[error] = Time_getUptimeSeconds();
 
-		} else{
-//TODO what we want do
-		  }
-		printf("%d", error); // TODO: remove before prod...
+		printf("[%d] Logging error number:%d\n", errCount[error], error); // TODO: remove before prod...
 
-
+		return 1;
 	}
+
 	return 0;
 
 }
