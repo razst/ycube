@@ -297,7 +297,14 @@
           "id": "146",
           "name": "ACK_DUMP_FINISHED",
           "desc": "when a dump has finished",
-          "inParams": []
+          "inParams": [
+            {
+              "name": "number of elements",
+              "desc": "the number of dump elements that were sent over RF",
+              "type": "int"
+            }
+		  
+		  ]
         },
         {
           "id": "147",

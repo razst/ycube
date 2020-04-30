@@ -312,7 +312,6 @@ void printTLM(void* element, tlm_type_t tlmType){
 
 int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int resolution){
 	//TODO check for unsupported tlmType
-	printf("reading from file...\n");
 
 	unsigned int offset = 0;
 
@@ -323,6 +322,7 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 
 	getTlmTypeInfo(tlmType,end_file_name,&size);
 	calculateFileName(date,&file_name,end_file_name , numOfDays);
+	printf("reading from file %s...\n",file_name);
 	fp = f_open(file_name, "r");
 
 	int err = f_getlasterror();
@@ -330,7 +330,7 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 	if (!fp)
 	{
 		printf("Unable to open file!, f_open error=%d\n",err);// TODO: log error in all printf in the file!
-		return 1;
+		return -1;
 	}
 
 
@@ -381,8 +381,10 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 
 int readTLMFiles(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id,int resolution){
 	int totalReads=0;
+	int elemntsRead=0;
 	for(int i = 0; i < numOfDays; i++){
-		totalReads+=readTLMFile(tlmType, date, i,cmd_id,resolution);
+		elemntsRead=readTLMFile(tlmType, date, i,cmd_id,resolution);
+		totalReads+=(elemntsRead>0) ? elemntsRead : 0;
 	}
 
 	return totalReads;
@@ -412,7 +414,7 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 	if (!fp)
 	{
 		printf("Unable to open file!");// TODO: log error in all printf in the file!
-		return 1;
+		return -1;
 	}
 
 
