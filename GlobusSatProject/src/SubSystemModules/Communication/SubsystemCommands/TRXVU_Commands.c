@@ -183,7 +183,7 @@ int CMD_GetBeaconInterval(sat_packet_t *cmd)
 
 int CMD_SetBaudRate(sat_packet_t *cmd)
 {
-	// TODO do want to save the new bit rate in the FRAME so after restart (init_logic) we will continute to use the new rate??
+	// TODO do want to save the new bit rate in the FRAM so after restart (init_logic) we will continute to use the new rate??
 	ISIStrxvuBitrateStatus bitrate;
 	bitrate = (ISIStrxvuBitrateStatus) cmd->data[0];
 	return IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, bitrate);
@@ -266,7 +266,7 @@ int CMD_AntGetArmStatus(sat_packet_t *cmd)
 	int err = 0;
 	ISISantsStatus status;
 	ISISantsSide ant_side;
-	memcpy(&ant_side, cmd->data, sizeof(ant_side)); //why memcpy? its a char, only one bit
+	memcpy(&ant_side, cmd->data, sizeof(ant_side));
 
 	err = IsisAntS_getStatusData(ISIS_TRXVU_I2C_BUS_INDEX, ant_side, &status);
 	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &status, sizeof(status));
