@@ -120,11 +120,11 @@
               "values": [
                 {
                   "id": "0",
-                  "name": "esp"
+                  "name": "EPS"
                 },
                 {
                   "id": "1",
-                  "name": "eso"
+                  "name": "TX"
                 },
                 {
                   "id": "4",
