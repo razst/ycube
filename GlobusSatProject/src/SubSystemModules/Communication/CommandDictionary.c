@@ -91,6 +91,9 @@ int trxvu_command_router(sat_packet_t *cmd)
 	case ANT_DEPLOY:
 		err = CMD_AntennaDeploy(cmd);
 		break;
+	case ANT_STOP_REDEPLOY:
+		err = CMD_StopReDeployment(cmd);
+		break;
 
 	default:
 		err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
@@ -130,54 +133,54 @@ int telemetry_command_router(sat_packet_t *cmd)
 {
 	int err = 0;
 
-		switch (cmd->cmd_subtype)
-		{
-		case DELETE_FILE:
-			err = CMD_DeleteTLM(cmd);
-			break;
-		default:
-			err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
-			break;
-		}
+	switch (cmd->cmd_subtype)
+	{
+	case DELETE_FILE:
+		err = CMD_DeleteTLM(cmd);
+		break;
+	default:
+		err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
+		break;
+	}
 
-		if (err != 0) {
-			SendAckPacket(ACK_ERROR_MSG, cmd, (unsigned char*) &err, sizeof(err));
-		}
+	if (err != 0) {
+		SendAckPacket(ACK_ERROR_MSG, cmd, (unsigned char*) &err, sizeof(err));
+	}
 
-			return err;
+	return err;
 }
 
 int managment_command_router(sat_packet_t *cmd)
 {
 	int err = 0;
 
-		switch (cmd->cmd_subtype)
-		{
-		case RESET_COMPONENT:
-			err = CMD_ResetComponent(cmd->cmd_subtype);
-			break;
-		case UPDATE_SAT_TIME:
-			err = CMD_UpdateSatTime(cmd);
-			break;
-		case GENERIC_I2C_CMD:
-			err = CMD_GenericI2C(cmd);
-			break;
-		case FRAM_WRITE_AND_TRANSMIT:
-			err = CMD_FRAM_WriteAndTransmitt(cmd);
-			break;
-		case FRAM_READ_AND_TRANSMIT:
-			err = CMD_FRAM_ReadAndTransmitt(cmd);
-			break;
-		default:
-			err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
-			break;
-		}
+	switch (cmd->cmd_subtype)
+	{
+	case RESET_COMPONENT:
+		err = CMD_ResetComponent(cmd->cmd_subtype);
+		break;
+	case UPDATE_SAT_TIME:
+		err = CMD_UpdateSatTime(cmd);
+		break;
+	case GENERIC_I2C_CMD:
+		err = CMD_GenericI2C(cmd);
+		break;
+	case FRAM_WRITE_AND_TRANSMIT:
+		err = CMD_FRAM_WriteAndTransmitt(cmd);
+		break;
+	case FRAM_READ_AND_TRANSMIT:
+		err = CMD_FRAM_ReadAndTransmitt(cmd);
+		break;
+	default:
+		err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
+		break;
+	}
 
-		if (err != 0) {
-			SendAckPacket(ACK_ERROR_MSG, cmd, (unsigned char*) &err, sizeof(err));
-		}
+	if (err != 0) {
+		SendAckPacket(ACK_ERROR_MSG, cmd, (unsigned char*) &err, sizeof(err));
+	}
 
-			return err;
+	return err;
 }
 int filesystem_command_router(sat_packet_t *cmd)
 {

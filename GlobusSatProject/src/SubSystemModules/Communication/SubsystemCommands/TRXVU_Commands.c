@@ -48,26 +48,16 @@ void DumpTask(void *args) {
 
 int CMD_AntennaDeploy(sat_packet_t *cmd)
 {
-	(void)cmd;
-	int err = 0;
-	err = IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideA, isisants_arm);
-	if(err != E_NO_SS_ERR ){
-		return err;
-	}
 
-	err = IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideB, isisants_arm);
-	if(err != E_NO_SS_ERR ){
-		return err;
-	}
+	if (!logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideA, isisants_arm))) return -1;
 
-	err = IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA,
-			ANTENNA_DEPLOYMENT_TIMEOUT);
-	if(err != E_NO_SS_ERR ){
-		return err;
-	}
-	err = IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB,
-				ANTENNA_DEPLOYMENT_TIMEOUT);
-	return err;
+	if (!logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideB, isisants_arm))) return -1;
+
+	if (!logError(IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA,ANTENNA_DEPLOYMENT_TIMEOUT))) return -1;
+
+	if (!logError(IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB,ANTENNA_DEPLOYMENT_TIMEOUT))) return -1;
+
+	return 0;
 }
 
 
@@ -283,6 +273,18 @@ int CMD_AntGetUptime(sat_packet_t *cmd)
 	err = IsisAntS_getUptime(ISIS_TRXVU_I2C_BUS_INDEX, ant_side,(unsigned int*) &uptime);
 	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &uptime, sizeof(uptime));
 	return err;
+}
+
+int CMD_StopReDeployment(sat_packet_t *cmd){
+	Boolean flag = TRUE;
+	FRAM_write((unsigned char*) &flag,STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);
+
+	if (!logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideA, isisants_disarm))) return -1;
+
+	if (!logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideB, isisants_disarm))) return -1;
+
+	SendAckPacket(ACK_COMD_EXEC, &cmd, NULL, 0);
+
 }
 
 int CMD_AntCancelDeployment(sat_packet_t *cmd)

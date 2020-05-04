@@ -15,6 +15,9 @@
 #define SECONDS_SINCE_DEPLOY_ADDR		0x09		//<! counts how many seconds has past since wakup for use in deployment.
 #define SECONDS_SINCE_DEPLOY_SIZE		4			//<! size of the parameter in bytes
 
+#define STOP_REDEPOLOY_FLAG_ADDR		0x30		//<! stop calling ant deploy every 30 min flag
+#define STOP_REDEPOLOY_FLAG_SIZE		4			//<! length in bytes of
+
 #define FIRST_ACTIVATION_FLAG_ADDR		0x42		//<! is this the first activation after launch flag
 #define FIRST_ACTIVATION_FLAG_SIZE		4			//<! length in bytes of FIRST_ACTIVATION_FLAG
 

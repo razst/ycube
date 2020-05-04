@@ -8,6 +8,8 @@
 #ifndef INITSYSTEM_H_
 #define INITSYSTEM_H_
 
+
+#define MIN_2_WAIT_BEFORE_DEPLOY 10 // how many minutes to wait before we open the Ants TODO: before flight change to 30
 /*!
  * @brief	Starts the FRAM using drivers, and checks for errors.
  * @see FRAM.h

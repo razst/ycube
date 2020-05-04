@@ -68,6 +68,13 @@
           ]
         },
         {
+          "id": "192",
+          "name": "ANT_STOP_REDEPLOY",
+          "desc": "Stop the every 30 min ant deploy in the maintiance",
+          "inParams": [
+          ]
+        },
+        {
           "id": "112",
           "name": "DUMP_TIME_RANGE",
           "desc": "start the dump task",

@@ -17,6 +17,7 @@ typedef enum __attribute__ ((__packed__)) spl_command_type_t {
 typedef enum __attribute__ ((__packed__)) ack_subtype_t
 {
 	ACK_RECEIVE_COMM = 		0x00,			// when receive any packet
+	ACK_COMD_EXEC	 = 		0x01,			// when executed any packet / SPL command
 
 	ACK_RESET_WAKEUP = 		0x7F,			// after waking up from reset
 
@@ -81,6 +82,7 @@ typedef enum __attribute__ ((__packed__)) trxvu_subtypes_t
 	ANT_GET_UPTIME =		0xB3,	//0b10110011 = //long int
 	ANT_CANCEL_DEPLOY = 	0xB7,	//0b10110111 *
 	ANT_DEPLOY = 			0xB9,	//0b10110111 *
+	ANT_STOP_REDEPLOY = 	0xC0,
 	FORCE_ABORT_DUMP_SUBTYPE = 0x33,//0b00110011 *
 	DELETE_DUMP_TASK = 0x44			//0b00100010 //its not in the cmd dictionary
 

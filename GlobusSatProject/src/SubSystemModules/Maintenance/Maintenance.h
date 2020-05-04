@@ -5,6 +5,7 @@
 #include "GlobalStandards.h"
 
 #define MIN_FREE_SPACE 300000000
+#define DEPLOY_INTRAVAL 1800 // every 30 minutes
 
 
 /*

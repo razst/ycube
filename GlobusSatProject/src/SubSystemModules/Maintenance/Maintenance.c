@@ -19,6 +19,9 @@
 #include "utils.h"
 #include <math.h>
 
+
+static time_unix lastDeploy = 0;
+
 Boolean CheckExecutionTime(time_unix prev_time, time_unix period)
 {
 	time_unix curr = 0;
@@ -190,7 +193,19 @@ int DeleteOldFiels(int minFreeSpace){
 
 	}
 }
-//palmon is not a gever
+
+void DeployAnt(){
+
+	Boolean flag;
+	FRAM_read((unsigned char*) &flag, STOP_REDEPOLOY_FLAG_ADDR,STOP_REDEPOLOY_FLAG_SIZE);
+	printf("STOP_REDEPOLOY_FLAG_ADDR: %d \n",flag);
+
+	if (!flag  && CheckExecutionTime(lastDeploy,DEPLOY_INTRAVAL)){
+		CMD_AntennaDeploy(NULL);
+		Time_getUnixEpoch(&lastDeploy);
+	}
+}
+
 void Maintenance()
 {
 	SaveSatTimeInFRAM(MOST_UPDATED_SAT_TIME_ADDR,
@@ -201,5 +216,7 @@ void Maintenance()
 	logError(IsGroundCommunicationWDTKick());
 
 	DeleteOldFiels(MIN_FREE_SPACE);
+
+	DeployAnt();
 }
 

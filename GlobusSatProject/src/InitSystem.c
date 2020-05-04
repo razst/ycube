@@ -13,6 +13,7 @@
 #include "InitSystem.h"
 #include "TLM_management.h"
 #include <satellite-subsystems/IsisAntS.h>
+#include "TRXVU_Commands.h"
 #include <SubSystemModules/Housekepping/TelemetryCollector.h>
 
 #ifdef GOMEPS
@@ -84,6 +85,13 @@ void WriteDefaultValuesToFRAM()
 	FRAM_write((unsigned char*) &num_of_resets,
 	DEL_OLD_FILES_NUM_DAYS_ADDR, DEL_OLD_FILES_NUM_DAYS_SIZE);
 
+	FRAM_write((unsigned char*) &num_of_resets,
+			SECONDS_SINCE_DEPLOY_ADDR, SECONDS_SINCE_DEPLOY_SIZE);
+
+	Boolean flag = FALSE;
+	FRAM_write((unsigned char*) &flag,
+			STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);
+
 
 }
 
@@ -129,18 +137,20 @@ int DeploySystem()
 	if (!first_activation) return 0;
 
 
+	// write default values to FRAM
+	WriteDefaultValuesToFRAM();
 
-	// if we are here...it means we are in the first activatio, wait 30min, deploy and make firstActivation flag=false
+	// if we are here...it means we are in the first activation, wait 30min, deploy and make firstActivation flag=false
 	int err = 0;
 
 	time_unix seconds_since_deploy = 0;
 	err = logError(FRAM_read((unsigned char*) seconds_since_deploy , SECONDS_SINCE_DEPLOY_ADDR , SECONDS_SINCE_DEPLOY_SIZE));
 	if (0 != err) {
-		seconds_since_deploy = MINUTES_TO_SECONDS(1);	// RBF to 30 min
+		seconds_since_deploy = MINUTES_TO_SECONDS(MIN_2_WAIT_BEFORE_DEPLOY);	// RBF to 30 min
 	}
 
 	// wait 30 min + log telm
-	while (seconds_since_deploy < MINUTES_TO_SECONDS(1)) { // RBF to 30 min
+	while (seconds_since_deploy < MINUTES_TO_SECONDS(MIN_2_WAIT_BEFORE_DEPLOY)) { // RBF to 30 min
 		vTaskDelay(SECONDS_TO_TICKS(10));
 
 		FRAM_write((unsigned char*)&seconds_since_deploy, SECONDS_SINCE_DEPLOY_ADDR,
@@ -158,8 +168,7 @@ int DeploySystem()
 	}
 
 	// open ants !
-	//IsisAntS_autoDeployment(0, isisants_sideA, 10); // TODO: RBF
-	//IsisAntS_autoDeployment(0, isisants_sideB, 10);// TODO: RBF
+	CMD_AntennaDeploy(NULL);
 
 	// set deploy time in FRAM
 	time_unix deploy_time = 0;
@@ -172,8 +181,6 @@ int DeploySystem()
 	FRAM_write((unsigned char*) &first_activation,
 	FIRST_ACTIVATION_FLAG_ADDR, FIRST_ACTIVATION_FLAG_SIZE);
 
-	// write default values to FRAM
-	WriteDefaultValuesToFRAM();
 	return 0;
 }
 
