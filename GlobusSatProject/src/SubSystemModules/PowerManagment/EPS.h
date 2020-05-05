@@ -7,6 +7,7 @@
 
 #include "GlobalStandards.h"
 #include "EPSOperationModes.h"
+#include "SubSystemModules/Communication/SatCommandHandler.h"
 
 /*
  	 	 	 	  ______
@@ -114,7 +115,7 @@ int GetAlpha(float *alpha);
  * 			-2 on invalid alpha
  * @see LPF- Low Pass Filter at wikipedia: https://en.wikipedia.org/wiki/Low-pass_filter#Discrete-time_realization
  */
-int UpdateAlpha(float new_alpha);
+int UpdateAlpha(sat_packet_t *cmd);
 
 /*!
  * @brief setting the new voltage smoothing factor (alpha) to be the default value.

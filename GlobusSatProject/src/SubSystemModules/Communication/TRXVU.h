@@ -77,9 +77,9 @@ void SendDumpAbortRequest();
  * @brief Closes a dump task if one is executing, using vTaskDelete.
  * @note Can be used to forcibly abort the task
  */
-void AbortDump();
+void AbortDump(sat_packet_t *cmd);
 
-void FinishDump(dump_arguments_t *task_args,unsigned char *buffer, ack_subtype_t acktype,
+void FinishDump(sat_packet_t *cmd,unsigned char *buffer, ack_subtype_t acktype,
 		unsigned char *err, unsigned int size) ;
 
 /*!

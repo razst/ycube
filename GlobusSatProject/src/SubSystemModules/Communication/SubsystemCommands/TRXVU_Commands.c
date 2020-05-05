@@ -49,15 +49,20 @@ void DumpTask(void *args) {
 int CMD_AntennaDeploy(sat_packet_t *cmd)
 {
 
-	if (!logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideA, isisants_arm))) return -1;
+	int err = logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideA, isisants_arm));
+	if (err != E_NO_SS_ERR)
+		logError(IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA,ANTENNA_DEPLOYMENT_TIMEOUT));
 
-	if (!logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideB, isisants_arm))) return -1;
+	logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideB, isisants_arm));
+	if (err != E_NO_SS_ERR)
+		logError(IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB,ANTENNA_DEPLOYMENT_TIMEOUT));
 
-	if (!logError(IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA,ANTENNA_DEPLOYMENT_TIMEOUT))) return -1;
 
-	if (!logError(IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB,ANTENNA_DEPLOYMENT_TIMEOUT))) return -1;
+	if (err == E_NO_SS_ERR){
+		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
+	}
 
-	return 0;
+	return err;
 }
 
 
@@ -101,15 +106,15 @@ int CMD_StartDump(sat_packet_t *cmd)
 
 int CMD_SendDumpAbortRequest(sat_packet_t *cmd)
 {
-	(void)cmd;
 	SendDumpAbortRequest();
+	SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0); //trying to add the ack functions
 	return 0;
 }
 
 int CMD_ForceDumpAbort(sat_packet_t *cmd)
 {
-	(void)cmd;
-	AbortDump();
+	AbortDump(cmd);
+	SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0); //trying to add the ack functions
 	return 0;
 }
 
@@ -120,7 +125,9 @@ int CMD_MuteTRXVU(sat_packet_t *cmd)
 	time_unix mute_duaration = 0;
 	memcpy(&mute_duaration,cmd->data,sizeof(mute_duaration));
 	err = muteTRXVU(mute_duaration);
-	SendAckPacket(MUTE_TRXVU,cmd,NULL,0); //trying to add the ack functions
+	if (err == E_NO_SS_ERR){
+		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0); //trying to add the ack functions
+	}
 	return err;
 }
 
@@ -132,15 +139,20 @@ int CMD_SetIdleState(sat_packet_t *cmd)
 	if (state == trxvu_idle_state_on){
 		memcpy(&duaration,cmd->data+sizeof(state),sizeof(duaration));
 	}
-	SetIdleState(state,duaration);
-	return 0;
+	int err = SetIdleState(state,duaration);
+	if (err == E_NO_SS_ERR){
+		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
+	}
+
+
+	return err;
 }
 
 
 int CMD_UnMuteTRXVU(sat_packet_t *cmd)
 {
-	(void)cmd;
 	UnMuteTRXVU();
+	SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
 	return 0;
 }
 
@@ -148,12 +160,14 @@ int CMD_GetBaudRate(sat_packet_t *cmd)
 {
 	//ISIStrxvuBitrateStatus bitrate;
 	ISIStrxvuTransmitterState trxvu_state;
-	if (logError(IsisTrxvu_tcGetState(ISIS_TRXVU_I2C_BUS_INDEX, &trxvu_state))) return -1;
+	int err = IsisTrxvu_tcGetState(ISIS_TRXVU_I2C_BUS_INDEX, &trxvu_state);
 
-	int bitrate = trxvu_state.fields.transmitter_bitrate; //isn't bitrate a char?
-	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &bitrate, sizeof(bitrate));
+	if (err == E_NO_SS_ERR){
+		int bitrate = trxvu_state.fields.transmitter_bitrate; //isn't bitrate a char?
+		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &bitrate, sizeof(bitrate));
+	}
 
-	return 0;
+	return err;
 }
 
 
@@ -165,8 +179,13 @@ int CMD_GetBeaconInterval(sat_packet_t *cmd)
 	err = FRAM_read((unsigned char*) &beacon_interval,
 			BEACON_INTERVAL_TIME_ADDR,
 			BEACON_INTERVAL_TIME_SIZE);
-	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &beacon_interval,
-			sizeof(beacon_interval));
+
+	if (err == E_NO_SS_ERR){
+		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &beacon_interval,
+				sizeof(beacon_interval));
+	}
+
+
 	return err;
 }
 
@@ -176,7 +195,11 @@ int CMD_SetBaudRate(sat_packet_t *cmd)
 	// TODO do want to save the new bit rate in the FRAM so after restart (init_logic) we will continute to use the new rate??
 	ISIStrxvuBitrateStatus bitrate;
 	bitrate = (ISIStrxvuBitrateStatus) cmd->data[0];
-	return IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, bitrate);
+	int err = IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, bitrate);
+	if (err == E_NO_SS_ERR){
+		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
+	}
+	return err;
 }
 
 
@@ -185,7 +208,9 @@ int CMD_GetTxUptime(sat_packet_t *cmd)
 	int err = 0;
 	time_unix uptime = 0;
 	err = IsisTrxvu_tcGetUptime(ISIS_TRXVU_I2C_BUS_INDEX, (unsigned int*)&uptime);
-	TransmitDataAsSPL_Packet(cmd, (unsigned char*)&uptime, sizeof(uptime));
+	if (err == E_NO_SS_ERR){
+		TransmitDataAsSPL_Packet(cmd, (unsigned char*)&uptime, sizeof(uptime));
+	}
 
 	return err;
 }
@@ -195,45 +220,23 @@ int CMD_GetRxUptime(sat_packet_t *cmd)
 	int err = 0;
 	time_unix uptime = 0;
 	err = IsisTrxvu_rcGetUptime(ISIS_TRXVU_I2C_BUS_INDEX,(unsigned int*) &uptime);
-	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &uptime, sizeof(uptime));
+	if (err == E_NO_SS_ERR){
+		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &uptime, sizeof(uptime));
+	}
 
 	return err;
 }
 
-int CMD_GetNumOfDelayedCommands(sat_packet_t *cmd)
-{
-	int err = 0;
-	unsigned char temp = 0;
-	temp = GetDelayedCommandBufferCount();
-	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &temp, sizeof(temp));
-
-	return err;
-}
 
 int CMD_GetNumOfOnlineCommands(sat_packet_t *cmd)
 {
 	int err = 0;
 	unsigned short int temp = 0;
 	err = IsisTrxvu_rcGetFrameCount(ISIS_TRXVU_I2C_BUS_INDEX, &temp);
-	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &temp, sizeof(temp));
+	if (err == E_NO_SS_ERR){
+		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &temp, sizeof(temp));
+	}
 
-	return err;
-}
-
-int CMD_DeleteDelyedCmdByID(sat_packet_t *cmd)
-{
-	int err = 0;
-	unsigned int index = 0;
-	memcpy(&index,cmd->data,sizeof(index));
-	err = DeleteDelayedCommandByIndex(index);
-	return err;
-}
-
-int CMD_DeleteAllDelyedBuffer(sat_packet_t *cmd)
-{
-	(void)cmd;
-	int err = 0;
-	err = DeleteDelayedBuffer();
 	return err;
 }
 
@@ -248,6 +251,10 @@ int CMD_AntSetArmStatus(sat_packet_t *cmd)
 	ISISantsArmStatus status = cmd->data[1];
 	err = IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX, ant_side, status);
 
+	if (err == E_NO_SS_ERR){
+		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
+	}
+
 	return err;
 }
 
@@ -259,7 +266,9 @@ int CMD_AntGetArmStatus(sat_packet_t *cmd)
 	memcpy(&ant_side, cmd->data, sizeof(ant_side));
 
 	err = IsisAntS_getStatusData(ISIS_TRXVU_I2C_BUS_INDEX, ant_side, &status);
-	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &status, sizeof(status));
+	if (err == E_NO_SS_ERR){
+		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &status, sizeof(status));
+	}
 
 	return err;
 }
@@ -271,20 +280,26 @@ int CMD_AntGetUptime(sat_packet_t *cmd)
 	ISISantsSide ant_side;
 	memcpy(&ant_side, cmd->data, sizeof(ant_side));
 	err = IsisAntS_getUptime(ISIS_TRXVU_I2C_BUS_INDEX, ant_side,(unsigned int*) &uptime);
-	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &uptime, sizeof(uptime));
+	if (err == E_NO_SS_ERR){
+		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &uptime, sizeof(uptime));
+	}
 	return err;
 }
 
 int CMD_StopReDeployment(sat_packet_t *cmd){
 	Boolean flag = TRUE;
+	int err = 0;
 	FRAM_write((unsigned char*) &flag,STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);
 
-	if (!logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideA, isisants_disarm))) return -1;
+	err = IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideA, isisants_disarm);
+	logError(err);
+	err = IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideB, isisants_disarm);
+	logError(err);
 
-	if (!logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideB, isisants_disarm))) return -1;
-
-	SendAckPacket(ACK_COMD_EXEC, &cmd, NULL, 0);
-
+	if (err == E_NO_SS_ERR){
+		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
+	}
+	return err;
 }
 
 int CMD_AntCancelDeployment(sat_packet_t *cmd)
@@ -293,6 +308,9 @@ int CMD_AntCancelDeployment(sat_packet_t *cmd)
 	ISISantsSide ant_side;
 	memcpy(&ant_side, cmd->data, sizeof(ant_side));
 	err = IsisAntS_cancelDeployment(ISIS_TRXVU_I2C_BUS_INDEX, ant_side);
+	if (err == E_NO_SS_ERR){
+		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
+	}
 	return err;
 }
 

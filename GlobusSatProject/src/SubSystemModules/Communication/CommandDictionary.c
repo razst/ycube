@@ -115,7 +115,7 @@ int eps_command_router(sat_packet_t *cmd)
 	switch (cmd->cmd_subtype)
 	{
 	case 0:
-		err = UpdateAlpha(*(float*)cmd->data);
+		err = UpdateAlpha(cmd);
 		break;
 
 	default:
@@ -157,7 +157,7 @@ int managment_command_router(sat_packet_t *cmd)
 	switch (cmd->cmd_subtype)
 	{
 	case RESET_COMPONENT:
-		err = CMD_ResetComponent(cmd->cmd_subtype);
+		err = CMD_ResetComponent(cmd);
 		break;
 	case UPDATE_SAT_TIME:
 		err = CMD_UpdateSatTime(cmd);

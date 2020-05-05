@@ -180,7 +180,7 @@ Boolean TestTransmitSplPacket()
 
 Boolean TestExitDump()
 {
-	AbortDump();
+	//AbortDump();
 	return TRUE;
 }
 

@@ -49,6 +49,6 @@ int CMD_HardTRXVU_ComponenetReset(sat_packet_t *cmd);
  * @return 	0 on success
  * 			Error code according to <hal/errors.h>
  */
-int CMD_ResetComponent(reset_type_t rst_type);
+int CMD_ResetComponent(sat_packet_t *cmd);
 
 #endif /* MAINTANENCE_COMMANDS_H_ */

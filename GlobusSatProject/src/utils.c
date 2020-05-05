@@ -59,10 +59,9 @@ int logError(int error){
 
 		printf("[%d] Logging error number:%d\n", errCount[error], error); // TODO: remove before prod...
 
-		return 1;
 	}
 
-	return 0;
+	return error;
 
 }
 

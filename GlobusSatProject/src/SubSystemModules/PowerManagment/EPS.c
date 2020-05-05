@@ -3,6 +3,7 @@
 #include <hal/errors.h>
 #include <utils.h>
 #include <string.h>
+#include "SubSystemModules/Communication/AckHandler.h"
 
 #include "EPS.h"
 #ifdef ISISEPS
@@ -95,15 +96,19 @@ int EPS_Conditioning()
 	return 0;
 }
 
-int UpdateAlpha(float new_alpha)
+int UpdateAlpha(sat_packet_t *cmd)
 {
+	float new_alpha = *(float*)cmd->data;
 	if(new_alpha < 0 || new_alpha > 1){
 		return logError(-2);
 	}
 
-	if(logError(FRAM_write((unsigned char*) &new_alpha , EPS_ALPHA_FILTER_VALUE_ADDR , EPS_ALPHA_FILTER_VALUE_SIZE)))return -1;
-	GetAlpha(&alpha);
-	return 0;
+	int err = logError(FRAM_write((unsigned char*) &new_alpha , EPS_ALPHA_FILTER_VALUE_ADDR , EPS_ALPHA_FILTER_VALUE_SIZE));
+	if (err == E_NO_SS_ERR){
+		GetAlpha(&alpha);
+		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
+	}
+	return err;
 }
 
 int UpdateThresholdVoltages(EpsThreshVolt_t *thresh_volts)
@@ -155,8 +160,10 @@ int GetAlpha(float *alpha)
 
 int RestoreDefaultAlpha()
 {
+	/*
 	float def_alpha = DEFAULT_ALPHA_VALUE;
 	if(logError(UpdateAlpha(def_alpha)))return -1;
+	*/
 	return 0;
 }
 

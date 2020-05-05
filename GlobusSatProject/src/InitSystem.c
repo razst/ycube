@@ -13,7 +13,6 @@
 #include "InitSystem.h"
 #include "TLM_management.h"
 #include <satellite-subsystems/IsisAntS.h>
-#include "TRXVU_Commands.h"
 #include <SubSystemModules/Housekepping/TelemetryCollector.h>
 
 #ifdef GOMEPS

@@ -5,6 +5,8 @@
 #include "GlobalStandards.h"
 
 #include <hal/Timing/Time.h>
+#include "SubSystemModules/Communication/SatCommandHandler.h"
+
 
 #include <satellite-subsystems/IsisTRXVU.h>
 #include <satellite-subsystems/IsisAntS.h>
@@ -44,8 +46,11 @@ int CMD_GenericI2C(sat_packet_t *cmd) // TODO: why do we need this funcation?? i
 
 	unsigned int offset = sizeof(slaveAddr) + sizeof(size);
 	err = I2C_write((unsigned int)slaveAddr,cmd->data + offset, cmd->length);
-	I2C_read((unsigned int)slaveAddr,i2c_data,size);
-
+	err = I2C_read((unsigned int)slaveAddr,i2c_data,size);
+	if (err == E_NO_SS_ERR){
+		TransmitDataAsSPL_Packet(cmd, i2c_data, size);
+	}
+	free(i2c_data);
 	return err;
 }
 
@@ -67,11 +72,10 @@ int CMD_FRAM_ReadAndTransmitt(sat_packet_t *cmd) // TODO: why do we need this fu
 	}
 
 	err = FRAM_read(read_data, addr, size);
-	if (err != 0){
-		return err;
+	if (err == E_NO_SS_ERR){
+		TransmitDataAsSPL_Packet(cmd, read_data, size);
 	}
 
-	TransmitDataAsSPL_Packet(cmd, read_data, size);
 	free(read_data);
 	return err;
 }
@@ -89,14 +93,13 @@ int CMD_FRAM_WriteAndTransmitt(sat_packet_t *cmd) // TODO: why do we need this f
 	memcpy(&addr, cmd->data, sizeof(addr));
 
 	err = FRAM_write(data + sizeof(addr), addr, length - sizeof(addr));
-	if (err != 0){
+	if (err != E_NO_SS_ERR){
 		return err;
 	}
 	err = FRAM_read(data, addr, length - sizeof(addr));
-	if (err != 0){
-		return err;
+	if (err == E_NO_SS_ERR){
+		TransmitDataAsSPL_Packet(cmd, data, length);
 	}
-	TransmitDataAsSPL_Packet(cmd, data, length);
 	return err;
 }
 
@@ -104,24 +107,30 @@ int CMD_FRAM_Start(sat_packet_t *cmd)
 {
 	int err = 0;
 	err = FRAM_start();
-	TransmitDataAsSPL_Packet(cmd, (unsigned char*)&err, sizeof(err));
+	if (err == E_NO_SS_ERR)
+	{
+		TransmitDataAsSPL_Packet(cmd, (unsigned char*)&err, sizeof(err));
+	}
 	return err;
 }
 
 int CMD_FRAM_Stop(sat_packet_t *cmd)
 {
-	(void)cmd;
-	int err = 0;
+
 	FRAM_stop();
-	return err;
+		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
+	return 0;
 }
 
 int CMD_FRAM_GetDeviceID(sat_packet_t *cmd)
 {
-	int err = 0;
+
 	unsigned char id;
-	FRAM_getDeviceID(&id);
-	TransmitDataAsSPL_Packet(cmd, &id, sizeof(id));
+	int err = FRAM_getDeviceID(&id);
+	if (err == E_NO_SS_ERR)
+	{
+		TransmitDataAsSPL_Packet(cmd, &id, sizeof(id));
+	}
 	return err;
 }
 
@@ -134,7 +143,10 @@ int CMD_UpdateSatTime(sat_packet_t *cmd)
 	time_unix set_time = 0;
 	memcpy(&set_time, cmd->data, sizeof(set_time));
 	err = Time_setUnixEpoch(set_time);
-	TransmitDataAsSPL_Packet(cmd, (unsigned char*)&set_time, sizeof(set_time));
+	if (err == E_NO_SS_ERR)
+	{
+		TransmitDataAsSPL_Packet(cmd, (unsigned char*)&set_time, sizeof(set_time));
+	}
 	return err;
 }
 
@@ -143,22 +155,21 @@ int CMD_GetSatTime(sat_packet_t *cmd)
 	int err = 0;
 	time_unix curr_time = 0;
 	err = Time_getUnixEpoch(&curr_time);
-	if (err != 0)
+	if (err == E_NO_SS_ERR)
 	{
-		return err;
+		TransmitDataAsSPL_Packet(cmd, (unsigned char*)&curr_time, sizeof(curr_time));
 	}
-	TransmitDataAsSPL_Packet(cmd, (unsigned char*)&curr_time, sizeof(curr_time));
 
 	return err;
 }
 
 int CMD_GetSatUptime(sat_packet_t *cmd)
 {
-	int err = 0;
+
 	time_unix uptime = 0;
 	uptime = Time_getUptimeSeconds();
 	TransmitDataAsSPL_Packet(cmd, (unsigned char*)&uptime, sizeof(uptime));
-	return err;
+	return 0;
 }
 
 int CMD_SoftTRXVU_ComponenetReset(sat_packet_t *cmd)
@@ -192,30 +203,30 @@ int CMD_HardTRXVU_ComponenetReset(sat_packet_t *cmd)
 }
 
 
-int CMD_ResetComponent(reset_type_t rst_type)
+int CMD_ResetComponent(sat_packet_t *cmd)
 {
 	int err = 0;
 
 	Boolean8bit reset_flag = TRUE_8BIT;
 
-	switch (rst_type)
+	switch (cmd->cmd_subtype)
 	{
 	case reset_software:
-		SendAnonymosAck(ACK_SOFT_RESET);
+		SendAckPacket(ACK_HARD_RESET, cmd, NULL, 0);
 		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
 		vTaskDelay(10);
 		restart();
 		break;
 
 	case reset_hardware:
-		SendAnonymosAck(ACK_HARD_RESET);
+		SendAckPacket(ACK_HARD_RESET, cmd, NULL, 0);
 		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
 		vTaskDelay(10);
 		//TODO: ASK if we need this as we have the eps reset
 		break;
 
 	case reset_eps: // this is a HW reset of the iOBC
-		SendAnonymosAck(ACK_EPS_RESET);
+		SendAckPacket(ACK_EPS_RESET, cmd, NULL, 0);
 		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
 		vTaskDelay(10);
 		isis_eps__reset__to_t cmd_t;
@@ -224,37 +235,37 @@ int CMD_ResetComponent(reset_type_t rst_type)
 		break;
 
 	case reset_trxvu_hard:
-		SendAnonymosAck(ACK_TRXVU_HARD_RESET);
+		SendAckPacket(ACK_TRXVU_HARD_RESET, cmd, NULL, 0);
 		logError(IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX));
 		vTaskDelay(100);
 		break;
 
 	case reset_trxvu_soft:
-		SendAnonymosAck(ACK_TRXVU_SOFT_RESET);
+		SendAckPacket(ACK_TRXVU_SOFT_RESET, cmd, NULL, 0);
 		logError(IsisTrxvu_softReset(ISIS_TRXVU_I2C_BUS_INDEX));
 		vTaskDelay(100);
 		break;
 
 	case reset_filesystem:
-		DeInitializeFS(); //TODO
+		DeInitializeFS(); //TODO not working well
 		vTaskDelay(10);
 		err = (unsigned int) InitializeFS(FALSE);
 		vTaskDelay(10);
-		SendAckPacket(ACK_FS_RESET, NULL, (unsigned char*) &err, sizeof(err));
+		if (err == E_NO_SS_ERR) SendAckPacket(ACK_FS_RESET, cmd, (unsigned char*) &err, sizeof(err));
 		break;
 
 	case reset_ant_SideA:
-		logError(IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA));
-		SendAckPacket(ACK_ANTS_RESET, NULL, (unsigned char*) &err, sizeof(err));
+		err = logError(IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA));
+		if (err == E_NO_SS_ERR) SendAckPacket(ACK_ANTS_RESET, cmd, (unsigned char*) &err, sizeof(err));
 		break;
 
 	case reset_ant_SideB:
-		logError(IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB));
-		SendAckPacket(ACK_ANTS_RESET, NULL, (unsigned char*) &err, sizeof(err));
+		err=logError(IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB));
+		if (err == E_NO_SS_ERR) SendAckPacket(ACK_ANTS_RESET, cmd, (unsigned char*) &err, sizeof(err));
 		break;
 
 	default:
-		SendAnonymosAck(ACK_UNKNOWN_SUBTYPE);
+		SendAckPacket(ACK_UNKNOWN_SUBTYPE, cmd, NULL, 0);
 		break;
 	}
 	vTaskDelay(10);

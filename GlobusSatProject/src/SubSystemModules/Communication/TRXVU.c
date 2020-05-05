@@ -221,10 +221,10 @@ Boolean CheckTransmitionAllowed() {
 
 }
 
-void FinishDump(dump_arguments_t *task_args,unsigned char *buffer, ack_subtype_t acktype,
+void FinishDump(sat_packet_t *cmd,unsigned char *buffer, ack_subtype_t acktype,
 		unsigned char *err, unsigned int size) {
 
-	SendAckPacket(acktype, &task_args->cmd, err, size);
+	SendAckPacket(acktype, cmd, err, size);
 	/*
 	if (NULL != task_args) {
 		free(task_args); // TODO: we don't use malloc so do we need to use free?
@@ -241,9 +241,9 @@ void FinishDump(dump_arguments_t *task_args,unsigned char *buffer, ack_subtype_t
 }
 
 
-void AbortDump()
+void AbortDump(sat_packet_t *cmd)
 {
-	FinishDump(NULL,NULL,ACK_DUMP_ABORT,NULL,0);
+	FinishDump(cmd,NULL,ACK_DUMP_ABORT,NULL,0); // TODO: this doesn't stop the dump task !! need to fix this
 }
 
 void SendDumpAbortRequest() {
@@ -308,9 +308,9 @@ int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
 		return TRXVU_IDLE_TOO_LOMG;
 	}
 
-	if (logError(IsisTrxvu_tcSetIdlestate(ISIS_TRXVU_I2C_BUS_INDEX, state))) return -1;
+	int err = logError(IsisTrxvu_tcSetIdlestate(ISIS_TRXVU_I2C_BUS_INDEX, state));
 
-	if (state == trxvu_idle_state_on){
+	if (err == E_NO_SS_ERR && state == trxvu_idle_state_on){
 		// get current unix time
 		time_unix curr_tick_time = 0;
 		Time_getUnixEpoch(&curr_tick_time);
@@ -318,7 +318,7 @@ int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
 		// set mute end time
 		g_idle_end_time = curr_tick_time + duration;
 	}
-	return 0;
+	return err;
 
 }
 

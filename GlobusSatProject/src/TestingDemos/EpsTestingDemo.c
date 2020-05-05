@@ -135,7 +135,7 @@ Boolean TestUpdateAlpha()
 	printf("Updating Alpha to be '0.66666'");
 	float alpha = 0.66666;
 
-	err = UpdateAlpha(alpha);
+	//err = UpdateAlpha(alpha);
 	if(err != 0){
 		printf("Error in 'UpdateAlpha' = %d\n",err);
 		return TRUE;
@@ -175,7 +175,7 @@ Boolean TestRestoreDefaultAlpha()
 	}
 	printf("old alpha value: a = %f\n",alpha);
 
-	err = RestoreDefaultAlpha();
+	//err = RestoreDefaultAlpha();
 	if(0 != err){
 		printf("error in 'RestoreDefaultAlpha' = %d\n",err);
 	}
