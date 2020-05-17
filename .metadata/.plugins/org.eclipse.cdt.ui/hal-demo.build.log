@@ -1,0 +1,11 @@
+22:35:12 **** Incremental Build of configuration Debug for project hal-demo ****
+make -r -k all 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "hal-demo.elf"
+   text	   data	    bss	    dec	    hex	filename
+ 345076	     12	 446936	 792024	  c15d8	hal-demo.elf
+Finished building: hal-demo.siz
+ 
+
+22:35:12 Build Finished (took 139ms)
+

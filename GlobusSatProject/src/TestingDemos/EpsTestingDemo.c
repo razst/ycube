@@ -221,6 +221,67 @@ Boolean TestRestoreDefaultThresholdVoltages()
 	return TRUE;
 }
 
+Boolean GetHeaterValues(){
+
+	isis_eps__getparameter__to_t to;
+	isis_eps__getparameter__from_t from;
+	int16_t heatValue;
+
+	// get current LOTHR_BAT_HEATER value
+	to.fields.par_id=0x3000;
+	isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+	memcpy(&heatValue,from.fields.par_val,sizeof(int16_t));
+	printf("LOW THR_BAT_HEATER value = %d\n",heatValue);
+
+	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+
+	heatValue = 0;
+	// get current HITHR_BAT_HEATER value
+	to.fields.par_id=0x3003;
+	isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+	memcpy(&heatValue,from.fields.par_val,sizeof(int16_t));
+	printf("HIGH THR_BAT_HEATER value = %d\n",heatValue);
+
+	return TRUE;
+}
+
+
+Boolean SetHeaterValues(){
+
+	printf("Please state heater LOW value:\n");
+
+	int value = 0;
+	while(UTIL_DbguGetInteger((int*)&value) == 0);
+
+	int16_t heatValue = value;
+
+	// set LOTHR_BAT_HEATER to new value
+	isis_eps__setparameter__to_t setTo;
+	isis_eps__setparameter__from_t setFrom;
+	setTo.fields.par_id = 0x3000;
+	memcpy(&setTo.fields.par_val[0],&heatValue,sizeof(int16_t));
+	int err = isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	printf("error = %d\n",err);
+
+
+	printf("Please state heater HIGH value:\n");
+
+	while(UTIL_DbguGetInteger((int*)&value) == 0);
+
+	heatValue = value;
+
+	// set LOTHR_BAT_HEATER to new value
+	setTo.fields.par_id = 0x3003;
+	memcpy(&setTo.fields.par_val[0],&heatValue,sizeof(int16_t));
+	err = isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	printf("error = %d\n",err);
+
+
+
+	return TRUE;
+}
+
+
 Boolean selectAndExecuteEpsDemoTest()
 {
 	unsigned int selection = 0;
@@ -236,9 +297,11 @@ Boolean selectAndExecuteEpsDemoTest()
 	printf("\t 6) Print Alpha  \n\r");
 	printf("\t 7) Restore Default Alpha \n\r");
 	printf("\t 8) Restore Default Threshold Voltages \n\r");
+	printf("\t 9) Get Heaters Value \n\r");
+	printf("\t 10) Set Heaters Value \n\r");
 
 
-	unsigned int number_of_tests = 8;
+	unsigned int number_of_tests = 10;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -268,6 +331,12 @@ Boolean selectAndExecuteEpsDemoTest()
 		break;
 	case 8:
 		offerMoreTests = TestRestoreDefaultThresholdVoltages();
+		break;
+	case 9:
+		offerMoreTests = GetHeaterValues();
+		break;
+	case 10:
+		offerMoreTests = SetHeaterValues();
 		break;
 
 	default:

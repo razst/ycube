@@ -198,7 +198,7 @@ void DeployAnt(){
 
 	Boolean flag;
 	FRAM_read((unsigned char*) &flag, STOP_REDEPOLOY_FLAG_ADDR,STOP_REDEPOLOY_FLAG_SIZE);
-	printf("STOP_REDEPOLOY_FLAG_ADDR: %d \n",flag);
+	//printf("STOP_REDEPOLOY_FLAG_ADDR: %d \n",flag);
 
 	if (!flag  && CheckExecutionTime(lastDeploy,DEPLOY_INTRAVAL)){
 		CMD_AntennaDeploy(NULL);

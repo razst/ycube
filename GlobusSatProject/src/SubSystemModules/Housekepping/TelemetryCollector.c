@@ -101,7 +101,7 @@ void TelemetrySaveEPS()
 
 	if (logError(isis_eps__gethousekeepingeng__tm(EPS_I2C_BUS_INDEX, &tlm_mb_eng)) == 0)
 	{
-		write2File(&tlm_mb_eng , tlm_eps_eng_cdb);
+		write2File(&tlm_mb_eng , tlm_eps_eng_mb);
 	}
 
 	isis_eps__gethousekeepingrawincdb__from_t tlm_cdb_raw;

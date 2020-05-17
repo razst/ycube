@@ -433,8 +433,9 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 			sat_packet_t dump_tlm = { 0 };
 
 			AssembleCommand((unsigned char*)element, sizeof(int)+size,
-					trxvu_cmd_type,DUMP_TIME_RANGE,
+					dump_type,tlmType,
 					cmd_id, &dump_tlm);
+
 
 			TransmitSplPacket(&dump_tlm, NULL);
 			numOfElementsSent++;

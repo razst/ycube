@@ -57,8 +57,19 @@
           "inParams": [
             {
               "name": "state",
-              "desc": "00 (on) / 01 (off)",
-              "type": "char"
+              "desc": "00 (off) / 01 (on)",
+              "type": "char",
+              "values": [
+                {
+                  "id": "00",
+                  "name": "Off"
+                },
+                {
+                  "id": "01",
+                  "name": "On"
+                }
+              ]
+			  
             },
             {
               "name": "duration",
@@ -85,16 +96,38 @@
               "type": "char",
               "values": [
                 {
-                  "id": "0",
-                  "name": "esp"
+                  "id": "9",
+                  "name": "tlm_eps_raw_mb"
+                },
+                {
+                  "id": "10",
+                  "name": "tlm_eps_eng_mb"
+                },
+                {
+                  "id": "11",
+                  "name": "tlm_eps_raw_cdb"
+                },
+                {
+                  "id": "12",
+                  "name": "tlm_eps_eng_cdb"
                 },
                 {
                   "id": "1",
-                  "name": "eso"
+                  "name": "TX"
                 },
                 {
                   "id": "4",
                   "name": "WOD"
+                }
+                ,
+                {
+                  "id": "6",
+                  "name": "tlm_rx"
+                }
+                ,
+                {
+                  "id": "13",
+                  "name": "LOG"
                 }
               ]
             },
@@ -126,8 +159,20 @@
               "type": "char",
               "values": [
                 {
-                  "id": "0",
-                  "name": "EPS"
+                  "id": "9",
+                  "name": "tlm_eps_raw_mb"
+                },
+                {
+                  "id": "10",
+                  "name": "tlm_eps_eng_mb"
+                },
+                {
+                  "id": "11",
+                  "name": "tlm_eps_raw_cdb"
+                },
+                {
+                  "id": "12",
+                  "name": "tlm_eps_eng_cdb"
                 },
                 {
                   "id": "1",
@@ -136,6 +181,16 @@
                 {
                   "id": "4",
                   "name": "WOD"
+                }
+                ,
+                {
+                  "id": "6",
+                  "name": "tlm_rx"
+                }
+                ,
+                {
+                  "id": "13",
+                  "name": "LOG"
                 }
               ]
             },
@@ -309,16 +364,38 @@
               "type": "char",
               "values": [
                 {
-                  "id": "0",
-                  "name": "ESP"
+                  "id": "9",
+                  "name": "tlm_eps_raw_mb"
+                },
+                {
+                  "id": "10",
+                  "name": "tlm_eps_eng_mb"
+                },
+                {
+                  "id": "11",
+                  "name": "tlm_eps_raw_cdb"
+                },
+                {
+                  "id": "12",
+                  "name": "tlm_eps_eng_cdb"
                 },
                 {
                   "id": "1",
-                  "name": "eso"
+                  "name": "TX"
                 },
                 {
                   "id": "4",
                   "name": "WOD"
+                }
+                ,
+                {
+                  "id": "6",
+                  "name": "tlm_rx"
+                }
+                ,
+                {
+                  "id": "13",
+                  "name": "LOG"
                 }
               ]
             },

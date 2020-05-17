@@ -96,7 +96,7 @@
             {
               "name": "bitrate",
               "desc": "the bitrate we want to get (1200 - 00 | 2400 - 01 | 4800 - 02 | 9600 - 03)",
-              "type": "char?"
+              "type": "int"
             }
           ]
         },
@@ -108,7 +108,7 @@
             {
               "name": "uptime",
               "desc": "how much time the satellite is on",
-              "type": "int?"
+              "type": "int"
             }
           ]
         },
@@ -120,7 +120,7 @@
             {
               "name": "uptime",
               "desc": "how much time the satellite is on",
-              "type": "int?"
+              "type": "int"
             }
           ]
         },
