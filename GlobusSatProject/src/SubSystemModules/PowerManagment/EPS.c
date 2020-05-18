@@ -160,10 +160,11 @@ int GetAlpha(float *alpha)
 
 int RestoreDefaultAlpha()
 {
+
 	/*
 	float def_alpha = DEFAULT_ALPHA_VALUE;
 	if(logError(UpdateAlpha(def_alpha)))return -1;
-	*/
+*/
 	return 0;
 }
 

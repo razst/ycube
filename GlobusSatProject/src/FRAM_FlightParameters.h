@@ -67,8 +67,6 @@
 // </Satellite Management>
 
 // <TRXVU>
-#define DELAYED_CMD_BUFFER_ADDR			0x8000		//<! starting address of the delayed command buffer
-#define DELAYED_CMD_BUFFER_LENGTH		50			//<! number of commands the buffer is capable of saving(self defined, can be changed)
 
 
 #define DEFAULT_BEACON_INTERVAL_TIME 	20			//<! how many seconds between two beacons [sec]

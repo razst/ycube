@@ -29,9 +29,11 @@
 #include "SubSystemModules/Maintenance/Maintenance.h"
 #include "Maintanence_Commands.h"
 
-#define RESET_KEY 0xA6 // need to sed this key to the reset command otherwise reset will not happen
+#define RESET_KEY 0xA6 // need to send this key to the reset command otherwise reset will not happen
 
-int CMD_GenericI2C(sat_packet_t *cmd) // TODO: why do we need this funcation?? it is using malloc
+// data in SPL should be: slaveaddr,size of data to get back from to I2C command ,data to sent to I2C
+// TODO: how to test this function??
+int CMD_GenericI2C(sat_packet_t *cmd)
 {
 	if(cmd == NULL || cmd->data == NULL){
 		return E_INPUT_POINTER_NULL;
@@ -45,16 +47,19 @@ int CMD_GenericI2C(sat_packet_t *cmd) // TODO: why do we need this funcation?? i
 	memcpy(&size,cmd->data + sizeof(slaveAddr),sizeof(size));
 
 	unsigned int offset = sizeof(slaveAddr) + sizeof(size);
-	err = I2C_write((unsigned int)slaveAddr,cmd->data + offset, cmd->length);
+	//err = I2C_write((unsigned int)slaveAddr,cmd->data + offset, cmd->length);
+	err = I2C_write((unsigned int)slaveAddr,cmd->data + offset, (cmd->length - offset));
 	err = I2C_read((unsigned int)slaveAddr,i2c_data,size);
 	if (err == E_NO_SS_ERR){
 		TransmitDataAsSPL_Packet(cmd, i2c_data, size);
 	}
 	free(i2c_data);
+
 	return err;
 }
 
-int CMD_FRAM_ReadAndTransmitt(sat_packet_t *cmd) // TODO: why do we need this funcation?? it is using malloc
+// SPL data should be: addr(int),size of data to read
+int CMD_FRAM_ReadAndTransmitt(sat_packet_t *cmd)
 {
 	if (cmd == NULL || cmd->data == NULL){
 		return E_INPUT_POINTER_NULL;
@@ -80,7 +85,8 @@ int CMD_FRAM_ReadAndTransmitt(sat_packet_t *cmd) // TODO: why do we need this fu
 	return err;
 }
 
-int CMD_FRAM_WriteAndTransmitt(sat_packet_t *cmd) // TODO: why do we need this funcation??
+// SPL data should be: addr(int),data
+int CMD_FRAM_WriteAndTransmitt(sat_packet_t *cmd)
 {
 	if (cmd == NULL || cmd->data == NULL){
 		return E_INPUT_POINTER_NULL;
@@ -209,10 +215,13 @@ int CMD_ResetComponent(sat_packet_t *cmd)
 
 	Boolean8bit reset_flag = TRUE_8BIT;
 
-	switch (cmd->cmd_subtype)
+	char restType=0;
+	memcpy(&restType, cmd->data, sizeof(char));
+
+	switch (restType)
 	{
 	case reset_software:
-		SendAckPacket(ACK_HARD_RESET, cmd, NULL, 0);
+		SendAckPacket(ACK_SOFT_RESET, cmd, NULL, 0);
 		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
 		vTaskDelay(10);
 		restart();
@@ -225,12 +234,13 @@ int CMD_ResetComponent(sat_packet_t *cmd)
 		//TODO: ASK if we need this as we have the eps reset
 		break;
 
-	case reset_eps: // this is a HW reset of the iOBC
+	case reset_eps: // this is a soft reset of the MCU
 		SendAckPacket(ACK_EPS_RESET, cmd, NULL, 0);
 		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
 		vTaskDelay(10);
 		isis_eps__reset__to_t cmd_t;
 		isis_eps__reset__from_t cmd_f;
+		cmd_t.fields.rst_key = RESET_KEY;
 		logError(isis_eps__reset__tmtc(EPS_I2C_BUS_INDEX, &cmd_t, &cmd_f));
 		break;
 

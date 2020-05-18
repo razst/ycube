@@ -6,6 +6,12 @@
       "desc": "All TRXVU function calls",
       "subtypes": [
         {
+          "id": "194",
+          "name": "Ping",
+          "desc": "Send ping call to satellite (a.k.a dummy function)",
+          "inParams": []
+        },
+        {
           "id": "17",
           "name": "mute",
           "desc": "mute the TRXVU",
@@ -26,17 +32,13 @@
           "id": "136",
           "name": "unmute",
           "desc": "unmute the TRXVU",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "35",
           "name": "get beacon interval",
           "desc": "get the beacon interval time in seconds",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "36",
@@ -69,7 +71,6 @@
                   "name": "On"
                 }
               ]
-			  
             },
             {
               "name": "duration",
@@ -82,8 +83,7 @@
           "id": "192",
           "name": "ANT_STOP_REDEPLOY",
           "desc": "Stop the every 30 min ant deploy in the maintiance",
-          "inParams": [
-          ]
+          "inParams": []
         },
         {
           "id": "112",
@@ -118,13 +118,11 @@
                 {
                   "id": "4",
                   "name": "WOD"
-                }
-                ,
+                },
                 {
                   "id": "6",
                   "name": "tlm_rx"
-                }
-                ,
+                },
                 {
                   "id": "13",
                   "name": "LOG"
@@ -138,7 +136,7 @@
             },
             {
               "name": "end time",
-              "desc": "end time of dump ",
+              "desc": "end time of dump - not including this date ",
               "type": "datetime"
             },
             {
@@ -181,13 +179,11 @@
                 {
                   "id": "4",
                   "name": "WOD"
-                }
-                ,
+                },
                 {
                   "id": "6",
                   "name": "tlm_rx"
-                }
-                ,
+                },
                 {
                   "id": "13",
                   "name": "LOG"
@@ -201,7 +197,7 @@
             },
             {
               "name": "end time",
-              "desc": "end date of dump ",
+              "desc": "end date of dump - not including this date",
               "type": "date"
             },
             {
@@ -215,17 +211,13 @@
           "id": "34",
           "name": "abort dump",
           "desc": "ask to stop the dump",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "19",
           "name": "get baud rate",
           "desc": "get the bitrate of the trxvu",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "21",
@@ -243,33 +235,25 @@
           "id": "51",
           "name": "force abort dump",
           "desc": "stop the dump",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "102",
           "name": "Get TX uptime",
           "desc": "get how much time the satellite is on",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "104",
           "name": "Get RX uptime",
           "desc": "get how much time the satellite is on?",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "167",
           "name": "Get num of online commands",
           "desc": "get how much commands do the satellite needs to do now",
-          "inParams": [
-            
-          ]
+          "inParams": []
         },
         {
           "id": "178",
@@ -333,10 +317,14 @@
       "subtypes": [
         {
           "id": "0",
-          "name": "restert",
-          "desc": "restart the OBC with the EPS",
+          "name": "Update Alpha",
+          "desc": "update the Alpha value for smothing",
           "inParams": [
-            
+            {
+              "name": "Alpha",
+              "desc": "new Alpha value (float value)",
+              "type": "float"
+            }
           ]
         }
       ]
@@ -345,14 +333,6 @@
       "id": "2",
       "name": "Telemetry",
       "subtypes": [
-        {
-          "id": "0",
-          "name": "restert",
-          "desc": "restart the OBC with the EPS",
-          "inParams": [
-            
-          ]
-        },
         {
           "id": "170",
           "name": "Delete TLM Files",
@@ -386,13 +366,11 @@
                 {
                   "id": "4",
                   "name": "WOD"
-                }
-                ,
+                },
                 {
                   "id": "6",
                   "name": "tlm_rx"
-                }
-                ,
+                },
                 {
                   "id": "13",
                   "name": "LOG"
@@ -406,18 +384,63 @@
             },
             {
               "name": "end time",
-              "desc": "end date of dump ",
+              "desc": "end date of dump - not including this date",
               "type": "date"
-            }            
+            }
           ]
         }
-		
       ]
     },
     {
       "id": "4",
       "name": "management",
       "subtypes": [
+        {
+          "id": "222",
+          "name": "restert",
+          "desc": "restart the OBC",
+          "inParams": [
+            {
+              "name": "reset type",
+              "desc": "what type to reset do we want to preform",
+              "type": "char",
+              "values": [
+                {
+                  "id": "0",
+                  "name": "reset_software"
+                },
+                {
+                  "id": "1",
+                  "name": "NOT USED reset_hardware"
+                },
+                {
+                  "id": "2",
+                  "name": "reset_eps - soft MCU reset"
+                },
+                {
+                  "id": "3",
+                  "name": "reset_trxvu_hard"
+                },
+                {
+                  "id": "4",
+                  "name": "reset_trxvu_soft"
+                },
+                {
+                  "id": "5",
+                  "name": "reset_ant_SideA"
+                },
+                {
+                  "id": "6",
+                  "name": "reset_ant_SideB"
+                },
+                {
+                  "id": "7",
+                  "name": "NOT USED reset_filesystem"
+                }
+              ]
+            }
+          ]
+        },
         {
           "id": "221",
           "name": "UPDATE_SAT_TIME",
@@ -432,6 +455,5 @@
         }
       ]
     }
-	
   ]
 }

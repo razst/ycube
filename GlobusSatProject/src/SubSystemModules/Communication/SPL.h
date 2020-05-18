@@ -5,10 +5,10 @@
 typedef enum __attribute__ ((__packed__)) spl_command_type_t {
 	trxvu_cmd_type,
 	eps_cmd_type,
-	telemetry_cmd_type,
+	telemetry_cmd_type, //2
 	filesystem_cmd_type,
 	managment_cmd_type,
-	ack_type,
+	ack_type,// 5
 	dump_type
 }spl_command_type;
 
@@ -83,6 +83,7 @@ typedef enum __attribute__ ((__packed__)) trxvu_subtypes_t
 	ANT_CANCEL_DEPLOY = 	0xB7,	//0b10110111 *
 	ANT_DEPLOY = 			0xB9,	//0b10110111 *
 	ANT_STOP_REDEPLOY = 	0xC0,
+	PING = 					0xC2,
 	FORCE_ABORT_DUMP_SUBTYPE = 0x33,//0b00110011 *
 	DELETE_DUMP_TASK = 0x44			//0b00100010 //its not in the cmd dictionary
 

@@ -19,6 +19,9 @@ int trxvu_command_router(sat_packet_t *cmd)
 	//TODO: finish 'trxvu_command_router'
 	switch (cmd->cmd_subtype)
 	{
+	case PING: 								//this command is a ping function
+		SendAckPacket(ACK_PING, cmd,NULL,0);
+		break;
 	case DUMP_DAYS:
 		err = CMD_StartDump(cmd);
 		break;
