@@ -98,6 +98,7 @@ int CMD_StartDump(sat_packet_t *cmd)
 	}
 	xTaskCreate(DumpTask, (const signed char* const )"DumpTask", 2000,
 			&dmp_pckt, configMAX_PRIORITIES - 2, xDumpHandle);
+	SendAckPacket(ACK_DUMP_START, cmd,NULL,0);
 
 	return 0;
 }
@@ -118,6 +119,25 @@ int CMD_ForceDumpAbort(sat_packet_t *cmd)
 	return 0;
 }
 
+int CMD_SetTransponder(sat_packet_t *cmd)
+{
+	//sends I2C command
+	int err = 0;
+	time_unix duration = 0;
+	char data[2] = {};
+
+	data[0] = 0x38;
+
+	memcpy(&data[1],cmd->data[0],sizeof(char)); //data[1] = 0x02 or data[1] = 0x01
+	err = I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
+
+	if(data[1] == 0x02)
+		memcpy(&duration,cmd->data[1],sizeof(duration));
+
+	if (err == E_NO_SS_ERR)
+		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
+	return err;
+}
 
 int CMD_MuteTRXVU(sat_packet_t *cmd)
 {
@@ -184,8 +204,6 @@ int CMD_GetBeaconInterval(sat_packet_t *cmd)
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &beacon_interval,
 				sizeof(beacon_interval));
 	}
-
-
 	return err;
 }
 

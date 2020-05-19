@@ -36,6 +36,10 @@ int trxvu_command_router(sat_packet_t *cmd)
 		err = CMD_ForceDumpAbort(cmd);
 		break;
 
+	case SET_TRANSPONDER:
+			err = CMD_SetTransponder(cmd);
+			break;
+
 	case MUTE_TRXVU:
 		err = CMD_MuteTRXVU(cmd);
 		break;
