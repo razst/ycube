@@ -648,7 +648,6 @@ Boolean FullSDTest(){
 			Time_setUnixEpoch(new_time + i);
 		}
 
-		Time_setUnixEpoch(current_time);
 }
 
 
