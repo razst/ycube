@@ -639,12 +639,14 @@ Boolean FullSDTest(){
 
 		// add new files
 		for(int i=0; i<86400; i=i+20){
-			printf("i=%d\n",i);
 			TelemetrySaveWOD();
-			//TelemetrySaveANT();
-			TelemetrySaveEPS();
-			//TelemetrySaveSolarPanels();
-			TelemetrySaveTRXVU();
+			TelemetrySaveRX();
+			TelemetrySaveTX();
+			TelemetrySaveERM();
+			TelemetrySaveERC();
+			TelemetrySaveEEC();
+			TelemetrySaveLOG();
+			TelemetrySaveEEM();
 			Time_setUnixEpoch(new_time + i);
 		}
 
@@ -702,7 +704,7 @@ Boolean selectAndExecuteFSTest()
 	printf("\t 14) full SD test\n\r");
 	//Ilay the mechoar!! Ilay is not agevaramlemokllikshmekknrnktnsmckdlxjdjnedjxndejxdnxmexdlkjenxdkj
 
-	unsigned int number_of_tests = 14;
+	unsigned int number_of_tests = 13;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {

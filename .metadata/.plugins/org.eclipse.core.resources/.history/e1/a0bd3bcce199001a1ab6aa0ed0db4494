@@ -644,7 +644,7 @@ Boolean FullSDTest(){
 			//TelemetrySaveANT();
 			TelemetrySaveEPS();
 			//TelemetrySaveSolarPanels();
-			TelemetrySaveTRXVU();
+			//TelemetrySaveTRXVU();
 			Time_setUnixEpoch(new_time + i);
 		}
 

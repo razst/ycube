@@ -639,12 +639,11 @@ Boolean FullSDTest(){
 
 		// add new files
 		for(int i=0; i<86400; i=i+20){
-			printf("i=%d\n",i);
 			TelemetrySaveWOD();
-			//TelemetrySaveANT();
-			TelemetrySaveEPS();
+			TelemetrySaveANT();
+			//TelemetrySaveEPS();
 			//TelemetrySaveSolarPanels();
-			TelemetrySaveTRXVU();
+			//TelemetrySaveTRXVU();
 			Time_setUnixEpoch(new_time + i);
 		}
 
