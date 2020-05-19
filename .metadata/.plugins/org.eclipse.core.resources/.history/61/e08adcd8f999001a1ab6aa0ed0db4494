@@ -637,18 +637,15 @@ Boolean FullSDTest(){
 		deleteTLMFile(tlm_eps_eng_cdb,theDay,0);
 		deleteTLMFile(tlm_log,theDay,0);
 */
-
-		int startSecond = 107940;
-		int endSecond = 86400*30;
 		// add new files
-		for(int i=startSecond; i<=endSecond; i=i+20){
-			Time_setUnixEpoch(new_time + i);
+		for(int i=0; i<86400; i=i+20){
 			printf("i=%d\n",i);
 			TelemetrySaveWOD();
 			//TelemetrySaveANT();
 			TelemetrySaveEPS();
 			//TelemetrySaveSolarPanels();
 			TelemetrySaveTRXVU();
+			Time_setUnixEpoch(new_time + i);
 		}
 
 		Time_setUnixEpoch(current_time);

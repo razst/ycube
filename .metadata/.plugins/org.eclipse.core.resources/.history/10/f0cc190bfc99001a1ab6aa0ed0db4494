@@ -638,10 +638,10 @@ Boolean FullSDTest(){
 		deleteTLMFile(tlm_log,theDay,0);
 */
 
-		int startSecond = 107940;
-		int endSecond = 86400*30;
+		int startSecond = 86400;
+		int endSecond = 86400*2;
 		// add new files
-		for(int i=startSecond; i<=endSecond; i=i+20){
+		for(int i=startSecond; i<endSecond; i=i+20){
 			Time_setUnixEpoch(new_time + i);
 			printf("i=%d\n",i);
 			TelemetrySaveWOD();
