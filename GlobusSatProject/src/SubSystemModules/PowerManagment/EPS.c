@@ -175,3 +175,43 @@ int RestoreDefaultThresholdVoltages()
 	return 0;
 }
 
+Boolean CMDGetHeaterValues(sat_packet_t *cmd){
+	isis_eps__getparameter__to_t to;
+	isis_eps__getparameter__from_t from;
+	HeaterValues values;
+	int err;
+	// get current LOTHR_BAT_HEATER value
+	to.fields.par_id=0x3000;
+	err = isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+	values.value.MIN = from.fields.par_val;
+
+	// get current HITHR_BAT_HEATER value
+	to.fields.par_id=0x3003;
+	err += isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+	values.value.MAX = from.fields.par_val;
+
+	if (err == E_NO_SS_ERR){
+		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &values, sizeof(values));
+	}
+
+	return TRUE;
+}
+
+
+Boolean CMDSetHeaterValues(sat_packet_t *cmd){
+	// set LOTHR_BAT_HEATER to new value
+	isis_eps__setparameter__to_t setTo;
+	isis_eps__setparameter__from_t setFrom;
+
+	setTo.fields.par_id = 0x3000;
+	memcpy(&setTo.fields.par_val[0],&cmd->data[0],sizeof(int));
+	logError(isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom));
+
+	// set LOTHR_BAT_HEATER to new value
+	setTo.fields.par_id = 0x3003;
+	memcpy(&setTo.fields.par_val[0],&cmd->data[1],sizeof(int));
+	logError(isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom));
+
+	return TRUE;
+}
+
