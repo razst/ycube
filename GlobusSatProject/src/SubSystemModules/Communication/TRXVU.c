@@ -28,6 +28,7 @@
 
 time_unix 		g_mute_end_time = 0;				// time at which the mute will end
 time_unix 		g_idle_end_time = 0;				// time at which the idel will end
+time_unix 		g_transponder_end_time = 0;			// time at which the transponder mode will end
 
 xQueueHandle xDumpQueue = NULL;
 xSemaphoreHandle xDumpLock = NULL;
@@ -128,9 +129,21 @@ void checkIdleFinish(){
 	Time_getUnixEpoch(&curr_tick_time);
 
 	// check if it is time to turn off the idle...
-	if (g_idle_end_time !=0 && g_idle_end_time < curr_tick_time){
-		g_idle_end_time = 0;
+	if (g_transponder_end_time !=0 && g_transponder_end_time < curr_tick_time){
+		g_transponder_end_time = 0;
 		SetIdleState(trxvu_idle_state_off,0);
+	}
+}
+
+void checkTransponderFinish(){
+	time_unix curr_tick_time = 0;
+	Time_getUnixEpoch(&curr_tick_time);
+
+	// check if it is time to turn off the transponder...
+	if (g_transponder_end_time !=0 && g_transponder_end_time < curr_tick_time){
+		g_transponder_end_time = 0;
+		int data[2] = {0x38, trxvu_transponder_off};
+		I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
 	}
 }
 
@@ -155,6 +168,7 @@ int TRX_Logic() {
 		//TODO: send message to ground when a delayed command was not executed-> add to log
 	}
 
+	checkTransponderFinish();
 	checkIdleFinish();
 	BeaconLogic();
 
