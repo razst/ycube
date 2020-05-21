@@ -40,7 +40,6 @@ static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buf
 
 void delete_allTMFilesFromSD()
 {
-	// TODO make sure we don't delete the image file
 	F_FIND find;
 	if (!f_findfirst("A:/*.*",&find))
 	{
