@@ -28,6 +28,11 @@ typedef struct __attribute__ ((__packed__))
 	int resulotion;
 } dump_arguments_t;
 
+typedef enum __attribute__ ((__packed__)) _ISIStrxvuTransponderMode
+{
+    trxvu_transponder_off = 0x01,
+    trxvu_transponder_on = 0x02
+} ISIStrxvutransponderMode;
 
 /*!
  * @breif Initializes data filed for transmission - semaphores, parameters from the FRAM
@@ -41,6 +46,8 @@ void InitTxModule();
  * 			errors according to <hal/errors.h>
  */
 int InitTrxvu();
+
+void checkTransponderFinish();
 
 int CMD_SetBeaconInterval(sat_packet_t *cmd);
 

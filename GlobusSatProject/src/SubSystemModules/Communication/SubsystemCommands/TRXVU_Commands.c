@@ -7,6 +7,7 @@
 #include "GlobalStandards.h"
 #include "TRXVU_Commands.h"
 #include "TLM_management.h"
+#include "TRXVU.c"
 
 
 extern xTaskHandle xDumpHandle;			 //task handle for dump task
@@ -128,16 +129,37 @@ int CMD_SetTransponder(sat_packet_t *cmd)
 
 	data[0] = 0x38;
 
-	memcpy(&data[1],cmd->data[0],sizeof(char)); //data[1] = 0x02 or data[1] = 0x01
+	memcpy(&data[1],cmd->data[0],sizeof(char)); //data[1] = 0x02 - transponder or data[1] = 0x01 - nominal
 	err = I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
 
-	if(data[1] == 0x02)
+	if(data[1] == trxvu_transponder_on){
 		memcpy(&duration,cmd->data[1],sizeof(duration));
+		time_unix curr_tick_time = 0;
+		Time_getUnixEpoch(&curr_tick_time);
+		g_transponder_end_time = curr_tick_time + duration;
+	}else g_transponder_end_time = 0;
 
 	if (err == E_NO_SS_ERR)
 		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
 	return err;
 }
+
+int CMD_SetRSSITransponder(sat_packet_t *cmd)
+{
+	//sends I2C command
+	int err = 0;
+	char data[1+sizeof(int)] = {};
+
+	data[0] = 0x52;
+
+	memcpy(&data[1],cmd->data[0],sizeof(int));
+	err = I2C_write(I2C_TRXVU_TC_ADDR, data, sizeof(data));
+
+	if (err == E_NO_SS_ERR)
+		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
+	return err;
+}
+
 
 int CMD_MuteTRXVU(sat_packet_t *cmd)
 {
