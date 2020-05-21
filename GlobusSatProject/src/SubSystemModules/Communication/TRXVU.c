@@ -59,6 +59,7 @@ int CMD_SetBeaconInterval(sat_packet_t *cmd)
 
 	g_beacon_interval_time=interval;
 	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &interval,sizeof(interval));
+	SendAckPacket(ACK_COMD_EXEC, cmd,NULL,0);
 	return err;
 }
 
