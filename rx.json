@@ -467,6 +467,38 @@
           ]
         }
       ]
+    },
+	
+	
+	
+    {
+      "id": "4",
+      "name": "Managment",
+      "desc": "All Managment Types",
+      "subtypes": [
+        {
+          "id": "221",
+          "name": "Update Sat time",
+          "desc": "Update Sat time",
+          "inParams": [
+            {
+              "name": "Current time",
+              "desc": "Current time after command exec",
+              "type": "datetime"
+            }
+          ]
+        }
+      ]
     }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
   ]
 }

@@ -725,18 +725,18 @@ Boolean FullSDTest(){
 	theDay.date = 5;
 	theDay.month = 1;
 
-	for(int j=7; j<=12 ; j++){
-		theDay.month=j;
-		printf("month=%d\n",theDay.month);
-		for(int i=1; i<=28; i++){
-			theDay.date = i;
-			printf("day=%d\n",theDay.date);
+	for(int j=0; j<6 ; j++){
+		printf("month=%d\n",j);
+		for(int i=0; i<28; i++){
+			printf("day=%d\n",i);
 			copyTLMFile(tlm_wod,theDay,"250130.WOD");
 			copyTLMFile(tlm_eps_eng_mb,theDay,"250130.EEM");
 			copyTLMFile(tlm_tx,theDay,"250130.TX");
 			copyTLMFile(tlm_rx,theDay,"250130.RX");
 			copyTLMFile(tlm_log,theDay,"200520.LOG");
+			theDay.date++;
 		}
+		theDay.month++;
 		TelemetrySaveWOD(); // just to keep the WDT happy
 	}
 	return TRUE;
