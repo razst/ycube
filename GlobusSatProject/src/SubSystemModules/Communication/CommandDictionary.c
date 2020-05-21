@@ -124,6 +124,12 @@ int eps_command_router(sat_packet_t *cmd)
 	case 0:
 		err = UpdateAlpha(cmd);
 		break;
+	case 1:
+		err = CMDGetHeaterValues(cmd);
+		break;
+	case 2:
+		err = CMDSetHeaterValues(cmd);
+		break;
 
 	default:
 		SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);

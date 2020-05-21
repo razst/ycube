@@ -35,8 +35,6 @@
 #define SD_CARD_DRIVER_PARMS 0
 #define FIRST_TIME -1
 
-#define NUM_ELEMENTS_READ_AT_ONCE 400 // TODO check if 400 is the right number !!!
-
 static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
 
 

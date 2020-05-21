@@ -5,6 +5,10 @@
 #include <SubSystemModules/Housekepping/TelemetryFiles.h>
 #include "utils.h"
 #include "SubSystemModules/Maintenance/Maintenance.h"
+#include "TLM_management.h"
+#include "SubSystemModules/Communication/SatCommandHandler.h"
+#include <TLM_management.h>
+
 
 Boolean TestlistFiels(){
 
@@ -220,7 +224,7 @@ Boolean GenerateWODTLM(){
 	time_unix current_time = 0;
 	Time_getUnixEpoch(&current_time);
 
-	// set time to 2040/1/1
+	// set time to 2031/1/1
 	Time_setUnixEpoch(1924992000);
 
 	//delete the file
@@ -348,6 +352,99 @@ Boolean CreateFiles4DeleteTest(){
 
 
 }
+
+static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
+
+void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
+	//TODO check for unsupported tlmType
+
+	unsigned int offset = 0;
+
+	F_FILE *source, *target;
+	int size=0;
+	char file_name[MAX_FILE_NAME_SIZE] = {0};
+	char end_file_name[3] = {0};
+
+	getTlmTypeInfo(tlmType,end_file_name,&size);
+	calculateFileName(date,&file_name,end_file_name , 0);
+	printf("reading from file %s...\n",file_name);
+
+	target = f_open(file_name, "w");
+
+	if( target == NULL )
+	{
+		f_close(source);
+		printf("unable to create target file...\n");
+		return;
+	}
+
+	source = f_open(sourceFile, "r");
+
+	int err = f_getlasterror();
+
+	if (!source)
+	{
+		printf("Unable to open file!, f_open error=%d\n",err);// TODO: log error in all printf in the file!
+		return;
+	}
+
+
+
+
+	char element[(sizeof(int)+size)];// buffer for a single element that we will tx
+	int numOfElementsSent=0;
+	time_unix currTime = 0;
+	time_unix lastSentTime = 0;
+
+	while(1)
+	{
+		int readElemnts = f_read(&buffer , sizeof(int)+size , NUM_ELEMENTS_READ_AT_ONCE, source);
+		if(!readElemnts) break;
+		f_write(&buffer , sizeof(int)+size ,readElemnts, target );
+
+	}// end loop...
+
+	/* close the file*/
+	f_close (source);
+	f_close (target);
+	return ;
+}
+
+
+
+void copyFile(char source_file[], char target_file[])
+{
+	char ch;
+	F_FILE *source, *target;
+
+	source = f_open(source_file, "r");
+
+	if( source == NULL )
+	{
+		printf("No source file...\n");
+		return;
+	}
+
+	target = f_open(target_file, "w");
+
+	if( target == NULL )
+	{
+		f_close(source);
+		printf("unable to create target file...\n");
+		return;
+	}
+
+	while( ( ch = f_getc(source) ) != -1 && !f_eof(source))
+		f_putc(ch, target);
+
+	printf("File copied successfully.\n");
+
+	f_close(source);
+	f_close(target);
+
+	return ;
+}
+
 
 Boolean TestWODTLM(){
 
@@ -611,6 +708,57 @@ Boolean TestTRXVUTLM(){
 
 
 }
+Boolean FullSDTest(){
+
+	// save current time
+	time_unix current_time = 0;
+	Time_getUnixEpoch(&current_time);
+
+	time_unix new_time = 1735689600;
+	// set time to 2025/1/1
+	Time_setUnixEpoch(new_time);
+
+	//delete the file
+	Time theDay;
+	theDay.year = 45;
+	theDay.date = 1;
+	theDay.month = 1;
+
+
+	//copyFile("250105.WOD","TEST04.WOD");
+
+	copyTLMFile(tlm_wod,theDay,"250130.WOD");
+	return TRUE;
+
+
+	/*
+		// first, delete all previus files
+		deleteTLMFile(tlm_tx,theDay,0);
+		deleteTLMFile(tlm_wod,theDay,0);
+		deleteTLMFile(tlm_rx,theDay,0);
+		deleteTLMFile(tlm_eps_raw_mb,theDay,0);
+		deleteTLMFile(tlm_eps_eng_mb,theDay,0);
+		deleteTLMFile(tlm_eps_raw_cdb,theDay,0);
+		deleteTLMFile(tlm_eps_eng_cdb,theDay,0);
+		deleteTLMFile(tlm_log,theDay,0);
+	 */
+
+	int startSecond = 86400*30;
+	int endSecond = 86400*30*2;// two months
+	// add new files
+	for(int i=startSecond; i<=endSecond; i=i+20){
+		Time_setUnixEpoch(new_time + i);
+		printf("i=%d\n",i);
+		TelemetrySaveWOD();
+		//TelemetrySaveANT();
+		TelemetrySaveEPS();
+		//TelemetrySaveSolarPanels();
+		TelemetrySaveTRXVU();
+	}
+
+	Time_setUnixEpoch(current_time);
+}
+
 
 Boolean LogErrorRateTest(){
 
@@ -660,9 +808,10 @@ Boolean selectAndExecuteFSTest()
 	printf("\t 11) Delete OLD files \n\r");
 	printf("\t 12) create files for delete test \n\r");
 	printf("\t 13) LOG error rate test\n\r");
-	//palmon is not a gever??
+	printf("\t 14) full SD test\n\r");
+	//Ilay the mechoar!! Ilay is not agevaramlemokllikshmekknrnktnsmckdlxjdjnedjxndejxdnxmexdlkjenxdkj
 
-	unsigned int number_of_tests = 13;
+	unsigned int number_of_tests = 14;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -694,20 +843,23 @@ Boolean selectAndExecuteFSTest()
 		offerMoreTests = TestReadTimeRangeTLMRes();
 		break;
 	case 9:
-			offerMoreTests = TestEPSTLM();
-			break;
+		offerMoreTests = TestEPSTLM();
+		break;
 	case 10:
-			offerMoreTests = GenerateWODTLM();
-			break;
+		offerMoreTests = GenerateWODTLM();
+		break;
 	case 11:
-			offerMoreTests = DeleteOldFiles();
-			break;
+		offerMoreTests = DeleteOldFiles();
+		break;
 	case 12:
-			offerMoreTests = CreateFiles4DeleteTest();
-			break;
+		offerMoreTests = CreateFiles4DeleteTest();
+		break;
 	case 13:
-			offerMoreTests = LogErrorRateTest();
-			break;
+		offerMoreTests = LogErrorRateTest();
+		break;
+	case 14:
+		offerMoreTests = FullSDTest();
+		break;
 	default:
 		break;
 	}

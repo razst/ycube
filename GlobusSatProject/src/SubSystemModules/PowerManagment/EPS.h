@@ -54,7 +54,12 @@ typedef union __attribute__ ((__packed__)){
 		voltage_t Vup_full;
 	}fields;
 }EpsThreshVolt_t;
-
+typedef union __attribute__ ((__packed__)){
+struct {
+	 int MIN;
+	 int MAX;
+}value;
+}HeaterValues;
 /*!
  * @brief initializes the EPS subsystem.
  * @return	0 on success
@@ -132,5 +137,9 @@ int RestoreDefaultAlpha();
   * @see EPS_DEFAULT_THRESHOLD_VOLTAGES
  */
 int RestoreDefaultThresholdVoltages();
+
+Boolean CMDGetHeaterValues(sat_packet_t *cmd);
+
+Boolean CMDSetHeaterValues(sat_packet_t *cmd);
 
 
