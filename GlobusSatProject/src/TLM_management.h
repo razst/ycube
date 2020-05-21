@@ -16,6 +16,8 @@
 
 
 #define MAX_FILE_NAME_SIZE 11
+#define NUM_ELEMENTS_READ_AT_ONCE 400 // TODO check if 400 is the right number !!!
+
 
 #define FS_FILE_ENDING	"TLM"
 #define FS_FILE_ENDING_SIZE	3
@@ -50,6 +52,7 @@ int deleteTLMFiles(tlm_type_t tlmType, Time date, int numOfDays);
  */
 int deleteTLMFile(tlm_type_t tlmType, Time date, int days2Add);
 
+void calculateFileName(Time curr_date,char* file_name, char* endFileName, int days2Add);
 /*
  * Read telematry file and send it to ground station over RF
  */
