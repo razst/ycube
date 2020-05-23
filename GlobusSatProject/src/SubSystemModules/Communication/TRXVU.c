@@ -129,8 +129,8 @@ void checkIdleFinish(){
 	Time_getUnixEpoch(&curr_tick_time);
 
 	// check if it is time to turn off the idle...
-	if (g_transponder_end_time !=0 && g_transponder_end_time < curr_tick_time){
-		g_transponder_end_time = 0;
+	if (g_idle_end_time !=0 && g_idle_end_time < curr_tick_time){
+		g_idle_end_time = 0;
 		SetIdleState(trxvu_idle_state_off,0);
 	}
 }

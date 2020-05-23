@@ -9,8 +9,8 @@
 #include "TLM_management.h"
 
 
-extern xTaskHandle xDumpHandle;			 //task handle for dump task
-extern xSemaphoreHandle xDumpLock; // this global lock is defined once in TRXVU.c
+extern xTaskHandle xDumpHandle;			                //task handle for dump task
+extern xSemaphoreHandle xDumpLock;                      // this global lock is defined once in TRXVU.c
 extern time_unix 		g_transponder_end_time;			// time at which the transponder mode will end
 
 static dump_arguments_t dmp_pckt;
@@ -74,7 +74,7 @@ int CMD_StartDump(sat_packet_t *cmd)
 	}
 
 
-	//dump_arguments_t dmp_pckt;
+	dump_arguments_t dmp_pckt;
 	//dump_arguments_t *dmp_pckt = malloc(sizeof(*dmp_pckt));
 	unsigned int offset = 0;
 
