@@ -1,8 +1,8 @@
-11:20:07 **** Clean-only build of configuration Debug for project GlobusSatProject ****
+14:03:26 **** Clean-only build of configuration Debug for project GlobusSatProject ****
 make -r -k clean 
 rm -rf  GlobusSatProject.siz  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o  ./src/TestingDemos/CommandsTestingDemo.d ./src/TestingDemos/EpsTestingDemo.d ./src/TestingDemos/FileSystemTestingDemo.d ./src/TestingDemos/MainTest.d ./src/TestingDemos/MaintenanceTestingDemo.d ./src/TestingDemos/TelemetryTestingDemo.d ./src/TestingDemos/TrxvuTestingDemo.d  ./src/SubSystemModules/PowerManagment/EPS.d ./src/SubSystemModules/PowerManagment/EPSOperationModes.d  ./src/SubSystemModules/Maintenance/Maintenance.d  ./src/SubSystemModules/Housekepping/TelemetryCollector.d  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d  ./src/SubSystemModules/Communication/AckHandler.d ./src/SubSystemModules/Communication/CommandDictionary.d ./src/SubSystemModules/Communication/SatCommandHandler.d ./src/SubSystemModules/Communication/TRXVU.d  ./src/InitSystem.d ./src/TLM_management.d ./src/main.d ./src/utils.d  GlobusSatProject.bin  GlobusSatProject.elf
  
-11:20:11 **** Build of configuration Debug for project GlobusSatProject ****
+14:03:31 **** Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Building file: ../src/TestingDemos/CommandsTestingDemo.c
 Invoking: Cross ARM C Compiler
@@ -423,91 +423,43 @@ Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/Maint
 Building file: ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c
 Invoking: Cross ARM C Compiler
 arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c"
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:10:0:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c: In function 'checkIdleFinish':
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:129:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
-In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
-                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:12,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
-C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:10:0:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c: In function 'checkTransponderFinish':
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:140:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
-In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
-                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:12,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
-C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:10:0:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:146:3: warning: implicit declaration of function 'I2C_write' [-Wimplicit-function-declaration]
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:10:0:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c: In function 'GetOnlineCommand':
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:193:6: warning: unused variable 'err' [-Wunused-variable]
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c: In function 'CheckTransmitionAllowed':
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:225:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
-In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
-                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:12,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
-C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:10:0:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c: In function 'BeaconLogic':
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:307:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
-In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
-                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:12,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
-C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:10:0:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:293:6: warning: unused variable 'err' [-Wunused-variable]
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c: In function 'SetIdleState':
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:331:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
-In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
-                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:12,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
-C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:10:0:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c: In function 'muteTRXVU':
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:347:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
-In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
-                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:12,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
-C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
 ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'DumpTask':
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:25:2: warning: implicit declaration of function 'f_enterFS' [-Wimplicit-function-declaration]
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:44:2: warning: passing argument 1 of 'FinishDump' from incompatible pointer type [enabled by default]
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:10:0:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:239:6: note: expected 'struct sat_packet_t *' but argument is of type 'struct dump_arguments_t *'
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:44:2: warning: passing argument 4 of 'FinishDump' from incompatible pointer type [enabled by default]
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:10:0:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:239:6: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:26:2: warning: implicit declaration of function 'f_enterFS' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:45:2: warning: passing argument 1 of 'FinishDump' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5:0,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:89:6: note: expected 'struct sat_packet_t *' but argument is of type 'struct dump_arguments_t *'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:45:2: warning: passing argument 4 of 'FinishDump' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5:0,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:89:6: note: expected 'unsigned char *' but argument is of type 'int *'
 ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_StartDump':
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:82:2: warning: passing argument 1 of 'AssembleCommand' from incompatible pointer type [enabled by default]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:83:2: warning: passing argument 1 of 'AssembleCommand' from incompatible pointer type [enabled by default]
 In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/AckHandler.h:5:0,
                  from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:10,
                  from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
                  from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
 C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/SatCommandHandler.h:56:5: note: expected 'unsigned char *' but argument is of type 'unsigned char (*)[200]'
 ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_SetTransponder':
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:131:2: warning: passing argument 2 of 'memcpy' makes pointer from integer without a cast [enabled by default]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:132:2: warning: passing argument 2 of 'memcpy' makes pointer from integer without a cast [enabled by default]
 In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:1:0:
 c:\isis\application\toolchain\bin\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/include/string.h:24:8: note: expected 'const void *' but argument is of type 'unsigned char'
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:135:3: warning: passing argument 2 of 'memcpy' makes pointer from integer without a cast [enabled by default]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:133:2: warning: implicit declaration of function 'I2C_write' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:136:3: warning: passing argument 2 of 'memcpy' makes pointer from integer without a cast [enabled by default]
 In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:1:0:
 c:\isis\application\toolchain\bin\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/include/string.h:24:8: note: expected 'const void *' but argument is of type 'unsigned char'
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:137:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:138:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
 In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
                  from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:12,
                  from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
                  from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
 ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_SetRSSITransponder':
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:155:2: warning: passing argument 2 of 'memcpy' makes pointer from integer without a cast [enabled by default]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:156:2: warning: passing argument 2 of 'memcpy' makes pointer from integer without a cast [enabled by default]
 In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:1:0:
 c:\isis\application\toolchain\bin\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/include/string.h:24:8: note: expected 'const void *' but argument is of type 'unsigned char'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: At top level:
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:16:25: warning: 'dmp_pckt' defined but not used [-Wunused-variable]
 Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c
  
 Building file: ../src/SubSystemModules/Communication/AckHandler.c
@@ -675,160 +627,6 @@ Finished building: ../src/utils.c
 Building target: GlobusSatProject.elf
 Invoking: Cross ARM C Linker
 arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
-./src/SubSystemModules/Communication/TRXVU.o: In function `InitTxModule':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:44: multiple definition of `g_mute_end_time'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:44: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `InitTxModule':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:44: multiple definition of `g_idle_end_time'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:44: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `InitTxModule':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:45: multiple definition of `g_transponder_end_time'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:45: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `InitTxModule':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:45: multiple definition of `xDumpQueue'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:45: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `InitTxModule':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:45: multiple definition of `xDumpLock'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:45: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `InitTxModule':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:45: multiple definition of `xIsTransmitting'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:45: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `InitTxModule':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:46: multiple definition of `xDumpHandle'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:46: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `InitTxModule':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:46: multiple definition of `g_prev_beacon_time'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:46: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `InitTxModule':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:46: multiple definition of `g_beacon_interval_time'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:46: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `InitTxModule':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:44: multiple definition of `InitTxModule'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:44: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `CMD_SetBeaconInterval':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:50: multiple definition of `CMD_SetBeaconInterval'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:50: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `TransmitDataAsSPL_Packet':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:362: multiple definition of `TransmitDataAsSPL_Packet'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:362: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `InitBeaconParams':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:70: multiple definition of `InitBeaconParams'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:70: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `InitSemaphores':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:78: multiple definition of `InitSemaphores'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:78: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `InitTrxvu':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:87: multiple definition of `InitTrxvu'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:87: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `checkIdleFinish':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:127: multiple definition of `checkIdleFinish'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:127: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `SetIdleState':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:319: multiple definition of `SetIdleState'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:319: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `checkTransponderFinish':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:138: multiple definition of `checkTransponderFinish'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:138: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `TRX_Logic':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:150: multiple definition of `TRX_Logic'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:150: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `GetNumberOfFramesInBuffer':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:180: multiple definition of `GetNumberOfFramesInBuffer'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:180: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `GetOnlineCommand':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:189: multiple definition of `GetOnlineCommand'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:189: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `BeaconLogic':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:287: multiple definition of `BeaconLogic'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:287: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `CheckTransmitionAllowed':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:217: multiple definition of `CheckTransmitionAllowed'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:217: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `FinishDump':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:240: multiple definition of `FinishDump'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:240: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `AbortDump':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:260: multiple definition of `AbortDump'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:260: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `SendDumpAbortRequest':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:264: multiple definition of `SendDumpAbortRequest'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:264: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `CheckDumpAbort':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:280: multiple definition of `CheckDumpAbort'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:280: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `TransmitSplPacket':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:379: multiple definition of `TransmitSplPacket'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:379: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `muteTRXVU':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:340: multiple definition of `muteTRXVU'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:340: first defined here
-./src/SubSystemModules/Communication/TRXVU.o: In function `UnMuteTRXVU':
-C:\ISIS\workspace_ycube\GlobusSatProject\Debug/../src/SubSystemModules/Communication/TRXVU.c:355: multiple definition of `UnMuteTRXVU'
-./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o:C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.c:355: first defined here
-collect2.exe: error: ld returned 1 exit status
-make: *** [GlobusSatProject.elf] Error 1
-make: Target `all' not remade because of errors.
-11:20:16 **** Incremental Build of configuration Debug for project hal-demo ****
-make -r -k all 
-Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "hal-demo.elf"
-   text	   data	    bss	    dec	    hex	filename
- 345076	     12	 446936	 792024	  c15d8	hal-demo.elf
-Finished building: hal-demo.siz
- 
-11:20:16 **** Incremental Build of configuration Debug for project satellite-subsystems-demo ****
-make -r -k all 
-Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "satellite-subsystems-demo.elf"
-   text	   data	    bss	    dec	    hex	filename
- 241080	     12	   3064	 244156	  3b9bc	satellite-subsystems-demo.elf
-Finished building: satellite-subsystems-demo.siz
- 
-11:21:39 **** Incremental Build of configuration Debug for project GlobusSatProject ****
-make -r -k all 
-Building file: ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c"
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'DumpTask':
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:26:2: warning: implicit declaration of function 'f_enterFS' [-Wimplicit-function-declaration]
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:45:2: warning: passing argument 1 of 'FinishDump' from incompatible pointer type [enabled by default]
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5:0,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:89:6: note: expected 'struct sat_packet_t *' but argument is of type 'struct dump_arguments_t *'
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:45:2: warning: passing argument 4 of 'FinishDump' from incompatible pointer type [enabled by default]
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5:0,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:89:6: note: expected 'unsigned char *' but argument is of type 'int *'
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_StartDump':
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:83:2: warning: passing argument 1 of 'AssembleCommand' from incompatible pointer type [enabled by default]
-In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/AckHandler.h:5:0,
-                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:10,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/SatCommandHandler.h:56:5: note: expected 'unsigned char *' but argument is of type 'unsigned char (*)[200]'
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_SetTransponder':
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:132:2: warning: passing argument 2 of 'memcpy' makes pointer from integer without a cast [enabled by default]
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:1:0:
-c:\isis\application\toolchain\bin\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/include/string.h:24:8: note: expected 'const void *' but argument is of type 'unsigned char'
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:133:2: warning: implicit declaration of function 'I2C_write' [-Wimplicit-function-declaration]
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:136:3: warning: passing argument 2 of 'memcpy' makes pointer from integer without a cast [enabled by default]
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:1:0:
-c:\isis\application\toolchain\bin\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/include/string.h:24:8: note: expected 'const void *' but argument is of type 'unsigned char'
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:138:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
-In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
-                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:12,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
-C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_SetRSSITransponder':
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:156:2: warning: passing argument 2 of 'memcpy' makes pointer from integer without a cast [enabled by default]
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:1:0:
-c:\isis\application\toolchain\bin\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/include/string.h:24:8: note: expected 'const void *' but argument is of type 'unsigned char'
-Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c
- 
-Building target: GlobusSatProject.elf
-Invoking: Cross ARM C Linker
-arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
 Finished building target: GlobusSatProject.elf
  
 Invoking: Cross ARM GNU Create Flash Image
@@ -838,10 +636,10 @@ Finished building: GlobusSatProject.bin
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 230784	     12	 403616	 634412	  9ae2c	GlobusSatProject.elf
+ 230784	     12	 403392	 634188	  9ad4c	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  
-11:21:40 **** Incremental Build of configuration Debug for project hal-demo ****
+14:03:37 **** Incremental Build of configuration Debug for project hal-demo ****
 make -r -k all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "hal-demo.elf"
@@ -849,7 +647,7 @@ arm-none-eabi-size --format=berkeley "hal-demo.elf"
  345076	     12	 446936	 792024	  c15d8	hal-demo.elf
 Finished building: hal-demo.siz
  
-11:21:40 **** Incremental Build of configuration Debug for project satellite-subsystems-demo ****
+14:03:38 **** Incremental Build of configuration Debug for project satellite-subsystems-demo ****
 make -r -k all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "satellite-subsystems-demo.elf"
@@ -857,43 +655,11 @@ arm-none-eabi-size --format=berkeley "satellite-subsystems-demo.elf"
  241080	     12	   3064	 244156	  3b9bc	satellite-subsystems-demo.elf
 Finished building: satellite-subsystems-demo.siz
  
-11:22:20 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+14:03:56 **** Incremental Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 230784	     12	 403616	 634412	  9ae2c	GlobusSatProject.elf
-Finished building: GlobusSatProject.siz
- 
-11:44:49 **** Incremental Build of configuration Debug for project GlobusSatProject ****
-make -r -k all 
-Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
-   text	   data	    bss	    dec	    hex	filename
- 230784	     12	 403616	 634412	  9ae2c	GlobusSatProject.elf
-Finished building: GlobusSatProject.siz
- 
-11:44:50 **** Incremental Build of configuration Debug for project hal-demo ****
-make -r -k all 
-Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "hal-demo.elf"
-   text	   data	    bss	    dec	    hex	filename
- 345076	     12	 446936	 792024	  c15d8	hal-demo.elf
-Finished building: hal-demo.siz
- 
-11:44:50 **** Incremental Build of configuration Debug for project satellite-subsystems-demo ****
-make -r -k all 
-Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "satellite-subsystems-demo.elf"
-   text	   data	    bss	    dec	    hex	filename
- 241080	     12	   3064	 244156	  3b9bc	satellite-subsystems-demo.elf
-Finished building: satellite-subsystems-demo.siz
- 
-11:44:53 **** Incremental Build of configuration Debug for project GlobusSatProject ****
-make -r -k all 
-Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
-   text	   data	    bss	    dec	    hex	filename
- 230784	     12	 403616	 634412	  9ae2c	GlobusSatProject.elf
+ 230784	     12	 403392	 634188	  9ad4c	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  

@@ -383,10 +383,80 @@
           "desc": "EPS eng data",
           "inParams": [
             {
-              "name": "TODO",
+              "name": "reply_header-stid",
               "desc": "TODO",
               "type": "char"
-            }
+            },
+            {
+              "name": "reply_header-ivid",
+              "desc": "TODO",
+              "type": "char"
+            },
+            {
+              "name": "reply_header-rc",
+              "desc": "TODO",
+              "type": "char"
+            },
+            {
+              "name": "reply_header-bid",
+              "desc": "TODO",
+              "type": "char"
+            },
+            {
+              "name": "reply_header-cmderr",
+              "desc": "TODO",
+              "type": "char"
+            },
+            {
+              "name": "reply_header-stat",
+              "desc": "TODO",
+              "type": "char"
+            },
+            {
+              "name": "reserved",
+              "desc": "reserved",
+              "type": "char"
+            },
+            {
+              "name": "volt_brdsup",
+              "desc": "volt_brdsup",
+              "type": "short"
+            },
+            {
+              "name": "temp",
+              "desc": "temp",
+              "type": "short"
+            },
+            {
+              "name": "dist_input-volt",
+              "desc": "volt_brdsup",
+              "type": "short"
+            },
+            {
+              "name": "dist_input-current",
+              "desc": "temp",
+              "type": "short"
+            },
+            {
+              "name": "dist_input-power",
+              "desc": "volt_brdsup",
+              "type": "short"
+            },
+            {
+              "name": "batt_input-volt",
+              "desc": "temp",
+              "type": "short"
+            },
+            {
+              "name": "batt_input-current",
+              "desc": "volt_brdsup",
+              "type": "short"
+            },
+            {
+              "name": "batt_input-power",
+              "desc": "temp",
+              "type": "short"
+            },
           ]
         },
         {
@@ -465,7 +535,109 @@
               "type": "int"
             }
           ]
+        },
+		
+        {
+          "id": "1",
+          "name": "TX",
+          "desc": "TX - TODO",
+          "inParams": [
+            {
+              "name": "timestamp",
+              "desc": "timestamp",
+              "type": "datetime"
+            },
+            {
+              "name": "vbat",
+              "desc": "battery voltage",
+              "type": "short"
+            }
+          ]
+        },
+		
+        {
+          "id": "6",
+          "name": "RX",
+          "desc": "RX - TODO",
+          "inParams": [
+            {
+              "name": "timestamp",
+              "desc": "timestamp",
+              "type": "datetime"
+            },
+            {
+              "name": "vbat",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "volt_5v",
+              "desc": "5v bus voltage",
+              "type": "short"
+            },
+            {
+              "name": "volt_3v3",
+              "desc": "3v3 bus voltage",
+              "type": "short"
+            },
+            {
+              "name": "charging_power",
+              "desc": "the current charging power",
+              "type": "short"
+            },
+            {
+              "name": "consumed_power",
+              "desc": "the satellite consumed power",
+              "type": "short"
+            },
+            {
+              "name": "electric_current",
+              "desc": "the battery's up-to-date electric current",
+              "type": "short"
+            },
+            {
+              "name": "current_3v3",
+              "desc": "3.3 volt bus up-to-date battery",
+              "type": "short"
+            },
+            {
+              "name": "current_5v",
+              "desc": "5 volt bus up-to-date battery",
+              "type": "short"
+            },
+            {
+              "name": "sat_time",
+              "desc": "satellite's clock current unix time",
+              "type": "datetime"
+            },
+            {
+              "name": "free_memory",
+              "desc": "the satellite's Sd's free bytes",
+              "type": "int"
+            },
+            {
+              "name": "corrupt_bytes",
+              "desc": "the memory's corrupted bytes",
+              "type": "int"
+            },
+            {
+              "name": "number_of_resets",
+              "desc": "number of resets the satellite has gone through",
+              "type": "int"
+            },
+            {
+              "name": "number_of_cmd_resets",
+              "desc": "number of resets the satellite has gone through",
+              "type": "int"
+            }
+          ]
         }
+		
+		
+		
+		
+		
+		
       ]
     },
 	
