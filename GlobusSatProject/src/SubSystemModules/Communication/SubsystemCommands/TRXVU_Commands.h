@@ -28,6 +28,8 @@ int CMD_SetIdleState(sat_packet_t *cmd);
 
 int CMD_SetTransponder(sat_packet_t *cmd);
 
+int CMD_SetRSSITransponder(sat_packet_t *cmd);
+
 int CMD_UnMuteTRXVU(sat_packet_t *cmd);
 
 int CMD_GetBaudRate(sat_packet_t *cmd);

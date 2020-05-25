@@ -22,12 +22,15 @@ int trxvu_command_router(sat_packet_t *cmd)
 	case PING: 								//this command is a ping function
 		SendAckPacket(ACK_PING, cmd,NULL,0);
 		break;
+
 	case DUMP_DAYS:
 		err = CMD_StartDump(cmd);
 		break;
+
 	case DUMP_TIME_RANGE:
 		err = CMD_StartDump(cmd);
 		break;
+
 	case ABORT_DUMP_SUBTYPE:
 		err = CMD_SendDumpAbortRequest(cmd);
 		break;
@@ -37,8 +40,13 @@ int trxvu_command_router(sat_packet_t *cmd)
 		break;
 
 	case SET_TRANSPONDER:
-			err = CMD_SetTransponder(cmd);
-			break;
+		err = CMD_SetTransponder(cmd);
+		break;
+
+	case SET_RSSI_TRANSPONDER:
+		err = CMD_SetRSSITransponder(cmd);
+		break;
+
 	case MUTE_TRXVU:
 		err = CMD_MuteTRXVU(cmd);
 		break;
@@ -94,9 +102,11 @@ int trxvu_command_router(sat_packet_t *cmd)
 	case ANT_CANCEL_DEPLOY:
 		err = CMD_AntCancelDeployment(cmd);
 		break;
+
 	case ANT_DEPLOY:
 		err = CMD_AntennaDeploy(cmd);
 		break;
+
 	case ANT_STOP_REDEPLOY:
 		err = CMD_StopReDeployment(cmd);
 		break;
@@ -150,6 +160,7 @@ int telemetry_command_router(sat_packet_t *cmd)
 	case DELETE_FILE:
 		err = CMD_DeleteTLM(cmd);
 		break;
+
 	default:
 		err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
 		break;
@@ -171,18 +182,23 @@ int managment_command_router(sat_packet_t *cmd)
 	case RESET_COMPONENT:
 		err = CMD_ResetComponent(cmd);
 		break;
+
 	case UPDATE_SAT_TIME:
 		err = CMD_UpdateSatTime(cmd);
 		break;
+
 	case GENERIC_I2C_CMD:
 		err = CMD_GenericI2C(cmd);
 		break;
+
 	case FRAM_WRITE_AND_TRANSMIT:
 		err = CMD_FRAM_WriteAndTransmitt(cmd);
 		break;
+
 	case FRAM_READ_AND_TRANSMIT:
 		err = CMD_FRAM_ReadAndTransmitt(cmd);
 		break;
+
 	default:
 		err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
 		break;
