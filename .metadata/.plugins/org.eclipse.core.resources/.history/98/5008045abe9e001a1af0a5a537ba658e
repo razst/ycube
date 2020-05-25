@@ -129,20 +129,15 @@ int CMD_SetTransponder(sat_packet_t *cmd)
 
 	data[0] = 0x38;
 
-	memcpy(&data + sizeof(char),cmd->data,sizeof(char)); //data[1] = 0x02 - transponder or data[1] = 0x01 - nominal
-
+	memcpy(data[1],cmd->data,sizeof(char)); //data[1] = 0x02 - transponder or data[1] = 0x01 - nominal
 	err = I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
 
 	if(data[1] == trxvu_transponder_on){
-		memcpy(&duration,cmd->data + sizeof(char),sizeof(duration));
+		memcpy(&duration,cmd->data,sizeof(duration));
 		time_unix curr_tick_time = 0;
 		Time_getUnixEpoch(&curr_tick_time);
 		g_transponder_end_time = curr_tick_time + duration;
-
-	}else if (data[1] == trxvu_transponder_off){
-		g_transponder_end_time = 0;
-
-	}else 	SendAckPacket(ACK_ERROR_MSG,cmd,NULL,0);
+	}else g_transponder_end_time = 0;
 
 	if (err == E_NO_SS_ERR)
 		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
