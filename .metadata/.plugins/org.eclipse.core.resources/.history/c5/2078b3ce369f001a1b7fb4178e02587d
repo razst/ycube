@@ -128,9 +128,8 @@ int CMD_SetTransponder(sat_packet_t *cmd)
 	char data[2] = {0, 0};
 
 	data[0] = 0x38;
-	data[1] = cmd->data[0];
 
-	//memcpy(data[1],cmd->data[0],sizeof(char)); //data[1] = 0x02 - transponder or data[1] = 0x01 - nominal
+	memcpy(data[1],cmd->data,sizeof(char)); //data[1] = 0x02 - transponder or data[1] = 0x01 - nominal
 
 	err = I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
 
