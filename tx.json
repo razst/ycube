@@ -112,6 +112,139 @@
           ]
         },
         {
+          "id": "21",
+          "name": "set baud rate",
+          "desc": "set the bitrate of the trxvu",
+          "inParams": [
+            {
+              "name": "bitrate",
+              "desc": "the bitrate we want to set in the trxvu (1200 - 00 | 2400 - 01 | 4800 - 02 | 9600 - 03)",
+              "type": "char",
+              "values": [
+                {
+                  "id": "00",
+                  "name": "1200"
+                },
+                {
+                  "id": "01",
+                  "name": "2400"
+                },
+                {
+                  "id": "02",
+                  "name": "4800"
+                },
+                {
+                  "id": "03",
+                  "name": "9600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "178",
+          "name": "ANT get arm status",
+          "desc": "get the status of one side in the antenna",
+          "inParams": [
+            {
+              "name": "ant side",
+              "desc": "what side we want to know the status (side A - 00 | side B - 01) ",
+              "type": "char",
+              "values": [
+                {
+                  "id": "00",
+                  "name": "Side A"
+                },
+                {
+                  "id": "01",
+                  "name": "Side B"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "176",
+          "name": "ANT set arm status",
+          "desc": "set the status of one side in the antenna",
+          "inParams": [
+            {
+              "name": "ant side",
+              "desc": "what side we want to change the status (side A - 00 | side B - 01) ",
+              "type": "char",
+              "values": [
+                {
+                  "id": "00",
+                  "name": "Side A"
+                },
+                {
+                  "id": "01",
+                  "name": "Side B"
+                }
+              ]
+            },
+            {
+              "name": "status",
+              "desc": "what status we want the antenna side to be (disarm = 172 | arm = 173) ",
+              "type": "char",
+              "values": [
+                {
+                  "id": "172",
+                  "name": "disarm"
+                },
+                {
+                  "id": "173",
+                  "name": "arm"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "179",
+          "name": "ANT get UPTIME",
+          "desc": "get the UPTIME of one side in the antenna",
+          "inParams": [
+            {
+              "name": "ant side",
+              "desc": "what side we want to know the UPTIME (side A - 00 | side B - 01) ",
+              "type": "char",
+              "values": [
+                {
+                  "id": "00",
+                  "name": "Side A"
+                },
+                {
+                  "id": "01",
+                  "name": "Side B"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "183",
+          "name": "ANT cancel deploy",
+          "desc": "cancel the deployment of one side in the antenna",
+          "inParams": [
+            {
+              "name": "ant side",
+              "desc": "what side we want to cancel the deployment (side A - 00 | side B - 01) ",
+              "type": "char",
+              "values": [
+                {
+                  "id": "00",
+                  "name": "Side A"
+                },
+                {
+                  "id": "01",
+                  "name": "Side B"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "192",
           "name": "ANT_STOP_REDEPLOY",
           "desc": "Stop the every 30 min ant deploy in the maintiance",
@@ -228,18 +361,6 @@
           "inParams": []
         },
         {
-          "id": "21",
-          "name": "set baud rate",
-          "desc": "set the bitrate of the trxvu",
-          "inParams": [
-            {
-              "name": "bitrate",
-              "desc": "the bitrate we want to set in the trxvu (1200 - 00 | 2400 - 01 | 4800 - 02 | 9600 - 03)",
-              "type": "char"
-            }
-          ]
-        },
-        {
           "id": "51",
           "name": "force abort dump",
           "desc": "stop the dump",
@@ -262,59 +383,6 @@
           "name": "Get num of online commands",
           "desc": "get how much commands do the satellite needs to do now",
           "inParams": []
-        },
-        {
-          "id": "178",
-          "name": "ANT get arm status",
-          "desc": "get the status of one side in the antenna",
-          "inParams": [
-            {
-              "name": "ant side",
-              "desc": "what side we want to know the status (side A - 00 | side B - 01) ",
-              "type": "char"
-            }
-          ]
-        },
-        {
-          "id": "176",
-          "name": "ANT set arm status",
-          "desc": "set the status of one side in the antenna",
-          "inParams": [
-            {
-              "name": "ant side",
-              "desc": "what side we want to change the status (side A - 00 | side B - 01) ",
-              "type": "char"
-            },
-            {
-              "name": "status",
-              "desc": "what status we want the antenna side to be (disarm = 172 | arm = 173) ",
-              "type": "char"
-            }
-          ]
-        },
-        {
-          "id": "179",
-          "name": "ANT get UPTIME",
-          "desc": "get the UPTIME of one side in the antenna",
-          "inParams": [
-            {
-              "name": "ant side",
-              "desc": "what side we want to know the UPTIME (side A - 00 | side B - 01) ",
-              "type": "char"
-            }
-          ]
-        },
-        {
-          "id": "183",
-          "name": "ANT cancel deploy",
-          "desc": "cancel the deployment of one side in the antenna",
-          "inParams": [
-            {
-              "name": "ant side",
-              "desc": "what side we want to cancel the deployment (side A - 00 | side B - 01) ",
-              "type": "char"
-            }
-          ]
         }
       ]
     },
