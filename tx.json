@@ -6,6 +6,38 @@
       "desc": "All TRXVU function calls",
       "subtypes": [
         {
+          "id": "166",
+          "name": "Set Transponder",
+          "desc": "Set Transponder mode",
+          "inParams": [
+        
+		{
+              "name": "mode",
+              "desc": "Transponder mode",
+              "type": "char",
+              "values": [
+                {
+                  "id": "01",
+                  "name": "nominal"
+                },
+                {
+                  "id": "02",
+                  "name": "transponder"
+                }
+              ]
+			},
+			
+		            {
+              "name": "duration",
+              "desc": "number of seconds to run the transponder (valid only when mdoe is transponder)",
+              "type": "int"
+            },
+	
+		]
+		
+		
+		},
+        {
           "id": "194",
           "name": "Ping",
           "desc": "Send ping call to satellite (a.k.a dummy function)",
