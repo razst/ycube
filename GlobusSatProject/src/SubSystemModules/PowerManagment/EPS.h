@@ -8,6 +8,7 @@
 #include "GlobalStandards.h"
 #include "EPSOperationModes.h"
 #include "SubSystemModules/Communication/SatCommandHandler.h"
+#include <stdint.h>
 
 /*
  	 	 	 	  ______
@@ -56,8 +57,12 @@ typedef union __attribute__ ((__packed__)){
 }EpsThreshVolt_t;
 typedef union __attribute__ ((__packed__)){
 struct {
-	 int MIN;
-	 int MAX;
+	int16_t H1_MIN;
+	int16_t H1_MAX;
+	int16_t H2_MIN;
+	int16_t H2_MAX;
+	int16_t H3_MIN;
+	int16_t H3_MAX;
 }value;
 }HeaterValues;
 /*!
@@ -138,8 +143,8 @@ int RestoreDefaultAlpha();
  */
 int RestoreDefaultThresholdVoltages();
 
-Boolean CMDGetHeaterValues(sat_packet_t *cmd);
+int CMDGetHeaterValues(sat_packet_t *cmd);
 
-Boolean CMDSetHeaterValues(sat_packet_t *cmd);
+int CMDSetHeaterValues(sat_packet_t *cmd);
 
 

@@ -45,7 +45,7 @@
         },
         {
           "id": "17",
-          "name": "mute",
+          "name": "Mute",
           "desc": "mute the TRXVU",
           "inParams": [
             {
@@ -62,19 +62,19 @@
         },
         {
           "id": "136",
-          "name": "unmute",
+          "name": "Unmute",
           "desc": "unmute the TRXVU",
           "inParams": []
         },
         {
           "id": "35",
-          "name": "get beacon interval",
+          "name": "Get beacon interval",
           "desc": "get the beacon interval time in seconds",
           "inParams": []
         },
         {
           "id": "36",
-          "name": "set beacon interval",
+          "name": "Set beacon interval",
           "desc": "set the beacon interval time in seconds",
           "inParams": [
             {
@@ -86,7 +86,7 @@
         },
         {
           "id": "135",
-          "name": "set idel state",
+          "name": "Set idel state",
           "desc": "set the TRXVU idel state",
           "inParams": [
             {
@@ -113,13 +113,13 @@
         },
         {
           "id": "192",
-          "name": "ANT_STOP_REDEPLOY",
+          "name": "Ant Stop Redeploy",
           "desc": "Stop the every 30 min ant deploy in the maintiance",
           "inParams": []
         },
         {
           "id": "112",
-          "name": "DUMP_TIME_RANGE",
+          "name": "Dump with time range",
           "desc": "start the dump task",
           "inParams": [
             {
@@ -168,7 +168,7 @@
         },
         {
           "id": "105",
-          "name": "DUMP_DAYS",
+          "name": "Dump by days",
           "desc": "start the dump task",
           "inParams": [
             {
@@ -217,19 +217,25 @@
         },
         {
           "id": "34",
-          "name": "abort dump",
+          "name": "Abort dump",
           "desc": "ask to stop the dump",
           "inParams": []
         },
         {
+          "id": "51",
+          "name": "Force abort dump",
+          "desc": "stop the dump",
+          "inParams": []
+        },
+        {
           "id": "19",
-          "name": "get baud rate",
+          "name": "Get baud rate",
           "desc": "get the bitrate of the trxvu",
           "inParams": []
         },
         {
           "id": "21",
-          "name": "set baud rate",
+          "name": "Set baud rate",
           "desc": "set the bitrate of the trxvu",
           "inParams": [
             {
@@ -238,12 +244,6 @@
               "type": "char"
             }
           ]
-        },
-        {
-          "id": "51",
-          "name": "force abort dump",
-          "desc": "stop the dump",
-          "inParams": []
         },
         {
           "id": "102",
@@ -265,7 +265,7 @@
         },
         {
           "id": "178",
-          "name": "ANT get arm status",
+          "name": "Ant get arm status",
           "desc": "get the status of one side in the antenna",
           "inParams": [
             {
@@ -277,7 +277,7 @@
         },
         {
           "id": "176",
-          "name": "ANT set arm status",
+          "name": "Ant set arm status",
           "desc": "set the status of one side in the antenna",
           "inParams": [
             {
@@ -294,19 +294,19 @@
         },
         {
           "id": "179",
-          "name": "ANT get UPTIME",
-          "desc": "get the UPTIME of one side in the antenna",
+          "name": "Ant get uptime",
+          "desc": "get the uptime of one side in the antenna",
           "inParams": [
             {
               "name": "ant side",
-              "desc": "what side we want to know the UPTIME (side A - 00 | side B - 01) ",
+              "desc": "what side we want to know the uptime (side A - 00 | side B - 01) ",
               "type": "char"
             }
           ]
         },
         {
           "id": "183",
-          "name": "ANT cancel deploy",
+          "name": "Ant cancel deploy",
           "desc": "cancel the deployment of one side in the antenna",
           "inParams": [
             {
@@ -324,7 +324,7 @@
       "desc": "All EPS function calls",
       "subtypes": [
         {
-          "id": "0",
+          "id": "1",
           "name": "Update Alpha",
           "desc": "update the Alpha value for smothing",
           "inParams": [
@@ -334,7 +334,33 @@
               "type": "float"
             }
           ]
+        },
+        {
+          "id": "2",
+          "name": "Get heater values",
+          "desc": "get min & max heater values",
+          "inParams": [
+            
+          ]
+        },
+        {
+          "id": "3",
+          "name": "Set heater values",
+          "desc": "set min & max heater values",
+          "inParams": [
+            {
+              "name": "Min",
+              "desc": "[0.01 degC] Battery heater low temperature threshold",
+              "type": "short"
+            },
+			{
+              "name": "Max",
+              "desc": "[0.01 degC] Battery heater max temperature threshold",
+              "type": "short"
+            }
+          ]
         }
+		
       ]
     },
     {
@@ -389,11 +415,11 @@
     },
     {
       "id": "4",
-      "name": "management",
+      "name": "Management",
       "subtypes": [
         {
           "id": "222",
-          "name": "restert",
+          "name": "Restert",
           "desc": "restart the OBC",
           "inParams": [
             {
@@ -439,7 +465,7 @@
         },
         {
           "id": "221",
-          "name": "UPDATE_SAT_TIME",
+          "name": "Update sat time",
           "desc": "update the time in the satellite",
           "inParams": [
             {

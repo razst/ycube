@@ -143,7 +143,7 @@ int CMD_SetTransponder(sat_packet_t *cmd)
 	}else if (data[1] == trxvu_transponder_off){
 		g_transponder_end_time = 0;
 
-	}else 	SendAckPacket(ACK_ERROR_MSG,cmd,NULL,0);
+	}else SendAckPacket(ACK_ERROR_MSG,cmd,NULL,0);
 
 	if (err == E_NO_SS_ERR)
 		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);

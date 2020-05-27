@@ -175,43 +175,82 @@ int RestoreDefaultThresholdVoltages()
 	return 0;
 }
 
-Boolean CMDGetHeaterValues(sat_packet_t *cmd){
+int CMDGetHeaterValues(sat_packet_t *cmd){
 	isis_eps__getparameter__to_t to;
 	isis_eps__getparameter__from_t from;
 	HeaterValues values;
 	int err;
-	// get current LOTHR_BAT_HEATER value
+	// get current LOTHR_BAT_HEATER values
 	to.fields.par_id=0x3000;
 	err = isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
-	values.value.MIN = from.fields.par_val;
+	memcpy(&values.value.H1_MIN,from.fields.par_val,sizeof(int16_t));
+	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	to.fields.par_id=0x3001;
+	err = isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+	memcpy(&values.value.H2_MIN,from.fields.par_val,sizeof(int16_t));
+	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	to.fields.par_id=0x3002;
+	err = isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+	memcpy(&values.value.H3_MIN,from.fields.par_val,sizeof(int16_t));
 
 	// get current HITHR_BAT_HEATER value
+	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
 	to.fields.par_id=0x3003;
 	err += isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
-	values.value.MAX = from.fields.par_val;
+	memcpy(&values.value.H1_MAX,from.fields.par_val,sizeof(int16_t));
+	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	to.fields.par_id=0x3004;
+	err += isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+	memcpy(&values.value.H2_MAX,from.fields.par_val,sizeof(int16_t));
+	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	to.fields.par_id=0x3005;
+	err += isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+	memcpy(&values.value.H3_MAX,from.fields.par_val,sizeof(int16_t));
 
 	if (err == E_NO_SS_ERR){
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &values, sizeof(values));
 	}
 
-	return TRUE;
+	return err;
 }
 
 
-Boolean CMDSetHeaterValues(sat_packet_t *cmd){
-	// set LOTHR_BAT_HEATER to new value
+int CMDSetHeaterValues(sat_packet_t *cmd){
+	int err;
 	isis_eps__setparameter__to_t setTo;
 	isis_eps__setparameter__from_t setFrom;
+	int16_t min;
+	int16_t max;
+	memcpy(&min,&cmd->data,sizeof(int16_t));
+	memcpy(&max,&cmd->data[2],sizeof(int16_t));
 
+	// set all min values
+	memcpy(&setTo.fields.par_val[0],&min,sizeof(int16_t));
 	setTo.fields.par_id = 0x3000;
-	memcpy(&setTo.fields.par_val[0],&cmd->data[0],sizeof(int));
-	logError(isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom));
+	err = isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	setTo.fields.par_id = 0x3001;
+	err += isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	setTo.fields.par_id = 0x3002;
+	err += isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
 
-	// set LOTHR_BAT_HEATER to new value
+	// set all max values
+	memcpy(&setTo.fields.par_val[0],&max,sizeof(int16_t));
+	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
 	setTo.fields.par_id = 0x3003;
-	memcpy(&setTo.fields.par_val[0],&cmd->data[1],sizeof(int));
-	logError(isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom));
+	err += isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	setTo.fields.par_id = 0x3004;
+	err += isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	setTo.fields.par_id = 0x3005;
+	err += isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
 
-	return TRUE;
+	if (err == E_NO_SS_ERR){
+		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
+	}
+
+	return err;
 }
 

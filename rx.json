@@ -641,7 +641,72 @@
       ]
     },
 	
-	
+    {
+      "id": "1",
+      "name": "EPS",
+      "desc": "All EPS function calls",
+      "subtypes": [
+        {
+          "id": "1",
+          "name": "Update Alpha",
+          "desc": "update the Alpha value for smothing",
+          "inParams": [
+            {
+              "name": "Alpha",
+              "desc": "new Alpha value (float value)",
+              "type": "float"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Get heater values",
+          "desc": "get min & max heater values",
+          "inParams": [
+            {
+              "name": "Min 1",
+              "desc": "[0.01 degC] Battery heater low temperature threshold",
+              "type": "short"
+            },
+			{
+              "name": "Max 1",
+              "desc": "[0.01 degC] Battery heater max temperature threshold",
+              "type": "short"
+            }           ,
+            {
+              "name": "Min 2",
+              "desc": "[0.01 degC] Battery heater low temperature threshold",
+              "type": "short"
+            },
+			{
+              "name": "Max 2",
+              "desc": "[0.01 degC] Battery heater max temperature threshold",
+              "type": "short"
+            }            ,
+			            {
+              "name": "Min 3",
+              "desc": "[0.01 degC] Battery heater low temperature threshold",
+              "type": "short"
+            },
+			{
+              "name": "Max 3",
+              "desc": "[0.01 degC] Battery heater max temperature threshold",
+              "type": "short"
+            }            
+
+			
+          ]
+        },
+        {
+          "id": "3",
+          "name": "Set heater values",
+          "desc": "set min & max heater values",
+          "inParams": [
+          ]
+        }
+		
+      ]
+    },	
 	
     {
       "id": "4",

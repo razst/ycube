@@ -94,8 +94,9 @@ typedef enum __attribute__ ((__packed__)) trxvu_subtypes_t
 
 typedef enum __attribute__ ((__packed__)) eps_subtypes_t
 {
-	a,
-	b
+	UPDATE_ALPHA 		= 0x01,
+    GET_HEATER_VALUES 	= 0x02,
+    SET_HEATER_VALUES 	= 0x03
 }eps_subtypes_t;
 
 

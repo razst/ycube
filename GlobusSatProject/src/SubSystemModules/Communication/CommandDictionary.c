@@ -130,13 +130,13 @@ int eps_command_router(sat_packet_t *cmd)
 
 	switch (cmd->cmd_subtype)
 	{
-	case 0:
+	case UPDATE_ALPHA:
 		err = UpdateAlpha(cmd);
 		break;
-	case 1:
+	case GET_HEATER_VALUES:
 		err = CMDGetHeaterValues(cmd);
 		break;
-	case 2:
+	case SET_HEATER_VALUES:
 		err = CMDSetHeaterValues(cmd);
 		break;
 
