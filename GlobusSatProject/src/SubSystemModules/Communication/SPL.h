@@ -77,7 +77,7 @@ typedef enum __attribute__ ((__packed__)) trxvu_subtypes_t
 	GET_TX_UPTIME = 		0x66,	//0b01100110 = //long int
 	GET_RX_UPTIME = 		0x68,	//0b01101000 = same func as the TX uptime //long int
 	GET_NUM_OF_ONLINE_CMD = 0xA7,	//0b10100111 =
-	SET_RSSI_TRANSPONDER =  0xA5,
+	SET_RSSI_TRANSPONDER =  0xA5,   //0b10100101
 	SET_TRANSPONDER =       0xA6,   //0b10100110
 	ANT_SET_ARM_STATUS = 	0xB0,	//0b10110000 *
 	ANT_GET_ARM_STATUS = 	0xB2,	//0b10110010 =
