@@ -1,5 +1,114 @@
-07:28:38 **** Incremental Build of configuration Debug for project hal-demo ****
+19:30:35 **** Incremental Build of configuration Debug for project hal-demo ****
 make -r -k all 
+Building file: ../src/Tests/ADCtest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/ADCtest.d" -MT"src/Tests/ADCtest.d" -c -o "src/Tests/ADCtest.o" "../src/Tests/ADCtest.c"
+Finished building: ../src/Tests/ADCtest.c
+ 
+Building file: ../src/Tests/FloatingPointTest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/FloatingPointTest.d" -MT"src/Tests/FloatingPointTest.d" -c -o "src/Tests/FloatingPointTest.o" "../src/Tests/FloatingPointTest.c"
+Finished building: ../src/Tests/FloatingPointTest.c
+ 
+Building file: ../src/Tests/I2CslaveTest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/I2CslaveTest.d" -MT"src/Tests/I2CslaveTest.d" -c -o "src/Tests/I2CslaveTest.o" "../src/Tests/I2CslaveTest.c"
+Finished building: ../src/Tests/I2CslaveTest.c
+ 
+Building file: ../src/Tests/I2Ctest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/I2Ctest.d" -MT"src/Tests/I2Ctest.d" -c -o "src/Tests/I2Ctest.o" "../src/Tests/I2Ctest.c"
+Finished building: ../src/Tests/I2Ctest.c
+ 
+Building file: ../src/Tests/LEDtest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/LEDtest.d" -MT"src/Tests/LEDtest.d" -c -o "src/Tests/LEDtest.o" "../src/Tests/LEDtest.c"
+Finished building: ../src/Tests/LEDtest.c
+ 
+Building file: ../src/Tests/PWMtest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/PWMtest.d" -MT"src/Tests/PWMtest.d" -c -o "src/Tests/PWMtest.o" "../src/Tests/PWMtest.c"
+Finished building: ../src/Tests/PWMtest.c
+ 
+Building file: ../src/Tests/PinTest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/PinTest.d" -MT"src/Tests/PinTest.d" -c -o "src/Tests/PinTest.o" "../src/Tests/PinTest.c"
+Finished building: ../src/Tests/PinTest.c
+ 
+Building file: ../src/Tests/SDCardTest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/SDCardTest.d" -MT"src/Tests/SDCardTest.d" -c -o "src/Tests/SDCardTest.o" "../src/Tests/SDCardTest.c"
+Finished building: ../src/Tests/SDCardTest.c
+ 
+Building file: ../src/Tests/SPI_FRAM_RTCtest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/SPI_FRAM_RTCtest.d" -MT"src/Tests/SPI_FRAM_RTCtest.d" -c -o "src/Tests/SPI_FRAM_RTCtest.o" "../src/Tests/SPI_FRAM_RTCtest.c"
+Finished building: ../src/Tests/SPI_FRAM_RTCtest.c
+ 
+Building file: ../src/Tests/SupervisorTest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/SupervisorTest.d" -MT"src/Tests/SupervisorTest.d" -c -o "src/Tests/SupervisorTest.o" "../src/Tests/SupervisorTest.c"
+Finished building: ../src/Tests/SupervisorTest.c
+ 
+Building file: ../src/Tests/ThermalTest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/ThermalTest.d" -MT"src/Tests/ThermalTest.d" -c -o "src/Tests/ThermalTest.o" "../src/Tests/ThermalTest.c"
+Finished building: ../src/Tests/ThermalTest.c
+ 
+Building file: ../src/Tests/TimeTest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/TimeTest.d" -MT"src/Tests/TimeTest.d" -c -o "src/Tests/TimeTest.o" "../src/Tests/TimeTest.c"
+Finished building: ../src/Tests/TimeTest.c
+ 
+Building file: ../src/Tests/UARTtest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/UARTtest.d" -MT"src/Tests/UARTtest.d" -c -o "src/Tests/UARTtest.o" "../src/Tests/UARTtest.c"
+Finished building: ../src/Tests/UARTtest.c
+ 
+Building file: ../src/Tests/USBdeviceTest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/USBdeviceTest.d" -MT"src/Tests/USBdeviceTest.d" -c -o "src/Tests/USBdeviceTest.o" "../src/Tests/USBdeviceTest.c"
+Finished building: ../src/Tests/USBdeviceTest.c
+ 
+Building file: ../src/Tests/boardTest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/boardTest.d" -MT"src/Tests/boardTest.d" -c -o "src/Tests/boardTest.o" "../src/Tests/boardTest.c"
+Finished building: ../src/Tests/boardTest.c
+ 
+Building file: ../src/Tests/checksumTest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Tests/checksumTest.d" -MT"src/Tests/checksumTest.d" -c -o "src/Tests/checksumTest.o" "../src/Tests/checksumTest.c"
+Finished building: ../src/Tests/checksumTest.c
+ 
+Building file: ../src/Demo/demo_sd.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Demo/demo_sd.d" -MT"src/Demo/demo_sd.d" -c -o "src/Demo/demo_sd.o" "../src/Demo/demo_sd.c"
+Finished building: ../src/Demo/demo_sd.c
+ 
+Building file: ../src/Demo/demo_uart.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/Demo/demo_uart.d" -MT"src/Demo/demo_uart.d" -c -o "src/Demo/demo_uart.o" "../src/Demo/demo_uart.c"
+Finished building: ../src/Demo/demo_uart.c
+ 
+Building file: ../src/freertos_hooks.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/freertos_hooks.d" -MT"src/freertos_hooks.d" -c -o "src/freertos_hooks.o" "../src/freertos_hooks.c"
+Finished building: ../src/freertos_hooks.c
+ 
+Building file: ../src/main.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\hal\demo\src" -I"C:/ISIS/workspace_ycube/hal/demo/..//freertos/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hal/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//at91/include" -I"C:/ISIS/workspace_ycube/hal/demo/..//hcc/include" -MMD -MP -MF"src/main.d" -MT"src/main.d" -c -o "src/main.o" "../src/main.c"
+Finished building: ../src/main.c
+ 
+Building target: hal-demo.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra -Werror  -g -T C:/ISIS/workspace_ycube/hal/demo/..//at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/hal/demo/..//at91/lib" -L"C:/ISIS/workspace_ycube/hal/demo/..//freertos/lib" -L"C:/ISIS/workspace_ycube/hal/demo/..//hal/lib" -L"C:/ISIS/workspace_ycube/hal/demo/..//hcc/lib" -Wl,-Map,"hal-demo.map" -lc -o "hal-demo.elf"  ./src/Tests/ADCtest.o ./src/Tests/FloatingPointTest.o ./src/Tests/I2CslaveTest.o ./src/Tests/I2Ctest.o ./src/Tests/LEDtest.o ./src/Tests/PWMtest.o ./src/Tests/PinTest.o ./src/Tests/SDCardTest.o ./src/Tests/SPI_FRAM_RTCtest.o ./src/Tests/SupervisorTest.o ./src/Tests/ThermalTest.o ./src/Tests/TimeTest.o ./src/Tests/UARTtest.o ./src/Tests/USBdeviceTest.o ./src/Tests/boardTest.o ./src/Tests/checksumTest.o  ./src/Demo/demo_sd.o ./src/Demo/demo_uart.o  ./src/freertos_hooks.o ./src/main.o   -lHCCD -lHALD -lFreeRTOSD -lAt91D
+Finished building target: hal-demo.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O binary "hal-demo.elf"  "hal-demo.bin"
+Finished building: hal-demo.bin
+ 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "hal-demo.elf"
    text	   data	    bss	    dec	    hex	filename
@@ -7,5 +116,5 @@ arm-none-eabi-size --format=berkeley "hal-demo.elf"
 Finished building: hal-demo.siz
  
 
-07:28:39 Build Finished (took 203ms)
+19:30:39 Build Finished (took 3s.984ms)
 
