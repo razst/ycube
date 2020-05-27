@@ -3,18 +3,19 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="353" key="DIALOG_WIDTH"/>
 		<item value="179" key="DIALOG_Y_ORIGIN"/>
-		<item value="795" key="DIALOG_X_ORIGIN"/>
 		<item value="513" key="DIALOG_HEIGHT"/>
+		<item value="795" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="Transp" key="selection"/>
+		<item value="" key="selection"/>
 		<list key="findhistory">
+			<item value="DEFAULT_ALPHA_VALUE"/>
 			<item value="transp"/>
 			<item value="Range"/>
 			<item value="Reset"/>
@@ -22,7 +23,6 @@
 			<item value="CMD_GenericI2C"/>
 			<item value="RESET_KEY"/>
 			<item value="delay"/>
-			<item value="isis_eps__setparameter__from_t"/>
 		</list>
 		<list key="replacehistory">
 		</list>

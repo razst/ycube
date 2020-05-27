@@ -1,4 +1,4 @@
-06:44:07 **** Incremental Build of configuration Debug for project satellite-subsystems-demo ****
+07:28:39 **** Incremental Build of configuration Debug for project satellite-subsystems-demo ****
 make -r -k all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "satellite-subsystems-demo.elf"
@@ -7,5 +7,5 @@ arm-none-eabi-size --format=berkeley "satellite-subsystems-demo.elf"
 Finished building: satellite-subsystems-demo.siz
  
 
-06:44:08 Build Finished (took 144ms)
+07:28:39 Build Finished (took 153ms)
 

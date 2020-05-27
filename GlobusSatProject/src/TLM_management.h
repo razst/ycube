@@ -40,6 +40,8 @@ typedef enum
 	FS_FAIL
 } FileSystemResult;
 
+
+static Boolean stopDump = FALSE;
 /**
  * write telematry data to file
  */

@@ -1,4 +1,4 @@
-06:44:07 **** Incremental Build of configuration Debug for project hal-demo ****
+07:28:38 **** Incremental Build of configuration Debug for project hal-demo ****
 make -r -k all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "hal-demo.elf"
@@ -7,5 +7,5 @@ arm-none-eabi-size --format=berkeley "hal-demo.elf"
 Finished building: hal-demo.siz
  
 
-06:44:07 Build Finished (took 137ms)
+07:28:39 Build Finished (took 203ms)
 

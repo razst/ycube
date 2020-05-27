@@ -31,6 +31,7 @@ void DumpTask(void *args) {
 	SendAckPacket(ACK_DUMP_START, &task_args->cmd,
 			NULL, 0);
 
+	stopDump = FALSE;
 	int numOfElementsSent = 0;
 	// calculate how many days we were asked to dump (every day has 86400 seconds)
 	int numberOfDays = (task_args->t_end - task_args->t_start)/86400;
@@ -109,7 +110,8 @@ int CMD_StartDump(sat_packet_t *cmd)
 int CMD_SendDumpAbortRequest(sat_packet_t *cmd)
 {
 	SendDumpAbortRequest();
-	SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0); //trying to add the ack functions
+	//stopDump = TRUE;
+	SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
 	return 0;
 }
 

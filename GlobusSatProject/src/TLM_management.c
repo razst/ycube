@@ -365,6 +365,9 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 
 				TransmitSplPacket(&dump_tlm, NULL);
 				numOfElementsSent++;
+				if(stopDump){
+					break;
+				}
 			}
 
 		}// end for loop...
@@ -384,6 +387,9 @@ int readTLMFiles(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id,int res
 	for(int i = 0; i < numOfDays; i++){
 		elemntsRead=readTLMFile(tlmType, date, i,cmd_id,resolution);
 		totalReads+=(elemntsRead>0) ? elemntsRead : 0;
+		if(stopDump){
+			break;
+		}
 	}
 
 	return totalReads;
@@ -438,6 +444,10 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 
 			TransmitSplPacket(&dump_tlm, NULL);
 			numOfElementsSent++;
+			if(stopDump){
+				break;
+			}
+
 
 		//}else if (current_time<=to_time){
 		//	f_seek (fp, size, SEEK_CUR);

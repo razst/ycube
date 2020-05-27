@@ -383,6 +383,11 @@
           "desc": "EPS eng data",
           "inParams": [
             {
+              "name": "timestamp",
+              "desc": "TODO",
+              "type": "datetime"
+            },
+            {
               "name": "reply_header-stid",
               "desc": "TODO",
               "type": "char"
