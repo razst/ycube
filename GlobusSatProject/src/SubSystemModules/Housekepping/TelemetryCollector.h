@@ -5,6 +5,7 @@
 #include "TelemetryFiles.h"
 #include "TLM_management.h"
 #include <satellite-subsystems/IsisSolarPanelv2.h>
+#include "SubSystemModules/PowerManagment/EPS.h"
 
 #define NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS 5
 
@@ -19,7 +20,9 @@ typedef struct __attribute__ ((__packed__)) WOD_Telemetry_t
 	current_t electric_current;		///< the up-to-date electric current of the battery [mA]
 	current_t current_3V3;			///< the up-to-date 3.3 Volt bus current of the battery [mA]
 	current_t current_5V;			///< the up-to-date 5 Volt bus current of the battery [mA]
-
+	temp_t mcu_temp; 				/*!< Measured temperature provided by a sensor internal to the MCU in raw form */
+	temp_t bat_temp; 				/*!< 2 cell battery pack: not used 4 cell battery pack: Battery pack temperature on the front of the battery pack. */
+	temp_t solar_panels[NUMBER_OF_SOLAR_PANELS]; // temp of each solar panel
 	time_unix sat_time;				///< current Unix time of the satellites clock [sec]
 	unsigned int free_memory;		///< number of bytes free in the satellites SD [byte]
 	unsigned int corrupt_bytes;		///< number of currpted bytes in the memory	[bytes]

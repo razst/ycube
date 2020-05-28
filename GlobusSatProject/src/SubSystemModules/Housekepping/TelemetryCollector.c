@@ -234,6 +234,16 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 		wod->current_5V = hk_tlm.fields.vip_obc01.fields.current;
 		wod->volt_3V3 = hk_tlm.fields.vip_obc05.fields.volt;
 		wod->volt_5V = hk_tlm.fields.vip_obc01.fields.volt;
+		wod->mcu_temp = hk_tlm.fields.temp;
+		wod->bat_temp = hk_tlm.fields.temp3;
+		wod->mcu_temp = hk_tlm.fields.temp;
+		// TODO set all solar panels temp values
+		wod->solar_panels[0]=0;
+		wod->solar_panels[1]=0;
+		wod->solar_panels[2]=0;
+		wod->solar_panels[3]=0;
+		wod->solar_panels[4]=0;
+		wod->solar_panels[5]=0;
 		wod->charging_power = hk_tlm_cdb.fields.batt_input.fields.volt;
 		wod->consumed_power = hk_tlm_cdb.fields.dist_input.fields.power;
 		//wod->electric_current = TODO TBD
