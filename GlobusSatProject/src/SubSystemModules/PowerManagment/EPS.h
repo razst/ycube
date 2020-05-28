@@ -4,6 +4,8 @@
  * 			the satellite and switching on and off power switches(5V, 3V3)
  * @see		inspect logic flowcharts thoroughly in order to write the code in a clean manner.
  */
+#ifndef EPS_H_
+#define EPS_H_
 
 #include "GlobalStandards.h"
 #include "EPSOperationModes.h"
@@ -149,3 +151,4 @@ int CMDGetHeaterValues(sat_packet_t *cmd);
 int CMDSetHeaterValues(sat_packet_t *cmd);
 
 
+#endif
