@@ -49,6 +49,50 @@
               "desc": "5 volt bus up-to-date battery",
               "type": "short"
             },
+			
+            {
+              "name": "MCU Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Battery Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Solar panel 1 Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Solar panel 2 Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Solar panel 3 Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Solar panel 4 Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Solar panel 5 Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Solar panel 6 Temperature",
+              "desc": "",
+              "type": "short"
+            },
+			
+			
+			
             {
               "name": "sat_time",
               "desc": "satellite's clock current unix time",
