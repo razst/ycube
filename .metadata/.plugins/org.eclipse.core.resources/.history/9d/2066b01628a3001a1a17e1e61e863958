@@ -181,9 +181,6 @@ int DeleteOldFiels(int minFreeSpace){
 			err *= deleteTLMFile(tlm_rx_frame,theDay,numOfDays);
 			err *= deleteTLMFile(tlm_solar,theDay,numOfDays);
 			err *= deleteTLMFile(tlm_tx,theDay,numOfDays);
-			// if all files were found & deleted -> break
-			// if all files were not found -> don't break, move to next day
-			// if found some but not all -> break
 			if(err != pow(F_ERR_NOTFOUND,12)){
 				break;
 			}

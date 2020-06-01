@@ -23,7 +23,7 @@ void DumpTask(void *args) {
 
 
 	// start the SD FS for this dump task
-	logError(f_enterFS());// TODO: also add release
+	logError(f_enterFS());
 
 	//dump_arguments_t t = *((dump_arguments_t*)args);
 	dump_arguments_t *task_args = (dump_arguments_t *) args;
@@ -99,7 +99,7 @@ int CMD_StartDump(sat_packet_t *cmd)
 		return E_GET_SEMAPHORE_FAILED;
 	}
 	xTaskCreate(DumpTask, (const signed char* const )"DumpTask", 2000,
-			dmp_pckt, configMAX_PRIORITIES - 2, &xDumpHandle);
+			&dmp_pckt, configMAX_PRIORITIES - 2, &xDumpHandle);
 
 	SendAckPacket(ACK_DUMP_START, cmd,NULL,0);
 

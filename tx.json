@@ -47,11 +47,6 @@
               "name": "duration",
               "desc": "number of seconds to mute the TRXVU",
               "type": "int"
-            },
-            {
-              "name": "temp value",
-              "desc": "temp temp",
-              "type": "short"
             }
           ]
         },
@@ -344,14 +339,8 @@
           ]
         },
         {
-          "id": "34",
-          "name": "Abort dump",
-          "desc": "ask to stop the dump",
-          "inParams": []
-        },
-        {
           "id": "51",
-          "name": "Force abort dump",
+          "name": "Abort dump",
           "desc": "stop the dump",
           "inParams": []
         },
@@ -489,15 +478,12 @@
               "values": [
                 {
                   "id": "0",
-                  "name": "reset_software"
+                  "name": "reset software"
                 },
-                {
-                  "id": "1",
-                  "name": "NOT USED reset_hardware"
-                },
+                
                 {
                   "id": "2",
-                  "name": "reset_eps - soft MCU reset"
+                  "name": "reset MCU using EPS"
                 },
                 {
                   "id": "3",
@@ -514,10 +500,6 @@
                 {
                   "id": "6",
                   "name": "reset_ant_SideB"
-                },
-                {
-                  "id": "7",
-                  "name": "NOT USED reset_filesystem"
                 }
               ]
             }

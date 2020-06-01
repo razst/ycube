@@ -23,7 +23,7 @@ void DumpTask(void *args) {
 
 
 	// start the SD FS for this dump task
-	logError(f_enterFS());// TODO: also add release
+	logError(f_enterFS());
 
 	//dump_arguments_t t = *((dump_arguments_t*)args);
 	dump_arguments_t *task_args = (dump_arguments_t *) args;

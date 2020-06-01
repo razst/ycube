@@ -49,7 +49,6 @@
               "desc": "5 volt bus up-to-date battery",
               "type": "short"
             },
-			
             {
               "name": "MCU Temperature",
               "desc": "",
@@ -90,9 +89,6 @@
               "desc": "",
               "type": "short"
             },
-			
-			
-			
             {
               "name": "sat_time",
               "desc": "satellite's clock current unix time",
@@ -353,8 +349,7 @@
               "desc": "the number of dump elements that were sent over RF",
               "type": "int"
             }
-		  
-		  ]
+          ]
         },
         {
           "id": "147",
@@ -396,11 +391,13 @@
           "id": "192",
           "name": "ACK_DELETE_TLM",
           "desc": "after deleting TLM file(s)",
-          "inParams": [            {
+          "inParams": [
+            {
               "name": "deleted files",
               "desc": "how many TLM files were actually deleted from SD",
               "type": "int"
-            }]
+            }
+          ]
         },
         {
           "id": "187",
@@ -506,6 +503,290 @@
               "desc": "temp",
               "type": "short"
             },
+            {
+              "name": "stat_obc_on",
+              "desc": "Bitflag field indicating channel-on status for the output bus channels",
+              "type": "short"
+            },
+            {
+              "name": "stat_obc_ocf",
+              "desc": "Bitflag field indicating overcurrent latch-off fault status for the output bus channels",
+              "type": "short"
+            },
+            {
+              "name": "bat_stat",
+              "desc": " Bitflag field indicating BP board",
+              "type": "short"
+            },
+            {
+              "name": "temp2",
+              "desc": " 2 and 4 cell battery pack: Battery pack temperature in between the center battery cells",
+              "type": "short"
+            },
+            {
+              "name": "temp3",
+              "desc": "2 cell battery pack: not used 4 cell battery pack: Battery pack temperature on the front of the battery pack",
+              "type": "short"
+            },
+            {
+              "name": "volt_vd0",
+              "desc": "Voltage of voltage domain 0 in raw form",
+              "type": "short"
+            },
+            {
+              "name": "volt_vd1",
+              "desc": "Voltage of voltage domain 1 in raw form",
+              "type": "short"
+            },
+            {
+              "name": "volt_vd2",
+              "desc": "Voltage of voltage domain 2 in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc00-volt",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc00-current",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc00-power",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc01-volt",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc01-current",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc01-power",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc02-volt",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc02-current",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc02-power",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc03-volt",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc03-current",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc03-power",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc04-volt",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc04-current",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc04-power",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+            {
+              "name": "vip_obc05-volt",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc05-current",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc05-power",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc06-volt",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc06-current",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc06-power",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc07-volt",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc07-current",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc07-power",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+
+
+
+
+
+
+
+
+
+            {
+              "name": "vip_obc08-volt",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc08-current",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "vip_obc08-power",
+              "desc": "Output V, I and P of output bus channel in raw form",
+              "type": "short"
+            },
+            {
+              "name": "cc1-volt_in_mppt",
+              "desc": "Data on conditioning chain in raw form",
+              "type": "short"
+            },
+            {
+              "name": "cc1-curr_in_mppt",
+              "desc": "Data on conditioning chain in raw form",
+              "type": "short"
+            },
+            {
+              "name": "cc1-volt_out_mppt",
+              "desc": "Data on conditioning chain in raw form",
+              "type": "short"
+            },
+            {
+              "name": "cc1-curr_out_mppt",
+              "desc": "Data on conditioning chain in raw form",
+              "type": "short"
+            },
+            {
+              "name": "cc2-volt_in_mppt",
+              "desc": "Data on conditioning chain in raw form",
+              "type": "short"
+            },
+			
+	
+
+
+
+	
+			
+            {
+              "name": "cc2-curr_in_mppt",
+              "desc": "Data on conditioning chain in raw form",
+              "type": "short"
+            },
+            {
+              "name": "cc2-volt_out_mppt",
+              "desc": "Data on conditioning chain in raw form",
+              "type": "short"
+            },
+            {
+              "name": "cc2-curr_out_mppt",
+              "desc": "Data on conditioning chain in raw form",
+              "type": "short"
+            },
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+            {
+              "name": "cc3-volt_in_mppt",
+              "desc": "Data on conditioning chain in raw form",
+              "type": "short"
+            },
+            {
+              "name": "cc3-curr_in_mppt",
+              "desc": "Data on conditioning chain in raw form",
+              "type": "short"
+            },
+            {
+              "name": "cc3-volt_out_mppt",
+              "desc": "Data on conditioning chain in raw form",
+              "type": "short"
+            },
+			
+			
+			
+			
+			
+
+
+
+
+
+
+			
+			
+			
+			
+			
+			
+			
           ]
         },
         {
@@ -559,6 +840,46 @@
               "type": "short"
             },
             {
+              "name": "MCU Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Battery Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Solar panel 1 Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Solar panel 2 Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Solar panel 3 Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Solar panel 4 Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Solar panel 5 Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
+              "name": "Solar panel 6 Temperature",
+              "desc": "",
+              "type": "short"
+            },
+            {
               "name": "sat_time",
               "desc": "satellite's clock current unix time",
               "type": "datetime"
@@ -585,7 +906,6 @@
             }
           ]
         },
-		
         {
           "id": "1",
           "name": "TX",
@@ -597,13 +917,52 @@
               "type": "datetime"
             },
             {
-              "name": "vbat",
+              "name": "tx_reflpwr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "tx_fwrdpwr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "bus_volt",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "vutotal_curr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "vutx_curr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "vurx_curr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "vupa_curr",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "pa_temp",
+              "desc": "battery voltage",
+              "type": "short"
+            },
+            {
+              "name": "board_temp",
               "desc": "battery voltage",
               "type": "short"
             }
           ]
         },
-		
         {
           "id": "6",
           "name": "RX",
@@ -615,81 +974,54 @@
               "type": "datetime"
             },
             {
-              "name": "vbat",
+              "name": "rx_doppler",
               "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "volt_5v",
-              "desc": "5v bus voltage",
+              "name": "rx_rssi",
+              "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "volt_3v3",
-              "desc": "3v3 bus voltage",
+              "name": "bus_volt",
+              "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "charging_power",
-              "desc": "the current charging power",
+              "name": "vutotal_curr",
+              "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "consumed_power",
-              "desc": "the satellite consumed power",
+              "name": "vutx_curr",
+              "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "electric_current",
-              "desc": "the battery's up-to-date electric current",
+              "name": "vurx_curr",
+              "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "current_3v3",
-              "desc": "3.3 volt bus up-to-date battery",
+              "name": "vupa_curr",
+              "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "current_5v",
-              "desc": "5 volt bus up-to-date battery",
+              "name": "pa_temp",
+              "desc": "battery voltage",
               "type": "short"
             },
             {
-              "name": "sat_time",
-              "desc": "satellite's clock current unix time",
-              "type": "datetime"
-            },
-            {
-              "name": "free_memory",
-              "desc": "the satellite's Sd's free bytes",
-              "type": "int"
-            },
-            {
-              "name": "corrupt_bytes",
-              "desc": "the memory's corrupted bytes",
-              "type": "int"
-            },
-            {
-              "name": "number_of_resets",
-              "desc": "number of resets the satellite has gone through",
-              "type": "int"
-            },
-            {
-              "name": "number_of_cmd_resets",
-              "desc": "number of resets the satellite has gone through",
-              "type": "int"
+              "name": "board_temp",
+              "desc": "battery voltage",
+              "type": "short"
             }
           ]
         }
-		
-		
-		
-		
-		
-		
       ]
     },
-	
     {
       "id": "1",
       "name": "EPS",
@@ -717,46 +1049,41 @@
               "desc": "[0.01 degC] Battery heater low temperature threshold",
               "type": "short"
             },
-			{
+            {
               "name": "Max 1",
               "desc": "[0.01 degC] Battery heater max temperature threshold",
               "type": "short"
-            }           ,
+            },
             {
               "name": "Min 2",
               "desc": "[0.01 degC] Battery heater low temperature threshold",
               "type": "short"
             },
-			{
+            {
               "name": "Max 2",
               "desc": "[0.01 degC] Battery heater max temperature threshold",
               "type": "short"
-            }            ,
-			            {
+            },
+            {
               "name": "Min 3",
               "desc": "[0.01 degC] Battery heater low temperature threshold",
               "type": "short"
             },
-			{
+            {
               "name": "Max 3",
               "desc": "[0.01 degC] Battery heater max temperature threshold",
               "type": "short"
-            }            
-
-			
+            }
           ]
         },
         {
           "id": "3",
           "name": "Set heater values",
           "desc": "set min & max heater values",
-          "inParams": [
-          ]
+          "inParams": []
         }
-		
       ]
-    },	
-	
+    },
     {
       "id": "4",
       "name": "Managment",
@@ -776,15 +1103,5 @@
         }
       ]
     }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
   ]
 }

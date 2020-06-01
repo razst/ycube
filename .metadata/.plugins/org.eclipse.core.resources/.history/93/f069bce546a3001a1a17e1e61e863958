@@ -240,16 +240,13 @@ void FinishDump(sat_packet_t *cmd,unsigned char *buffer, ack_subtype_t acktype,
 		unsigned char *err, unsigned int size) {
 
 	SendAckPacket(acktype, cmd, err, size);
-/*
+	/*
 	if (NULL != task_args) {
 		free(task_args); // TODO: we don't use malloc so do we need to use free?
 	}*/
 	if (NULL != xDumpLock) {
 		xSemaphoreGive(xDumpLock);
 	}
-
-	// TODO: also give the transmit semaphore
-
 	if (xDumpHandle != NULL) {
 		vTaskDelete(xDumpHandle);
 	}
