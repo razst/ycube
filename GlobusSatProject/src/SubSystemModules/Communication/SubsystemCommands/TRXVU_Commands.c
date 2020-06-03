@@ -138,6 +138,7 @@ int CMD_SetTransponder(sat_packet_t *cmd)
 	err = I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
 
 	if(data[1] == trxvu_transponder_on){
+		SetIdleState(trxvu_idle_state_off, 0);
 		memcpy(&duration,cmd->data + sizeof(char),sizeof(duration));
 		time_unix curr_tick_time = 0;
 		Time_getUnixEpoch(&curr_tick_time);
@@ -189,6 +190,11 @@ int CMD_SetIdleState(sat_packet_t *cmd)
 	memcpy(&state,cmd->data,sizeof(state));
 	time_unix duaration = 0;
 	if (state == trxvu_idle_state_on){
+		time_unix curr_tick_time = 0;
+		Time_getUnixEpoch(&curr_tick_time);
+
+		if(g_transponder_end_time > curr_tick_time) return TRXVU_IDLE_WHILE_TRANSPONDER;
+
 		memcpy(&duaration,cmd->data+sizeof(state),sizeof(duaration));
 	}
 	int err = SetIdleState(state,duaration);
