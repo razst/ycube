@@ -322,8 +322,8 @@ int BeaconLogic() {
 int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
 
 	if (duration > MAX_IDLE_TIME) {
-		logError(TRXVU_IDLE_TOO_LOMG);
-		return TRXVU_IDLE_TOO_LOMG;
+		logError(TRXVU_IDLE_TOO_LONG);
+		return TRXVU_IDLE_TOO_LONG;
 	}
 
 	int err = logError(IsisTrxvu_tcSetIdlestate(ISIS_TRXVU_I2C_BUS_INDEX, state));
@@ -342,7 +342,7 @@ int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
 
 int muteTRXVU(time_unix duration) {
 	if (duration > MAX_MUTE_TIME) {
-		logError(TRXVU_MUTE_TOO_LOMG);
+		logError(TRXVU_MUTE_TOO_LONG);
 		return -1;
 	}
 	// get current unix time

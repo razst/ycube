@@ -15,8 +15,9 @@
 #define E_CANT_TRANSMIT    		-200
 #define E_TOO_EARLY_4_BEACON    -201
 #define E_INVALID_PARAMETERS    -204
-#define TRXVU_MUTE_TOO_LOMG    -202
-#define TRXVU_IDLE_TOO_LOMG    -203
+#define TRXVU_MUTE_TOO_LONG    	-202
+#define TRXVU_IDLE_TOO_LONG    	-203
+#define TRXVU_IDLE_WHILE_TRANSPONDER -205
 
 #define MAX_ERRORS       				 20 // max errors we want to log from the same type toghether
 #define MAX_TIME_BETWEEN_ERRORS          2 // max seconds we allow between errors
