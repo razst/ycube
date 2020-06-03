@@ -76,7 +76,7 @@ int CMD_StartDump(sat_packet_t *cmd)
 
 
 
-	dump_arguments_t *dmp_pckt = malloc(sizeof(*dmp_pckt)); // TODO: change back to static and remove free()
+	dump_arguments_t *dmp_pckt = malloc(sizeof(*dmp_pckt));
 	unsigned int offset = 0;
 
 	//dmp_pckt.cmd.ID = cmd->ID;
