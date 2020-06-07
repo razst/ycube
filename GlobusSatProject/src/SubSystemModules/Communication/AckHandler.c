@@ -20,7 +20,7 @@ int SendAckPacket(ack_subtype_t acksubtype, sat_packet_t *cmd,
 	AssembleCommand(data, length, (char)ack_type, (char)acksubtype, id, &ack);
 
 	err = TransmitSplPacket(&ack,NULL);
-	vTaskDelay(10); // TODO why do we need to wait and why 10 ticks ???
+	vTaskDelay(10);
 	return err;
 }
 

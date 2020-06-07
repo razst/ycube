@@ -98,7 +98,7 @@ FileSystemResult InitializeFS(Boolean first_time)
 }
 
 
-//TODO when we get the Sat, check if we get 01 or 1 for the day and update the code
+
 void calculateFileName(Time curr_date,char* file_name, char* endFileName, int days2Add)
 {
 	/* initialize */
@@ -163,7 +163,6 @@ void getTlmTypeInfo(tlm_type_t tlmType, char* endFileName, int* structSize){
 }
 
 int write2File(void* data, tlm_type_t tlmType){
-	// TODO what happens if there was an error writing to SD, the whole file will be corrupted for us.
 	printf("writing tlm: %d to SD\n",tlmType);
 
 	unsigned int curr_time;
@@ -207,7 +206,7 @@ void printTLM(void* element, tlm_type_t tlmType){
 	printf("TLM element: time:%u\n ",element_time);
 
 	// print the data of the TLM element based on tlm_type
-	if (tlmType==tlm_log){// TODO: switch
+	if (tlmType==tlm_log){
 		logData_t data;
 		memcpy(&data.error,element+offset,sizeof(int));
 		offset += sizeof(data.error);
@@ -310,7 +309,6 @@ void printTLM(void* element, tlm_type_t tlmType){
 
 
 int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int resolution){
-	//TODO check for unsupported tlmType
 
 	unsigned int offset = 0;
 
@@ -328,7 +326,7 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 
 	if (!fp)
 	{
-		printf("Unable to open file!, f_open error=%d\n",err);// TODO: log error in all printf in the file!
+		printf("Unable to open file!, f_open error=%d\n",err);
 		return -1;
 	}
 
@@ -404,7 +402,6 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 	Time date;
 	timeU2time(from_time,&date);
 
-	//TODO check for unsupported tlmType
 	printf("reading from file...\n");
 
 	FILE * fp;
@@ -418,7 +415,7 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 
 	if (!fp)
 	{
-		printf("Unable to open file!");// TODO: log error in all printf in the file!
+		printf("Unable to open file!");
 		return -1;
 	}
 

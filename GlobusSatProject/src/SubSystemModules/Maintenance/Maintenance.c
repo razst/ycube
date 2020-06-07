@@ -124,14 +124,13 @@ Boolean IsGroundCommunicationWDTKick()
 
 	time_unix wdt_kick_thresh = GetGsWdtKickTime();
 
-	//TODO: if current_time - last_comm_time < 0
+
 	if (current_time - last_comm_time >= wdt_kick_thresh) {
 		return TRUE;
 	}
 	return FALSE;
 }
 
-//TODO: add to command dictionary
 int SetGsWdtKickTime(time_unix new_gs_wdt_kick_time)
 {
 	int err = FRAM_write((unsigned char*)&new_gs_wdt_kick_time, NO_COMM_WDT_KICK_TIME_ADDR,

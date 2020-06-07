@@ -9,7 +9,7 @@
 
 #define NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS 5
 
-//TODO: finish WOD telemetry according to requirements... TRX TLM...
+
 typedef struct __attribute__ ((__packed__)) WOD_Telemetry_t
 {
 	voltage_t vbat;					///< the current voltage on the battery [mV]

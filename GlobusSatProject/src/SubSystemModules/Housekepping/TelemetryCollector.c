@@ -228,7 +228,7 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 	err += isis_eps__gethousekeepingeng__tm(EPS_I2C_BUS_INDEX, &hk_tlm);
 
 	if(err == 0){
-		// TODO: check if which values do we need to use and are we using the right ones??
+
 		wod->vbat = hk_tlm_cdb.fields.dist_input.fields.volt;
 		wod->current_3V3 = hk_tlm.fields.vip_obc05.fields.current;
 		wod->current_5V = hk_tlm.fields.vip_obc01.fields.current;
@@ -246,7 +246,6 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 		wod->solar_panels[5]=0;
 		wod->charging_power = hk_tlm_cdb.fields.batt_input.fields.volt;
 		wod->consumed_power = hk_tlm_cdb.fields.dist_input.fields.power;
-		//wod->electric_current = TODO TBD
 	}else
 		logError(err);
 

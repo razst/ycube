@@ -227,14 +227,14 @@ int CMD_ResetComponent(sat_packet_t *cmd)
 		vTaskDelay(10);
 		restart();
 		break;
-
+/*
+		//don't need this as we have the eps reset
 	case reset_hardware:
 		SendAckPacket(ACK_HARD_RESET, cmd, NULL, 0);
 		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
 		vTaskDelay(10);
-		//TODO: ASK if we need this as we have the eps reset
 		break;
-
+*/
 	case reset_eps: // this is a soft reset of the MCU
 		SendAckPacket(ACK_EPS_RESET, cmd, NULL, 0);
 		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);

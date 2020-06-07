@@ -357,7 +357,6 @@ Boolean CreateFiles4DeleteTest(){
 static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
 
 void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
-	//TODO check for unsupported tlmType
 
 	unsigned int offset = 0;
 
@@ -385,7 +384,7 @@ void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
 
 	if (!source)
 	{
-		printf("Unable to open file!, f_open error=%d\n",err);// TODO: log error in all printf in the file!
+		printf("Unable to open file!, f_open error=%d\n",err);
 		return;
 	}
 

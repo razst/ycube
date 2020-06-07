@@ -34,7 +34,6 @@ Boolean CheckExecTimeFromFRAM(unsigned int fram_time_addr, time_unix period);
 /*!
  * @brief reads the current UNIX time and writes it into the FRAM for future reference.
  */
-//TODO: Document
 void SaveSatTimeInFRAM(unsigned int time_addr, unsigned int time_size);
 
 /*!
@@ -57,10 +56,9 @@ void ResetGroundCommWDT();
  */
 Boolean IsGroundCommunicationWDTKick();
 
-//TODO: document
+
 int SetGsWdtKickTime(time_unix new_gs_wdt_kick_time);
 
-//TODO: document
 time_unix GetGsWdtKickTime();
 
 /*!

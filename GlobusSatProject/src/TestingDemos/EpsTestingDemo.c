@@ -233,7 +233,7 @@ Boolean GetHeaterValues(){
 	memcpy(&heatValue,from.fields.par_val,sizeof(int16_t));
 	printf("LOW THR_BAT_HEATER value = %d\n",heatValue);
 
-	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	vTaskDelay(4000); //
 
 	heatValue = 0;
 	// get current HITHR_BAT_HEATER value

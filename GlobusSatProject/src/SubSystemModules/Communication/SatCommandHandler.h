@@ -77,7 +77,6 @@ int AddDelayedCommand(sat_packet_t *cmd);
 int GetDelayedCommandBufferCount();
 
 
-//TODO: document
 int GetDelayedCommandByIndex(unsigned int index, sat_packet_t *cmd);
 
 int DeleteDelayedCommandByIndex(unsigned int index);

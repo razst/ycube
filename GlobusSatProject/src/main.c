@@ -44,8 +44,7 @@ void taskMain()
 
 		Maintenance();
 
-		// TODO do we need to make a short delay / sleep ???
-		// Payload_Logic();
+		vTaskDelay(10);
 	}
 }
 #endif

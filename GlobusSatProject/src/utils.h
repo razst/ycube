@@ -19,6 +19,10 @@
 #define TRXVU_IDLE_TOO_LONG    	-203
 #define TRXVU_IDLE_WHILE_TRANSPONDER -205
 #define BEACON_INTRAVL_TOO_SMALL -206
+#define BEACON_INTRAVL_TOO_SMALL -206
+#define SPL_DATA_TOO_BIG			-207
+
+
 
 #define MAX_ERRORS       				 20 // max errors we want to log from the same type toghether
 #define MAX_TIME_BETWEEN_ERRORS          2 // max seconds we allow between errors

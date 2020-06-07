@@ -109,7 +109,7 @@ int InitTrxvu() {
 	myTRXVUBitrates = trxvu_bitrate_9600;
 	if (logError(IsisTrxvu_initialize(&myTRXVUAddress, &myTRXVUFramesLenght,&myTRXVUBitrates, 1))) return -1;
 
-	vTaskDelay(100); //TODO why 100?? 100 what??
+	vTaskDelay(100);
 
 	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,myTRXVUBitrates))) return -1;
 	vTaskDelay(100);
@@ -170,8 +170,7 @@ int TRX_Logic() {
 	if (cmdFound == command_found) {
 		SendAckPacket(ACK_RECEIVE_COMM, &cmd, NULL, 0);
 		err = ActUponCommand(&cmd);
-		//TODO: log error
-		//TODO: send message to ground when a delayed command was not executed-> add to log
+
 	}
 
 	checkTransponderFinish();
@@ -248,13 +247,17 @@ void FinishDump(sat_packet_t *cmd,unsigned char *buffer, ack_subtype_t acktype,
 	SendAckPacket(acktype, cmd, err, size);
 /*
 	if (NULL != task_args) {
-		free(task_args); // TODO: we don't use malloc so do we need to use free?
+		free(task_args);
 	}*/
 	if (NULL != xDumpLock) {
 		xSemaphoreGive(xDumpLock);
 	}
 
-	// TODO: also give the transmit semaphore
+	if (NULL != xIsTransmitting) {
+		xSemaphoreGive(xIsTransmitting);
+	}
+
+	logError(f_releaseFS());
 
 	if (xDumpHandle != NULL) {
 		vTaskDelete(xDumpHandle);
@@ -298,7 +301,7 @@ int BeaconLogic() {
 	if(!CheckTransmitionAllowed()){
 		return E_CANT_TRANSMIT;
 	}
-	// TODO get and set g_prev_beacon_time
+
 	int err = 0;
 	if (!CheckExecutionTime(g_prev_beacon_time, g_beacon_interval_time)) {
 		return E_TOO_EARLY_4_BEACON;
@@ -308,7 +311,6 @@ int BeaconLogic() {
 	GetCurrentWODTelemetry(&wod);
 
 	sat_packet_t cmd = { 0 };
-	//TODO do we send beacon as SPL ???? there is no global standart ???
 
 	if (logError(AssembleCommand((unsigned char*) &wod, sizeof(wod), trxvu_cmd_type,BEACON_SUBTYPE, 0x02FFFFFF, &cmd))) return -1;
 
@@ -375,7 +377,7 @@ int TransmitDataAsSPL_Packet(sat_packet_t *cmd, unsigned char *data,
 		err = AssembleCommand(data, length, cmd->cmd_type, cmd->cmd_subtype,
 				cmd->ID, &packet);
 	} else {
-		err = AssembleCommand(data, length, 0xFF, 0xFF, 0xFFFFFFFF, &packet); //TODO: figure out what should be the 'FF'
+		err = AssembleCommand(data, length, 0xFF, 0xFF, 0xFFFFFFFF, &packet);
 	}
 	if (err != 0) {
 		return err;
@@ -399,12 +401,12 @@ int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
 			+ sizeof(packet->cmd_subtype) + sizeof(packet->cmd_type)
 			+ sizeof(packet->ID);
 
-	if (xSemaphoreTake(xIsTransmitting,SECONDS_TO_TICKS(WAIT_TIME_SEM_TX)) != pdTRUE) { // TODO ask: isn't one tick too low ??
+	if (xSemaphoreTake(xIsTransmitting,SECONDS_TO_TICKS(WAIT_TIME_SEM_TX)) != pdTRUE) {
 		return E_GET_SEMAPHORE_FAILED;
 	}
 
 	err = IsisTrxvu_tcSendAX25DefClSign(ISIS_TRXVU_I2C_BUS_INDEX,
-			(unsigned char*) packet, data_length, (unsigned char*) avalFrames); // TOD ask: avalFrames null or zero ??
+			(unsigned char*) packet, data_length, (unsigned char*) avalFrames);
 
 #ifdef TESTING
 	printf("trxvu send ax25 error= %d",err);

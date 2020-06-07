@@ -1,11 +1,124 @@
-15:55:34 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+19:09:53 **** Incremental Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
+Building file: ../src/SubSystemModules/PowerManagment/EPSOperationModes.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/PowerManagment/EPSOperationModes.d" -MT"src/SubSystemModules/PowerManagment/EPSOperationModes.d" -c -o "src/SubSystemModules/PowerManagment/EPSOperationModes.o" "../src/SubSystemModules/PowerManagment/EPSOperationModes.c"
+Finished building: ../src/SubSystemModules/PowerManagment/EPSOperationModes.c
+ 
+Building file: ../src/SubSystemModules/Housekepping/TelemetryCollector.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Housekepping/TelemetryCollector.d" -MT"src/SubSystemModules/Housekepping/TelemetryCollector.d" -c -o "src/SubSystemModules/Housekepping/TelemetryCollector.o" "../src/SubSystemModules/Housekepping/TelemetryCollector.c"
+../src/SubSystemModules/Housekepping/TelemetryCollector.c: In function 'InitSavePeriodTimes':
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:33:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'time_unix' [-Wformat]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:33:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'time_unix' [-Wformat]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:36:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'time_unix' [-Wformat]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:36:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'time_unix' [-Wformat]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:39:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'time_unix' [-Wformat]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:39:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'time_unix' [-Wformat]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:42:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'time_unix' [-Wformat]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:42:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'time_unix' [-Wformat]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:45:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'time_unix' [-Wformat]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:45:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'time_unix' [-Wformat]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c: In function 'TelemetryCollectorLogic':
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:55:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:15:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:63:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:15:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:70:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:15:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:77:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:15:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:84:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:15:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/TelemetryCollector.c: In function 'TelemetrySaveANT':
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:147:7: warning: unused variable 'err' [-Wunused-variable]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c: In function 'GetCurrentWODTelemetry':
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:222:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:15:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:254:2: warning: passing argument 1 of 'FRAM_read' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/FRAM_FlightParameters.h:11:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:9,
+                 from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:3:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Storage/FRAM.h:62:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:256:2: warning: passing argument 1 of 'FRAM_read' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/FRAM_FlightParameters.h:11:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:9,
+                 from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:3:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Storage/FRAM.h:62:5: note: expected 'unsigned char *' but argument is of type 'int *'
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.h:6:0,
+                 from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:20:
+../src/SubSystemModules/Housekepping/TelemetryCollector.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:44:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c: In function 'InitSavePeriodTimes':
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:33:8: warning: 'value' is used uninitialized in this function [-Wuninitialized]
+Finished building: ../src/SubSystemModules/Housekepping/TelemetryCollector.c
+ 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'DumpTask':
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:26:2: warning: implicit declaration of function 'f_enterFS' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:46:2: warning: passing argument 1 of 'FinishDump' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5:0,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:90:6: note: expected 'struct sat_packet_t *' but argument is of type 'struct dump_arguments_t *'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:46:2: warning: passing argument 4 of 'FinishDump' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5:0,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:90:6: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_StartDump':
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:84:2: warning: passing argument 1 of 'AssembleCommand' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/AckHandler.h:5:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:10,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/SatCommandHandler.h:56:5: note: expected 'unsigned char *' but argument is of type 'unsigned char (*)[200]'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_SetTransponder':
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:138:2: warning: implicit declaration of function 'I2C_write' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:144:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:12,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_SetIdleState':
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:195:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:12,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c
+ 
+Building file: ../src/main.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/main.d" -MT"src/main.d" -c -o "src/main.o" "../src/main.c"
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.h:6:0,
+                 from ../src/main.c:22:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:44:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/main.c
+ 
+Building target: GlobusSatProject.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
+Finished building target: GlobusSatProject.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O binary "GlobusSatProject.elf"  "GlobusSatProject.bin"
+Finished building: GlobusSatProject.bin
+ 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 232320	     12	 403416	 635748	  9b364	GlobusSatProject.elf
+ 232512	     12	 523640	 756164	  b89c4	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  
 
-15:55:34 Build Finished (took 196ms)
+19:09:54 Build Finished (took 1s.305ms)
 

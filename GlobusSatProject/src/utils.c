@@ -11,7 +11,7 @@
 #include <hal/errors.h>
 #include "TLM_management.h"
 #include <SubSystemModules/Housekepping/TelemetryFiles.h>
-//TODO save in FRAM?
+
 static int errCount[2000] = {0};
 static int errLastTime[2000] = {0};
 
@@ -57,7 +57,7 @@ int logError(int error){
 		}
 		errLastTime[error] = Time_getUptimeSeconds();
 
-		printf("[%d] Logging error number:%d\n", errCount[error], error); // TODO: remove before prod...
+		printf("[%d] Logging error number:%d\n", errCount[error], error);
 
 	}
 

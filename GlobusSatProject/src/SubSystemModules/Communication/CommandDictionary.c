@@ -16,7 +16,6 @@ int trxvu_command_router(sat_packet_t *cmd)
 {
 	int err = 0;
 	sat_packet_t delayed_cmd = {0};
-	//TODO: finish 'trxvu_command_router'
 	switch (cmd->cmd_subtype)
 	{
 	case PING: 								//this command is a ping function
@@ -125,7 +124,7 @@ int trxvu_command_router(sat_packet_t *cmd)
 
 int eps_command_router(sat_packet_t *cmd)
 {
-	//TODO: finish 'eps_command_router'
+
 	int err = 0;
 
 	switch (cmd->cmd_subtype)

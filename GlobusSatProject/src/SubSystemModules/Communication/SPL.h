@@ -12,7 +12,7 @@ typedef enum __attribute__ ((__packed__)) spl_command_type_t {
 	dump_type
 }spl_command_type;
 
-//TODO: set all sub-types to be different from one another
+
 
 typedef enum __attribute__ ((__packed__)) ack_subtype_t
 {

@@ -51,7 +51,7 @@ int EnterCriticalMode()
 	if(state == CriticalMode){
 		return 0;
 	}
-	//TODO check which channels to turn off - is the OBC CONNECTED TO A CHANNEL??? we don't want to turn OBC off !!!
+
 	state = CriticalMode;
 	EpsSetLowVoltageFlag(TRUE);
 	return 0;

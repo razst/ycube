@@ -7,8 +7,8 @@
 #include "SubSystemModules/Communication/SatCommandHandler.h"
 
 // wait time for taking semaphores
-#define WAIT_TIME_SEM_DUMP	1 //TODO: verify how much time we need to wait
-#define WAIT_TIME_SEM_TX	1 //TODO: verify how much time we need to wait
+#define WAIT_TIME_SEM_DUMP	3
+#define WAIT_TIME_SEM_TX	3
 
 #define ANTENNA_DEPLOYMENT_TIMEOUT 10 //<! in seconds
 

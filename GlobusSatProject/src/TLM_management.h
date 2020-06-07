@@ -16,7 +16,7 @@
 
 
 #define MAX_FILE_NAME_SIZE 11
-#define NUM_ELEMENTS_READ_AT_ONCE 400 // TODO check if 400 is the right number !!!
+#define NUM_ELEMENTS_READ_AT_ONCE 1000
 
 
 #define FS_FILE_ENDING	"TLM"

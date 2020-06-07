@@ -79,7 +79,7 @@ int EPS_Conditioning()
 			 EnterSafeMode();
 		 }else if(filtered_voltage < eps_threshold_voltages.fields.Vdown_full){
 			 EnterCruiseMode();
-		 }else if(filtered_voltage > eps_threshold_voltages.fields.Vup_full){ // TODO: happened in testing - check with Amitay
+		 }else if(filtered_voltage > eps_threshold_voltages.fields.Vup_full){
 			 EnterFullMode();
 		 }
 
@@ -184,25 +184,25 @@ int CMDGetHeaterValues(sat_packet_t *cmd){
 	to.fields.par_id=0x3000;
 	err = isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
 	memcpy(&values.value.H1_MIN,from.fields.par_val,sizeof(int16_t));
-	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	vTaskDelay(4000);
 	to.fields.par_id=0x3001;
 	err = isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
 	memcpy(&values.value.H2_MIN,from.fields.par_val,sizeof(int16_t));
-	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	vTaskDelay(4000);
 	to.fields.par_id=0x3002;
 	err = isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
 	memcpy(&values.value.H3_MIN,from.fields.par_val,sizeof(int16_t));
 
 	// get current HITHR_BAT_HEATER value
-	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	vTaskDelay(4000); //
 	to.fields.par_id=0x3003;
 	err += isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
 	memcpy(&values.value.H1_MAX,from.fields.par_val,sizeof(int16_t));
-	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	vTaskDelay(4000); //
 	to.fields.par_id=0x3004;
 	err += isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
 	memcpy(&values.value.H2_MAX,from.fields.par_val,sizeof(int16_t));
-	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	vTaskDelay(4000); //
 	to.fields.par_id=0x3005;
 	err += isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
 	memcpy(&values.value.H3_MAX,from.fields.par_val,sizeof(int16_t));
@@ -228,22 +228,22 @@ int CMDSetHeaterValues(sat_packet_t *cmd){
 	memcpy(&setTo.fields.par_val[0],&min,sizeof(int16_t));
 	setTo.fields.par_id = 0x3000;
 	err = isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
-	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	vTaskDelay(4000); //
 	setTo.fields.par_id = 0x3001;
 	err += isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
-	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	vTaskDelay(4000); //
 	setTo.fields.par_id = 0x3002;
 	err += isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
 
 	// set all max values
 	memcpy(&setTo.fields.par_val[0],&max,sizeof(int16_t));
-	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	vTaskDelay(4000); //
 	setTo.fields.par_id = 0x3003;
 	err += isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
-	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	vTaskDelay(4000); //
 	setTo.fields.par_id = 0x3004;
 	err += isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
-	vTaskDelay(4000); // TODO:without the delay, we don't get good values. why???
+	vTaskDelay(4000); //
 	setTo.fields.par_id = 0x3005;
 	err += isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
 

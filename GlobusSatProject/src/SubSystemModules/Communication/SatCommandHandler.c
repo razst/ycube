@@ -6,6 +6,7 @@
 #include "GlobalStandards.h"
 #include "SatCommandHandler.h"
 #include "SPL.h"
+#include "utils.h"
 
 
 typedef struct __attribute__ ((__packed__)) delayed_cmd_t
@@ -51,7 +52,7 @@ int ParseDataToCommand(unsigned char * data, sat_packet_t *cmd)
 	}
 	offset += sizeof(subtype);
 
-	unsigned int data_length = 0; // TODO in the SPL presentation, it says that length is 16bits and note 32 bits, who is correct??
+	unsigned int data_length = 0;
 	err = memcpy(&data_length, data + offset,sizeof(data_length));
 		if (NULL == err) {
 			return execution_error;
@@ -74,8 +75,16 @@ int AssembleCommand(unsigned char *data, unsigned int data_length, char type,
 	cmd->length = 0;
 
 	if (NULL != data) {
-		unsigned int size =(data_length > MAX_COMMAND_DATA_LENGTH) ?
-				MAX_COMMAND_DATA_LENGTH :data_length; // TODO, if data_length > MAX_COMMAND_DATA_LENGTH than log an error
+
+		unsigned int size = 0;
+		if (data_length > MAX_COMMAND_DATA_LENGTH){
+			logError(SPL_DATA_TOO_BIG);
+			size = MAX_COMMAND_DATA_LENGTH;
+		}else{
+			size = data_length;
+		}
+
+
 		cmd->length = size;
 		void *err = memcpy(cmd->data, data, size);
 
