@@ -33,6 +33,18 @@
           ]
         },
         {
+          "id": "165",
+          "name": "Set Transponder RSSI",
+          "desc": "Set the minimum RSSI for the transponder to take action",
+          "inParams": [
+            {
+              "name": "RSSI",
+              "desc": "RSSI value (0-4095)",
+              "type": "short"
+            }
+          ]
+        },
+        {
           "id": "194",
           "name": "Ping",
           "desc": "Send ping call to satellite (a.k.a dummy function)",

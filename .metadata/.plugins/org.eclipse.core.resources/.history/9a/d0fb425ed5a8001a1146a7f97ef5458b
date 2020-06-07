@@ -195,6 +195,7 @@ int CMD_SetIdleState(sat_packet_t *cmd)
 		Time_getUnixEpoch(&curr_tick_time);
 
 		if(g_transponder_end_time > curr_tick_time){
+			SendAckPacket(ACK_ERROR_MSG, cmd, NULL, 0);
 			return TRXVU_IDLE_WHILE_TRANSPONDER;
 		}
 

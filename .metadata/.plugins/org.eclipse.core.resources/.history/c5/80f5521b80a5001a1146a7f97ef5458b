@@ -159,12 +159,11 @@ int CMD_SetRSSITransponder(sat_packet_t *cmd)
 {
 	//sends I2C command
 	int err = 0;
-	char data[1+sizeof(short)] = {0};
+	char data[1+sizeof(int)] = {};
 
 	data[0] = 0x52;
-	data[1] = cmd->data[0]; // TODO: ask if we send the RSSI value in the correct order, doc says: "The most significant byte is transmitted first - big endian"
-	data[2] = cmd->data[1];
-	//memcpy(&data[1],cmd->data[0],sizeof(short));
+
+	memcpy(&data[1],cmd->data[0],sizeof(int));
 	err = I2C_write(I2C_TRXVU_TC_ADDR, data, sizeof(data));
 
 	if (err == E_NO_SS_ERR)
@@ -194,9 +193,7 @@ int CMD_SetIdleState(sat_packet_t *cmd)
 		time_unix curr_tick_time = 0;
 		Time_getUnixEpoch(&curr_tick_time);
 
-		if(g_transponder_end_time > curr_tick_time){
-			return TRXVU_IDLE_WHILE_TRANSPONDER;
-		}
+		if(g_transponder_end_time > curr_tick_time) return TRXVU_IDLE_WHILE_TRANSPONDER;
 
 		memcpy(&duaration,cmd->data+sizeof(state),sizeof(duaration));
 	}

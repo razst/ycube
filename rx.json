@@ -409,7 +409,14 @@
           "id": "255",
           "name": "ACK_ERROR_MSG",
           "desc": "when error has occurred",
-          "inParams": []
+          "inParams": [
+           {
+              "name": "error number",
+              "desc": "TODO",
+              "type": "int"
+            }
+		  
+		  ]
         }
       ]
     },

@@ -191,13 +191,12 @@ int CMD_SetIdleState(sat_packet_t *cmd)
 	memcpy(&state,cmd->data,sizeof(state));
 	time_unix duaration = 0;
 	if (state == trxvu_idle_state_on){
-		time_unix curr_tick_time = 0;
-		Time_getUnixEpoch(&curr_tick_time);
-
 		if(g_transponder_end_time > curr_tick_time){
 			return TRXVU_IDLE_WHILE_TRANSPONDER;
 		}
 
+		time_unix curr_tick_time = 0;
+		Time_getUnixEpoch(&curr_tick_time);
 		memcpy(&duaration,cmd->data+sizeof(state),sizeof(duaration));
 	}
 	int err = SetIdleState(state,duaration);

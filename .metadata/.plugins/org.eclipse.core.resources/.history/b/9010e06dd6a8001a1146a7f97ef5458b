@@ -53,8 +53,9 @@ int CMD_SetBeaconInterval(sat_packet_t *cmd)
 
 	memcpy(&interval,&cmd->data,sizeof(time_unix));
 
-	if (interval < MIN_BEACON_INTRAVL)
-		return BEACON_INTRAVL_TOO_SMALL;
+	if interval < MIN_BEACON_INTRAVL
+		return BEACON_INTRAVL_TOO_SMALLl
+
 
 	err =  FRAM_write((unsigned char*) &cmd->data,
 			BEACON_INTERVAL_TIME_ADDR,
