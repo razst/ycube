@@ -351,7 +351,7 @@
           ]
         },
         {
-          "id": "51",
+          "id": "34",
           "name": "Abort dump",
           "desc": "stop the dump",
           "inParams": []
@@ -514,6 +514,18 @@
                   "name": "reset_ant_SideB"
                 }
               ]
+            }
+          ]
+        },
+        {
+          "id": "225",
+          "name": "FRAM Read",
+          "desc": "Read FRAM value and transmit it",
+          "inParams": [
+            {
+              "name": "Byte data",
+              "desc": "addr(int)+size of data to read(int)",
+              "type": "bytes"
             }
           ]
         },

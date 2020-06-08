@@ -260,6 +260,7 @@ void FinishDump(sat_packet_t *cmd,unsigned char *buffer, ack_subtype_t acktype,
 	logError(f_releaseFS());
 
 	if (xDumpHandle != NULL) {
+		xDumpHandle = NULL;
 		vTaskDelete(xDumpHandle);
 	}
 	if(NULL != buffer){
@@ -274,22 +275,26 @@ void AbortDump(sat_packet_t *cmd)
 }
 
 void SendDumpAbortRequest() {
-	if (eTaskGetState(xDumpHandle) == eDeleted) {
+	//if (eTaskGetState(xDumpHandle) == eDeleted) {
+	if (xDumpHandle == NULL) {
 		return;
 	}
 	Boolean queue_msg = TRUE;
-	int err = xQueueSend(xDumpQueue, &queue_msg, SECONDS_TO_TICKS(1));
-	if (0 != err) {
-		if (NULL != xDumpLock) {
-			xSemaphoreGive(xDumpLock);
-		}
-		if (xDumpHandle != NULL) {
-			vTaskDelete(xDumpHandle);
-		}
-	}
+	logError(xQueueSend(xDumpQueue, &queue_msg, SECONDS_TO_TICKS(5)));
 }
 
 Boolean CheckDumpAbort() {
+	portBASE_TYPE queueError;
+	Boolean queue_msg = FALSE;
+	queueError = xQueueReceive(xDumpQueue, &queue_msg, 0);
+	if (queueError == pdTRUE)
+	{
+		if (queue_msg == TRUE)
+		{
+			return TRUE;
+		}
+	}
+
 	return FALSE;
 }
 

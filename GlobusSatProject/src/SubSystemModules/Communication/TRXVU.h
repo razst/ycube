@@ -61,6 +61,8 @@ int CMD_SetBeaconInterval(sat_packet_t *cmd);
 int TRX_Logic();
 
 
+Boolean CheckDumpAbort();
+
 /*!
  * @brief checks if transmission is possible on grounds of low voltage and TX mute
  * @return	TRUE if transmission is allowed

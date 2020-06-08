@@ -723,7 +723,7 @@ Boolean FullSDTest(){
 	theDay.year = 55;
 	theDay.date = 5;
 	theDay.month = 1;
-
+/* copy files ...
 	for(int j=7; j<=12 ; j++){
 		theDay.month=j;
 		printf("month=%d\n",theDay.month);
@@ -738,7 +738,7 @@ Boolean FullSDTest(){
 		}
 		TelemetrySaveWOD(); // just to keep the WDT happy
 	}
-	return TRUE;
+	return TRUE;*/
 
 
 	/*
@@ -753,10 +753,11 @@ Boolean FullSDTest(){
 		deleteTLMFile(tlm_log,theDay,0);
 	 */
 
-	int startSecond = 86400*30;
-	int endSecond = 86400*30*2;// two months
+	/* generate new files ...*/
+	int startSecond = 0;
+	int endSecond = 86400*30*1; // one month
 	// add new files
-	for(int i=startSecond; i<=endSecond; i=i+20){
+	for(int i=startSecond; i<=endSecond; i=i+5){
 		Time_setUnixEpoch(new_time + i);
 		printf("i=%d\n",i);
 		TelemetrySaveWOD();
@@ -767,6 +768,7 @@ Boolean FullSDTest(){
 	}
 
 	Time_setUnixEpoch(current_time);
+	return TRUE;
 }
 
 

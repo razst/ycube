@@ -41,12 +41,21 @@ static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buf
 void delete_allTMFilesFromSD()
 {
 	// TODO make sure we don't delete the image file
+
+	int c = 100;
 	F_FIND find;
 	if (!f_findfirst("A:/*.*",&find))
 	{
 		do
 		{
 			f_delete(find.filename);
+			c++;
+			if (c>=100){
+				c=0;
+				unsigned int curr_time;
+				Time_getUnixEpoch(&curr_time);
+				printf("time is: %d",curr_time);
+			}
 		} while (!f_findnext(&find));
 	}
 }
@@ -336,6 +345,7 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 	time_unix currTime = 0;
 	time_unix lastSentTime = 0;
 
+	Boolean doBreak = FALSE;
 	while(1)
 	{
 		int readElemnts = f_read(&buffer , sizeof(int)+size , NUM_ELEMENTS_READ_AT_ONCE, fp );
@@ -363,13 +373,16 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 
 				TransmitSplPacket(&dump_tlm, NULL);
 				numOfElementsSent++;
-				if(stopDump){
+				if(CheckDumpAbort()){
+					doBreak = TRUE;
 					break;
 				}
 			}
 
 		}// end for loop...
-
+		if(doBreak){
+			break;
+		}
 	}// while (1) loop...
 
 	/* close the file*/
@@ -441,7 +454,7 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 
 			TransmitSplPacket(&dump_tlm, NULL);
 			numOfElementsSent++;
-			if(stopDump){
+			if(CheckDumpAbort()){
 				break;
 			}
 
