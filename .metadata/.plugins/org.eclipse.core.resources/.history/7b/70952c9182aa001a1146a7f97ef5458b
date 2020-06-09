@@ -52,7 +52,6 @@ int logError(int error ,char* msg){
 		if (errCount[error_abs] < MAX_ERRORS){
 			logData_t log_;
 			log_.error = error;
-			memset(log_.msg, 0, MAX_LOG_STR);
 			sprintf(log_.msg, "err %d %s", error ,msg);
 			write2File(&log_, tlm_log);
 			//printf("[%d] Logging error number:%d\n", errCount[error], error);

@@ -43,10 +43,7 @@ void timeU2time(time_unix utime, Time *time);
  */
 int logError(int error ,char* msg);
 
-/*
- * log info message
- */
-int logInfo(char *info);
+
 
 #endif /* UTILS_H_ */
 
