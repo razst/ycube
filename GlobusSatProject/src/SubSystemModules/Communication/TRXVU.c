@@ -107,11 +107,11 @@ int InitTrxvu() {
 	//Bitrate definition
 	ISIStrxvuBitrate myTRXVUBitrates;
 	myTRXVUBitrates = trxvu_bitrate_9600;
-	if (logError(IsisTrxvu_initialize(&myTRXVUAddress, &myTRXVUFramesLenght,&myTRXVUBitrates, 1))) return -1;
+	if (logError(IsisTrxvu_initialize(&myTRXVUAddress, &myTRXVUFramesLenght,&myTRXVUBitrates, 1) ,"InitTrxvu-IsisTrxvu_initialize") ) return -1;
 
 	vTaskDelay(100);
 
-	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,myTRXVUBitrates))) return -1;
+	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,myTRXVUBitrates) ,"InitTrxvu-IsisTrxvu_tcSetAx25Bitrate")) return -1;
 	vTaskDelay(100);
 
 
@@ -120,7 +120,7 @@ int InitTrxvu() {
 	myAntennaAddress.addressSideB = ANTS_I2C_SIDE_B_ADDR;
 
 	//Initialize the AntS system
-	if (logError(IsisAntS_initialize(&myAntennaAddress, 1))) return -1;
+	if (logError(IsisAntS_initialize(&myAntennaAddress, 1),"InitTrxvu-IsisAntS_initialize")) return -1;
 
 	InitTxModule();
 	InitBeaconParams();
@@ -177,14 +177,14 @@ int TRX_Logic() {
 	checkIdleFinish();
 	BeaconLogic();
 
-	if (logError(err)) return -1;
+	if (logError(err ,"TRX_Logic-ActUponCommand")) return -1;
 
 	return command_succsess;
 }
 
 int GetNumberOfFramesInBuffer() {
 	unsigned short frameCounter = 0;
-	if (logError(IsisTrxvu_rcGetFrameCount(0, &frameCounter))) return -1;
+	if (logError(IsisTrxvu_rcGetFrameCount(0, &frameCounter) ,"TRX_Logic-IsisTrxvu_rcGetFrameCount")) return -1;
 
 	return frameCounter;
 }
@@ -200,7 +200,7 @@ int GetOnlineCommand(sat_packet_t *cmd)
 	unsigned short frameCount = 0;
 	unsigned char receivedFrameData[MAX_COMMAND_DATA_LENGTH];
 
-	if (logError(IsisTrxvu_rcGetFrameCount(0, &frameCount))) return -1;
+	if (logError(IsisTrxvu_rcGetFrameCount(0, &frameCount) ,"GetOnlineCommand-IsisTrxvu_rcGetFrameCount")) return -1;
 
 	if (frameCount==0) {
 		return no_command_found;
@@ -209,9 +209,9 @@ int GetOnlineCommand(sat_packet_t *cmd)
 	ISIStrxvuRxFrame rxFrameCmd = { 0, 0, 0,
 			(unsigned char*) receivedFrameData }; // for getting raw data from Rx, nullify values
 
-	if (logError(IsisTrxvu_rcGetCommandFrame(0, &rxFrameCmd))) return -1;
+	if (logError(IsisTrxvu_rcGetCommandFrame(0, &rxFrameCmd) ,"GetOnlineCommand-IsisTrxvu_rcGetCommandFrame")) return -1;
 	// TODO log the RSSI from the frame
-	if (logError(ParseDataToCommand(receivedFrameData,cmd))) return -1;
+	if (logError(ParseDataToCommand(receivedFrameData,cmd),"GetOnlineCommand-ParseDataToCommand")) return -1;
 
 
 	return command_found;
@@ -257,7 +257,7 @@ void FinishDump(sat_packet_t *cmd,unsigned char *buffer, ack_subtype_t acktype,
 		xSemaphoreGive(xIsTransmitting);
 	}
 
-	logError(f_releaseFS());
+	logError(f_releaseFS() ,"FinishDump-f_releaseFS");
 
 	if (xDumpHandle != NULL) {
 		xDumpHandle = NULL;
@@ -280,7 +280,7 @@ void SendDumpAbortRequest() {
 		return;
 	}
 	Boolean queue_msg = TRUE;
-	logError(xQueueSend(xDumpQueue, &queue_msg, SECONDS_TO_TICKS(5)));
+	logError(xQueueSend(xDumpQueue, &queue_msg, SECONDS_TO_TICKS(5)) ,"AbortDump-xQueueSend");
 }
 
 Boolean CheckDumpAbort() {
@@ -317,15 +317,15 @@ int BeaconLogic() {
 
 	sat_packet_t cmd = { 0 };
 
-	if (logError(AssembleCommand((unsigned char*) &wod, sizeof(wod), trxvu_cmd_type,BEACON_SUBTYPE, 0x02FFFFFF, &cmd))) return -1;
+	if (logError(AssembleCommand((unsigned char*) &wod, sizeof(wod), trxvu_cmd_type,BEACON_SUBTYPE, 0x02FFFFFF, &cmd), "BeaconLogic-AssembleCommand") ) return -1;
 
 	// set the current time as the previous beacon time
-	if (logError(Time_getUnixEpoch(&g_prev_beacon_time))) return -1;
+	if (logError(Time_getUnixEpoch(&g_prev_beacon_time),"BeaconLogic-Time_getUnixEpoch") ) return -1;
 
 
-	if (logError(TransmitSplPacket(&cmd, NULL))) return -1;
+	if (logError(TransmitSplPacket(&cmd, NULL),"BeaconLogic-TransmitSplPacket") ) return -1;
 	// make sure we switch back to 9600 if we used 1200 in the beacon
-	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, trxvu_bitrate_9600))) return -1;
+	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, trxvu_bitrate_9600),"BeaconLogic-IsisTrxvu_tcSetAx25Bitrate") ) return -1;
 
 	printf("***************** beacon sent *****************\n");
 	return 0;
@@ -335,11 +335,11 @@ int BeaconLogic() {
 int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
 
 	if (duration > MAX_IDLE_TIME) {
-		logError(TRXVU_IDLE_TOO_LONG);
+		logError(TRXVU_IDLE_TOO_LONG ,"SetIdleState");
 		return TRXVU_IDLE_TOO_LONG;
 	}
 
-	int err = logError(IsisTrxvu_tcSetIdlestate(ISIS_TRXVU_I2C_BUS_INDEX, state));
+	int err = logError(IsisTrxvu_tcSetIdlestate(ISIS_TRXVU_I2C_BUS_INDEX, state) ,"SetIdleState-IsisTrxvu_tcSetIdlestate");
 
 	if (err == E_NO_SS_ERR && state == trxvu_idle_state_on){
 		// get current unix time
@@ -355,7 +355,7 @@ int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
 
 int muteTRXVU(time_unix duration) {
 	if (duration > MAX_MUTE_TIME) {
-		logError(TRXVU_MUTE_TOO_LONG);
+		logError(TRXVU_MUTE_TOO_LONG ,"muteTRXVU");
 		return -1;
 	}
 	// get current unix time

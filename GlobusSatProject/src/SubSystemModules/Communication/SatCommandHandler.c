@@ -78,7 +78,7 @@ int AssembleCommand(unsigned char *data, unsigned int data_length, char type,
 
 		unsigned int size = 0;
 		if (data_length > MAX_COMMAND_DATA_LENGTH){
-			logError(SPL_DATA_TOO_BIG);
+			logError(SPL_DATA_TOO_BIG , "AssembleCommand");
 			size = MAX_COMMAND_DATA_LENGTH;
 		}else{
 			size = data_length;

@@ -88,17 +88,17 @@ FileSystemResult InitializeFS(Boolean first_time)
 {
 
 	// Initialize the memory for the FS
-	if(logError(hcc_mem_init())) return -1;
+	if(logError(hcc_mem_init() ,"InitializeFS-hcc_mem_init")) return -1;
 
 	// Initialize the FS
-	if(logError(fs_init())) return -1;
+	if(logError(fs_init(),"InitializeFS-fs_init")) return -1;
 
 	// Tell the OS (freeRTOS) about our FS
-	if(logError(f_enterFS())) return -1;
+	if(logError(f_enterFS(),"InitializeFS-f_enterFS")) return -1;
 
 	// Initialize the volume of SD card 0 (A)
 	// TODO should we also init the volume of SD card 1 (B)???
-	if(logError(f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_PARMS ))) return -1;
+	if(logError(f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_PARMS ),"InitializeFS-f_initvolume")) return -1;
 
 	//In the first time the SD on. if there is file on the SD delete it.
 	if(first_time) delete_allTMFilesFromSD();

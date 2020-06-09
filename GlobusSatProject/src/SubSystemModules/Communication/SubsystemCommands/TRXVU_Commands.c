@@ -23,7 +23,7 @@ void DumpTask(void *args) {
 
 
 	// start the SD FS for this dump task
-	logError(f_enterFS());
+	logError(f_enterFS(), "DumpTask-f_enterFS");
 
 	//dump_arguments_t t = *((dump_arguments_t*)args);
 	dump_arguments_t *task_args = (dump_arguments_t *) args;
@@ -51,13 +51,13 @@ void DumpTask(void *args) {
 int CMD_AntennaDeploy(sat_packet_t *cmd)
 {
 
-	int err = logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideA, isisants_arm));
+	int err = logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideA, isisants_arm) ,"CMD_AntennaDeploy-IsisAntS_setArmStatus-A");
 	if (err != E_NO_SS_ERR)
-		logError(IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA,ANTENNA_DEPLOYMENT_TIMEOUT));
+		logError(IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA,ANTENNA_DEPLOYMENT_TIMEOUT) ,"CMD_AntennaDeploy-IsisAntS_autoDeployment-A");
 
-	logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideB, isisants_arm));
+	logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideB, isisants_arm) ,"CMD_AntennaDeploy-IsisAntS_setArmStatus-B");
 	if (err != E_NO_SS_ERR)
-		logError(IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB,ANTENNA_DEPLOYMENT_TIMEOUT));
+		logError(IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB,ANTENNA_DEPLOYMENT_TIMEOUT),"CMD_AntennaDeploy-IsisAntS_autoDeployment-B");
 
 
 	if (err == E_NO_SS_ERR){
@@ -350,9 +350,9 @@ int CMD_StopReDeployment(sat_packet_t *cmd){
 	FRAM_write((unsigned char*) &flag,STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);
 
 	err = IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideA, isisants_disarm);
-	logError(err);
+	logError(err ,"CMD_StopReDeployment-IsisAntS_setArmStatus-A");
 	err = IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideB, isisants_disarm);
-	logError(err);
+	logError(err ,"CMD_StopReDeployment-IsisAntS_setArmStatus-B");
 
 	if (err == E_NO_SS_ERR){
 		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);

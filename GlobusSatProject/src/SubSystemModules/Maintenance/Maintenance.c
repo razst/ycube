@@ -25,7 +25,7 @@ static time_unix lastDeploy = 0;
 Boolean CheckExecutionTime(time_unix prev_time, time_unix period)
 {
 	time_unix curr = 0;
-	if (logError(Time_getUnixEpoch(&curr)) == 1) return -1;
+	if (logError(Time_getUnixEpoch(&curr) ,"CheckExecutionTime-Time_getUnixEpoch") == 1) return -1;
 	if(curr - prev_time >= period){
 		return TRUE;
 	}
@@ -154,7 +154,7 @@ int DeleteOldFiels(int minFreeSpace){
 
 	// get the free space of the SD card
 
-	if (logError(f_getfreespace(drivenum, &space))) return -1;
+	if (logError(f_getfreespace(drivenum, &space) ,"DeleteOldFiels-f_getfreespace")) return -1;
 
 	// if needed, clean old files
 	if (space.free < minFreeSpace){
@@ -215,7 +215,8 @@ void Maintenance()
 
 	//logError(IsFS_Corrupted());-> we send corrupted bytes over beacon, no need to log in error file all the time
 
-	logError(IsGroundCommunicationWDTKick());
+	//logError(IsGroundCommunicationWDTKick());
+	logError(-1 , "Maintenance");
 
 	DeleteOldFiels(MIN_FREE_SPACE);
 

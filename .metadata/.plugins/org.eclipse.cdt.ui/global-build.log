@@ -1,10 +1,8 @@
-16:15:09 **** Clean-only build of configuration Debug for project GlobusSatProject ****
+17:11:52 **** Clean-only build of configuration Debug for project GlobusSatProject ****
 make -r -k clean 
 rm -rf  GlobusSatProject.siz  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o  ./src/TestingDemos/CommandsTestingDemo.d ./src/TestingDemos/EpsTestingDemo.d ./src/TestingDemos/FileSystemTestingDemo.d ./src/TestingDemos/MainTest.d ./src/TestingDemos/MaintenanceTestingDemo.d ./src/TestingDemos/TelemetryTestingDemo.d ./src/TestingDemos/TrxvuTestingDemo.d  ./src/SubSystemModules/PowerManagment/EPS.d ./src/SubSystemModules/PowerManagment/EPSOperationModes.d  ./src/SubSystemModules/Maintenance/Maintenance.d  ./src/SubSystemModules/Housekepping/TelemetryCollector.d  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d  ./src/SubSystemModules/Communication/AckHandler.d ./src/SubSystemModules/Communication/CommandDictionary.d ./src/SubSystemModules/Communication/SatCommandHandler.d ./src/SubSystemModules/Communication/TRXVU.d  ./src/InitSystem.d ./src/TLM_management.d ./src/main.d ./src/utils.d  GlobusSatProject.bin  GlobusSatProject.elf
-rm: cannot remove `GlobusSatProject.elf': Permission denied
-make: [clean] Error 1 (ignored)
  
-16:15:22 **** Build of configuration Debug for project GlobusSatProject ****
+17:11:54 **** Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Building file: ../src/TestingDemos/CommandsTestingDemo.c
 Invoking: Cross ARM C Compiler
@@ -110,7 +108,8 @@ C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:1
 ../src/TestingDemos/FileSystemTestingDemo.c:369:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
 In file included from ../src/TestingDemos/FileSystemTestingDemo.c:8:0:
 C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:57:6: note: expected 'char *' but argument is of type 'char (*)[11]'
-../src/TestingDemos/FileSystemTestingDemo.c:370:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:377:3: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:387:3: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
 ../src/TestingDemos/FileSystemTestingDemo.c:397:12: warning: unused variable 'lastSentTime' [-Wunused-variable]
 ../src/TestingDemos/FileSystemTestingDemo.c:396:12: warning: unused variable 'currTime' [-Wunused-variable]
 ../src/TestingDemos/FileSystemTestingDemo.c:395:6: warning: unused variable 'numOfElementsSent' [-Wunused-variable]
@@ -152,8 +151,7 @@ C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:1
 ../src/TestingDemos/FileSystemTestingDemo.c:715:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
 In file included from ../src/TestingDemos/FileSystemTestingDemo.c:4:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
-../src/TestingDemos/FileSystemTestingDemo.c:762:3: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
-../src/TestingDemos/FileSystemTestingDemo.c:722:7: warning: variable 'theDay' set but not used [-Wunused-but-set-variable]
+../src/TestingDemos/FileSystemTestingDemo.c:729:3: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
 ../src/TestingDemos/FileSystemTestingDemo.c: In function 'LogErrorRateTest':
 ../src/TestingDemos/FileSystemTestingDemo.c:777:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
 ../src/TestingDemos/FileSystemTestingDemo.c: In function 'selectAndExecuteFSTest':
@@ -603,8 +601,8 @@ C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:57:6: note: expect
 ../src/TLM_management.c:189:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
 ../src/TLM_management.c:111:6: note: expected 'char *' but argument is of type 'char (*)[11]'
 ../src/TLM_management.c: In function 'printTLM':
-../src/TLM_management.c:263:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'time_unix' [-Wformat]
-../src/TLM_management.c:263:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'time_unix' [-Wformat]
+../src/TLM_management.c:209:21: warning: unused parameter 'element' [-Wunused-parameter]
+../src/TLM_management.c:209:41: warning: unused parameter 'tlmType' [-Wunused-parameter]
 ../src/TLM_management.c: In function 'readTLMFile':
 ../src/TLM_management.c:330:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
 ../src/TLM_management.c:111:6: note: expected 'char *' but argument is of type 'char (*)[11]'
@@ -670,14 +668,14 @@ Finished building: GlobusSatProject.bin
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 259928	     12	 523632	 783572	  bf4d4	GlobusSatProject.elf
+ 234704	     12	 523640	 758356	  b9254	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  
-16:15:33 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+17:12:08 **** Incremental Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 259928	     12	 523632	 783572	  bf4d4	GlobusSatProject.elf
+ 234704	     12	 523640	 758356	  b9254	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  

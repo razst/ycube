@@ -23,10 +23,9 @@
 #define SPL_DATA_TOO_BIG			-207
 
 
-
-#define MAX_ERRORS       				 20 // max errors we want to log from the same type toghether
-#define MAX_TIME_BETWEEN_ERRORS          2 // max seconds we allow between errors
-#define MAX_LOG_STR				40
+#define MAX_ERRORS       				 10 // max errors we want to log from the same type toghether
+#define MAX_TIME_BETWEEN_ERRORS          60 // max seconds we allow between errors
+#define MAX_LOG_STR				100
 
 typedef struct data
 {
@@ -42,7 +41,7 @@ void timeU2time(time_unix utime, Time *time);
 /*
  * log error message
  */
-int logError(int error);
+int logError(int error ,char* msg);
 
 /*
  * log info message

@@ -242,18 +242,18 @@ int CMD_ResetComponent(sat_packet_t *cmd)
 		isis_eps__reset__to_t cmd_t;
 		isis_eps__reset__from_t cmd_f;
 		cmd_t.fields.rst_key = RESET_KEY;
-		logError(isis_eps__reset__tmtc(EPS_I2C_BUS_INDEX, &cmd_t, &cmd_f));
+		logError(isis_eps__reset__tmtc(EPS_I2C_BUS_INDEX, &cmd_t, &cmd_f),"CMD_ResetComponent-isis_eps__reset__tmtc");
 		break;
 
 	case reset_trxvu_hard:
 		SendAckPacket(ACK_TRXVU_HARD_RESET, cmd, NULL, 0);
-		logError(IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX));
+		logError(IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_hardReset");
 		vTaskDelay(100);
 		break;
 
 	case reset_trxvu_soft:
 		SendAckPacket(ACK_TRXVU_SOFT_RESET, cmd, NULL, 0);
-		logError(IsisTrxvu_softReset(ISIS_TRXVU_I2C_BUS_INDEX));
+		logError(IsisTrxvu_softReset(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_softReset");
 		vTaskDelay(100);
 		break;
 
@@ -266,12 +266,12 @@ int CMD_ResetComponent(sat_packet_t *cmd)
 		break;
 
 	case reset_ant_SideA:
-		err = logError(IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA));
+		err = logError(IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA),"CMD_ResetComponent-IsisAntS_reset");
 		if (err == E_NO_SS_ERR) SendAckPacket(ACK_ANTS_RESET, cmd, (unsigned char*) &err, sizeof(err));
 		break;
 
 	case reset_ant_SideB:
-		err=logError(IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB));
+		err=logError(IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB),"CMD_ResetComponent-IsisAntS_reset");
 		if (err == E_NO_SS_ERR) SendAckPacket(ACK_ANTS_RESET, cmd, (unsigned char*) &err, sizeof(err));
 		break;
 

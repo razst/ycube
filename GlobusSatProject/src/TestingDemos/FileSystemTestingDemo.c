@@ -367,7 +367,7 @@ void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
 
 	getTlmTypeInfo(tlmType,end_file_name,&size);
 	calculateFileName(date,&file_name,end_file_name , 0);
-	printf("reading from file %s...\n",file_name);
+	//printf("reading from file %s...\n",file_name);
 
 	target = f_open(file_name, "w");
 
@@ -720,25 +720,25 @@ Boolean FullSDTest(){
 
 	//delete the file
 	Time theDay;
-	theDay.year = 55;
-	theDay.date = 5;
+	theDay.year = 30;
+	theDay.date = 1;
 	theDay.month = 1;
-/* copy files ...
-	for(int j=7; j<=12 ; j++){
-		theDay.month=j;
+/* copy files ... */
+	for(int M=1; M<=12 ; M++){
+		theDay.month=M;
 		printf("month=%d\n",theDay.month);
 		for(int i=1; i<=28; i++){
 			theDay.date = i;
 			printf("day=%d\n",theDay.date);
-			copyTLMFile(tlm_wod,theDay,"250130.WOD");
-			copyTLMFile(tlm_eps_eng_mb,theDay,"250130.EEM");
-			copyTLMFile(tlm_tx,theDay,"250130.TX");
-			copyTLMFile(tlm_rx,theDay,"250130.RX");
-			copyTLMFile(tlm_log,theDay,"200520.LOG");
+			copyTLMFile(tlm_wod,theDay,"250102.WOD");
+			copyTLMFile(tlm_eps_eng_mb,theDay,"250102.EEM");
+			copyTLMFile(tlm_tx,theDay,"250102.TX");
+			copyTLMFile(tlm_rx,theDay,"250102.RX");
+			copyTLMFile(tlm_log,theDay,"200608.LOG");
 		}
 		TelemetrySaveWOD(); // just to keep the WDT happy
 	}
-	return TRUE;*/
+
 
 
 	/*
@@ -753,7 +753,7 @@ Boolean FullSDTest(){
 		deleteTLMFile(tlm_log,theDay,0);
 	 */
 
-	/* generate new files ...*/
+	/* generate new files ...
 	int startSecond = 0;
 	int endSecond = 86400*30*1; // one month
 	// add new files
@@ -765,7 +765,7 @@ Boolean FullSDTest(){
 		TelemetrySaveEPS();
 		//TelemetrySaveSolarPanels();
 		TelemetrySaveTRXVU();
-	}
+	}*/
 
 	Time_setUnixEpoch(current_time);
 	return TRUE;
@@ -776,12 +776,12 @@ Boolean LogErrorRateTest(){
 
 	printf("ERROR 20 - should log only the first 20 errors\n");
 	for(int i=0;i<100;i++){
-		logError(-20);
+		logError(-20 ,"LogErrorRateTest");
 	}
 
 	printf("ERROR 21 - should log all errors\n");
 	for(int i=0;i<5;i++){
-		logError(-21);
+		logError(-21 ,"LogErrorRateTest");
 	}
 
 	vTaskDelay((MAX_TIME_BETWEEN_ERRORS+1) * 1000);
@@ -789,12 +789,12 @@ Boolean LogErrorRateTest(){
 
 	printf("ERROR 20 - should start logging again only the first 20 errors\n");
 	for(int i=0;i<100;i++){
-		logError(-20);
+		logError(-20 , "LogErrorRateTest");
 	}
 
 	printf("ERROR 0 (sucsess) - shouldn't log anything\n");
 	for(int i=0;i<10;i++){
-		logError(0);
+		logError(0 ,"LogErrorRateTest");
 	}
 
 	return TRUE;

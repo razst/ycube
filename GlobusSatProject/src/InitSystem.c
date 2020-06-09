@@ -96,17 +96,17 @@ void WriteDefaultValuesToFRAM()
 
 int StartFRAM()
 {
-	return logError(FRAM_start());
+	return logError(FRAM_start() ,"StartFRAM");
 }
 
 int StartI2C()
 {
-	return logError(I2C_start(I2c_SPEED_Hz , I2c_Timeout));
+	return logError(I2C_start(I2c_SPEED_Hz , I2c_Timeout) ,"StartI2C");
 }
 
 int StartSPI()
 {
-	return logError(SPI_start(bus1_spi , slave1_spi));
+	return logError(SPI_start(bus1_spi , slave1_spi) ,"SPI_start");
 }
 
 int StartTIME()
@@ -115,7 +115,7 @@ int StartTIME()
 		Time expected_deploy_time = UNIX_DATE_JAN_D1_Y2000;
 		error = Time_start(&expected_deploy_time, 0);
 		if (0 != error) {
-			return logError(error);
+			return logError(error ,"StartTIME-Time_start");
 		}
 		time_unix time_before_wakeup = 0;
 		if (!isFirstActivation()) {
@@ -143,7 +143,7 @@ int DeploySystem()
 	int err = 0;
 
 	time_unix seconds_since_deploy = 0;
-	err = logError(FRAM_read((unsigned char*) seconds_since_deploy , SECONDS_SINCE_DEPLOY_ADDR , SECONDS_SINCE_DEPLOY_SIZE));
+	err = logError(FRAM_read((unsigned char*) seconds_since_deploy , SECONDS_SINCE_DEPLOY_ADDR , SECONDS_SINCE_DEPLOY_SIZE) ,"DeploySystem-FRAM_read");
 	if (0 != err) {
 		seconds_since_deploy = MINUTES_TO_SECONDS(MIN_2_WAIT_BEFORE_DEPLOY);	// RBF to 30 min
 	}

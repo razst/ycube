@@ -52,7 +52,7 @@ void TelemetryCollectorLogic()
 	time_unix curr = 0;
 	if (CheckExecutionTime(tlm_last_save_time[tlm_eps],tlm_save_periods[tlm_eps])){
 		TelemetrySaveEPS();
-		if (logError(Time_getUnixEpoch(&curr)) == 0){
+		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
 			tlm_last_save_time[tlm_eps] = curr;
 		}
 
@@ -60,28 +60,28 @@ void TelemetryCollectorLogic()
 
 	if (CheckExecutionTime(tlm_last_save_time[tlm_tx],tlm_save_periods[tlm_tx])){
 		TelemetrySaveTRXVU();
-		if (logError(Time_getUnixEpoch(&curr)) == 0){
+		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
 			tlm_last_save_time[tlm_tx] = curr;
 		}
 	}
 
 	if (CheckExecutionTime(tlm_last_save_time[tlm_antenna],tlm_save_periods[tlm_antenna])){
 		TelemetrySaveANT();
-		if (logError(Time_getUnixEpoch(&curr)) == 0){
+		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
 			tlm_last_save_time[tlm_antenna] = curr;
 		}
 	}
 
 	if (CheckExecutionTime(tlm_last_save_time[tlm_solar],tlm_save_periods[tlm_solar])){
 		TelemetrySaveSolarPanels();
-		if (logError(Time_getUnixEpoch(&curr)) == 0){
+		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
 			tlm_last_save_time[tlm_solar] = curr;
 		}
 	}
 
 	if (CheckExecutionTime(tlm_last_save_time[tlm_wod],tlm_save_periods[tlm_wod])){
 		TelemetrySaveWOD();
-		if (logError(Time_getUnixEpoch(&curr)) == 0){
+		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
 			tlm_last_save_time[tlm_wod] = curr;
 		}
 	}
@@ -93,7 +93,7 @@ void TelemetrySaveEPS()
 {
 	isis_eps__gethousekeepingeng__from_t tlm_mb_eng;
 
-	if (logError(isis_eps__gethousekeepingeng__tm(EPS_I2C_BUS_INDEX, &tlm_mb_eng)) == 0)
+	if (logError(isis_eps__gethousekeepingeng__tm(EPS_I2C_BUS_INDEX, &tlm_mb_eng) ,"TelemetrySaveEPS-isis_eps__gethousekeepingeng__tm") == 0)
 	{
 		write2File(&tlm_mb_eng , tlm_eps_eng_mb);
 	}
@@ -127,7 +127,7 @@ void TelemetrySaveTRXVU()
 
 		ISIStrxvuTxTelemetry tx_tlm;
 
-		if (logError(IsisTrxvu_tcGetTelemetryAll(ISIS_TRXVU_I2C_BUS_INDEX, &tx_tlm))== 0)
+		if (logError(IsisTrxvu_tcGetTelemetryAll(ISIS_TRXVU_I2C_BUS_INDEX, &tx_tlm) ,"TelemetrySaveTRXVU-IsisTrxvu_tcGetTelemetryAll")== 0)
 		{
 			write2File(&tx_tlm , tlm_tx);
 		}
@@ -135,7 +135,7 @@ void TelemetrySaveTRXVU()
 
 		ISIStrxvuRxTelemetry rx_tlm;
 
-		if (logError(IsisTrxvu_rcGetTelemetryAll(ISIS_TRXVU_I2C_BUS_INDEX, &rx_tlm)) == 0)
+		if (logError(IsisTrxvu_rcGetTelemetryAll(ISIS_TRXVU_I2C_BUS_INDEX, &rx_tlm) ,"TelemetrySaveTRXVU-IsisTrxvu_rcGetTelemetryAll") == 0)
 		{
 			write2File(&rx_tlm , tlm_rx);
 		}
@@ -147,11 +147,11 @@ void TelemetrySaveTRXVU()
 		int err = 0;
 		ISISantsTelemetry ant_tlmA, ant_tlmB;
 		if(logError(IsisAntS_getAlltelemetry(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA,
-				&ant_tlmA) == 0)){
+				&ant_tlmA) ,"TelemetrySaveANT-IsisAntS_getAlltelemetry-A" )==0){
 			write2File(&ant_tlmA , tlm_antenna);
 		}
 		if(logError(IsisAntS_getAlltelemetry(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB,
-				&ant_tlmB)) == 0){
+				&ant_tlmB),"TelemetrySaveANT-IsisAntS_getAlltelemetry-B") == 0){
 			write2File(&ant_tlmB , tlm_antenna);
 		}
 	}
@@ -216,7 +216,7 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 		wod->free_memory = space.free;
 		wod->corrupt_bytes = space.bad;
 	}else
-		logError(err);
+		logError(err ,"GetCurrentWODTelemetry");
 
 	time_unix current_time = 0;
 	Time_getUnixEpoch(&current_time);
@@ -247,7 +247,7 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 		wod->charging_power = hk_tlm_cdb.fields.batt_input.fields.volt;
 		wod->consumed_power = hk_tlm_cdb.fields.dist_input.fields.power;
 	}else
-		logError(err);
+		logError(err ,"GetCurrentWODTelemetry");
 
 	int reset=0;
 	err = FRAM_read(&reset,NUMBER_OF_RESETS_ADDR, NUMBER_OF_RESETS_SIZE);
