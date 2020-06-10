@@ -257,8 +257,7 @@ void FinishDump(sat_packet_t *cmd,unsigned char *buffer, ack_subtype_t acktype,
 		xSemaphoreGive(xIsTransmitting);
 	}
 
-	//logError(f_releaseFS() ,"FinishDump-f_releaseFS");
-	f_releaseFS();
+	logError(f_releaseFS() ,"FinishDump-f_releaseFS");
 
 	if (xDumpHandle != NULL) {
 		xDumpHandle = NULL;

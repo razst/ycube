@@ -189,16 +189,10 @@ int write2File(void* data, tlm_type_t tlmType){
 	calculateFileName(curr_date,&file_name,end_file_name , 0);
 	fp = f_open(file_name, "a");
 
-	int err = f_getlasterror();
-
 	if (!fp)
 	{
-		char buffer[80];
-		sprintf(buffer, "write2File Unable to open file %s, f_open error=%d",file_name, err);
-		logError(err,buffer);
-		printf(buffer);printf("\n");
-		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
-		return -1;
+		printf("Unable to open file!");
+		return 1;
 	}
 
 	f_write(&curr_time , sizeof(curr_time) ,1, fp );
@@ -351,7 +345,7 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 	time_unix currTime = 0;
 	time_unix lastSentTime = 0;
 
-
+	Boolean doBreak = FALSE;
 	while(1)
 	{
 		int readElemnts = f_read(&buffer , sizeof(int)+size , NUM_ELEMENTS_READ_AT_ONCE, fp );
@@ -386,7 +380,8 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 			}
 
 		}// end for loop...
-		if(stopDump){
+		if(doBreak){
+			stopDump = TRUE;
 			break;
 		}
 	}// while (1) loop...
@@ -447,7 +442,7 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 	while (f_read(&element , sizeof(int)+size , 1, fp ) == 1){
 		// get the time of the current element and check if we need to send it or not based on the resolution
 		memcpy(&current_time, &element, sizeof(int));
-		//printf("tlm time is:%d\n",current_time);
+		printf("tlm time is:%d\n",current_time);
 		if (current_time>=from_time && current_time<=to_time && ((current_time - lastSentTime) >= resolution)){
 			lastSentTime = current_time;
 

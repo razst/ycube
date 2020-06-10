@@ -215,7 +215,7 @@ void Maintenance()
 
 	//logError(IsFS_Corrupted());-> we send corrupted bytes over beacon, no need to log in error file all the time
 
-	logError(IsGroundCommunicationWDTKick(),"Maintenance-IsGroundCommunicationWDTKick");
+	logError(IsGroundCommunicationWDTKick());
 
 	DeleteOldFiels(MIN_FREE_SPACE);
 

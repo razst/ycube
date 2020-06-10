@@ -55,7 +55,7 @@ int logError(int error ,char* msg){
 			memset(log_.msg, 0, MAX_LOG_STR);
 			sprintf(log_.msg, "err %d %s", error ,msg);
 			write2File(&log_, tlm_log);
-			//printf(log_.msg);printf("\n");
+			printf(log_.msg);
 			errLastTime[error_abs] = Time_getUptimeSeconds();
 		}
 
