@@ -131,8 +131,8 @@ int CMD_FRAM_Stop(sat_packet_t *cmd)
 
 int CMD_FRAM_ReStart(sat_packet_t *cmd)
 {
-	FRAM_stop();
-	int err = FRAM_start();
+	int err = FRAM_stop();
+	err = FRAM_start();
 	if (err == E_NO_SS_ERR)
 	{
 		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);

@@ -96,16 +96,14 @@ typedef enum __attribute__ ((__packed__)) eps_subtypes_t
 {
 	UPDATE_ALPHA 		= 0x01,
     GET_HEATER_VALUES 	= 0x02,
-    SET_HEATER_VALUES 	= 0x03,
-    RESET_EPS_WDT	 	= 0x04
+    SET_HEATER_VALUES 	= 0x03
 }eps_subtypes_t;
 
 
 typedef enum __attribute__ ((__packed__)) telemetry_subtypes_t
 {
-	DELETE_FILE 		= 0xAA,		//0b10101010
-	GET_LAST_FS_ERROR	= 0xBB
-
+	DELETE_FILE = 0xAA,		//0b10101010
+	ba
 }telemetry_subtypes_t;
 
 
@@ -121,9 +119,7 @@ typedef enum __attribute__ ((__packed__)) management_subtypes_t
 	GENERIC_I2C_CMD =           0xDF,       //0b‭11011111‬
 	RESET_COMPONENT =           0xDE,       //0b‭11011110
 	FRAM_WRITE_AND_TRANSMIT =   0xE0,       //0b11100000
-	FRAM_READ_AND_TRANSMIT =    0xE1,
-	FRAM_RESTART =    			0xE2,
-	GET_SAT_UPTIME =    		0xE3
+	FRAM_READ_AND_TRANSMIT =    0xE1        //0b11100001
 }management_subtypes_t;
 //-----------------
 

@@ -96,16 +96,14 @@ typedef enum __attribute__ ((__packed__)) eps_subtypes_t
 {
 	UPDATE_ALPHA 		= 0x01,
     GET_HEATER_VALUES 	= 0x02,
-    SET_HEATER_VALUES 	= 0x03,
-    RESET_EPS_WDT	 	= 0x04
+    SET_HEATER_VALUES 	= 0x03
 }eps_subtypes_t;
 
 
 typedef enum __attribute__ ((__packed__)) telemetry_subtypes_t
 {
-	DELETE_FILE 		= 0xAA,		//0b10101010
-	GET_LAST_FS_ERROR	= 0xBB
-
+	DELETE_FILE = 0xAA,		//0b10101010
+	ba
 }telemetry_subtypes_t;
 
 

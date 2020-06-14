@@ -138,9 +138,7 @@ int eps_command_router(sat_packet_t *cmd)
 	case SET_HEATER_VALUES:
 		err = CMDSetHeaterValues(cmd);
 		break;
-	case RESET_EPS_WDT:
-		err = CMD_EPS_ResetWDT(cmd);
-		break;
+
 	default:
 		SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
 		break;
@@ -160,9 +158,6 @@ int telemetry_command_router(sat_packet_t *cmd)
 	{
 	case DELETE_FILE:
 		err = CMD_DeleteTLM(cmd);
-		break;
-	case GET_LAST_FS_ERROR:
-		err = CMD_GetLastFS_Error(cmd);
 		break;
 
 	default:

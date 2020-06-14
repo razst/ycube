@@ -129,17 +129,6 @@ int CMD_FRAM_Stop(sat_packet_t *cmd)
 	return 0;
 }
 
-int CMD_FRAM_ReStart(sat_packet_t *cmd)
-{
-	FRAM_stop();
-	int err = FRAM_start();
-	if (err == E_NO_SS_ERR)
-	{
-		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
-	}
-	return err;
-}
-
 int CMD_FRAM_GetDeviceID(sat_packet_t *cmd)
 {
 

@@ -103,9 +103,8 @@ typedef enum __attribute__ ((__packed__)) eps_subtypes_t
 
 typedef enum __attribute__ ((__packed__)) telemetry_subtypes_t
 {
-	DELETE_FILE 		= 0xAA,		//0b10101010
-	GET_LAST_FS_ERROR	= 0xBB
-
+	DELETE_FILE = 0xAA,		//0b10101010
+	ba
 }telemetry_subtypes_t;
 
 

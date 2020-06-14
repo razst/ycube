@@ -421,7 +421,14 @@
               "type": "short"
             }
           ]
-        }
+        },
+        {
+          "id": "4",
+          "name": "Rest EPS WDT",
+          "desc": "Resets the watchdog timer keeping the system from performing a reset",
+          "inParams": []
+        },
+		
       ]
     },
     {
@@ -470,6 +477,14 @@
               "desc": "end date of dump - not including this date",
               "type": "date"
             }
+          ]
+        },
+        {
+          "id": "187",
+          "name": "Get Last FS Error",
+          "desc": "Get last file system error",
+          "inParams": [
+            
           ]
         }
       ]
@@ -527,6 +542,21 @@
               "desc": "addr(int)+size of data to read(int)",
               "type": "bytes"
             }
+          ]
+        },
+        {
+          "id": "227",
+          "name": "Get Sat Uptime",
+          "desc": "Get Sat Uptime",
+          "inParams": [
+          ]
+        },
+        {
+          "id": "226",
+          "name": "FRAM Resart",
+          "desc": "restart the FRAM",
+          "inParams": [
+            
           ]
         },
         {

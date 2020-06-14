@@ -64,12 +64,7 @@ int CMD_GetNumOfFilesByType(sat_packet_t *cmd)
 int CMD_GetLastFS_Error(sat_packet_t *cmd)
 {
 	int err = f_getlasterror();
-	if (err == E_NO_SS_ERR)
-	{
-		TransmitDataAsSPL_Packet(cmd, (unsigned char*)&err, sizeof(int));
-	}
-	return err;
-
+	return 0;
 }
 
 int CMD_FreeSpace(sat_packet_t *cmd)

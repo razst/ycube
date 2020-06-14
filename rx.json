@@ -1107,7 +1107,20 @@
               "type": "datetime"
             }
           ]
-        }
+        },
+        {
+          "id": "227",
+          "name": "Get Sat Uptime",
+          "desc": "Get Sat Uptime in seconds",
+          "inParams": [
+            {
+              "name": "Uptime",
+              "desc": "",
+              "type": "int"
+            }
+          ]
+        },
+		
       ]
     }
   ]

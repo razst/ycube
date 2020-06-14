@@ -161,9 +161,6 @@ int telemetry_command_router(sat_packet_t *cmd)
 	case DELETE_FILE:
 		err = CMD_DeleteTLM(cmd);
 		break;
-	case GET_LAST_FS_ERROR:
-		err = CMD_GetLastFS_Error(cmd);
-		break;
 
 	default:
 		err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
