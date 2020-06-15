@@ -28,4 +28,5 @@ int CMD_GetTimeOfLastElementInFile(sat_packet_t *cmd);
 
 int CMD_GetTimeOfFirstElement(sat_packet_t *cmd);
 
+
 #endif /* FS_COMMANDS_H_ */

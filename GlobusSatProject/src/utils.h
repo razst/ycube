@@ -21,6 +21,8 @@
 #define BEACON_INTRAVL_TOO_SMALL -206
 #define BEACON_INTRAVL_TOO_SMALL -206
 #define SPL_DATA_TOO_BIG			-207
+#define INVALID_TLM_TYPE			-208
+
 
 
 #define MAX_ERRORS       				 10 // max errors we want to log from the same type toghether

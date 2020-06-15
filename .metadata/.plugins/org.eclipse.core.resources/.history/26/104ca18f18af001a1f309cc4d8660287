@@ -1,0 +1,138 @@
+#include "FS_Commands.h"
+#include "GlobalStandards.h"
+#include "TLM_management.h"
+#include "SubSystemModules/Communication/TRXVU.h"
+#include <hcc/api_fat.h>
+
+
+int CMD_SetPeriodTimes(sat_packet_t *cmd){
+
+	tlm_type_t tlm_type=cmd->data[1];
+	time_unix value=0;
+	memcpy(&value,cmd->data+1,sizeof(value));
+
+	int err=0;
+	switch (tlm_type)
+	{
+	case tlm_eps:
+		err=FRAM_write(&value, EPS_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+		tlm_save_periods[tlm_eps] = value;
+		break;
+	case tlm_tx:
+		err=FRAM_write(&value, TRXVU_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+		tlm_save_periods[tlm_tx] = value;
+		break;
+	case tlm_antenna:
+		err=FRAM_write(&value, ANT_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+		tlm_save_periods[tlm_antenna] = value;
+		break;
+	case tlm_solar:
+		err=FRAM_write(&value, SOLAR_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+		tlm_save_periods[tlm_solar] = value;
+		break;
+	case tlm_wod:
+		err=FRAM_write(&value, WOD_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+		tlm_save_periods[tlm_wod] = value;
+		break;
+
+	default:
+		err=INVALID_TLM_TYPE;
+		break;
+	}
+	if (err == E_NO_SS_ERR){
+		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
+	}
+
+	return err;
+
+
+}
+
+int CMD_DeleteTLM(sat_packet_t *cmd)
+{
+	if (NULL == cmd) {
+		return -1;
+	}
+
+	dump_arguments_t dmp_pckt;
+	unsigned int offset = 0;
+
+	AssembleCommand(&cmd->data,cmd->length,cmd->cmd_type,cmd->cmd_subtype,cmd->ID, &dmp_pckt.cmd);
+
+	memcpy(&dmp_pckt.dump_type, cmd->data, sizeof(dmp_pckt.dump_type));
+	offset += sizeof(dmp_pckt.dump_type);
+
+	memcpy(&dmp_pckt.t_start, cmd->data + offset, sizeof(dmp_pckt.t_start));
+	offset += sizeof(dmp_pckt.t_start);
+
+	memcpy(&dmp_pckt.t_end, cmd->data + offset, sizeof(dmp_pckt.t_end));
+	offset += sizeof(dmp_pckt.t_end);
+
+
+	// calculate how many days we were asked to dump (every day has 86400 seconds)
+	int numberOfDays = (dmp_pckt.t_end - dmp_pckt.t_start)/86400;
+	Time date;
+	timeU2time(dmp_pckt.t_start,&date);
+	int numOfElementsSent = deleteTLMFiles(dmp_pckt.dump_type,date,numberOfDays);
+	SendAckPacket(ACK_DELETE_TLM, &cmd, numOfElementsSent, sizeof(numOfElementsSent));
+	return 0;
+}
+
+
+int CMD_DeleteFileByTime(sat_packet_t *cmd)
+{
+	return 0;
+}
+
+int CMD_DeleteFilesOfType(sat_packet_t *cmd)
+{
+	return 0;
+}
+
+int CMD_DeleteAllFiles(sat_packet_t *cmd)
+{
+	delete_allTMFilesFromSD();
+	SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
+	return 0;
+}
+
+int CMD_GetNumOfFilesInTimeRange(sat_packet_t *cmd)
+{
+	return 0;
+}
+
+int CMD_GetNumOfFilesByType(sat_packet_t *cmd)
+{
+	return 0;
+}
+
+int CMD_GetLastFS_Error(sat_packet_t *cmd)
+{
+	int err = f_getlasterror();
+	if (err == E_NO_SS_ERR)
+	{
+		TransmitDataAsSPL_Packet(cmd, (unsigned char*)&err, sizeof(int));
+	}
+	return err;
+
+}
+
+int CMD_FreeSpace(sat_packet_t *cmd)
+{
+	return 0;
+}
+
+int CMD_GetFileLengthByTime(sat_packet_t *cmd)
+{
+	return 0;
+}
+
+int CMD_GetTimeOfLastElementInFile(sat_packet_t *cmd)
+{
+	return 0;
+}
+
+int CMD_GetTimeOfFirstElement(sat_packet_t *cmd)
+{
+	return 0;
+}

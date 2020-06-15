@@ -489,8 +489,46 @@
           "id": "171",
           "name": "Delete all files on SD, excluding about.jpg",
           "desc": "Delete all files on SD",
+          "inParams": []
+        },
+        {
+          "id": "204",
+          "name": "Set TLM period time",
+          "desc": "Set TLM period time",
           "inParams": [
-            
+            {
+              "name": "tlm_type",
+              "desc": "the type of the telematry to delete ",
+              "type": "char",
+              "values": [
+                {
+                  "id": "0",
+                  "name": "EPS"
+                },
+                {
+                  "id": "1",
+                  "name": "TRXUV"
+                },
+                {
+                  "id": "2",
+                  "name": "Antenna"
+                },
+                 {
+                  "id": "3",
+                  "name": "Solar Panel"
+                },
+                 {
+                  "id": "4",
+                  "name": "WOD"
+                }
+              ]
+            },
+
+			{
+              "name": "TLM interval",
+              "desc": "number of seconds between every TLM save",
+              "type": "int"
+            }            
           ]
         },
 		

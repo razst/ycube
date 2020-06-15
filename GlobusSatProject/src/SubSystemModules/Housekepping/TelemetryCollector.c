@@ -22,29 +22,71 @@
 #include "TLM_management.h"
 #include "FRAM_FlightParameters.h"
 #include "SubSystemModules/Maintenance/Maintenance.h"
+#include "SubSystemModules/Communication/AckHandler.h"
 
-
-time_unix tlm_save_periods[NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS] = {0};
-time_unix tlm_last_save_time[NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS]= {0};
+static time_unix tlm_save_periods[NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS] = {0};
+static time_unix tlm_last_save_time[NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS]= {0};
 
 void InitSavePeriodTimes(){
 	time_unix value;
 	FRAM_read((unsigned char*) &tlm_save_periods[tlm_eps], EPS_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
-	printf("test value:%d \n",value);
+	printf("tlm_eps period value:%d \n",value);
 
 	FRAM_read((unsigned char*) &tlm_save_periods[tlm_tx], TRXVU_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
-	printf("test value:%d \n",value);
+	printf("tlm_tx period value:%d \n",value);
 
 	FRAM_read((unsigned char*) &tlm_save_periods[tlm_antenna], ANT_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
-	printf("test value:%d \n",value);
+	printf("tlm_antenna period value:%d \n",value);
 
 	FRAM_read((unsigned char*) &tlm_save_periods[tlm_solar], SOLAR_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
-	printf("test value:%d \n",value);
+	printf("tlm_solar period value:%d \n",value);
 
 	FRAM_read((unsigned char*) &tlm_save_periods[tlm_wod], WOD_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
-	printf("test value:%d \n",value);
+	printf("tlm_wod period value:%d \n",value);
 
-	//FRAM_read((unsigned char*)tlm_save_periods,TLM_SAVE_PERIOD_START_ADDR,NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS*sizeof(time_unix));
+}
+
+int CMD_SetTLMPeriodTimes(sat_packet_t *cmd){
+
+	tlm_type_t tlm_type=cmd->data[0];
+	time_unix value=0;
+	memcpy(&value,cmd->data+1,sizeof(value));
+
+	int err=0;
+	switch (tlm_type)
+	{
+	case tlm_eps:
+		err=FRAM_write((unsigned char *)&value, EPS_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+		tlm_save_periods[tlm_eps] = value;
+		break;
+	case tlm_tx:
+		err=FRAM_write((unsigned char *)&value, TRXVU_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+		tlm_save_periods[tlm_tx] = value;
+		break;
+	case tlm_antenna:
+		err=FRAM_write((unsigned char *)&value, ANT_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+		tlm_save_periods[tlm_antenna] = value;
+		break;
+	case tlm_solar:
+		err=FRAM_write((unsigned char *)&value, SOLAR_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+		tlm_save_periods[tlm_solar] = value;
+		break;
+	case tlm_wod:
+		err=FRAM_write((unsigned char *)&value, WOD_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+		tlm_save_periods[tlm_wod] = value;
+		break;
+
+	default:
+		err=INVALID_TLM_TYPE;
+		break;
+	}
+	if (err == E_NO_SS_ERR){
+		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
+	}
+
+	return err;
+
+
 }
 
 void TelemetryCollectorLogic()
@@ -159,7 +201,7 @@ void TelemetrySaveTRXVU()
 void TelemetrySaveSolarPanels()
 {
 	//solar_tlm_t data;
-	int32_t data[ISIS_SOLAR_PANEL_COUNT] ;
+	int32_t data[ISIS_SOLAR_PANEL_COUNT] = {0} ;
 	int err = 0;
 	uint8_t fault;
 	if (IsisSolarPanelv2_getState() == ISIS_SOLAR_PANEL_STATE_AWAKE)
@@ -183,10 +225,12 @@ void TelemetrySaveSolarPanels()
 		err += IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_8, &data[8],
 				&fault);
 
+		write2File(&data,tlm_solar);// write the temp values in all cases, even if one was failing
+		/*
 		if (err == ISIS_SOLAR_PANEL_STATE_AWAKE * ISIS_SOLAR_PANEL_COUNT)
 		{
 			write2File(&data,tlm_solar);
-		}
+		}*/
 	}
 }
 

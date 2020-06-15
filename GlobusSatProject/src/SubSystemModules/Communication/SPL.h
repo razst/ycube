@@ -106,7 +106,8 @@ typedef enum __attribute__ ((__packed__)) telemetry_subtypes_t
 {
 	DELETE_FILE 		= 0xAA,		//0b10101010
 	DELETE_ALL_FILES	= 0xAB,		//0b10101010
-	GET_LAST_FS_ERROR	= 0xBB
+	GET_LAST_FS_ERROR	= 0xBB,
+	SET_TLM_PERIOD		= 0xCC
 
 }telemetry_subtypes_t;
 

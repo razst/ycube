@@ -47,7 +47,7 @@
 #define DEFAULT_ANT_SAVE_TLM_TIME		5			//<! save antenna TLM every 5 seconds
 #define ANT_SAVE_TLM_PERIOD_ADDR		0x138		//<! address where the save tlm period will be
 
-#define DEFAULT_SOLAR_SAVE_TLM_TIME		5			//<! save solar panel TLM every 5 seconds
+#define DEFAULT_SOLAR_SAVE_TLM_TIME		60			//<! save solar panel TLM every 5 seconds
 #define SOLAR_SAVE_TLM_PERIOD_ADDR		0x142		//<! address where the save tlm period will be
 
 #define DEFAULT_WOD_SAVE_TLM_TIME		5			//<! save WOD TLM every 5 seconds

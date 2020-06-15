@@ -171,6 +171,9 @@ int telemetry_command_router(sat_packet_t *cmd)
 	case GET_LAST_FS_ERROR:
 		err = CMD_GetLastFS_Error(cmd);
 		break;
+	case SET_TLM_PERIOD:
+		err = CMD_SetTLMPeriodTimes(cmd);
+		break;
 
 	default:
 		err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);

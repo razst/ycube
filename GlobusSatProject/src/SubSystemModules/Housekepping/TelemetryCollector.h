@@ -38,6 +38,10 @@ typedef struct solar_tlm { int32_t values[ISIS_SOLAR_PANEL_COUNT]; } solar_tlm_t
  */
 void InitSavePeriodTimes();
 
+/**
+ * set a new periodTime
+ */
+int CMD_SetTLMPeriodTimes(sat_packet_t *cmd);
 /*!
  * @brief saves all telemetries into the appropriate TLM files
  */
