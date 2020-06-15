@@ -1029,6 +1029,27 @@
         }
       ]
     },
+	
+    {
+      "id": "2",
+      "name": "Telemetry",
+      "subtypes": [
+        {
+          "id": "187",
+          "name": "Get Last FS Error",
+          "desc": "Get last file system error",
+          "inParams": [
+            {
+              "name": "Last Error",
+              "desc": "",
+              "type": "int"
+            }            
+          ]
+        }
+      ]
+    },	
+	
+	
     {
       "id": "1",
       "name": "EPS",
@@ -1088,7 +1109,13 @@
           "name": "Set heater values",
           "desc": "set min & max heater values",
           "inParams": []
-        }
+        },
+        {
+          "id": "4",
+          "name": "Rest EPS WDT",
+          "desc": "Resets the watchdog timer keeping the system from performing a reset",
+          "inParams": []
+        },		
       ]
     },
     {

@@ -70,10 +70,6 @@ int trxvu_command_router(sat_packet_t *cmd)
 		err = CMD_SetBeaconInterval(cmd);
 		break;
 
-	case TRANSMIT_BEACON:
-		err = CMD_TrasmitBeacon(cmd);
-		break;
-
 	case SET_BAUD_RATE:
 		err = CMD_SetBaudRate(cmd);
 		break;

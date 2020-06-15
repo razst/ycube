@@ -337,19 +337,13 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 	printf("reading from file %s...\n",file_name);
 	fp = f_open(file_name, "r");
 
-
 	int err = f_getlasterror();
 
 	if (!fp)
 	{
-		char buffer[80];
-		sprintf(buffer, "readTLMFile Unable to open file %s, f_open error=%d",file_name, err);
-		logError(err,buffer);
-		printf(buffer);printf("\n");
-		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
+		printf("Unable to open file!, f_open error=%d\n",err);
 		return -1;
 	}
-
 
 
 	char element[(sizeof(int)+size)];// buffer for a single element that we will tx
@@ -439,19 +433,11 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 	calculateFileName(date,&file_name,end_file_name ,0);
 	fp = f_open(file_name, "r");
 
-
-	int err = f_getlasterror();
-
 	if (!fp)
 	{
-		char buffer[80];
-		sprintf(buffer, "readTLMFileTimeRange %s, f_open error=%d",file_name, err);
-		logError(err,buffer);
-		printf(buffer);printf("\n");
-		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
+		printf("Unable to open file!");
 		return -1;
 	}
-
 
 
 	int numOfElementsSent = 0;

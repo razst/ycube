@@ -87,6 +87,12 @@
           ]
         },
         {
+          "id": "37",
+          "name": "Transmit beacon",
+          "desc": "Transmit beacon ignoring all tx allow checks",
+          "inParams": []
+        },
+        {
           "id": "21",
           "name": "Set baud rate",
           "desc": "set the bitrate of the trxvu",
@@ -479,6 +485,15 @@
             }
           ]
         },
+        {
+          "id": "171",
+          "name": "Delete all files on SD, excluding about.jpg",
+          "desc": "Delete all files on SD",
+          "inParams": [
+            
+          ]
+        },
+		
         {
           "id": "187",
           "name": "Get Last FS Error",

@@ -70,10 +70,6 @@ int trxvu_command_router(sat_packet_t *cmd)
 		err = CMD_SetBeaconInterval(cmd);
 		break;
 
-	case TRANSMIT_BEACON:
-		err = CMD_TrasmitBeacon(cmd);
-		break;
-
 	case SET_BAUD_RATE:
 		err = CMD_SetBaudRate(cmd);
 		break;
@@ -164,9 +160,6 @@ int telemetry_command_router(sat_packet_t *cmd)
 	{
 	case DELETE_FILE:
 		err = CMD_DeleteTLM(cmd);
-		break;
-	case DELETE_ALL_FILES:
-		err = CMD_DeleteAllFiles(cmd);
 		break;
 	case GET_LAST_FS_ERROR:
 		err = CMD_GetLastFS_Error(cmd);

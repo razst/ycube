@@ -445,7 +445,7 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 	if (!fp)
 	{
 		char buffer[80];
-		sprintf(buffer, "readTLMFileTimeRange %s, f_open error=%d",file_name, err);
+		sprintf(buffer, "readTLMFileTimeRange Unable to open file %s, f_open error=%d",file_name, err);
 		logError(err,buffer);
 		printf(buffer);printf("\n");
 		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);

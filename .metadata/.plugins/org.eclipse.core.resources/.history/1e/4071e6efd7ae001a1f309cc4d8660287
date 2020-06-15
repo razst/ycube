@@ -309,7 +309,7 @@ int BeaconLogic(Boolean forceTX) {
 	}
 
 	int err = 0;
-	if (!forceTX && !CheckExecutionTime(g_prev_beacon_time, g_beacon_interval_time)) {
+	if (!CheckExecutionTime(g_prev_beacon_time, g_beacon_interval_time)) {
 		return E_TOO_EARLY_4_BEACON;
 	}
 

@@ -48,8 +48,6 @@ int CMD_DeleteFilesOfType(sat_packet_t *cmd)
 
 int CMD_DeleteAllFiles(sat_packet_t *cmd)
 {
-	delete_allTMFilesFromSD();
-	SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
 	return 0;
 }
 

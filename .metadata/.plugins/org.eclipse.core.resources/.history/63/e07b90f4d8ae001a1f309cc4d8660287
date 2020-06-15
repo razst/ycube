@@ -271,7 +271,7 @@ Boolean TestBeaconLogic()
 	{
 		Time_getUnixEpoch(&curr_time);
 
-		BeaconLogic(FALSE);
+		BeaconLogic();
 
 		EPS_Conditioning();
 

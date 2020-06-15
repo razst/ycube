@@ -175,7 +175,7 @@ int TRX_Logic() {
 
 	checkTransponderFinish();
 	checkIdleFinish();
-	BeaconLogic(FALSE);
+	BeaconLogic();
 
 	if (logError(err ,"TRX_Logic-ActUponCommand")) return -1;
 
@@ -302,14 +302,14 @@ Boolean CheckDumpAbort() {
 
 
 
-int BeaconLogic(Boolean forceTX) {
+int BeaconLogic() {
 
-	if(!forceTX && !CheckTransmitionAllowed()){
+	if(!CheckTransmitionAllowed()){
 		return E_CANT_TRANSMIT;
 	}
 
 	int err = 0;
-	if (!forceTX && !CheckExecutionTime(g_prev_beacon_time, g_beacon_interval_time)) {
+	if (!CheckExecutionTime(g_prev_beacon_time, g_beacon_interval_time)) {
 		return E_TOO_EARLY_4_BEACON;
 	}
 

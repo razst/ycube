@@ -1,63 +1,11 @@
-18:56:54 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+07:22:27 **** Incremental Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
-Building file: ../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c"
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_DeleteTLM':
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:17:2: warning: passing argument 1 of 'AssembleCommand' from incompatible pointer type [enabled by default]
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.h:4:0,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:1:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/SatCommandHandler.h:56:5: note: expected 'unsigned char *' but argument is of type 'unsigned char (*)[200]'
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:19:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:19:2: warning: incompatible implicit declaration of built-in function 'memcpy' [enabled by default]
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:34:2: warning: passing argument 2 of 'SendAckPacket' from incompatible pointer type [enabled by default]
-In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:10:0,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:4:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/AckHandler.h:19:5: note: expected 'struct sat_packet_t *' but argument is of type 'struct sat_packet_t **'
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:34:2: warning: passing argument 3 of 'SendAckPacket' makes pointer from integer without a cast [enabled by default]
-In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:10:0,
-                 from ../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:4:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/AckHandler.h:19:5: note: expected 'unsigned char *' but argument is of type 'int'
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_DeleteFileByTime':
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:39:40: warning: unused parameter 'cmd' [-Wunused-parameter]
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_DeleteFilesOfType':
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:44:41: warning: unused parameter 'cmd' [-Wunused-parameter]
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_DeleteFS':
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:49:32: warning: unused parameter 'cmd' [-Wunused-parameter]
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_GetNumOfFilesInTimeRange':
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:54:48: warning: unused parameter 'cmd' [-Wunused-parameter]
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_GetNumOfFilesByType':
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:59:43: warning: unused parameter 'cmd' [-Wunused-parameter]
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_GetLastFS_Error':
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:66:2: warning: implicit declaration of function 'f_getlasterror' [-Wimplicit-function-declaration]
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_FreeSpace':
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:75:33: warning: unused parameter 'cmd' [-Wunused-parameter]
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_GetFileLengthByTime':
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:80:43: warning: unused parameter 'cmd' [-Wunused-parameter]
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_GetTimeOfLastElementInFile':
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:85:50: warning: unused parameter 'cmd' [-Wunused-parameter]
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_GetTimeOfFirstElement':
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:90:45: warning: unused parameter 'cmd' [-Wunused-parameter]
-In file included from ../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:3:0:
-../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: At top level:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:44:16: warning: 'stopDump' defined but not used [-Wunused-variable]
-Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c
- 
-Building target: GlobusSatProject.elf
-Invoking: Cross ARM C Linker
-arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
-Finished building target: GlobusSatProject.elf
- 
-Invoking: Cross ARM GNU Create Flash Image
-arm-none-eabi-objcopy -O binary "GlobusSatProject.elf"  "GlobusSatProject.bin"
-Finished building: GlobusSatProject.bin
- 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 235576	     12	 523640	 759228	  b95bc	GlobusSatProject.elf
+ 236040	     12	 523640	 759692	  b978c	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  
 
-18:56:54 Build Finished (took 695ms)
+07:22:27 Build Finished (took 137ms)
 

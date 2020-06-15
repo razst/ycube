@@ -304,12 +304,12 @@ Boolean CheckDumpAbort() {
 
 int BeaconLogic(Boolean forceTX) {
 
-	if(!forceTX && !CheckTransmitionAllowed()){
+	if(!CheckTransmitionAllowed()){
 		return E_CANT_TRANSMIT;
 	}
 
 	int err = 0;
-	if (!forceTX && !CheckExecutionTime(g_prev_beacon_time, g_beacon_interval_time)) {
+	if (!CheckExecutionTime(g_prev_beacon_time, g_beacon_interval_time)) {
 		return E_TOO_EARLY_4_BEACON;
 	}
 

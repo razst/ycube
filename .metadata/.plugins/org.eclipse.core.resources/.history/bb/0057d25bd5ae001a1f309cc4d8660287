@@ -12,7 +12,7 @@ int CMD_DeleteFileByTime(sat_packet_t *cmd);
 
 int CMD_DeleteFilesOfType(sat_packet_t *cmd);
 
-int CMD_DeleteAllFiles(sat_packet_t *cmd);
+int CMD_DeleteFS(sat_packet_t *cmd);
 
 int CMD_GetNumOfFilesInTimeRange(sat_packet_t *cmd);
 

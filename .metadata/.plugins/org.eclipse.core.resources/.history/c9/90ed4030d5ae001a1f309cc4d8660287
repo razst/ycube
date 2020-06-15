@@ -72,7 +72,6 @@ typedef enum __attribute__ ((__packed__)) trxvu_subtypes_t
 	GET_BAUD_RATE = 		0x13,	//0b00010011 =
 	GET_BEACON_INTERVAL = 	0x23,	//0b00100011 =
 	SET_BEACON_INTERVAL = 	0x24,	//0b00100100 *
-	TRANSMIT_BEACON		= 	0x25,
 	SET_BAUD_RATE = 		0x15,	//0b00010101 *
 	SET_BEACON_CYCLE_TIME =	0x25,	//0b00100101 //its not in the cmd dictionary
 	GET_TX_UPTIME = 		0x66,	//0b01100110 = //long int
@@ -105,7 +104,6 @@ typedef enum __attribute__ ((__packed__)) eps_subtypes_t
 typedef enum __attribute__ ((__packed__)) telemetry_subtypes_t
 {
 	DELETE_FILE 		= 0xAA,		//0b10101010
-	DELETE_ALL_FILES	= 0xAB,		//0b10101010
 	GET_LAST_FS_ERROR	= 0xBB
 
 }telemetry_subtypes_t;
