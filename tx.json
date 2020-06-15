@@ -532,6 +532,15 @@
           ]
         },
 		
+
+        {
+          "id": "205",
+          "name": "Get TLM period times",
+          "desc": "Get all TLM period times",
+          "inParams": []
+        },
+
+
         {
           "id": "187",
           "name": "Get Last FS Error",

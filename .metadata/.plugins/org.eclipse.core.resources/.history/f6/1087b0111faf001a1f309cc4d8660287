@@ -47,15 +47,20 @@ void InitSavePeriodTimes(){
 }
 
 
-
-int CMD_GetTLMPeriodTimes(sat_packet_t *cmd)
+int CMD_TLMPeriodTimes(sat_packet_t *cmd)
 {
-	int err = TransmitDataAsSPL_Packet(cmd, (unsigned char*) &tlm_save_periods,
-				sizeof(time_unix)*NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS);
+	int err = 0;
+	time_unix beacon_interval = 0;
+	err = FRAM_read((unsigned char*) &beacon_interval,
+			BEACON_INTERVAL_TIME_ADDR,
+			BEACON_INTERVAL_TIME_SIZE);
+
+	if (err == E_NO_SS_ERR){
+		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &beacon_interval,
+				sizeof(beacon_interval));
+	}
 	return err;
 }
-
-
 int CMD_SetTLMPeriodTimes(sat_packet_t *cmd){
 
 	tlm_type_t tlm_type=cmd->data[0];

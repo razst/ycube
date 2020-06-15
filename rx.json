@@ -1035,6 +1035,39 @@
       "name": "Telemetry",
       "subtypes": [
         {
+          "id": "205",
+          "name": "Get TLM period times",
+          "desc": "Get all TLM period times",
+          "inParams": [
+            {
+              "name": "EPS interval",
+              "desc": "",
+              "type": "int"
+            },            
+            {
+              "name": "TRXVU interval",
+              "desc": "",
+              "type": "int"
+            },            
+            {
+              "name": "Ant interval",
+              "desc": "",
+              "type": "int"
+            },            
+            {
+              "name": "Solar Panel interval",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "WOD Panel interval",
+              "desc": "",
+              "type": "int"
+            }	
+		  
+		  ]
+        },
+        {
           "id": "187",
           "name": "Get Last FS Error",
           "desc": "Get last file system error",

@@ -174,9 +174,6 @@ int telemetry_command_router(sat_packet_t *cmd)
 	case SET_TLM_PERIOD:
 		err = CMD_SetTLMPeriodTimes(cmd);
 		break;
-	case GET_TLM_PERIOD:
-		err = CMD_GetTLMPeriodTimes(cmd);
-		break;
 
 	default:
 		err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);

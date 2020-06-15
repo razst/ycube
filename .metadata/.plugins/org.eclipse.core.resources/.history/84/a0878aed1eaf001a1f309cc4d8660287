@@ -46,16 +46,6 @@ void InitSavePeriodTimes(){
 
 }
 
-
-
-int CMD_GetTLMPeriodTimes(sat_packet_t *cmd)
-{
-	int err = TransmitDataAsSPL_Packet(cmd, (unsigned char*) &tlm_save_periods,
-				sizeof(time_unix)*NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS);
-	return err;
-}
-
-
 int CMD_SetTLMPeriodTimes(sat_packet_t *cmd){
 
 	tlm_type_t tlm_type=cmd->data[0];
