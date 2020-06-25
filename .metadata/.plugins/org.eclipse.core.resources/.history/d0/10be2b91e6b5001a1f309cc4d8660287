@@ -17,7 +17,7 @@
 
 #define MAX_FILE_NAME_SIZE 11
 #define NUM_ELEMENTS_READ_AT_ONCE 1000
-#define BUFF_SIZE 300
+
 
 #define FS_FILE_ENDING	"TLM"
 #define FS_FILE_ENDING_SIZE	3
@@ -42,9 +42,9 @@ typedef enum
 
 
 static Boolean stopDump = FALSE;
-//void getInfoImage(int imageID,sat_packet_t *cmd);
+void getInfoImage(int imageID, char size);
 
-//void getDataImge(int imageID, short chunkList, sat_packet_t *cmd);
+void getDataImge(int imageID, short chunkList);
 /**
  * write telematry data to file
  */

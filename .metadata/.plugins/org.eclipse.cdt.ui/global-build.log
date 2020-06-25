@@ -1,8 +1,8 @@
-15:31:13 **** Clean-only build of configuration Debug for project GlobusSatProject ****
+16:27:31 **** Clean-only build of configuration Debug for project GlobusSatProject ****
 make -r -k clean 
 rm -rf  GlobusSatProject.siz  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o  ./src/TestingDemos/CommandsTestingDemo.d ./src/TestingDemos/EpsTestingDemo.d ./src/TestingDemos/FileSystemTestingDemo.d ./src/TestingDemos/MainTest.d ./src/TestingDemos/MaintenanceTestingDemo.d ./src/TestingDemos/TelemetryTestingDemo.d ./src/TestingDemos/TrxvuTestingDemo.d  ./src/SubSystemModules/PowerManagment/EPS.d ./src/SubSystemModules/PowerManagment/EPSOperationModes.d  ./src/SubSystemModules/Maintenance/Maintenance.d  ./src/SubSystemModules/Housekepping/TelemetryCollector.d  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d  ./src/SubSystemModules/Communication/AckHandler.d ./src/SubSystemModules/Communication/CommandDictionary.d ./src/SubSystemModules/Communication/SatCommandHandler.d ./src/SubSystemModules/Communication/TRXVU.d  ./src/InitSystem.d ./src/TLM_management.d ./src/main.d ./src/utils.d  GlobusSatProject.bin  GlobusSatProject.elf
  
-15:31:49 **** Build of configuration Debug for project GlobusSatProject ****
+16:27:33 **** Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Building file: ../src/TestingDemos/CommandsTestingDemo.c
 Invoking: Cross ARM C Compiler
@@ -107,7 +107,7 @@ C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:1
 ../src/TestingDemos/FileSystemTestingDemo.c:368:2: warning: implicit declaration of function 'getTlmTypeInfo' [-Wimplicit-function-declaration]
 ../src/TestingDemos/FileSystemTestingDemo.c:369:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
 In file included from ../src/TestingDemos/FileSystemTestingDemo.c:8:0:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:57:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:60:6: note: expected 'char *' but argument is of type 'char (*)[11]'
 ../src/TestingDemos/FileSystemTestingDemo.c:377:3: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
 ../src/TestingDemos/FileSystemTestingDemo.c:387:3: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
 ../src/TestingDemos/FileSystemTestingDemo.c:397:12: warning: unused variable 'lastSentTime' [-Wunused-variable]
@@ -584,44 +584,49 @@ C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/boolean.h:41:0:
 In file included from C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_hcc_mem.h:31:0,
                  from ../src/TLM_management.c:15:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/../psp/include/psp_types.h:56:0: note: this is the location of the previous definition
+../src/TLM_management.c: In function 'getInfoImage':
+../src/TLM_management.c:44:11: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:42:6: warning: variable 'numChunk' set but not used [-Wunused-but-set-variable]
+../src/TLM_management.c:40:23: warning: unused parameter 'imageID' [-Wunused-parameter]
+../src/TLM_management.c:40:46: warning: unused parameter 'cmd' [-Wunused-parameter]
 ../src/TLM_management.c: In function 'deleteTLMFile':
-../src/TLM_management.c:79:2: warning: implicit declaration of function 'getTlmTypeInfo' [-Wimplicit-function-declaration]
-../src/TLM_management.c:82:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:143:2: warning: implicit declaration of function 'getTlmTypeInfo' [-Wimplicit-function-declaration]
+../src/TLM_management.c:146:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
 In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:6:0,
                  from ../src/TLM_management.c:17:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:57:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:60:6: note: expected 'char *' but argument is of type 'char (*)[11]'
 ../src/TLM_management.c: At top level:
-../src/TLM_management.c:125:6: warning: conflicting types for 'getTlmTypeInfo' [enabled by default]
-../src/TLM_management.c:79:2: note: previous implicit declaration of 'getTlmTypeInfo' was here
+../src/TLM_management.c:189:6: warning: conflicting types for 'getTlmTypeInfo' [enabled by default]
+../src/TLM_management.c:143:2: note: previous implicit declaration of 'getTlmTypeInfo' was here
 ../src/TLM_management.c: In function 'write2File':
-../src/TLM_management.c:189:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
-../src/TLM_management.c:111:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c:253:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:175:6: note: expected 'char *' but argument is of type 'char (*)[11]'
 ../src/TLM_management.c: In function 'printTLM':
-../src/TLM_management.c:215:21: warning: unused parameter 'element' [-Wunused-parameter]
-../src/TLM_management.c:215:41: warning: unused parameter 'tlmType' [-Wunused-parameter]
+../src/TLM_management.c:279:21: warning: unused parameter 'element' [-Wunused-parameter]
+../src/TLM_management.c:279:41: warning: unused parameter 'tlmType' [-Wunused-parameter]
 ../src/TLM_management.c: In function 'readTLMFile':
-../src/TLM_management.c:336:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
-../src/TLM_management.c:111:6: note: expected 'char *' but argument is of type 'char (*)[11]'
-../src/TLM_management.c:338:5: warning: assignment from incompatible pointer type [enabled by default]
-../src/TLM_management.c:363:3: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:400:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:175:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c:402:5: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:427:3: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
 In file included from ../src/TLM_management.c:14:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
-../src/TLM_management.c:375:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../src/TLM_management.c:401:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:439:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:465:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
 In file included from ../src/TLM_management.c:14:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
 ../src/TLM_management.c: In function 'readTLMFileTimeRange':
-../src/TLM_management.c:439:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
-../src/TLM_management.c:111:6: note: expected 'char *' but argument is of type 'char (*)[11]'
-../src/TLM_management.c:440:5: warning: assignment from incompatible pointer type [enabled by default]
-../src/TLM_management.c:461:2: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:503:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:175:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c:504:5: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:525:2: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
 In file included from ../src/TLM_management.c:14:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
-../src/TLM_management.c:465:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../src/TLM_management.c:465:46: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../src/TLM_management.c:465:90: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../src/TLM_management.c:485:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../src/TLM_management.c:491:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:529:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:529:46: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:529:90: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:549:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:555:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
 In file included from ../src/TLM_management.c:14:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
 Finished building: ../src/TLM_management.c
@@ -662,14 +667,14 @@ Finished building: GlobusSatProject.bin
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 236928	     12	 523640	 760580	  b9b04	GlobusSatProject.elf
+ 236968	     12	 523640	 760620	  b9b2c	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  
-15:36:11 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+16:27:48 **** Incremental Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 236928	     12	 523640	 760580	  b9b04	GlobusSatProject.elf
+ 236968	     12	 523640	 760620	  b9b2c	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  

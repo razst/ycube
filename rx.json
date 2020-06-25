@@ -913,6 +913,33 @@
             }
           ]
         },
+		
+		
+		
+        {
+          "id": "13",
+          "name": "LOG",
+          "desc": "LOG DATA",
+          "inParams": [
+            {
+              "name": "timestamp",
+              "desc": "timestamp",
+              "type": "datetime"
+            },
+            {
+              "name": "error number",
+              "desc": "error number",
+              "type": "int"
+            },
+            {
+              "name": "message",
+              "desc": "message",
+              "type": "ascii"
+            }
+          ]
+        },
+		
+		
         {
           "id": "1",
           "name": "TX",
@@ -970,6 +997,8 @@
             }
           ]
         },
+		
+		
         {
           "id": "6",
           "name": "RX",

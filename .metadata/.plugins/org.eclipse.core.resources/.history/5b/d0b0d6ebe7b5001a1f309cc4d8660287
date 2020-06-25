@@ -37,30 +37,15 @@
 
 static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
 
-void getInfoImage(int imageID, sat_packet_t *cmd){
-	FILE * f_source;
-	int numChunk;
-
-	f_source = f_open("c:/temp/imageID.jpg", "rb");
-			if (!f_source)
-			{
-				printf("Unable to open file\n");
-				return;
-			}
-
+void getInfoImage(int imageID, char size){
 	fseek (f_source, 0 , SEEK_END);
-	long size = ftell (f_source);
-	rewind (f_source);
-	fclose(f_source);
-	numChunk = size / BUFF_SIZE;
-
-
+			long size = ftell (f_source);
+			rewind (f_source);
 }
-/*
-void getDataImge(int imageID, short chunkList, sat_packet_t *cmd){
-	short chunk_liist[] = chunkList;
+
+void getDataImge(int imageID, short chunkList){
 	FILE * f_source;
-		f_source = f_open("c:/temp/imageID.jpg", "rb");
+		f_source = fopen("c:/temp/imageID.jpg", "rb");
 		if (!f_source)
 		{
 			printf("Unable to open file\n");
@@ -69,39 +54,43 @@ void getDataImge(int imageID, short chunkList, sat_packet_t *cmd){
 
 		 // calculating source file size
 		fseek (f_source, 0 , SEEK_END);
-		long size = f_tell (f_source);
+		long size = ftell (f_source);
 		rewind (f_source);
 		printf("source file size:%d\n",size);
 
+		FILE * f_dest;
+		f_dest = fopen("c:/temp/about2.jpg", "wb");
 
 		char buffer[BUFF_SIZE]={0};
 
-		int cunk = 0;
+		int c = 0;
 		while (size>0){
-			cunk++;
+			c++;
 			size = size - BUFF_SIZE;
 
-			int readSize = f_read(buffer,1,BUFF_SIZE,f_source);
-
+			int readSize = fread(buffer,1,BUFF_SIZE,f_source);
 			if (readSize==0){
-		        f_puts ("Reading error",stderr);
+		        fputs ("Reading error",stderr);
+		    	fclose(f_dest);
 		    	fclose(f_source);
 		        return;
 			}
-			cmd->ID = imageID;
-			cmd->data = buffer;
-			for(int i =0; i>= sizeof(chunk_liist);i++){
-				SendAckPacket(ACK_DELETE_TLM, cmd, NULL, 0);
-				}
 
 			//if (c==5)continue; // to check download curruption
 
-
+			// Write Buffer
+			if(fwrite(buffer, 1, readSize, f_dest) != readSize)
+			{
+		        fputs ("Writing error",stderr);
+		    	fclose(f_dest);
+		    	fclose(f_source);
+		        return;
+			}
 
 		}
 }
 
-*/
+
 void delete_allTMFilesFromSD()
 {
 	// TODO make sure we don't delete the image file

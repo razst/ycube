@@ -56,7 +56,7 @@ void getInfoImage(int imageID, sat_packet_t *cmd){
 
 
 }
-/*
+
 void getDataImge(int imageID, short chunkList, sat_packet_t *cmd){
 	short chunk_liist[] = chunkList;
 	FILE * f_source;
@@ -101,7 +101,7 @@ void getDataImge(int imageID, short chunkList, sat_packet_t *cmd){
 		}
 }
 
-*/
+
 void delete_allTMFilesFromSD()
 {
 	// TODO make sure we don't delete the image file
