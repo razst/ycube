@@ -52,7 +52,7 @@ int ParseDataToCommand(unsigned char * data, sat_packet_t *cmd)
 	}
 	offset += sizeof(subtype);
 
-	unsigned int data_length = 0;
+	unsigned short data_length = 0;
 	err = memcpy(&data_length, data + offset,sizeof(data_length));
 		if (NULL == err) {
 			return execution_error;
@@ -63,7 +63,7 @@ int ParseDataToCommand(unsigned char * data, sat_packet_t *cmd)
 
 }
 
-int AssembleCommand(unsigned char *data, unsigned int data_length, char type,
+int AssembleCommand(unsigned char *data, unsigned short data_length, char type,
 		char subtype, unsigned int id, sat_packet_t *cmd)
 {
 	if (NULL == cmd) {
@@ -76,7 +76,7 @@ int AssembleCommand(unsigned char *data, unsigned int data_length, char type,
 
 	if (NULL != data) {
 
-		unsigned int size = 0;
+		unsigned short size = 0;
 		if (data_length > MAX_COMMAND_DATA_LENGTH){
 			logError(SPL_DATA_TOO_BIG , "AssembleCommand");
 			size = MAX_COMMAND_DATA_LENGTH;

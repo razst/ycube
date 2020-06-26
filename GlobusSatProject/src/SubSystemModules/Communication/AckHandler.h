@@ -16,7 +16,7 @@
  * @note the ACK is sent with the corresponding ID of the ACK inside the SPL packet
  * @return errors according t <hal/errors.h>
  */
-int SendAckPacket(ack_subtype_t acksubtype, sat_packet_t *cmd, unsigned char *data, unsigned int length);
+int SendAckPacket(ack_subtype_t acksubtype, sat_packet_t *cmd, unsigned char *data, unsigned short length);
 
 
 #endif /* ACKHANDLER_H_ */

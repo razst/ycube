@@ -41,7 +41,7 @@ Boolean TestAssmbleCommand()
 {
 	unsigned char data[] = {1,2,3,4,5,6,7,8,9,10,
 							11,12,13,14,15,16,17,18,19,20};
-	unsigned int length = sizeof(data);
+	unsigned short length = sizeof(data);
 	unsigned char type = 0x42;
 	unsigned char subtype = 0x43;
 	unsigned int id = 0x12345678;

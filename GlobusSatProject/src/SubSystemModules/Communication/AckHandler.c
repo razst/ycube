@@ -5,7 +5,7 @@
 #include "AckHandler.h"
 
 int SendAckPacket(ack_subtype_t acksubtype, sat_packet_t *cmd,
-		unsigned char *data, unsigned int length)
+		unsigned char *data, unsigned short length)
 {
 	int err = 0;
 	sat_packet_t ack = { 0 };

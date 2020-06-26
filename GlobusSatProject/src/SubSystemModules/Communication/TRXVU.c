@@ -376,7 +376,7 @@ void UnMuteTRXVU() {
 
 
 int TransmitDataAsSPL_Packet(sat_packet_t *cmd, unsigned char *data,
-		unsigned int length) {
+		unsigned short length) {
 	int err = 0;
 	sat_packet_t packet = { 0 };
 	if (NULL != cmd) {
@@ -403,7 +403,7 @@ int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
 	}
 
 	int err = 0;
-	unsigned int data_length = packet->length + sizeof(packet->length)
+	unsigned short data_length = packet->length + sizeof(packet->length)
 			+ sizeof(packet->cmd_subtype) + sizeof(packet->cmd_type)
 			+ sizeof(packet->ID);
 

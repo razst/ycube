@@ -151,6 +151,6 @@ int GetOnlineCommand(sat_packet_t *cmd);
  * @param[in] length number of bytes in 'data' fields.
  * @return errors according to <hal/errors.h>
  */
-int TransmitDataAsSPL_Packet(sat_packet_t *cmd, unsigned char *data, unsigned int length);
+int TransmitDataAsSPL_Packet(sat_packet_t *cmd, unsigned char *data, unsigned short length);
 
 #endif
