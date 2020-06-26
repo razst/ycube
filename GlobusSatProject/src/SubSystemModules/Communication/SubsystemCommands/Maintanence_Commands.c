@@ -94,7 +94,7 @@ int CMD_FRAM_WriteAndTransmitt(sat_packet_t *cmd)
 	}
 	int err = 0;
 	unsigned int addr = 0;
-	unsigned int length = cmd->length;
+	unsigned short length = cmd->length;
 	unsigned char *data = cmd->data;
 
 	memcpy(&addr, cmd->data, sizeof(addr));

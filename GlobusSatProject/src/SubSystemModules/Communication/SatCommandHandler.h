@@ -29,7 +29,7 @@ typedef struct __attribute__ ((__packed__)) sat_packet_t
 	unsigned int ID;
 	char cmd_type;
 	char cmd_subtype;
-	unsigned int length;
+	unsigned short length;
 	unsigned char data[MAX_COMMAND_DATA_LENGTH];
 
 }sat_packet_t;
@@ -53,7 +53,7 @@ int ParseDataToCommand(unsigned char * data, sat_packet_t *cmd);
  * @param[out] cmd pointer to parsed command buffer
  * @return	errors according to CMD_ERR
  */
-int AssembleCommand(unsigned char *data, unsigned int data_length, char type, char subtype,unsigned int id, sat_packet_t *cmd);
+int AssembleCommand(unsigned char *data, unsigned short data_length, char type, char subtype,unsigned int id, sat_packet_t *cmd);
 
 /*!
  * @brief returns a command to be executed if there is one in the delayed command buffer
