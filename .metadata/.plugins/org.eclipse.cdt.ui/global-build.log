@@ -1,8 +1,8 @@
-16:27:31 **** Clean-only build of configuration Debug for project GlobusSatProject ****
+11:24:19 **** Clean-only build of configuration Debug for project GlobusSatProject ****
 make -r -k clean 
 rm -rf  GlobusSatProject.siz  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o  ./src/TestingDemos/CommandsTestingDemo.d ./src/TestingDemos/EpsTestingDemo.d ./src/TestingDemos/FileSystemTestingDemo.d ./src/TestingDemos/MainTest.d ./src/TestingDemos/MaintenanceTestingDemo.d ./src/TestingDemos/TelemetryTestingDemo.d ./src/TestingDemos/TrxvuTestingDemo.d  ./src/SubSystemModules/PowerManagment/EPS.d ./src/SubSystemModules/PowerManagment/EPSOperationModes.d  ./src/SubSystemModules/Maintenance/Maintenance.d  ./src/SubSystemModules/Housekepping/TelemetryCollector.d  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d  ./src/SubSystemModules/Communication/AckHandler.d ./src/SubSystemModules/Communication/CommandDictionary.d ./src/SubSystemModules/Communication/SatCommandHandler.d ./src/SubSystemModules/Communication/TRXVU.d  ./src/InitSystem.d ./src/TLM_management.d ./src/main.d ./src/utils.d  GlobusSatProject.bin  GlobusSatProject.elf
  
-16:27:33 **** Build of configuration Debug for project GlobusSatProject ****
+11:24:24 **** Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Building file: ../src/TestingDemos/CommandsTestingDemo.c
 Invoking: Cross ARM C Compiler
@@ -11,7 +11,7 @@ arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-se
 ../src/TestingDemos/CommandsTestingDemo.c:47:15: warning: unused variable 'id' [-Wunused-variable]
 ../src/TestingDemos/CommandsTestingDemo.c:46:16: warning: unused variable 'subtype' [-Wunused-variable]
 ../src/TestingDemos/CommandsTestingDemo.c:45:16: warning: unused variable 'type' [-Wunused-variable]
-../src/TestingDemos/CommandsTestingDemo.c:44:15: warning: unused variable 'length' [-Wunused-variable]
+../src/TestingDemos/CommandsTestingDemo.c:44:17: warning: unused variable 'length' [-Wunused-variable]
 Finished building: ../src/TestingDemos/CommandsTestingDemo.c
  
 Building file: ../src/TestingDemos/EpsTestingDemo.c
@@ -667,14 +667,14 @@ Finished building: GlobusSatProject.bin
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 236968	     12	 523640	 760620	  b9b2c	GlobusSatProject.elf
+ 236880	     12	 523640	 760532	  b9ad4	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  
-16:27:48 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+11:24:41 **** Incremental Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 236968	     12	 523640	 760620	  b9b2c	GlobusSatProject.elf
+ 236880	     12	 523640	 760532	  b9ad4	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  

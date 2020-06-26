@@ -129,6 +129,18 @@
           ]
         },
         {
+          "id": "36",
+          "name": "Set beacon interval",
+          "desc": "set the beacon interval time in seconds",
+          "inParams": [
+            {
+              "name": "seconds",
+              "desc": "number of seconds for beacon interval ",
+              "type": "int"
+            }
+          ]
+        },		
+        {
           "id": "19",
           "name": "get baud rate",
           "desc": "get the bitrate of the trxvu",
