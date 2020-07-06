@@ -13,6 +13,7 @@
 #include "SubSystemModules/Housekepping/TelemetryFiles.h"
 #include <hal/Timing/Time.h>
 #include <time.h>
+#include "SubSystemModules/Communication/SatCommandHandler.h"
 
 
 #define MAX_FILE_NAME_SIZE 11
@@ -40,11 +41,25 @@ typedef enum
 	FS_FAIL
 } FileSystemResult;
 
+typedef struct imageInfo
+{
+	char imageID;
+	unsigned short numberChunks;
+} imageInfo_t;
+
+typedef struct imageData
+{
+	char chunkID;
+	char data[BUFF_SIZE];
+} imageData_t;
+
+
 
 static Boolean stopDump = FALSE;
-//void getInfoImage(int imageID,sat_packet_t *cmd);
 
-//void getDataImge(int imageID, short chunkList, sat_packet_t *cmd);
+int CMD_getInfoImage(sat_packet_t *cmd);
+
+int CMD_getDataImage(sat_packet_t *cmd);
 /**
  * write telematry data to file
  */

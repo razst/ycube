@@ -22,6 +22,9 @@
 #define BEACON_INTRAVL_TOO_SMALL -206
 #define SPL_DATA_TOO_BIG			-207
 #define INVALID_TLM_TYPE			-208
+#define INVALID_IMG_TYPE			-209
+
+
 
 
 

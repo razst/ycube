@@ -37,48 +37,75 @@
 
 static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
 
-void getInfoImage(int imageID, sat_packet_t *cmd){
+int CMD_getInfoImage(sat_packet_t *cmd){
 	FILE * f_source;
 	int numChunk;
+	char image[5];
+	short imageID;
+	memcpy(&imageID, &cmd->data, sizeof(int));
 
-	f_source = f_open("c:/temp/imageID.jpg", "rb");
-			if (!f_source)
-			{
-				printf("Unable to open file\n");
-				return;
-			}
+	if(imageID < 6){
+	  sprintf(image, "%d.JPG",imageID);
+	  f_source = f_open(image, "r");
+	}else if(imageID == 6){
+		// TODO: heat map
+	}else{
+		return INVALID_IMG_TYPE;
+	}
 
-	fseek (f_source, 0 , SEEK_END);
-	long size = ftell (f_source);
-	rewind (f_source);
-	fclose(f_source);
+	if (!f_source)
+	{
+		printf("Unable to open file\n");
+		return -1;
+	}
+
+	f_seek (f_source, 0 , SEEK_END);
+	long size = f_tell (f_source);
+	f_rewind (f_source);
+	f_close(f_source);
 	numChunk = size / BUFF_SIZE;
-
+	if((size % BUFF_SIZE) != 0){
+		numChunk++;
+	}
+	imageInfo_t data;
+	data.imageID = imageID;
+	memcpy(&data.numberChunks,&numChunk, sizeof(int));
+	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &data,
+			sizeof(data));
 
 }
-/*
-void getDataImge(int imageID, short chunkList, sat_packet_t *cmd){
-	short chunk_liist[] = chunkList;
+
+
+int CMD_getDataImage(sat_packet_t *cmd){
+//	short chunk_list[] = ;
+
 	FILE * f_source;
-		f_source = f_open("c:/temp/imageID.jpg", "rb");
+	char image[5];
+	short imageID;
+	memcpy(&imageID, &cmd->data, sizeof(short));
+	sprintf(image, "5.jpg", imageID);
+		f_source = f_open(image, "r");
 		if (!f_source)
 		{
 			printf("Unable to open file\n");
-			return;
+			return -1;
 		}
 
 		 // calculating source file size
-		fseek (f_source, 0 , SEEK_END);
+		f_seek (f_source, 0 , SEEK_END);
 		long size = f_tell (f_source);
-		rewind (f_source);
+		f_rewind (f_source);
 		printf("source file size:%d\n",size);
+
 
 
 		char buffer[BUFF_SIZE]={0};
 
-		int cunk = 0;
+		int chunk = 0;
+		imageData_t data;
+
 		while (size>0){
-			cunk++;
+			chunk++;
 			size = size - BUFF_SIZE;
 
 			int readSize = f_read(buffer,1,BUFF_SIZE,f_source);
@@ -86,22 +113,18 @@ void getDataImge(int imageID, short chunkList, sat_packet_t *cmd){
 			if (readSize==0){
 		        f_puts ("Reading error",stderr);
 		    	fclose(f_source);
-		        return;
+		        return -1;
 			}
-			cmd->ID = imageID;
-			cmd->data = buffer;
-			for(int i =0; i>= sizeof(chunk_liist);i++){
-				SendAckPacket(ACK_DELETE_TLM, cmd, NULL, 0);
-				}
+			memcpy(&data.chunkID,&chunk,sizeof(int));
+			memcpy(&data.data,&buffer, BUFF_SIZE);
 
-			//if (c==5)continue; // to check download curruption
-
-
+			TransmitDataAsSPL_Packet(cmd, (unsigned char*) &data,
+						sizeof(data));
 
 		}
 }
 
-*/
+
 void delete_allTMFilesFromSD()
 {
 	// TODO make sure we don't delete the image file
