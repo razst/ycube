@@ -1,1 +1,6 @@
-{"endNodePath":"C:/Users/pc/Desktop/GSC/GSC-EndNode/GSC-EndNode.exe","dataBaseEnabled":true,"dataBaseKeyPath":"C:/key/satelite packets-a1af32f2133c.json","dataBaseName":"satelite-packets"}
+{
+  "endNodePath": "C:/Users/pc/Desktop/GSC/GSC-EndNode/GSC-EndNode.exe",
+  "dataBaseEnabled": true,
+  "dataBaseKeyPath": "C:/key/satelite packets-a1af32f2133c.json",
+  "dataBaseName": "satelite-packets"
+}

@@ -39,15 +39,15 @@ static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buf
 
 int CMD_getInfoImage(sat_packet_t *cmd){
 	FILE * f_source;
-	int numChunk;
-	char image[5];
-	short imageID;
-	memcpy(&imageID, &cmd->data, sizeof(int));
+	unsigned short numChunk;
+	char imageFileName[5];
+	char imageType;
+	memcpy(&imageType, &cmd->data, sizeof(char));
 
-	if(imageID < 6){
-	  sprintf(image, "%d.JPG",imageID);
-	  f_source = f_open(image, "r");
-	}else if(imageID == 6){
+	if(imageType < 6){
+	  sprintf(imageFileName, "%d.JPG",imageType);
+	  f_source = f_open(imageFileName, "r");
+	}else if(imageType == 6){
 		// TODO: heat map
 	}else{
 		return INVALID_IMG_TYPE;
@@ -63,13 +63,13 @@ int CMD_getInfoImage(sat_packet_t *cmd){
 	long size = f_tell (f_source);
 	f_rewind (f_source);
 	f_close(f_source);
-	numChunk = size / BUFF_SIZE;
-	if((size % BUFF_SIZE) != 0){
+	numChunk = size / IMG_CHUNK_SIZE;
+	if((size % IMG_CHUNK_SIZE) != 0){
 		numChunk++;
 	}
 	imageInfo_t data;
-	data.imageID = imageID;
-	memcpy(&data.numberChunks,&numChunk, sizeof(int));
+	data.imageID = imageType; // TODO: change for image type 6 (heat map)
+	memcpy(&data.numberChunks,&numChunk, sizeof(numChunk));
 	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &data,
 			sizeof(data));
 
@@ -83,7 +83,7 @@ int CMD_getDataImage(sat_packet_t *cmd){
 	char image[5];
 	short imageID;
 	memcpy(&imageID, &cmd->data, sizeof(short));
-	sprintf(image, "5.jpg", imageID);
+	sprintf(image, "%d.jpg", imageID);
 		f_source = f_open(image, "r");
 		if (!f_source)
 		{
@@ -95,29 +95,30 @@ int CMD_getDataImage(sat_packet_t *cmd){
 		f_seek (f_source, 0 , SEEK_END);
 		long size = f_tell (f_source);
 		f_rewind (f_source);
-		printf("source file size:%d\n",size);
+		printf("source file size:%d. chunk size:\n",size,IMG_CHUNK_SIZE);
 
 
 
-		char buffer[BUFF_SIZE]={0};
+		char buffer[IMG_CHUNK_SIZE]={0};
 
-		int chunk = 0;
+		unsigned short chunk = 0;
 		imageData_t data;
 
 		while (size>0){
 			chunk++;
-			size = size - BUFF_SIZE;
+			size = size - IMG_CHUNK_SIZE;
 
-			int readSize = f_read(buffer,1,BUFF_SIZE,f_source);
+			int readSize = f_read(buffer,1,IMG_CHUNK_SIZE,f_source);
 
 			if (readSize==0){
 		        f_puts ("Reading error",stderr);
 		    	fclose(f_source);
 		        return -1;
 			}
-			memcpy(&data.chunkID,&chunk,sizeof(int));
-			memcpy(&data.data,&buffer, BUFF_SIZE);
+			memcpy(&data.chunkID,&chunk,sizeof(data.chunkID));
+			memcpy(&data.data,&buffer, IMG_CHUNK_SIZE);
 
+			printf("about to transmit chunk:%d\n",chunk);
 			TransmitDataAsSPL_Packet(cmd, (unsigned char*) &data,
 						sizeof(data));
 

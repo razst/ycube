@@ -18,7 +18,7 @@
 
 #define MAX_FILE_NAME_SIZE 11
 #define NUM_ELEMENTS_READ_AT_ONCE 1000
-#define BUFF_SIZE 300
+
 
 #define FS_FILE_ENDING	"TLM"
 #define FS_FILE_ENDING_SIZE	3
@@ -43,14 +43,14 @@ typedef enum
 
 typedef struct imageInfo
 {
-	char imageID;
+	unsigned short imageID;
 	unsigned short numberChunks;
 } imageInfo_t;
 
 typedef struct imageData
 {
-	char chunkID;
-	char data[BUFF_SIZE];
+	unsigned short chunkID;
+	char data[IMG_CHUNK_SIZE];
 } imageData_t;
 
 
