@@ -1827,7 +1827,7 @@ LOAD c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../.
 LOAD c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libc.a
 END GROUP
 
-.fixed          0x20000000    0x38af0
+.fixed          0x20000000    0x38b18
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _sfixed = .
  *(.startup)
@@ -2154,116 +2154,116 @@ END GROUP
                 0x20005eb4       0xdc ./src/SubSystemModules/Communication/CommandDictionary.o
                 0x20005eb4                eps_command_router
  .text.telemetry_command_router
-                0x20005f90      0x1ec ./src/SubSystemModules/Communication/CommandDictionary.o
+                0x20005f90      0x1f4 ./src/SubSystemModules/Communication/CommandDictionary.o
                 0x20005f90                telemetry_command_router
  .text.managment_command_router
-                0x2000617c      0x12c ./src/SubSystemModules/Communication/CommandDictionary.o
-                0x2000617c                managment_command_router
+                0x20006184      0x12c ./src/SubSystemModules/Communication/CommandDictionary.o
+                0x20006184                managment_command_router
  .text.filesystem_command_router
-                0x200062a8       0x24 ./src/SubSystemModules/Communication/CommandDictionary.o
-                0x200062a8                filesystem_command_router
+                0x200062b0       0x24 ./src/SubSystemModules/Communication/CommandDictionary.o
+                0x200062b0                filesystem_command_router
  .text.ParseDataToCommand
-                0x200062cc      0x1ac ./src/SubSystemModules/Communication/SatCommandHandler.o
-                0x200062cc                ParseDataToCommand
+                0x200062d4      0x1ac ./src/SubSystemModules/Communication/SatCommandHandler.o
+                0x200062d4                ParseDataToCommand
  .text.AssembleCommand
-                0x20006478      0x14c ./src/SubSystemModules/Communication/SatCommandHandler.o
-                0x20006478                AssembleCommand
+                0x20006480      0x14c ./src/SubSystemModules/Communication/SatCommandHandler.o
+                0x20006480                AssembleCommand
  .text.ActUponCommand
-                0x200065c4       0xb4 ./src/SubSystemModules/Communication/SatCommandHandler.o
-                0x200065c4                ActUponCommand
+                0x200065cc       0xb4 ./src/SubSystemModules/Communication/SatCommandHandler.o
+                0x200065cc                ActUponCommand
  .text.InitTxModule
-                0x20006678       0x68 ./src/SubSystemModules/Communication/TRXVU.o
-                0x20006678                InitTxModule
+                0x20006680       0x68 ./src/SubSystemModules/Communication/TRXVU.o
+                0x20006680                InitTxModule
  .text.CMD_SetBeaconInterval
-                0x200066e0       0xdc ./src/SubSystemModules/Communication/TRXVU.o
-                0x200066e0                CMD_SetBeaconInterval
+                0x200066e8       0xdc ./src/SubSystemModules/Communication/TRXVU.o
+                0x200066e8                CMD_SetBeaconInterval
  .text.InitBeaconParams
-                0x200067bc       0x3c ./src/SubSystemModules/Communication/TRXVU.o
-                0x200067bc                InitBeaconParams
+                0x200067c4       0x3c ./src/SubSystemModules/Communication/TRXVU.o
+                0x200067c4                InitBeaconParams
  .text.InitSemaphores
-                0x200067f8       0x98 ./src/SubSystemModules/Communication/TRXVU.o
-                0x200067f8                InitSemaphores
+                0x20006800       0x98 ./src/SubSystemModules/Communication/TRXVU.o
+                0x20006800                InitSemaphores
  .text.InitTrxvu
-                0x20006890      0x128 ./src/SubSystemModules/Communication/TRXVU.o
-                0x20006890                InitTrxvu
+                0x20006898      0x128 ./src/SubSystemModules/Communication/TRXVU.o
+                0x20006898                InitTrxvu
  .text.checkIdleFinish
-                0x200069b8       0x68 ./src/SubSystemModules/Communication/TRXVU.o
-                0x200069b8                checkIdleFinish
+                0x200069c0       0x68 ./src/SubSystemModules/Communication/TRXVU.o
+                0x200069c0                checkIdleFinish
  .text.checkTransponderFinish
-                0x20006a20       0x84 ./src/SubSystemModules/Communication/TRXVU.o
-                0x20006a20                checkTransponderFinish
+                0x20006a28       0x84 ./src/SubSystemModules/Communication/TRXVU.o
+                0x20006a28                checkTransponderFinish
  .text.TRX_Logic
-                0x20006aa4       0xd4 ./src/SubSystemModules/Communication/TRXVU.o
-                0x20006aa4                TRX_Logic
+                0x20006aac       0xd4 ./src/SubSystemModules/Communication/TRXVU.o
+                0x20006aac                TRX_Logic
  .text.GetNumberOfFramesInBuffer
-                0x20006b78       0x5c ./src/SubSystemModules/Communication/TRXVU.o
-                0x20006b78                GetNumberOfFramesInBuffer
+                0x20006b80       0x5c ./src/SubSystemModules/Communication/TRXVU.o
+                0x20006b80                GetNumberOfFramesInBuffer
  .text.GetOnlineCommand
-                0x20006bd4      0x140 ./src/SubSystemModules/Communication/TRXVU.o
-                0x20006bd4                GetOnlineCommand
+                0x20006bdc      0x140 ./src/SubSystemModules/Communication/TRXVU.o
+                0x20006bdc                GetOnlineCommand
  .text.CheckTransmitionAllowed
-                0x20006d14       0xc4 ./src/SubSystemModules/Communication/TRXVU.o
-                0x20006d14                CheckTransmitionAllowed
+                0x20006d1c       0xc4 ./src/SubSystemModules/Communication/TRXVU.o
+                0x20006d1c                CheckTransmitionAllowed
  .text.FinishDump
-                0x20006dd8       0xf0 ./src/SubSystemModules/Communication/TRXVU.o
-                0x20006dd8                FinishDump
+                0x20006de0       0xf0 ./src/SubSystemModules/Communication/TRXVU.o
+                0x20006de0                FinishDump
  .text.AbortDump
-                0x20006ec8       0x34 ./src/SubSystemModules/Communication/TRXVU.o
-                0x20006ec8                AbortDump
+                0x20006ed0       0x34 ./src/SubSystemModules/Communication/TRXVU.o
+                0x20006ed0                AbortDump
  .text.SendDumpAbortRequest
-                0x20006efc       0x6c ./src/SubSystemModules/Communication/TRXVU.o
-                0x20006efc                SendDumpAbortRequest
+                0x20006f04       0x6c ./src/SubSystemModules/Communication/TRXVU.o
+                0x20006f04                SendDumpAbortRequest
  .text.CheckDumpAbort
-                0x20006f68       0x6c ./src/SubSystemModules/Communication/TRXVU.o
-                0x20006f68                CheckDumpAbort
+                0x20006f70       0x6c ./src/SubSystemModules/Communication/TRXVU.o
+                0x20006f70                CheckDumpAbort
  .text.BeaconLogic
-                0x20006fd4      0x24c ./src/SubSystemModules/Communication/TRXVU.o
-                0x20006fd4                BeaconLogic
+                0x20006fdc      0x24c ./src/SubSystemModules/Communication/TRXVU.o
+                0x20006fdc                BeaconLogic
  .text.SetIdleState
-                0x20007220       0xb8 ./src/SubSystemModules/Communication/TRXVU.o
-                0x20007220                SetIdleState
+                0x20007228       0xb8 ./src/SubSystemModules/Communication/TRXVU.o
+                0x20007228                SetIdleState
  .text.muteTRXVU
-                0x200072d8       0x78 ./src/SubSystemModules/Communication/TRXVU.o
-                0x200072d8                muteTRXVU
+                0x200072e0       0x78 ./src/SubSystemModules/Communication/TRXVU.o
+                0x200072e0                muteTRXVU
  .text.UnMuteTRXVU
-                0x20007350       0x24 ./src/SubSystemModules/Communication/TRXVU.o
-                0x20007350                UnMuteTRXVU
+                0x20007358       0x24 ./src/SubSystemModules/Communication/TRXVU.o
+                0x20007358                UnMuteTRXVU
  .text.TransmitDataAsSPL_Packet
-                0x20007374      0x114 ./src/SubSystemModules/Communication/TRXVU.o
-                0x20007374                TransmitDataAsSPL_Packet
+                0x2000737c      0x114 ./src/SubSystemModules/Communication/TRXVU.o
+                0x2000737c                TransmitDataAsSPL_Packet
  .text.TransmitSplPacket
-                0x20007488       0xf0 ./src/SubSystemModules/Communication/TRXVU.o
-                0x20007488                TransmitSplPacket
+                0x20007490       0xf0 ./src/SubSystemModules/Communication/TRXVU.o
+                0x20007490                TransmitSplPacket
  .text.isFirstActivation
-                0x20007578       0x38 ./src/InitSystem.o
-                0x20007578                isFirstActivation
+                0x20007580       0x38 ./src/InitSystem.o
+                0x20007580                isFirstActivation
  .text.WriteDefaultValuesToFRAM
-                0x200075b0      0x1c0 ./src/InitSystem.o
-                0x200075b0                WriteDefaultValuesToFRAM
+                0x200075b8      0x1c0 ./src/InitSystem.o
+                0x200075b8                WriteDefaultValuesToFRAM
  .text.StartFRAM
-                0x20007770       0x2c ./src/InitSystem.o
-                0x20007770                StartFRAM
+                0x20007778       0x2c ./src/InitSystem.o
+                0x20007778                StartFRAM
  .text.StartI2C
-                0x2000779c       0x38 ./src/InitSystem.o
-                0x2000779c                StartI2C
+                0x200077a4       0x38 ./src/InitSystem.o
+                0x200077a4                StartI2C
  .text.StartSPI
-                0x200077d4       0x34 ./src/InitSystem.o
-                0x200077d4                StartSPI
+                0x200077dc       0x34 ./src/InitSystem.o
+                0x200077dc                StartSPI
  .text.StartTIME
-                0x20007808       0xb8 ./src/InitSystem.o
-                0x20007808                StartTIME
+                0x20007810       0xb8 ./src/InitSystem.o
+                0x20007810                StartTIME
  .text.DeploySystem
-                0x200078c0      0x148 ./src/InitSystem.o
-                0x200078c0                DeploySystem
+                0x200078c8      0x148 ./src/InitSystem.o
+                0x200078c8                DeploySystem
  .text.InitSubsystems
-                0x20007a08       0x48 ./src/InitSystem.o
-                0x20007a08                InitSubsystems
+                0x20007a10       0x48 ./src/InitSystem.o
+                0x20007a10                InitSubsystems
  .text.CMD_getInfoImage
-                0x20007a50      0x18c ./src/TLM_management.o
-                0x20007a50                CMD_getInfoImage
+                0x20007a58      0x16c ./src/TLM_management.o
+                0x20007a58                CMD_getInfoImage
  .text.CMD_getDataImage
-                0x20007bdc      0x1b4 ./src/TLM_management.o
-                0x20007bdc                CMD_getDataImage
+                0x20007bc4      0x1cc ./src/TLM_management.o
+                0x20007bc4                CMD_getDataImage
  .text.delete_allTMFilesFromSD
                 0x20007d90       0xa0 ./src/TLM_management.o
                 0x20007d90                delete_allTMFilesFromSD
@@ -3695,91 +3695,91 @@ END GROUP
  .rodata        0x200366b0       0x10 ./src/SubSystemModules/Communication/SatCommandHandler.o
  .rodata        0x200366c0      0x240 ./src/SubSystemModules/Communication/TRXVU.o
  .rodata        0x20036900       0x6c ./src/InitSystem.o
- .rodata        0x2003696c      0x1f0 ./src/TLM_management.o
- .rodata        0x20036b5c       0x18 ./src/main.o
- .rodata        0x20036b74        0xc ./src/utils.o
- .rodata        0x20036b80      0x12c C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
- .rodata        0x20036cac      0x384 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
- .rodata        0x20037030       0xc4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
- .rodata        0x200370f4        0xc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerNoOS.o)
- .rodata        0x20037100       0x14 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerOS.o)
- .rodata        0x20037114       0x30 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(LED.o)
- .rodata        0x20037144       0x60 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(safefat.o)
- .rodata        0x200371a4       0x30 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc.o)
- .rodata        0x200371d4       0x54 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc_hw.o)
- .rodata        0x20037228       0x50 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
- .rodata        0x20037278       0x40 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(queue.o)
- .rodata        0x200372b8       0x4c C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
- .rodata        0x20037304       0x48 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(timers.o)
- .rodata        0x2003734c       0x90 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(hooks.o)
- .rodata        0x200373dc       0x1c C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(syscalls.o)
- .rodata        0x200373f8      0x320 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15.o)
- .rodata        0x20037718      0x1a0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pmc.o)
- .rodata        0x200378b8       0xd0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(twi_at91.o)
- .rodata        0x20037988       0xa0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(ExitHandler.o)
- .rodata        0x20037a28      0x100 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_lowlevel.o)
+ .rodata        0x2003696c      0x218 ./src/TLM_management.o
+ .rodata        0x20036b84       0x18 ./src/main.o
+ .rodata        0x20036b9c        0xc ./src/utils.o
+ .rodata        0x20036ba8      0x12c C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
+ .rodata        0x20036cd4      0x384 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
+ .rodata        0x20037058       0xc4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
+ .rodata        0x2003711c        0xc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerNoOS.o)
+ .rodata        0x20037128       0x14 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerOS.o)
+ .rodata        0x2003713c       0x30 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(LED.o)
+ .rodata        0x2003716c       0x60 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(safefat.o)
+ .rodata        0x200371cc       0x30 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc.o)
+ .rodata        0x200371fc       0x54 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc_hw.o)
+ .rodata        0x20037250       0x50 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .rodata        0x200372a0       0x40 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(queue.o)
+ .rodata        0x200372e0       0x4c C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
+ .rodata        0x2003732c       0x48 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(timers.o)
+ .rodata        0x20037374       0x90 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(hooks.o)
+ .rodata        0x20037404       0x1c C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(syscalls.o)
+ .rodata        0x20037420      0x320 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15.o)
+ .rodata        0x20037740      0x1a0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pmc.o)
+ .rodata        0x200378e0       0xd0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(twi_at91.o)
+ .rodata        0x200379b0       0xa0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(ExitHandler.o)
+ .rodata        0x20037a50      0x100 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_lowlevel.o)
  *(.rodata*)
  .rodata.str1.4
-                0x20037b28        0x2 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-impure.o)
+                0x20037b50        0x2 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-impure.o)
                                   0x4 (size before relaxing)
- *fill*         0x20037b2a        0x2 00
+ *fill*         0x20037b52        0x2 00
  .rodata._global_impure_ptr
-                0x20037b2c        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-impure.o)
-                0x20037b2c                _global_impure_ptr
+                0x20037b54        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-impure.o)
+                0x20037b54                _global_impure_ptr
  .rodata._DAYS_BEFORE_MONTH
-                0x20037b30       0x30 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mktime.o)
+                0x20037b58       0x30 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mktime.o)
  .rodata.DAYS_IN_MONTH
-                0x20037b60       0x30 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mktime.o)
+                0x20037b88       0x30 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mktime.o)
  .rodata.mon_lengths
-                0x20037b90       0x60 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mktm_r.o)
+                0x20037bb8       0x60 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mktm_r.o)
  .rodata.year_lengths
-                0x20037bf0        0x8 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mktm_r.o)
+                0x20037c18        0x8 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mktm_r.o)
  .rodata.str1.4
-                0x20037bf8        0x2 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-puts.o)
+                0x20037c20        0x2 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-puts.o)
                                   0x4 (size before relaxing)
- *fill*         0x20037bfa        0x2 00
+ *fill*         0x20037c22        0x2 00
  .rodata.str1.4
-                0x20037bfc       0x74 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-strftime.o)
+                0x20037c24       0x74 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-strftime.o)
                                  0x78 (size before relaxing)
  .rodata.str1.4
-                0x20037c70       0x42 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-svfprintf.o)
+                0x20037c98       0x42 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-svfprintf.o)
                                  0x44 (size before relaxing)
- *fill*         0x20037cb2        0x2 00
+ *fill*         0x20037cda        0x2 00
  .rodata.zeroes.6721
-                0x20037cb4       0x10 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-svfprintf.o)
+                0x20037cdc       0x10 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-svfprintf.o)
  .rodata.blanks.6720
-                0x20037cc4       0x10 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-svfprintf.o)
+                0x20037cec       0x10 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-svfprintf.o)
  .rodata._C_time_locale
-                0x20037cd4       0xfc c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-timelocal.o)
+                0x20037cfc       0xfc c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-timelocal.o)
  .rodata.str1.4
-                0x20037dd0      0x160 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-timelocal.o)
+                0x20037df8      0x160 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-timelocal.o)
                                 0x164 (size before relaxing)
  .rodata.str1.4
-                0x20037f30        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-tzvars.o)
+                0x20037f58        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-tzvars.o)
  .rodata.blanks.6735
-                0x20037f34       0x10 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-vfprintf.o)
+                0x20037f5c       0x10 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-vfprintf.o)
  .rodata.str1.4
                 0x00000000       0x44 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-vfprintf.o)
  .rodata.zeroes.6736
-                0x20037f44       0x10 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-vfprintf.o)
+                0x20037f6c       0x10 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-vfprintf.o)
  .rodata._ctype_
-                0x20037f54      0x104 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-ctype_.o)
-                0x20037f54                _ctype_
+                0x20037f7c      0x104 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-ctype_.o)
+                0x20037f7c                _ctype_
  .rodata.str1.4
-                0x20038058       0x10 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-dtoa.o)
+                0x20038080       0x10 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-dtoa.o)
                                  0x14 (size before relaxing)
  .rodata.str1.4
-                0x20038068        0xc c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-locale.o)
+                0x20038090        0xc c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-locale.o)
                                  0x14 (size before relaxing)
  .rodata.p05.5242
-                0x20038074        0xc c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mprec.o)
- *fill*         0x20038080        0x0 00
+                0x2003809c        0xc c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mprec.o)
+ *fill*         0x200380a8        0x0 00
  .rodata.__mprec_tens
-                0x20038080       0xc8 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mprec.o)
-                0x20038080                __mprec_tens
+                0x200380a8       0xc8 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mprec.o)
+                0x200380a8                __mprec_tens
  .rodata.__mprec_bigtens
-                0x20038148       0x28 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mprec.o)
-                0x20038148                __mprec_bigtens
+                0x20038170       0x28 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mprec.o)
+                0x20038170                __mprec_bigtens
  *(.rodata.*)
  *(.glue_7)
  .glue_7        0x00000000        0x0 linker stubs
@@ -3790,50 +3790,50 @@ END GROUP
  *(.v4_bx)
  .v4_bx         0x00000000        0x0 linker stubs
  *(.data)
- .data          0x20038170        0xc ./src/SubSystemModules/PowerManagment/EPS.o
-                0x20038170                eps_threshold_voltages
- .data          0x2003817c        0x8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
- .data          0x20038184        0xc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
- .data          0x20038190       0x10 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(FRAM.o)
- .data          0x200381a0        0x4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
- .data          0x200381a4       0x10 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTC.o)
- .data          0x200381b4       0x20 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(safefat.o)
-                0x200381b4                s_subdir
- .data          0x200381d4       0x28 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
- .data          0x200381fc        0x4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
- .data          0x20038200        0x4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(port.o)
-                0x20038200                ulCriticalNesting
+ .data          0x20038198        0xc ./src/SubSystemModules/PowerManagment/EPS.o
+                0x20038198                eps_threshold_voltages
+ .data          0x200381a4        0x8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
+ .data          0x200381ac        0xc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
+ .data          0x200381b8       0x10 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(FRAM.o)
+ .data          0x200381c8        0x4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
+ .data          0x200381cc       0x10 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTC.o)
+ .data          0x200381dc       0x20 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(safefat.o)
+                0x200381dc                s_subdir
+ .data          0x200381fc       0x28 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .data          0x20038224        0x4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
+ .data          0x20038228        0x4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(port.o)
+                0x20038228                ulCriticalNesting
  *(.data.*)
- *fill*         0x20038204        0x4 00
+ *fill*         0x2003822c        0x4 00
  .data.impure_data
-                0x20038208      0x428 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-impure.o)
+                0x20038230      0x428 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-impure.o)
  .data._impure_ptr
-                0x20038630        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-impure.o)
-                0x20038630                _impure_ptr
+                0x20038658        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-impure.o)
+                0x20038658                _impure_ptr
  .data.__malloc_av_
-                0x20038634      0x408 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
-                0x20038634                __malloc_av_
+                0x2003865c      0x408 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
+                0x2003865c                __malloc_av_
  .data.__malloc_trim_threshold
-                0x20038a3c        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
-                0x20038a3c                __malloc_trim_threshold
+                0x20038a64        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
+                0x20038a64                __malloc_trim_threshold
  .data.__malloc_sbrk_base
-                0x20038a40        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
-                0x20038a40                __malloc_sbrk_base
- .data._tzname  0x20038a44        0x8 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-tzvars.o)
-                0x20038a44                _tzname
+                0x20038a68        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
+                0x20038a68                __malloc_sbrk_base
+ .data._tzname  0x20038a6c        0x8 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-tzvars.o)
+                0x20038a6c                _tzname
  .data.__ctype_ptr__
-                0x20038a4c        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-ctype_.o)
-                0x20038a4c                __ctype_ptr__
- .data.tzinfo   0x20038a50       0x40 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-gettzinfo.o)
- .data.lconv    0x20038a90       0x38 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-locale.o)
+                0x20038a74        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-ctype_.o)
+                0x20038a74                __ctype_ptr__
+ .data.tzinfo   0x20038a78       0x40 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-gettzinfo.o)
+ .data.lconv    0x20038ab8       0x38 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-locale.o)
  .data.lc_ctype_charset
-                0x20038ac8       0x20 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-locale.o)
+                0x20038af0       0x20 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-locale.o)
  .data.__mb_cur_max
-                0x20038ae8        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-locale.o)
-                0x20038ae8                __mb_cur_max
+                0x20038b10        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-locale.o)
+                0x20038b10                __mb_cur_max
  .data.__wctomb
-                0x20038aec        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-wctomb_r.o)
-                0x20038aec                __wctomb
+                0x20038b14        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-wctomb_r.o)
+                0x20038b14                __wctomb
  *(.dyn)
  *(.iplt)
  .iplt          0x00000000        0x0 ./src/TestingDemos/CommandsTestingDemo.o
@@ -3843,27 +3843,27 @@ END GROUP
  *(.rel.dyn)
  *(.rel.iplt)
  .rel.iplt      0x00000000        0x0 ./src/TestingDemos/CommandsTestingDemo.o
-                0x20038af0                . = ALIGN (0x4)
-                0x20038af0                _efixed = .
+                0x20038b18                . = ALIGN (0x4)
+                0x20038b18                _efixed = .
 
-.ARM.exidx      0x20038af0        0x8
+.ARM.exidx      0x20038b18        0x8
  *(.ARM.exidx)
- .ARM.exidx     0x20038af0        0x8 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_divdi3.o)
- .ARM.exidx     0x20038af8        0x0 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_udivdi3.o)
+ .ARM.exidx     0x20038b18        0x8 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_divdi3.o)
+ .ARM.exidx     0x20038b20        0x0 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_udivdi3.o)
                                   0x8 (size before relaxing)
-                0x20038af8                _eexidx = .
+                0x20038b20                _eexidx = .
 
-.ARM.extab      0x20038af8        0x0
+.ARM.extab      0x20038b20        0x0
  *(.ARM.extab)
-                0x20038af8                _eextab = .
+                0x20038b20                _eextab = .
 
-.prerelocate    0x00200000        0x0 load address 0x20038af8
+.prerelocate    0x00200000        0x0 load address 0x20038b20
                 0x00200000                . = ALIGN (0x4)
                 0x00200000                _sprerelocate = .
                 0x00200000                . = ALIGN (0x4)
                 0x00200000                _eprerelocate = .
 
-.postrelocate   0x00200000     0x1cf8 load address 0x20038af8
+.postrelocate   0x00200000     0x1cf8 load address 0x20038b20
                 0x00200000                . = ALIGN (0x4)
                 0x00200000                _spostrelocate = .
  *(.vectors)
@@ -3888,7 +3888,7 @@ END GROUP
                 0x00201cf8                . = ALIGN (0x4)
                 0x00201cf8                _epostrelocate = .
 
-.sramdata       0x00300000        0xc load address 0x2003a7f0
+.sramdata       0x00300000        0xc load address 0x2003a818
                 0x00300000                . = ALIGN (0x4)
                 0x00300000                _ssramdata = .
  *(.sramdata)
@@ -3904,94 +3904,94 @@ END GROUP
                 0x0030000c                . = ALIGN (0x4)
                 0x0030000c                _esrambss = .
 
-.bss            0x20038af8    0x7fd78
-                0x20038af8                _szero = .
+.bss            0x20038b20    0x7fd78
+                0x20038b20                _szero = .
  *(.bss)
- .bss           0x20038af8        0x8 ./src/SubSystemModules/PowerManagment/EPS.o
-                0x20038af8                prev_avg
-                0x20038afc                alpha
- .bss           0x20038b00        0x4 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
-                0x20038b00                g_low_volt_flag
- .bss           0x20038b04        0x8 ./src/SubSystemModules/Maintenance/Maintenance.o
- .bss           0x20038b0c       0x2c ./src/SubSystemModules/Housekepping/TelemetryCollector.o
- .bss           0x20038b38       0xe4 ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o
- .bss           0x20038c1c       0x28 ./src/SubSystemModules/Communication/TRXVU.o
-                0x20038c20                g_mute_end_time
-                0x20038c24                g_idle_end_time
-                0x20038c28                g_transponder_end_time
-                0x20038c2c                xDumpQueue
-                0x20038c30                xDumpLock
-                0x20038c34                xIsTransmitting
-                0x20038c38                xDumpHandle
-                0x20038c3c                g_prev_beacon_time
-                0x20038c40                g_beacon_interval_time
- .bss           0x20038c44    0x30d44 ./src/TLM_management.o
- .bss           0x20069988     0x3e84 ./src/utils.o
- .bss           0x2006d80c       0x54 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
-                0x2006d814                RescheduleFlag
- .bss           0x2006d860       0x58 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
- .bss           0x2006d8b8      0x214 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(FRAM.o)
- .bss           0x2006dacc       0x18 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
- .bss           0x2006dae4        0x8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerOS.o)
- .bss           0x2006daec       0x10 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(LED.o)
- .bss           0x2006dafc    0x44780 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o)
-                0x200b2278                p_filesystem
- .bss           0x200b227c       0x60 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc.o)
-                0x200b22d8                mmcsd_dma_buf
- .bss           0x200b22dc       0x90 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(hcc_mem.o)
- .bss           0x200b236c     0x4024 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_hcc_mem.o)
- .bss           0x200b6390        0x8 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisAntS.o)
- .bss           0x200b6398        0x1 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
- *fill*         0x200b6399        0x3 00
- .bss           0x200b639c        0x8 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o)
- .bss           0x200b63a4        0x8 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(isis_eps_driver.o)
- .bss           0x200b63ac       0xfc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
-                0x200b63ac                pxCurrentTCB
- .bss           0x200b64a8       0x38 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(timers.o)
- .bss           0x200b64e0        0x8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(standardMemMang.o)
+ .bss           0x20038b20        0x8 ./src/SubSystemModules/PowerManagment/EPS.o
+                0x20038b20                prev_avg
+                0x20038b24                alpha
+ .bss           0x20038b28        0x4 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+                0x20038b28                g_low_volt_flag
+ .bss           0x20038b2c        0x8 ./src/SubSystemModules/Maintenance/Maintenance.o
+ .bss           0x20038b34       0x2c ./src/SubSystemModules/Housekepping/TelemetryCollector.o
+ .bss           0x20038b60       0xe4 ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o
+ .bss           0x20038c44       0x28 ./src/SubSystemModules/Communication/TRXVU.o
+                0x20038c48                g_mute_end_time
+                0x20038c4c                g_idle_end_time
+                0x20038c50                g_transponder_end_time
+                0x20038c54                xDumpQueue
+                0x20038c58                xDumpLock
+                0x20038c5c                xIsTransmitting
+                0x20038c60                xDumpHandle
+                0x20038c64                g_prev_beacon_time
+                0x20038c68                g_beacon_interval_time
+ .bss           0x20038c6c    0x30d44 ./src/TLM_management.o
+ .bss           0x200699b0     0x3e84 ./src/utils.o
+ .bss           0x2006d834       0x54 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
+                0x2006d83c                RescheduleFlag
+ .bss           0x2006d888       0x58 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
+ .bss           0x2006d8e0      0x214 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(FRAM.o)
+ .bss           0x2006daf4       0x18 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
+ .bss           0x2006db0c        0x8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerOS.o)
+ .bss           0x2006db14       0x10 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(LED.o)
+ .bss           0x2006db24    0x44780 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o)
+                0x200b22a0                p_filesystem
+ .bss           0x200b22a4       0x60 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc.o)
+                0x200b2300                mmcsd_dma_buf
+ .bss           0x200b2304       0x90 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(hcc_mem.o)
+ .bss           0x200b2394     0x4024 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_hcc_mem.o)
+ .bss           0x200b63b8        0x8 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisAntS.o)
+ .bss           0x200b63c0        0x1 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ *fill*         0x200b63c1        0x3 00
+ .bss           0x200b63c4        0x8 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o)
+ .bss           0x200b63cc        0x8 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(isis_eps_driver.o)
+ .bss           0x200b63d4       0xfc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
+                0x200b63d4                pxCurrentTCB
+ .bss           0x200b64d0       0x38 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(timers.o)
+ .bss           0x200b6508        0x8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(standardMemMang.o)
  *(.bss.*)
  .bss.__malloc_max_total_mem
-                0x200b64e8        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
-                0x200b64e8                __malloc_max_total_mem
+                0x200b6510        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
+                0x200b6510                __malloc_max_total_mem
  .bss.__malloc_max_sbrked_mem
-                0x200b64ec        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
-                0x200b64ec                __malloc_max_sbrked_mem
+                0x200b6514        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
+                0x200b6514                __malloc_max_sbrked_mem
  .bss.__malloc_top_pad
-                0x200b64f0        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
-                0x200b64f0                __malloc_top_pad
+                0x200b6518        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
+                0x200b6518                __malloc_top_pad
  .bss.__malloc_current_mallinfo
-                0x200b64f4       0x28 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
-                0x200b64f4                __malloc_current_mallinfo
+                0x200b651c       0x28 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
+                0x200b651c                __malloc_current_mallinfo
  .bss._time_using_locale
-                0x200b651c        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-timelocal.o)
+                0x200b6544        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-timelocal.o)
  .bss._time_locale
-                0x200b6520       0xfc c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-timelocal.o)
+                0x200b6548       0xfc c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-timelocal.o)
  .bss._daylight
-                0x200b661c        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-tzvars.o)
-                0x200b661c                _daylight
+                0x200b6644        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-tzvars.o)
+                0x200b6644                _daylight
  *(COMMON)
- COMMON         0x200b6620        0x2 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
-                0x200b6620                g_system_state
-                0x200b6621                state
- *fill*         0x200b6622        0x2 00
- COMMON         0x200b6624     0x2148 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o)
-                0x200b6624                g_fatmutex
-                0x200b6628                g_multi
-                0x200b8768                f_format_progress
- COMMON         0x200b876c      0x100 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(queue.o)
-                0x200b876c                xQueueRegistry
- COMMON         0x200b886c        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-reent.o)
-                0x200b886c                errno
+ COMMON         0x200b6648        0x2 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+                0x200b6648                g_system_state
+                0x200b6649                state
+ *fill*         0x200b664a        0x2 00
+ COMMON         0x200b664c     0x2148 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o)
+                0x200b664c                g_fatmutex
+                0x200b6650                g_multi
+                0x200b8790                f_format_progress
+ COMMON         0x200b8794      0x100 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(queue.o)
+                0x200b8794                xQueueRegistry
+ COMMON         0x200b8894        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-reent.o)
+                0x200b8894                errno
  *(COMMON.*)
-                0x200b8870                . = ALIGN (0x4)
-                0x200b8870                _ezero = .
-                0x200b8870                _sheap_ = .
+                0x200b8898                . = ALIGN (0x4)
+                0x200b8898                _ezero = .
+                0x200b8898                _sheap_ = .
                 0x21f00000                _eheap_ = 0x21f00000
                 0x21fffc00                _sstack = 0x21fffc00
-                0x200b8870                end = .
+                0x200b8898                end = .
 OUTPUT(GlobusSatProject.elf elf32-littlearm)
 
-.debug_info     0x00000000    0x2b95c
+.debug_info     0x00000000    0x2b968
  .debug_info    0x00000000      0xc89 ./src/SubSystemModules/PowerManagment/EPS.o
  .debug_info    0x00000c89      0x1ce ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .debug_info    0x00000e57      0x640 ./src/SubSystemModules/Maintenance/Maintenance.o
@@ -4005,58 +4005,58 @@ OUTPUT(GlobusSatProject.elf elf32-littlearm)
  .debug_info    0x00004e9b      0x4d0 ./src/SubSystemModules/Communication/SatCommandHandler.o
  .debug_info    0x0000536b      0xc58 ./src/SubSystemModules/Communication/TRXVU.o
  .debug_info    0x00005fc3      0x502 ./src/InitSystem.o
- .debug_info    0x000064c5     0x16aa ./src/TLM_management.o
- .debug_info    0x00007b6f      0x409 ./src/main.o
- .debug_info    0x00007f78      0x395 ./src/utils.o
- .debug_info    0x0000830d     0x1981 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
- .debug_info    0x00009c8e     0x173e C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
- .debug_info    0x0000b3cc      0x895 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(FRAM.o)
- .debug_info    0x0000bc61      0xfbb C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
- .debug_info    0x0000cc1c      0x3f1 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerNoOS.o)
- .debug_info    0x0000d00d      0x1aa C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerOS.o)
- .debug_info    0x0000d1b7      0x228 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(fprintf.o)
- .debug_info    0x0000d3df      0x506 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(LED.o)
- .debug_info    0x0000d8e5      0xf41 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTC.o)
- .debug_info    0x0000e826      0x185 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTT.o)
- .debug_info    0x0000e9ab     0x4751 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o)
- .debug_info    0x000130fc     0x19f9 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_m.o)
- .debug_info    0x00014af5     0x2750 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(safefat.o)
- .debug_info    0x00017245      0xd43 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc.o)
- .debug_info    0x00017f88      0x1aa C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_mutex.o)
- .debug_info    0x00018132       0xb0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_task.o)
- .debug_info    0x000181e2      0x4c6 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc_hw.o)
- .debug_info    0x000186a8      0x1ba C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_rtc.o)
- .debug_info    0x00018862      0xd35 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(hcc_mem.o)
- .debug_info    0x00019597     0x28dd C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat.o)
- .debug_info    0x0001be74      0x1ad C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_hcc_mem.o)
- .debug_info    0x0001c021      0xa44 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisAntS.o)
- .debug_info    0x0001ca65      0xbd2 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
- .debug_info    0x0001d637     0x1059 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o)
- .debug_info    0x0001e690     0x267e C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(isis_eps_driver.o)
- .debug_info    0x00020d0e      0x72c C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXCommon.o)
- .debug_info    0x0002143a      0xd24 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(queue.o)
- .debug_info    0x0002215e     0x17f9 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
- .debug_info    0x00023957      0x762 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(timers.o)
- .debug_info    0x000240b9       0xf4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(hooks.o)
- .debug_info    0x000241ad      0x214 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(standardMemMang.o)
- .debug_info    0x000243c1      0x330 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(port.o)
- .debug_info    0x000246f1      0x2aa C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(list.o)
- .debug_info    0x0002499b      0x589 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(syscalls.o)
- .debug_info    0x00024f24      0x287 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(aic.o)
- .debug_info    0x000251ab      0xc4d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15.o)
- .debug_info    0x00025df8      0xc6e C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(dbgu.o)
- .debug_info    0x00026a66      0x734 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pio.o)
- .debug_info    0x0002719a      0x1ae C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pit.o)
- .debug_info    0x00027348      0xc40 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pmc.o)
- .debug_info    0x00027f88      0x576 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(spi_at91.o)
- .debug_info    0x000284fe      0xf50 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(twi_at91.o)
- .debug_info    0x0002944e      0xb1d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(ExitHandler.o)
- .debug_info    0x00029f6b       0x92 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_cstartup.o)
- .debug_info    0x00029ffd       0x81 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15_asm.o)
- .debug_info    0x0002a07e      0xf88 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_lowlevel.o)
- .debug_info    0x0002b006      0x956 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_memories.o)
+ .debug_info    0x000064c5     0x16b6 ./src/TLM_management.o
+ .debug_info    0x00007b7b      0x409 ./src/main.o
+ .debug_info    0x00007f84      0x395 ./src/utils.o
+ .debug_info    0x00008319     0x1981 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
+ .debug_info    0x00009c9a     0x173e C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
+ .debug_info    0x0000b3d8      0x895 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(FRAM.o)
+ .debug_info    0x0000bc6d      0xfbb C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
+ .debug_info    0x0000cc28      0x3f1 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerNoOS.o)
+ .debug_info    0x0000d019      0x1aa C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerOS.o)
+ .debug_info    0x0000d1c3      0x228 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(fprintf.o)
+ .debug_info    0x0000d3eb      0x506 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(LED.o)
+ .debug_info    0x0000d8f1      0xf41 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTC.o)
+ .debug_info    0x0000e832      0x185 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTT.o)
+ .debug_info    0x0000e9b7     0x4751 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o)
+ .debug_info    0x00013108     0x19f9 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_m.o)
+ .debug_info    0x00014b01     0x2750 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(safefat.o)
+ .debug_info    0x00017251      0xd43 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc.o)
+ .debug_info    0x00017f94      0x1aa C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_mutex.o)
+ .debug_info    0x0001813e       0xb0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_task.o)
+ .debug_info    0x000181ee      0x4c6 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc_hw.o)
+ .debug_info    0x000186b4      0x1ba C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_rtc.o)
+ .debug_info    0x0001886e      0xd35 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(hcc_mem.o)
+ .debug_info    0x000195a3     0x28dd C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat.o)
+ .debug_info    0x0001be80      0x1ad C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_hcc_mem.o)
+ .debug_info    0x0001c02d      0xa44 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisAntS.o)
+ .debug_info    0x0001ca71      0xbd2 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .debug_info    0x0001d643     0x1059 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o)
+ .debug_info    0x0001e69c     0x267e C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(isis_eps_driver.o)
+ .debug_info    0x00020d1a      0x72c C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXCommon.o)
+ .debug_info    0x00021446      0xd24 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(queue.o)
+ .debug_info    0x0002216a     0x17f9 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
+ .debug_info    0x00023963      0x762 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(timers.o)
+ .debug_info    0x000240c5       0xf4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(hooks.o)
+ .debug_info    0x000241b9      0x214 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(standardMemMang.o)
+ .debug_info    0x000243cd      0x330 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(port.o)
+ .debug_info    0x000246fd      0x2aa C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(list.o)
+ .debug_info    0x000249a7      0x589 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(syscalls.o)
+ .debug_info    0x00024f30      0x287 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(aic.o)
+ .debug_info    0x000251b7      0xc4d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15.o)
+ .debug_info    0x00025e04      0xc6e C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(dbgu.o)
+ .debug_info    0x00026a72      0x734 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pio.o)
+ .debug_info    0x000271a6      0x1ae C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pit.o)
+ .debug_info    0x00027354      0xc40 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pmc.o)
+ .debug_info    0x00027f94      0x576 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(spi_at91.o)
+ .debug_info    0x0002850a      0xf50 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(twi_at91.o)
+ .debug_info    0x0002945a      0xb1d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(ExitHandler.o)
+ .debug_info    0x00029f77       0x92 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_cstartup.o)
+ .debug_info    0x0002a009       0x81 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15_asm.o)
+ .debug_info    0x0002a08a      0xf88 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_lowlevel.o)
+ .debug_info    0x0002b012      0x956 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_memories.o)
 
-.debug_abbrev   0x00000000     0x61d5
+.debug_abbrev   0x00000000     0x61cc
  .debug_abbrev  0x00000000      0x21f ./src/SubSystemModules/PowerManagment/EPS.o
  .debug_abbrev  0x0000021f       0xb9 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .debug_abbrev  0x000002d8      0x194 ./src/SubSystemModules/Maintenance/Maintenance.o
@@ -4070,56 +4070,56 @@ OUTPUT(GlobusSatProject.elf elf32-littlearm)
  .debug_abbrev  0x00000e09      0x192 ./src/SubSystemModules/Communication/SatCommandHandler.o
  .debug_abbrev  0x00000f9b      0x255 ./src/SubSystemModules/Communication/TRXVU.o
  .debug_abbrev  0x000011f0      0x171 ./src/InitSystem.o
- .debug_abbrev  0x00001361      0x2f7 ./src/TLM_management.o
- .debug_abbrev  0x00001658      0x114 ./src/main.o
- .debug_abbrev  0x0000176c      0x14b ./src/utils.o
- .debug_abbrev  0x000018b7      0x353 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
- .debug_abbrev  0x00001c0a      0x2a8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
- .debug_abbrev  0x00001eb2      0x260 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(FRAM.o)
- .debug_abbrev  0x00002112      0x299 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
- .debug_abbrev  0x000023ab       0xf6 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerNoOS.o)
- .debug_abbrev  0x000024a1       0xeb C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerOS.o)
- .debug_abbrev  0x0000258c       0xd7 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(fprintf.o)
- .debug_abbrev  0x00002663      0x163 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(LED.o)
- .debug_abbrev  0x000027c6      0x24e C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTC.o)
- .debug_abbrev  0x00002a14       0xf6 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTT.o)
- .debug_abbrev  0x00002b0a      0x2c0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o)
- .debug_abbrev  0x00002dca      0x1c9 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_m.o)
- .debug_abbrev  0x00002f93      0x265 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(safefat.o)
- .debug_abbrev  0x000031f8      0x22f C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc.o)
- .debug_abbrev  0x00003427       0xb3 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_mutex.o)
- .debug_abbrev  0x000034da       0x5a C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_task.o)
- .debug_abbrev  0x00003534      0x13e C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc_hw.o)
- .debug_abbrev  0x00003672       0xb4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_rtc.o)
- .debug_abbrev  0x00003726      0x1fb C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(hcc_mem.o)
- .debug_abbrev  0x00003921      0x2ce C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat.o)
- .debug_abbrev  0x00003bef       0xb3 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_hcc_mem.o)
- .debug_abbrev  0x00003ca2      0x1b8 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisAntS.o)
- .debug_abbrev  0x00003e5a      0x22b C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
- .debug_abbrev  0x00004085      0x19e C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o)
- .debug_abbrev  0x00004223      0x1e9 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(isis_eps_driver.o)
- .debug_abbrev  0x0000440c      0x16d C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXCommon.o)
- .debug_abbrev  0x00004579      0x1af C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(queue.o)
- .debug_abbrev  0x00004728      0x2b2 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
- .debug_abbrev  0x000049da      0x170 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(timers.o)
- .debug_abbrev  0x00004b4a       0xa2 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(hooks.o)
- .debug_abbrev  0x00004bec      0x116 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(standardMemMang.o)
- .debug_abbrev  0x00004d02      0x1dc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(port.o)
- .debug_abbrev  0x00004ede       0xc0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(list.o)
- .debug_abbrev  0x00004f9e      0x121 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(syscalls.o)
- .debug_abbrev  0x000050bf       0xc3 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(aic.o)
- .debug_abbrev  0x00005182      0x1f0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15.o)
- .debug_abbrev  0x00005372      0x1f7 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(dbgu.o)
- .debug_abbrev  0x00005569      0x185 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pio.o)
- .debug_abbrev  0x000056ee       0xd3 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pit.o)
- .debug_abbrev  0x000057c1      0x1fc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pmc.o)
- .debug_abbrev  0x000059bd       0xff C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(spi_at91.o)
- .debug_abbrev  0x00005abc      0x24f C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(twi_at91.o)
- .debug_abbrev  0x00005d0b      0x1af C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(ExitHandler.o)
- .debug_abbrev  0x00005eba       0x12 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_cstartup.o)
- .debug_abbrev  0x00005ecc       0x14 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15_asm.o)
- .debug_abbrev  0x00005ee0      0x1ac C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_lowlevel.o)
- .debug_abbrev  0x0000608c      0x149 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_memories.o)
+ .debug_abbrev  0x00001361      0x2ee ./src/TLM_management.o
+ .debug_abbrev  0x0000164f      0x114 ./src/main.o
+ .debug_abbrev  0x00001763      0x14b ./src/utils.o
+ .debug_abbrev  0x000018ae      0x353 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
+ .debug_abbrev  0x00001c01      0x2a8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
+ .debug_abbrev  0x00001ea9      0x260 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(FRAM.o)
+ .debug_abbrev  0x00002109      0x299 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
+ .debug_abbrev  0x000023a2       0xf6 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerNoOS.o)
+ .debug_abbrev  0x00002498       0xeb C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerOS.o)
+ .debug_abbrev  0x00002583       0xd7 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(fprintf.o)
+ .debug_abbrev  0x0000265a      0x163 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(LED.o)
+ .debug_abbrev  0x000027bd      0x24e C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTC.o)
+ .debug_abbrev  0x00002a0b       0xf6 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTT.o)
+ .debug_abbrev  0x00002b01      0x2c0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o)
+ .debug_abbrev  0x00002dc1      0x1c9 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_m.o)
+ .debug_abbrev  0x00002f8a      0x265 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(safefat.o)
+ .debug_abbrev  0x000031ef      0x22f C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc.o)
+ .debug_abbrev  0x0000341e       0xb3 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_mutex.o)
+ .debug_abbrev  0x000034d1       0x5a C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_task.o)
+ .debug_abbrev  0x0000352b      0x13e C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc_hw.o)
+ .debug_abbrev  0x00003669       0xb4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_rtc.o)
+ .debug_abbrev  0x0000371d      0x1fb C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(hcc_mem.o)
+ .debug_abbrev  0x00003918      0x2ce C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat.o)
+ .debug_abbrev  0x00003be6       0xb3 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_hcc_mem.o)
+ .debug_abbrev  0x00003c99      0x1b8 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisAntS.o)
+ .debug_abbrev  0x00003e51      0x22b C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .debug_abbrev  0x0000407c      0x19e C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o)
+ .debug_abbrev  0x0000421a      0x1e9 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(isis_eps_driver.o)
+ .debug_abbrev  0x00004403      0x16d C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXCommon.o)
+ .debug_abbrev  0x00004570      0x1af C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(queue.o)
+ .debug_abbrev  0x0000471f      0x2b2 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
+ .debug_abbrev  0x000049d1      0x170 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(timers.o)
+ .debug_abbrev  0x00004b41       0xa2 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(hooks.o)
+ .debug_abbrev  0x00004be3      0x116 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(standardMemMang.o)
+ .debug_abbrev  0x00004cf9      0x1dc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(port.o)
+ .debug_abbrev  0x00004ed5       0xc0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(list.o)
+ .debug_abbrev  0x00004f95      0x121 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(syscalls.o)
+ .debug_abbrev  0x000050b6       0xc3 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(aic.o)
+ .debug_abbrev  0x00005179      0x1f0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15.o)
+ .debug_abbrev  0x00005369      0x1f7 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(dbgu.o)
+ .debug_abbrev  0x00005560      0x185 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pio.o)
+ .debug_abbrev  0x000056e5       0xd3 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pit.o)
+ .debug_abbrev  0x000057b8      0x1fc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pmc.o)
+ .debug_abbrev  0x000059b4       0xff C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(spi_at91.o)
+ .debug_abbrev  0x00005ab3      0x24f C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(twi_at91.o)
+ .debug_abbrev  0x00005d02      0x1af C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(ExitHandler.o)
+ .debug_abbrev  0x00005eb1       0x12 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_cstartup.o)
+ .debug_abbrev  0x00005ec3       0x14 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15_asm.o)
+ .debug_abbrev  0x00005ed7      0x1ac C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_lowlevel.o)
+ .debug_abbrev  0x00006083      0x149 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_memories.o)
 
 .debug_loc      0x00000000     0x9af4
  .debug_loc     0x00000000      0x1e4 ./src/SubSystemModules/PowerManagment/EPS.o
@@ -4376,7 +4376,7 @@ OUTPUT(GlobusSatProject.elf elf32-littlearm)
  .debug_ranges  0x00001ee0       0x30 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_lowlevel.o)
  .debug_ranges  0x00001f10       0x28 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_memories.o)
 
-.debug_line     0x00000000     0xea75
+.debug_line     0x00000000     0xea7a
  .debug_line    0x00000000      0x447 ./src/SubSystemModules/PowerManagment/EPS.o
  .debug_line    0x00000447      0x19d ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
  .debug_line    0x000005e4      0x396 ./src/SubSystemModules/Maintenance/Maintenance.o
@@ -4386,62 +4386,62 @@ OUTPUT(GlobusSatProject.elf elf32-littlearm)
  .debug_line    0x00001445      0x44e ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o
  .debug_line    0x00001893      0x57b ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o
  .debug_line    0x00001e0e       0x8d ./src/SubSystemModules/Communication/AckHandler.o
- .debug_line    0x00001e9b      0x220 ./src/SubSystemModules/Communication/CommandDictionary.o
- .debug_line    0x000020bb      0x22b ./src/SubSystemModules/Communication/SatCommandHandler.o
- .debug_line    0x000022e6      0x5be ./src/SubSystemModules/Communication/TRXVU.o
- .debug_line    0x000028a4      0x3d4 ./src/InitSystem.o
- .debug_line    0x00002c78      0x663 ./src/TLM_management.o
- .debug_line    0x000032db      0x2a0 ./src/main.o
- .debug_line    0x0000357b      0x1ee ./src/utils.o
- .debug_line    0x00003769      0x608 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
- .debug_line    0x00003d71      0x4f4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
- .debug_line    0x00004265      0x371 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(FRAM.o)
- .debug_line    0x000045d6      0x4d8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
- .debug_line    0x00004aae       0xe3 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerNoOS.o)
- .debug_line    0x00004b91      0x147 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerOS.o)
- .debug_line    0x00004cd8      0x247 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(fprintf.o)
- .debug_line    0x00004f1f      0x1fa C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(LED.o)
- .debug_line    0x00005119      0x382 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTC.o)
- .debug_line    0x0000549b       0xe8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTT.o)
- .debug_line    0x00005583     0x1b99 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o)
- .debug_line    0x0000711c      0x637 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_m.o)
- .debug_line    0x00007753      0xcb9 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(safefat.o)
- .debug_line    0x0000840c      0x574 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc.o)
- .debug_line    0x00008980      0x14d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_mutex.o)
- .debug_line    0x00008acd       0x92 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_task.o)
- .debug_line    0x00008b5f      0x18b C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc_hw.o)
- .debug_line    0x00008cea      0x132 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_rtc.o)
- .debug_line    0x00008e1c      0x5b7 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(hcc_mem.o)
- .debug_line    0x000093d3     0x1081 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat.o)
- .debug_line    0x0000a454      0x133 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_hcc_mem.o)
- .debug_line    0x0000a587      0x310 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisAntS.o)
- .debug_line    0x0000a897      0x466 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
- .debug_line    0x0000acfd      0x48a C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o)
- .debug_line    0x0000b187      0x4f3 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(isis_eps_driver.o)
- .debug_line    0x0000b67a      0x279 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXCommon.o)
- .debug_line    0x0000b8f3      0x68d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(queue.o)
- .debug_line    0x0000bf80      0x8f8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
- .debug_line    0x0000c878      0x2a6 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(timers.o)
- .debug_line    0x0000cb1e       0x89 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(hooks.o)
- .debug_line    0x0000cba7      0x15a C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(standardMemMang.o)
- .debug_line    0x0000cd01      0x1ea C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(port.o)
- .debug_line    0x0000ceeb      0x10e C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(list.o)
- .debug_line    0x0000cff9      0x33a C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(syscalls.o)
- .debug_line    0x0000d333       0xb2 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(aic.o)
- .debug_line    0x0000d3e5      0x25b C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15.o)
- .debug_line    0x0000d640      0x2cc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(dbgu.o)
- .debug_line    0x0000d90c      0x1b7 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pio.o)
- .debug_line    0x0000dac3      0x136 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pit.o)
- .debug_line    0x0000dbf9      0x258 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pmc.o)
- .debug_line    0x0000de51      0x14e C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(spi_at91.o)
- .debug_line    0x0000df9f      0x3fa C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(twi_at91.o)
- .debug_line    0x0000e399      0x1eb C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(ExitHandler.o)
- .debug_line    0x0000e584      0x10f C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_cstartup.o)
- .debug_line    0x0000e693       0x6f C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15_asm.o)
- .debug_line    0x0000e702      0x233 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_lowlevel.o)
- .debug_line    0x0000e935      0x140 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_memories.o)
+ .debug_line    0x00001e9b      0x222 ./src/SubSystemModules/Communication/CommandDictionary.o
+ .debug_line    0x000020bd      0x22b ./src/SubSystemModules/Communication/SatCommandHandler.o
+ .debug_line    0x000022e8      0x5be ./src/SubSystemModules/Communication/TRXVU.o
+ .debug_line    0x000028a6      0x3d4 ./src/InitSystem.o
+ .debug_line    0x00002c7a      0x666 ./src/TLM_management.o
+ .debug_line    0x000032e0      0x2a0 ./src/main.o
+ .debug_line    0x00003580      0x1ee ./src/utils.o
+ .debug_line    0x0000376e      0x608 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
+ .debug_line    0x00003d76      0x4f4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
+ .debug_line    0x0000426a      0x371 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(FRAM.o)
+ .debug_line    0x000045db      0x4d8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
+ .debug_line    0x00004ab3       0xe3 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerNoOS.o)
+ .debug_line    0x00004b96      0x147 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerOS.o)
+ .debug_line    0x00004cdd      0x247 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(fprintf.o)
+ .debug_line    0x00004f24      0x1fa C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(LED.o)
+ .debug_line    0x0000511e      0x382 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTC.o)
+ .debug_line    0x000054a0       0xe8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTT.o)
+ .debug_line    0x00005588     0x1b99 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o)
+ .debug_line    0x00007121      0x637 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_m.o)
+ .debug_line    0x00007758      0xcb9 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(safefat.o)
+ .debug_line    0x00008411      0x574 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc.o)
+ .debug_line    0x00008985      0x14d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_mutex.o)
+ .debug_line    0x00008ad2       0x92 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_task.o)
+ .debug_line    0x00008b64      0x18b C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc_hw.o)
+ .debug_line    0x00008cef      0x132 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_rtc.o)
+ .debug_line    0x00008e21      0x5b7 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(hcc_mem.o)
+ .debug_line    0x000093d8     0x1081 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat.o)
+ .debug_line    0x0000a459      0x133 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_hcc_mem.o)
+ .debug_line    0x0000a58c      0x310 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisAntS.o)
+ .debug_line    0x0000a89c      0x466 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .debug_line    0x0000ad02      0x48a C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o)
+ .debug_line    0x0000b18c      0x4f3 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(isis_eps_driver.o)
+ .debug_line    0x0000b67f      0x279 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXCommon.o)
+ .debug_line    0x0000b8f8      0x68d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(queue.o)
+ .debug_line    0x0000bf85      0x8f8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
+ .debug_line    0x0000c87d      0x2a6 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(timers.o)
+ .debug_line    0x0000cb23       0x89 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(hooks.o)
+ .debug_line    0x0000cbac      0x15a C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(standardMemMang.o)
+ .debug_line    0x0000cd06      0x1ea C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(port.o)
+ .debug_line    0x0000cef0      0x10e C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(list.o)
+ .debug_line    0x0000cffe      0x33a C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(syscalls.o)
+ .debug_line    0x0000d338       0xb2 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(aic.o)
+ .debug_line    0x0000d3ea      0x25b C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15.o)
+ .debug_line    0x0000d645      0x2cc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(dbgu.o)
+ .debug_line    0x0000d911      0x1b7 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pio.o)
+ .debug_line    0x0000dac8      0x136 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pit.o)
+ .debug_line    0x0000dbfe      0x258 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pmc.o)
+ .debug_line    0x0000de56      0x14e C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(spi_at91.o)
+ .debug_line    0x0000dfa4      0x3fa C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(twi_at91.o)
+ .debug_line    0x0000e39e      0x1eb C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(ExitHandler.o)
+ .debug_line    0x0000e589      0x10f C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_cstartup.o)
+ .debug_line    0x0000e698       0x6f C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15_asm.o)
+ .debug_line    0x0000e707      0x233 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_lowlevel.o)
+ .debug_line    0x0000e93a      0x140 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_memories.o)
 
-.debug_str      0x00000000     0xa1c3
+.debug_str      0x00000000     0xa1db
  .debug_str     0x00000000      0x805 ./src/SubSystemModules/PowerManagment/EPS.o
                                 0x9e2 (size before relaxing)
  .debug_str     0x00000805       0xb4 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
@@ -4468,101 +4468,101 @@ OUTPUT(GlobusSatProject.elf elf32-littlearm)
                                 0xdb1 (size before relaxing)
  .debug_str     0x000026ae      0x13b ./src/InitSystem.o
                                 0x44f (size before relaxing)
- .debug_str     0x000027e9      0x695 ./src/TLM_management.o
-                                0xb72 (size before relaxing)
- .debug_str     0x00002e7e      0x195 ./src/main.o
+ .debug_str     0x000027e9      0x6ad ./src/TLM_management.o
+                                0xb8a (size before relaxing)
+ .debug_str     0x00002e96      0x195 ./src/main.o
                                 0x2dd (size before relaxing)
- .debug_str     0x00003013       0x69 ./src/utils.o
+ .debug_str     0x0000302b       0x69 ./src/utils.o
                                 0x2d0 (size before relaxing)
- .debug_str     0x0000307c      0x6a8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
+ .debug_str     0x00003094      0x6a8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
                                 0xde0 (size before relaxing)
- .debug_str     0x00003724      0x40b C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
+ .debug_str     0x0000373c      0x40b C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
                                 0xc8a (size before relaxing)
- .debug_str     0x00003b2f      0x1c5 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(FRAM.o)
+ .debug_str     0x00003b47      0x1c5 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(FRAM.o)
                                 0x5a5 (size before relaxing)
- .debug_str     0x00003cf4      0x24e C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
+ .debug_str     0x00003d0c      0x24e C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
                                 0x7b9 (size before relaxing)
- .debug_str     0x00003f42       0x6b C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerNoOS.o)
+ .debug_str     0x00003f5a       0x6b C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerNoOS.o)
                                 0x2f3 (size before relaxing)
- .debug_str     0x00003fad       0xef C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerOS.o)
+ .debug_str     0x00003fc5       0xef C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(WatchDogTimerOS.o)
                                 0x22e (size before relaxing)
- .debug_str     0x0000409c       0x3d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(fprintf.o)
+ .debug_str     0x000040b4       0x3d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(fprintf.o)
                                 0x171 (size before relaxing)
- .debug_str     0x000040d9       0x72 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(LED.o)
+ .debug_str     0x000040f1       0x72 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(LED.o)
                                 0x31d (size before relaxing)
- .debug_str     0x0000414b       0xf4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTC.o)
+ .debug_str     0x00004163       0xf4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTC.o)
                                 0x8af (size before relaxing)
- .debug_str     0x0000423f       0x4b C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTT.o)
+ .debug_str     0x00004257       0x4b C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTT.o)
                                 0x1b5 (size before relaxing)
- .debug_str     0x0000428a     0x120c C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o)
+ .debug_str     0x000042a2     0x120c C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_common.o)
                                0x1610 (size before relaxing)
- .debug_str     0x00005496      0x2f7 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_m.o)
+ .debug_str     0x000054ae      0x2f7 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat_m.o)
                                 0x7fd (size before relaxing)
- .debug_str     0x0000578d      0x540 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(safefat.o)
+ .debug_str     0x000057a5      0x540 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(safefat.o)
                                 0xdcf (size before relaxing)
- .debug_str     0x00005ccd      0x34d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc.o)
+ .debug_str     0x00005ce5      0x34d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc.o)
                                 0x643 (size before relaxing)
- .debug_str     0x0000601a       0x8d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_mutex.o)
+ .debug_str     0x00006032       0x8d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_mutex.o)
                                 0x1df (size before relaxing)
- .debug_str     0x000060a7       0x27 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_task.o)
+ .debug_str     0x000060bf       0x27 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(oalp_task.o)
                                 0x154 (size before relaxing)
- .debug_str     0x000060ce       0xc0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc_hw.o)
+ .debug_str     0x000060e6       0xc0 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(atmel_mcipdc_hw.o)
                                 0x3bb (size before relaxing)
- .debug_str     0x0000618e       0x34 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_rtc.o)
+ .debug_str     0x000061a6       0x34 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_rtc.o)
                                 0x1b2 (size before relaxing)
- .debug_str     0x000061c2      0x2eb C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(hcc_mem.o)
+ .debug_str     0x000061da      0x2eb C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(hcc_mem.o)
                                 0x4fa (size before relaxing)
- .debug_str     0x000064ad      0x2e4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat.o)
+ .debug_str     0x000064c5      0x2e4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(fat.o)
                                 0xd16 (size before relaxing)
- .debug_str     0x00006791       0x7a C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_hcc_mem.o)
+ .debug_str     0x000067a9       0x7a C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(psp_hcc_mem.o)
                                 0x1d7 (size before relaxing)
- .debug_str     0x0000680b      0x2e1 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisAntS.o)
+ .debug_str     0x00006823      0x2e1 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisAntS.o)
                                 0x6bd (size before relaxing)
- .debug_str     0x00006aec      0x28e C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .debug_str     0x00006b04      0x28e C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
                                 0x8dd (size before relaxing)
- .debug_str     0x00006d7a      0x43f C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o)
+ .debug_str     0x00006d92      0x43f C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXVU.o)
                                 0xa97 (size before relaxing)
- .debug_str     0x000071b9      0xb66 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(isis_eps_driver.o)
+ .debug_str     0x000071d1      0xb66 C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(isis_eps_driver.o)
                                0x159d (size before relaxing)
- .debug_str     0x00007d1f      0x1ee C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXCommon.o)
+ .debug_str     0x00007d37      0x1ee C:/ISIS/workspace_ycube/satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisTRXCommon.o)
                                 0x436 (size before relaxing)
- .debug_str     0x00007f0d      0x621 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(queue.o)
+ .debug_str     0x00007f25      0x621 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(queue.o)
                                 0x76b (size before relaxing)
- .debug_str     0x0000852e      0x757 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
+ .debug_str     0x00008546      0x757 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
                                 0xd57 (size before relaxing)
- .debug_str     0x00008c85      0x334 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(timers.o)
+ .debug_str     0x00008c9d      0x334 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(timers.o)
                                 0x565 (size before relaxing)
- .debug_str     0x00008fb9       0x57 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(hooks.o)
+ .debug_str     0x00008fd1       0x57 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(hooks.o)
                                 0x19b (size before relaxing)
- .debug_str     0x00009010       0xfc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(standardMemMang.o)
+ .debug_str     0x00009028       0xfc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(standardMemMang.o)
                                 0x238 (size before relaxing)
- .debug_str     0x0000910c      0x155 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(port.o)
+ .debug_str     0x00009124      0x155 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(port.o)
                                 0x2f6 (size before relaxing)
- .debug_str     0x00009261       0xa1 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(list.o)
+ .debug_str     0x00009279       0xa1 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(list.o)
                                 0x257 (size before relaxing)
- .debug_str     0x00009302      0x171 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(syscalls.o)
+ .debug_str     0x0000931a      0x171 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(syscalls.o)
                                 0x2c0 (size before relaxing)
- .debug_str     0x00009473       0xfd C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(aic.o)
+ .debug_str     0x0000948b       0xfd C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(aic.o)
                                 0x1be (size before relaxing)
- .debug_str     0x00009570      0x12a C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15.o)
+ .debug_str     0x00009588      0x12a C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(cp15.o)
                                 0x602 (size before relaxing)
- .debug_str     0x0000969a      0x164 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(dbgu.o)
+ .debug_str     0x000096b2      0x164 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(dbgu.o)
                                 0x65a (size before relaxing)
- .debug_str     0x000097fe       0xde C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pio.o)
+ .debug_str     0x00009816       0xde C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pio.o)
                                 0x408 (size before relaxing)
- .debug_str     0x000098dc       0x94 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pit.o)
+ .debug_str     0x000098f4       0x94 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pit.o)
                                 0x17c (size before relaxing)
- .debug_str     0x00009970       0xcf C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pmc.o)
+ .debug_str     0x00009988       0xcf C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(pmc.o)
                                 0x670 (size before relaxing)
- .debug_str     0x00009a3f       0xaf C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(spi_at91.o)
+ .debug_str     0x00009a57       0xaf C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(spi_at91.o)
                                 0x2f4 (size before relaxing)
- .debug_str     0x00009aee      0x161 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(twi_at91.o)
+ .debug_str     0x00009b06      0x161 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(twi_at91.o)
                                 0x774 (size before relaxing)
- .debug_str     0x00009c4f      0x127 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(ExitHandler.o)
+ .debug_str     0x00009c67      0x127 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(ExitHandler.o)
                                 0x612 (size before relaxing)
- .debug_str     0x00009d76      0x23d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_lowlevel.o)
+ .debug_str     0x00009d8e      0x23d C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_lowlevel.o)
                                 0x88a (size before relaxing)
- .debug_str     0x00009fb3      0x210 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_memories.o)
+ .debug_str     0x00009fcb      0x210 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib\libAt91D.a(board_memories.o)
                                 0x641 (size before relaxing)
 
 .comment        0x00000000       0x70

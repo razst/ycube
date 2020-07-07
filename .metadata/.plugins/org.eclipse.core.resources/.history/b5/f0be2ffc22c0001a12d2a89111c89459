@@ -45,7 +45,6 @@ typedef struct imageInfo
 {
 	unsigned short imageID;
 	unsigned short numberChunks;
-	char imageType;
 } imageInfo_t;
 
 typedef struct imageData
