@@ -69,7 +69,6 @@ int CMD_getInfoImage(sat_packet_t *cmd){
 	}
 	imageInfo_t data;
 	data.imageID = imageType; // TODO: change for image type 6 (heat map)
-	data.imageType = imageType;
 	memcpy(&data.numberChunks,&numChunk, sizeof(numChunk));
 	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &data,
 			sizeof(data));
@@ -96,7 +95,7 @@ int CMD_getDataImage(sat_packet_t *cmd){
 		f_seek (f_source, 0 , SEEK_END);
 		long size = f_tell (f_source);
 		f_rewind (f_source);
-		printf("source file size:%d. chunk size:%d\n",size,IMG_CHUNK_SIZE);
+		printf("source file size:%d. chunk size:\n",size,IMG_CHUNK_SIZE);
 
 
 

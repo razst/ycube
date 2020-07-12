@@ -69,7 +69,6 @@ int CMD_getInfoImage(sat_packet_t *cmd){
 	}
 	imageInfo_t data;
 	data.imageID = imageType; // TODO: change for image type 6 (heat map)
-	data.imageType = imageType;
 	memcpy(&data.numberChunks,&numChunk, sizeof(numChunk));
 	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &data,
 			sizeof(data));
