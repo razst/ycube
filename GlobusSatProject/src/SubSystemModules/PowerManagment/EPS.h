@@ -31,7 +31,7 @@
  	 	 	 |	CRITICAL	|
  	 	 	 |______________|
  */
-#define DEFAULT_ALPHA_VALUE 0.95
+#define DEFAULT_ALPHA_VALUE 0.3
 
 #define NUMBER_OF_SOLAR_PANELS			6
 #define NUMBER_OF_THRESHOLD_VOLTAGES 	6 		///< first 3 are charging voltages, last 3 are discharging voltages
