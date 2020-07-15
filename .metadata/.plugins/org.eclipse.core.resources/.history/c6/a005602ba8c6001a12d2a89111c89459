@@ -187,7 +187,6 @@ FileSystemResult InitializeFS(Boolean first_time)
 
 	// Initialize the volume of SD card 0 (A)
 	// TODO should we also init the volume of SD card 1 (B)???
-	// TODO: why drive 1 is not working when we test it?
 	if(logError(f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_PARMS ),"InitializeFS-f_initvolume")) return -1;
 
 	//In the first time the SD on. if there is file on the SD delete it.

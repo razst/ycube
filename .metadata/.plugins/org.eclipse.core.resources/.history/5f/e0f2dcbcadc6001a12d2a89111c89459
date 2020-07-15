@@ -63,7 +63,6 @@ int main()
 		WDT_start();
 
 		printf("###### size of int32:%d ##########\n",sizeof(int32_t));
-		printf("###### size of int:%d ##########\n",sizeof(int));
 
 		// create the main operation task of the satellite
 		#ifdef TESTING

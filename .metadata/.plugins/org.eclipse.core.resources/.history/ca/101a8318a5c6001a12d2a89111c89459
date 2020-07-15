@@ -91,6 +91,8 @@ void WriteDefaultValuesToFRAM()
 	FRAM_write((unsigned char*) &flag,
 			STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);
 
+
+	printf("###### size of int32:%d",sizeof(int32_t));
 }
 
 int StartFRAM()

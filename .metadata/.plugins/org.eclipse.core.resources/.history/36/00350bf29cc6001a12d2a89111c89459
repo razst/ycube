@@ -291,16 +291,17 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 		wod->mcu_temp = hk_tlm.fields.temp;
 		wod->bat_temp = hk_tlm.fields.temp3;
 		wod->mcu_temp = hk_tlm.fields.temp;
+		// TODO set all solar panels temp values
+		IsisSolarPanelv2_Panel_temp temp;
+
+		wod->solar_panels[0]=0;
+		wod->solar_panels[1]=0;
+		wod->solar_panels[2]=0;
+		wod->solar_panels[3]=0;
+		wod->solar_panels[4]=0;
+		wod->solar_panels[5]=0;
 		wod->charging_power = hk_tlm_cdb.fields.batt_input.fields.volt;
 		wod->consumed_power = hk_tlm_cdb.fields.dist_input.fields.power;
-		// set all solar panels temp values
-		uint8_t status;
-		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_0,&wod->solar_panels[0],&status);
-		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_1,&wod->solar_panels[1],&status);
-		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_2,&wod->solar_panels[2],&status);
-		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_3,&wod->solar_panels[3],&status);
-		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_4,&wod->solar_panels[4],&status);
-		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_5,&wod->solar_panels[5],&status);
 	}else
 		logError(err ,"GetCurrentWODTelemetry");
 

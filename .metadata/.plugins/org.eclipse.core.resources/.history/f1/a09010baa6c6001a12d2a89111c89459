@@ -62,9 +62,6 @@ int main()
 		// The actual watchdog is already started, this only initializes the watchdog-kick interface.
 		WDT_start();
 
-		printf("###### size of int32:%d ##########\n",sizeof(int32_t));
-		printf("###### size of int:%d ##########\n",sizeof(int));
-
 		// create the main operation task of the satellite
 		#ifdef TESTING
 			xTaskGenericCreate(taskTesting, (const signed char*) "taskTesting", 4096,

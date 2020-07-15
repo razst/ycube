@@ -91,6 +91,7 @@ void WriteDefaultValuesToFRAM()
 	FRAM_write((unsigned char*) &flag,
 			STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);
 
+
 }
 
 int StartFRAM()

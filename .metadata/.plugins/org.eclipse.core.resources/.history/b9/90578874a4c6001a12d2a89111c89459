@@ -316,7 +316,6 @@ int BeaconLogic(Boolean forceTX) {
 	WOD_Telemetry_t wod = { 0 };
 	GetCurrentWODTelemetry(&wod);
 
-
 	sat_packet_t cmd = { 0 };
 
 	if (logError(AssembleCommand((unsigned char*) &wod, sizeof(wod), trxvu_cmd_type,BEACON_SUBTYPE, 0x02FFFFFF, &cmd), "BeaconLogic-AssembleCommand") ) return -1;
