@@ -951,6 +951,35 @@
           ]
         },
 		
+
+        {
+          "id": "2",
+          "name": "ANT",
+          "desc": "ANT DATA",
+          "inParams": [
+            {
+              "name": "timestamp",
+              "desc": "timestamp",
+              "type": "datetime"
+            },
+            {
+              "name": "ants_temperature",
+              "desc": "ants_temperature",
+              "type": "short"
+            },
+            {
+              "name": "ants_deployment",
+              "desc": "ants_deployment",
+              "type": "short"
+            },
+            {
+              "name": "ants_uptime",
+              "desc": "ants_uptime",
+              "type": "int"
+            }
+          ]
+        },
+
 		
         {
           "id": "1",
