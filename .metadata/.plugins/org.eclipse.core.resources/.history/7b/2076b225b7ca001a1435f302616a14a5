@@ -319,7 +319,7 @@ int BeaconLogic(Boolean forceTX) {
 
 	sat_packet_t cmd = { 0 };
 
-	if (logError(AssembleCommand((unsigned char*) &wod, sizeof(wod), trxvu_cmd_type,BEACON_SUBTYPE, BEACON_SPL_ID, &cmd), "BeaconLogic-AssembleCommand") ) return -1;
+	if (logError(AssembleCommand((unsigned char*) &wod, sizeof(wod), trxvu_cmd_type,BEACON_SUBTYPE, 0x02FFFFFF, &cmd), "BeaconLogic-AssembleCommand") ) return -1;
 
 	// set the current time as the previous beacon time
 	if (logError(Time_getUnixEpoch(&g_prev_beacon_time),"BeaconLogic-Time_getUnixEpoch") ) return -1;
