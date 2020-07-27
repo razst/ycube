@@ -514,11 +514,11 @@
         {
           "id": "204",
           "name": "Set TLM period time",
-          "desc": "Set TLM period time",
+          "desc": "Set TLM interval period time",
           "inParams": [
             {
               "name": "tlm_type",
-              "desc": "the type of the telematry to delete ",
+              "desc": "the type of the telematry to update ",
               "type": "char",
               "values": [
                 {

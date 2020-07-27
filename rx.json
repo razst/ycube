@@ -951,6 +951,48 @@
           ]
         },
 		
+        {
+          "id": "3",
+          "name": "Solar Panels",
+          "desc": "Solar Panels TLM DATA",
+          "inParams": [
+            {
+              "name": "timestamp",
+              "desc": "timestamp",
+              "type": "datetime"
+            },
+            {
+              "name": "Solar panel 1 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 2 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 3 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 4 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 5 Temperature",
+              "desc": "",
+              "type": "int"
+            },
+            {
+              "name": "Solar panel 6 Temperature",
+              "desc": "",
+              "type": "int"
+            }
+          ]
+        },
 
         {
           "id": "2",
