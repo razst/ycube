@@ -281,6 +281,10 @@
                   "name": "ANT"
                 },
                 {
+                  "id": "3",
+                  "name": "Solar Panel"
+                },
+                {
                   "id": "4",
                   "name": "WOD"
                 },
@@ -332,6 +336,10 @@
                 {
                   "id": "2",
                   "name": "ANT"
+                },
+                {
+                  "id": "3",
+                  "name": "Solar Panel"
                 },
                 {
                   "id": "4",
@@ -514,24 +522,32 @@
               "type": "char",
               "values": [
                 {
-                  "id": "0",
-                  "name": "EPS"
+                  "id": "10",
+                  "name": "eps_eng_mb"
                 },
                 {
                   "id": "1",
-                  "name": "TRXUV"
+                  "name": "TX"
                 },
                 {
                   "id": "2",
-                  "name": "Antenna"
+                  "name": "ANT"
                 },
-                 {
+                {
                   "id": "3",
                   "name": "Solar Panel"
                 },
-                 {
+                {
                   "id": "4",
                   "name": "WOD"
+                },
+                {
+                  "id": "6",
+                  "name": "RX"
+                },
+                {
+                  "id": "13",
+                  "name": "LOG"
                 }
               ]
             },
