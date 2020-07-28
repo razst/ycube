@@ -1,8 +1,8 @@
-18:31:13 **** Clean-only build of configuration Debug for project GlobusSatProject ****
+15:09:02 **** Clean-only build of configuration Debug for project GlobusSatProject ****
 make -r -k clean 
 rm -rf  GlobusSatProject.siz  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o  ./src/TestingDemos/CommandsTestingDemo.d ./src/TestingDemos/EpsTestingDemo.d ./src/TestingDemos/FileSystemTestingDemo.d ./src/TestingDemos/MainTest.d ./src/TestingDemos/MaintenanceTestingDemo.d ./src/TestingDemos/TelemetryTestingDemo.d ./src/TestingDemos/TrxvuTestingDemo.d  ./src/SubSystemModules/PowerManagment/EPS.d ./src/SubSystemModules/PowerManagment/EPSOperationModes.d  ./src/SubSystemModules/Maintenance/Maintenance.d  ./src/SubSystemModules/Housekepping/TelemetryCollector.d  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d  ./src/SubSystemModules/Communication/AckHandler.d ./src/SubSystemModules/Communication/CommandDictionary.d ./src/SubSystemModules/Communication/SatCommandHandler.d ./src/SubSystemModules/Communication/TRXVU.d  ./src/InitSystem.d ./src/TLM_management.d ./src/main.d ./src/utils.d  GlobusSatProject.bin  GlobusSatProject.elf
  
-18:31:17 **** Build of configuration Debug for project GlobusSatProject ****
+15:09:06 **** Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Building file: ../src/TestingDemos/CommandsTestingDemo.c
 Invoking: Cross ARM C Compiler
@@ -699,18 +699,18 @@ Finished building: GlobusSatProject.bin
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 238904	     12	 523640	 762556	  ba2bc	GlobusSatProject.elf
+ 239024	     12	 523640	 762676	  ba334	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  
-18:31:43 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+15:09:51 **** Incremental Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 238904	     12	 523640	 762556	  ba2bc	GlobusSatProject.elf
+ 239024	     12	 523640	 762676	  ba334	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  
-18:32:27 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+15:20:36 **** Incremental Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Building file: ../src/TestingDemos/CommandsTestingDemo.c
 Invoking: Cross ARM C Compiler
@@ -1407,6 +1407,14 @@ Finished building: GlobusSatProject.bin
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 238904	     12	 523640	 762556	  ba2bc	GlobusSatProject.elf
+ 239024	     12	 523640	 762676	  ba334	GlobusSatProject.elf
+Finished building: GlobusSatProject.siz
+ 
+15:20:45 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
+   text	   data	    bss	    dec	    hex	filename
+ 239024	     12	 523640	 762676	  ba334	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  

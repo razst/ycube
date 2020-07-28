@@ -309,8 +309,5 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 	wod->number_of_resets = reset;
 	err = FRAM_read(&reset,NUMBER_OF_CMD_RESETS_ADDR, NUMBER_OF_CMD_RESETS_SIZE);
 	wod->num_of_cmd_resets = reset;
-
-	wod->sat_uptime = Time_getUptimeSeconds();
-
 }
 
