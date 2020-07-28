@@ -924,6 +924,11 @@
               "type": "int"
             },
             {
+              "name": "sat_uptime",
+              "desc": "satellite's up time in seconds",
+              "type": "int"
+            },			
+            {
               "name": "number_of_cmd_resets",
               "desc": "number of resets the satellite has gone through",
               "type": "int"
