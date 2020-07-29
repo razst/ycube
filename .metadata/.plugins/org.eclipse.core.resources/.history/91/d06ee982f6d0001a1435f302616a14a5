@@ -153,8 +153,9 @@ int ActUponCommand(sat_packet_t *cmd)
 	}
 
 	char buffer [50];
-	sprintf (buffer, "ActUponCommand, cmd id: %d", cmd->ID);
-	logError(INFO_MSG ,buffer);
+	int n, a=5, b=3;
+	n=sprintf (buffer, "ActUponCommand,type: %d sub type: %d", cmd->ID);
+	logError(INFO_MSG ,"ActUponCommand");
 
 	switch (cmd->cmd_type)
 	{

@@ -206,7 +206,7 @@ int InitSubsystems()
 
 	WakeupFromResetCMD();
 
-	logError(INFO_MSG ,"Sat Started");
+	logError(SAT_STARTED ,"Sat Started");
 
 	return 0;
 }

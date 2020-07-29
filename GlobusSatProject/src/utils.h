@@ -23,7 +23,7 @@
 #define SPL_DATA_TOO_BIG			-207
 #define INVALID_TLM_TYPE			-208
 #define INVALID_IMG_TYPE			-209
-#define SAT_STARTED				-210
+#define INFO_MSG				-210
 
 
 
