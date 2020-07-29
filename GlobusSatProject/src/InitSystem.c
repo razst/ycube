@@ -142,7 +142,7 @@ int DeploySystem()
 	int err = 0;
 
 	time_unix seconds_since_deploy = 0;
-	err = logError(FRAM_read((unsigned char*) seconds_since_deploy , SECONDS_SINCE_DEPLOY_ADDR , SECONDS_SINCE_DEPLOY_SIZE) ,"DeploySystem-FRAM_read");
+	err = logError(FRAM_read((unsigned char*) &seconds_since_deploy , SECONDS_SINCE_DEPLOY_ADDR , SECONDS_SINCE_DEPLOY_SIZE) ,"DeploySystem-FRAM_read");
 	if (0 != err) {
 		seconds_since_deploy = MINUTES_TO_SECONDS(MIN_2_WAIT_BEFORE_DEPLOY);	// RBF to 30 min
 	}
