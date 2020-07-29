@@ -216,10 +216,9 @@ void Maintenance()
 
 	// check if for too long we didn't got any comm from ground, and reset TRXVU and sat if needed
 	if (IsGroundCommunicationWDTKick()){
-		logError(INFO_MSG,"Maintenance-WDTKick, going to reset systems");
-		ResetGroundCommWDT(); // to make sure we don't get into endless resart loop
+		logError(INFO_MSG,"CommunicationWDTKick, going to reset systems");
 		// hard reset the TRXVU
-		logError(IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX),"Maintenance-IsisTrxvu_hardReset");
+		logError(IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_hardReset");
 		vTaskDelay(500);
 		SaveSatTimeInFRAM(MOST_UPDATED_SAT_TIME_ADDR,MOST_UPDATED_SAT_TIME_SIZE);// store the most updated sat time
 		// soft reset the sat

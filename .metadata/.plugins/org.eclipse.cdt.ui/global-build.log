@@ -1,8 +1,8 @@
-17:22:24 **** Clean-only build of configuration Debug for project GlobusSatProject ****
+06:40:53 **** Clean-only build of configuration Debug for project GlobusSatProject ****
 make -r -k clean 
 rm -rf  GlobusSatProject.siz  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o  ./src/TestingDemos/CommandsTestingDemo.d ./src/TestingDemos/EpsTestingDemo.d ./src/TestingDemos/FileSystemTestingDemo.d ./src/TestingDemos/MainTest.d ./src/TestingDemos/MaintenanceTestingDemo.d ./src/TestingDemos/TelemetryTestingDemo.d ./src/TestingDemos/TrxvuTestingDemo.d  ./src/SubSystemModules/PowerManagment/EPS.d ./src/SubSystemModules/PowerManagment/EPSOperationModes.d  ./src/SubSystemModules/Maintenance/Maintenance.d  ./src/SubSystemModules/Housekepping/TelemetryCollector.d  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d  ./src/SubSystemModules/Communication/AckHandler.d ./src/SubSystemModules/Communication/CommandDictionary.d ./src/SubSystemModules/Communication/SatCommandHandler.d ./src/SubSystemModules/Communication/TRXVU.d  ./src/InitSystem.d ./src/TLM_management.d ./src/main.d ./src/utils.d  GlobusSatProject.bin  GlobusSatProject.elf
  
-17:22:26 **** Build of configuration Debug for project GlobusSatProject ****
+06:40:56 **** Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Building file: ../src/TestingDemos/CommandsTestingDemo.c
 Invoking: Cross ARM C Compiler
@@ -533,24 +533,24 @@ In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
 ../src/SubSystemModules/Communication/TRXVU.c:152:3: warning: implicit declaration of function 'I2C_write' [-Wimplicit-function-declaration]
 ../src/SubSystemModules/Communication/TRXVU.c: In function 'GetOnlineCommand':
-../src/SubSystemModules/Communication/TRXVU.c:197:6: warning: unused variable 'err' [-Wunused-variable]
+../src/SubSystemModules/Communication/TRXVU.c:196:6: warning: unused variable 'err' [-Wunused-variable]
 ../src/SubSystemModules/Communication/TRXVU.c: In function 'CheckTransmitionAllowed':
-../src/SubSystemModules/Communication/TRXVU.c:229:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+../src/SubSystemModules/Communication/TRXVU.c:233:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
 In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
 ../src/SubSystemModules/Communication/TRXVU.c: In function 'FinishDump':
-../src/SubSystemModules/Communication/TRXVU.c:260:2: warning: implicit declaration of function 'f_releaseFS' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/TRXVU.c:264:2: warning: implicit declaration of function 'f_releaseFS' [-Wimplicit-function-declaration]
 ../src/SubSystemModules/Communication/TRXVU.c: In function 'BeaconLogic':
-../src/SubSystemModules/Communication/TRXVU.c:324:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+../src/SubSystemModules/Communication/TRXVU.c:328:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
 In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
-../src/SubSystemModules/Communication/TRXVU.c:310:6: warning: unused variable 'err' [-Wunused-variable]
+../src/SubSystemModules/Communication/TRXVU.c:314:6: warning: unused variable 'err' [-Wunused-variable]
 ../src/SubSystemModules/Communication/TRXVU.c: In function 'SetIdleState':
-../src/SubSystemModules/Communication/TRXVU.c:348:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+../src/SubSystemModules/Communication/TRXVU.c:352:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
 In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
 ../src/SubSystemModules/Communication/TRXVU.c: In function 'muteTRXVU':
-../src/SubSystemModules/Communication/TRXVU.c:364:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+../src/SubSystemModules/Communication/TRXVU.c:368:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
 In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
 In file included from ../src/SubSystemModules/Communication/TRXVU.c:19:0:
@@ -701,56 +701,48 @@ Finished building: GlobusSatProject.bin
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 239160	     12	 523640	 762812	  ba3bc	GlobusSatProject.elf
+ 239376	     12	 523640	 763028	  ba494	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  
-17:22:41 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+06:41:20 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building target: GlobusSatProject.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
+Finished building target: GlobusSatProject.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O binary "GlobusSatProject.elf"  "GlobusSatProject.bin"
+Finished building: GlobusSatProject.bin
+ 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
+   text	   data	    bss	    dec	    hex	filename
+ 239376	     12	 523640	 763028	  ba494	GlobusSatProject.elf
+Finished building: GlobusSatProject.siz
+ 
+06:41:38 **** Incremental Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 239160	     12	 523640	 762812	  ba3bc	GlobusSatProject.elf
+ 239376	     12	 523640	 763028	  ba494	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  
-06:05:12 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+06:44:31 **** Incremental Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
-Building file: ../src/SubSystemModules/Communication/TRXVU.c
+Building file: ../src/InitSystem.c
 Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/TRXVU.d" -MT"src/SubSystemModules/Communication/TRXVU.d" -c -o "src/SubSystemModules/Communication/TRXVU.o" "../src/SubSystemModules/Communication/TRXVU.c"
-../src/SubSystemModules/Communication/TRXVU.c: In function 'checkIdleFinish':
-../src/SubSystemModules/Communication/TRXVU.c:135:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
-In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/InitSystem.d" -MT"src/InitSystem.d" -c -o "src/InitSystem.o" "../src/InitSystem.c"
+../src/InitSystem.c: In function 'DeploySystem':
+../src/InitSystem.c:169:2: warning: implicit declaration of function 'CMD_AntennaDeploy' [-Wimplicit-function-declaration]
+../src/InitSystem.c:173:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/InitSystem.c:6:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
-../src/SubSystemModules/Communication/TRXVU.c: In function 'checkTransponderFinish':
-../src/SubSystemModules/Communication/TRXVU.c:146:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
-In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
-C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
-../src/SubSystemModules/Communication/TRXVU.c:152:3: warning: implicit declaration of function 'I2C_write' [-Wimplicit-function-declaration]
-../src/SubSystemModules/Communication/TRXVU.c: In function 'GetOnlineCommand':
-../src/SubSystemModules/Communication/TRXVU.c:196:6: warning: unused variable 'err' [-Wunused-variable]
-../src/SubSystemModules/Communication/TRXVU.c: In function 'CheckTransmitionAllowed':
-../src/SubSystemModules/Communication/TRXVU.c:233:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
-In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
-C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
-../src/SubSystemModules/Communication/TRXVU.c: In function 'FinishDump':
-../src/SubSystemModules/Communication/TRXVU.c:264:2: warning: implicit declaration of function 'f_releaseFS' [-Wimplicit-function-declaration]
-../src/SubSystemModules/Communication/TRXVU.c: In function 'BeaconLogic':
-../src/SubSystemModules/Communication/TRXVU.c:328:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
-In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
-C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
-../src/SubSystemModules/Communication/TRXVU.c:314:6: warning: unused variable 'err' [-Wunused-variable]
-../src/SubSystemModules/Communication/TRXVU.c: In function 'SetIdleState':
-../src/SubSystemModules/Communication/TRXVU.c:352:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
-In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
-C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
-../src/SubSystemModules/Communication/TRXVU.c: In function 'muteTRXVU':
-../src/SubSystemModules/Communication/TRXVU.c:368:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
-In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
-C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
-In file included from ../src/SubSystemModules/Communication/TRXVU.c:19:0:
-../src/SubSystemModules/Communication/TRXVU.c: At top level:
-C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
-Finished building: ../src/SubSystemModules/Communication/TRXVU.c
+In file included from ../src/InitSystem.c:14:0:
+../src/InitSystem.c: At top level:
+../src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/InitSystem.c
  
 Building target: GlobusSatProject.elf
 Invoking: Cross ARM C Linker
@@ -764,14 +756,14 @@ Finished building: GlobusSatProject.bin
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 239240	     12	 523640	 762892	  ba40c	GlobusSatProject.elf
+ 239336	     12	 523640	 762988	  ba46c	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  
-06:05:19 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+06:44:35 **** Incremental Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 239240	     12	 523640	 762892	  ba40c	GlobusSatProject.elf
+ 239336	     12	 523640	 762988	  ba46c	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  
