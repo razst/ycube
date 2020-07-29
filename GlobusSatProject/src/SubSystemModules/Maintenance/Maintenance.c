@@ -112,7 +112,7 @@ void ResetGroundCommWDT()
 }
 
 // check if last communication with the ground station has passed WDT kick time
-// and return a boolean describing it.
+// return TRUE if we past wdt_kick_thresh
 Boolean IsGroundCommunicationWDTKick()
 {
 	time_unix current_time = 0;
@@ -210,12 +210,21 @@ void DeployAnt(){
 
 void Maintenance()
 {
-	SaveSatTimeInFRAM(MOST_UPDATED_SAT_TIME_ADDR,
-	MOST_UPDATED_SAT_TIME_SIZE);
+	SaveSatTimeInFRAM(MOST_UPDATED_SAT_TIME_ADDR,MOST_UPDATED_SAT_TIME_SIZE);
 
 	//logError(IsFS_Corrupted());-> we send corrupted bytes over beacon, no need to log in error file all the time
 
-	logError(IsGroundCommunicationWDTKick(),"Maintenance-IsGroundCommunicationWDTKick");
+	// check if for too long we didn't got any comm from ground, and reset TRXVU and sat if needed
+	if (IsGroundCommunicationWDTKick()){
+		logError(INFO_MSG,"Maintenance-WDTKick, going to reset systems");
+		ResetGroundCommWDT(); // to make sure we don't get into endless resart loop
+		// hard reset the TRXVU
+		logError(IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX),"Maintenance-IsisTrxvu_hardReset");
+		vTaskDelay(500);
+		SaveSatTimeInFRAM(MOST_UPDATED_SAT_TIME_ADDR,MOST_UPDATED_SAT_TIME_SIZE);// store the most updated sat time
+		// soft reset the sat
+		restart();
+	}
 
 	DeleteOldFiels(MIN_FREE_SPACE);
 

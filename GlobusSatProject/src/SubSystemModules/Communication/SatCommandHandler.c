@@ -152,6 +152,10 @@ int ActUponCommand(sat_packet_t *cmd)
 		return E_NOT_INITIALIZED;
 	}
 
+	char buffer [50];
+	sprintf (buffer, "ActUponCommand, cmd id: %d", cmd->ID);
+	logError(INFO_MSG ,buffer);
+
 	switch (cmd->cmd_type)
 	{
 	case trxvu_cmd_type:

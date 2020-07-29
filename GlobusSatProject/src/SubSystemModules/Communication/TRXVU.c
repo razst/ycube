@@ -162,15 +162,13 @@ int TRX_Logic() {
 
 	if (frameCount > 0) {
 		// we have data that came from grand station
-		cmdFound = GetOnlineCommand(&cmd); //--> check - don't reset WDT if we got error getting the frame becuase we will never get a reset !
+		cmdFound = GetOnlineCommand(&cmd); //TODO check - don't reset WDT if we got error getting the frame becuase we will never get a reset !
 		ResetGroundCommWDT();
-
 	}
 
 	if (cmdFound == command_found) {
 		SendAckPacket(ACK_RECEIVE_COMM, &cmd, NULL, 0);
 		err = ActUponCommand(&cmd);
-
 	}
 
 	checkTransponderFinish();
@@ -210,7 +208,12 @@ int GetOnlineCommand(sat_packet_t *cmd)
 			(unsigned char*) receivedFrameData }; // for getting raw data from Rx, nullify values
 
 	if (logError(IsisTrxvu_rcGetCommandFrame(0, &rxFrameCmd) ,"GetOnlineCommand-IsisTrxvu_rcGetCommandFrame")) return -1;
-	// TODO log the RSSI from the frame
+
+	// log frame info
+	char buffer [80];
+	sprintf (buffer, "Frame info: doppler: %d length: %d rssi: %d", rxFrameCmd.rx_doppler,rxFrameCmd.rx_length,rxFrameCmd.rx_rssi);
+	logError(INFO_MSG ,buffer);
+
 	if (logError(ParseDataToCommand(receivedFrameData,cmd),"GetOnlineCommand-ParseDataToCommand")) return -1;
 
 
