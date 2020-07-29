@@ -216,8 +216,8 @@ void Maintenance()
 
 	// check if for too long we didn't got any comm from ground, and reset TRXVU and sat if needed
 	if (IsGroundCommunicationWDTKick()){
-		logError(INFO_MSG,"Maintenance-WDTKick, going to restart systems");
-		ResetGroundCommWDT(); // to make sure we don't get into endless restart loop
+		logError(INFO_MSG,"Maintenance-WDTKick, going to reset systems");
+		ResetGroundCommWDT(); // to make sure we don't get into endless resart loop
 		// hard reset the TRXVU
 		logError(IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX),"Maintenance-IsisTrxvu_hardReset");
 		vTaskDelay(500);

@@ -173,7 +173,7 @@ int DeploySystem()
 	time_unix deploy_time = 0;
 	Time_getUnixEpoch(&deploy_time);
 	FRAM_write((unsigned char*) deploy_time, DEPLOYMENT_TIME_ADDR,
-			DEPLOYMENT_TIME_SIZE);
+	DEPLOYMENT_TIME_SIZE);
 
 	// set first activation false in FRAM
 	first_activation = FALSE;

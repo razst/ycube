@@ -92,6 +92,7 @@ void WriteDefaultValuesToFRAM()
 			STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);
 
 	ResetGroundCommWDT();
+
 }
 
 int StartFRAM()
@@ -144,8 +145,8 @@ int DeploySystem()
 
 	time_unix seconds_since_deploy = 0;
 	err = logError(FRAM_read((unsigned char*) &seconds_since_deploy , SECONDS_SINCE_DEPLOY_ADDR , SECONDS_SINCE_DEPLOY_SIZE) ,"DeploySystem-FRAM_read");
-	if (err == E_NO_SS_ERR) {
-		seconds_since_deploy = 0;
+	if (0 != err) {
+		seconds_since_deploy = MINUTES_TO_SECONDS(MIN_2_WAIT_BEFORE_DEPLOY);	// RBF to 30 min
 	}
 
 	// wait 30 min + log telm
@@ -173,12 +174,12 @@ int DeploySystem()
 	time_unix deploy_time = 0;
 	Time_getUnixEpoch(&deploy_time);
 	FRAM_write((unsigned char*) deploy_time, DEPLOYMENT_TIME_ADDR,
-			DEPLOYMENT_TIME_SIZE);
+	DEPLOYMENT_TIME_SIZE);
 
 	// set first activation false in FRAM
 	first_activation = FALSE;
 	FRAM_write((unsigned char*) &first_activation,
-			FIRST_ACTIVATION_FLAG_ADDR, FIRST_ACTIVATION_FLAG_SIZE);
+	FIRST_ACTIVATION_FLAG_ADDR, FIRST_ACTIVATION_FLAG_SIZE);
 
 	return 0;
 }
