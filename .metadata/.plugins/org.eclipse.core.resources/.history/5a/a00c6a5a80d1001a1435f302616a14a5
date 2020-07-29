@@ -303,7 +303,6 @@ int write2File(void* data, tlm_type_t tlmType){
 
 // data = timestampe+data (based on tlm type)
 void printTLM(void* element, tlm_type_t tlmType){
-
 #ifdef TESTING
 	int offset = sizeof(int);
 
@@ -505,7 +504,6 @@ int readTLMFiles(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id,int res
 		if(stopDump){
 			break;
 		}
-		vTaskDelay(100);
 	}
 
 	return totalReads;

@@ -101,7 +101,7 @@ int CMD_StartDump(sat_packet_t *cmd)
 
 	// check for invalid dump parametrs
 	if (dmp_pckt.t_start>=dmp_pckt.t_end){
-		return E_INVALID_PARAMETERS; // exit with error
+		return E_INVALID_PARAMETERS;
 	}
 
 	memcpy(&dmp_pckt.resulotion, cmd->data + offset, sizeof(dmp_pckt.resulotion));

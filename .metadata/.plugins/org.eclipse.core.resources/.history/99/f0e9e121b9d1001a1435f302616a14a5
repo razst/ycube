@@ -21,8 +21,6 @@
 #define SIZE_TXFRAME	235
 #define BEACON_SPL_ID	0x02FFFFFF
 
-#define MIN_TRXVU_BUFF 5
-
 typedef struct __attribute__ ((__packed__))
 {
 	sat_packet_t cmd;
