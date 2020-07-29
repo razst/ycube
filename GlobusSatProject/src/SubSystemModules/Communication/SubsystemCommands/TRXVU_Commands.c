@@ -43,7 +43,11 @@ void DumpTask(void *args) {
 		numOfElementsSent = readTLMFileTimeRange(task_args->dump_type,task_args->t_start,task_args->t_end,task_args->cmd.ID,task_args->resulotion);
 	}
 
-	FinishDump(task_args, NULL, ACK_DUMP_FINISHED, &numOfElementsSent, sizeof(numOfElementsSent));
+	if (numOfElementsSent<0){
+		FinishDump(task_args, NULL, ACK_ERROR_MSG, &numOfElementsSent, sizeof(numOfElementsSent));
+	}else{
+		FinishDump(task_args, NULL, ACK_DUMP_FINISHED, &numOfElementsSent, sizeof(numOfElementsSent));
+	}
 	vTaskDelete(NULL); // kill the dump task
 
 }
