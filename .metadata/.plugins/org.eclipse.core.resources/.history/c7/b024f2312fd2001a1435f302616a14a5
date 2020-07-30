@@ -112,20 +112,20 @@ int StartSPI()
 int StartTIME()
 {
 	int error = 0;
-	Time expected_deploy_time = UNIX_DATE_JAN_D1_Y2000;
-	error = Time_start(&expected_deploy_time, 0);
-	if (0 != error) {
-		return logError(error ,"StartTIME-Time_start");
-	}
-	time_unix time_before_wakeup = 0;
-	if (!isFirstActivation()) {
-		FRAM_read((unsigned char*) &time_before_wakeup,
-		MOST_UPDATED_SAT_TIME_ADDR, MOST_UPDATED_SAT_TIME_SIZE);
+		Time expected_deploy_time = UNIX_DATE_JAN_D1_Y2000;
+		error = Time_start(&expected_deploy_time, 0);
+		if (0 != error) {
+			return logError(error ,"StartTIME-Time_start");
+		}
+		time_unix time_before_wakeup = 0;
+		if (!isFirstActivation()) {
+			FRAM_read((unsigned char*) &time_before_wakeup,
+			MOST_UPDATED_SAT_TIME_ADDR, MOST_UPDATED_SAT_TIME_SIZE);
 
-		Time_setUnixEpoch(time_before_wakeup);
-	}
+			Time_setUnixEpoch(time_before_wakeup);
+		}
 
-	return 0;
+		return 0;
 }
 
 int DeploySystem()

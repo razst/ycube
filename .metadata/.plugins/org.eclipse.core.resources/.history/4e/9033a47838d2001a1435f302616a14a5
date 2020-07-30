@@ -162,12 +162,12 @@ int TRX_Logic() {
 
 	if (frameCount > 0) {
 		// we have data that came from grand station
-		cmdFound = GetOnlineCommand(&cmd);
+		cmdFound = GetOnlineCommand(&cmd); //TODO check - don't reset WDT if we got error getting the frame becuase we will never get a reset !
+		ResetGroundCommWDT();
 	}
 
 	if (cmdFound == command_found) {
 		SendAckPacket(ACK_RECEIVE_COMM, &cmd, NULL, 0);
-		ResetGroundCommWDT();
 		err = ActUponCommand(&cmd);
 	}
 
