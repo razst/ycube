@@ -1830,7 +1830,7 @@ LOAD c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../.
 LOAD c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libc.a
 END GROUP
 
-.fixed          0x20000000    0x388c8
+.fixed          0x20000000    0x388c0
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _sfixed = .
  *(.startup)
@@ -3788,51 +3788,49 @@ END GROUP
  *(.data)
  .data          0x20037f40        0xc ./src/SubSystemModules/PowerManagment/EPS.o
                 0x20037f40                eps_threshold_voltages
- .data          0x20037f4c        0xc ./src/SubSystemModules/Communication/TRXVU.o
-                0x20037f4c                g_mute_end_time
-                0x20037f50                g_idle_end_time
-                0x20037f54                g_transponder_end_time
- .data          0x20037f58        0x8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
- .data          0x20037f60        0xc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
- .data          0x20037f6c       0x10 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(FRAM.o)
- .data          0x20037f7c        0x4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
- .data          0x20037f80       0x10 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTC.o)
- .data          0x20037f90       0x20 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(safefat.o)
-                0x20037f90                s_subdir
- .data          0x20037fb0       0x28 C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
- .data          0x20037fd8        0x4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
- .data          0x20037fdc        0x4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(port.o)
-                0x20037fdc                ulCriticalNesting
+ .data          0x20037f4c        0x4 ./src/SubSystemModules/Communication/TRXVU.o
+                0x20037f4c                g_idle_end_time
+ .data          0x20037f50        0x8 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(I2C.o)
+ .data          0x20037f58        0xc C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(SPI.o)
+ .data          0x20037f64       0x10 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(FRAM.o)
+ .data          0x20037f74        0x4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(Time.o)
+ .data          0x20037f78       0x10 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib\libHALD.a(RTC.o)
+ .data          0x20037f88       0x20 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib\libHCCD.a(safefat.o)
+                0x20037f88                s_subdir
+ .data          0x20037fa8       0x28 C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib\libSatelliteSubsystemsD.a(IsisSolarPanelv2.o)
+ .data          0x20037fd0        0x4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(tasks.o)
+ .data          0x20037fd4        0x4 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib\libFreeRTOSD.a(port.o)
+                0x20037fd4                ulCriticalNesting
  *(.data.*)
  .data.impure_data
-                0x20037fe0      0x428 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-impure.o)
+                0x20037fd8      0x428 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-impure.o)
  .data._impure_ptr
-                0x20038408        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-impure.o)
-                0x20038408                _impure_ptr
+                0x20038400        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-impure.o)
+                0x20038400                _impure_ptr
  .data.__malloc_av_
-                0x2003840c      0x408 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
-                0x2003840c                __malloc_av_
+                0x20038404      0x408 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
+                0x20038404                __malloc_av_
  .data.__malloc_trim_threshold
-                0x20038814        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
-                0x20038814                __malloc_trim_threshold
+                0x2003880c        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
+                0x2003880c                __malloc_trim_threshold
  .data.__malloc_sbrk_base
-                0x20038818        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
-                0x20038818                __malloc_sbrk_base
- .data._tzname  0x2003881c        0x8 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-tzvars.o)
-                0x2003881c                _tzname
+                0x20038810        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-mallocr.o)
+                0x20038810                __malloc_sbrk_base
+ .data._tzname  0x20038814        0x8 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-tzvars.o)
+                0x20038814                _tzname
  .data.__ctype_ptr__
-                0x20038824        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-ctype_.o)
-                0x20038824                __ctype_ptr__
- .data.tzinfo   0x20038828       0x40 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-gettzinfo.o)
- .data.lconv    0x20038868       0x38 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-locale.o)
+                0x2003881c        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-ctype_.o)
+                0x2003881c                __ctype_ptr__
+ .data.tzinfo   0x20038820       0x40 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-gettzinfo.o)
+ .data.lconv    0x20038860       0x38 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-locale.o)
  .data.lc_ctype_charset
-                0x200388a0       0x20 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-locale.o)
+                0x20038898       0x20 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-locale.o)
  .data.__mb_cur_max
-                0x200388c0        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-locale.o)
-                0x200388c0                __mb_cur_max
+                0x200388b8        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-locale.o)
+                0x200388b8                __mb_cur_max
  .data.__wctomb
-                0x200388c4        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-wctomb_r.o)
-                0x200388c4                __wctomb
+                0x200388bc        0x4 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/lib\libg.a(lib_a-wctomb_r.o)
+                0x200388bc                __wctomb
  *(.dyn)
  *(.iplt)
  .iplt          0x00000000        0x0 ./src/TestingDemos/CommandsTestingDemo.o
@@ -3842,27 +3840,27 @@ END GROUP
  *(.rel.dyn)
  *(.rel.iplt)
  .rel.iplt      0x00000000        0x0 ./src/TestingDemos/CommandsTestingDemo.o
-                0x200388c8                . = ALIGN (0x4)
-                0x200388c8                _efixed = .
+                0x200388c0                . = ALIGN (0x4)
+                0x200388c0                _efixed = .
 
-.ARM.exidx      0x200388c8        0x8
+.ARM.exidx      0x200388c0        0x8
  *(.ARM.exidx)
- .ARM.exidx     0x200388c8        0x8 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_divdi3.o)
- .ARM.exidx     0x200388d0        0x0 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_udivdi3.o)
+ .ARM.exidx     0x200388c0        0x8 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_divdi3.o)
+ .ARM.exidx     0x200388c8        0x0 c:/isis/application/toolchain/bin/../lib/gcc/arm-none-eabi/4.7.4\libgcc.a(_udivdi3.o)
                                   0x8 (size before relaxing)
-                0x200388d0                _eexidx = .
+                0x200388c8                _eexidx = .
 
-.ARM.extab      0x200388d0        0x0
+.ARM.extab      0x200388c8        0x0
  *(.ARM.extab)
-                0x200388d0                _eextab = .
+                0x200388c8                _eextab = .
 
-.prerelocate    0x00200000        0x0 load address 0x200388d0
+.prerelocate    0x00200000        0x0 load address 0x200388c8
                 0x00200000                . = ALIGN (0x4)
                 0x00200000                _sprerelocate = .
                 0x00200000                . = ALIGN (0x4)
                 0x00200000                _eprerelocate = .
 
-.postrelocate   0x00200000     0x1cf8 load address 0x200388d0
+.postrelocate   0x00200000     0x1cf8 load address 0x200388c8
                 0x00200000                . = ALIGN (0x4)
                 0x00200000                _spostrelocate = .
  *(.vectors)
@@ -3887,7 +3885,7 @@ END GROUP
                 0x00201cf8                . = ALIGN (0x4)
                 0x00201cf8                _epostrelocate = .
 
-.sramdata       0x00300000        0xc load address 0x2003a5c8
+.sramdata       0x00300000        0xc load address 0x2003a5c0
                 0x00300000                . = ALIGN (0x4)
                 0x00300000                _ssramdata = .
  *(.sramdata)
@@ -3903,18 +3901,20 @@ END GROUP
                 0x0030000c                . = ALIGN (0x4)
                 0x0030000c                _esrambss = .
 
-.bss            0x200388d0    0x7fd6c
-                0x200388d0                _szero = .
+.bss            0x200388c8    0x7fd74
+                0x200388c8                _szero = .
  *(.bss)
- .bss           0x200388d0        0x8 ./src/SubSystemModules/PowerManagment/EPS.o
-                0x200388d0                prev_avg
-                0x200388d4                alpha
- .bss           0x200388d8        0x4 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
-                0x200388d8                g_low_volt_flag
- .bss           0x200388dc        0x8 ./src/SubSystemModules/Maintenance/Maintenance.o
- .bss           0x200388e4       0x2c ./src/SubSystemModules/Housekepping/TelemetryCollector.o
- .bss           0x20038910       0xe4 ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o
- .bss           0x200389f4       0x1c ./src/SubSystemModules/Communication/TRXVU.o
+ .bss           0x200388c8        0x8 ./src/SubSystemModules/PowerManagment/EPS.o
+                0x200388c8                prev_avg
+                0x200388cc                alpha
+ .bss           0x200388d0        0x4 ./src/SubSystemModules/PowerManagment/EPSOperationModes.o
+                0x200388d0                g_low_volt_flag
+ .bss           0x200388d4        0x8 ./src/SubSystemModules/Maintenance/Maintenance.o
+ .bss           0x200388dc       0x2c ./src/SubSystemModules/Housekepping/TelemetryCollector.o
+ .bss           0x20038908       0xe4 ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o
+ .bss           0x200389ec       0x24 ./src/SubSystemModules/Communication/TRXVU.o
+                0x200389f0                g_mute_end_time
+                0x200389f4                g_transponder_end_time
                 0x200389f8                xDumpQueue
                 0x200389fc                xDumpLock
                 0x20038a00                xIsTransmitting
