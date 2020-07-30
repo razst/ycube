@@ -876,32 +876,32 @@
             {
               "name": "Solar panel 1 Temperature",
               "desc": "",
-              "type": "short"
+              "type": "int"
             },
             {
               "name": "Solar panel 2 Temperature",
               "desc": "",
-              "type": "short"
+              "type": "int"
             },
             {
               "name": "Solar panel 3 Temperature",
               "desc": "",
-              "type": "short"
+              "type": "int"
             },
             {
               "name": "Solar panel 4 Temperature",
               "desc": "",
-              "type": "short"
+              "type": "int"
             },
             {
               "name": "Solar panel 5 Temperature",
               "desc": "",
-              "type": "short"
+              "type": "int"
             },
             {
               "name": "Solar panel 6 Temperature",
               "desc": "",
-              "type": "short"
+              "type": "int"
             },
             {
               "name": "sat_time",
