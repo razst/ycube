@@ -234,7 +234,6 @@ void Maintenance()
 		logError(IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX),"Maintenance-IsisTrxvu_hardReset");
 		vTaskDelay(500);
 		SaveSatTimeInFRAM(MOST_UPDATED_SAT_TIME_ADDR,MOST_UPDATED_SAT_TIME_SIZE);// store the most updated sat time
-		HardResetMCU();
 	}
 
 	DeleteOldFiels(MIN_FREE_SPACE);

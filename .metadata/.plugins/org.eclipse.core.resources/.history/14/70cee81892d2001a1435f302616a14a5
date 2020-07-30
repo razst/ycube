@@ -4,13 +4,6 @@
 #include <hcc/api_fat.h>
 
 #include <hal/Timing/Time.h>
-#include "TestingConfigurations.h"
-#ifdef ISISEPS
-	#include <satellite-subsystems/isis_eps_driver.h>
-#endif
-#ifdef GOMEPS
-	#include <satellite-subsystems/GomEPS.h>
-#endif
 
 #include "GlobalStandards.h"
 
@@ -213,13 +206,6 @@ void DeployAnt(){
 	}
 }
 
-int HardResetMCU(){
-	isis_eps__reset__to_t cmd_t;
-	isis_eps__reset__from_t cmd_f;
-	cmd_t.fields.rst_key = RESET_KEY;
-	logError(isis_eps__reset__tmtc(EPS_I2C_BUS_INDEX, &cmd_t, &cmd_f),"CMD_ResetComponent-isis_eps__reset__tmtc");
-}
-
 void Maintenance()
 {
 	SaveSatTimeInFRAM(MOST_UPDATED_SAT_TIME_ADDR,MOST_UPDATED_SAT_TIME_SIZE);
@@ -234,7 +220,8 @@ void Maintenance()
 		logError(IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX),"Maintenance-IsisTrxvu_hardReset");
 		vTaskDelay(500);
 		SaveSatTimeInFRAM(MOST_UPDATED_SAT_TIME_ADDR,MOST_UPDATED_SAT_TIME_SIZE);// store the most updated sat time
-		HardResetMCU();
+		// soft reset the sat
+		restart();
 	}
 
 	DeleteOldFiels(MIN_FREE_SPACE);

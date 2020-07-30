@@ -10,6 +10,12 @@
 
 #include <satellite-subsystems/IsisTRXVU.h>
 #include <satellite-subsystems/IsisAntS.h>
+#ifdef ISISEPS
+	#include <satellite-subsystems/isis_eps_driver.h>
+#endif
+#ifdef GOMEPS
+	#include <satellite-subsystems/GomEPS.h>
+#endif
 
 
 #include <hcc/api_fat.h>
