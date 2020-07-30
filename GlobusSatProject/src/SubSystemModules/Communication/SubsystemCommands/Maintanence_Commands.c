@@ -71,18 +71,12 @@ int CMD_FRAM_ReadAndTransmitt(sat_packet_t *cmd)
 	memcpy(&addr, cmd->data, sizeof(addr));
 	memcpy(&size, cmd->data + sizeof(addr),sizeof(size));
 
-	unsigned char *read_data = malloc(size);
-	if(NULL == read_data){
-		return E_MEM_ALLOC;
-	}
-
-	int i=0;
-	err = FRAM_read((unsigned char*)&i, addr, size); // TODO: ask why using read_data doesn't work
+	int data=0;
+	err = FRAM_read((unsigned char*)&data, addr, size);
 	if (err == E_NO_SS_ERR){
-		TransmitDataAsSPL_Packet(cmd, &i, size);
+		TransmitDataAsSPL_Packet(cmd, &data, size);
 	}
 
-	free(read_data);
 	return err;
 }
 
