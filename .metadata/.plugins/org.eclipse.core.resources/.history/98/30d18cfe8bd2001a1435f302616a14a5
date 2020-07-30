@@ -33,10 +33,10 @@ typedef enum {
 	tlm_rx,
 	tlm_rx_revc_NO_USE,
 	tlm_rx_frame,
-	tlm_eps_raw_mb_NOT_USED, // 9
-	tlm_eps_eng_mb_NOT_USED,
-	tlm_eps_raw_cdb_NOT_USED,
-	tlm_eps_eng_cdb_NOT_USED,
+	tlm_eps_raw_mb, // 9
+	tlm_eps_eng_mb,
+	tlm_eps_raw_cdb,
+	tlm_eps_eng_cdb,
 	tlm_log //13
 }tlm_type_t;
 #endif /* TELEMETRYFILES_H_ */

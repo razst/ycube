@@ -279,9 +279,9 @@ Boolean DeleteOldFiles(){
 		int err = deleteTLMFile(tlm_wod,theDay,i);
 		err *= deleteTLMFile(tlm_antenna,theDay,i);
 		err *= deleteTLMFile(tlm_eps,theDay,i);
-		err *= deleteTLMFile(tlm_eps_eng_cdb_NOT_USED,theDay,i);
-		err *= deleteTLMFile(tlm_eps_eng_mb_NOT_USED,theDay,i);
-		err *= deleteTLMFile(tlm_eps_raw_cdb_NOT_USED,theDay,i);
+		err *= deleteTLMFile(tlm_eps_eng_cdb,theDay,i);
+		err *= deleteTLMFile(tlm_eps_eng_mb,theDay,i);
+		err *= deleteTLMFile(tlm_eps_raw_cdb,theDay,i);
 		err *= deleteTLMFile(tlm_log,theDay,i);
 		err *= deleteTLMFile(tlm_rx,theDay,i);
 		err *= deleteTLMFile(tlm_rx_frame,theDay,i);

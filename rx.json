@@ -443,9 +443,9 @@
       "desc": "All DUMP Types",
       "subtypes": [
         {
-          "id": "10",
-          "name": "tlm_eps_eng_mb",
-          "desc": "EPS eng data",
+          "id": "0",
+          "name": "tlm_eps",
+          "desc": "EPS data",
           "inParams": [
             {
               "name": "timestamp",

@@ -269,8 +269,8 @@
               "type": "char",
               "values": [
                 {
-                  "id": "10",
-                  "name": "eps_eng_mb"
+                  "id": "0",
+                  "name": "EPS"
                 },
                 {
                   "id": "1",
@@ -326,8 +326,8 @@
               "type": "char",
               "values": [
                 {
-                  "id": "10",
-                  "name": "eps_eng_mb"
+                  "id": "0",
+                  "name": "EPS"
                 },
                 {
                   "id": "1",
@@ -468,8 +468,8 @@
               "type": "char",
               "values": [
                 {
-                  "id": "10",
-                  "name": "eps_eng_mb"
+                  "id": "0",
+                  "name": "EPS"
                 },
                 {
                   "id": "1",
@@ -522,8 +522,8 @@
               "type": "char",
               "values": [
                 {
-                  "id": "10",
-                  "name": "eps_eng_mb"
+                  "id": "0",
+                  "name": "EPS"
                 },
                 {
                   "id": "1",
@@ -540,14 +540,6 @@
                 {
                   "id": "4",
                   "name": "WOD"
-                },
-                {
-                  "id": "6",
-                  "name": "RX"
-                },
-                {
-                  "id": "13",
-                  "name": "LOG"
                 }
               ]
             },

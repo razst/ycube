@@ -106,7 +106,7 @@ Boolean TestEPSTLM(){
 	// write some LOG elements in TLM file
 	TelemetrySaveEPS();
 	// read the data
-	int numOfElementsSent = readTLMFile(tlm_eps,theDay,0,2,0);
+	int numOfElementsSent = readTLMFile(tlm_eps_raw_cdb,theDay,0,2,0);
 
 	// set the time back
 	Time_setUnixEpoch(current_time);
@@ -279,9 +279,9 @@ Boolean DeleteOldFiles(){
 		int err = deleteTLMFile(tlm_wod,theDay,i);
 		err *= deleteTLMFile(tlm_antenna,theDay,i);
 		err *= deleteTLMFile(tlm_eps,theDay,i);
-		err *= deleteTLMFile(tlm_eps_eng_cdb_NOT_USED,theDay,i);
-		err *= deleteTLMFile(tlm_eps_eng_mb_NOT_USED,theDay,i);
-		err *= deleteTLMFile(tlm_eps_raw_cdb_NOT_USED,theDay,i);
+		err *= deleteTLMFile(tlm_eps_eng_cdb,theDay,i);
+		err *= deleteTLMFile(tlm_eps_eng_mb,theDay,i);
+		err *= deleteTLMFile(tlm_eps_raw_cdb,theDay,i);
 		err *= deleteTLMFile(tlm_log,theDay,i);
 		err *= deleteTLMFile(tlm_rx,theDay,i);
 		err *= deleteTLMFile(tlm_rx_frame,theDay,i);
@@ -731,7 +731,7 @@ Boolean FullSDTest(){
 			theDay.date = i;
 			printf("day=%d\n",theDay.date);
 			copyTLMFile(tlm_wod,theDay,"250102.WOD");
-			copyTLMFile(tlm_eps,theDay,"250102.EEM");
+			copyTLMFile(tlm_eps_eng_mb,theDay,"250102.EEM");
 			copyTLMFile(tlm_tx,theDay,"250102.TX");
 			copyTLMFile(tlm_rx,theDay,"250102.RX");
 			copyTLMFile(tlm_log,theDay,"200608.LOG");

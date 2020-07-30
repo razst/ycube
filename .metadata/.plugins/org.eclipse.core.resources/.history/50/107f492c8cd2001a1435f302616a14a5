@@ -171,8 +171,8 @@ int DeleteOldFiels(int minFreeSpace){
 			int err = deleteTLMFile(tlm_wod,theDay,numOfDays);
 			err *= deleteTLMFile(tlm_antenna,theDay,numOfDays);
 			err *= deleteTLMFile(tlm_eps,theDay,numOfDays);
-			err *= deleteTLMFile(tlm_eps_raw_cdb_NOT_USED,theDay,numOfDays);
-			err *= deleteTLMFile(tlm_eps_raw_mb_NOT_USED,theDay,numOfDays);
+			err *= deleteTLMFile(tlm_eps_raw_cdb,theDay,numOfDays);
+			err *= deleteTLMFile(tlm_eps_raw_mb,theDay,numOfDays);
 			err *= deleteTLMFile(tlm_log,theDay,numOfDays);
 			err *= deleteTLMFile(tlm_rx,theDay,numOfDays);
 			err *= deleteTLMFile(tlm_rx_frame,theDay,numOfDays);

@@ -243,19 +243,19 @@ void getTlmTypeInfo(tlm_type_t tlmType, char* endFileName, int* structSize){
 		memcpy(endFileName,END_FILE_NAME_ANTENNA,sizeof(END_FILE_NAME_ANTENNA));
 		*structSize = sizeof(ISISantsTelemetry);
 	}
-	else if (tlmType==tlm_eps_raw_mb_NOT_USED){
+	else if (tlmType==tlm_eps_raw_mb){
 		memcpy(endFileName,END_FILENAME_EPS_RAW_MB_TLM,sizeof(END_FILENAME_EPS_RAW_MB_TLM));
 		*structSize = sizeof(isis_eps__gethousekeepingraw__from_t);
 	}
-	else if (tlmType==tlm_eps_raw_cdb_NOT_USED){
+	else if (tlmType==tlm_eps_raw_cdb){
 		memcpy(endFileName,END_FILENAME_EPS_RAW_CDB_TLM,sizeof(END_FILENAME_EPS_RAW_CDB_TLM));
 		*structSize = sizeof(isis_eps__gethousekeepingrawincdb__from_t);
 	}
-	else if (tlmType==tlm_eps){
-		memcpy(endFileName,END_FILENAME_EPS_TLM,sizeof(END_FILENAME_EPS_TLM));
+	else if (tlmType==tlm_eps_eng_mb){
+		memcpy(endFileName,END_FILENAME_EPS_ENG_MB_TLM,sizeof(END_FILENAME_EPS_ENG_MB_TLM));
 		*structSize = sizeof(isis_eps__gethousekeepingeng__from_t);
 	}
-	else if (tlmType==tlm_eps_eng_cdb_NOT_USED){
+	else if (tlmType==tlm_eps_eng_cdb){
 		memcpy(endFileName,END_FILENAME_EPS_ENG_CDB_TLM,sizeof(END_FILENAME_EPS_ENG_CDB_TLM));
 		*structSize = sizeof(isis_eps__gethousekeepingengincdb__from_t);
 	}
