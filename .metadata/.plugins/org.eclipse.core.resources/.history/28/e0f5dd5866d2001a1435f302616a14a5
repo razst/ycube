@@ -176,32 +176,19 @@ int deleteTLMFile(tlm_type_t tlmType, Time date, int days2Add){
 FileSystemResult InitializeFS(Boolean first_time)
 {
 
-	// in FS init we don't want to use a log file !
 	// Initialize the memory for the FS
-	int err = hcc_mem_init();
-	if (err != E_NO_SS_ERR){
-		printf("hcc_mem_init error:",err);
-	}
+	if(logError(hcc_mem_init() ,"InitializeFS-hcc_mem_init")) return -1;
 
 	// Initialize the FS
-	err = fs_init();
-	if (err != E_NO_SS_ERR){
-		printf("fs_init error:",err);
-	}
+	if(logError(fs_init(),"InitializeFS-fs_init")) return -1;
 
 	// Tell the OS (freeRTOS) about our FS
-	err = f_enterFS();
-	if (err != E_NO_SS_ERR){
-		printf("f_enterFS error:",err);
-	}
+	if(logError(f_enterFS(),"InitializeFS-f_enterFS")) return -1;
 
 	// Initialize the volume of SD card 0 (A)
 	// TODO should we also init the volume of SD card 1 (B)???
 	// TODO: why drive 1 is not working when we test it?
-	err=f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_PARMS );
-	if (err != E_NO_SS_ERR){
-		printf("f_initvolume error:",err);
-	}
+	if(logError(f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_PARMS ),"InitializeFS-f_initvolume")) return -1;
 
 	//In the first time the SD on. if there is file on the SD delete it.
 	if(first_time) delete_allTMFilesFromSD();
@@ -296,7 +283,11 @@ int write2File(void* data, tlm_type_t tlmType){
 
 	if (!fp)
 	{
-		printf("Unable to open file %s, f_open error=%d\n",file_name, err);
+		char buffer[80];
+		sprintf(buffer, "write2File Unable to open file %s, f_open error=%d",file_name, err);
+		logError(err,buffer);
+		printf(buffer);printf("\n");
+		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
 		return -1;
 	}
 
@@ -442,7 +433,11 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 
 	if (!fp)
 	{
-		printf("Unable to open file %s, f_open error=%d\n",file_name, err);
+		char buffer[80];
+		sprintf(buffer, "readTLMFile Unable to open file %s, f_open error=%d",file_name, err);
+		logError(err,buffer);
+		printf(buffer);printf("\n");
+		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
 		return -1;
 	}
 
@@ -541,7 +536,11 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 
 	if (!fp)
 	{
-		printf("Unable to open file %s, f_open error=%d\n",file_name, err);
+		char buffer[80];
+		sprintf(buffer, "readTLMFileTimeRange %s, f_open error=%d",file_name, err);
+		logError(err,buffer);
+		printf(buffer);printf("\n");
+		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
 		return -1;
 	}
 

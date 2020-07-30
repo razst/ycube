@@ -296,7 +296,11 @@ int write2File(void* data, tlm_type_t tlmType){
 
 	if (!fp)
 	{
-		printf("Unable to open file %s, f_open error=%d\n",file_name, err);
+		char buffer[80];
+		sprintf(buffer, "write2File Unable to open file %s, f_open error=%d",file_name, err);
+		//logError(err,buffer);
+		printf(buffer);printf("\n");
+		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
 		return -1;
 	}
 
@@ -442,7 +446,11 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 
 	if (!fp)
 	{
-		printf("Unable to open file %s, f_open error=%d\n",file_name, err);
+		char buffer[80];
+		sprintf(buffer, "readTLMFile Unable to open file %s, f_open error=%d",file_name, err);
+		//logError(err,buffer);
+		printf(buffer);printf("\n");
+		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
 		return -1;
 	}
 
@@ -541,7 +549,11 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 
 	if (!fp)
 	{
-		printf("Unable to open file %s, f_open error=%d\n",file_name, err);
+		char buffer[80];
+		sprintf(buffer, "readTLMFileTimeRange %s, f_open error=%d",file_name, err);
+		logError(err,buffer);
+		printf(buffer);printf("\n");
+		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
 		return -1;
 	}
 

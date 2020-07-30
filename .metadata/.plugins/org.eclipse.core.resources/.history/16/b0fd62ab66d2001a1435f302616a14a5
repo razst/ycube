@@ -186,13 +186,13 @@ FileSystemResult InitializeFS(Boolean first_time)
 	// Initialize the FS
 	err = fs_init();
 	if (err != E_NO_SS_ERR){
-		printf("fs_init error:",err);
+		printf("hcc_mem_init error:",err);
 	}
 
 	// Tell the OS (freeRTOS) about our FS
 	err = f_enterFS();
 	if (err != E_NO_SS_ERR){
-		printf("f_enterFS error:",err);
+		printf("hcc_mem_init error:",err);
 	}
 
 	// Initialize the volume of SD card 0 (A)
@@ -200,7 +200,7 @@ FileSystemResult InitializeFS(Boolean first_time)
 	// TODO: why drive 1 is not working when we test it?
 	err=f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_PARMS );
 	if (err != E_NO_SS_ERR){
-		printf("f_initvolume error:",err);
+		printf("hcc_mem_init error:",err);
 	}
 
 	//In the first time the SD on. if there is file on the SD delete it.
@@ -296,7 +296,11 @@ int write2File(void* data, tlm_type_t tlmType){
 
 	if (!fp)
 	{
-		printf("Unable to open file %s, f_open error=%d\n",file_name, err);
+		char buffer[80];
+		sprintf(buffer, "write2File Unable to open file %s, f_open error=%d",file_name, err);
+		logError(err,buffer);
+		printf(buffer);printf("\n");
+		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
 		return -1;
 	}
 
@@ -442,7 +446,11 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 
 	if (!fp)
 	{
-		printf("Unable to open file %s, f_open error=%d\n",file_name, err);
+		char buffer[80];
+		sprintf(buffer, "readTLMFile Unable to open file %s, f_open error=%d",file_name, err);
+		logError(err,buffer);
+		printf(buffer);printf("\n");
+		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
 		return -1;
 	}
 
@@ -541,7 +549,11 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 
 	if (!fp)
 	{
-		printf("Unable to open file %s, f_open error=%d\n",file_name, err);
+		char buffer[80];
+		sprintf(buffer, "readTLMFileTimeRange %s, f_open error=%d",file_name, err);
+		logError(err,buffer);
+		printf(buffer);printf("\n");
+		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
 		return -1;
 	}
 
