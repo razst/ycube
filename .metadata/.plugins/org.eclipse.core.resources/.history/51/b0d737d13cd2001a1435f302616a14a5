@@ -165,7 +165,7 @@ int CMD_UpdateSatTime(sat_packet_t *cmd)
 	{
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*)&set_time, sizeof(set_time));
 	}
-	ResetGroundCommWDT();// make sure the CommWDT is in sync with the new time
+	ResetGroundCommWDT();
 	return err;
 }
 
