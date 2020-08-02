@@ -29,6 +29,7 @@
 time_unix 		g_mute_end_time = 0;				// time at which the mute will end
 time_unix 		g_idle_end_time = 1;				// time at which the idel will end
 time_unix 		g_transponder_end_time = 0;			// time at which the transponder mode will end
+time_unix       g_max_transponder_time = 259200;    //max time of transponder
 
 xQueueHandle xDumpQueue = NULL;
 xSemaphoreHandle xDumpLock = NULL;

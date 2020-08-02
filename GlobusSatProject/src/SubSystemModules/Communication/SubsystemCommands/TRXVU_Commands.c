@@ -150,10 +150,13 @@ int CMD_SetTransponder(sat_packet_t *cmd)
 	err = I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
 
 	if(data[1] == trxvu_transponder_on){
-		SetIdleState(trxvu_idle_state_off, 0);
-		memcpy(&duration,cmd->data + sizeof(char),sizeof(duration));
 		time_unix curr_tick_time = 0;
 		Time_getUnixEpoch(&curr_tick_time);
+		if (curr_tick_time < g_mute_end_time) return TRXVU_TRANSPONDER_WHILE_MUTE;
+		SetIdleState(trxvu_idle_state_off, 0);
+		memcpy(&duration,cmd->data + sizeof(char),sizeof(duration));
+		if(duration > g_max_transponder_time) return TRXVU_TRANSPONDER_TOO_LONG;
+
 		g_transponder_end_time = curr_tick_time + duration;
 
 	}else if (data[1] == trxvu_transponder_off){
@@ -193,6 +196,12 @@ int CMD_MuteTRXVU(sat_packet_t *cmd)
 	int err = 0;
 	time_unix mute_duaration = 0;
 	memcpy(&mute_duaration,cmd->data,sizeof(mute_duaration));
+	SetIdleState(trxvu_idle_state_off, 0);
+
+	g_transponder_end_time = 0;
+	int data[2] = {0x38, trxvu_transponder_off};
+	I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
+
 	err = muteTRXVU(mute_duaration);
 	if (err == E_NO_SS_ERR){
 		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0); //trying to add the ack functions
@@ -208,6 +217,8 @@ int CMD_SetIdleState(sat_packet_t *cmd)
 	if (state == trxvu_idle_state_on){
 		time_unix curr_tick_time = 0;
 		Time_getUnixEpoch(&curr_tick_time);
+
+		if (curr_tick_time < g_mute_end_time) return TRXVU_IDEL_WHILE_MUTE;
 
 		if(g_transponder_end_time > curr_tick_time){
 			return TRXVU_IDLE_WHILE_TRANSPONDER;
