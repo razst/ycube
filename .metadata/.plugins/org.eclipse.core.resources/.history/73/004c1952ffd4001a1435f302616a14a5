@@ -29,7 +29,7 @@
 time_unix 		g_mute_end_time = 0;				// time at which the mute will end
 time_unix 		g_idle_end_time = 1;				// time at which the idel will end
 time_unix 		g_transponder_end_time = 0;			// time at which the transponder mode will end
-time_unix       g_max_transponder_time = 259200;    // max time of transponder
+time_unix       g_max_transponder_time = 259200;    //max time of transponder
 
 xQueueHandle xDumpQueue = NULL;
 xSemaphoreHandle xDumpLock = NULL;
@@ -110,7 +110,11 @@ int InitTrxvu() {
 	myTRXVUBitrates = trxvu_bitrate_9600;
 	if (logError(IsisTrxvu_initialize(&myTRXVUAddress, &myTRXVUFramesLenght,&myTRXVUBitrates, 1) ,"InitTrxvu-IsisTrxvu_initialize") ) return -1;
 
-	vTaskDelay(1000); // wait a little
+	vTaskDelay(100);
+
+	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,myTRXVUBitrates) ,"InitTrxvu-IsisTrxvu_tcSetAx25Bitrate")) return -1;
+	vTaskDelay(100);
+
 
 	ISISantsI2Caddress myAntennaAddress;
 	myAntennaAddress.addressSideA = ANTS_I2C_SIDE_A_ADDR;
