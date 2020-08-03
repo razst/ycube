@@ -210,7 +210,7 @@ int InitSubsystems()
 
 	logError(INFO_MSG ,"Sat Started");
 
-	//time_unix default_no_comm_thresh = (4*60*60);
+	//time_unix default_no_comm_thresh = (24*60*60);
 	//FRAM_write((unsigned char*) &default_no_comm_thresh , NO_COMM_WDT_KICK_TIME_ADDR , NO_COMM_WDT_KICK_TIME_SIZE);
 
 	vTaskDelay(1000); // rest a little before we start working

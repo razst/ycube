@@ -376,3 +376,27 @@ java.io.FileNotFoundException: C:\ISIS\workspace_ycube\GlobusSatProject\Release\
 	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1018)
 	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1222)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+
+!ENTRY org.eclipse.cdt.debug.mi.core 4 42 2020-08-03 17:35:44.978
+!MESSAGE Internal Error
+!STACK 0
+org.eclipse.cdt.debug.mi.core.cdi.MI2CDIException: Inferior terminated[]
+	at org.eclipse.cdt.debug.mi.core.cdi.SharedLibraryManager.getMIShareds(SharedLibraryManager.java:123)
+	at org.eclipse.cdt.debug.mi.core.cdi.SharedLibraryManager.updateState(SharedLibraryManager.java:189)
+	at org.eclipse.cdt.debug.mi.core.cdi.SharedLibraryManager.update(SharedLibraryManager.java:137)
+	at org.eclipse.cdt.debug.mi.core.cdi.EventManager.processSuspendedEvent(EventManager.java:329)
+	at org.eclipse.cdt.debug.mi.core.cdi.EventManager.update(EventManager.java:101)
+	at java.util.Observable.notifyObservers(Unknown Source)
+	at org.eclipse.cdt.debug.mi.core.MISession.notifyObservers(MISession.java:797)
+	at org.eclipse.cdt.debug.mi.core.EventThread.run(EventThread.java:47)
+
+!ENTRY org.eclipse.cdt.debug.mi.core 4 42 2020-08-03 17:53:47.781
+!MESSAGE Internal Error
+!STACK 0
+org.eclipse.cdt.debug.mi.core.cdi.MI2CDIException: No registers.[No registers.]
+	at org.eclipse.cdt.debug.mi.core.cdi.RegisterManager.update(RegisterManager.java:427)
+	at org.eclipse.cdt.debug.mi.core.cdi.EventManager.processSuspendedEvent(EventManager.java:317)
+	at org.eclipse.cdt.debug.mi.core.cdi.EventManager.update(EventManager.java:101)
+	at java.util.Observable.notifyObservers(Unknown Source)
+	at org.eclipse.cdt.debug.mi.core.MISession.notifyObservers(MISession.java:797)
+	at org.eclipse.cdt.debug.mi.core.EventThread.run(EventThread.java:47)

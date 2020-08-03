@@ -1291,6 +1291,30 @@
           ]
         },
         {
+          "id": "225",
+          "name": "FRAM Read",
+          "desc": "Read FRAM value and transmit it",
+          "inParams": [
+            {
+              "name": "Byte data",
+              "desc": "data to read",
+              "type": "bytes"
+            }
+          ]
+        },		
+        {
+          "id": "224",
+          "name": "FRAM Wtite",
+          "desc": "Write FRAM value and transmit it",
+          "inParams": [
+            {
+              "name": "Byte data",
+              "desc": "data to read",
+              "type": "bytes"
+            }
+          ]
+        },		
+        {
           "id": "227",
           "name": "Get Sat Uptime",
           "desc": "Get Sat Uptime in seconds",

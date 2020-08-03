@@ -117,13 +117,12 @@ int StartTIME()
 	if (0 != error) {
 		return logError(error ,"StartTIME-Time_start");
 	}
-	// udpate to sat time that we had before the restart in FRAM
 	time_unix time_before_wakeup = 0;
 	if (!isFirstActivation()) {
 		FRAM_read((unsigned char*) &time_before_wakeup,
 		MOST_UPDATED_SAT_TIME_ADDR, MOST_UPDATED_SAT_TIME_SIZE);
 
-		Time_setUnixEpoch(time_before_wakeup + RESTART_TIME); // set the last time we had + time it takes to restart the sat
+		Time_setUnixEpoch(time_before_wakeup);
 	}
 
 	return 0;
@@ -209,9 +208,6 @@ int InitSubsystems()
 	WakeupFromResetCMD();
 
 	logError(INFO_MSG ,"Sat Started");
-
-	//time_unix default_no_comm_thresh = (4*60*60);
-	//FRAM_write((unsigned char*) &default_no_comm_thresh , NO_COMM_WDT_KICK_TIME_ADDR , NO_COMM_WDT_KICK_TIME_SIZE);
 
 	vTaskDelay(1000); // rest a little before we start working
 

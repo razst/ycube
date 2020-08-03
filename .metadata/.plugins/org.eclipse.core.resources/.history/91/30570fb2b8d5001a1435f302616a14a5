@@ -91,7 +91,7 @@ int CMD_FRAM_WriteAndTransmitt(sat_packet_t *cmd)
 	}
 	err = FRAM_read(data, addr, length - sizeof(addr));
 	if (err == E_NO_SS_ERR){
-		TransmitDataAsSPL_Packet(cmd, data, length - sizeof(addr));
+		TransmitDataAsSPL_Packet(cmd, data, length);
 	}
 	return err;
 }

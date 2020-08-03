@@ -32,8 +32,7 @@
 #include <satellite-subsystems/isis_eps_driver.h>
 
 #define SKIP_FILE_TIME_SEC 1000000
-#define SD_CARD_DRIVER_PRI 0
-#define SD_CARD_DRIVER_SEC 1
+#define SD_CARD_DRIVER_PARMS 1
 #define FIRST_TIME -1
 
 static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
@@ -199,13 +198,9 @@ FileSystemResult InitializeFS(Boolean first_time)
 	// Initialize the volume of SD card 0 (A)
 	// TODO should we also init the volume of SD card 1 (B)???
 	// TODO: why drive 1 is not working when we test it?
-	err=f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_PRI );
+	err=f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_PARMS );
 	if (err != E_NO_SS_ERR){
-		printf("f_initvolume primary error:",err);
-		err=f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_SEC );
-		if (err != E_NO_SS_ERR){
-			printf("f_initvolume secondary error:",err);
-		}
+		printf("f_initvolume error:",err);
 	}
 
 	//In the first time the SD on. if there is file on the SD delete it.
