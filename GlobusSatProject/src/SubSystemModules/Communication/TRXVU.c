@@ -109,11 +109,7 @@ int InitTrxvu() {
 	myTRXVUBitrates = trxvu_bitrate_9600;
 	if (logError(IsisTrxvu_initialize(&myTRXVUAddress, &myTRXVUFramesLenght,&myTRXVUBitrates, 1) ,"InitTrxvu-IsisTrxvu_initialize") ) return -1;
 
-	vTaskDelay(100);
-
-	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,myTRXVUBitrates) ,"InitTrxvu-IsisTrxvu_tcSetAx25Bitrate")) return -1;
-	vTaskDelay(100);
-
+	vTaskDelay(1000); // wait a little
 
 	ISISantsI2Caddress myAntennaAddress;
 	myAntennaAddress.addressSideA = ANTS_I2C_SIDE_A_ADDR;

@@ -209,6 +209,8 @@ int InitSubsystems()
 
 	logError(INFO_MSG ,"Sat Started");
 
+	vTaskDelay(1000); // rest a little before we start working
+
 	return 0;
 }
 
