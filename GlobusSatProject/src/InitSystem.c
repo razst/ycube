@@ -151,17 +151,16 @@ int DeploySystem()
 
 	// wait 30 min + log telm
 	while (seconds_since_deploy < MINUTES_TO_SECONDS(MIN_2_WAIT_BEFORE_DEPLOY)) { // RBF to 30 min
+		// wait 10 sec and update timer in FRAM
 		vTaskDelay(SECONDS_TO_TICKS(10));
+		seconds_since_deploy += 10;
+		logError(FRAM_write((unsigned char*)&seconds_since_deploy, SECONDS_SINCE_DEPLOY_ADDR,
+				SECONDS_SINCE_DEPLOY_SIZE),"DeploySystem-FRAM_write");
 
-		FRAM_write((unsigned char*)&seconds_since_deploy, SECONDS_SINCE_DEPLOY_ADDR,
-				SECONDS_SINCE_DEPLOY_SIZE);
-		if (0 != err) {
-			break;
-		}
+		// collect TLM
 		TelemetryCollectorLogic();
 
-		seconds_since_deploy += 10;
-
+		// reset WDT
 		isis_eps__watchdog__from_t eps_cmd;
 		isis_eps__watchdog__tm(EPS_I2C_BUS_INDEX, &eps_cmd);
 
