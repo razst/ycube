@@ -148,8 +148,7 @@ int SetGsWdtKickTime(time_unix new_gs_wdt_kick_time)
 time_unix GetGsWdtKickTime()
 {
 	time_unix no_comm_thresh = 0;
-	FRAM_read((unsigned char*)&no_comm_thresh, NO_COMM_WDT_KICK_TIME_ADDR,
-	NO_COMM_WDT_KICK_TIME_SIZE);
+	FRAM_read((unsigned char*)&no_comm_thresh, NO_COMM_WDT_KICK_TIME_ADDR,NO_COMM_WDT_KICK_TIME_SIZE);
 	return no_comm_thresh;
 }
 

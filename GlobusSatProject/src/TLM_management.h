@@ -99,7 +99,7 @@ FileSystemResult InitializeFS();
 /*!
  * DeInitializes the file system.
  */
-void DeInitializeFS();
+void DeInitializeFS(int sd_card);
 
 /*!
  * Create new c_file.

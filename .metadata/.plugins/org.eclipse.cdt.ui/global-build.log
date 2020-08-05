@@ -1,8 +1,8 @@
-18:03:28 **** Clean-only build of configuration Debug for project GlobusSatProject ****
+12:34:00 **** Clean-only build of configuration Debug for project GlobusSatProject ****
 make -r -k clean 
 rm -rf  GlobusSatProject.siz  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o  ./src/TestingDemos/CommandsTestingDemo.d ./src/TestingDemos/EpsTestingDemo.d ./src/TestingDemos/FileSystemTestingDemo.d ./src/TestingDemos/MainTest.d ./src/TestingDemos/MaintenanceTestingDemo.d ./src/TestingDemos/TelemetryTestingDemo.d ./src/TestingDemos/TrxvuTestingDemo.d  ./src/SubSystemModules/PowerManagment/EPS.d ./src/SubSystemModules/PowerManagment/EPSOperationModes.d  ./src/SubSystemModules/Maintenance/Maintenance.d  ./src/SubSystemModules/Housekepping/TelemetryCollector.d  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d  ./src/SubSystemModules/Communication/AckHandler.d ./src/SubSystemModules/Communication/CommandDictionary.d ./src/SubSystemModules/Communication/SatCommandHandler.d ./src/SubSystemModules/Communication/TRXVU.d  ./src/InitSystem.d ./src/TLM_management.d ./src/main.d ./src/utils.d  GlobusSatProject.bin  GlobusSatProject.elf
  
-18:03:30 **** Build of configuration Debug for project GlobusSatProject ****
+12:34:02 **** Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Building file: ../src/TestingDemos/CommandsTestingDemo.c
 Invoking: Cross ARM C Compiler
@@ -254,19 +254,19 @@ C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:1
 In file included from ../src/SubSystemModules/Maintenance/Maintenance.c:6:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
 ../src/SubSystemModules/Maintenance/Maintenance.c: In function 'DeleteOldFiels':
-../src/SubSystemModules/Maintenance/Maintenance.c:167:17: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/SubSystemModules/Maintenance/Maintenance.c:166:17: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
 ../src/SubSystemModules/Maintenance/Maintenance.c: In function 'DeployAnt':
-../src/SubSystemModules/Maintenance/Maintenance.c:211:3: warning: implicit declaration of function 'CMD_AntennaDeploy' [-Wimplicit-function-declaration]
-../src/SubSystemModules/Maintenance/Maintenance.c:212:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+../src/SubSystemModules/Maintenance/Maintenance.c:210:3: warning: implicit declaration of function 'CMD_AntennaDeploy' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Maintenance/Maintenance.c:211:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
 In file included from ../src/SubSystemModules/Maintenance/Maintenance.c:6:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
 In file included from ../src/SubSystemModules/Maintenance/Maintenance.c:24:0:
 ../src/SubSystemModules/Maintenance/Maintenance.c: At top level:
 C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
 ../src/SubSystemModules/Maintenance/Maintenance.c: In function 'HardResetMCU':
-../src/SubSystemModules/Maintenance/Maintenance.c:221:1: warning: control reaches end of non-void function [-Wreturn-type]
+../src/SubSystemModules/Maintenance/Maintenance.c:220:1: warning: control reaches end of non-void function [-Wreturn-type]
 ../src/SubSystemModules/Maintenance/Maintenance.c: In function 'DeleteOldFiels':
-../src/SubSystemModules/Maintenance/Maintenance.c:202:1: warning: control reaches end of non-void function [-Wreturn-type]
+../src/SubSystemModules/Maintenance/Maintenance.c:201:1: warning: control reaches end of non-void function [-Wreturn-type]
 Finished building: ../src/SubSystemModules/Maintenance/Maintenance.c
  
 Building file: ../src/SubSystemModules/Housekepping/TelemetryCollector.c
@@ -430,11 +430,12 @@ C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXV
 ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:162:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
 In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:7:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_ResetComponent':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:256:3: error: a label can only be part of a statement and a declaration is not a statement
 In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:20:0:
 ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: At top level:
 C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
-Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
- 
+make: *** [src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o] Error 1
 Building file: ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c
 Invoking: Cross ARM C Compiler
 arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c"
@@ -459,29 +460,29 @@ C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXV
 ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_AntennaDeploy':
 ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:57:37: warning: unused parameter 'cmd' [-Wunused-parameter]
 ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_StartDump':
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:93:2: warning: passing argument 1 of 'AssembleCommand' from incompatible pointer type [enabled by default]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:95:2: warning: passing argument 1 of 'AssembleCommand' from incompatible pointer type [enabled by default]
 In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/AckHandler.h:5:0,
                  from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:10,
                  from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
                  from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
 C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/SatCommandHandler.h:58:5: note: expected 'unsigned char *' but argument is of type 'unsigned char (*)[200]'
 ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_SetTransponder':
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:152:2: warning: implicit declaration of function 'I2C_write' [-Wimplicit-function-declaration]
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:156:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:154:2: warning: implicit declaration of function 'I2C_write' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:158:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
 In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
                  from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:12,
                  from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
                  from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
 ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_SetIdleState':
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:221:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:223:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
 In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
                  from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:12,
                  from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
                  from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
 ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_TrasmitBeacon':
-../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:268:1: warning: control reaches end of non-void function [-Wreturn-type]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:270:1: warning: control reaches end of non-void function [-Wreturn-type]
 Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c
  
 Building file: ../src/SubSystemModules/Communication/AckHandler.c
@@ -577,8 +578,8 @@ Building file: ../src/InitSystem.c
 Invoking: Cross ARM C Compiler
 arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/InitSystem.d" -MT"src/InitSystem.d" -c -o "src/InitSystem.o" "../src/InitSystem.c"
 ../src/InitSystem.c: In function 'DeploySystem':
-../src/InitSystem.c:171:2: warning: implicit declaration of function 'CMD_AntennaDeploy' [-Wimplicit-function-declaration]
-../src/InitSystem.c:175:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+../src/InitSystem.c:173:2: warning: implicit declaration of function 'CMD_AntennaDeploy' [-Wimplicit-function-declaration]
+../src/InitSystem.c:177:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
 In file included from ../src/InitSystem.c:6:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
 In file included from ../src/InitSystem.c:14:0:
@@ -645,44 +646,40 @@ C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:76:6: note: expect
 ../src/TLM_management.c:184:3: warning: too many arguments for format [-Wformat-extra-args]
 ../src/TLM_management.c:190:3: warning: too many arguments for format [-Wformat-extra-args]
 ../src/TLM_management.c:190:3: warning: too many arguments for format [-Wformat-extra-args]
-../src/TLM_management.c:196:3: warning: too many arguments for format [-Wformat-extra-args]
-../src/TLM_management.c:196:3: warning: too many arguments for format [-Wformat-extra-args]
-../src/TLM_management.c:204:3: warning: too many arguments for format [-Wformat-extra-args]
-../src/TLM_management.c:204:3: warning: too many arguments for format [-Wformat-extra-args]
-../src/TLM_management.c:207:4: warning: too many arguments for format [-Wformat-extra-args]
-../src/TLM_management.c:207:4: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:198:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:198:3: warning: too many arguments for format [-Wformat-extra-args]
 ../src/TLM_management.c: At top level:
-../src/TLM_management.c:233:6: warning: conflicting types for 'getTlmTypeInfo' [enabled by default]
+../src/TLM_management.c:245:6: warning: conflicting types for 'getTlmTypeInfo' [enabled by default]
 ../src/TLM_management.c:169:2: note: previous implicit declaration of 'getTlmTypeInfo' was here
 ../src/TLM_management.c: In function 'write2File':
-../src/TLM_management.c:297:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
-../src/TLM_management.c:219:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c:309:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:231:6: note: expected 'char *' but argument is of type 'char (*)[11]'
 ../src/TLM_management.c: In function 'printTLM':
-../src/TLM_management.c:319:21: warning: unused parameter 'element' [-Wunused-parameter]
-../src/TLM_management.c:319:41: warning: unused parameter 'tlmType' [-Wunused-parameter]
+../src/TLM_management.c:331:21: warning: unused parameter 'element' [-Wunused-parameter]
+../src/TLM_management.c:331:41: warning: unused parameter 'tlmType' [-Wunused-parameter]
 ../src/TLM_management.c: In function 'readTLMFile':
-../src/TLM_management.c:441:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
-../src/TLM_management.c:219:6: note: expected 'char *' but argument is of type 'char (*)[11]'
-../src/TLM_management.c:443:5: warning: assignment from incompatible pointer type [enabled by default]
-../src/TLM_management.c:464:3: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:453:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:231:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c:455:5: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:476:3: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
 In file included from ../src/TLM_management.c:14:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
-../src/TLM_management.c:476:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../src/TLM_management.c:502:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:488:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:514:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
 In file included from ../src/TLM_management.c:14:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
 ../src/TLM_management.c: In function 'readTLMFileTimeRange':
-../src/TLM_management.c:541:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
-../src/TLM_management.c:219:6: note: expected 'char *' but argument is of type 'char (*)[11]'
-../src/TLM_management.c:542:5: warning: assignment from incompatible pointer type [enabled by default]
-../src/TLM_management.c:559:2: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:553:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:231:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c:554:5: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:571:2: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
 In file included from ../src/TLM_management.c:14:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
-../src/TLM_management.c:563:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../src/TLM_management.c:563:46: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../src/TLM_management.c:563:90: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../src/TLM_management.c:583:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-../src/TLM_management.c:589:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:575:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:575:46: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:575:90: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:595:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:601:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
 In file included from ../src/TLM_management.c:14:0:
 C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
 ../src/TLM_management.c: In function 'CMD_getDataImage':
@@ -715,30 +712,8 @@ In file included from ../src/utils.c:12:0:
 ../src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
 Finished building: ../src/utils.c
  
-Building target: GlobusSatProject.elf
-Invoking: Cross ARM C Linker
-arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
-Finished building target: GlobusSatProject.elf
- 
-Invoking: Cross ARM GNU Create Flash Image
-arm-none-eabi-objcopy -O binary "GlobusSatProject.elf"  "GlobusSatProject.bin"
-Finished building: GlobusSatProject.bin
- 
-Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
-   text	   data	    bss	    dec	    hex	filename
- 239184	     12	 523636	 762832	  ba3d0	GlobusSatProject.elf
-Finished building: GlobusSatProject.siz
- 
-18:03:51 **** Incremental Build of configuration Debug for project GlobusSatProject ****
-make -r -k all 
-Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
-   text	   data	    bss	    dec	    hex	filename
- 239184	     12	 523636	 762832	  ba3d0	GlobusSatProject.elf
-Finished building: GlobusSatProject.siz
- 
-18:40:04 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make: Target `all' not remade because of errors.
+12:34:22 **** Incremental Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Building file: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
 Invoking: Cross ARM C Compiler
@@ -768,14 +743,739 @@ Finished building: GlobusSatProject.bin
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 239200	     12	 523636	 762848	  ba3e0	GlobusSatProject.elf
+ 241840	     12	 523636	 765488	  bae30	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  
-18:40:10 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+12:35:58 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_FRAM_ReadAndTransmitt':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:69:3: warning: passing argument 2 of 'TransmitDataAsSPL_Packet' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:21:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:157:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_GetSatTime':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:162:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:20:0:
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+ 
+Building target: GlobusSatProject.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
+Finished building target: GlobusSatProject.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O binary "GlobusSatProject.elf"  "GlobusSatProject.bin"
+Finished building: GlobusSatProject.bin
+ 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
+   text	   data	    bss	    dec	    hex	filename
+ 241840	     12	 523636	 765488	  bae30	GlobusSatProject.elf
+Finished building: GlobusSatProject.siz
+ 
+12:36:07 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_FRAM_ReadAndTransmitt':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:69:3: warning: passing argument 2 of 'TransmitDataAsSPL_Packet' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:21:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:157:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_GetSatTime':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:162:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_ResetComponent':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:259:7: warning: unused variable 'i' [-Wunused-variable]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:20:0:
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+ 
+Building target: GlobusSatProject.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
+Finished building target: GlobusSatProject.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O binary "GlobusSatProject.elf"  "GlobusSatProject.bin"
+Finished building: GlobusSatProject.bin
+ 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
+   text	   data	    bss	    dec	    hex	filename
+ 241848	     12	 523636	 765496	  bae38	GlobusSatProject.elf
+Finished building: GlobusSatProject.siz
+ 
+12:36:30 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_FRAM_ReadAndTransmitt':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:69:3: warning: passing argument 2 of 'TransmitDataAsSPL_Packet' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:21:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:157:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_GetSatTime':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:162:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_ResetComponent':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:256:3: error: a label can only be part of a statement and a declaration is not a statement
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:20:0:
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+make: *** [src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o] Error 1
+make: Target `all' not remade because of errors.
+12:36:44 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_FRAM_ReadAndTransmitt':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:69:3: warning: passing argument 2 of 'TransmitDataAsSPL_Packet' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:21:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:157:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_GetSatTime':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:162:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:20:0:
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+ 
+Building target: GlobusSatProject.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
+Finished building target: GlobusSatProject.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O binary "GlobusSatProject.elf"  "GlobusSatProject.bin"
+Finished building: GlobusSatProject.bin
+ 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
+   text	   data	    bss	    dec	    hex	filename
+ 241840	     12	 523636	 765488	  bae30	GlobusSatProject.elf
+Finished building: GlobusSatProject.siz
+ 
+12:36:50 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_FRAM_ReadAndTransmitt':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:69:3: warning: passing argument 2 of 'TransmitDataAsSPL_Packet' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:21:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:157:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_GetSatTime':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:162:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_ResetComponent':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:257:7: warning: unused variable 'd' [-Wunused-variable]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:20:0:
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+ 
+Building target: GlobusSatProject.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
+Finished building target: GlobusSatProject.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O binary "GlobusSatProject.elf"  "GlobusSatProject.bin"
+Finished building: GlobusSatProject.bin
+ 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
+   text	   data	    bss	    dec	    hex	filename
+ 241848	     12	 523636	 765496	  bae38	GlobusSatProject.elf
+Finished building: GlobusSatProject.siz
+ 
+12:37:09 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_FRAM_ReadAndTransmitt':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:69:3: warning: passing argument 2 of 'TransmitDataAsSPL_Packet' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:21:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:157:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_GetSatTime':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:162:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_ResetComponent':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:257:7: warning: unused variable 'd' [-Wunused-variable]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:20:0:
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+ 
+Building target: GlobusSatProject.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
+Finished building target: GlobusSatProject.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O binary "GlobusSatProject.elf"  "GlobusSatProject.bin"
+Finished building: GlobusSatProject.bin
+ 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
+   text	   data	    bss	    dec	    hex	filename
+ 241848	     12	 523636	 765496	  bae38	GlobusSatProject.elf
+Finished building: GlobusSatProject.siz
+ 
+12:37:17 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_FRAM_ReadAndTransmitt':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:69:3: warning: passing argument 2 of 'TransmitDataAsSPL_Packet' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:21:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:157:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_GetSatTime':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:162:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_ResetComponent':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:256:3: error: a label can only be part of a statement and a declaration is not a statement
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:256:7: warning: unused variable 'd' [-Wunused-variable]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:20:0:
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+make: *** [src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o] Error 1
+make: Target `all' not remade because of errors.
+12:37:25 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_FRAM_ReadAndTransmitt':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:69:3: warning: passing argument 2 of 'TransmitDataAsSPL_Packet' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:21:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:157:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_GetSatTime':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:162:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_ResetComponent':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:257:3: error: a label can only be part of a statement and a declaration is not a statement
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:257:7: warning: unused variable 'd' [-Wunused-variable]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:20:0:
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+make: *** [src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o] Error 1
+make: Target `all' not remade because of errors.
+12:37:30 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_FRAM_ReadAndTransmitt':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:69:3: warning: passing argument 2 of 'TransmitDataAsSPL_Packet' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:21:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:157:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_GetSatTime':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:162:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_ResetComponent':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:257:3: error: a label can only be part of a statement and a declaration is not a statement
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:257:7: warning: unused variable 'd' [-Wunused-variable]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:20:0:
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+make: *** [src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o] Error 1
+make: Target `all' not remade because of errors.
+12:37:39 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_FRAM_ReadAndTransmitt':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:69:3: warning: passing argument 2 of 'TransmitDataAsSPL_Packet' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:21:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:157:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_GetSatTime':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:162:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:20:0:
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+ 
+Building target: GlobusSatProject.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
+Finished building target: GlobusSatProject.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O binary "GlobusSatProject.elf"  "GlobusSatProject.bin"
+Finished building: GlobusSatProject.bin
+ 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
+   text	   data	    bss	    dec	    hex	filename
+ 241840	     12	 523636	 765488	  bae30	GlobusSatProject.elf
+Finished building: GlobusSatProject.siz
+ 
+12:37:52 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_FRAM_ReadAndTransmitt':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:69:3: warning: passing argument 2 of 'TransmitDataAsSPL_Packet' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:21:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:157:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_GetSatTime':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:162:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_ResetComponent':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:257:3: error: a label can only be part of a statement and a declaration is not a statement
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:257:7: warning: unused variable 'j' [-Wunused-variable]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:20:0:
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+make: *** [src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o] Error 1
+make: Target `all' not remade because of errors.
+12:53:06 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_FRAM_ReadAndTransmitt':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:69:3: warning: passing argument 2 of 'TransmitDataAsSPL_Packet' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:21:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:157:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_GetSatTime':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:162:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_ResetComponent':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:257:3: error: a label can only be part of a statement and a declaration is not a statement
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:257:7: warning: unused variable 'j' [-Wunused-variable]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:20:0:
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+make: *** [src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o] Error 1
+make: Target `all' not remade because of errors.
+12:53:34 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_FRAM_ReadAndTransmitt':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:69:3: warning: passing argument 2 of 'TransmitDataAsSPL_Packet' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:21:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:157:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_GetSatTime':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:162:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:126:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:20:0:
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:59:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+ 
+Building file: ../src/TLM_management.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/TLM_management.d" -MT"src/TLM_management.d" -c -o "src/TLM_management.o" "../src/TLM_management.c"
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:5:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:4,
+                 from ../src/TLM_management.c:17:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/boolean.h:40:0: warning: "TRUE" redefined [enabled by default]
+In file included from C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_hcc_mem.h:31:0,
+                 from ../src/TLM_management.c:15:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/../psp/include/psp_types.h:59:0: note: this is the location of the previous definition
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:5:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:4,
+                 from ../src/TLM_management.c:17:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/boolean.h:41:0: warning: "FALSE" redefined [enabled by default]
+In file included from C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_hcc_mem.h:31:0,
+                 from ../src/TLM_management.c:15:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/../psp/include/psp_types.h:56:0: note: this is the location of the previous definition
+../src/TLM_management.c: In function 'CMD_getInfoImage':
+../src/TLM_management.c:50:13: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:63:2: warning: passing argument 1 of 'fm_seek' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:616:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:64:2: warning: passing argument 1 of 'fm_tell' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:618:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:65:2: warning: passing argument 1 of 'fm_rewind' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:621:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:66:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c: In function 'CMD_getDataImage':
+../src/TLM_management.c:89:12: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:97:3: warning: passing argument 1 of 'fm_seek' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:616:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:98:3: warning: passing argument 1 of 'fm_tell' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:618:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:99:3: warning: passing argument 1 of 'fm_rewind' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:621:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:100:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat]
+../src/TLM_management.c:100:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat]
+../src/TLM_management.c:113:4: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:116:11: warning: implicit declaration of function 'f_puts' [-Wimplicit-function-declaration]
+../src/TLM_management.c: In function 'deleteTLMFile':
+../src/TLM_management.c:169:2: warning: implicit declaration of function 'getTlmTypeInfo' [-Wimplicit-function-declaration]
+../src/TLM_management.c:172:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:6:0,
+                 from ../src/TLM_management.c:17:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:76:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c: In function 'InitializeFS':
+../src/TLM_management.c:184:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:184:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:190:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:190:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:198:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:198:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c: At top level:
+../src/TLM_management.c:245:6: warning: conflicting types for 'getTlmTypeInfo' [enabled by default]
+../src/TLM_management.c:169:2: note: previous implicit declaration of 'getTlmTypeInfo' was here
+../src/TLM_management.c: In function 'write2File':
+../src/TLM_management.c:309:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:231:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c: In function 'printTLM':
+../src/TLM_management.c:331:21: warning: unused parameter 'element' [-Wunused-parameter]
+../src/TLM_management.c:331:41: warning: unused parameter 'tlmType' [-Wunused-parameter]
+../src/TLM_management.c: In function 'readTLMFile':
+../src/TLM_management.c:453:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:231:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c:455:5: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:476:3: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:488:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:514:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c: In function 'readTLMFileTimeRange':
+../src/TLM_management.c:553:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:231:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c:554:5: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:571:2: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:575:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:575:46: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:575:90: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:595:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:601:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c: In function 'DeInitializeFS':
+../src/TLM_management.c:609:6: warning: unused variable 'j' [-Wunused-variable]
+../src/TLM_management.c: In function 'CMD_getDataImage':
+../src/TLM_management.c:128:1: warning: control reaches end of non-void function [-Wreturn-type]
+../src/TLM_management.c: In function 'CMD_getInfoImage':
+../src/TLM_management.c:78:1: warning: control reaches end of non-void function [-Wreturn-type]
+Finished building: ../src/TLM_management.c
+ 
+Building target: GlobusSatProject.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
+Finished building target: GlobusSatProject.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O binary "GlobusSatProject.elf"  "GlobusSatProject.bin"
+Finished building: GlobusSatProject.bin
+ 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
+   text	   data	    bss	    dec	    hex	filename
+ 241848	     12	 523636	 765496	  bae38	GlobusSatProject.elf
+Finished building: GlobusSatProject.siz
+ 
+12:54:15 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building file: ../src/TLM_management.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/TLM_management.d" -MT"src/TLM_management.d" -c -o "src/TLM_management.o" "../src/TLM_management.c"
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:5:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:4,
+                 from ../src/TLM_management.c:17:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/boolean.h:40:0: warning: "TRUE" redefined [enabled by default]
+In file included from C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_hcc_mem.h:31:0,
+                 from ../src/TLM_management.c:15:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/../psp/include/psp_types.h:59:0: note: this is the location of the previous definition
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:5:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:4,
+                 from ../src/TLM_management.c:17:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/boolean.h:41:0: warning: "FALSE" redefined [enabled by default]
+In file included from C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_hcc_mem.h:31:0,
+                 from ../src/TLM_management.c:15:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/../psp/include/psp_types.h:56:0: note: this is the location of the previous definition
+../src/TLM_management.c: In function 'CMD_getInfoImage':
+../src/TLM_management.c:50:13: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:63:2: warning: passing argument 1 of 'fm_seek' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:616:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:64:2: warning: passing argument 1 of 'fm_tell' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:618:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:65:2: warning: passing argument 1 of 'fm_rewind' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:621:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:66:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c: In function 'CMD_getDataImage':
+../src/TLM_management.c:89:12: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:97:3: warning: passing argument 1 of 'fm_seek' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:616:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:98:3: warning: passing argument 1 of 'fm_tell' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:618:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:99:3: warning: passing argument 1 of 'fm_rewind' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:621:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:100:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat]
+../src/TLM_management.c:100:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat]
+../src/TLM_management.c:113:4: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:116:11: warning: implicit declaration of function 'f_puts' [-Wimplicit-function-declaration]
+../src/TLM_management.c: In function 'deleteTLMFile':
+../src/TLM_management.c:169:2: warning: implicit declaration of function 'getTlmTypeInfo' [-Wimplicit-function-declaration]
+../src/TLM_management.c:172:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:6:0,
+                 from ../src/TLM_management.c:17:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:76:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c: In function 'InitializeFS':
+../src/TLM_management.c:184:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:184:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:190:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:190:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:198:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:198:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c: At top level:
+../src/TLM_management.c:245:6: warning: conflicting types for 'getTlmTypeInfo' [enabled by default]
+../src/TLM_management.c:169:2: note: previous implicit declaration of 'getTlmTypeInfo' was here
+../src/TLM_management.c: In function 'write2File':
+../src/TLM_management.c:309:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:231:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c: In function 'printTLM':
+../src/TLM_management.c:331:21: warning: unused parameter 'element' [-Wunused-parameter]
+../src/TLM_management.c:331:41: warning: unused parameter 'tlmType' [-Wunused-parameter]
+../src/TLM_management.c: In function 'readTLMFile':
+../src/TLM_management.c:453:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:231:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c:455:5: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:476:3: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:488:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:514:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c: In function 'readTLMFileTimeRange':
+../src/TLM_management.c:553:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:231:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c:554:5: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:571:2: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:575:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:575:46: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:575:90: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:595:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:601:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c: In function 'CMD_getDataImage':
+../src/TLM_management.c:128:1: warning: control reaches end of non-void function [-Wreturn-type]
+../src/TLM_management.c: In function 'CMD_getInfoImage':
+../src/TLM_management.c:78:1: warning: control reaches end of non-void function [-Wreturn-type]
+Finished building: ../src/TLM_management.c
+ 
+Building target: GlobusSatProject.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
+Finished building target: GlobusSatProject.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O binary "GlobusSatProject.elf"  "GlobusSatProject.bin"
+Finished building: GlobusSatProject.bin
+ 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
+   text	   data	    bss	    dec	    hex	filename
+ 241848	     12	 523636	 765496	  bae38	GlobusSatProject.elf
+Finished building: GlobusSatProject.siz
+ 
+12:54:43 **** Incremental Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 239200	     12	 523636	 762848	  ba3e0	GlobusSatProject.elf
+ 241848	     12	 523636	 765496	  bae38	GlobusSatProject.elf
+Finished building: GlobusSatProject.siz
+ 
+12:55:22 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
+   text	   data	    bss	    dec	    hex	filename
+ 241848	     12	 523636	 765496	  bae38	GlobusSatProject.elf
+Finished building: GlobusSatProject.siz
+ 
+12:55:39 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
+   text	   data	    bss	    dec	    hex	filename
+ 241848	     12	 523636	 765496	  bae38	GlobusSatProject.elf
+Finished building: GlobusSatProject.siz
+ 
+12:56:09 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Building file: ../src/TLM_management.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/TLM_management.d" -MT"src/TLM_management.d" -c -o "src/TLM_management.o" "../src/TLM_management.c"
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:5:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:4,
+                 from ../src/TLM_management.c:17:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/boolean.h:40:0: warning: "TRUE" redefined [enabled by default]
+In file included from C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_hcc_mem.h:31:0,
+                 from ../src/TLM_management.c:15:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/../psp/include/psp_types.h:59:0: note: this is the location of the previous definition
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:5:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:4,
+                 from ../src/TLM_management.c:17:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/boolean.h:41:0: warning: "FALSE" redefined [enabled by default]
+In file included from C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_hcc_mem.h:31:0,
+                 from ../src/TLM_management.c:15:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/../psp/include/psp_types.h:56:0: note: this is the location of the previous definition
+../src/TLM_management.c: In function 'CMD_getInfoImage':
+../src/TLM_management.c:50:13: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:63:2: warning: passing argument 1 of 'fm_seek' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:616:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:64:2: warning: passing argument 1 of 'fm_tell' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:618:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:65:2: warning: passing argument 1 of 'fm_rewind' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:621:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:66:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c: In function 'CMD_getDataImage':
+../src/TLM_management.c:89:12: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:97:3: warning: passing argument 1 of 'fm_seek' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:616:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:98:3: warning: passing argument 1 of 'fm_tell' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:618:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:99:3: warning: passing argument 1 of 'fm_rewind' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:621:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:100:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat]
+../src/TLM_management.c:100:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long int' [-Wformat]
+../src/TLM_management.c:113:4: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:116:11: warning: implicit declaration of function 'f_puts' [-Wimplicit-function-declaration]
+../src/TLM_management.c: In function 'deleteTLMFile':
+../src/TLM_management.c:169:2: warning: implicit declaration of function 'getTlmTypeInfo' [-Wimplicit-function-declaration]
+../src/TLM_management.c:172:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:6:0,
+                 from ../src/TLM_management.c:17:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:76:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c: In function 'InitializeFS':
+../src/TLM_management.c:184:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:184:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:190:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:190:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:198:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c:198:3: warning: too many arguments for format [-Wformat-extra-args]
+../src/TLM_management.c: At top level:
+../src/TLM_management.c:245:6: warning: conflicting types for 'getTlmTypeInfo' [enabled by default]
+../src/TLM_management.c:169:2: note: previous implicit declaration of 'getTlmTypeInfo' was here
+../src/TLM_management.c: In function 'write2File':
+../src/TLM_management.c:309:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:231:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c: In function 'printTLM':
+../src/TLM_management.c:331:21: warning: unused parameter 'element' [-Wunused-parameter]
+../src/TLM_management.c:331:41: warning: unused parameter 'tlmType' [-Wunused-parameter]
+../src/TLM_management.c: In function 'readTLMFile':
+../src/TLM_management.c:453:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:231:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c:455:5: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:476:3: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:488:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:514:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c: In function 'readTLMFileTimeRange':
+../src/TLM_management.c:553:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:231:6: note: expected 'char *' but argument is of type 'char (*)[11]'
+../src/TLM_management.c:554:5: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:571:2: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:575:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:575:46: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:575:90: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:595:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:601:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c: In function 'CMD_getDataImage':
+../src/TLM_management.c:128:1: warning: control reaches end of non-void function [-Wreturn-type]
+../src/TLM_management.c: In function 'CMD_getInfoImage':
+../src/TLM_management.c:78:1: warning: control reaches end of non-void function [-Wreturn-type]
+Finished building: ../src/TLM_management.c
+ 
+Building target: GlobusSatProject.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
+Finished building target: GlobusSatProject.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O binary "GlobusSatProject.elf"  "GlobusSatProject.bin"
+Finished building: GlobusSatProject.bin
+ 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
+   text	   data	    bss	    dec	    hex	filename
+ 241848	     12	 523636	 765496	  bae38	GlobusSatProject.elf
+Finished building: GlobusSatProject.siz
+ 
+12:56:13 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+make -r -k all 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
+   text	   data	    bss	    dec	    hex	filename
+ 241848	     12	 523636	 765496	  bae38	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  

@@ -57,6 +57,8 @@ void DumpTask(void *args) {
 int CMD_AntennaDeploy(sat_packet_t *cmd)
 {
 
+	printf("******* ANT DEPLOY - ANT DEPLOY - ANT DEPLOY - ANT DEPLOY\n");
+	logError(INFO_MSG,"ANT DEPLOY - ANT DEPLOY - ANT DEPLOY");
 	return 0; // TODO RBF - now that we have the ANT installed, want to make sure we don't deploy by mistake
 	/*
 	int err = logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideA, isisants_arm) ,"CMD_AntennaDeploy-IsisAntS_setArmStatus-A");

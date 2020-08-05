@@ -137,6 +137,7 @@ int DeploySystem()
 	if (!first_activation) return 0;
 
 
+	logError(INFO_MSG,"Deploy first activation");
 	// write default values to FRAM
 	WriteDefaultValuesToFRAM();
 
@@ -145,12 +146,13 @@ int DeploySystem()
 
 	time_unix seconds_since_deploy = 0;
 	err = logError(FRAM_read((unsigned char*) &seconds_since_deploy , SECONDS_SINCE_DEPLOY_ADDR , SECONDS_SINCE_DEPLOY_SIZE) ,"DeploySystem-FRAM_read");
-	if (err == E_NO_SS_ERR) {
+	if (err != E_NO_SS_ERR) {
 		seconds_since_deploy = 0;
 	}
 
 	// wait 30 min + log telm
 	while (seconds_since_deploy < MINUTES_TO_SECONDS(MIN_2_WAIT_BEFORE_DEPLOY)) { // RBF to 30 min
+		logError(INFO_MSG,"Deploy wait loop");
 		// wait 10 sec and update timer in FRAM
 		vTaskDelay(SECONDS_TO_TICKS(10));
 		seconds_since_deploy += 10;
@@ -165,6 +167,7 @@ int DeploySystem()
 		isis_eps__watchdog__tm(EPS_I2C_BUS_INDEX, &eps_cmd);
 
 	}
+	logError(INFO_MSG,"Deploy wait loop");
 
 	// open ants !
 	CMD_AntennaDeploy(NULL);
@@ -209,8 +212,8 @@ int InitSubsystems()
 
 	logError(INFO_MSG ,"Sat Started");
 
-	//time_unix default_no_comm_thresh = (4*60*60);
-	//FRAM_write((unsigned char*) &default_no_comm_thresh , NO_COMM_WDT_KICK_TIME_ADDR , NO_COMM_WDT_KICK_TIME_SIZE);
+	time_unix default_no_comm_thresh = (1*60*60);
+	FRAM_write((unsigned char*) &default_no_comm_thresh , NO_COMM_WDT_KICK_TIME_ADDR , NO_COMM_WDT_KICK_TIME_SIZE);
 
 	vTaskDelay(1000); // rest a little before we start working
 

@@ -253,7 +253,9 @@ int CMD_ResetComponent(sat_packet_t *cmd)
 		break;
 
 	case reset_filesystem:
-		DeInitializeFS(); //TODO not working well
+
+		DeInitializeFS(0);
+
 		vTaskDelay(10);
 		err = (unsigned int) InitializeFS(FALSE);
 		vTaskDelay(10);

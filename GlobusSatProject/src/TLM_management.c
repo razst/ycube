@@ -190,6 +190,8 @@ FileSystemResult InitializeFS(Boolean first_time)
 		printf("fs_init error:",err);
 	}
 
+	fs_start();
+
 	// Tell the OS (freeRTOS) about our FS
 	err = f_enterFS();
 	if (err != E_NO_SS_ERR){
@@ -201,10 +203,15 @@ FileSystemResult InitializeFS(Boolean first_time)
 	// TODO: why drive 1 is not working when we test it?
 	err=f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_PRI );
 	if (err != E_NO_SS_ERR){
-		printf("f_initvolume primary error:",err);
+		// erro init SD 0 so de-itnit and init SD 1
+		printf("f_initvolume primary error:%d\n",err);
+		DeInitializeFS(SD_CARD_DRIVER_PRI);
+		hcc_mem_init();
+		fs_init();
+		f_enterFS();
 		err=f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_SEC );
 		if (err != E_NO_SS_ERR){
-			printf("f_initvolume secondary error:",err);
+			printf("f_initvolume secondary error:%d\n",err);
 		}
 	}
 
@@ -591,6 +598,38 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 }
 
 
-void DeInitializeFS( void )
+void DeInitializeFS( int sd_card )
 {
+	printf("deinitializig file system. SD card: %d \n",sd_card);
+	int err = f_delvolume( sd_card ); /* delete the volID */
+
+	printf("volume deleted\n");
+
+	if(err != 0)
+	{
+		printf("f_delvolume err %d\n", err);
+	}
+
+	f_releaseFS(); /* release this task from the filesystem */
+
+	printf("FS released\n");
+
+	err = fs_delete(); /* delete the filesystem */
+
+	printf("FS deleted\n");
+
+	if(err != 0)
+	{
+		printf("fs_delete err , %d\n", err);
+	}
+	err = hcc_mem_delete(); /* free the memory used by the filesystem */
+
+	printf("FS mem freed\n");
+
+	if(err != 0)
+	{
+		printf("hcc_mem_delete err , %d\n", err);
+	}
+	printf("deinitializig file system done \n");
+
 }
