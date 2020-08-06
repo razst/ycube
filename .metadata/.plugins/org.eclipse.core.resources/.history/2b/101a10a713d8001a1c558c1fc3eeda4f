@@ -153,7 +153,6 @@ int DeploySystem()
 
 	time_unix startTime = 0;
 	Time_getUnixEpoch(&startTime);
-	startTime -= seconds_since_deploy;
 
 	// wait 30 min + log telm
 	while (seconds_since_deploy < MINUTES_TO_SECONDS(MIN_2_WAIT_BEFORE_DEPLOY)) { // RBF to 30 min
