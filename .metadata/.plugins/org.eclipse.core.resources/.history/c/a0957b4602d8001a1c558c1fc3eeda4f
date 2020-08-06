@@ -50,17 +50,6 @@ time_unix getMuteEndTime(){
 	return endTime;
 }
 
-// set Transponder end time in FRAM
-void setTransponderEndTime(time_unix endTime){
-	logError(FRAM_write((unsigned char*) &endTime , TRANSPONDER_END_TIME_ADDR , TRANSPONDER_END_TIME_SIZE) ,"TRXVU-setTransponderEndTime");
-}
-
-// get Transponder end time from FRAM
-time_unix getTransponderEndTime(){
-	time_unix endTime;
-	logError(FRAM_read((unsigned char*) &endTime , TRANSPONDER_END_TIME_ADDR , TRANSPONDER_END_TIME_SIZE) ,"TRXVU-getTransponderEndTime");
-	return endTime;
-}
 
 void InitTxModule()
 {
@@ -165,8 +154,8 @@ void checkTransponderFinish(){
 	Time_getUnixEpoch(&curr_tick_time);
 
 	// check if it is time to turn off the transponder...
-	if (getTransponderEndTime() != 0 && getTransponderEndTime() < curr_tick_time){
-		setTransponderEndTime(0);
+	if (g_transponder_end_time !=0 && g_transponder_end_time < curr_tick_time){
+		g_transponder_end_time = 0;
 		char data[2] = {0, 0};
 		data[0] = 0x38;
 		data[1] = trxvu_transponder_off;
@@ -371,7 +360,7 @@ int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
 	Time_getUnixEpoch(&curr_tick_time);
 	if (state == trxvu_idle_state_on && curr_tick_time < getMuteEndTime()) return TRXVU_IDEL_WHILE_MUTE;
 
-	if (state == trxvu_idle_state_on && curr_tick_time < getTransponderEndTime()) return TRXVU_IDLE_WHILE_TRANSPONDER;
+	if (state == trxvu_idle_state_on && curr_tick_time < g_transponder_end_time) return TRXVU_IDLE_WHILE_TRANSPONDER;
 
 	int err = logError(IsisTrxvu_tcSetIdlestate(ISIS_TRXVU_I2C_BUS_INDEX, state) ,"SetIdleState-IsisTrxvu_tcSetIdlestate");
 

@@ -41,9 +41,6 @@ typedef enum __attribute__ ((__packed__)) _ISIStrxvuTransponderMode
 
 time_unix getMuteEndTime();
 
-
-time_unix getTransponderEndTime();
-
 /*!
  * @breif Initializes data filed for transmission - semaphores, parameters from the FRAM
  * @return

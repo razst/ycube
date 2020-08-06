@@ -165,7 +165,7 @@ void checkTransponderFinish(){
 	Time_getUnixEpoch(&curr_tick_time);
 
 	// check if it is time to turn off the transponder...
-	if (getTransponderEndTime() != 0 && getTransponderEndTime() < curr_tick_time){
+	if (getTransponderEndTime() < curr_tick_time){
 		setTransponderEndTime(0);
 		char data[2] = {0, 0};
 		data[0] = 0x38;
@@ -371,7 +371,7 @@ int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
 	Time_getUnixEpoch(&curr_tick_time);
 	if (state == trxvu_idle_state_on && curr_tick_time < getMuteEndTime()) return TRXVU_IDEL_WHILE_MUTE;
 
-	if (state == trxvu_idle_state_on && curr_tick_time < getTransponderEndTime()) return TRXVU_IDLE_WHILE_TRANSPONDER;
+	if (state == trxvu_idle_state_on && curr_tick_time < g_transponder_end_time) return TRXVU_IDLE_WHILE_TRANSPONDER;
 
 	int err = logError(IsisTrxvu_tcSetIdlestate(ISIS_TRXVU_I2C_BUS_INDEX, state) ,"SetIdleState-IsisTrxvu_tcSetIdlestate");
 

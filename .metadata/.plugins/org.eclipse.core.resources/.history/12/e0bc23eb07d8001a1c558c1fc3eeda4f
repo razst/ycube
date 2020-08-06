@@ -130,7 +130,7 @@ int StartTIME()
 
 
 
-//TODO: before sent to flight: 1. set FIRST_ACTIVATION flag to TRUE 2. set SECONDS_SINCE_DEPLOY to 0
+//TODO: before send to flight: 1. set FIRST_ACTIVATION flag to TRUE 2. set SECONDS_SINCE_DEPLOY to 0
 int DeploySystem()
 {
 	Boolean first_activation = isFirstActivation();

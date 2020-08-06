@@ -11,6 +11,7 @@
 
 extern xTaskHandle xDumpHandle;			                //task handle for dump task
 extern xSemaphoreHandle xDumpLock;                      // this global lock is defined once in TRXVU.c
+extern time_unix 		g_max_transponder_time;			// time at which the transponder mode will end
 
 static dump_arguments_t dmp_pckt;
 
@@ -159,11 +160,11 @@ int CMD_SetTransponder(sat_packet_t *cmd)
 		if(duration > MAX_TRANS_TIME) return TRXVU_TRANSPONDER_TOO_LONG;
 
 		err = I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
-		setTransponderEndTime(curr_tick_time + duration);
+		g_transponder_end_time = curr_tick_time + duration;
 
 	}else if (data[1] == trxvu_transponder_off){
 		err = I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
-		setTransponderEndTime(0);
+		g_transponder_end_time = 0;
 
 	}else {
 		return E_INVALID_PARAMETERS;
@@ -200,7 +201,7 @@ int CMD_MuteTRXVU(sat_packet_t *cmd)
 	SetIdleState(trxvu_idle_state_off, 0);
 
 	// turn off the transponder
-	setTransponderEndTime(0);
+	g_transponder_end_time = 0;
 	char data[2] = {0, 0};
 	data[0] = 0x38;
 	data[1] = trxvu_transponder_off;

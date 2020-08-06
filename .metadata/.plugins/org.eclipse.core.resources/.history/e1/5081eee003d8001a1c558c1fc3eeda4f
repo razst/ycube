@@ -31,8 +31,8 @@
 #define FIRST_ACTIVATION_FLAG_ADDR		0x42		//<! is this the first activation after launch flag
 #define FIRST_ACTIVATION_FLAG_SIZE		4			//<! length in bytes of FIRST_ACTIVATION_FLAG
 
-#define TRANSPONDER_END_TIME_ADDR		0x48		//<! mute end time
-#define TRANSPONDER_END_TIME_SIZE		4			//<! length in bytes of
+#define MUTE_END_TIME_ADDR				0x48		//<! mute end time
+#define MUTE_END_TIME_SIZE				4			//<! length in bytes of
 
 #define MOST_UPDATED_SAT_TIME_ADDR		0x54		//<! this parameters saves the sat time to be read after resets
 #define MOST_UPDATED_SAT_TIME_SIZE		4			//<! size of the parameter in bytes
