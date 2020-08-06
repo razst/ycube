@@ -26,7 +26,6 @@
 #endif
 
 
-time_unix 		g_mute_end_time = 0;				// time at which the mute will end
 time_unix 		g_idle_end_time = 1;				// time at which the idel will end
 time_unix 		g_transponder_end_time = 0;			// time at which the transponder mode will end
 
@@ -38,6 +37,19 @@ xTaskHandle xDumpHandle = NULL;
 time_unix g_prev_beacon_time = 0;				// the time at which the previous beacon occured
 time_unix g_beacon_interval_time = 0;			// seconds between each beacon
 
+
+
+// set mute end time in FRAM
+void setMuteEndTime(time_unix endTime){
+	logError(FRAM_write((unsigned char*) &endTime , MUTE_END_TIME_ADDR , MUTE_END_TIME_SIZE) ,"TRXVU-setMuteEndTime");
+}
+
+// get mute end time from FRAM
+time_unix getMuteEndTime(){
+	time_unix endTime;
+	logError(FRAM_read((unsigned char*) &endTime , MUTE_END_TIME_ADDR , MUTE_END_TIME_SIZE) ,"TRXVU-getMuteEndTime");
+	return endTime;
+}
 
 
 void InitTxModule()
@@ -232,7 +244,7 @@ Boolean CheckTransmitionAllowed() {
 	time_unix curr_tick_time = 0;
 	Time_getUnixEpoch(&curr_tick_time);
 
-	if (curr_tick_time < g_mute_end_time) return FALSE;
+	if (curr_tick_time < getMuteEndTime()) return FALSE;
 
 
 	// check that we can take the tx Semaphore
@@ -344,13 +356,16 @@ int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
 		return TRXVU_IDLE_TOO_LONG;
 	}
 
+	// get current unix time
+	time_unix curr_tick_time = 0;
+	Time_getUnixEpoch(&curr_tick_time);
+	if (state == trxvu_idle_state_on && curr_tick_time < getMuteEndTime()) return TRXVU_IDEL_WHILE_MUTE;
+
+	if (state == trxvu_idle_state_on && curr_tick_time < g_transponder_end_time) return TRXVU_IDLE_WHILE_TRANSPONDER;
+
 	int err = logError(IsisTrxvu_tcSetIdlestate(ISIS_TRXVU_I2C_BUS_INDEX, state) ,"SetIdleState-IsisTrxvu_tcSetIdlestate");
 
 	if (err == E_NO_SS_ERR && state == trxvu_idle_state_on){
-		// get current unix time
-		time_unix curr_tick_time = 0;
-		Time_getUnixEpoch(&curr_tick_time);
-
 		// set mute end time
 		g_idle_end_time = curr_tick_time + duration;
 	}
@@ -358,23 +373,24 @@ int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
 
 }
 
+
 int muteTRXVU(time_unix duration) {
 	if (duration > MAX_MUTE_TIME) {
 		logError(TRXVU_MUTE_TOO_LONG ,"muteTRXVU");
-		return -1;
+		return TRXVU_MUTE_TOO_LONG;
 	}
 	// get current unix time
 	time_unix curr_tick_time = 0;
 	Time_getUnixEpoch(&curr_tick_time);
 
 	// set mute end time
-	g_mute_end_time = curr_tick_time + duration;
+	setMuteEndTime(curr_tick_time + duration);
 	return 0;
 
 }
 
 void UnMuteTRXVU() {
-	g_mute_end_time = 0;
+	setMuteEndTime(0);
 
 }
 

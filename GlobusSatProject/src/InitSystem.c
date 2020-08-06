@@ -89,6 +89,8 @@ void WriteDefaultValuesToFRAM()
 			STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);
 
 	ResetGroundCommWDT();
+
+	setMuteEndTime(0);
 }
 
 int StartFRAM()

@@ -13,7 +13,6 @@ extern xTaskHandle xDumpHandle;			                //task handle for dump task
 extern xSemaphoreHandle xDumpLock;                      // this global lock is defined once in TRXVU.c
 extern time_unix 		g_transponder_end_time;			// time at which the transponder mode will end
 extern time_unix 		g_max_transponder_time;			// time at which the transponder mode will end
-extern time_unix 		g_mute_end_time;			// time at which the transponder mode will end
 
 static dump_arguments_t dmp_pckt;
 
@@ -156,7 +155,7 @@ int CMD_SetTransponder(sat_packet_t *cmd)
 	if(data[1] == trxvu_transponder_on){
 		time_unix curr_tick_time = 0;
 		Time_getUnixEpoch(&curr_tick_time);
-		if (curr_tick_time < g_mute_end_time) return TRXVU_TRANSPONDER_WHILE_MUTE;
+		if (curr_tick_time < getMuteEndTime()) return TRXVU_TRANSPONDER_WHILE_MUTE;
 		SetIdleState(trxvu_idle_state_off, 0);
 		memcpy(&duration,cmd->data + sizeof(char),sizeof(duration));
 		if(duration > MAX_TRANS_TIME) return TRXVU_TRANSPONDER_TOO_LONG;
@@ -198,18 +197,23 @@ int CMD_SetRSSITransponder(sat_packet_t *cmd)
 
 int CMD_MuteTRXVU(sat_packet_t *cmd)
 {
+
+	// turn off Idle
+	SetIdleState(trxvu_idle_state_off, 0);
+
+	// turn off the transponder
+	g_transponder_end_time = 0;
+	char data[2] = {0, 0};
+	data[0] = 0x38;
+	data[1] = trxvu_transponder_off;
+	I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
+
 	int err = 0;
 	time_unix mute_duaration = 0;
 	memcpy(&mute_duaration,cmd->data,sizeof(mute_duaration));
-	SetIdleState(trxvu_idle_state_off, 0);
-
-	g_transponder_end_time = 0;
-	int data[2] = {0x38, trxvu_transponder_off};
-	I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
-
 	err = muteTRXVU(mute_duaration);
 	if (err == E_NO_SS_ERR){
-		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0); //trying to add the ack functions
+		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
 	}
 	return err;
 }
@@ -220,22 +224,14 @@ int CMD_SetIdleState(sat_packet_t *cmd)
 	memcpy(&state,cmd->data,sizeof(state));
 	time_unix duaration = 0;
 	if (state == trxvu_idle_state_on){
-		time_unix curr_tick_time = 0;
-		Time_getUnixEpoch(&curr_tick_time);
-
-		if (curr_tick_time < g_mute_end_time) return TRXVU_IDEL_WHILE_MUTE;
-
-		if(g_transponder_end_time > curr_tick_time){
-			return TRXVU_IDLE_WHILE_TRANSPONDER;
-		}
-
 		memcpy(&duaration,cmd->data+sizeof(state),sizeof(duaration));
 	}
+
 	int err = SetIdleState(state,duaration);
+
 	if (err == E_NO_SS_ERR){
 		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
 	}
-
 
 	return err;
 }

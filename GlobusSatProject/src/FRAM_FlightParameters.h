@@ -18,6 +18,9 @@
 #define STOP_REDEPOLOY_FLAG_ADDR		0x30		//<! stop calling ant deploy every 30 min flag
 #define STOP_REDEPOLOY_FLAG_SIZE		4			//<! length in bytes of
 
+#define MUTE_END_TIME_ADDR				0x36		//<! mute end time
+#define MUTE_END_TIME_SIZE				4			//<! length in bytes of
+
 #define FIRST_ACTIVATION_FLAG_ADDR		0x42		//<! is this the first activation after launch flag
 #define FIRST_ACTIVATION_FLAG_SIZE		4			//<! length in bytes of FIRST_ACTIVATION_FLAG
 
