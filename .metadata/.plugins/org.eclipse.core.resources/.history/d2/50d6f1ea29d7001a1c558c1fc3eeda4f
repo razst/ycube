@@ -207,7 +207,7 @@ void DeployAnt(){
 
 	// if we don't have any last deploy time, than take the first deploy time from FRAM
 	if (lastDeploy==0){
-		FRAM_read((unsigned char*) &lastDeploy, DEPLOYMENT_TIME_ADDR,
+		FRAM_read((unsigned char*) lastDeploy, DEPLOYMENT_TIME_ADDR,
 				DEPLOYMENT_TIME_SIZE);
 	}
 

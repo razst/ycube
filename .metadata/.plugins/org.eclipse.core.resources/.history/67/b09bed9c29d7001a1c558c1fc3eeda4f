@@ -14,7 +14,7 @@ extern xSemaphoreHandle xDumpLock;                      // this global lock is d
 extern time_unix 		g_transponder_end_time;			// time at which the transponder mode will end
 extern time_unix 		g_max_transponder_time;			// time at which the transponder mode will end
 extern time_unix 		g_mute_end_time;			// time at which the transponder mode will end
-
+extern time_unix 		lastDeploy;
 static dump_arguments_t dmp_pckt;
 
 void DumpTask(void *args) {

@@ -151,7 +151,7 @@ int DeploySystem()
 
 	// wait 30 min + log telm
 	while (seconds_since_deploy < MINUTES_TO_SECONDS(MIN_2_WAIT_BEFORE_DEPLOY)) { // RBF to 30 min
-		logError(INFO_MSG,"Deploy wait loop start");
+		logError(INFO_MSG,"Deploy wait loop");
 		// wait 10 sec and update timer in FRAM
 		vTaskDelay(SECONDS_TO_TICKS(10));
 		seconds_since_deploy += 10;
@@ -211,7 +211,7 @@ int InitSubsystems()
 
 	logError(INFO_MSG ,"Sat Started");
 
-	time_unix default_no_comm_thresh = (5*24*60*60);
+	time_unix default_no_comm_thresh = (1*60*60);
 	FRAM_write((unsigned char*) &default_no_comm_thresh , NO_COMM_WDT_KICK_TIME_ADDR , NO_COMM_WDT_KICK_TIME_SIZE);
 
 	vTaskDelay(1000); // rest a little before we start working

@@ -204,12 +204,7 @@ void DeployAnt(){
 
 	Boolean flag;
 	FRAM_read((unsigned char*) &flag, STOP_REDEPOLOY_FLAG_ADDR,STOP_REDEPOLOY_FLAG_SIZE);
-
-	// if we don't have any last deploy time, than take the first deploy time from FRAM
-	if (lastDeploy==0){
-		FRAM_read((unsigned char*) &lastDeploy, DEPLOYMENT_TIME_ADDR,
-				DEPLOYMENT_TIME_SIZE);
-	}
+	//printf("STOP_REDEPOLOY_FLAG_ADDR: %d \n",flag);
 
 	if (!flag  && CheckExecutionTime(lastDeploy,DEPLOY_INTRAVAL)){
 		CMD_AntennaDeploy(NULL);

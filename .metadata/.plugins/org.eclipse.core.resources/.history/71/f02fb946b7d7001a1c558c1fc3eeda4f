@@ -145,9 +145,7 @@ void checkTransponderFinish(){
 	// check if it is time to turn off the transponder...
 	if (g_transponder_end_time !=0 && g_transponder_end_time < curr_tick_time){
 		g_transponder_end_time = 0;
-		char data[2] = {0, 0};
-		data[0] = 0x38;
-		data[1] = trxvu_transponder_off;
+		int data[2] = {0x38, trxvu_transponder_off};
 		I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
 	}
 }
