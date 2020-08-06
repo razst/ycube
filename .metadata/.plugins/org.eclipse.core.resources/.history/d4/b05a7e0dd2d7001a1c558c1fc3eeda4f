@@ -177,6 +177,11 @@ int DeploySystem()
 	FRAM_write((unsigned char*) &deploy_time, DEPLOYMENT_TIME_ADDR,
 			DEPLOYMENT_TIME_SIZE);
 
+	time_unix lastDeploy=0;
+	FRAM_read((unsigned char*) &lastDeploy, DEPLOYMENT_TIME_ADDR,
+			DEPLOYMENT_TIME_SIZE);
+
+
 	// set first activation false in FRAM
 	first_activation = FALSE;
 	FRAM_write((unsigned char*) &first_activation,

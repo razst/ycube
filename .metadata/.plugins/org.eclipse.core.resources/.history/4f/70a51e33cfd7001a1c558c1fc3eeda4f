@@ -27,7 +27,7 @@
 #include <math.h>
 
 
-time_unix lastDeploy = 0;
+static time_unix lastDeploy = 0;
 
 Boolean CheckExecutionTime(time_unix prev_time, time_unix period)
 {

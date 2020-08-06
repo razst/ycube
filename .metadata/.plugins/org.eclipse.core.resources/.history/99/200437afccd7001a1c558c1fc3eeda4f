@@ -9,7 +9,6 @@
 #include "GlobalStandards.h"
 #include "SubSystemModules/PowerManagment/EPS.h"
 #include "SubSystemModules/Communication/TRXVU.h"
-#include "SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h"
 #include "SubSystemModules/Maintenance/Maintenance.h"
 #include "InitSystem.h"
 #include "TLM_management.h"
@@ -136,6 +135,7 @@ int DeploySystem()
 	// if this is not a first activation, than nothing to do here... return
 	if (!first_activation) return 0;
 
+
 	logError(INFO_MSG,"Deploy first activation");
 	// write default values to FRAM
 	WriteDefaultValuesToFRAM();
@@ -174,7 +174,7 @@ int DeploySystem()
 	// set deploy time in FRAM
 	time_unix deploy_time = 0;
 	Time_getUnixEpoch(&deploy_time);
-	FRAM_write((unsigned char*) &deploy_time, DEPLOYMENT_TIME_ADDR,
+	FRAM_write((unsigned char*) deploy_time, DEPLOYMENT_TIME_ADDR,
 			DEPLOYMENT_TIME_SIZE);
 
 	// set first activation false in FRAM
@@ -186,6 +186,7 @@ int DeploySystem()
 }
 
 
+#define PRINT_IF_ERR(method) if(0 != err)printf("error in '" #method  "' err = %d\n",err);
 int InitSubsystems()
 {
 	StartI2C();
