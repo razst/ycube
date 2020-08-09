@@ -200,12 +200,12 @@ int DeleteOldFiels(int minFreeSpace){
 	}
 }
 
-void CheckDeployAnt(){
+void DeployAnt(){
 
 	Boolean flag;
 	FRAM_read((unsigned char*) &flag, STOP_REDEPOLOY_FLAG_ADDR,STOP_REDEPOLOY_FLAG_SIZE);
 
-	// if we don't have any last deploy time, than its our first iteration check, take current time so we don't deploy immediately
+	// if we don't have any last deploy time, than take the first deploy time from FRAM
 	if (lastDeploy==0){
 		Time_getUnixEpoch(&lastDeploy);
 		//FRAM_read((unsigned char*) &lastDeploy, DEPLOYMENT_TIME_ADDR, DEPLOYMENT_TIME_SIZE);
@@ -243,6 +243,6 @@ void Maintenance()
 
 	DeleteOldFiels(MIN_FREE_SPACE);
 
-	CheckDeployAnt();
+	DeployAnt();
 }
 

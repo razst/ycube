@@ -200,7 +200,7 @@ int DeleteOldFiels(int minFreeSpace){
 	}
 }
 
-void CheckDeployAnt(){
+void DeployAnt(){
 
 	Boolean flag;
 	FRAM_read((unsigned char*) &flag, STOP_REDEPOLOY_FLAG_ADDR,STOP_REDEPOLOY_FLAG_SIZE);
@@ -243,6 +243,6 @@ void Maintenance()
 
 	DeleteOldFiels(MIN_FREE_SPACE);
 
-	CheckDeployAnt();
+	DeployAnt();
 }
 
