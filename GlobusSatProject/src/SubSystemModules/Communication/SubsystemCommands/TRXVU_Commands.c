@@ -54,10 +54,9 @@ void DumpTask(void *args) {
 int CMD_AntennaDeploy(sat_packet_t *cmd)
 {
 
-	logError(INFO_MSG,"ANT DEPLOY - ANT DEPLOY - ANT DEPLOY\n");
 	while (TRUE)
 	{
-		printf("******* ANT DEPLOY - ANT DEPLOY - ANT DEPLOY - ANT DEPLOY\n");
+		printf("******* REMARK - ANT DEPLOY - ANT DEPLOY - ANT DEPLOY - ANT DEPLOY\n");
 		vTaskDelay(SECONDS_TO_TICKS(10));
 	}
 	return 0; // TODO RBF - now that we have the ANT installed, want to make sure we don't deploy by mistake
