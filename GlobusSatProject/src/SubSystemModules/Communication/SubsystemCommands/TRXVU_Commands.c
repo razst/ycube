@@ -163,6 +163,7 @@ int CMD_SetTransponder(sat_packet_t *cmd)
 
 		err = I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
 		setTransponderEndTime(curr_tick_time + duration);
+		logError(INFO_MSG,"Transponder ON\n");
 
 	}else if (data[1] == trxvu_transponder_off){
 		err = I2C_write(I2C_TRXVU_TC_ADDR, data, 2);

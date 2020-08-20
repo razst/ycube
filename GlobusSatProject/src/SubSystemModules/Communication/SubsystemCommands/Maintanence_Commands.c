@@ -242,12 +242,14 @@ int CMD_ResetComponent(sat_packet_t *cmd)
 
 	case reset_trxvu_hard:
 		SendAckPacket(ACK_TRXVU_HARD_RESET, cmd, NULL, 0);
+		setTransponderEndTime(0);
 		logError(IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_hardReset");
 		vTaskDelay(100);
 		break;
 
 	case reset_trxvu_soft:
 		SendAckPacket(ACK_TRXVU_SOFT_RESET, cmd, NULL, 0);
+		setTransponderEndTime(0);
 		logError(IsisTrxvu_softReset(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_softReset");
 		vTaskDelay(100);
 		break;
