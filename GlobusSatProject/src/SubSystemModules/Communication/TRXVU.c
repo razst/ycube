@@ -143,6 +143,7 @@ int InitTrxvu() {
 	InitTxModule();
 	InitBeaconParams();
 	InitSemaphores();
+	checkTransponderStart();// lets see if we need to turn on the transponder
 
 
 	return 0;
@@ -171,6 +172,20 @@ void checkTransponderFinish(){
 		data[1] = trxvu_transponder_off;
 		I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
 		logError(INFO_MSG,"transponder off");
+	}
+}
+
+void checkTransponderStart(){
+	time_unix curr_tick_time = 0;
+	Time_getUnixEpoch(&curr_tick_time);
+
+	// check if we need to turn on the transponder...
+	if (getTransponderEndTime() != 0 && getTransponderEndTime() > curr_tick_time){
+		char data[2] = {0, 0};
+		data[0] = 0x38;
+		data[1] = trxvu_transponder_on;
+		I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
+		logError(INFO_MSG,"transponder on");
 	}
 }
 
