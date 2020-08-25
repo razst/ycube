@@ -283,6 +283,7 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 
 	if(err == 0){
 
+		wod->electric_current = hk_tlm.fields.vip_obc00.fields.current;
 		wod->vbat = hk_tlm_cdb.fields.dist_input.fields.volt;
 		wod->current_3V3 = hk_tlm.fields.vip_obc05.fields.current;
 		wod->current_5V = hk_tlm.fields.vip_obc01.fields.current;
