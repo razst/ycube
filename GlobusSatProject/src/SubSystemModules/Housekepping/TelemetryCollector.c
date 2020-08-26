@@ -8,6 +8,7 @@
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
 #endif
+#include <hal/Drivers/ADC.h>
 
 #include <satellite-subsystems/IsisTRXVU.h>
 #include <satellite-subsystems/IsisAntS.h>
@@ -312,6 +313,18 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 	wod->num_of_cmd_resets = reset;
 
 	wod->sat_uptime = Time_getUptimeSeconds();
+
+	// get ADC channels vlaues (include the photo diodes mV values)
+	unsigned short adcSamples[8];
+
+	ADC_SingleShot( adcSamples );
+
+	for(int i=0; i < 8; i++ )
+	{
+		wod->photo_diodes[i] = ADC_ConvertRaw10bitToMillivolt( adcSamples[i] ); // convert to mV data
+		//printf("PD%d : %u mV\n\r", i, wod->photo_diodes[i]);
+	}
+
 
 }
 
