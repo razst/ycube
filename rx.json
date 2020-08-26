@@ -1,4 +1,9 @@
 {
+	"calibrations": [
+		{"ID":"1","name":"Temperature","a":"0.0009765625","b":"0"},
+		{"ID":"2","name":"Voltage","a":"0","b":"0"}
+	],
+
   "types": [
     {
       "id": "0",
@@ -59,37 +64,43 @@
               "desc": "",
               "type": "short"
             },
-            {
+           {
               "name": "Solar panel 1 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 2 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 3 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 4 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 5 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 6 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
-            {
+             {
               "name": "sat_time",
               "desc": "satellite's clock current unix time",
               "type": "datetime"
@@ -912,32 +923,38 @@
             {
               "name": "Solar panel 1 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 2 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 3 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 4 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 5 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "Solar panel 6 Temperature",
               "desc": "",
-              "type": "int"
+              "type": "int",
+			  "calibration":"1"
             },
             {
               "name": "sat_time",
