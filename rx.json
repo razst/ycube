@@ -149,23 +149,7 @@
               "name": "ADC channel 4 (mV)",
               "desc": "na",
               "type": "int"
-            },
-            {
-              "name": "ADC channel 5 (mV)",
-              "desc": "na",
-              "type": "int"
-            },
-            {
-              "name": "ADC channel 6 (mV)",
-              "desc": "na",
-              "type": "int"
-            },
-            {
-              "name": "ADC channel 7 (mV)",
-              "desc": "na",
-              "type": "int"
             },			
-			
             {
               "name": "number_of_cmd_resets",
               "desc": "number of resets the satellite has gone through",
@@ -1005,23 +989,7 @@
               "name": "ADC channel 4 (mV)",
               "desc": "na",
               "type": "int"
-            },
-            {
-              "name": "ADC channel 5 (mV)",
-              "desc": "na",
-              "type": "int"
-            },
-            {
-              "name": "ADC channel 6 (mV)",
-              "desc": "na",
-              "type": "int"
-            },
-            {
-              "name": "ADC channel 7 (mV)",
-              "desc": "na",
-              "type": "int"
             },			
-			
             {
               "name": "number_of_cmd_resets",
               "desc": "number of resets the satellite has gone through",

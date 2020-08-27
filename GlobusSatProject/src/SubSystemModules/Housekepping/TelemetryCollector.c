@@ -319,7 +319,7 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 
 	ADC_SingleShot( adcSamples );
 
-	for(int i=0; i < 8; i++ )
+	for(int i=0; i <= 4; i++ )
 	{
 		wod->photo_diodes[i] = ADC_ConvertRaw10bitToMillivolt( adcSamples[i] ); // convert to mV data
 		//printf("PD%d : %u mV\n\r", i, wod->photo_diodes[i]);
