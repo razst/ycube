@@ -62,6 +62,21 @@ time_unix getTransponderEndTime(){
 	return endTime;
 }
 
+
+// set Transponder RSSI in FRAM
+void setTransponderRSSIinFRAM(short val){
+	logError(FRAM_write((unsigned char*) &val , TRANSPONDER_RSSI_ADDR, TRANSPONDER_RSSI_SIZE) ,"TRXVU-setTransponderRSSI");
+}
+
+// get Transponder end time from FRAM
+short getTransponderRSSIFromFRAM(){
+	short val;
+	logError(FRAM_read((unsigned char*) &val , TRANSPONDER_RSSI_ADDR, TRANSPONDER_RSSI_SIZE) ,"TRXVU-getTransponderRSSI");
+	return val;
+}
+
+
+
 void InitTxModule()
 {
 	if(xIsTransmitting == NULL)
@@ -181,12 +196,36 @@ void checkTransponderStart(){
 
 	// check if we need to turn on the transponder...
 	if (getTransponderEndTime() != 0 && getTransponderEndTime() > curr_tick_time){
-		char data[2] = {0, 0};
-		data[0] = 0x38;
-		data[1] = trxvu_transponder_on;
-		I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
-		logError(INFO_MSG,"transponder on");
+		turnOnTransponder();
 	}
+}
+
+
+int turnOnTransponder(){
+	char data[2] = {0, 0};
+	data[0] = 0x38;
+	data[1] = trxvu_transponder_on;
+
+
+	// first set the RSSI from value in FRAM
+	SetRSSITransponder(getTransponderRSSIFromFRAM());
+	vTaskDelay(100);// make sure RSSI was set
+	// than turn on the trasnponder
+	if (logError(I2C_write(I2C_TRXVU_TC_ADDR, data, 2),"TRXVU-turnOnTransponder") != E_NO_SS_ERR) return -1;
+
+	logError(INFO_MSG,"transponder on");
+	return 0;
+}
+
+int SetRSSITransponder(short rssiValue)
+{
+	//sends I2C command
+	char data[1+sizeof(short)] = {0};
+
+	data[0] = 0x52;
+	memcpy(data+1,&rssiValue,sizeof(rssiValue));
+
+	return logError(I2C_write(I2C_TRXVU_TC_ADDR, data, sizeof(data)),"TRXVU-SetRSSITransponder");
 }
 
 int TRX_Logic() {

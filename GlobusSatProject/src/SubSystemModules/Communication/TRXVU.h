@@ -22,6 +22,7 @@
 #define BEACON_SPL_ID	0x02FFFFFF
 
 #define MIN_TRXVU_BUFF 5
+#define DEFAULT_RSSI_VALUE 10
 
 typedef struct __attribute__ ((__packed__))
 {
@@ -43,6 +44,16 @@ time_unix getMuteEndTime();
 
 
 time_unix getTransponderEndTime();
+
+/**
+ * Sets transponder RSSI value in FRAM
+ */
+void setTransponderRSSIinFRAM(short val);
+
+/**
+ * Gets transponder RSSI value from FRAM
+ */
+short getTransponderRSSIFromFRAM();
 
 /*!
  * @breif Initializes data filed for transmission - semaphores, parameters from the FRAM
@@ -69,6 +80,15 @@ int CMD_SetBeaconInterval(sat_packet_t *cmd);
  */
 int TRX_Logic();
 
+/**
+ * sets the transponder's RSSI value
+ */
+int SetRSSITransponder(short rssiValue);
+
+/**
+ * turn on the transponder
+ */
+int turnOnTransponder();
 
 Boolean CheckDumpAbort();
 

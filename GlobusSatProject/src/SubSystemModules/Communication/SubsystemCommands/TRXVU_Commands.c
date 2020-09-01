@@ -160,9 +160,8 @@ int CMD_SetTransponder(sat_packet_t *cmd)
 		memcpy(&duration,cmd->data + sizeof(char),sizeof(duration));
 		if(duration > MAX_TRANS_TIME) return TRXVU_TRANSPONDER_TOO_LONG;
 
-		err = I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
+		turnOnTransponder();
 		setTransponderEndTime(curr_tick_time + duration);
-		logError(INFO_MSG,"Transponder ON\n");
 
 	}else if (data[1] == trxvu_transponder_off){
 		err = I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
@@ -180,18 +179,17 @@ int CMD_SetTransponder(sat_packet_t *cmd)
 
 int CMD_SetRSSITransponder(sat_packet_t *cmd)
 {
-	//sends I2C command
-	int err = 0;
-	char data[1+sizeof(short)] = {0};
+	short rssiValue = 0;
+	memcpy(&rssiValue,cmd->data,sizeof(rssiValue));
 
-	data[0] = 0x52;
-	data[1] = cmd->data[0];
-	data[2] = cmd->data[1];
-	//memcpy(&data[1],cmd->data[0],sizeof(short));
-	err = I2C_write(I2C_TRXVU_TC_ADDR, data, sizeof(data));
+	int err = SetRSSITransponder(rssiValue);
 
-	if (err == E_NO_SS_ERR)
+	if (err == E_NO_SS_ERR){
 		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
+		// update RSSI value in FRAM so we can use it after reset
+		setTransponderRSSIinFRAM(rssiValue);
+	}
+
 	return err;
 }
 

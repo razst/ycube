@@ -34,6 +34,9 @@
 #define TRANSPONDER_END_TIME_ADDR		0x48		//<! mute end time
 #define TRANSPONDER_END_TIME_SIZE		4			//<! length in bytes of
 
+#define TRANSPONDER_RSSI_ADDR			0x52		//<! mute end time
+#define TRANSPONDER_RSSI_SIZE			2			//<! length in bytes of
+
 #define MOST_UPDATED_SAT_TIME_ADDR		0x54		//<! this parameters saves the sat time to be read after resets
 #define MOST_UPDATED_SAT_TIME_SIZE		4			//<! size of the parameter in bytes
 

@@ -73,6 +73,10 @@ void WriteDefaultValuesToFRAM()
 	FRAM_write((unsigned char*) &beacon_interval, BEACON_INTERVAL_TIME_ADDR,
 			BEACON_INTERVAL_TIME_SIZE);
 
+	short rssi;
+	rssi = DEFAULT_RSSI_VALUE;
+	FRAM_write((unsigned char*) &rssi ,TRANSPONDER_RSSI_ADDR , TRANSPONDER_RSSI_SIZE);
+
 	// set the reset counter to zero
 	unsigned int num_of_resets = 0;
 	FRAM_write((unsigned char*) &num_of_resets,
@@ -80,6 +84,9 @@ void WriteDefaultValuesToFRAM()
 
 	FRAM_write((unsigned char*) &num_of_resets,
 	NUMBER_OF_CMD_RESETS_ADDR, NUMBER_OF_CMD_RESETS_SIZE);
+
+	FRAM_write((unsigned char*) &num_of_resets,
+	TRANSPONDER_END_TIME_ADDR, TRANSPONDER_END_TIME_SIZE);
 
 	FRAM_write((unsigned char*) &num_of_resets,
 	DEL_OLD_FILES_NUM_DAYS_ADDR, DEL_OLD_FILES_NUM_DAYS_SIZE);
