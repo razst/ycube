@@ -6,7 +6,7 @@
 
 
 #define MIN_FREE_SPACE 300000000
-#define DEPLOY_INTRAVAL 120 //TBD: RBF every 1800 sec (30 minutes)
+#define DEPLOY_INTRAVAL 1800 //TBD: RBF every 1800 sec (30 minutes)
 
 #define RESET_KEY 0xA6 // need to send this key to the reset command otherwise reset will not happen
 

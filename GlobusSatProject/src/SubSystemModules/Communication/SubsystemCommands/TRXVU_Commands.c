@@ -54,13 +54,14 @@ void DumpTask(void *args) {
 int CMD_AntennaDeploy(sat_packet_t *cmd)
 {
 
-	while (TRUE)
-	{
-		printf("******* REMARK - ANT DEPLOY - ANT DEPLOY - ANT DEPLOY - ANT DEPLOY\n");
-		vTaskDelay(SECONDS_TO_TICKS(10));
-	}
-	return 0; // TODO RBF - now that we have the ANT installed, want to make sure we don't deploy by mistake
-	/*
+//	while (TRUE)
+//	{
+//		printf("******* REMARK - ANT DEPLOY - ANT DEPLOY - ANT DEPLOY - ANT DEPLOY\n");
+//		vTaskDelay(SECONDS_TO_TICKS(10));
+//	}
+
+
+
 	int err = logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideA, isisants_arm) ,"CMD_AntennaDeploy-IsisAntS_setArmStatus-A");
 	if (err == E_NO_SS_ERR)
 		logError(IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA,ANTENNA_DEPLOYMENT_TIMEOUT) ,"CMD_AntennaDeploy-IsisAntS_autoDeployment-A");
@@ -74,7 +75,7 @@ int CMD_AntennaDeploy(sat_packet_t *cmd)
 		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
 	}
 
-	return err;*/
+	return err;
 
 }
 

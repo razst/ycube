@@ -13,8 +13,8 @@
 #include <hal/Timing/Time.h>
 
 
-#define MAX_MUTE_TIME 		(5400) 	///< max mute duration will be 90 minutes = 60 *90 [sec]
-#define MAX_IDLE_TIME 		(1200) 	///< max IDLE duration will be 20 minutes = 120 *10 [sec]
+#define MAX_MUTE_TIME 		(60*60*24) 	///< max mute duration will be 90 minutes = 60 *90 [sec]
+#define MAX_IDLE_TIME 		(2400) 	///< max IDLE duration will be 20 minutes = 120 *20 [sec]
 #define MIN_BEACON_INTRAVL	5 // min of 5 sec between beacons
 
 #define SIZE_RXFRAME	200
