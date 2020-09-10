@@ -40,6 +40,8 @@ typedef enum __attribute__ ((__packed__)) _ISIStrxvuTransponderMode
 } ISIStrxvutransponderMode;
 
 
+void setMuteEndTime(time_unix endTime);
+
 time_unix getMuteEndTime();
 
 
