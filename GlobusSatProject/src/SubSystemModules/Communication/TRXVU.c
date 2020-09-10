@@ -407,7 +407,7 @@ int BeaconLogic(Boolean forceTX) {
 	// make sure we switch back to 9600 if we used 1200 in the beacon
 	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, trxvu_bitrate_9600),"BeaconLogic-IsisTrxvu_tcSetAx25Bitrate") ) return -1;
 
-	printf("***************** beacon sent *****************\n");
+	//printf("***************** beacon sent *****************\n");
 	return 0;
 }
 
@@ -501,7 +501,7 @@ int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
 	err = IsisTrxvu_tcSendAX25DefClSign(ISIS_TRXVU_I2C_BUS_INDEX,
 			(unsigned char*) packet, data_length, &avail);
 
-	//printf("avial TRXVU:%d\n",avail);
+	////printf("avial TRXVU:%d\n",avail);
 
 	if (avail < MIN_TRXVU_BUFF){
 		vTaskDelay(100);
@@ -514,7 +514,7 @@ int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
 
 #ifdef TESTING
 	printf("trxvu send ax25 error= %d",err);
-	// display cmd packet values to screen
+	 display cmd packet values to screen
 	printf(" id= %d",packet->ID);
 	printf(" cmd type= %d",packet->cmd_type);
 	printf(" cmd sub type= %d",packet->cmd_subtype);

@@ -31,19 +31,19 @@ static time_unix tlm_last_save_time[NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS]= {0};
 void InitSavePeriodTimes(){
 
 	FRAM_read((unsigned char*) &tlm_save_periods[tlm_eps], EPS_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
-	printf("tlm_eps period value:%d \n",tlm_save_periods[tlm_eps]);
+	//printf("tlm_eps period value:%d \n",tlm_save_periods[tlm_eps]);
 
 	FRAM_read((unsigned char*) &tlm_save_periods[tlm_tx], TRXVU_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
-	printf("tlm_tx period value:%d \n",tlm_save_periods[tlm_tx]);
+	//printf("tlm_tx period value:%d \n",tlm_save_periods[tlm_tx]);
 
 	FRAM_read((unsigned char*) &tlm_save_periods[tlm_antenna], ANT_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
-	printf("tlm_antenna period value:%d \n",tlm_save_periods[tlm_antenna]);
+	//printf("tlm_antenna period value:%d \n",tlm_save_periods[tlm_antenna]);
 
 	FRAM_read((unsigned char*) &tlm_save_periods[tlm_solar], SOLAR_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
-	printf("tlm_solar period value:%d \n",tlm_save_periods[tlm_solar]);
+	//printf("tlm_solar period value:%d \n",tlm_save_periods[tlm_solar]);
 
 	FRAM_read((unsigned char*) &tlm_save_periods[tlm_wod], WOD_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
-	printf("tlm_wod period value:%d \n",tlm_save_periods[tlm_wod]);
+	//printf("tlm_wod period value:%d \n",tlm_save_periods[tlm_wod]);
 
 }
 
@@ -322,7 +322,7 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 	for(int i=0; i <= 4; i++ )
 	{
 		wod->photo_diodes[i] = ADC_ConvertRaw10bitToMillivolt( adcSamples[i] ); // convert to mV data
-		//printf("PD%d : %u mV\n\r", i, wod->photo_diodes[i]);
+		////printf("PD%d : %u mV\n\r", i, wod->photo_diodes[i]);
 	}
 
 

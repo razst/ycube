@@ -28,8 +28,8 @@ void timeU2time(time_unix utime, Time *time){
 	time->year = ts.tm_year-100;
 
     //strftime(buf, sizeof(buf), "%a %Y-%m-%d %H:%M:%S", &ts);
-    //printf("Local Time %s\n", buf);
-	//printf("year: %d\n", time->year);
+    ////printf("Local Time %s\n", buf);
+	////printf("year: %d\n", time->year);
 
 }
 
@@ -55,7 +55,7 @@ int logError(int error ,char* msg){
 			memset(log_.msg, 0, MAX_LOG_STR);
 			sprintf(log_.msg, "err %d %s", error ,msg);
 			write2File(&log_, tlm_log);
-			printf(log_.msg);printf("\n");
+			//printf(log_.msg);//printf("\n");
 			errLastTime[error_abs] = Time_getUptimeSeconds();
 		}
 

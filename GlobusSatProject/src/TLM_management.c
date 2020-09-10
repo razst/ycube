@@ -56,7 +56,7 @@ int CMD_getInfoImage(sat_packet_t *cmd){
 
 	if (!f_source)
 	{
-		printf("Unable to open file\n");
+		//printf("Unable to open file\n");
 		return -1;
 	}
 
@@ -89,7 +89,7 @@ int CMD_getDataImage(sat_packet_t *cmd){
 		f_source = f_open(image, "r");
 		if (!f_source)
 		{
-			printf("Unable to open file\n");
+			//printf("Unable to open file\n");
 			return -1;
 		}
 
@@ -97,7 +97,7 @@ int CMD_getDataImage(sat_packet_t *cmd){
 		f_seek (f_source, 0 , SEEK_END);
 		long size = f_tell (f_source);
 		f_rewind (f_source);
-		printf("source file size:%d. chunk size:%d\n",size,IMG_CHUNK_SIZE);
+		//printf("source file size:%d. chunk size:%d\n",size,IMG_CHUNK_SIZE);
 
 
 
@@ -120,7 +120,7 @@ int CMD_getDataImage(sat_packet_t *cmd){
 			memcpy(&data.chunkID,&chunk,sizeof(data.chunkID));
 			memcpy(&data.data,&buffer, IMG_CHUNK_SIZE);
 
-			printf("about to transmit chunk:%d\n",chunk);
+			//printf("about to transmit chunk:%d\n",chunk);
 			TransmitDataAsSPL_Packet(cmd, (unsigned char*) &data,
 						sizeof(data));
 
@@ -144,7 +144,7 @@ void delete_allTMFilesFromSD()
 				c=0;
 				unsigned int curr_time;
 				Time_getUnixEpoch(&curr_time);
-				printf("time is: %d",curr_time);
+				//printf("time is: %d",curr_time);
 			}
 		} while (!f_findnext(&find));
 	}
@@ -181,13 +181,13 @@ FileSystemResult InitializeFS(Boolean first_time)
 	// Initialize the memory for the FS
 	int err = hcc_mem_init();
 	if (err != E_NO_SS_ERR){
-		printf("hcc_mem_init error:",err);
+		//printf("hcc_mem_init error:",err);
 	}
 
 	// Initialize the FS
 	err = fs_init();
 	if (err != E_NO_SS_ERR){
-		printf("fs_init error:",err);
+		//printf("fs_init error:",err);
 	}
 
 	fs_start();
@@ -195,7 +195,7 @@ FileSystemResult InitializeFS(Boolean first_time)
 	// Tell the OS (freeRTOS) about our FS
 	err = f_enterFS();
 	if (err != E_NO_SS_ERR){
-		printf("f_enterFS error:",err);
+		//printf("f_enterFS error:",err);
 	}
 
 	// Initialize the volume of SD card 0 (A)
@@ -204,14 +204,14 @@ FileSystemResult InitializeFS(Boolean first_time)
 	err=f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_PRI );
 	if (err != E_NO_SS_ERR){
 		// erro init SD 0 so de-itnit and init SD 1
-		printf("f_initvolume primary error:%d\n",err);
+		//printf("f_initvolume primary error:%d\n",err);
 		DeInitializeFS(SD_CARD_DRIVER_PRI);
 		hcc_mem_init();
 		fs_init();
 		f_enterFS();
 		err=f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_SEC );
 		if (err != E_NO_SS_ERR){
-			printf("f_initvolume secondary error:%d\n",err);
+			//printf("f_initvolume secondary error:%d\n",err);
 		}
 	}
 
@@ -287,7 +287,7 @@ void getTlmTypeInfo(tlm_type_t tlmType, char* endFileName, int* structSize){
 }
 
 int write2File(void* data, tlm_type_t tlmType){
-	printf("writing tlm: %d to SD\n",tlmType);
+	//printf("writing tlm: %d to SD\n",tlmType);
 
 	unsigned int curr_time;
 	Time_getUnixEpoch(&curr_time);
@@ -308,7 +308,7 @@ int write2File(void* data, tlm_type_t tlmType){
 
 	if (!fp)
 	{
-		printf("Unable to open file %s, f_open error=%d\n",file_name, err);
+		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
 		return -1;
 	}
 
@@ -330,7 +330,7 @@ void printTLM(void* element, tlm_type_t tlmType){
 
 	// print the timestamp of the TLM element
 	unsigned int element_time = *((unsigned int*)element);
-	printf("TLM element: time:%u\n ",element_time);
+	//printf("TLM element: time:%u\n ",element_time);
 
 	// print the data of the TLM element based on tlm_type
 	if (tlmType==tlm_log){
@@ -339,84 +339,84 @@ void printTLM(void* element, tlm_type_t tlmType){
 		offset += sizeof(data.error);
 
 		memcpy(&data.msg,element+offset,MAX_LOG_STR);
-		printf("error: %d\n ",data.error);
-		printf("msg: %s\n",data.msg);
+		//printf("error: %d\n ",data.error);
+		//printf("msg: %s\n",data.msg);
 	}
 	else if (tlmType==tlm_wod){
 		WOD_Telemetry_t data;
 		memcpy(&data.vbat,element+offset,sizeof(data.vbat));
 		offset += sizeof(data.vbat);
-		printf("vbat: %d\n ",data.vbat);
+		//printf("vbat: %d\n ",data.vbat);
 
 		memcpy(&data.volt_5V,element+offset,sizeof(data.volt_5V));
 		offset += sizeof(data.volt_5V);
-		printf("volt_5V: %d\n ",data.volt_5V);
+		//printf("volt_5V: %d\n ",data.volt_5V);
 
 		memcpy(&data.volt_3V3,element+offset,sizeof(data.volt_3V3));
 		offset += sizeof(data.volt_3V3);
-		printf("volt_3V3: %d\n ",data.volt_3V3);
+		//printf("volt_3V3: %d\n ",data.volt_3V3);
 
 		memcpy(&data.charging_power,element+offset,sizeof(data.charging_power));
 		offset += sizeof(data.charging_power);
-		printf("charging_power: %d\n ",data.charging_power);
+		//printf("charging_power: %d\n ",data.charging_power);
 
 		memcpy(&data.consumed_power,element+offset,sizeof(data.consumed_power));
 		offset += sizeof(data.consumed_power);
-		printf("consumed_power: %d\n ",data.consumed_power);
+		//printf("consumed_power: %d\n ",data.consumed_power);
 
 		memcpy(&data.electric_current,element+offset,sizeof(data.electric_current));
 		offset += sizeof(data.electric_current);
-		printf("electric_current: %d\n ",data.electric_current);
+		//printf("electric_current: %d\n ",data.electric_current);
 
 		memcpy(&data.current_3V3,element+offset,sizeof(data.current_3V3));
 		offset += sizeof(data.current_3V3);
-		printf("current_3V3: %d\n ",data.current_3V3);
+		//printf("current_3V3: %d\n ",data.current_3V3);
 
 		memcpy(&data.current_5V,element+offset,sizeof(data.current_5V));
 		offset += sizeof(data.current_5V);
-		printf("current_5V: %d\n ",data.current_5V);
+		//printf("current_5V: %d\n ",data.current_5V);
 
 		memcpy(&data.sat_time,element+offset,sizeof(data.sat_time));
 		offset += sizeof(data.sat_time);
-		printf("sat_time: %d\n ",data.sat_time);
+		//printf("sat_time: %d\n ",data.sat_time);
 
 		memcpy(&data.free_memory,element+offset,sizeof(data.free_memory));
 		offset += sizeof(data.free_memory);
-		printf("free_memory: %d\n ",data.free_memory);
+		//printf("free_memory: %d\n ",data.free_memory);
 
 		memcpy(&data.corrupt_bytes,element+offset,sizeof(data.corrupt_bytes));
 		offset += sizeof(data.corrupt_bytes);
-		printf("corrupt_bytes: %d\n ",data.corrupt_bytes);
+		//printf("corrupt_bytes: %d\n ",data.corrupt_bytes);
 
 		memcpy(&data.number_of_resets,element+offset,sizeof(data.number_of_resets));
 		offset += sizeof(data.number_of_resets);
-		printf("number_of_resets: %d\n ",data.number_of_resets);
+		//printf("number_of_resets: %d\n ",data.number_of_resets);
 
 		memcpy(&data.num_of_cmd_resets,element+offset,sizeof(data.num_of_cmd_resets));
 		offset += sizeof(data.num_of_cmd_resets);
-		printf("number_of_cmd_resets: %d\n ",data.num_of_cmd_resets);
+		//printf("number_of_cmd_resets: %d\n ",data.num_of_cmd_resets);
 
 	}else if (tlmType==tlm_tx){
 		ISIStrxvuTxTelemetry data;
 		offset += (sizeof(unsigned short) * 7);// skip 7 unsigned short fields
 		memcpy(&data.fields.pa_temp,element+offset,sizeof(data.fields.pa_temp));
 		offset += sizeof(data.fields.pa_temp);
-		printf("pa_temp: %d\n ",data.fields.pa_temp);
+		//printf("pa_temp: %d\n ",data.fields.pa_temp);
 
 		memcpy(&data.fields.board_temp,element+offset,sizeof(data.fields.board_temp));
 		offset += sizeof(data.fields.board_temp);
-		printf("board_temp: %d\n ",data.fields.board_temp);
+		//printf("board_temp: %d\n ",data.fields.board_temp);
 	}
 	else if (tlmType==tlm_rx){
 		ISIStrxvuRxTelemetry data;
 		offset += (sizeof(unsigned short) * 1);// skip 1 unsigned short fields
 		memcpy(&data.fields.rx_rssi,element+offset,sizeof(data.fields.rx_rssi));
 		offset += sizeof(data.fields.rx_rssi);
-		printf("rx_rssi: %d\n ",data.fields.rx_rssi);
+		//printf("rx_rssi: %d\n ",data.fields.rx_rssi);
 
 		memcpy(&data.fields.bus_volt,element+offset,sizeof(data.fields.bus_volt));
 		offset += sizeof(data.fields.bus_volt);
-		printf("bus_volt: %d\n ",data.fields.bus_volt);
+		//printf("bus_volt: %d\n ",data.fields.bus_volt);
 	}
 	else if (tlmType==tlm_eps_raw_cdb){
 		isis_eps__gethousekeepingrawincdb__from_t data;
@@ -424,11 +424,11 @@ void printTLM(void* element, tlm_type_t tlmType){
 			offset += (sizeof(uint8_t));// skip 1 unsigned short fields
 			memcpy(&data.fields.volt_brdsup ,element+offset,sizeof(data.fields.volt_brdsup));
 			offset += sizeof(data.fields.volt_brdsup);
-			printf("volt_brdsup: %d\n ",data.fields.volt_brdsup);
+			//printf("volt_brdsup: %d\n ",data.fields.volt_brdsup);
 
 			memcpy(&data.fields.temp,element+offset,sizeof(data.fields.temp));
 			offset += sizeof(data.fields.temp);
-			printf("temp: %d\n ",data.fields.temp);
+			//printf("temp: %d\n ",data.fields.temp);
 		}
 #endif
 }
@@ -446,7 +446,7 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 
 	getTlmTypeInfo(tlmType,end_file_name,&size);
 	calculateFileName(date,&file_name,end_file_name , numOfDays);
-	printf("reading from file %s...\n",file_name);
+	//printf("reading from file %s...\n",file_name);
 	fp = f_open(file_name, "r");
 
 
@@ -454,7 +454,7 @@ int readTLMFile(tlm_type_t tlmType, Time date, int numOfDays,int cmd_id, int res
 
 	if (!fp)
 	{
-		printf("Unable to open file %s, f_open error=%d\n",file_name, err);
+		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
 		return -1;
 	}
 
@@ -537,7 +537,7 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 	Time date;
 	timeU2time(from_time,&date);
 
-	printf("reading from file...\n");
+	//printf("reading from file...\n");
 
 	FILE * fp;
 	int size=0;
@@ -553,7 +553,7 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 
 	if (!fp)
 	{
-		printf("Unable to open file %s, f_open error=%d\n",file_name, err);
+		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
 		return -1;
 	}
 
@@ -566,7 +566,7 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 	while (f_read(&element , sizeof(int)+size , 1, fp ) == 1){
 		// get the time of the current element and check if we need to send it or not based on the resolution
 		memcpy(&current_time, &element, sizeof(int));
-		//printf("tlm time is:%d\n",current_time);
+		////printf("tlm time is:%d\n",current_time);
 		if (current_time>=from_time && current_time<=to_time && ((current_time - lastSentTime) >= resolution)){
 			lastSentTime = current_time;
 
@@ -600,36 +600,36 @@ int readTLMFileTimeRange(tlm_type_t tlmType,time_t from_time,time_t to_time, int
 
 void DeInitializeFS( int sd_card )
 {
-	printf("deinitializig file system. SD card: %d \n",sd_card);
+	//printf("deinitializig file system. SD card: %d \n",sd_card);
 	int err = f_delvolume( sd_card ); /* delete the volID */
 
-	printf("volume deleted\n");
+	//printf("volume deleted\n");
 
 	if(err != 0)
 	{
-		printf("f_delvolume err %d\n", err);
+		//printf("f_delvolume err %d\n", err);
 	}
 
 	f_releaseFS(); /* release this task from the filesystem */
 
-	printf("FS released\n");
+	//printf("FS released\n");
 
 	err = fs_delete(); /* delete the filesystem */
 
-	printf("FS deleted\n");
+	//printf("FS deleted\n");
 
 	if(err != 0)
 	{
-		printf("fs_delete err , %d\n", err);
+		//printf("fs_delete err , %d\n", err);
 	}
 	err = hcc_mem_delete(); /* free the memory used by the filesystem */
 
-	printf("FS mem freed\n");
+	//printf("FS mem freed\n");
 
 	if(err != 0)
 	{
-		printf("hcc_mem_delete err , %d\n", err);
+		//printf("hcc_mem_delete err , %d\n", err);
 	}
-	printf("deinitializig file system done \n");
+	//printf("deinitializig file system done \n");
 
 }
