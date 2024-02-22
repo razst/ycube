@@ -41,7 +41,7 @@ int logError(int error ,char* msg){
 		 }
 
 
-		int timeFromLastError = Time_getUptimeSeconds() - errLastTime[error];
+		int timeFromLastError = Time_getUptimeSeconds() - errLastTime[error_abs];
 
 		if (timeFromLastError > MAX_TIME_BETWEEN_ERRORS){
 			errCount[error_abs] = 0;
