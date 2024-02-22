@@ -74,3 +74,5 @@ GlobusSatProject/GlobusSatProject-debug.launch
 .metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
 GlobusSatProject/.settings/language.settings.xml
 GlobusSatProject/Debug/GlobusSatProject.map
+GlobusSatProject/.settings/language.settings.xml
+satellite-subsystems/demo/.settings/language.settings.xml
