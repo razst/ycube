@@ -21,6 +21,7 @@
 
 
 #define FS_TLM_DIR	"TLM"
+#define FS_IMG_DIR	"IMG"
 #define FS_FILE_ENDING_SIZE	3
 
 #ifndef FSFRAM
