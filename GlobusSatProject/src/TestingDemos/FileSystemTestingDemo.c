@@ -33,9 +33,75 @@ Boolean TestlistFiels(){
 	return TRUE;
 }
 
+Boolean TestListFiles(char* path) {
+
+	F_FIND find;
+	int c=0;
+	if (!f_findfirst(path,&find)) {
+		do {
+			printf("filename:%s",find.filename);
+			c++;
+			if (find.attr&F_ATTR_DIR) {
+				printf ("directory \n");
+			} else {
+				printf (" size %d\n",find.filesize);
+			}
+		} while (!f_findnext(&find));
+	}
+	printf("all file names printed. count=%d\n",c);
+	return TRUE;
+}
+
 Boolean TestListAllFiles() {
 
+	printf("Main dir:\n");
+	F_FIND find;
+	int c=0;
+	if (!f_findfirst("*.*",&find)) {
+		do {
+			printf("filename:%s",find.filename);
+			c++;
+			if (find.attr&F_ATTR_DIR)
+			{
+				printf ("directory \n");
+			}
+			else
+			{
+				printf (" size %d\n",find.filesize);
+			}
+		} while (!f_findnext(&find));
+	}
+	printf("all file names printed. count=%d\n",c);
 
+	printf("TLM dir:\n");
+	c=0;
+	if (!f_findfirst("TLM/*.*",&find)) {
+		do {
+			printf("filename:%s",find.filename);
+			c++;
+			if (find.attr&F_ATTR_DIR) {
+				printf ("directory \n");
+			} else {
+				printf (" size %d\n",find.filesize);
+			}
+		} while (!f_findnext(&find));
+	}
+	printf("all file names printed. count=%d\n",c);
+
+	printf("IMG dir:\n");
+	c=0;
+	if (!f_findfirst("IMG/*.*",&find)) {
+		do {
+			printf("filename:%s",find.filename);
+			c++;
+			if (find.attr&F_ATTR_DIR) {
+				printf ("directory \n");
+			} else {
+				printf (" size %d\n",find.filesize);
+			}
+		} while (!f_findnext(&find));
+	}
+	printf("all file names printed. count=%d\n",c);
 
 	return TRUE;
 }
@@ -354,21 +420,27 @@ Boolean CreateFiles4DeleteTest2(){
 	theDay.date = 1;
 	theDay.month = 1;
 
-	// write some WOD elements in TLM file
-	for (int i=0;i<3;i++){
-		Time_setUnixEpoch(1735689600 + (60*60*i));
+	// write some WOD elements in TLM file, writes 3 times with 1 hour in between
+	for (int i=0;i<3;i++){ // 2030/1/1
+		Time_setUnixEpoch(1735689600 + 60*60*i);
 		TelemetrySaveWOD();
 		vTaskDelay(10);
 	}
 
-	for (int i=0;i<3;i++){
-		Time_setUnixEpoch(1735689600 + 60*60*24*30 + (60*60*i));
+	for (int i=0;i<3;i++){ // 2030/1/2
+		Time_setUnixEpoch(1735689600 + 60*60*24 + 60*60*i);
 		TelemetrySaveWOD();
 		vTaskDelay(10);
 	}
 
-	for (int i=0;i<3;i++){
-		Time_setUnixEpoch(1735689600 + 60*60*24*30*12 + (60*60*i));
+	for (int i=0;i<3;i++){ // 2030/2/1
+		Time_setUnixEpoch(1735689600 + 60*60*24*30 + 60*60*i);
+		TelemetrySaveWOD();
+		vTaskDelay(10);
+	}
+
+	for (int i=0;i<3;i++){ // 2031/1/1
+		Time_setUnixEpoch(1735689600 + 60*60*24*30*12 + 60*60*i);
 		TelemetrySaveWOD();
 		vTaskDelay(10);
 	}
