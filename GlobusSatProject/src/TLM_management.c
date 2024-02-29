@@ -315,9 +315,9 @@ int write2File(void* data, tlm_type_t tlmType){
 		printf("Unable to open file %s, try creating directory:\n",file_name);
 
 		//get directory name
-		char dir_name[5];
-		strncpy(dir_name, file_name + 4, 4);
-		dir_name[4] = 0;
+		char dir_name[9];
+		strncpy(dir_name, file_name, 8);
+		dir_name[8] = 0;
 
 		int err = f_mkdir(dir_name);
 		if (err != 0)
