@@ -16,11 +16,11 @@
 #include "SubSystemModules/Communication/SatCommandHandler.h"
 
 
-#define MAX_FILE_NAME_SIZE 11
+#define MAX_FILE_NAME_SIZE 20
 #define NUM_ELEMENTS_READ_AT_ONCE 1000
 
 
-#define FS_FILE_ENDING	"TLM"
+#define FS_TLM_DIR	"TLM"
 #define FS_FILE_ENDING_SIZE	3
 
 #ifndef FSFRAM

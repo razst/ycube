@@ -231,9 +231,13 @@ void calculateFileName(Time curr_date,char* file_name, char* endFileName, int da
 	t.tm_mday += days2Add;
 	mktime(&t);
 
-	char buff[7];
-	strftime(buff, sizeof buff, "%y%0m%0d", &t);
-	snprintf(file_name, MAX_FILE_NAME_SIZE, "%s.%s", buff, endFileName);
+	char dir_buff[5];
+	char file_buff[7];
+
+	strftime(dir_buff, sizeof dir_buff, "%y%0m", &t);
+	strftime(file_buff, sizeof file_buff, "%y%0m%0d", &t);
+
+	sprintf(file_name, "%s/%s/%s.%s", FS_TLM_DIR, dir_buff ,file_buff, endFileName);
 }
 
 
@@ -304,12 +308,30 @@ int write2File(void* data, tlm_type_t tlmType){
 	calculateFileName(curr_date,&file_name,end_file_name , 0);
 	fp = f_open(file_name, "a");
 
-	int err = f_getlasterror();
+//	int err = f_getlasterror(); //if there's error, we cant logerror the problem because it will use this function to log
 
 	if (!fp)
 	{
-		//printf("Unable to open file %s, f_open error=%d\n",file_name, err);
-		return -1;
+		printf("Unable to open file %s, try creating directory:\n",file_name);
+
+		//get directory name
+		char dir_name[5];
+		strncpy(dir_name, file_name + 4, 4);
+		dir_name[4] = 0;
+
+		int err = f_mkdir(dir_name);
+		if (err != 0)
+		{
+			printf("error creating directory %s\n", dir_name);
+			return -1;
+		}
+
+		fp = f_open(file_name, "a");
+		if (!fp)
+		{
+			printf("error 2 openning %s file!\n", file_name);
+			return -1;
+		}
 	}
 
 	f_write(&curr_time , sizeof(curr_time) ,1, fp );
