@@ -9,9 +9,7 @@
 #include "SubSystemModules/Communication/SatCommandHandler.h"
 #include <TLM_management.h>
 
-
 Boolean TestlistFiels(){
-
 
 	F_FIND find;
 	int c=0;
@@ -35,7 +33,15 @@ Boolean TestlistFiels(){
 	return TRUE;
 }
 
+Boolean TestListAllFiles() {
+
+
+
+	return TRUE;
+}
+
 Boolean TestReadWODFile(){
+
 	Time theDay;
 	theDay.year = 0;
 	theDay.date = 1;
@@ -46,7 +52,9 @@ Boolean TestReadWODFile(){
 	return TRUE;
 
 }
+
 Boolean TestLOGTLM(){
+
 
 	// save current time
 	time_unix current_time = 0;
@@ -82,8 +90,6 @@ Boolean TestLOGTLM(){
 	Time_setUnixEpoch(current_time);
 
 	return TRUE;
-
-
 }
 
 Boolean TestEPSTLM(){
@@ -112,10 +118,10 @@ Boolean TestEPSTLM(){
 	Time_setUnixEpoch(current_time);
 
 	return TRUE;
-
-
 }
+
 Boolean TestReadTimeRangeTLMRes(){
+
 	// save current time
 	time_unix current_time = 0;
 	Time_getUnixEpoch(&current_time);
@@ -167,9 +173,7 @@ Boolean TestReadTimeRangeTLMRes(){
 	}
 
 	return TRUE;
-
 }
-
 
 Boolean TestReadTimeRangeTLM(){
 
@@ -198,8 +202,6 @@ Boolean TestReadTimeRangeTLM(){
 
 		vTaskDelay(1500); // wait 1.5 sec, so we see a different timestamp in the file...
 	}
-
-
 	// set the time back
 	Time_setUnixEpoch(current_time);
 
@@ -214,10 +216,7 @@ Boolean TestReadTimeRangeTLM(){
 	}
 
 	return TRUE;
-
 }
-
-
 
 Boolean GenerateWODTLM(){
 
@@ -252,12 +251,7 @@ Boolean GenerateWODTLM(){
 	Time_setUnixEpoch(current_time);
 
 	return TRUE;
-
-
 }
-
-
-
 
 Boolean DeleteOldFiles(){
 
@@ -300,18 +294,13 @@ Boolean DeleteOldFiles(){
 		TelemetrySaveANT();
 		TelemetrySaveSolarPanels();
 	}
-
 	DeleteOldFiels(MIN_FREE_SPACE*1000);
 
 	// set the time back
 	Time_setUnixEpoch(current_time);
 
 	return TRUE;
-
-
 }
-
-
 
 Boolean CreateFiles4DeleteTest(){
 
@@ -333,7 +322,6 @@ Boolean CreateFiles4DeleteTest(){
 		int err = deleteTLMFile(tlm_wod,theDay,i);
 
 	}
-
 	// write some WOD elements in TLM file
 	for (int i=0;i<10;i++){
 		// set time to 2030/1/1
@@ -345,13 +333,50 @@ Boolean CreateFiles4DeleteTest(){
 		TelemetrySaveWOD();
 
 	}
+	// set the time back
+	Time_setUnixEpoch(current_time);
+
+	return TRUE;
+}
+
+Boolean CreateFiles4DeleteTest2(){
+
+	// save current time
+	time_unix current_time = 0;
+	Time_getUnixEpoch(&current_time);
+
+	// set time to 2025/1/1
+	Time_setUnixEpoch(1735689600);
+
+	//delete the file
+	Time theDay;
+	theDay.year = 25;
+	theDay.date = 1;
+	theDay.month = 1;
+
+	// write some WOD elements in TLM file
+	for (int i=0;i<3;i++){
+		Time_setUnixEpoch(1735689600 + (60*60*i));
+		TelemetrySaveWOD();
+		vTaskDelay(10);
+	}
+
+	for (int i=0;i<3;i++){
+		Time_setUnixEpoch(1735689600 + 60*60*24*30 + (60*60*i));
+		TelemetrySaveWOD();
+		vTaskDelay(10);
+	}
+
+	for (int i=0;i<3;i++){
+		Time_setUnixEpoch(1735689600 + 60*60*24*30*12 + (60*60*i));
+		TelemetrySaveWOD();
+		vTaskDelay(10);
+	}
 
 	// set the time back
 	Time_setUnixEpoch(current_time);
 
 	return TRUE;
-
-
 }
 
 static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
@@ -377,7 +402,6 @@ void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
 		printf("unable to create target file...\n");
 		return;
 	}
-
 	source = f_open(sourceFile, "r");
 
 	int err = f_getlasterror();
@@ -387,10 +411,6 @@ void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
 		printf("Unable to open file!, f_open error=%d\n",err);
 		return;
 	}
-
-
-
-
 	char element[(sizeof(int)+size)];// buffer for a single element that we will tx
 	int numOfElementsSent=0;
 	time_unix currTime = 0;
@@ -410,10 +430,8 @@ void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
 	return ;
 }
 
+void copyFile(char source_file[], char target_file[]){
 
-
-void copyFile(char source_file[], char target_file[])
-{
 	char ch;
 	F_FILE *source, *target;
 
@@ -424,7 +442,6 @@ void copyFile(char source_file[], char target_file[])
 		printf("No source file...\n");
 		return;
 	}
-
 	target = f_open(target_file, "w");
 
 	if( target == NULL )
@@ -433,10 +450,8 @@ void copyFile(char source_file[], char target_file[])
 		printf("unable to create target file...\n");
 		return;
 	}
-
 	while( ( ch = f_getc(source) ) != -1 && !f_eof(source))
 		f_putc(ch, target);
-
 	printf("File copied successfully.\n");
 
 	f_close(source);
@@ -444,7 +459,6 @@ void copyFile(char source_file[], char target_file[])
 
 	return ;
 }
-
 
 Boolean TestWODTLM(){
 
@@ -472,11 +486,7 @@ Boolean TestWODTLM(){
 	Time_setUnixEpoch(current_time);
 
 	return TRUE;
-
-
 }
-
-
 
 Boolean TestDeleteFiels(){
 
@@ -540,7 +550,6 @@ Boolean TestDeleteFiels(){
 			}
 		} while (!f_findnext(&find));
 	}
-
 	if (c!=3){
 		printf("*******  FAIL ***********\n");
 	}
@@ -580,9 +589,8 @@ Boolean TestDeleteFiels(){
 	Time_setUnixEpoch(current_time);
 
 	return TRUE;
-
-
 }
+
 Boolean TestReadMultiFiels(){
 
 	// save current time
@@ -603,7 +611,6 @@ Boolean TestReadMultiFiels(){
 	//delete 3rd file
 	theDay.date = 3;
 	deleteTLMFile(tlm_log,theDay,0);
-
 
 	// set time to 2030/1/1
 	Time_setUnixEpoch(1893456000);
@@ -635,9 +642,6 @@ Boolean TestReadMultiFiels(){
 	logData.error = 30;
 	write2File(&logData,tlm_log);
 
-
-
-
 	// lets check that we have 3 log files:
 	int c = 0;
 	F_FIND find;
@@ -665,13 +669,10 @@ Boolean TestReadMultiFiels(){
 	theDay.date = 1;
 	int numOfElementsSent = readTLMFiles(tlm_log,theDay,2,2,0);
 
-
 	// set the time back
 	Time_setUnixEpoch(current_time);
 
 	return TRUE;
-
-
 }
 
 Boolean TestTRXVUTLM(){
@@ -705,9 +706,8 @@ Boolean TestTRXVUTLM(){
 	Time_setUnixEpoch(current_time);
 
 	return TRUE;
-
-
 }
+
 Boolean FullSDTest(){
 
 	// save current time
@@ -738,9 +738,6 @@ Boolean FullSDTest(){
 		}
 		TelemetrySaveWOD(); // just to keep the WDT happy
 	}
-
-
-
 	/*
 		// first, delete all previus files
 		deleteTLMFile(tlm_tx,theDay,0);
@@ -771,37 +768,31 @@ Boolean FullSDTest(){
 	return TRUE;
 }
 
-
 Boolean LogErrorRateTest(){
 
 	printf("ERROR 20 - should log only the first 20 errors\n");
 	for(int i=0;i<100;i++){
 		logError(-20 ,"LogErrorRateTest");
 	}
-
 	printf("ERROR 21 - should log all errors\n");
 	for(int i=0;i<5;i++){
 		logError(-21 ,"LogErrorRateTest");
 	}
-
 	vTaskDelay((MAX_TIME_BETWEEN_ERRORS+1) * 1000);
-
 
 	printf("ERROR 20 - should start logging again only the first 20 errors\n");
 	for(int i=0;i<100;i++){
 		logError(-20 , "LogErrorRateTest");
 	}
-
 	printf("ERROR 0 (sucsess) - shouldn't log anything\n");
 	for(int i=0;i<10;i++){
 		logError(0 ,"LogErrorRateTest");
 	}
-
 	return TRUE;
 }
 
-Boolean selectAndExecuteFSTest()
-{
+Boolean selectAndExecuteFSTest(){
+
 	unsigned int selection = 0;
 	Boolean offerMoreTests = TRUE;
 
@@ -878,8 +869,8 @@ Boolean selectAndExecuteFSTest()
 	return offerMoreTests;
 }
 
-Boolean MainFileSystemTestBench()
-{
+Boolean MainFileSystemTestBench(){
+
 	Boolean offerMoreTests = FALSE;
 
 	while(1)
