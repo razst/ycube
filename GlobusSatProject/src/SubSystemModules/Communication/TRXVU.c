@@ -514,7 +514,7 @@ int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
 
 #ifdef TESTING
 	printf("trxvu send ax25 error= %d",err);
-	 display cmd packet values to screen
+//	 display cmd packet values to screen
 	printf(" id= %d",packet->ID);
 	printf(" cmd type= %d",packet->cmd_type);
 	printf(" cmd sub type= %d",packet->cmd_subtype);

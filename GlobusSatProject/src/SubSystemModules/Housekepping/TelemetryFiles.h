@@ -37,6 +37,7 @@ typedef enum {
 	tlm_eps_eng_mb_NOT_USED,
 	tlm_eps_raw_cdb_NOT_USED,
 	tlm_eps_eng_cdb_NOT_USED,
-	tlm_log //13
+	tlm_log, //13
+	tlm_eps_raw_cdb
 }tlm_type_t;
 #endif /* TELEMETRYFILES_H_ */
