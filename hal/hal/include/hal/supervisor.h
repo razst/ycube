@@ -1,6 +1,5 @@
 /**
  *      @file       supervisor.h
- *      @date       2013/6/10
  *      @brief      Supervisor Controller interface.
  */
 
@@ -8,9 +7,6 @@
 #define SUPERVISOR_H_
 
 #include <stdint.h>
-
-#define SUPERVISOR_COMMUNICATION_SPI      1
-#define SUPERVISOR_COMMUNICATION_I2C      2
 
 /** The I2C Address of the IOBC Supervisor. */
 #define SUPERVISOR_DEFAULT_I2C_ADDRESS			0x14
@@ -186,8 +182,40 @@ typedef union __attribute__ ((__packed__)) _supervisor_enable_status_t
 	} fields;
 } supervisor_enable_status_t;
 
+/**
+ * Power output
+ */
+typedef union __attribute__ ((__packed__)) _supervisor_powerout_t
+{
+	uint8_t rawValue; //!< Raw value of the version configuration bytes.
+	struct __attribute__ ((__packed__)) _fields_supervisor_output_t
+	{
+		uint8_t powerObc : 1,  	//!< /** OBC Power. */
+		powerRtc : 1,  			//!< Output power to the RTC.
+		isInSupervisorMode : 1, //!< Supervisor mode.
+		:5;
+	} fields;
+} supervisor_powerout_t;
+
 /** The number of channels used in the Supervisor Controller. */
 #define SUPERVISOR_NUMBER_OF_ADC_CHANNELS           10
+
+/**
+ *      @brief		Indices of available analog channels
+ */
+typedef enum _adc_channels_t
+{
+        _temperature_measurement = 0, //!< <code>Engineering value [deg. C] = -0.29802 * raw + 191.098</code>
+        _voltage_measurement_3v3in = 1, //!< <code>Engineering value [V] = 0.0048875855 * raw</code>
+        _voltage_measurement_3v3 = 2, //!< <code>Engineering value [V] = 0.0048875855 * raw</code>
+        _voltage_reference_2v5 = 3, //!< <code>Engineering value [V] = 0.0024437928 * raw</code>
+        _voltage_measurement_1v8 = 4, //!< <code>Engineering value [V] = 0.0024437928 * raw</code>
+        _voltage_measurement_1v0 = 5, //!< <code>Engineering value [V] = 0.0024437928 * raw</code>
+        _current_measurement_3v3 = 6, //!< <code>Engineering value [mA] = 0.3470186 * raw</code>
+        _current_measurement_1v8 = 7, //!< <code>Engineering value [mA] = 0.1221896 * raw</code>
+        _current_measurement_1v0 = 8, //!< <code>Engineering value [mA] = 0.1637341 * raw</code>
+        _voltage_measurement_rtc = 9 //!< <code>Engineering value [V] = 0.0048875855 * raw</code>
+} adc_channels_t;
 
 /**
  * Supervisor housekeeping.
@@ -226,6 +254,7 @@ typedef union __attribute__ ((__packed__)) _supervisor_housekeeping_t
  *      @return		Error code as specified in errors.h
  *
  *      @note This function will always instantiate a supervisor over SPI irrespective of the input parameters. If there is no supervisor connected over SPI, this initialization is harmless.
+ *      @note This function will automatically initialize the SPI bus if this hasn't already been done
  */
 int Supervisor_start(uint8_t* address, uint8_t count);
 /**
@@ -255,7 +284,7 @@ int Supervisor_reset(supervisor_generic_reply_t* reply, uint8_t index);
  *                 An index value of 255 is for communicating to the supervisor on the same board over SPI.
  *		@return		Error code as specified in errors.h
  */
-int Supervisor_writeOutput(uint8_t output, supervisor_generic_reply_t* reply, uint8_t index);
+int Supervisor_writeOutput(supervisor_powerout_t output, supervisor_generic_reply_t* reply, uint8_t index);
 
 /**
  *      @brief      Let the IOBC be power-cycled for around 4-5 seconds.
@@ -286,27 +315,12 @@ int Supervisor_getVersion(supervisor_version_configuration_t* versionReply, uint
 int Supervisor_getHousekeeping(supervisor_housekeeping_t* housekeepingReply, uint8_t index);
 
 /**
- *      @brief          The analog channels being used.
- */
-typedef enum _adc_channels_t
-{
-        _temperature_measurement = 0,
-        _voltage_measurement_3v3in = 1,
-        _voltage_measurement_3v3 = 2,
-        _voltage_reference_2v5 = 3,
-        _voltage_measurement_1v8 = 4,
-        _voltage_measurement_1v0 = 5,
-        _current_measurement_3v3 = 6,
-        _current_measurement_1v8 = 7,
-        _current_measurement_1v0 = 8,
-        _voltage_measurement_rtc = 9
-} adc_channels_t;
-
-/**
- *      @brief      Calculate ADC Values.
+ *      @brief      Converts raw ADC values into engineering values.
+ *      @note		Conversion formulas have been specified in the documentation of \ref _adc_channels_t
  *      @param[in]  housekeepingReply Housekeeping read back from the Supervisor Controller.
  *      @param[out] adcValue Output value of the ADC.
+ *      @return		Error code as specified in errors.h
  */
-void Supervisor_calculateAdcValues(supervisor_housekeeping_t* housekeepingReply, int16_t* adcValue);
+int Supervisor_calculateAdcValues(supervisor_housekeeping_t* housekeepingReply, int16_t* adcValue);
 
 #endif

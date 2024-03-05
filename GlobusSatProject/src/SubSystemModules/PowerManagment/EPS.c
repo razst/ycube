@@ -25,7 +25,7 @@ int GetBatteryVoltage(voltage_t *vbatt)
 {
 	isis_eps__gethousekeepingengincdb__from_t hk_tlm;
 
-	if(logError(isis_eps__gethousekeepingengincdb__tm(EPS_I2C_BUS_INDEX, &hk_tlm) ,"GetBatteryVoltage-isis_eps__gethousekeepingengincdb__tm"))return -1;
+//	if(logError(isis_eps__gethousekeepingengincdb__tm(EPS_I2C_BUS_INDEX, &hk_tlm) ,"GetBatteryVoltage-isis_eps__gethousekeepingengincdb__tm"))return -1;
 
 	*vbatt = hk_tlm.fields.batt_input.fields.volt;
 
@@ -37,7 +37,7 @@ int EPS_Init()
 
 	ISIS_EPS_t i2c_address[1];
 	i2c_address[0].i2cAddr = EPS_I2C_ADDR;
-	if(logError(ISIS_EPS_Init(&i2c_address , 1),"EPS_Init-ISIS_EPS_Init")) return -1;
+//	if(logError(ISIS_EPS_Init(&i2c_address , 1),"EPS_Init-ISIS_EPS_Init")) return -1;
 
 
 	if(logError(IsisSolarPanelv2_initialize(slave0_spi) ,"EPS_Init-IsisSolarPanelv2_initialize")) return -1;
@@ -181,6 +181,7 @@ int CMDGetHeaterValues(sat_packet_t *cmd){
 	HeaterValues values;
 	int err;
 	// get current LOTHR_BAT_HEATER values
+	/*
 	to.fields.par_id=0x3000;
 	err = isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
 	memcpy(&values.value.H1_MIN,from.fields.par_val,sizeof(int16_t));
@@ -210,7 +211,7 @@ int CMDGetHeaterValues(sat_packet_t *cmd){
 	if (err == E_NO_SS_ERR){
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &values, sizeof(values));
 	}
-
+*/
 	return err;
 }
 
@@ -223,7 +224,7 @@ int CMDSetHeaterValues(sat_packet_t *cmd){
 	int16_t max;
 	memcpy(&min,&cmd->data,sizeof(int16_t));
 	memcpy(&max,&cmd->data[2],sizeof(int16_t));
-
+/*
 	// set all min values
 	memcpy(&setTo.fields.par_val[0],&min,sizeof(int16_t));
 	setTo.fields.par_id = 0x3000;
@@ -250,7 +251,7 @@ int CMDSetHeaterValues(sat_packet_t *cmd){
 	if (err == E_NO_SS_ERR){
 		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
 	}
-
+*/
 	return err;
 }
 

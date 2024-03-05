@@ -200,6 +200,12 @@ typedef enum __attribute__ ((__packed__)) _cspace_adcs_fileupdestination
 	fileupdest_sdfile8 = 17, ///< SD user file 8
 } cspace_adcs_fileupdestination;
 
+typedef struct __attribute__ ((__packed__)) _cspace_adcs_copytointflash_t
+{
+	cspace_adcs_bootprogram flash_source;
+	unsigned char bl_overwrite;
+} cspace_adcs_copytointflash_t;
+
 typedef struct __attribute__ ((__packed__)) _cspace_adcs_fileerase_t
 {
 	cspace_adcs_fileupdestination filetype;

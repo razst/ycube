@@ -11,9 +11,9 @@
  */
 typedef enum __attribute__ ((__packed__)) _gom_eps_power_point_mode_t
 {
-	gomeps_ppt_hardware = 0x00,
-	gomeps_ppt_maximum = 0x01,
-	gomeps_ppt_software = 0x02
+	gomeps_ppt_hardware = 0x00, //!< Hardware defaults
+	gomeps_ppt_maximum = 0x01, //!< Maximum power-point tracking
+	gomeps_ppt_software = 0x02 //!< Software setpoints
 } gom_eps_power_point_mode_t;
 
 /**
@@ -55,8 +55,8 @@ typedef enum __attribute__ ((__packed__)) _gom_eps_channelid_t
  */
 typedef enum __attribute__ ((__packed__)) _gom_eps_output_status_t
 {
-	gomeps_channel_off = 0x00,
-	gomeps_channel_on = 0x01
+	gomeps_channel_off = 0x00, //!< Channel is off
+	gomeps_channel_on = 0x01 //!< Channel is on
 } gom_eps_output_status_t;
 
 /**
@@ -202,14 +202,50 @@ typedef union __attribute__ ((__packed__)) _gom_eps_hk_basic_t
 } gom_eps_hk_basic_t;
 
 /**
- * Status of the EPS battery heater
+ * Mode of the EPS battery heater
  */
-typedef enum __attribute__ ((__packed__)) _gom_eps_heater_auto_t
+typedef enum __attribute__ ((__packed__)) _gom_eps_heater_mode_t
 {
-	mode_off = 0x00,
-	mode_on = 0x01
-} gom_eps_heater_auto_t;
+	mode_off = 0x00, //!< Heater is on
+	mode_on = 0x01 //!< Heater is off
+} gom_eps_heater_mode_t;
 
+/**
+ * Selection of the EPS battery heater
+ */
+typedef enum __attribute__ ((__packed__)) _gom_eps_heater_selection_t
+{
+	heater_bp4 = 0, //!< Heater of the BP4
+	heater_onboard = 1, //!< On-board heater
+	heater_both = 2, //!< Both heaters
+} gom_eps_heater_selection_t;
+
+/**
+ * Parameters for the set heater mode command
+ */
+typedef union __attribute__ ((__packed__)) _gom_eps_heater_cmdparams_t
+{
+	unsigned char raw[2]; //<! Unformatted command parameters
+	struct __attribute__((packed))
+	{
+		gom_eps_heater_selection_t heater; //<! Heater to apply the specified mode to
+		gom_eps_heater_mode_t mode; //!< Heater mode
+	} fields; //<! Struct with individual command parameters
+} gom_eps_heater_cmdparams_t;
+
+/**
+ * Status of EPS heaters
+ */
+typedef union __attribute__ ((__packed__)) _gom_eps_heater_status_t
+{
+	unsigned char raw[4]; //<! Unformatted heater status
+	struct __attribute__((packed))
+	{
+		unsigned short commandReply; //!< reply of the last command
+		gom_eps_heater_mode_t bp4_heatermode; //!< Heater mode of the BP4 heater
+		gom_eps_heater_mode_t onboard_heatermode; //!< Heater mode of the on-board heater
+	} fields; //<! Struct with individual heater statuses
+} gom_eps_heater_status_t;
 
 /**
  * Union for storing the block of configuration values coming from the EPS.
@@ -380,14 +416,23 @@ int GomEpsSetPhotovoltaicInputs(unsigned char index, unsigned short voltage1, un
 int GomEpsSetPptMode(unsigned char index, gom_eps_power_point_mode_t mode);
 
 /**
- *	Set the GOMSpace EPS Heater Auto Mode
+ *	Set the mode of one of the GOMSpace EPS heaters
  *
  *	@param[in] index index of GOMSpace EPS I2C bus address
- *	@param[in] auto_mode desired heater auto mode to the GOMSpace EPS
- *	@param[out] auto_mode_return current heater auto mode
+ *	@param[in] params Struct containing the heater selection and mode to be set
+ *	@param[out] heater_status Current status of the heaters
  * 	@return Error code according to <hal/errors.h>
  */
-int GomEpsSetHeaterAutoMode(unsigned char index, gom_eps_heater_auto_t auto_mode, gom_eps_heater_auto_t* auto_mode_return);
+int GomEpsSetHeaterMode(unsigned char index, gom_eps_heater_cmdparams_t params, gom_eps_heater_status_t* heater_status);
+
+/**
+ *	Retrieve the current state of the GOMSpace EPS heaters
+ *
+ *	@param[in] index index of GOMSpace EPS I2C bus address
+ *	@param[out] heater_status Current status of the heaters
+ *	@return Error code according to <hal/errors.h>
+ */
+int GomEpsGetHeaterMode(unsigned char index, gom_eps_heater_status_t* heater_status);
 
 /**
  *	Reset the GOMSpace EPS counters

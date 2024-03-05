@@ -221,7 +221,7 @@ int HardResetMCU(){
 	isis_eps__reset__to_t cmd_t;
 	isis_eps__reset__from_t cmd_f;
 	cmd_t.fields.rst_key = RESET_KEY;
-	logError(isis_eps__reset__tmtc(EPS_I2C_BUS_INDEX, &cmd_t, &cmd_f),"CMD_ResetComponent-isis_eps__reset__tmtc");
+//	logError(isis_eps__reset__tmtc(EPS_I2C_BUS_INDEX, &cmd_t, &cmd_f),"CMD_ResetComponent-isis_eps__reset__tmtc");
 }
 
 void Maintenance()

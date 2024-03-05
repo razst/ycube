@@ -3,6 +3,8 @@ Changelog for ISIS OBC Satellite Subsystems library
 Table of contents
 
 Changelog for:
+- Version 0.1.13 (05 Aug 2021)
+- Version 0.1.12 (08 Apr 2021)
 - Version 0.1.11 (15 Jan 2020)
 - Version 0.1.10 (04 Oct 2019)
 - Version 0.1.9 (25 Oct 2018)
@@ -15,6 +17,69 @@ Changelog for:
 - Version 0.1.2 (13 Jul 2015)
 - Version 0.1.1 (10 Jul 2015)
 - Version 0.1.0 (13 Mar 2015)
+
+Version 0.1.13
+============= 
+
+Summary: fixes for GOM EPS heater commands
+Release date: 5th of August 2021
+Prepared by: Gerard Aalbers
+
+Specific changes:
+
+GomEPS.h / GomEPS.c
+
+* Updated command to activate / deactivate Gom EPS heaters to match recent ICD revisions
+* Introduced functionality to be able to retrieve status of Gom EPS heaters
+* Added some additional documentation
+
+common_types.h
+
+* Introduced additional error codes
+* Added documentation for all error codes
+
+Demos/isis_ants2_demo.c
+
+* Fixed printout for AntS 2 deploment status
+
+Version 0.1.12
+============= 
+
+Summary: added support for ISIS AntS 2.0, made IsisSolarPanelv2 timing configurable, various fixes
+Release date: 8th of April 2021
+Prepared by: Alf Henrik Sauge, Vincent Gollé, Gerard Aalbers
+
+General changes:
+
+* Added driver and demo for the ISISPACE deployable antenna system version 2 [ants2]
+* Updated IsisSolarPanelv2 to make timing parameters user configurable instead of hard-coded
+* Changed baudrate of Debug UART in demo code to 115200 bps
+* Changed I2C bus speed for all subsystem demos to 200 kHz
+* Introduced common_types.h with error codes for certain subsystem drivers
+
+Specific changes:
+
+cspaceADCS.h / cspaceADCS.c / cspaceADCS_types.h
+
+* Renamed functions related to the bootloader functionality to start with cspaceADCS_BL
+* Introduced function to copy an uploaded application to the internal flash of the ADCS
+* Increased timing tolerance for command ACK/NACK to 10 tries
+
+GomEPS.c
+
+* Fixed issue with endianness swapping in GomEpsConfigSet
+* Fixed issue with two superfluous bytes getting sent by GomEpsConfigSet and GomEpsConfig2Set
+
+TRXVU.c and TRXUV.c
+
+* Changed xxx_EstimateTransmissionTime functions to have current radio bitrate as explicit input parameter instead of assuming current radio state
+* Fixed issue with xxx_EstimateTransmissionTime functions overestimating the transmission time by a factor of 1000
+
+SCS_Gecko/gecko_use_cases.h / gecko_use_cases.c
+
+* Added utility function to convert exposure register value to milliseconds
+* Added parameter for wait time to GECKO_UC_TakeImage_Cleanup function
+* GECKO_UC_TakeImage_Prepare and GECKO_UC_TakeImage functions now take an offset parameter
 
 Version 0.1.11
 ============= 

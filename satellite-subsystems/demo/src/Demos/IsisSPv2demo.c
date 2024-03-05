@@ -54,7 +54,7 @@ Boolean SolarPanelv2_Temperature()
 
 Boolean selectAndExecuteSolarPanelsv2DemoTest()
 {
-	unsigned int selection = 0;
+	int selection = 0;
 	Boolean offerMoreTests = TRUE;
 
 	printf("\n\r Select a test to perform: \n\r");

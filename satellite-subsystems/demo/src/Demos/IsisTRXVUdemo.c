@@ -6,6 +6,7 @@
  */
 
 #include "common.h"
+//#include <hal/>
 #include "trxvu_frame_ready.h"
 
 #include <freertos/FreeRTOS.h>
@@ -23,7 +24,7 @@
 #include <hal/Drivers/LED.h>
 #include <hal/boolean.h>
 #include <hal/errors.h>
-
+#include "IsisTRXVUdemo.h"
 #include <satellite-subsystems/IsisTRXVU.h>
 
 #include <stddef.h>
@@ -44,6 +45,8 @@
 
 static xTaskHandle watchdogKickTaskHandle = NULL;
 static xSemaphoreHandle trxvuInterruptTrigger = NULL;
+
+static beacon_arguments_t beacon_args;
 
 // Test Function
 static Boolean softResetVUTest(void)
@@ -317,49 +320,6 @@ static Boolean vurc_getFrameCmdInterruptTest(void)
     return TRUE;
 }
 
-static Boolean vurc_getRxTelemTest_revC(void)
-{
-	unsigned short telemetryValue;
-	float eng_value = 0.0;
-	ISIStrxvuRxTelemetry_revC telemetry;
-	int rv;
-
-	// Telemetry values are presented as raw values
-	printf("\r\nGet all Telemetry at once in raw values \r\n\r\n");
-	rv = IsisTrxvu_rcGetTelemetryAll_revC(0, &telemetry);
-	if(rv)
-	{
-		printf("Subsystem call failed. rv = %d", rv);
-		return TRUE;
-	}
-
-	telemetryValue = telemetry.fields.bus_volt;
-	eng_value = ((float)telemetryValue) * 0.00488;
-	printf("Bus voltage = %f V\r\n", eng_value);
-
-	telemetryValue = telemetry.fields.total_current;
-	eng_value = ((float)telemetryValue) * 0.16643964;
-	printf("Total current = %f mA\r\n", eng_value);
-
-	telemetryValue = telemetry.fields.pa_temp;
-	eng_value = ((float)telemetryValue) * -0.07669 + 195.6037;
-	printf("PA temperature = %f degC\r\n", eng_value);
-
-	telemetryValue = telemetry.fields.locosc_temp;
-	eng_value = ((float)telemetryValue) * -0.07669 + 195.6037;
-	printf("Local oscillator temperature = %f degC\r\n", eng_value);
-
-	telemetryValue = telemetry.fields.rx_doppler;
-	eng_value = ((float)telemetryValue) * 13.352 - 22300;
-	printf("Receiver doppler = %f Hz\r\n", eng_value);
-
-	telemetryValue = telemetry.fields.rx_rssi;
-	eng_value = ((float)telemetryValue) * 0.03 - 152;
-	printf("Receiver RSSI = %f dBm\r\n", eng_value);
-
-	return TRUE;
-}
-
 static Boolean vurc_getRxTelemTest_revD(void)
 {
 	unsigned short telemetryValue;
@@ -409,49 +369,6 @@ static Boolean vurc_getRxTelemTest_revD(void)
 	printf("PA temperature = %f degC\r\n", eng_value);
 
 	telemetryValue = telemetry.fields.board_temp;
-	eng_value = ((float)telemetryValue) * -0.07669 + 195.6037;
-	printf("Local oscillator temperature = %f degC\r\n", eng_value);
-
-	return TRUE;
-}
-
-static Boolean vutc_getTxTelemTest_revC(void)
-{
-	unsigned short telemetryValue;
-	float eng_value = 0.0;
-	ISIStrxvuTxTelemetry_revC telemetry;
-	int rv;
-
-	// Telemetry values are presented as raw values
-	printf("\r\nGet all Telemetry at once in raw values \r\n\r\n");
-	rv = IsisTrxvu_tcGetTelemetryAll_revC(0, &telemetry);
-	if(rv)
-	{
-		printf("Subsystem call failed. rv = %d", rv);
-		return TRUE;
-	}
-
-	telemetryValue = telemetry.fields.bus_volt;
-	eng_value = ((float)telemetryValue) * 0.00488;
-	printf("Bus voltage = %f V\r\n", eng_value);
-
-	telemetryValue = telemetry.fields.total_current;
-	eng_value = ((float)telemetryValue) * 0.16643964;
-	printf("Total current = %f mA\r\n", eng_value);
-
-	telemetryValue = telemetry.fields.pa_temp;
-	eng_value = ((float)telemetryValue) * -0.07669 + 195.6037;
-	printf("PA temperature = %f degC\r\n", eng_value);
-
-	telemetryValue = telemetry.fields.tx_reflpwr;
-	eng_value = ((float)(telemetryValue * telemetryValue)) * 5.887E-5;
-	printf("RF reflected power = %f mW\r\n", eng_value);
-
-	telemetryValue = telemetry.fields.tx_fwrdpwr;
-	eng_value = ((float)(telemetryValue * telemetryValue)) * 5.887E-5;
-	printf("RF forward power = %f mW\r\n", eng_value);
-
-	telemetryValue = telemetry.fields.locosc_temp;
 	eng_value = ((float)telemetryValue) * -0.07669 + 195.6037;
 	printf("Local oscillator temperature = %f degC\r\n", eng_value);
 
@@ -513,9 +430,185 @@ static Boolean vutc_getTxTelemTest_revD(void)
 	return TRUE;
 }
 
+static Boolean sendPKWithCountDelay(void)
+{
+	//Buffers and variables definition
+	int amount = 0, delay = 0;
+	unsigned char testBuffer1[2]  = {0x56,0x56};
+
+	printf("Enter number of packages:\n");
+	while(UTIL_DbguGetIntegerMinMax(&amount, 1, 100) == 0);
+
+	printf("Enter delay in milliseconds:\n");
+	while(UTIL_DbguGetIntegerMinMax(&delay, 1, 10000) == 0);
+
+//	printf("Enter string to send:\n");
+//	UTIL_DbguGetString(&testBuffer1, 128);
+
+	send_data(testBuffer1, 2, delay, amount);
+
+	return TRUE;
+}
+
+int send_data(void* data, int length, int delay, int amount)
+{
+	unsigned char txCounter = 0;
+	unsigned char avalFrames = 0;
+	unsigned int timeoutCounter = 0;
+	while(txCounter < amount && timeoutCounter < amount)
+		{
+			printf("\r\n Transmission of single buffers with default callsign. AX25 Format. \r\n");
+	//		print_error(IsisTrxvu_tcSendAX25DefClSign(0, testBuffer1, strcspn(testBuffer1, '\0') + 1, &avalFrames));
+			print_error(IsisTrxvu_tcSendAX25DefClSign(0, data, length, &avalFrames));
+			vTaskDelay(delay / portTICK_RATE_MS);
+
+			if ((avalFrames != 0)&&(avalFrames != 255))
+			{
+				printf("\r\n Number of frames in the buffer: %d  \r\n", avalFrames);
+				txCounter++;
+			}
+			else
+			{
+				vTaskDelay(100 / portTICK_RATE_MS);
+				timeoutCounter++;
+			}
+		}
+	return 0;
+}
+
+void activateTransponder(void* args)
+{
+	int time = ( ( int ) args );
+
+	int err = 0;
+	char data[2] = {0, 0};
+
+	data[0] = 0x38; //function
+	data[1] = 0x02; //activate
+
+	err = I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
+
+	printf("\n\n\nTransponder activated for %d seconds. error result: %d\n\n", time, err);
+	vTaskDelay(time * 1000 / portTICK_RATE_MS);
+
+
+	data[1] = 0x01; //deactivate
+	err = I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
+	printf("\n\n\nTransponder deactivated, error result: %d\n\n", err);
+	vTaskDelete(NULL);
+}
+
+
+static Boolean createTransponderTask(void)
+{
+	int time = 0;
+	printf("Enter time for the transponder to be activated(in secondes):\n");
+	while(UTIL_DbguGetIntegerMinMax(&time, 1, 1200) == 0);
+
+	printf("\nTime: %d\n", time);
+	xTaskHandle taskTransponderHandle;
+
+	xTaskCreate(activateTransponder, (const signed char*)"taskTransponder", 4096, (void *)time, configMAX_PRIORITIES-3, &taskTransponderHandle);
+
+//	vTaskStartScheduler();
+
+	return TRUE;
+}
+
+int createSendBeaconTask()
+{
+	printf("Enter delay between beacons(in secondes):\n");
+	while(UTIL_DbguGetIntegerMinMax(&beacon_args.delay, 1, 12000) == 0);
+
+	printf("Enter amount of beacons:\n");
+	while(UTIL_DbguGetIntegerMinMax(&beacon_args.amount, 1, 12000) == 0);
+
+	printf("\nCreating beacon task...\n");
+
+	xTaskHandle taskBeaconHandle;
+	xTaskGenericCreate(sendBeaconTask, (const signed char*)"taskBeacon", 4096, &beacon_args, configMAX_PRIORITIES-3, &taskBeaconHandle, NULL, NULL);
+
+	return 1;
+}
+
+int sendBeaconTask(void* args)
+{
+	beacon_arguments_t *beacon_args = (beacon_arguments_t *) args;
+	printf("delay: %d, amount: %d", beacon_args->delay, beacon_args->amount);
+
+	/*srand(time(NULL));
+
+	int power_mode = rand() % 5 + 1;*/
+
+	WOD_Telemetry_t beacon;
+	createRandBeacon(&beacon);
+
+
+	// delay based on battery power
+//	while(true)
+//	{
+//		switch(power_mode) {
+//		case(1):
+//			vTaskDelay(1 * 1000 / portTICK_RATE_MS);
+//			break;
+//		case(2):
+//			vTaskDelay(2 * 1000 / portTICK_RATE_MS);
+//			break;
+//		case(3):
+//			vTaskDelay(3 * 1000 / portTICK_RATE_MS);
+//			break;
+//		case(4):
+//			vTaskDelay(4 * 1000 / portTICK_RATE_MS);
+//			break;
+//		case(5):
+//			vTaskDelay(5 * 1000 / portTICK_RATE_MS);
+//			break;
+//		default:
+//			vTaskDelay(10 * 1000 / portTICK_RATE_MS);
+//			break;
+//		}
+//	}
+	// put inside loop
+	printf("Vbat: %d", beacon.vbat);
+	printf("Volt_5V: %d", beacon.volt_5V);
+	printf("Charging power: %d", beacon.charging_power);
+
+	send_data(&beacon, sizeof(beacon), beacon_args->delay * 1000, beacon_args->amount);
+
+	return 0;
+}
+int createRandBeacon(WOD_Telemetry_t* beacon)
+{
+	srand(time(NULL));
+
+
+	beacon->vbat = rand() % 8 + 6;
+	beacon->volt_5V = rand() % 8 + 6;
+	beacon->volt_3V3 = rand() % 8 + 6;
+	beacon->charging_power = rand() % 8 + 6;
+	beacon->consumed_power = rand() % 8 + 6;
+	beacon->electric_current = rand() % 8 + 6;
+	beacon->current_3V3 = rand() % 8 + 6;
+	beacon->current_5V = rand() % 8 + 6;
+	beacon->mcu_temp = rand() % 30 + 0;
+	beacon->bat_temp = rand() % 30 + 0;
+		//int32_t solar_panels[6];                // temp of each solar panel
+	beacon->sat_time = rand() % 24 + 0; //
+	beacon->free_memory = rand() % 10 + 1; //
+	beacon->corrupt_bytes = rand() % 10 + 1; //
+	beacon->number_of_resets = 0;
+	beacon->sat_uptime = rand() % 10 + 1; //
+	beacon->num_of_cmd_resets = rand() % 10 + 1; //
+
+	return 0;
+
+
+}
+
+
 static Boolean selectAndExecuteTRXVUDemoTest(void)
 {
-	unsigned int selection = 0;
+	int selection = 0;
 	Boolean offerMoreTests = TRUE;
 
 	printf( "\n\r Select a test to perform: \n\r");
@@ -531,9 +624,10 @@ static Boolean selectAndExecuteTRXVUDemoTest(void)
 	printf("\t 10) (revD) Get command frame by interrupt \n\r");
 	printf("\t 11) (revD) Get receiver telemetry \n\r");
 	printf("\t 12) (revD) Get transmitter telemetry \n\r");
-	printf("\t 13) (revC) Get receiver telemetry \n\r");
-	printf("\t 14) (revC) Get transmitter telemetry \n\r");
-	printf("\t 15) Return to main menu \n\r");
+	printf("\t 13) Send Packet and choose count & delay \n\r");
+	printf("\t 14) Activate Transponder and choose time \n\r");
+	printf("\t 15) Send beacon \n\r");
+	printf("\t 16) Return to main menu \n\r");
 
 	while(UTIL_DbguGetIntegerMinMax(&selection, 1, 15) == 0);
 
@@ -575,12 +669,15 @@ static Boolean selectAndExecuteTRXVUDemoTest(void)
 		offerMoreTests = vutc_getTxTelemTest_revD();
 		break;
 	case 13:
-		offerMoreTests = vurc_getRxTelemTest_revC();
+		offerMoreTests = sendPKWithCountDelay();
 		break;
 	case 14:
-		offerMoreTests = vutc_getTxTelemTest_revC();
+		offerMoreTests = createTransponderTask();
 		break;
 	case 15:
+		offerMoreTests = createSendBeaconTask();
+		break;
+	case 16:
 		offerMoreTests = FALSE;
 		break;
 

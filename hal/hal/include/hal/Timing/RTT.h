@@ -2,7 +2,6 @@
  * @file	RTT.h
  * @brief	Exposes the functionality of the RTT (Real Time Timer) of the AT91SAM9G20 microcontroller.
  * @author	Akhil Piplani
- * @date	Feb 14, 2011
  */
 
 #ifndef RTT_H_
@@ -25,6 +24,22 @@ unsigned int RTT_GetTime(void);
  * @return The status register value of the RTT.
  */
 unsigned int RTT_GetStatus(void);
+
+/*!
+ * Sets a future time to trigger an alarm/interrupt on.
+ */
+void RTT_SetAlarm(unsigned int epoch);
+
+/*!
+ * Returns the current set RTT alarm in epoch.
+ * @return 0 if alarm is not set, non zero if RTT alarm is set
+ */
+unsigned int RTT_GetAlarm(void);
+
+/*!
+ * Sets the interrupt callback used for RTT alarms
+ */
+void RTT_SetAlarmInterrupt(void (*funcPtr)(void));
 
 /*!
  * @brief Checks if the time at the RTT is changing.

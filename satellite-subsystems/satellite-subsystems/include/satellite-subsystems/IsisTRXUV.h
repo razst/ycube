@@ -324,11 +324,11 @@ int IsisTrxuv_itcGetState(unsigned char index, ISIStrxuvTransmitterState *curren
 
 /**
  *  @brief       Calculates the approximate time it will take for a certain transmission to complete.
- *  @param[in]   index index of ISIS TRXUV I2C bus address.
  *  @param[in]   length The length of the transmission in bytes.
+ *  @param[in]   bitrate Bitrate at which the transmission will take place
  *  @return      The time estimate in milliseconds.
  */
-unsigned short IsisTrxuv_itcEstimateTransmissionTime(unsigned char index, unsigned char length);
+unsigned short IsisTrxuv_itcEstimateTransmissionTime(unsigned char length, ISIStrxuvBitrate bitrate);
 
 /**
  *  @brief       Retrieve the number of telecommand frames present in the receive buffer of the TRXUV.

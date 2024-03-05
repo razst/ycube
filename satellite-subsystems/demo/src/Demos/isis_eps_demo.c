@@ -16,34 +16,30 @@
 #include <hal/Utility/util.h>
 #include <hal/boolean.h>
 
-#include <satellite-subsystems/isis_eps_driver.h>
+#include <satellite-subsystems/imepsv2_piu.h>
 
 static uint8_t _index;
 
-static void _print_eps_respone(isis_eps__replyheader_t* replyheader)
+static void _print_eps_response(imepsv2_piu__replyheader_t* replyheader)
 {
 	printf("System Type Identifier: %u \n\r", replyheader->fields.stid);
 	printf("Interface Version Identifier: %u \n\r", replyheader->fields.ivid);
 	printf("Response Code: %u \n\r", replyheader->fields.rc);
 	printf("Board Identifier: %u \n\r", replyheader->fields.bid);
 	printf("Command error: %u \n\r", replyheader->fields.cmderr);
-	printf("Response Status: %u \n\r", replyheader->fields.stat);
 	printf("\n\r");
 }
 
 static Boolean _reset__tmtc( void )
 {
-	isis_eps__reset__to_t params;
-	isis_eps__reset__from_t response;
+	imepsv2_piu__replyheader_t replyheader;
 
 	printf("\nReset command sent to EPS, no reply available.\n\n\r");
 
-	params.fields.rst_key = 0xA6; // Reset key being sent.
-
-	int error = isis_eps__reset__tmtc(_index,&params,&response);
+	int error = imepsv2_piu__reset(0, &replyheader);
 	if( error )
 	{
-		TRACE_ERROR("isis_eps__reset(...) return error (%d)!\n\r",error);
+		TRACE_ERROR("imepsv2_piu__reset(...) return error (%d)!\n\r",error);
 		return FALSE;
 	}
 	
@@ -52,119 +48,119 @@ static Boolean _reset__tmtc( void )
 
 static Boolean _cancel__tm( void )
 {
-	isis_eps__cancel__from_t response;
+	imepsv2_piu__replyheader_t response;
 
 	printf("\n\rNote: switches off any output bus channels that have been switched on after the system powered up up.\n\r");
 
 
-	int error = isis_eps__cancel__tm(_index,&response);
+	int error = imepsv2_piu__cancel(_index,&response);
 	if( error )
 	{
-		TRACE_ERROR("isis_eps__cancel(...) return error (%d)!\n\r",error);
+		TRACE_ERROR("imepsv2_piu__cancel(...) return error (%d)!\n\r",error);
 		return FALSE;
 	}
 
 	printf("\nisis_eps cancel operation response: \n\n\r");
-	_print_eps_respone(&(response.fields.reply_header));
+	_print_eps_response(&response);
 	
 	return TRUE;
 }
 
 static Boolean _watchdog__tm( void )
 {
-	isis_eps__watchdog__from_t response;
+	imepsv2_piu__replyheader_t response;
 
 	printf("\n\rNote: resets the watchdog timer, keeping the system from performing a reset.\n\r");
 
-	int error = isis_eps__watchdog__tm(_index,&response);
+	int error = imepsv2_piu__resetwatchdog(_index,&response);
 	if( error )
 	{
-		TRACE_ERROR("isis_eps__watchdog(...) return error (%d)!\n\r",error);
+		TRACE_ERROR("imepsv2_piu__resetwatchdog(...) return error (%d)!\n\r",error);
 		return FALSE;
 	}
 
 	printf("\nisis_eps watchdog kick response: \n\n\r");
-	_print_eps_respone(&(response.fields.reply_header));
+	_print_eps_response(&response);
 	
 	return TRUE;
 }
 
 static Boolean _outputbuschannelon__tmtc( void )
 {
-	isis_eps__outputbuschannelon__to_t params;
-	isis_eps__outputbuschannelon__from_t response;
+	imepsv2_piu__imeps_channel_t params;
+	imepsv2_piu__replyheader_t response;
 
-	printf("\n\rNote: turn ON a single output bus channel using the bus channel index. Index 0 represents channel 0 (OBC0), index 1 represents channel 1 (OBC1), etc.\n\r");
+	printf("\n\rNote: turn ON a single output bus channel using the bus channel index. The iMTQ is index 2 and the LED board is index 9.\n\r");
 
-	params.fields.obc_idx = INPUT_GetINT8("Single Output Bus Channel Index: ");
+	params = INPUT_GetINT8("Single Output Bus Channel Index: ");
 
-	int error = isis_eps__outputbuschannelon__tmtc(_index,&params,&response);
+	int error = imepsv2_piu__outputbuschannelon(_index,params,&response);
 	if( error )
 	{
-		TRACE_ERROR("isis_eps__outputbuschannelon(...) return error (%d)!\n\r",error);
+		TRACE_ERROR("imepsv2_piu__outputbuschannelon(...) return error (%d)!\n\r",error);
 		return FALSE;
 	}
 
 	printf("\nisis_eps output bus channel on response: \n\n\r");
-	_print_eps_respone(&(response.fields.reply_header));
+	_print_eps_response(&response);
 	
 	return TRUE;
 }
 
 static Boolean _outputbuschanneloff__tmtc( void )
 {
-	isis_eps__outputbuschanneloff__to_t params;
-	isis_eps__outputbuschanneloff__from_t response;
+	imepsv2_piu__imeps_channel_t params;
+	imepsv2_piu__replyheader_t response;
 
-	printf("\n\rNote: turn OFF a single output bus channel using the bus channel index. Index 0 represents channel 0 (OBC0), index 1 represents channel 1 (OBC1), etc.\n\r");
+	printf("\n\rNote: turn OFF a single output bus channel using the bus channel index. The iMTQ is index 2 and the LED board is index 9.\n\r");
 
-	params.fields.obc_idx = INPUT_GetINT8("Single Output Bus Channel Index: ");
+	params = INPUT_GetINT8("Single Output Bus Channel Index: ");
 
-	int error = isis_eps__outputbuschanneloff__tmtc(_index,&params,&response);
+	int error = imepsv2_piu__outputbuschanneloff(_index,params,&response);
 	if( error )
 	{
-		TRACE_ERROR("isis_eps__outputbuschanneloff(...) return error (%d)!\n\r",error);
+		TRACE_ERROR("imepsv2_piu__outputbuschanneloff(...) return error (%d)!\n\r",error);
 		return FALSE;
 	}
 
 	printf("\nisis_eps output bus channel off response: \n\n\r");
-	_print_eps_respone(&(response.fields.reply_header));
+	_print_eps_response(&response);
 	
 	return TRUE;
 }
 
 static Boolean _switchtonominal__tm( void )
 {
-	isis_eps__switchtonominal__from_t response;
+	imepsv2_piu__replyheader_t response;
 
 	printf("\n\rNote: move system to nominal mode. This provides full control of all output buses. The system automatically enters nominal mode after startup mode or when the PDU system is in safety mode or emergency low power mode and the PDU rail voltage exceeds their respective high threshold set in the configuration parameter system.\n\r");
 
-	int error = isis_eps__switchtonominal__tm(_index,&response);
+	int error = imepsv2_piu__switchtonominal(_index,&response);
 	if( error )
 	{
-		TRACE_ERROR("isis_eps__switchtonominal(...) return error (%d)!\n\r",error);
+		TRACE_ERROR("imepsv2_piu__switchtonominal(...) return error (%d)!\n\r",error);
 		return FALSE;
 	}
 		
 	printf("\nisis_eps switch to nominal response: \n\n\r");
-	_print_eps_respone(&(response.fields.reply_header));
+	_print_eps_response(&response);
 	
 	return TRUE;
 }
 
 static Boolean _switchtosafety__tm( void )
 {
-	isis_eps__switchtosafety__from_t response;
+	imepsv2_piu__replyheader_t response;
 
-	int error = isis_eps__switchtosafety__tm(_index,&response);
+	int error = imepsv2_piu__switchtosafety(_index,&response);
 	if( error )
 	{
-		TRACE_ERROR("isis_eps__switchtosafety(...) return error (%d)!\n\r",error);
+		TRACE_ERROR("imepsv2_piu__switchtosafety(...) return error (%d)!\n\r",error);
 		return FALSE;
 	}
 		
 	printf("\nisis_eps switch to safety response: \n\n\r");
-	_print_eps_respone(&(response.fields.reply_header));
+	_print_eps_response(&response);
 	
 	return TRUE;
 }
@@ -176,19 +172,19 @@ static Boolean _getsystemstatus__tm( void )
 
 	uint8_t string_index;
 
-	isis_eps__getsystemstatus__from_t response;
+	imepsv2_piu__getsystemstatus__from_t response;
 
 	printf("\n\rNote: returns system status information\n\r");
 
-	int error = isis_eps__getsystemstatus__tm(_index,&response);
+	int error = imepsv2_piu__getsystemstatus(_index,&response);
 	if( error )
 	{
-		TRACE_ERROR("isis_eps__getsystemstatus(...) return error (%d)!\n\r",error);
+		TRACE_ERROR("imepsv2_piu__getsystemstatus(...) return error (%d)!\n\r",error);
 		return FALSE;
 	}
 		
 	printf("\nisis_eps get system status response: \n\n\r");
-	_print_eps_respone(&(response.fields.reply_header));
+	_print_eps_response(&(response.fields.reply_header));
 
 	string_index = response.fields.mode;
 	if(response.fields.mode > 4)
@@ -220,17 +216,17 @@ static Boolean _getsystemstatus__tm( void )
 
 static Boolean _gethousekeepingraw__tm( void )
 {
-	isis_eps__gethousekeepingraw__from_t response;
+	imepsv2_piu__gethousekeepingraw__from_t response;
 
-	int error = isis_eps__gethousekeepingraw__tm(_index,&response);
+	int error = imepsv2_piu__gethousekeepingraw(_index,&response);
 	if( error )
 	{
-		TRACE_ERROR("isis_eps__gethousekeepingraw(...) return error (%d)!\n\r",error);
+		TRACE_ERROR("imepsv2_piu__gethousekeepingraw(...) return error (%d)!\n\r",error);
 		return FALSE;
 	}
 
 	printf("\nisis_eps get housekeeping data raw response: \n\n\r");
-	_print_eps_respone(&(response.fields.reply_header));
+	_print_eps_response(&(response.fields.reply_header));
 
 	printf("(UINT8) reserved : %u \n\r", response.fields.reserved);
 	printf("(INT16) volt_brdsup : %d \n\r", response.fields.volt_brdsup);
@@ -295,17 +291,17 @@ static Boolean _gethousekeepingraw__tm( void )
 
 static Boolean _gethousekeepingeng__tm( void )
 {
-	isis_eps__gethousekeepingeng__from_t response;
+	imepsv2_piu__gethousekeepingeng__from_t response;
 
-	int error = isis_eps__gethousekeepingeng__tm(_index,&response);
+	int error = imepsv2_piu__gethousekeepingeng(_index,&response);
 	if( error )
 	{
-		TRACE_ERROR("isis_eps__gethousekeepingeng(...) return error (%d)!\n\r",error);
+		TRACE_ERROR("imepsv2_piu__gethousekeepingeng(...) return error (%d)!\n\r",error);
 		return FALSE;
 	}
 
 	printf("\nisis_eps get housekeeping data engineering response: \n\n\r");
-	_print_eps_respone(&(response.fields.reply_header));
+	_print_eps_response(&(response.fields.reply_header));
 
 	printf("Internal EPS board voltage: %u mV\n\r", response.fields.volt_brdsup);
 	printf("MCU temperature: %.2f deg. C\n\r", ((double)response.fields.temp) * 0.01);
@@ -356,7 +352,7 @@ static Boolean _gethousekeepingeng__tm( void )
 
 static Boolean selectAndExecuteIsis_EpsDemoTest()
 {
-	unsigned int selection = 0;
+	int selection = 0;
 	Boolean offerMoreTests = TRUE;
 
 	printf( "\n\r Select a test to perform: \n\r");
@@ -422,22 +418,22 @@ Boolean isis_eps__demo__init(void)
 
 	//Initialize the I2C
 	printf("\nI2C Initialize\n\r");
-	retValInt = I2C_start(100000, 10);
+	retValInt = I2C_start(200000, 10);
 
 	if(retValInt != 0)
 	{
 		TRACE_FATAL("\n\rI2Ctest: I2C_start_Master for ISIS_EPS test: %d! \n\r", retValInt);
 	}
 
-	ISIS_EPS_t subsystem[1]; // One instance to be initialised.
+	IMEPSV2_PIU_t subsystem[1]; // One instance to be initialised.
 	subsystem[0].i2cAddr = 0x20; // I2C address defined to 0x20.
 		
-	retValInt = ISIS_EPS_Init( subsystem, 1);
-	if(retValInt == isis_eps__error__reinit)
+	retValInt = IMEPSV2_PIU_Init(subsystem, 1);
+	if(retValInt == driver_error_reinit)
 	{
 		printf("\nISIS_EPS subsystem have already been initialised.\n\r");
 	}
-	else if(retValInt != isis_eps__error__none )
+	else if(retValInt != driver_error_none )
 	{
 		printf("\nISIS_EPS_Init(...) returned error %d! \n\r", retValInt);
 		return FALSE;

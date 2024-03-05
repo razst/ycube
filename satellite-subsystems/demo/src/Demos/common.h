@@ -30,6 +30,8 @@ typedef enum CONFIG_PARAM_OP_enum				//!< configuration param printing an gettin
 } CONFIG_PARAM_OP_e;
 
 
+
+
 /***
  * input number generic (ING) user input request functions
  * provides a scanf style input function that includes watchdog petting in the data request loop
@@ -50,5 +52,9 @@ Boolean config_param_info(CONFIG_PARAM_OP_e op, unsigned short* p_param_id, void
  * prints an error message if the error code differs from 0
  */
 void print_error(int error);
+
+/***
+ *
+ */
 
 #endif /* COMMON_H_ */

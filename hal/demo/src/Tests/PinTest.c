@@ -3,6 +3,8 @@
  *
  *  Created on: 26-Feb-2013
  *      Author: Akhil Piplani
+ *  Modified on: 5/10/2020
+ *  	Author: Owain Barker
  */
 
 #include <at91/boards/ISIS_OBC_G20/board.h>
@@ -15,66 +17,99 @@
 #include <hal/boolean.h>
 #include <hal/Utility/util.h>
 
-// Some pins are not included on purpose
-#define AUX_PINS_PIOA	{1<<12 | 1<<13 | 1<<14 | 1<<15 | 1<<16 | 1<<17 | 1<<18 | 1<<19 | 1<<20 | 1<<21 | 1<<26 | 1<<27 | 1<<28 | 1<<29, AT91C_BASE_PIOA, AT91C_ID_PIOA, PIO_OUTPUT_0, PIO_DEFAULT}
-#define AUX_PINS_PIOB	{1<<0  | 1<<1  | 1<<2  | 1<<3  | 1<<10 | 1<<11 | 1<<12 | 1<<13 | 1<<20 | 1<<21 | 1<<22 | 1<<23 | 1<<24 | 1<<25 | 1<<26 | 1<<27 | 1<<28 | 1<<29 | 1<<30 | 1<<31, AT91C_BASE_PIOB, AT91C_ID_PIOB, PIO_OUTPUT_0, PIO_DEFAULT}
-#define AUX_PINS_PIOC	{1<<4  | 1<<5  | 1<<6  | 1<<7  | 1<<9  | 1<<12 | 1<<13 | 1<<14 | 1<<15, AT91C_BASE_PIOC, AT91C_ID_PIOC, PIO_OUTPUT_0, PIO_DEFAULT}
+//This is a demonstration of the GPIO pins
+//The reference pins are from the J5 and J6 connectors on the daughterboard
 
-Boolean PinTest() {
-	unsigned int choice;
-	Pin PinsPIOA = AUX_PINS_PIOA;
-	Pin PinsPIOB = AUX_PINS_PIOB;
-	Pin PinsPIOC = AUX_PINS_PIOC;
+//Typical test case, set one GPIO to output, high
+//Wire the GPIO which was set to high to a GPIO you want to check as an input
+//Set that GPIO to input and read in the value set on the output of the first pin
 
-	printf("\n\r PinTest: List of Pins Under Test: \n\r");
-	printf(" PIOA: 12-21, 26-29 \n\r");
-	printf(" PIOB: 0-3, 10-13, 20-31 \n\r");
-	printf(" PIOC: 4-7, 9, 12-15 \n\r");
-	printf("\n\r Continue? (1=Yes, 0=No) \n\r");
-	while(UTIL_DbguGetIntegerMinMax(&choice, 0, 1) == 0);
-	if(choice == 0) {
-		return TRUE;
-	}
+Boolean PinTest()
+{
+	//List of GPIO pins which can be manipulated
 
-	PIO_Configure(&PinsPIOA, PIO_LISTSIZE(&PinsPIOA));
-	if(!PIO_Configure(&PinsPIOA, PIO_LISTSIZE(PinsPIOA))) {
-		printf(" PinTest: Unable to configure PIOA pins as output! \n\r");
-		while(1);
-	}
+	Pin pPins[] = {PIN_GPIO00, PIN_GPIO01, PIN_GPIO02, PIN_GPIO03, PIN_GPIO04, PIN_GPIO05, PIN_GPIO06, PIN_GPIO07, PIN_GPIO08,
+			PIN_GPIO09, PIN_GPIO10, PIN_GPIO11, PIN_GPIO12, PIN_GPIO13, PIN_GPIO14, PIN_GPIO15, PIN_GPIO16, PIN_GPIO17, PIN_GPIO18,
+			PIN_GPIO19, PIN_GPIO20, PIN_GPIO21};
 
-	vTaskDelay(10);
+	int choice = 0, activePin = 0, input_output = 0, high_low = 0;
+	unsigned char pinValue;
 
-	PIO_Configure(&PinsPIOB, PIO_LISTSIZE(&PinsPIOB));
-	if(!PIO_Configure(&PinsPIOB, PIO_LISTSIZE(PinsPIOB))) {
-		printf(" PinTest: Unable to configure PIOB pins as output! \n\r");
-		while(1);
-	}
+	do
+	{
+		printf("\n\r Select a pin to test GPIO0 - GPIO21 (0 - 21), or -1 to quit \n\r");
+		while(UTIL_DbguGetIntegerMinMax(&choice, -1, 21) == 0);
 
-	vTaskDelay(10);
+		if(choice < 0)
+			return TRUE;
 
-	PIO_Configure(&PinsPIOC, PIO_LISTSIZE(&PinsPIOC));
-	if(!PIO_Configure(&PinsPIOC, PIO_LISTSIZE(PinsPIOC))) {
-		printf(" PinTest: Unable to configure PIOC pins as output! \n\r");
-		while(1);
-	}
+		activePin = choice;
 
-	vTaskDelay(10);
+		printf("\n\r Configure as input (0) or output (1) \n\r");
+		while(UTIL_DbguGetIntegerMinMax(&choice, 0, 1) == 0);
 
-	printf("\n\r PinTest: All pins should now be logic-0 (0V). Please check their states now. \n\r");
-	printf(" PinTest: Press 1 then Enter when done. \n\r");
-	UTIL_DbguGetInteger(&choice);
+		input_output = (unsigned int)choice;
 
-	PIO_Set(&PinsPIOA);
-	vTaskDelay(10);
-	PIO_Set(&PinsPIOB);
-	vTaskDelay(10);
-	PIO_Set(&PinsPIOC);
+		switch(input_output) {
+			case 0:
+				//Configure the active pin as an input
+				pPins[activePin].type = PIO_INPUT;
+				break;
+			case 1:
+				//Configure as an output pin with default 0
+				 pPins[activePin].type = PIO_OUTPUT_0;
+				break;
+			default:
+				printf("\n\r Invalid choice \n\r");
+				break;
+		}
 
-	vTaskDelay(10);
+		//Set the pin to the desired state
+		if(!PIO_Configure(&pPins[activePin], PIO_LISTSIZE(pPins[activePin])))
+		{
+			printf(" PinTest: Unable to configure PIO pin %d \n\r", activePin);
+		}
 
-	printf("\n\r PinTest: All pins should now be logic-1 (3.3V). Please check their states now. \n\r");
-	printf(" PinTest: Press 1 then Enter when done. \n\r");
-	UTIL_DbguGetInteger(&choice);
+		//If we want it to be an output, set it high or low
+		if(input_output)
+		{
+			printf("\n\r Set Pin as low (0) or high (1) \n\r");
+			while(UTIL_DbguGetIntegerMinMax(&choice, 0, 1) == 0);
+
+			high_low = choice;
+
+			switch(high_low) {
+				case 0:
+					//configure active pin as an output low
+					//In the context of this program this is redundant as this was already configured as a low pin output by default
+					//However clearing the pin will set the voltage low
+					PIO_Clear(&pPins[activePin]);
+					break;
+				case 1:
+					//configure active pin as an output high
+					PIO_Set(&pPins[activePin]);
+					break;
+				default:
+					printf("\n\r Invalid choice \n\r");
+					break;
+			}
+
+			//Now we can measure until this pin is reset
+
+			printf(" \n\rMeasure the pin output\n\r");
+		}
+		else
+		{
+			printf("\n\r PinTest: Waiting for an input, when ready you can press 1 to continue to read the status. \n\r");
+			UTIL_DbguGetInteger(&choice);
+
+			pinValue = PIO_Get(&pPins[activePin]);
+
+			printf("\n\r Pin Test: The current value of GPIO%d is %u. \n\r", activePin, pinValue);
+		}
+
+		vTaskDelay(10);
+	}while(choice >= 0);
 
 	return TRUE;
 }

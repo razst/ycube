@@ -70,7 +70,7 @@
 resetVector:
         ldr     pc, =resetHandler				/* Reset */
 undefVector:
-        b       undefVector						/* Undefined instruction */
+        ldr     pc, =startOverDataAbort	        /* Undefined instruction */
 swiVector:
 #ifdef no_os
 		b       irqHandler						/* Interrupt */
@@ -311,12 +311,51 @@ startOver:
 		blx		r0
 
 startOverPrefetchAbort:
-		ldr     r0, =restartPrefetchAbort
-		blx		r0
+/*
+Copying shared registers + LR to stack for preservation
+This is AAPCS function call conformant assuming we've filled up r0-r3
+*/
+        stmdb   sp, {r0-r12}^
+/* Writeback to SP from list is not supported here, so manual add it is */
+        sub     sp, #52
+        stmdb   sp!, {lr}
+		mov		r4, #0
+/* Jump into startOverDataAbort to avoid duplication of code */
+		b		startOverAbort
 
 startOverDataAbort:
-		ldr     r0, =restartDataAbort
-		blx		r0
+/*
+Copying shared registers + LR to stack for preservation
+This is AAPCS function call conformant assuming we've filled up r0-r3
+*/
+        stmdb   sp, {r0-r12}^
+/* Writeback to SP from list is not supported here, so manual add it is */
+        sub     sp, #52
+        stmdb   sp!, {lr}
+		mov		r4, #1
+	startOverAbort:
+/* Saving the cpsr and spsr so we can switch mode */
+		mrs 	r0, cpsr
+		mrs		r1, spsr
+		tst		r1, #0xF
+		orreq	r1, r1, #0xF
+		bic		r7, r1, #0x20
+/* Switching to fault causing mode*/
+		msr		cpsr_c, r7
+/*
+Retrieve sp + lr (except for FIQ, the only banked registers along with pc)
+NOTE: lr will here be the address of the last function call before the crash
+ */
+		mov		r2, sp
+		mov		r3, lr
+/* Switching back to abort mode */
+		msr		cpsr_c, r0
+/*
+Pushing last parameter to handleAbort on stack as we've run out of registers
+This is AAPCS conformant
+*/
+		stmdb	sp!, {r4}
+		bl		handleAbort
 
 /* Loop indefinitely when program is finished */
 1:

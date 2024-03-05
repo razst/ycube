@@ -1,7 +1,6 @@
 /*!
  * @file	I2Cslave.h
  * @brief	I2C slave communication.
- * @date	Feb 7, 2011
  * @author	Akhil Piplani
  */
 

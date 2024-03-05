@@ -106,6 +106,9 @@
 #define portPIT_INT_ENABLE     	( ( unsigned short ) 0x1 << 25 )
 /*-----------------------------------------------------------*/
 
+static void (*_dbguInterrupt)(void) = NULL;
+static void (*_rttInterrupt)(void) = NULL;
+
 /* Setup the timer to generate the tick interrupts. */
 static void prvSetupTimerInterrupt( void );
 
@@ -225,30 +228,61 @@ void vPortEndScheduler( void )
 }
 /*-----------------------------------------------------------*/
 
+void portISR_SetDBUGHandler(void (*funcPtr)(void))
+{
+    _dbguInterrupt = funcPtr;
+}
+
+void portISR_SetRTTHandler(void (*funcPtr)(void))
+{
+    _rttInterrupt = funcPtr;
+}
+
 /*
  * The ISR used for the scheduler tick depends on whether the cooperative or
  * the preemptive scheduler is being used.
  */
-void vPortTickISR( void ) __attribute__ ((section(".sramfunc"), weak));
+void vPortTickISR( void ) __attribute__ ((section(".sramfunc")));
 void vPortTickISR( void )
 {
-	volatile unsigned long ulDummy;
+    unsigned long ulDummy;
+    unsigned int maskedStatusReg = AT91C_BASE_DBGU->DBGU_CSR & AT91C_BASE_DBGU->DBGU_IMR; // get interrupt source
 
-	/* Increment the tick count - which may wake some tasks but as the
-		preemptive scheduler is not being used any woken task is not given
-		processor time no matter what its priority. */
-	if( xTaskIncrementTick() != pdFALSE )
-	{
-		vTaskSwitchContext();
-	}
 
-	/* Clear the PIT interrupt. */
-	ulDummy = AT91C_BASE_PITC->PITC_PIVR;
+    if( maskedStatusReg & AT91C_US_RXRDY )
+    {
+        if (_dbguInterrupt != NULL)
+        {
+            _dbguInterrupt();
+        }
+    }
+    else if ((AT91C_BASE_RTTC->RTTC_RTSR & AT91C_RTTC_ALMS) == AT91C_RTTC_ALMS)
+    {
+        if (_rttInterrupt != NULL)
+        {
+            _rttInterrupt();
+        }
+        //Disable the interrupt otherwise we risk spurious interrupts occurring
+        AT91C_BASE_RTTC->RTTC_RTMR &= ~AT91C_RTTC_ALMIEN;
+    }
+    else
+    {
+        /* Increment the tick count - which may wake some tasks but as the
+            preemptive scheduler is not being used any woken task is not given
+            processor time no matter what its priority. */
+        if( xTaskIncrementTick() != pdFALSE )
+        {
+            vTaskSwitchContext();
+        }
 
-	/* To remove compiler warning. */
-	( void ) ulDummy;
+        /* Clear the PIT interrupt. */
+        ulDummy = AT91C_BASE_PITC->PITC_PIVR;
 
-	/* The AIC is cleared in the asm wrapper, outside of this function. */
+        /* To remove compiler warning. */
+        ( void ) ulDummy;
+
+        /* The AIC is cleared in the asm wrapper, outside of this function. */
+    }
 }
 /*-----------------------------------------------------------*/
 

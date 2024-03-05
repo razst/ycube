@@ -111,7 +111,7 @@ static void taskSupervisorTest()
 		printf("\t 3) Reset Supervisor Controller \n\r");
 		printf("\t 4) Status Monitoring \n\r");
 
-		unsigned int selection = 0;
+		int selection = 0;
 		continueOperation = FALSE;
 		while(FALSE == continueOperation) {
 			continueOperation = UTIL_DbguGetIntegerMinMax(&selection, 1, 5)? TRUE : FALSE;
@@ -120,7 +120,7 @@ static void taskSupervisorTest()
 		// Instance of housekeeping bytes.
 		supervisor_housekeeping_t houseKeeping;
 		Supervisor_getHousekeeping(&houseKeeping, supervisorIndex);
-		unsigned int testRun = 1;
+		int testRun = 1;
 		switch(selection) {
 			case 1:
 				/** .......................................................Getting telemetry........................................................ */
@@ -179,7 +179,8 @@ static void taskSupervisorTest()
 				break;
 			case 4:
 				while(testRun != 0) {
-					unsigned int delayInBetween = 0, seconds = 0, j = 0;
+					int delayInBetween = 0, seconds = 0;
+					unsigned int j = 0;
 					// Getting the required information.
 					printf("Insert delay in us in between watchdog kicks. (range 1 - 1000000) \n\r");
 					while(UTIL_DbguGetIntegerMinMax(&delayInBetween, 1, 1000000) == 0);

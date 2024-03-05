@@ -1,8 +1,6 @@
 /*
- * boolean.h
- *
- *  Created on: 03-Aug-2012
- *      Author: Akhil Piplani
+ * @file boolean.h
+ * @author Akhil Piplani
  */
 /*!
  * @file	boolean.h
@@ -27,8 +25,6 @@
  	 }
  * @endverbatim
  *
- * @date	Aug 03, 2012
- * @author	Akhil Piplani
  */
 
 #ifndef BOOLEAN_H_

@@ -366,11 +366,11 @@ int IsisTrxvu_tcGetLastTxTelemetry_revC(unsigned char index, ISIStrxvuTxTelemetr
 
 /**
  *  @brief       Calculates the approximate time it will take for a certain transmission to complete.
- *  @param[in]   index index of ISIS TRXVU I2C bus address.
  *  @param[in]   length The length of the transmission in bytes.
+ *  @param[in]   bitrate Bitrate at which the transmission will take place
  *  @return      The time estimate in milliseconds.
  */
-unsigned short IsisTrxvu_tcEstimateTransmissionTime(unsigned char index, unsigned char length);
+unsigned short IsisTrxvu_tcEstimateTransmissionTime(unsigned char length, ISIStrxvuBitrate bitrate);
 
 /**
  *  @brief       Retrieve the number of telecommand frames present in the receive buffer of the TRXVU.

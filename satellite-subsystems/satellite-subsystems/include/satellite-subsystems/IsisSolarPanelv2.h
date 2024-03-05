@@ -7,6 +7,7 @@
 #define SRC_ISISSOLARPANELV2_H_
 
 #include <hal/Drivers/SPI.h>
+#include <freertos/FreeRTOS.h>
 
 #include <stdint.h>
 
@@ -56,14 +57,30 @@ typedef enum _IsisSolarPanel_panel_t
 }
 IsisSolarPanelv2_Panel_t;
 
+typedef struct {
+	portTickType delay_ms;
+	portTickType timeout_ms;
+}
+IsisSolarPanelv2_timeouts_s;
+
 /**
  * Initializes the internal hardware and software required for measuring the
  * temperatures of the ISIS solar panels.
  *
- * @param[in] slave SPI slave to which LTC ADC driver is connected
+ * @param[in] config contains the SPI slave to which LTC ADC driver is connected, and timing structure
+ * for initialization only
  * @return A value defined by IsisSolarPanelv2_State_t
  */
-int IsisSolarPanelv2_initialize( SPIslave slave );
+int IsisSolarPanelv2_initialize( SPIslave spi_slave );
+
+/**
+ * Sets the ADC sampling delay and timeout.
+ * If the sampling is unsuccessful, *delay* is applied and a new sampling is performed until
+ * either the sampling is successful or *timeout* is met
+ *
+ * @param p_timeout[in]
+ */
+void IsisSolarPanelv2_set_interface_timeout( const IsisSolarPanelv2_timeouts_s *p_timeout );
 
 /**
  * Puts the internal temperature sensor to sleep mode. Reducing its power-
@@ -85,7 +102,7 @@ int IsisSolarPanelv2_sleep( void );
  *
  * @return A value defined by IsisSolarPanelv2_State_t
  */
-int IsisSolarPanelv2_wakeup( void );
+int IsisSolarPanelv2_wakeup(void);
 
 /**
  * Acquires the temperature from the specified panel as well as a status byte

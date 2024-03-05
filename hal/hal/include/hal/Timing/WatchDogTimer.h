@@ -35,13 +35,17 @@ void WDT_forceKick(void);
 
 /*!
  * Force kicks the watchdog if the last kick of the watchdog was more than N ticks ago
+ * Example usage:
+ * @code
+ * WDT_forceKickEveryNms(10 / portTICK_RATE_MS);
+ * @endcode
  */
-void WDT_forceKickEveryNms( portTickType N );
+void WDT_forceKickEveryNms(portTickType N);
 
 /*!
- * Starts a low-priority FreeRTOS task that kicks the watchdog at the specified interval.
+ * Starts a FreeRTOS task with the lowest priority, i.e 0 / zero, that kicks the watchdog at the specified interval.
  * Also calls the WDT_start function to ensure the watchdog interface is initialized.
- * An example for initializing the watchdog correctly is:
+ * An example for initializing the watchdog task correctly is:
  * @code
  * WDT_startWatchdogKickTask(10 / portTICK_RATE_MS, FALSE);
  * @endcode

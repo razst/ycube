@@ -3,6 +3,8 @@ Changelog for ISIS OBC HAL library
 Table of contents
 
 Changelog for:
+- version 0.3.3 (18 Jan 2021)
+- version 0.3.2 (23 Jun 2020)
 - version 0.3.1 (04 Nov 2019)
 - version 0.3.0 (11 Oct 2019)
 - version 0.2.8 (06 Aug 2018)
@@ -24,6 +26,80 @@ Changelog for:
 - Version 0.1.2 (11 Nov 2014)
 - Version 0.1.1b (24 Oct 2014)
 - Version 0.1.0 (15 Oct 2014)
+
+Version 0.3.3
+==============
+
+Summary: fix in time module, improvements in util.h and GPIO demo
+Release date: 18th of January 2021
+Prepared by: Gerard Aalbers, Owain Barker
+
+Specific changes:
+
+Utility/util.h / util.c
+
+* Integer input functions now accept negative numbers
+
+Timing/Time.c
+
+* Fixed an issue where epoch and secondsOfYear would be reported incorrectly after transition into a new year
+
+Tests/PinTest.c
+
+* Updated this demo to be more generic and include reading of GPIO pins
+
+Version 0.3.2
+==============
+
+Summary: introduced sliced LUT CRC-32 calculations, introduced RTT alarm feature, various fixes and improvements
+Release date: 23rd of June 2020
+Prepared by: Gerard Aalbers, Alf Henrik Sauge
+
+General changes:
+
+* Updated FreeRTOS minimum task stack size to 1024 bytes and timer task stack size to 4096 bytes
+* Updated AbortHandler to be more verbose with its output to aid with troubleshooting
+* Various dogyxen touch-ups
+* Various small improvements, such as introducing const keywords, additional null pointer checks, internalizing definitions where possible
+
+Specific changes:
+
+checksum.h / checksum.c
+
+* Introduced sliced LUT implementation for CRC-32 calculations, offering a performance improvement at the cost of a bigger LUT
+
+supervisor.h
+
+* Supervisor_start now initializes the SPI driver if this hadn't already been done, returns appropriate error codes
+* Included conversion formulas for ADC channel values in doxygen documentation
+
+Drivers/PWM.h
+
+* Fixed memory overflow issue in PWM_setDutyCycles, which now uses unsigned shorts for duty cycle inputs
+
+Storage/FRAM.h
+
+* FRAM driver functions now return error codes according to errors.h
+
+Storage/NORFlash.c
+
+* Fixed memory overflow issue in internal function called from NORflash_start
+
+Timing/RTT.h
+
+* Introduced several functions to be able to use the RTT alarm feature
+
+Timing/Time.h
+
+* Introduced Time_getUptimeSecondsFromISR function
+
+demo/main.c
+
+* Changed debug UART speed to 115200 bps
+
+demo/example-aborthandler.c
+
+* Added demo to demonstate overriding the default AbortHandler
 
 Version 0.3.1
 ==============

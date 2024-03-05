@@ -255,6 +255,14 @@ int cspaceADCS_BLRunSelectedProgram(unsigned char index);
 int cspaceADCS_eraseFile(unsigned char index, cspace_adcs_fileerase_t fileerase_param);
 
 /**
+ *  @brief      Copy a program from a specific flash to the internal flash shot, prior to execution
+ *  @param[in]  index index of the cspaceADCS unit.
+ *  @param[in]	copy_param Parameters controlling the copying of the program
+ *  @return     Error code according to <hal/errors.h>.
+ */
+int cspaceADCS_BLcopyToInternalFlash(unsigned char index, cspace_adcs_copytointflash_t copy_param);
+
+/**
  *  @brief      Load a file block for download
  *  @param[in]  index index of the cspaceADCS unit.
  *  @param[in]	filedownblock Parameters to indicate which part of which file to load
@@ -268,7 +276,7 @@ int cspaceADCS_loadFileDownloadBlock(unsigned char index, cspace_adcs_filedownbl
  *  @param[in]	fileupinit_param Parameters for the file upload that is to be performed
  *  @return     Error code according to <hal/errors.h>.
  */
-int cspaceADCS_initiateFileUpload(unsigned char index, cspace_adcs_fileupinit_t fileupinit_param);
+int cspaceADCS_BLinitiateFileUpload(unsigned char index, cspace_adcs_fileupinit_t fileupinit_param);
 
 /**
  *  @brief      Send a packet of the file upload
@@ -276,7 +284,7 @@ int cspaceADCS_initiateFileUpload(unsigned char index, cspace_adcs_fileupinit_t 
  *  @param[in]	filepacket Data and metadata to send
  *  @return     Error code according to <hal/errors.h>.
  */
-int cspaceADCS_uploadFilePacket(unsigned char index, cspace_adcs_filedatapacket_t* filepacket);
+int cspaceADCS_BLuploadFilePacket(unsigned char index, cspace_adcs_filedatapacket_t* filepacket);
 
 /**
  *  @brief      Finalize upload file block
@@ -284,14 +292,14 @@ int cspaceADCS_uploadFilePacket(unsigned char index, cspace_adcs_filedatapacket_
  *  @param[in]	fileupblock Required parameters for finalizing an upload block
  *  @return     Error code according to <hal/errors.h>.
  */
-int cspaceADCS_finalizeUploadBlock(unsigned char index, cspace_adcs_fileupblock_t* fileupblock);
+int cspaceADCS_BLfinalizeUploadBlock(unsigned char index, cspace_adcs_fileupblock_t* fileupblock);
 
 /**
  *  @brief      Reset holemap for file upload
  *  @param[in]  index index of the cspaceADCS unit.
  *  @return     Error code according to <hal/errors.h>.
  */
-int cspaceADCS_resetHolemap(unsigned char index);
+int cspaceADCS_BLresetHolemap(unsigned char index);
 
 /**** Telemetry ****/
 
@@ -695,7 +703,7 @@ int cspaceADCS_getSGP4OrbitParameters(unsigned char index, double* parameters);
  *  @param[out] filedownblock File download block
  *  @return     Error code according to <hal/errors.h>.
  */
-int cspaceADCS_getFileDownloadBlock(unsigned char index, cspace_adcs_filedatapacket_t* filedownblock);
+int cspaceADCS_BLgetFileDownloadBlock(unsigned char index, cspace_adcs_filedatapacket_t* filedownblock);
 
 /**
  *  @brief      Get the status of the current file download block
@@ -703,7 +711,7 @@ int cspaceADCS_getFileDownloadBlock(unsigned char index, cspace_adcs_filedatapac
  *  @param[out] ready File download block status
  *  @return     Error code according to <hal/errors.h>.
  */
-int cspaceADCS_getFileDownloadBlockReady(unsigned char index, unsigned char* ready);
+int cspaceADCS_BLgetFileDownloadBlockReady(unsigned char index, unsigned char* ready);
 
 /**
  *  @brief      Get the status of the file upload initialization
@@ -711,7 +719,7 @@ int cspaceADCS_getFileDownloadBlockReady(unsigned char index, unsigned char* rea
  *  @param[out] busy File upload initialization busy indicator
  *  @return     Error code according to <hal/errors.h>.
  */
-int cspaceADCS_getFileUploadInitComplete(unsigned char index, unsigned char* busy);
+int cspaceADCS_BLgetFileUploadInitComplete(unsigned char index, unsigned char* busy);
 
 /**
  *  @brief      Get the status of the file upload block finalization
@@ -719,7 +727,7 @@ int cspaceADCS_getFileUploadInitComplete(unsigned char index, unsigned char* bus
  *  @param[out] busy File upload block finalization busy indicator
  *  @return     Error code according to <hal/errors.h>.
  */
-int cspaceADCS_getFileUploadBlockComplete(unsigned char index, unsigned char* busy);
+int cspaceADCS_BLgetFileUploadBlockComplete(unsigned char index, unsigned char* busy);
 
 /**
  *  @brief      Get the CRC-16 of the file upload block
@@ -727,7 +735,7 @@ int cspaceADCS_getFileUploadBlockComplete(unsigned char index, unsigned char* bu
  *  @param[out] crc16 CRC-16 of the file upload block
  *  @return     Error code according to <hal/errors.h>.
  */
-int cspaceADCS_getFileUploadBlockCRC(unsigned char index, unsigned short* crc16);
+int cspaceADCS_BLgetFileUploadBlockCRC(unsigned char index, unsigned short* crc16);
 
 /**
  *  @brief      Get a hole map
@@ -736,6 +744,6 @@ int cspaceADCS_getFileUploadBlockCRC(unsigned char index, unsigned short* crc16)
  *  @param[out] holemap Holemap
  *  @return     Error code according to <hal/errors.h>.
  */
-int cspaceADCS_getFileHolemap(unsigned char index, unsigned char holemaptype, cspace_adcs_holemap_t* holemap);
+int cspaceADCS_BLgetFileHolemap(unsigned char index, unsigned char holemaptype, cspace_adcs_holemap_t* holemap);
 
 #endif /* ESLADCS_H_ */

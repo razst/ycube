@@ -1,7 +1,6 @@
 /*!
  * @file	ADC.h
  * @brief	Driver for reading Analog data (including OBC board temperature) using the ADC.
- * @date	Feb 26, 2013
  * @author	Akhil Piplani
  */
 

@@ -100,8 +100,9 @@ int GECKO_UC_Init( const SPIslaveParameters* slaveParamsIn, uint8_t numSystems )
  *  -15 = sampling timeout
  *  -16 = could not clear sample flag
  *  -17 = could not turn of sensor
+ *  -18 = could not set offset
  */
-int GECKO_UC_TakeImage( uint8_t index, uint8_t adcGain, uint8_t pgaGain, uint32_t exposure, uint32_t frameAmount, uint32_t frameRate, uint32_t imageID );
+int GECKO_UC_TakeImage( uint8_t index, uint8_t adcGain, uint8_t pgaGain, uint32_t exposure, uint32_t frameAmount, uint32_t frameRate, uint32_t imageID , uint16_t offset);
 
 /**
  * @brief Prepares the Gecko camera for taking an image.
@@ -111,7 +112,7 @@ int GECKO_UC_TakeImage( uint8_t index, uint8_t adcGain, uint8_t pgaGain, uint32_
  *
  * See GECKO_UC_TakeImage for documentation about the parameters
  */
-int GECKO_UC_TakeImage_Prepare( uint8_t index, uint8_t adcGain, uint8_t pgaGain, uint32_t exposure, uint32_t frameAmount, uint32_t frameRate, uint32_t imageID );
+int GECKO_UC_TakeImage_Prepare( uint8_t index, uint8_t adcGain, uint8_t pgaGain, uint32_t exposure, uint32_t frameAmount, uint32_t frameRate, uint32_t imageID, uint16_t offset);
 
 /**
  * @brief Starts the sampling of an image
@@ -120,8 +121,16 @@ int GECKO_UC_TakeImage_StartSample(uint8_t index);
 
 /**
  * @brief Waits for sampling to finish and then cleans up flags etc. in the Gecko camera
+ * @param maxWaitMS How many ms to wait for sampling to finish
  */
-int GECKO_UC_TakeImage_Cleanup(uint8_t index);
+int GECKO_UC_TakeImage_Cleanup(uint8_t index, uint16_t maxWaitMS);
+
+/**
+ * @brief Converts exposure time as register value into ms
+ * @param exposure Register value exposure time
+ * @return Exposure time in ms
+ */
+uint16_t GECKO_UC_Calculate_ExposureTimeMS(uint32_t exposure);
 
 /**
  * @brief Higher level function for reading an image.

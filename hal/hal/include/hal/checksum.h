@@ -1,5 +1,6 @@
-/** @file checksum.h
- * Collection of checksum functions
+/**
+ * @file checksum.h
+ * @brief Collection of checksum functions
  */
 
 #ifndef CHECKSUM_H
@@ -16,6 +17,27 @@
 #define CRC32_DEFAULT_STARTREMAINDER	0
 #define CRC32_POLYNOMIAL				0x04C11DB7
 #define CRC32_POLYNOMIAL_REVERSED		0xEDB88320
+
+/**
+ * Generate a LUT for CRC 32 calculations with a certain polynomial, using the
+ * sliced-by-4 algorithm
+ *
+ * @param[in] polynomial Reverse of 32-bit CRC polynomial to be used
+ * @param[out] LUT 2D pointer to memory block where LUT can be stored, needs to be at least 4 by 256 * sizeof(unsigned int) = 4KiB
+ */
+void checksum_prepareSlicedLUTCRC32(unsigned int polynomial, unsigned int LUT[4][256]);
+
+/**
+ * Calculates a CRC 32 checksum according to ISO 3309, using a LUT based on the
+ * sliced-by-4 algorithm
+ *
+ * @param[in] data Pointer to data to calculate the checksum for.
+ * @param[in] length Length of the data in bytes.
+ * @param[in] LUT Pointer to LUT to use for CRC calculations, prepared using checksum_prepareSlicedLUTCRC32()
+ * @param[in] start_remainder Remainder to start CRC calculation with
+ * @return 32-bit CRC checksum.
+ */
+unsigned int checksum_calculateSlicedCRC32LUT(const unsigned char* data, unsigned int length, unsigned int LUT[4][256], unsigned int start_remainder);
 
 /**
  * Generate a LUT for CRC 32 calculations with a certain polynomial

@@ -1,6 +1,5 @@
 /*!
  * @file	interruptPriorities.h
- * @date	June, 2012
  * @author	Akhil Piplani
  *
  * @brief Interrupt priorities of peripherals kept at the same place for easy tweaking.

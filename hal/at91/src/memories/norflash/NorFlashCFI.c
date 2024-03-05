@@ -343,7 +343,7 @@ unsigned char NorFlash_CFI_Detect(
     pNorFlash->norFlashInfo.cfiCompatible = 0;
     pNorFlash->norFlashInfo.deviceChipWidth = hardwareBusWidth;
     address = CFI_QUERY_OFFSET;
-    for(i = 0; i< sizeof(struct NorFlashInfo) ; i++){
+    for(i = 0; i< sizeof(struct NorFlashCFI) ; i++){
         WriteCommand(8, NorFlash_GetByteAddressInChip(&(pNorFlash->norFlashInfo), CFI_QUERY_ADDRESS), CFI_QUERY_COMMAND);
         ReadRawData(8, NorFlash_GetByteAddressInChip(&(pNorFlash->norFlashInfo), address), pCfi);
         address++;

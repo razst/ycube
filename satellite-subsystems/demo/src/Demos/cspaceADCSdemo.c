@@ -769,7 +769,7 @@ static Boolean cspaceADCS_getADCGroup1(void)
 
 static Boolean selectAndExecute_cspaceADCSDemoTest(void)
 {
-	unsigned int selection = 0;
+	int selection = 0;
 	Boolean offerMoreTests = TRUE;
 
 	printf( "\n\r Select a test to perform: \n\r");

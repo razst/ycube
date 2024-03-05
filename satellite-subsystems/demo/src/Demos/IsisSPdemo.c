@@ -49,7 +49,7 @@ static Boolean SolarPanel_Temperature(void)
 
 static Boolean selectAndExecuteSolarPanelsDemoTest(void)
 {
-	unsigned int selection = 0;
+	int selection = 0;
 	Boolean offerMoreTests = TRUE;
 
 	printf( "\n\r Select a test to perform: \n\r");

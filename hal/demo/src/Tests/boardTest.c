@@ -29,7 +29,7 @@ void taskBoardTest() {
 	unsigned int i = 0, j;
 	int retVal;
 	float temperature;
-	unsigned int pwmVals[6] = {16, 32, 48, 64, 80, 96};
+	unsigned short pwmVals[6] = {16, 32, 48, 64, 80, 96};
 	unsigned int dummyI2Cdata = 0xAA55AA55;
 	supervisor_housekeeping_t supervisorHK;
 	short supervisorADCvalues[SUPERVISOR_NUMBER_OF_ADC_CHANNELS] = {0};

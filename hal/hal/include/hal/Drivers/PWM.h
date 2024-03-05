@@ -3,7 +3,6 @@
  * @brief	Pulse Width Modulation control.
  * @warning User may not change the entries in this header file. Values such as
  * define preprocessor directives are for information and not for configuration.
- * @date	Feb 27, 2013
  * @author	Akhil Piplani
  */
 
@@ -63,11 +62,11 @@ int PWM_startAuto(unsigned int frequency);
 
 /*!
  * Sets the duty cycle of 6 PWM channels based on the input.
- * @param[in] channels Pointer to an array of 6 unsigned integers containing DutyCycle values in percent.
+ * @param[in] channels Pointer to an array of 6 unsigned shorts containing DutyCycle values in percent.
  * @return -1 if any of the input duty cycles is >100,
  * 0 on success.
  */
-int PWM_setDutyCycles(unsigned int *channels);
+int PWM_setDutyCycles(unsigned short *channels);
 
 /*!
  * Sets the duty cycle of 6 PWM channels based on the input.

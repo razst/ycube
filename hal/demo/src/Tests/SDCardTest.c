@@ -18,8 +18,7 @@
 
 Boolean SDCardTest( void )
 {
-	int err;
-	unsigned int sdcard;
+	int err, sdcard;
 
 	printf("\nPlease select a the SD Card you would like to test (0 or 1)?: \n");
 	while( UTIL_DbguGetIntegerMinMax( &sdcard, 0, 1 ) == 0 );

@@ -14,9 +14,12 @@
 #include <hal/Drivers/ADC.h>
 #include <hal/Drivers/PWM.h>
 
-void taskPWMtest() {
-	unsigned int pwmVals[6] = {0};
+void taskPWMtest(void* parameters)
+{
+	unsigned short pwmVals[6] = {0};
 	int retVal = 0;
+
+	(void)parameters;
 
 	TRACE_DEBUG("taskPWMtest: Starting \n\r");
 

@@ -1,7 +1,6 @@
 /*!
  * @file	util.h
  * @brief	Utility based functions for reading and writing with Debug UART.
- * @date	Apr 06, 2015
  * @author	Pieter Botma
  */
 /* ----------------------------------------------------------------------------
@@ -64,7 +63,7 @@ extern void UTIL_DbguDumpArrayBytes(unsigned char *pBuffer, unsigned int size);
  *  @param[out] pValue Pointer to storage location for input value
  *  @return   1 if successful, 0 if input is not a number
  */
-extern unsigned char UTIL_DbguGetInteger(unsigned int *pValue);
+extern unsigned char UTIL_DbguGetInteger(int *pValue);
 
 /**
  *  @brief    Reads an integer between a minimum and maximum value from the debug UART
@@ -76,7 +75,7 @@ extern unsigned char UTIL_DbguGetInteger(unsigned int *pValue);
  *  @param[out] pValue Pointer to storage location for input value
  *  @return   1 if successful, 0 if input is not a number or outside of specified range
  */
-extern unsigned char UTIL_DbguGetIntegerMinMax(unsigned int *pValue, unsigned int min, unsigned int max);
+extern unsigned char UTIL_DbguGetIntegerMinMax(int *pValue, int min, int max);
 
 /**
  *  @brief    Reads a hexadecimal number from the debug UART

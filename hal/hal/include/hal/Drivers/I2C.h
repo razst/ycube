@@ -3,7 +3,6 @@
  * @brief	I2C master communication driver.
  * @warning User may not change the entries in this header file. Values such as
  * define preprocessor directives are for information and not for configuration.
- * @date	Oct 26, 2012
  * @author	Akhil Piplani
  */
 

@@ -180,7 +180,7 @@ int DeploySystem()
 
 		// reset WDT
 		isis_eps__watchdog__from_t eps_cmd;
-		isis_eps__watchdog__tm(EPS_I2C_BUS_INDEX, &eps_cmd);
+//		isis_eps__watchdog__tm(EPS_I2C_BUS_INDEX, &eps_cmd);
 
 	}
 	logError(INFO_MSG,"Deploy wait loop - DONE");

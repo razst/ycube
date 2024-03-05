@@ -57,7 +57,7 @@ void taskUARTtest(void *arguments) {
 
 Boolean UARTtest() {
 	int retValInt = 0;
-	unsigned int bus2type = 0;
+	int bus2type = 0;
 	xTaskHandle taskUART0testHandle, taskUART2testHandle;
 	static UARTbus UARTtestBus[2] = {bus0_uart, bus2_uart};
 

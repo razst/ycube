@@ -146,10 +146,10 @@ void TelemetrySaveEPS()
 {
 	isis_eps__gethousekeepingeng__from_t tlm_mb_eng;
 
-	if (logError(isis_eps__gethousekeepingeng__tm(EPS_I2C_BUS_INDEX, &tlm_mb_eng) ,"TelemetrySaveEPS-isis_eps__gethousekeepingeng__tm") == 0)
-	{
-		write2File(&tlm_mb_eng , tlm_eps);
-	}
+//	if (logError(isis_eps__gethousekeepingeng__tm(EPS_I2C_BUS_INDEX, &tlm_mb_eng) ,"TelemetrySaveEPS-isis_eps__gethousekeepingeng__tm") == 0)
+//	{
+//		write2File(&tlm_mb_eng , tlm_eps);
+//	}
 
 
 	/* to save space & time, we only store tlm_eps_eng_mb
@@ -279,8 +279,8 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 	isis_eps__gethousekeepingeng__from_t hk_tlm;
 	isis_eps__gethousekeepingengincdb__from_t hk_tlm_cdb;
 
-	err =  isis_eps__gethousekeepingengincdb__tm(EPS_I2C_BUS_INDEX, &hk_tlm_cdb);
-	err += isis_eps__gethousekeepingeng__tm(EPS_I2C_BUS_INDEX, &hk_tlm);
+//	err =  isis_eps__gethousekeepingengincdb__tm(EPS_I2C_BUS_INDEX, &hk_tlm_cdb);
+//	err += isis_eps__gethousekeepingeng__tm(EPS_I2C_BUS_INDEX, &hk_tlm);
 
 	if(err == 0){
 

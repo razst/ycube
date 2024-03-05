@@ -2,7 +2,6 @@
  * @file	RTC.h
  * @brief	Communicates with DS3234 RTC over SPI.
  * @author	Akhil Piplani
- * @date	Feb 11, 2011
  * @see		RTC.c
  */
 
@@ -18,11 +17,6 @@
  * @return -1 if initializing the SPI bus fails, 0 on success.
  */
 int RTC_start(void);
-
-/*!
- * Stops the RTC interface.
- */
-void RTC_stop(void);
 
 /*!
  * @brief Sets the time inside the RTC.
@@ -74,6 +68,7 @@ int RTC_checkTimeValid(const Time *time);
  * @brief Reads 10bit temperature sensor measurement inside the RTC.
  * @param[in,out] temperature Location where temperature should be stored.
  * @return -1 if SPI transfer could not be started,
+ * -2 if temperature is invalid,
  * 0 on success.
  */
 int RTC_getTemperature(float *temperature);

@@ -168,7 +168,7 @@ static Boolean setARMStatus(unsigned char index, ISISantsSide side, Boolean arm)
 
 	if(arm)
 	{
-		unsigned int command = 0;
+		int command = 0;
 
 	    printf( "ARM antenna system side %c? (1=yes, 0=abort): \n\r", side + 'A');
 
@@ -246,7 +246,7 @@ static Boolean autoDeploymentAntSTest(unsigned char index, ISISantsSide side)
 
 static Boolean manualDeploymentAntSTest(unsigned char index, ISISantsSide side)
 {
-    unsigned int antennaSelection = 0;
+    int antennaSelection = 0;
     unsigned char antennaSystemsIndex = index;
     int rv;
 
@@ -285,7 +285,7 @@ static Boolean manualDeploymentAntSTest(unsigned char index, ISISantsSide side)
 
 Boolean selectAndExecuteAntSDemoTest(unsigned char index)
 {
-	unsigned int selection = 0;
+	int selection = 0;
 	Boolean offerMoreTests = TRUE;
 
 	printf("\n\r Select a test to perform: \n\r");
@@ -369,7 +369,7 @@ static void initmain(void)
 	myAntennaAddress[0].addressSideB = 0x32;
 
 	//Initialize the I2C
-	retValInt = I2C_start(66000, 10);
+	retValInt = I2C_start(200000, 10);
 
 	if(retValInt != 0)
 	{

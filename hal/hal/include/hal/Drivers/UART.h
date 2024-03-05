@@ -3,7 +3,6 @@
  * @brief	UART communication.
  * @warning User may not change the entries in this header file. Values such as
  * define preprocessor directives are for information and not for configuration.
- * @date	Feb 18, 2013
  * @author	Akhil Piplani
  */
 

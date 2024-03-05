@@ -3,7 +3,6 @@
  * @brief	SPI master communication.
  * @warning User may not change the entries in this header file. Values such as
  * define preprocessor directives are for information and not for configuration.
- * @date	Jan 16, 2013
  * @author	Akhil Piplani
  */
 

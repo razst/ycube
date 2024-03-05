@@ -3,7 +3,6 @@
  * @brief	LED control.
  * @warning User may not change the entries in this header file. Values such as
  * define preprocessor directives are for information and not for configuration.
- * @date	Feb 16, 2012
  * @author	Akhil Piplani
  */
 

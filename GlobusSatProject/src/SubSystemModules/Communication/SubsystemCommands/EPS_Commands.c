@@ -80,7 +80,7 @@ int CMD_EPS_NOP(sat_packet_t *cmd)
 int CMD_EPS_ResetWDT(sat_packet_t *cmd)
 {
 	isis_eps__watchdog__from_t res;
-	int err = isis_eps__watchdog__tm(EPS_I2C_BUS_INDEX,&res);
+	int err = 0;//isis_eps__watchdog__tm(EPS_I2C_BUS_INDEX,&res);
 	if (err == E_NO_SS_ERR)
 	{
 		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);

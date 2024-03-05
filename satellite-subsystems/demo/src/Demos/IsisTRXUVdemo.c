@@ -301,7 +301,7 @@ static Boolean imc_getAllTelemTest(void)
 
 static Boolean selectAndExecuteTRXUVDemoTest(void)
 {
-	unsigned int selection = 0;
+	int selection = 0;
 	Boolean offerMoreTests = TRUE;
 
 	printf( "\n\r Select a test to perform: \n\r");

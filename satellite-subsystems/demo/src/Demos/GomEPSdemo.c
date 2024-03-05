@@ -287,7 +287,7 @@ static Boolean EPS_TelemetryHKParam(void)
 
 static Boolean EPS_SetOutputOn(void)
 {
-    unsigned int selection;
+    int selection;
 
     printf( "Select channel to enable: 0, 1, 2, 3, 4, 5. Type 6 to cancel \n\r");
     while(UTIL_DbguGetIntegerMinMax(&selection, 0, 6) == 0);
@@ -302,7 +302,7 @@ static Boolean EPS_SetOutputOn(void)
 
 static Boolean EPS_SetOutputOff(void)
 {
-    unsigned int selection;
+    int selection;
 
     printf( "Select channel to disable: 0, 1, 2, 3, 4, 5. Type 6 to cancel \n\r");
     while(UTIL_DbguGetIntegerMinMax(&selection, 0, 6) == 0);
@@ -317,7 +317,7 @@ static Boolean EPS_SetOutputOff(void)
 
 static Boolean EPS_Reboot(void)
 {
-    unsigned int selection;
+    int selection;
 
     printf( "Select eps reboot mode: 0=soft, 1=hard. Type 2 to cancel \n\r");
     while(UTIL_DbguGetIntegerMinMax(&selection, 0, 2) == 0);
@@ -373,9 +373,8 @@ static Boolean EPS_TelemetryHKGeneral_BatteryLoop(void)
 
 static Boolean selectAndExecuteGomEPSDemoTest(void)
 {
-	unsigned int selection = 0;
+	int selection = 0;
 	Boolean offerMoreTests = TRUE;
-	gom_eps_channelstates_t state;
 
 	printf( "\n\r Select a test to perform: \n\r");
 	printf("\t 0) Return to main menu \n\r");
@@ -389,10 +388,8 @@ static Boolean selectAndExecuteGomEPSDemoTest(void)
 	printf("\t 8) EPS Enable channel \n\r");
 	printf("\t 9) EPS Disable channel \n\r");
 	printf("\t 10) EPS Reboot \n\r");
-	printf("\t 11) Payload on \n\r");
-	printf("\t 12) Payload off \n\r");
 
-	while(UTIL_DbguGetIntegerMinMax(&selection, 0, 12) == 0);
+	while(UTIL_DbguGetIntegerMinMax(&selection, 0, 10) == 0);
 
 	switch(selection) {
 	case 0:
@@ -427,30 +424,6 @@ static Boolean selectAndExecuteGomEPSDemoTest(void)
         break;
     case 10:
     	offerMoreTests = EPS_Reboot();
-    	break;
-    case 11:
-    	state.fields.quadbatSwitch = 0;
-    	state.fields.quadbatHeater = 0;
-    	state.fields.channel3V3_1 = 0;
-    	state.fields.channel3V3_2 = 0;
-    	state.fields.channel3V3_3 = 0;
-    	state.fields.channel5V_1 = 0;
-    	state.fields.channel5V_2 = 1;
-    	state.fields.channel5V_3 = 0;
-    	GomEpsSetOutput(0,state);
-    	offerMoreTests = TRUE;
-    	break;
-    case 12:
-    	state.fields.quadbatSwitch = 0;
-    	state.fields.quadbatHeater = 0;
-    	state.fields.channel3V3_1 = 0;
-    	state.fields.channel3V3_2 = 0;
-    	state.fields.channel3V3_3 = 0;
-    	state.fields.channel5V_1 = 0;
-    	state.fields.channel5V_2 = 1;
-    	state.fields.channel5V_3 = 0;
-    	GomEpsSetOutput(0,state);
-    	offerMoreTests = TRUE;
     	break;
 	default:
 		break;

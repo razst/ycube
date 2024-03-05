@@ -1,7 +1,6 @@
 /*!
  * @file	fprintf.h
  * @brief	Implements fprintf(...) like functionality.
- * @date	Apr 06, 2015
  * @author	Pieter Botma
  */
 

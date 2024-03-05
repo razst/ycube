@@ -229,7 +229,7 @@ Boolean GetHeaterValues(){
 
 	// get current LOTHR_BAT_HEATER value
 	to.fields.par_id=0x3000;
-	isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+	//isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
 	memcpy(&heatValue,from.fields.par_val,sizeof(int16_t));
 	printf("LOW THR_BAT_HEATER value = %d\n",heatValue);
 
@@ -238,7 +238,7 @@ Boolean GetHeaterValues(){
 	heatValue = 0;
 	// get current HITHR_BAT_HEATER value
 	to.fields.par_id=0x3003;
-	isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+//	isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
 	memcpy(&heatValue,from.fields.par_val,sizeof(int16_t));
 	printf("HIGH THR_BAT_HEATER value = %d\n",heatValue);
 
@@ -260,7 +260,7 @@ Boolean SetHeaterValues(){
 	isis_eps__setparameter__from_t setFrom;
 	setTo.fields.par_id = 0x3000;
 	memcpy(&setTo.fields.par_val[0],&heatValue,sizeof(int16_t));
-	int err = isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	int err = 0;//isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
 	printf("error = %d\n",err);
 
 
@@ -273,7 +273,7 @@ Boolean SetHeaterValues(){
 	// set LOTHR_BAT_HEATER to new value
 	setTo.fields.par_id = 0x3003;
 	memcpy(&setTo.fields.par_val[0],&heatValue,sizeof(int16_t));
-	err = isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+//	err = isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
 	printf("error = %d\n",err);
 
 
