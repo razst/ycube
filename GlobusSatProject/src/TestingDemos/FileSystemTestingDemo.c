@@ -17,11 +17,11 @@ Boolean TestlistFiels(){
 	{
 		do
 		{
-			printf("filename:%s",find.filename);
+			printf("filename: %s",find.filename);
 			c++;
 			if (find.attr&F_ATTR_DIR)
 			{
-				printf ("directory \n");
+				printf (" directory \n");
 			}
 			else
 			{
@@ -33,18 +33,55 @@ Boolean TestlistFiels(){
 	return TRUE;
 }
 
-Boolean TestListFiles(char* path) {
+int TestListFiles(char* path) {
 
 	F_FIND find;
 	int c=0;
 	if (!f_findfirst(path,&find)) {
 		do {
-			printf("filename:%s",find.filename);
-			c++;
-			if (find.attr&F_ATTR_DIR) {
-				printf ("directory \n");
-			} else {
-				printf (" size %d\n",find.filesize);
+			char* filename = find.filename;
+			if (filename[1] != '.')
+			{
+				printf("filename: %s",filename);
+				c++;
+				if (find.attr&F_ATTR_DIR) {
+					printf (" directory \n\r");
+				} else {
+					printf (" size %d\n\r",find.filesize);
+				}
+			}
+		} while (!f_findnext(&find));
+	}
+	printf("all file names printed. count=%d\n\r",c);
+	return c;
+}
+
+Boolean TestlistTLMFiles(){
+
+	F_FIND find;
+	int c=0;
+	if (!f_findfirst("TLM/*.*",&find))
+	{
+		do
+		{
+			char* filename = find.filename;
+			if (sizeof(filename) > 2)
+			{
+				printf("filename: %s",filename);
+				c++;
+				if (find.attr&F_ATTR_DIR)
+				{
+					printf (" directory \n");
+					char newPath[13] = "TLM/";
+					strcat(newPath,filename);
+					strcat(newPath,"/*.*");
+					printf("path - %s\n\r", newPath);
+					TestListFiles(newPath);
+				}
+				else
+				{
+					printf (" size %d\n",find.filesize);
+				}
 			}
 		} while (!f_findnext(&find));
 	}
@@ -54,54 +91,20 @@ Boolean TestListFiles(char* path) {
 
 Boolean TestListAllFiles() {
 
-	printf("Main dir:\n");
+
+
 	F_FIND find;
-	int c=0;
-	if (!f_findfirst("*.*",&find)) {
-		do {
-			printf("filename:%s",find.filename);
-			c++;
-			if (find.attr&F_ATTR_DIR)
-			{
-				printf ("directory \n");
-			}
-			else
-			{
-				printf (" size %d\n",find.filesize);
-			}
-		} while (!f_findnext(&find));
-	}
+	printf("\n\rMain dir:\n\r");
+	int c=TestListFiles("*.*");
+	printf("\n\rTLM dir:\n\r");
+	c=c+TestListFiles("TLM/*.*");
+	printf("\n\rIMG dir:\n\r");
+	c=c+TestListFiles("IMG/*.*");
+
 	printf("all file names printed. count=%d\n",c);
 
-	printf("TLM dir:\n");
-	c=0;
-	if (!f_findfirst("TLM/*.*",&find)) {
-		do {
-			printf("filename:%s",find.filename);
-			c++;
-			if (find.attr&F_ATTR_DIR) {
-				printf ("directory \n");
-			} else {
-				printf (" size %d\n",find.filesize);
-			}
-		} while (!f_findnext(&find));
-	}
-	printf("all file names printed. count=%d\n",c);
-
-	printf("IMG dir:\n");
-	c=0;
-	if (!f_findfirst("IMG/*.*",&find)) {
-		do {
-			printf("filename:%s",find.filename);
-			c++;
-			if (find.attr&F_ATTR_DIR) {
-				printf ("directory \n");
-			} else {
-				printf (" size %d\n",find.filesize);
-			}
-		} while (!f_findnext(&find));
-	}
-	printf("all file names printed. count=%d\n",c);
+	printf("\n\r");
+	TestlistTLMFiles();
 
 	return TRUE;
 }
@@ -440,7 +443,7 @@ Boolean CreateFiles4DeleteTest2(){
 	}
 
 	for (int i=0;i<3;i++){ // 2031/1/1
-		Time_setUnixEpoch(1735689600 + 60*60*24*30*12 + 60*60*i);
+		Time_setUnixEpoch(1735689600 + 60*60*24*30*15 + 60*60*i);
 		TelemetrySaveWOD();
 		vTaskDelay(10);
 	}
@@ -894,7 +897,7 @@ Boolean selectAndExecuteFSTest(){
 		offerMoreTests = FALSE;
 		break;
 	case 1:
-		offerMoreTests = TestlistFiels();
+		offerMoreTests = TestListAllFiles();
 		break;
 	case 2:
 		offerMoreTests = TestDeleteFiels();
@@ -927,7 +930,7 @@ Boolean selectAndExecuteFSTest(){
 		offerMoreTests = DeleteOldFiles();
 		break;
 	case 12:
-		offerMoreTests = CreateFiles4DeleteTest();
+		offerMoreTests = CreateFiles4DeleteTest2();
 		break;
 	case 13:
 		offerMoreTests = LogErrorRateTest();
