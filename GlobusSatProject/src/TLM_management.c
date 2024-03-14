@@ -220,13 +220,13 @@ FileSystemResult InitializeFS(Boolean first_time)
 
 	//Createing 2 main directories (TLM and IMG)
 	err = f_mkdir(FS_TLM_DIR);
-	if(err != 0)
+	if(err != 0 && err!= F_ERR_DUPLICATED)
 	{
 		printf("Error creating TLM dir\n");
 	}
 
 	err = f_mkdir(FS_IMG_DIR);
-	if(err != 0)
+	if(err != 0 && err!= F_ERR_DUPLICATED)
 	{
 		printf("Error creating IMG dir\n");
 	}
