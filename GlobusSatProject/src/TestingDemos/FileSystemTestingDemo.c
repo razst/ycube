@@ -33,19 +33,23 @@ Boolean TestlistFiels(){
 	return TRUE;
 }
 
-int TestListFiles(char* path) {
+int TestListFiles(char* path, int level) {
 
 	F_FIND find;
 	int c=0;
 	if (!f_findfirst(path,&find)) {
 		do {
 			char* filename = find.filename;
-			if (filename[1] != '.')
+			if (filename[0] != '.')
 			{
-				printf("filename: %s",filename);
+				for	(int i = 0 ; i < level ; i++)
+				{
+					printf("    ");
+				}
+				printf("%s",filename);
 				c++;
 				if (find.attr&F_ATTR_DIR) {
-					printf (" directory \n\r");
+					printf (" dir \n\r");
 				} else {
 					printf (" size %d\n\r",find.filesize);
 				}
@@ -65,7 +69,7 @@ Boolean TestlistTLMFiles(){
 		do
 		{
 			char* filename = find.filename;
-			if (sizeof(filename) > 2)
+			if (filename[0] != '.')
 			{
 				printf("filename: %s",filename);
 				c++;
@@ -76,7 +80,7 @@ Boolean TestlistTLMFiles(){
 					strcat(newPath,filename);
 					strcat(newPath,"/*.*");
 					printf("path - %s\n\r", newPath);
-					TestListFiles(newPath);
+					TestListFiles(newPath, 1);
 				}
 				else
 				{
@@ -95,11 +99,11 @@ Boolean TestListAllFiles() {
 
 	F_FIND find;
 	printf("\n\rMain dir:\n\r");
-	int c=TestListFiles("*.*");
+	int c=TestListFiles("*.*", 1);
 	printf("\n\rTLM dir:\n\r");
-	c=c+TestListFiles("TLM/*.*");
+	c=c+TestListFiles("TLM/*.*", 1);
 	printf("\n\rIMG dir:\n\r");
-	c=c+TestListFiles("IMG/*.*");
+	c=c+TestListFiles("IMG/*.*", 1);
 
 	printf("all file names printed. count=%d\n",c);
 
