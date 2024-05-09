@@ -167,11 +167,18 @@ int deleteTLMFile(tlm_type_t tlmType, Time date, int days2Add){
 	char endFileName [3] = {0};
 	int size;
 	getTlmTypeInfo(tlmType,endFileName,&size);
-
 	char file_name[MAX_FILE_NAME_SIZE] = {0};
 	calculateFileName(date,&file_name, endFileName, days2Add);
 
 	return f_delete(file_name);
+}
+
+int deleteTLMbyMonth(unsigned short month)
+{
+	char dirName[9] = {0};
+	sprintf(dirName, "%s/%d", FS_TLM_DIR, month);
+	printf("deleting folder - %s\n", dirName);
+	return f_delete(dirName);
 }
 
 FileSystemResult InitializeFS(Boolean first_time)

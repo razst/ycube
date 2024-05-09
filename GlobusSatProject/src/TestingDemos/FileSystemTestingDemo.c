@@ -870,6 +870,23 @@ Boolean LogErrorRateTest(){
 	return TRUE;
 }
 
+Boolean deleteMonth()
+{
+	unsigned short month2delete;
+	printf("Enter year and month in a 4 digit format: ");
+	scanf("%d", month2delete);
+	int err = deleteTLMbyMonth(month2delete);
+	if(err != E_NO_SS_ERR)
+	{
+		printf("Delete Failed! returned error - %d\n", err);
+	}
+	else
+	{
+		printf("month successfully deleted!\n");
+	}
+	return TRUE;
+}
+
 Boolean selectAndExecuteFSTest(){
 
 	unsigned int selection = 0;
@@ -891,6 +908,7 @@ Boolean selectAndExecuteFSTest(){
 	printf("\t 12) create files for delete test \n\r");
 	printf("\t 13) LOG error rate test\n\r");
 	printf("\t 14) full SD test\n\r");
+	printf("\t 15) delete files by month\n\r");
 	//Ilay the mechoar!! Ilay is not agevaramlemokllikshmekknrnktnsmckdlxjdjnedjxndejxdnxmexdlkjenxdkj
 
 	unsigned int number_of_tests = 14;
@@ -941,6 +959,9 @@ Boolean selectAndExecuteFSTest(){
 		break;
 	case 14:
 		offerMoreTests = FullSDTest();
+		break;
+	case 15:
+		offerMoreTests = deleteMonth();
 		break;
 	default:
 		break;
