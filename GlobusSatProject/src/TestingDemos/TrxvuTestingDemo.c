@@ -97,6 +97,8 @@ Boolean TestTrxvuLogic()
 	return TRUE;
 }
 
+
+
 Boolean TestCheckTransmitionAllowed()
 {
 	char msg[10]  = {0};
@@ -106,6 +108,29 @@ Boolean TestCheckTransmitionAllowed()
 	else
 		strcpy(msg,"FALSE");
 	printf("Transmition is allowed: %s\n",msg);
+	return TRUE;
+}
+
+Boolean TestLoopSPL()
+{
+	sat_packet_t packet = {0};
+	packet.ID = 0xFF;
+	packet.cmd_type = 0xAA;
+	packet.cmd_subtype = 0xBB;
+
+	char data[] = {0x01};
+	for (int i=2;i<100;i++){
+		data[0] = i;
+		memcpy(packet.data,data,sizeof(data));
+
+		packet.length = sizeof(data);
+
+		int err = TransmitSplPacket(&packet,NULL);
+		if(err != 0 ){
+			printf("error in 'TransmitSplPacket' = %d\n",err);
+		}
+	}
+
 	return TRUE;
 }
 
@@ -448,8 +473,9 @@ Boolean selectAndExecuteTrxvuDemoTest()
 	printf("\t 16) Choose to default beacon inervals\n\r");
 	printf("\t 17) Restore to default beacon inervals\n\r");
 	printf("\t 18) Check Transmition Allowed\n\r");
+	printf("\t 19) Loop Transmition of SPL\n\r");
 
-	unsigned int number_of_tests = 18;
+	unsigned int number_of_tests = 19;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -509,6 +535,9 @@ Boolean selectAndExecuteTrxvuDemoTest()
 		break;
 	case 18:
 		offerMoreTests = TestCheckTransmitionAllowed();
+		break;
+	case 19:
+		offerMoreTests = TestLoopSPL();
 		break;
 	default:
 		break;

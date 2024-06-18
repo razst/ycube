@@ -911,7 +911,7 @@ Boolean selectAndExecuteFSTest(){
 	printf("\t 15) delete files by month\n\r");
 	//Ilay the mechoar!! Ilay is not agevaramlemokllikshmekknrnktnsmckdlxjdjnedjxndejxdnxmexdlkjenxdkj
 
-	unsigned int number_of_tests = 14;
+	unsigned int number_of_tests = 15;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
