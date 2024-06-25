@@ -25,7 +25,8 @@
 #include <string.h>
 #include <time.h>
 #include "SubSystemModules/Communication/TRXVU.h"
-
+#include <stdlib.h>
+#include <unistd.h>
 
 #include <satellite-subsystems/IsisTRXVU.h>
 #include <satellite-subsystems/IsisAntS.h>
@@ -35,8 +36,11 @@
 #define SD_CARD_DRIVER_PRI 0
 #define SD_CARD_DRIVER_SEC 1
 #define FIRST_TIME -1
+#define _POSIX_SOURCE
 
 static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
+
+
 
 int CMD_getInfoImage(sat_packet_t *cmd){
 	FILE * f_source;
@@ -178,7 +182,51 @@ int deleteTLMbyMonth(unsigned short month)
 	char dirName[9] = {0};
 	sprintf(dirName, "%s/%d", FS_TLM_DIR, month);
 	printf("deleting folder - %s\n", dirName);
-	return f_delete(dirName);
+	return deleteDirectory(dirName);
+}
+
+int deleteDirectory(char *dirname) {
+	int i = 1;
+    while(f_rmdir(dirname) != F_NO_ERROR)
+    {
+    	for(int j = 0; j < 7; j++)
+    	{
+    		char filename[25] = { 0 };
+    		sprintf(filename, "%s/", dirname);
+			if (i < 10) { sprintf(filename, "%s%s0%d",filename,&dirname[4] ,i); }
+			else { sprintf(filename, "%s%d",filename, i); }
+    		switch(j)
+    		{
+    		case 0:
+    			sprintf(filename, "%s.%s",filename , "WOD");
+    			break;
+    		case 1:
+    			sprintf(filename, "%s.%s",filename , "EPS");
+				break;
+    		case 2:
+    			sprintf(filename, "%s.%s",filename , "TX");
+				break;
+    		case 3:
+    			sprintf(filename, "%s.%s",filename , "ANT");
+				break;
+    		case 4:
+    			sprintf(filename, "%s.%s",filename , "TLM");
+				break;
+    		case 5:
+    			sprintf(filename, "%s.%s",filename , "LOG");
+    			break;
+    		case 6:
+				sprintf(filename, "%s.%s",filename , "RX");
+				break;
+			default:
+				break;
+    		}
+    		printf("%s\n",filename);
+    		f_delete(filename);
+    	}
+    	i++;
+    }
+    return 0;
 }
 
 FileSystemResult InitializeFS(Boolean first_time)
