@@ -873,17 +873,11 @@ Boolean LogErrorRateTest(){
 Boolean deleteMonth()
 {
 	unsigned short month2delete;
-	printf("Enter year and month in a 4 digit format: ");
-	scanf("%d", month2delete);
+	printf("Enter year and month in a 4 digit format:\n");
+	scanf("%d", &month2delete);
 	int err = deleteTLMbyMonth(month2delete);
-	if(err != E_NO_SS_ERR)
-	{
-		printf("Delete Failed! returned error - %d\n", err);
-	}
-	else
-	{
-		printf("month successfully deleted!\n");
-	}
+	if(err != E_NO_SS_ERR) { printf("Delete Failed! returned error - %d\n", err); }
+	else { printf("month successfully deleted!\n"); }
 	return TRUE;
 }
 
