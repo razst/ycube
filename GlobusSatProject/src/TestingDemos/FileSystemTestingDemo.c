@@ -475,12 +475,31 @@ void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
 
 	target = f_open(file_name, "w");
 
-	if( target == NULL )
+	if (!target)
 	{
-		f_close(source);
-		printf("unable to create target file...\n");
-		return;
+		printf("Unable to open file %s, try creating directory:\n",file_name);
+
+		//get directory name
+		char dir_name[9];
+		strncpy(dir_name, file_name, 8);
+		dir_name[8] = 0;
+
+		int err = f_mkdir(dir_name);
+		if (err != 0)
+		{
+			printf("error creating directory %s\n", dir_name);
+			return ;
+		}
+
+		target = f_open(file_name, "a");
+		if (!target)
+		{
+			printf("error 2 openning %s file!\n", file_name);
+			return ;
+		}
 	}
+
+
 	source = f_open(sourceFile, "r");
 
 	int err = f_getlasterror();
@@ -803,17 +822,17 @@ Boolean FullSDTest(){
 	theDay.date = 1;
 	theDay.month = 1;
 /* copy files ... */
-	for(int M=1; M<=12 ; M++){
+	for(int M=1; M<=2 ; M++){
 		theDay.month=M;
 		printf("month=%d\n",theDay.month);
-		for(int i=1; i<=28; i++){
+		for(int i=1; i<=2; i++){
 			theDay.date = i;
 			printf("day=%d\n",theDay.date);
-			copyTLMFile(tlm_wod,theDay,"250102.WOD");
-			copyTLMFile(tlm_eps,theDay,"250102.EEM");
-			copyTLMFile(tlm_tx,theDay,"250102.TX");
-			copyTLMFile(tlm_rx,theDay,"250102.RX");
-			copyTLMFile(tlm_log,theDay,"200608.LOG");
+//			copyTLMFile(tlm_wod,theDay,"250102.WOD");
+//			copyTLMFile(tlm_eps,theDay,"250102.EEM");
+//			copyTLMFile(tlm_tx,theDay,"250102.TX");
+//			copyTLMFile(tlm_rx,theDay,"250102.RX");
+			copyTLMFile(tlm_log,theDay,"TLM/2201/220126.LOG");
 		}
 		TelemetrySaveWOD(); // just to keep the WDT happy
 	}
@@ -874,7 +893,7 @@ Boolean deleteMonth()
 {
 	unsigned short month2delete;
 	printf("Enter year and month in a 4 digit format:\n");
-	scanf("%d", &month2delete);
+	scanf("%hu", &month2delete);
 	int err = deleteTLMbyMonth(month2delete);
 	if(err != E_NO_SS_ERR) { printf("Delete Failed! returned error - %d\n", err); }
 	else { printf("month successfully deleted!\n"); }

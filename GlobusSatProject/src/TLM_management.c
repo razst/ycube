@@ -179,8 +179,8 @@ int deleteTLMFile(tlm_type_t tlmType, Time date, int days2Add){
 
 int deleteTLMbyMonth(unsigned short month)
 {
-	char dirName[9] = {0};
-	sprintf(dirName, "%s/%d", FS_TLM_DIR, month);
+	char dirName[13] = {0};
+	sprintf(dirName, "%s/%hu/*.*", FS_TLM_DIR, month);
 	printf("deleting folder - %s\n", dirName);
 	return deleteDirectory(dirName);
 }
@@ -193,14 +193,19 @@ int deleteDirectory(char* path) {
 			char* filename = find.filename;
 			if (filename[0] != '.')
 			{
+				char file2delete[20] = {0};
+				memcpy(file2delete, path, 9);
+				sprintf(file2delete, "%s%s", file2delete, filename);
 				c++;
-				f_delete(filename);
+				f_delete(file2delete);
 			}
 		} while (!f_findnext(&find));
 	}
-	f_rmdir(path);
-	printf("Number of files deleted - %d", c);
-	return c;
+	char file2delete[9] = {0};
+	memcpy(file2delete, path, 8);
+	f_rmdir(file2delete);
+	printf("Number of files deleted - %d\n", c);
+	return 0;
 }
 
 FileSystemResult InitializeFS(Boolean first_time)
