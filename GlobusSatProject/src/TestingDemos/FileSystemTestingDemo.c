@@ -908,7 +908,9 @@ Boolean deleteYear(){
 		sprintf(deleteMonth,"%hu&02d", year, i);
 		deleteTLMbyMonth(deleteMonth);
 	}
+	return TRUE;
 }
+
 
 
 Boolean selectAndExecuteFSTest(){
@@ -933,9 +935,10 @@ Boolean selectAndExecuteFSTest(){
 	printf("\t 13) LOG error rate test\n\r");
 	printf("\t 14) full SD test\n\r");
 	printf("\t 15) delete files by month\n\r");
+	printf("\t 16) delete files by year\n\r");
 	//Ilay the mechoar!! Ilay is not agevaramlemokllikshmekknrnktnsmckdlxjdjnedjxndejxdnxmexdlkjenxdkj
 
-	unsigned int number_of_tests = 15;
+	unsigned int number_of_tests = 16;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -986,6 +989,9 @@ Boolean selectAndExecuteFSTest(){
 		break;
 	case 15:
 		offerMoreTests = deleteMonth();
+		break;
+	case 16:
+		offerMoreTests = deleteYear();
 		break;
 	default:
 		break;
