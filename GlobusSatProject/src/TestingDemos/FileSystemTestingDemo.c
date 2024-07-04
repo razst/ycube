@@ -458,6 +458,8 @@ Boolean CreateFiles4DeleteTest2(){
 	return TRUE;
 }
 
+
+
 int createSingleDayTLM()
 {
 	// save current time
@@ -468,20 +470,16 @@ int createSingleDayTLM()
 		// set time to 2028/1/1
 		Time_setUnixEpoch(1830297600);
 		int curtime = 1830297600;
-		//delete the file
-		Time theDay;
-		theDay.year = 28;
-		theDay.date = 1;
-		theDay.month = 1;
 
 		//TLM/2801/280101.WOD;
 		for(int i = 0; i < 60*60*24; i += 10){
-		TelemetrySaveWOD();
-		TelemetrySaveEPS();
-		TelemetrySaveTRXVU();
-		TelemetrySaveANT();
-		TelemetrySaveSolarPanels();
-		Time_setUnixEpoch(curtime + 10);
+			printf("working on hour: %d out of 24 hours\n",i);
+			Time_setUnixEpoch(curtime + i);
+			TelemetrySaveWOD();
+			//TelemetrySaveEPS(); TODO: remove comment when we get the EPS from ISIS
+			TelemetrySaveTRXVU();
+			TelemetrySaveANT();
+			TelemetrySaveSolarPanels();
 		}
 
 		return 0;
@@ -837,17 +835,9 @@ Boolean TestTRXVUTLM(){
 
 Boolean FullSDTest(){
 
-	// save current time
-	time_unix current_time = 0;
-	Time_getUnixEpoch(&current_time);
-
-	time_unix new_time = 1735689600;
-	// set time to 2025/1/1
-	Time_setUnixEpoch(new_time);
-
 	//delete the file
 	Time theDay;
-	theDay.year = 30;
+	theDay.year = 25;
 	theDay.date = 1;
 	theDay.month = 1;
 /* copy files ... */
@@ -857,11 +847,12 @@ Boolean FullSDTest(){
 		for(int i=1; i<=2; i++){
 			theDay.date = i;
 			printf("day=%d\n",theDay.date);
-			copyTLMFile(tlm_wod,theDay,"280101.WOD");
-//			copyTLMFile(tlm_eps,theDay,"280101.EEM");
-//			copyTLMFile(tlm_tx,theDay,"280101.TX");
-// 			copyTLMFile(tlm_rx,theDay,"280101.RX");
-			copyTLMFile(tlm_log,theDay,"280101.LOG");
+			copyTLMFile(tlm_wod,theDay,"TLM/2801/280101.WOD");
+//			copyTLMFile(tlm_eps,theDay,"280101.EPS");
+			copyTLMFile(tlm_tx,theDay,"TLM/2801/280101.TX");
+ 			copyTLMFile(tlm_rx,theDay,"TLM/2801/280101.RX");
+			copyTLMFile(tlm_antenna,theDay,"TLM/2801/280101.ANT");
+// 			copyTLMFile(tlm_log,theDay,"TLM/2801/280101.LOG");
 		}
 		TelemetrySaveWOD(); // just to keep the WDT happy
 	}
@@ -891,7 +882,6 @@ Boolean FullSDTest(){
 		TelemetrySaveTRXVU();
 	}*/
 
-	Time_setUnixEpoch(current_time);
 	return TRUE;
 }
 
@@ -933,8 +923,7 @@ Boolean deleteYear(){
 	printf("Enter year:\n");
 	scanf("%hu", &year);
 	for(int i =1; i <= 12 ; i++){
-		char deleteMonth[4];
-		sprintf(deleteMonth,"%hu&02d", year, i);
+		unsigned short deleteMonth = year * 100 + i;
 		deleteTLMbyMonth(deleteMonth);
 	}
 	return TRUE;
