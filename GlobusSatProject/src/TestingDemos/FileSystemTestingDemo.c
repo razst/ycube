@@ -458,6 +458,35 @@ Boolean CreateFiles4DeleteTest2(){
 	return TRUE;
 }
 
+int createSingleDayTLM()
+{
+	// save current time
+		time_unix current_time = 0;
+		Time_getUnixEpoch(&current_time);
+
+
+		// set time to 2028/1/1
+		Time_setUnixEpoch(1830297600);
+		int curtime = 1830297600;
+		//delete the file
+		Time theDay;
+		theDay.year = 28;
+		theDay.date = 1;
+		theDay.month = 1;
+
+		//TLM/2801/280101.WOD;
+		for(int i = 0; i < 60*60*24; i += 10){
+		TelemetrySaveWOD();
+		TelemetrySaveEPS();
+		TelemetrySaveTRXVU();
+		TelemetrySaveANT();
+		TelemetrySaveSolarPanels();
+		Time_setUnixEpoch(curtime + 10);
+		}
+
+		return 0;
+}
+
 static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
 
 void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
@@ -828,11 +857,11 @@ Boolean FullSDTest(){
 		for(int i=1; i<=2; i++){
 			theDay.date = i;
 			printf("day=%d\n",theDay.date);
-//			copyTLMFile(tlm_wod,theDay,"250102.WOD");
-//			copyTLMFile(tlm_eps,theDay,"250102.EEM");
-//			copyTLMFile(tlm_tx,theDay,"250102.TX");
-//			copyTLMFile(tlm_rx,theDay,"250102.RX");
-			copyTLMFile(tlm_log,theDay,"TLM/2201/220126.LOG");
+			copyTLMFile(tlm_wod,theDay,"280101.WOD");
+//			copyTLMFile(tlm_eps,theDay,"280101.EEM");
+//			copyTLMFile(tlm_tx,theDay,"280101.TX");
+// 			copyTLMFile(tlm_rx,theDay,"280101.RX");
+			copyTLMFile(tlm_log,theDay,"280101.LOG");
 		}
 		TelemetrySaveWOD(); // just to keep the WDT happy
 	}
@@ -979,7 +1008,7 @@ Boolean selectAndExecuteFSTest(){
 		offerMoreTests = DeleteOldFiles();
 		break;
 	case 12:
-		offerMoreTests = CreateFiles4DeleteTest2();
+		offerMoreTests = createSingleDayTLM();
 		break;
 	case 13:
 		offerMoreTests = LogErrorRateTest();
