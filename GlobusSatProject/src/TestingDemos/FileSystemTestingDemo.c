@@ -899,6 +899,17 @@ Boolean deleteMonth()
 	else { printf("month successfully deleted!\n"); }
 	return TRUE;
 }
+Boolean deleteYear(){
+	unsigned short year;
+	printf("Enter year:\n");
+	scanf("%hu", &year);
+	for(int i =1; i <= 12 ; i++){
+		char deleteMonth[4];
+		sprintf(deleteMonth,"%hu&02d", year, i);
+		deleteTLMbyMonth(deleteMonth);
+	}
+}
+
 
 Boolean selectAndExecuteFSTest(){
 
