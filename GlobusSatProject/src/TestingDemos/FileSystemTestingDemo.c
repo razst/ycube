@@ -327,51 +327,18 @@ Boolean GenerateWODTLM(){
 }
 
 Boolean DeleteOldFiles(){
+	FN_SPACE space = { 0 };
+	int min;
+	int drivenum = f_getdrive();
+	if (logError(f_getfreespace(drivenum, &space) ,"DeleteOldFiels-f_getfreespace")) return -1;
+	printf("free space before: %d\n", space.free);
+	printf("Enter min free space:\n");
+	scanf("%d", &min);
 
-	// save current time
-	time_unix current_time = 0;
-	Time_getUnixEpoch(&current_time);
+	DeleteOldFiels(min);
 
-	// set time to 2030/1/1
-	Time_setUnixEpoch(1735689600);
-
-	//delete the file
-	Time theDay;
-	theDay.year = 25;
-	theDay.date = 1;
-	theDay.month = 1;
-
-	// delete all WOD files
-	for (int i=0;i<5;i++){
-		int err = deleteTLMFile(tlm_wod,theDay,i);
-		err *= deleteTLMFile(tlm_antenna,theDay,i);
-		err *= deleteTLMFile(tlm_eps,theDay,i);
-		err *= deleteTLMFile(tlm_eps_eng_cdb_NOT_USED,theDay,i);
-		err *= deleteTLMFile(tlm_eps_eng_mb_NOT_USED,theDay,i);
-		err *= deleteTLMFile(tlm_eps_raw_cdb_NOT_USED,theDay,i);
-		err *= deleteTLMFile(tlm_log,theDay,i);
-		err *= deleteTLMFile(tlm_rx,theDay,i);
-		err *= deleteTLMFile(tlm_rx_frame,theDay,i);
-		err *= deleteTLMFile(tlm_solar,theDay,i);
-		err *= deleteTLMFile(tlm_tx,theDay,i);
-	}
-
-	// write some WOD elements in TLM file
-	for (int i=0;i<5;i++){
-		// set time to 2030/1/1
-		Time_setUnixEpoch(1735689600 + (60*60*24*i));
-
-		TelemetrySaveWOD();
-		TelemetrySaveEPS();
-		TelemetrySaveTRXVU();
-		TelemetrySaveANT();
-		TelemetrySaveSolarPanels();
-	}
-	DeleteOldFiels(MIN_FREE_SPACE*1000);
-
-	// set the time back
-	Time_setUnixEpoch(current_time);
-
+	if (logError(f_getfreespace(drivenum, &space) ,"DeleteOldFiels-f_getfreespace")) return -1;
+	printf("free space after: %d\n", space.free);
 	return TRUE;
 }
 
@@ -918,6 +885,7 @@ Boolean deleteMonth()
 	else { printf("month successfully deleted!\n"); }
 	return TRUE;
 }
+
 Boolean deleteYear(){
 	unsigned short year;
 	printf("Enter year:\n");

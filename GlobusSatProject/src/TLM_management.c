@@ -179,6 +179,8 @@ int deleteTLMFile(tlm_type_t tlmType, Time date, int days2Add){
 
 int deleteTLMbyMonth(unsigned short month)
 {
+	if(month <= 2000)
+	{	return E_PARAM_OUTOFBOUNDS;}
 	char dirName[13] = {0};
 	sprintf(dirName, "%s/%hu/*.*", FS_TLM_DIR, month);
 	printf("deleting folder - %s\n", dirName);

@@ -153,6 +153,26 @@ time_unix GetGsWdtKickTime()
 }
 
 
+unsigned short findMinMonth(){
+
+	char* path = "TLM/*.*";
+	unsigned short minMonth = -1;
+	F_FIND find;
+	if (!f_findfirst(path,&find)) {
+			do {
+				char* filename = find.filename;
+				if (filename[0] != '.')
+				{
+					int ataoifile = atoi(find.filename);
+					if(ataoifile<minMonth)
+					minMonth = ataoifile;
+				}
+			} while (!f_findnext(&find));
+	}
+	return minMonth;
+}
+
+
 int DeleteOldFiels(int minFreeSpace){
 	// check how much free space we have in the SD
 	FN_SPACE space = { 0 };
@@ -163,41 +183,11 @@ int DeleteOldFiels(int minFreeSpace){
 	if (logError(f_getfreespace(drivenum, &space) ,"DeleteOldFiels-f_getfreespace")) return -1;
 
 	// if needed, clean old files
-	if (space.free < minFreeSpace){
-		Time theDay;
-		theDay.year = 20;
-		theDay.date = 1;
-		theDay.month = 1;
-		int numOfDays = 0;
-		//read the last numOfDays from FRAM
-		FRAM_read((unsigned char*) &numOfDays,
-		DEL_OLD_FILES_NUM_DAYS_ADDR, DEL_OLD_FILES_NUM_DAYS_SIZE);
-
-		while (numOfDays < (365*5)){ // just in case that we won't get into endless loop, stop after 5 years
-			int err = deleteTLMFile(tlm_wod,theDay,numOfDays);
-			err *= deleteTLMFile(tlm_antenna,theDay,numOfDays);
-			err *= deleteTLMFile(tlm_eps,theDay,numOfDays);
-			err *= deleteTLMFile(tlm_eps_raw_cdb_NOT_USED,theDay,numOfDays);
-			err *= deleteTLMFile(tlm_eps_raw_mb_NOT_USED,theDay,numOfDays);
-			err *= deleteTLMFile(tlm_log,theDay,numOfDays);
-			err *= deleteTLMFile(tlm_rx,theDay,numOfDays);
-			err *= deleteTLMFile(tlm_rx_frame,theDay,numOfDays);
-			err *= deleteTLMFile(tlm_solar,theDay,numOfDays);
-			err *= deleteTLMFile(tlm_tx,theDay,numOfDays);
-			// if all files were found & deleted -> break
-			// if all files were not found -> don't break, move to next day
-			// if found some but not all -> break
-			if(err != pow(F_ERR_NOTFOUND,12)){
-				break;
-			}
-			numOfDays++;
-		}
-
-		//write the numOfDays into FRAM
-		FRAM_write((unsigned char*) &numOfDays,
-		DEL_OLD_FILES_NUM_DAYS_ADDR, DEL_OLD_FILES_NUM_DAYS_SIZE);
-
+	if (space.free < minFreeSpace)
+	{
+		return deleteTLMbyMonth(findMinMonth());
 	}
+	return E_NO_SS_ERR;
 }
 
 void CheckDeployAnt(){
