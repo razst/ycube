@@ -50,6 +50,7 @@ int TestListFiles(char* path, int level) {
 				c++;
 				if (find.attr&F_ATTR_DIR) {
 					printf (" dir \n\r");
+					TestListFiles(sprintf("%s/%s", filename, path));
 				} else {
 					printf (" size %d\n\r",find.filesize);
 				}
@@ -108,7 +109,7 @@ Boolean TestListAllFiles() {
 	printf("all file names printed. count=%d\n",c);
 
 	printf("\n\r");
-	TestlistTLMFiles();
+	//TestlistTLMFiles();
 
 	return TRUE;
 }
