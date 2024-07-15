@@ -36,6 +36,7 @@ Boolean TestlistFiels(){
 int TestListFiles(char* path, int level) {
 
 	F_FIND find;
+
 	int c=0;
 	if (!f_findfirst(path,&find)) {
 		do {
@@ -44,72 +45,40 @@ int TestListFiles(char* path, int level) {
 			{
 				for	(int i = 0 ; i < level ; i++)
 				{
-					printf("    ");
+					printf("|  ");
 				}
 				printf("%s",filename);
 				c++;
 				if (find.attr&F_ATTR_DIR) {
 					printf (" dir \n\r");
+
+					char temp[20] = {0};
+					memcpy(temp, path, strlen(path) -3);
+					sprintf(temp, "%s%s/*.*", temp, filename);
+					TestListFiles(temp, level+1);
+
 				} else {
 					printf (" size %d\n\r",find.filesize);
 				}
 			}
 		} while (!f_findnext(&find));
 	}
-	printf("all file names printed. count=%d\n\r",c);
+	//printf("all file names printed. count=%d\n\r",c);
 	return c;
 }
 
-Boolean TestlistTLMFiles(){
-
-	F_FIND find;
-	int c=0;
-	if (!f_findfirst("TLM/*.*",&find))
-	{
-		do
-		{
-			char* filename = find.filename;
-			if (filename[0] != '.')
-			{
-				printf("filename: %s",filename);
-				c++;
-				if (find.attr&F_ATTR_DIR)
-				{
-					printf (" directory \n");
-					char newPath[13] = "TLM/";
-					strcat(newPath,filename);
-					strcat(newPath,"/*.*");
-					printf("path - %s\n\r", newPath);
-					TestListFiles(newPath, 1);
-				}
-				else
-				{
-					printf (" size %d\n",find.filesize);
-				}
-			}
-		} while (!f_findnext(&find));
-	}
-	printf("all file names printed. count=%d\n",c);
-	return TRUE;
-}
-
 Boolean TestListAllFiles() {
-
-
-
 	F_FIND find;
-	printf("\n\rMain dir:\n\r");
-	int c=TestListFiles("*.*", 1);
-	printf("\n\rTLM dir:\n\r");
-	c=c+TestListFiles("TLM/*.*", 1);
-	printf("\n\rIMG dir:\n\r");
-	c=c+TestListFiles("IMG/*.*", 1);
+	char path[20] = {0};
+	printf("Enter path to list(type 1 for all)\n");
+	scanf("%s", &path);
+	if(strcmp(path,"1") == 0) {sprintf(path,"");}
+	sprintf(path, "%s/*.*", path);
+	int c=TestListFiles(path, 1);
 
 	printf("all file names printed. count=%d\n",c);
 
 	printf("\n\r");
-	TestlistTLMFiles();
-
 	return TRUE;
 }
 
@@ -898,7 +867,37 @@ Boolean deleteYear(){
 }
 
 
+int writeFileOnScreen()
+{
+	F_FILE *fptr;
+	char c;
+	char filename[17] = {0};
+	printf("Enter file filename (e.g  TLM\\2212\\221215.LOG \n");
+	scanf("%s",filename);
+    printf("About to open file:%s\n",filename);
 
+	int g=0;
+    fptr = f_open(filename, "r");
+	  if (fptr == NULL)
+	  {
+		  printf("Cannot open file \n");
+		  return TRUE;
+	  }
+
+	  // Read contents from file
+	  c = f_getc(fptr);
+	  while (c != -1)
+	  {
+		  g++;
+		  if (g>2000)break;
+		  printf ("%c", c);
+		  printf ("*%d*", c);
+		  c = f_getc(fptr);
+	  }
+
+	  f_close(fptr);
+	  return TRUE;
+}
 Boolean selectAndExecuteFSTest(){
 
 	unsigned int selection = 0;
@@ -922,9 +921,11 @@ Boolean selectAndExecuteFSTest(){
 	printf("\t 14) full SD test\n\r");
 	printf("\t 15) delete files by month\n\r");
 	printf("\t 16) delete files by year\n\r");
+	printf("\t 17) write file \n\r");
+
 	//Ilay the mechoar!! Ilay is not agevaramlemokllikshmekknrnktnsmckdlxjdjnedjxndejxdnxmexdlkjenxdkj
 
-	unsigned int number_of_tests = 16;
+	unsigned int number_of_tests = 17;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -979,11 +980,16 @@ Boolean selectAndExecuteFSTest(){
 	case 16:
 		offerMoreTests = deleteYear();
 		break;
+	case 17:
+		offerMoreTests = writeFileOnScreen();
+		break;
 	default:
 		break;
 	}
 	return offerMoreTests;
 }
+
+
 
 Boolean MainFileSystemTestBench(){
 
