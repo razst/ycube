@@ -51,12 +51,16 @@ int TestListFiles(char* path, int level) {
 				c++;
 				if (find.attr&F_ATTR_DIR) {
 					printf (" dir \n\r");
+<<<<<<< HEAD
 
 					char temp[20] = {0};
 					memcpy(temp, path, strlen(path) -3);
 					sprintf(temp, "%s%s/*.*", temp, filename);
 					TestListFiles(temp, level+1);
 
+=======
+					TestListFiles(sprintf("%s/%s", filename, path));
+>>>>>>> ed0242eedbebc9b16069da7e3391c0fafb91a8da
 				} else {
 					printf (" size %d\n\r",find.filesize);
 				}
@@ -79,6 +83,11 @@ Boolean TestListAllFiles() {
 	printf("all file names printed. count=%d\n",c);
 
 	printf("\n\r");
+<<<<<<< HEAD
+=======
+	//TestlistTLMFiles();
+
+>>>>>>> ed0242eedbebc9b16069da7e3391c0fafb91a8da
 	return TRUE;
 }
 
