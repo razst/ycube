@@ -6,6 +6,7 @@
 C_SRCS += \
 ../src/Demos/GomEPSdemo.c \
 ../src/Demos/IsisAntSdemo.c \
+../src/Demos/IsisHSTxSdemo.c \
 ../src/Demos/IsisMTQv1demo.c \
 ../src/Demos/IsisMTQv2demo.c \
 ../src/Demos/IsisSPdemo.c \
@@ -17,12 +18,15 @@ C_SRCS += \
 ../src/Demos/common.c \
 ../src/Demos/cspaceADCSdemo.c \
 ../src/Demos/input.c \
+../src/Demos/isis_ants2_demo.c \
 ../src/Demos/isis_eps_demo.c \
+../src/Demos/tausat2_pdhudemo.c \
 ../src/Demos/trxvu_frame_ready.c 
 
 OBJS += \
 ./src/Demos/GomEPSdemo.o \
 ./src/Demos/IsisAntSdemo.o \
+./src/Demos/IsisHSTxSdemo.o \
 ./src/Demos/IsisMTQv1demo.o \
 ./src/Demos/IsisMTQv2demo.o \
 ./src/Demos/IsisSPdemo.o \
@@ -34,12 +38,15 @@ OBJS += \
 ./src/Demos/common.o \
 ./src/Demos/cspaceADCSdemo.o \
 ./src/Demos/input.o \
+./src/Demos/isis_ants2_demo.o \
 ./src/Demos/isis_eps_demo.o \
+./src/Demos/tausat2_pdhudemo.o \
 ./src/Demos/trxvu_frame_ready.o 
 
 C_DEPS += \
 ./src/Demos/GomEPSdemo.d \
 ./src/Demos/IsisAntSdemo.d \
+./src/Demos/IsisHSTxSdemo.d \
 ./src/Demos/IsisMTQv1demo.d \
 ./src/Demos/IsisMTQv2demo.d \
 ./src/Demos/IsisSPdemo.d \
@@ -51,7 +58,9 @@ C_DEPS += \
 ./src/Demos/common.d \
 ./src/Demos/cspaceADCSdemo.d \
 ./src/Demos/input.d \
+./src/Demos/isis_ants2_demo.d \
 ./src/Demos/isis_eps_demo.d \
+./src/Demos/tausat2_pdhudemo.d \
 ./src/Demos/trxvu_frame_ready.d 
 
 
@@ -59,7 +68,7 @@ C_DEPS += \
 src/Demos/%.o: ../src/Demos/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross ARM C Compiler'
-	arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=$(REV)' -D'BASE_REVISION_HASH_SHORT=$(REVHASH_SHORT)' -D'BASE_REVISION_HASH=$(REVHASH)' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -c -o "$@" "$<"
+	arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=$(REV)' -D'BASE_REVISION_HASH_SHORT=$(REVHASH_SHORT)' -D'BASE_REVISION_HASH=$(REVHASH)' -I"C:\ISIS\workspace\ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace/ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -c -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

@@ -79,11 +79,6 @@ Boolean TestListAllFiles() {
 	printf("all file names printed. count=%d\n",c);
 
 	printf("\n\r");
-<<<<<<< HEAD
-=======
-	//TestlistTLMFiles();
-
->>>>>>> ed0242eedbebc9b16069da7e3391c0fafb91a8da
 	return TRUE;
 }
 
