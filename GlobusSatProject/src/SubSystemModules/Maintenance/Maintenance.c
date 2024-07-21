@@ -153,23 +153,25 @@ time_unix GetGsWdtKickTime()
 }
 
 
-unsigned short findMinMonth(){
+unsigned short* findMinMaxDate(){
 
 	char* path = "TLM/*.*";
-	unsigned short minMonth = -1;
+	unsigned short minMaxMonth[2] = { 3000, 0 };
 	F_FIND find;
 	if (!f_findfirst(path,&find)) {
 			do {
 				char* filename = find.filename;
 				if (filename[0] != '.')
 				{
-					int ataoifile = atoi(find.filename);
-					if(ataoifile<minMonth)
-					minMonth = ataoifile;
+					int month = atoi(filename);
+					if (minMaxMonth[0] > month)
+						minMaxMonth[0] = month;
+					if (minMaxMonth[1] < month)
+						minMaxMonth[1] = month;
 				}
 			} while (!f_findnext(&find));
 	}
-	return minMonth;
+	return minMaxMonth;
 }
 
 
@@ -185,7 +187,7 @@ int DeleteOldFiels(int minFreeSpace){
 	// if needed, clean old files
 	if (space.free < minFreeSpace)
 	{
-		return deleteTLMbyMonth(findMinMonth());
+		return deleteTLMbyMonth(findMinMaxDate()[0]);
 	}
 	return E_NO_SS_ERR;
 }

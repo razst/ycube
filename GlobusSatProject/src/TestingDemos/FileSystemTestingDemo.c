@@ -10,7 +10,6 @@
 #include <TLM_management.h>
 
 Boolean TestlistFiels(){
-
 	F_FIND find;
 	int c=0;
 	if (!f_findfirst("*.*",&find))
@@ -900,6 +899,19 @@ int writeFileOnScreen()
 	  f_close(fptr);
 	  return TRUE;
 }
+
+
+// TODO: move to non testing file
+int mashoo() {
+	unsigned short* minMaxDate = findMinMaxDate();
+
+	mashooStruct mashooVar = { minMaxDate[0], minMaxDate[1], f_getlasterror() };
+	printf("Min date - %hu\nMax date - %hu\nLast error - %hu\n", mashooVar.minDate, mashooVar.maxDate, mashooVar.lastError);
+
+	return TRUE;
+}
+
+
 Boolean selectAndExecuteFSTest(){
 
 	unsigned int selection = 0;
@@ -924,6 +936,7 @@ Boolean selectAndExecuteFSTest(){
 	printf("\t 15) delete files by month\n\r");
 	printf("\t 16) delete files by year\n\r");
 	printf("\t 17) write file \n\r");
+	printf("\t 18) mashoo \n\r");
 
 	//Ilay the mechoar!! Ilay is not agevaramlemokllikshmekknrnktnsmckdlxjdjnedjxndejxdnxmexdlkjenxdkj
 
@@ -984,6 +997,9 @@ Boolean selectAndExecuteFSTest(){
 		break;
 	case 17:
 		offerMoreTests = writeFileOnScreen();
+		break;
+	case 18:
+		offerMoreTests = mashoo();
 		break;
 	default:
 		break;
