@@ -868,36 +868,33 @@ Boolean deleteYear(){
 
 int writeFileOnScreen()
 {
-	char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
 
 	F_FILE *fptr;
 
 	logData_t data;
 
-	char c;
 	char filename[17] = {0};
 	printf("Enter file filename (e.g  TLM\\2212\\221215.LOG \n");
 	scanf("%s",filename);
     printf("About to open file:%s\n",filename);
 
-	int g=0;
-    fptr = f_open(filename, "r");
-	  if (fptr == NULL)
-	  {
-		  printf("Cannot open file \n");
-		  return TRUE;
-	  }
-
-		while(1)
-		{
-			int readElemnts = f_read(&buffer , sizeof(data) , 1, fptr );
-			if(!readElemnts) break;
-			printf("error:%d \t msg:%s\n",data.error,data.msg);
-
-		}
-
-	  f_close(fptr);
+    fptr = f_open(filename, "rb");
+	if (fptr == NULL)
+	{
+	  printf("Cannot open file \n");
 	  return TRUE;
+	}
+
+    int c=0;
+    // reading to read_struct
+    while (f_read(&data, sizeof(data), 1, fptr) !=0){
+	    printf("error: %d\n", data.error);
+	    c++;
+    }
+    printf("number of elements read:%d\n",c);
+
+	f_close(fptr);
+	return TRUE;
 }
 
 
