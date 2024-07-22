@@ -830,16 +830,31 @@ Boolean LogErrorRateTest(){
 	for(int i=0;i<5;i++){
 		logError(-21 ,"LogErrorRateTest");
 	}
-	vTaskDelay((MAX_TIME_BETWEEN_ERRORS+1) * 1000);
 
-	printf("ERROR 20 - should start logging again only the first 20 errors\n");
-	for(int i=0;i<100;i++){
-		logError(-20 , "LogErrorRateTest");
-	}
-	printf("ERROR 0 (sucsess) - shouldn't log anything\n");
-	for(int i=0;i<10;i++){
-		logError(0 ,"LogErrorRateTest");
-	}
+	unsigned int curr_time;
+	Time_getUnixEpoch(&curr_time);
+
+	Time curr_date;
+	Time_get(&curr_date);
+
+	char file_name[MAX_FILE_NAME_SIZE] = {0};
+	char end_file_name[3] = "LOG";
+	calculateFileName(curr_date,&file_name,end_file_name , 0);
+	writeFileOnScreen(file_name);
+
+
+
+
+//	vTaskDelay((MAX_TIME_BETWEEN_ERRORS+1) * 1000);
+//
+//	printf("ERROR 20 - should start logging again only the first 20 errors\n");
+//	for(int i=0;i<100;i++){
+//		logError(-20 , "LogErrorRateTest");
+//	}
+//	printf("ERROR 0 (sucsess) - shouldn't log anything\n");
+//	for(int i=0;i<10;i++){
+//		logError(0 ,"LogErrorRateTest");
+//	}
 	return TRUE;
 }
 
@@ -866,35 +881,44 @@ Boolean deleteYear(){
 }
 
 
-int writeFileOnScreen()
+int readFileTest()
+{
+
+	char filename[MAX_FILE_NAME_SIZE] = {0};
+//	char filename[] ="TLM\\2201\\220126.LOG";
+	printf("Enter file filename (e.g  TLM\\2212\\221215.LOG \n");
+	scanf("%s",filename);
+    writeFileOnScreen(filename);
+
+    return TRUE;
+}
+
+void writeFileOnScreen(char filename[MAX_FILE_NAME_SIZE])
 {
 
 	F_FILE *fptr;
 
 	logData_t data;
 
-	char filename[17] = {0};
-	printf("Enter file filename (e.g  TLM\\2212\\221215.LOG \n");
-	scanf("%s",filename);
     printf("About to open file:%s\n",filename);
 
-    fptr = f_open(filename, "rb");
+    fptr = f_open(filename, "r");
 	if (fptr == NULL)
 	{
 	  printf("Cannot open file \n");
-	  return TRUE;
+	  return;
 	}
 
     int c=0;
     // reading to read_struct
     while (f_read(&data, sizeof(data), 1, fptr) !=0){
-	    printf("error: %d\n", data.error);
+	    printf("error: %d msg:%s\n", data.error,data.msg);
 	    c++;
     }
     printf("number of elements read:%d\n",c);
 
 	f_close(fptr);
-	return TRUE;
+
 }
 
 
@@ -993,7 +1017,7 @@ Boolean selectAndExecuteFSTest(){
 		offerMoreTests = deleteYear();
 		break;
 	case 17:
-		offerMoreTests = writeFileOnScreen();
+		offerMoreTests = readFileTest();
 		break;
 	case 18:
 		offerMoreTests = mashoo();
