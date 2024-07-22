@@ -55,6 +55,16 @@ typedef struct imageData
 	char data[IMG_CHUNK_SIZE];
 } imageData_t;
 
+typedef struct
+{
+	  unsigned long  total;
+	  unsigned long  free;
+	  unsigned long  used;
+	  unsigned long  bad;
+
+	  unsigned short minFileDate;
+	  unsigned short  maxFileDate;
+}TLM_Info_Data_t;
 
 
 static Boolean stopDump = FALSE;

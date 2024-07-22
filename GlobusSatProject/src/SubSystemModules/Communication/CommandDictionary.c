@@ -183,6 +183,9 @@ int telemetry_command_router(sat_packet_t *cmd)
 	case GET_IMAGE_DATA:
 		err = CMD_getDataImage(cmd);
 		break;
+	case GET_TLM_INFO:
+		err = CMD_Get_TLM_Info(cmd);
+		break;
 
 	default:
 		err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);

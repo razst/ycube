@@ -74,6 +74,29 @@ int CMD_GetLastFS_Error(sat_packet_t *cmd)
 	return err;
 
 }
+int CMD_Get_TLM_Info(sat_packet_t *cmd)
+{
+	TLM_Info_Data_t data;
+	FN_SPACE space = { 0 };
+	int drivenum = f_getdrive();
+	// get the free space of the SD card
+	int err = logError(f_getfreespace(drivenum, &space), "CMD_Get_TLM_Info");
+
+	unsigned short* minMaxDate = findMinMaxDate();
+	if(err == E_NO_SS_ERR)
+	{
+		data.total = space.total;
+		data.used = space.used;
+		data.free = space.free;
+		data.bad = space.bad;
+		data.minFileDate = minMaxDate[0];
+		data.maxFileDate = minMaxDate[1];
+		TransmitDataAsSPL_Packet(cmd, (unsigned char*)&data, sizeof(data));
+	}
+	return err;
+
+
+}
 
 int CMD_FreeSpace(sat_packet_t *cmd)
 {
