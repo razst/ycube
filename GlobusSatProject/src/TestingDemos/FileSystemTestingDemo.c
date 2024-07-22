@@ -776,20 +776,24 @@ Boolean FullSDTest(){
 	theDay.date = 1;
 	theDay.month = 1;
 /* copy files ... */
-	for(int M=1; M<=2 ; M++){
-		theDay.month=M;
-		printf("month=%d\n",theDay.month);
-		for(int i=1; i<=2; i++){
-			theDay.date = i;
-			printf("day=%d\n",theDay.date);
-			copyTLMFile(tlm_wod,theDay,"TLM/2801/280101.WOD");
-//			copyTLMFile(tlm_eps,theDay,"280101.EPS");
-			copyTLMFile(tlm_tx,theDay,"TLM/2801/280101.TX");
- 			copyTLMFile(tlm_rx,theDay,"TLM/2801/280101.RX");
-			copyTLMFile(tlm_antenna,theDay,"TLM/2801/280101.ANT");
-// 			copyTLMFile(tlm_log,theDay,"TLM/2801/280101.LOG");
+	for(int Y=25; Y<=26 ; Y++){
+		theDay.year =Y;
+		printf("year=%d\n",theDay.year);
+		for(int M=1; M<=12 ; M++){
+			theDay.month=M;
+			printf("month=%d\n",theDay.month);
+			for(int i=1; i<=29; i++){
+				theDay.date = i;
+				printf("day=%d\n",theDay.date);
+				copyTLMFile(tlm_wod,theDay,"TLM/2801/280101.WOD");
+	//			copyTLMFile(tlm_eps,theDay,"280101.EPS");
+				copyTLMFile(tlm_tx,theDay,"TLM/2801/280101.TX");
+				copyTLMFile(tlm_rx,theDay,"TLM/2801/280101.RX");
+				copyTLMFile(tlm_antenna,theDay,"TLM/2801/280101.ANT");
+	// 			copyTLMFile(tlm_log,theDay,"TLM/2801/280101.LOG");
+			}
+			TelemetrySaveWOD(); // just to keep the WDT happy
 		}
-		TelemetrySaveWOD(); // just to keep the WDT happy
 	}
 	/*
 		// first, delete all previus files
@@ -932,7 +936,18 @@ int mashoo() {
 	return TRUE;
 }
 
+int showFreeSapce(){
+	FN_SPACE space = { 0 };
+	int drivenum = f_getdrive();
 
+	if (logError(f_getfreespace(drivenum, &space) ,"DeleteOldFiels-f_getfreespace")) return -1;
+	printf("total space after: %d\n", space.total);
+	printf("used space after: %d\n", space.used);
+	printf("bad space after: %d\n", space.bad);
+	printf("free space after: %d\n", space.free);
+
+	return TRUE;
+}
 Boolean selectAndExecuteFSTest(){
 
 	unsigned int selection = 0;
@@ -958,10 +973,11 @@ Boolean selectAndExecuteFSTest(){
 	printf("\t 16) delete files by year\n\r");
 	printf("\t 17) write file \n\r");
 	printf("\t 18) mashoo \n\r");
+	printf("\t 19) Show free space info");
 
 	//Ilay the mechoar!! Ilay is not agevaramlemokllikshmekknrnktnsmckdlxjdjnedjxndejxdnxmexdlkjenxdkj
 
-	unsigned int number_of_tests = 17;
+	unsigned int number_of_tests = 19;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -1021,6 +1037,9 @@ Boolean selectAndExecuteFSTest(){
 		break;
 	case 18:
 		offerMoreTests = mashoo();
+		break;
+	case 19:
+		offerMoreTests = showFreeSapce();
 		break;
 	default:
 		break;
