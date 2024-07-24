@@ -411,13 +411,25 @@ int createSingleDayTLM()
 			printf("working on hour: %d out of 24 hours\n",i);
 			Time_setUnixEpoch(curtime + i);
 			TelemetrySaveWOD();
+			printLastError();
 			//TelemetrySaveEPS(); TODO: remove comment when we get the EPS from ISIS
 			TelemetrySaveTRXVU();
 			TelemetrySaveANT();
 			TelemetrySaveSolarPanels();
+
 		}
 
 		return 0;
+}
+
+
+void printLastError(){
+	int err = f_getlasterror();
+
+	if (err != E_NO_SS_ERR)
+	{
+		printf("fS last error=%d\n",err);
+	}
 }
 
 static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
@@ -439,6 +451,7 @@ void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
 
 	if (!target)
 	{
+		printLastError();
 		printf("Unable to open file %s, try creating directory:\n",file_name);
 
 		//get directory name
@@ -450,6 +463,7 @@ void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
 		if (err != 0)
 		{
 			printf("error creating directory %s\n", dir_name);
+			printLastError();
 			return ;
 		}
 
@@ -457,18 +471,18 @@ void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
 		if (!target)
 		{
 			printf("error 2 openning %s file!\n", file_name);
+			printLastError();
 			return ;
 		}
 	}
 
 
 	source = f_open(sourceFile, "r");
-
-	int err = f_getlasterror();
+	printLastError();
 
 	if (!source)
 	{
-		printf("Unable to open file!, f_open error=%d\n",err);
+		printf("Unable to open file!\n");
 		return;
 	}
 	char element[(sizeof(int)+size)];// buffer for a single element that we will tx
@@ -479,14 +493,17 @@ void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
 	while(1)
 	{
 		int readElemnts = f_read(&buffer , sizeof(int)+size , NUM_ELEMENTS_READ_AT_ONCE, source);
+		printLastError();
 		if(!readElemnts) break;
 		f_write(&buffer , sizeof(int)+size ,readElemnts, target );
-
+		printLastError();
 	}// end loop...
 
 	/* close the file*/
 	f_close (source);
+	printLastError();
 	f_close (target);
+	printLastError();
 	return ;
 }
 
@@ -772,11 +789,11 @@ Boolean FullSDTest(){
 
 	//delete the file
 	Time theDay;
-	theDay.year = 25;
+	theDay.year = 27;
 	theDay.date = 1;
 	theDay.month = 1;
 /* copy files ... */
-	for(int Y=25; Y<=26 ; Y++){
+	for(int Y=30; Y<=32 ; Y++){
 		theDay.year =Y;
 		printf("year=%d\n",theDay.year);
 		for(int M=1; M<=12 ; M++){
@@ -826,13 +843,30 @@ Boolean FullSDTest(){
 
 Boolean LogErrorRateTest(){
 
+//	printf("A check for when the SD is full\n");
+//
+//	int c=0;
+//	while (1){
+//		printf("round number %d\n",c);
+//		c++;
+//		showFreeSapce();
+//		vTaskDelay(1000);
+//		for(int i=0;i<1000;i++){
+//			logError(-10 ,"LogErrorRateTest");
+//			printLastError();
+//		}
+//	}
+
+
 	printf("ERROR 20 - should log only the first 20 errors\n");
 	for(int i=0;i<100;i++){
 		logError(-20 ,"LogErrorRateTest");
+		printLastError();
 	}
 	printf("ERROR 21 - should log all errors\n");
 	for(int i=0;i<5;i++){
 		logError(-21 ,"LogErrorRateTest");
+		printLastError();
 	}
 
 	unsigned int curr_time;
@@ -941,10 +975,10 @@ int showFreeSapce(){
 	int drivenum = f_getdrive();
 
 	if (logError(f_getfreespace(drivenum, &space) ,"DeleteOldFiels-f_getfreespace")) return -1;
-	printf("total space after: %d\n", space.total);
-	printf("used space after: %d\n", space.used);
-	printf("bad space after: %d\n", space.bad);
-	printf("free space after: %d\n", space.free);
+	printf("total space : %d\n", space.total);
+	printf("used space  : %d\n", space.used);
+	printf("free space  : %d\n", space.free);
+	printf("bad space   : %d\n", space.bad);
 
 	return TRUE;
 }
