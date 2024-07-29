@@ -3,6 +3,8 @@
 #include "TLM_management.h"
 #include "SubSystemModules/Communication/TRXVU.h"
 #include <hcc/api_fat.h>
+#include "TLM_management.h"
+#include <hcc/api_mdriver_atmel_mcipdc.h>
 
 
 
@@ -95,7 +97,28 @@ int CMD_Get_TLM_Info(sat_packet_t *cmd)
 	}
 	return err;
 
+}
+int CMD_Switch_SD_Card(sat_packet_t *cmd)
+{
+	unsigned short change_to_SD_card;
+	memcpy(&change_to_SD_card,cmd->data,sizeof(change_to_SD_card));
+	unsigned short current_SD_card = f_getdrive();
+	if(current_SD_card == change_to_SD_card)
+	{
+		return E_IS_INITIALIZED;
+	}
+	//TODO check after 2nd SD is added
+	int err = hcc_mem_init();
+	DeInitializeFS(current_SD_card);
+	hcc_mem_init();
+	fs_init();
+	f_enterFS();
+	err = f_initvolume( 0, atmel_mcipdc_initfunc, change_to_SD_card );
 
+	if (err != E_NO_SS_ERR){
+		//printf("f_initvolume secondary error:%d\n",err);
+	}
+	return err;
 }
 
 int CMD_FreeSpace(sat_packet_t *cmd)

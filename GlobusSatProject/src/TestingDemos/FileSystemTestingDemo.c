@@ -8,6 +8,7 @@
 #include "TLM_management.h"
 #include "SubSystemModules/Communication/SatCommandHandler.h"
 #include <TLM_management.h>
+#include "SubSystemModules/Communication/SPL.h"
 
 Boolean TestlistFiels(){
 	F_FIND find;
@@ -982,6 +983,25 @@ int showFreeSapce(){
 
 	return TRUE;
 }
+
+
+int SwitchSDCardTest()
+{
+	printf("pls enter which SD card to switch to (i.e 0 or 1 )\n");
+	unsigned short SD_name;
+	scanf("%hu", &SD_name);
+	sat_packet_t cmd;
+	cmd.ID = 1;
+	cmd.cmd_type = telemetry_cmd_type;
+	cmd.cmd_subtype = SWITCH_SD_CARD;
+	cmd.length = sizeof(SD_name);
+	memcpy(&cmd.data, &SD_name, sizeof(SD_name));
+	int err;
+	err = ActUponCommand(&cmd);
+	printf("result: %d", err);
+	return TRUE;
+}
+
 Boolean selectAndExecuteFSTest(){
 
 	unsigned int selection = 0;
@@ -1007,11 +1027,12 @@ Boolean selectAndExecuteFSTest(){
 	printf("\t 16) delete files by year\n\r");
 	printf("\t 17) write file \n\r");
 	printf("\t 18) mashoo \n\r");
-	printf("\t 19) Show free space info");
+	printf("\t 19) Show free space info\n\r");
+	printf("\t 20) Switch SD card\n\r");
 
 	//Ilay the mechoar!! Ilay is not agevaramlemokllikshmekknrnktnsmckdlxjdjnedjxndejxdnxmexdlkjenxdkj
 
-	unsigned int number_of_tests = 19;
+	unsigned int number_of_tests = 20;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -1074,6 +1095,9 @@ Boolean selectAndExecuteFSTest(){
 		break;
 	case 19:
 		offerMoreTests = showFreeSapce();
+		break;
+	case 20:
+		offerMoreTests = SwitchSDCardTest();
 		break;
 	default:
 		break;
