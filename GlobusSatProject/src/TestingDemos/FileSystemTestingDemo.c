@@ -70,9 +70,11 @@ int TestListFiles(char* path, int level) {
 Boolean TestListAllFiles() {
 	F_FIND find;
 	char path[20] = {0};
-	printf("Enter path to list(type 1 for all)\n");
+	printf("Enter path to list(type 1 for TLM, 2 for all)\n");
 	scanf("%s", &path);
-	if(strcmp(path,"1") == 0) {sprintf(path,"");}
+	if(strcmp(path,"1") == 0) {sprintf(path,"TLM/");}
+	if(strcmp(path,"2") == 0) {sprintf(path,"");}
+
 	sprintf(path, "%s/*.*", path);
 	int c=TestListFiles(path, 1);
 
@@ -962,14 +964,18 @@ void writeFileOnScreen(char filename[MAX_FILE_NAME_SIZE])
 
 
 // TODO: move to non testing file
-int mashoo() {
-	unsigned short* minMaxDate = findMinMaxDate();
-
-	mashooStruct mashooVar = { minMaxDate[0], minMaxDate[1], f_getlasterror() };
-	printf("Min date - %hu\nMax date - %hu\nLast error - %hu\n", mashooVar.minDate, mashooVar.maxDate, mashooVar.lastError);
-
-	return TRUE;
+int GetExtraData()
+{
+	sat_packet_t cmd;
+	cmd.ID = 1;
+	cmd.cmd_type = telemetry_cmd_type;
+	cmd.cmd_subtype = GET_TLM_INFO;
+	cmd.length = sizeof(TLM_Info_Data_t);
+	int err;
+	err = ActUponCommand(&cmd);
+	return err;
 }
+
 
 int showFreeSapce(){
 	FN_SPACE space = { 0 };
@@ -1026,7 +1032,7 @@ Boolean selectAndExecuteFSTest(){
 	printf("\t 15) delete files by month\n\r");
 	printf("\t 16) delete files by year\n\r");
 	printf("\t 17) write file \n\r");
-	printf("\t 18) mashoo \n\r");
+	printf("\t 18) get extra data test (min max month) \n\r");
 	printf("\t 19) Show free space info\n\r");
 	printf("\t 20) Switch SD card\n\r");
 
@@ -1091,7 +1097,7 @@ Boolean selectAndExecuteFSTest(){
 		offerMoreTests = readFileTest();
 		break;
 	case 18:
-		offerMoreTests = mashoo();
+		offerMoreTests = GetExtraData();
 		break;
 	case 19:
 		offerMoreTests = showFreeSapce();
