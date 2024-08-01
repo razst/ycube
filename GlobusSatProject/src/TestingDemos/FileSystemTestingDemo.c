@@ -10,6 +10,25 @@
 #include <TLM_management.h>
 #include "SubSystemModules/Communication/SPL.h"
 
+int FormatSD()
+{
+	//todo make this func work it is not finished also get rid of tmp=provided example by the manual
+	int drivenum;
+	//long fattype;
+	int ret;
+	drivenum = f_getdrive();
+	// tmp = cfc_initfunc;
+	f_init();
+	f_enterFS();
+	//f_initvolume(drivenum,atmel_mcipdc_initfunc, F_AUTO_ASSIGN);
+	ret = f_format(drivenum, F_FAT32_MEDIA);
+	if (ret){
+		printf("Unable to format CFC: Error %d",ret);}
+	else
+		{printf("cfc formated");}
+	// add de-init??? return error
+	return ret;
+}
 Boolean TestlistFiels(){
 	F_FIND find;
 	int c=0;
