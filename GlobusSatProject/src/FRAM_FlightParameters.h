@@ -87,8 +87,12 @@
 #define LAST_COMM_TIME_ADDR 			0X9485		//<! saves the last unix time at which communication has occured
 #define LAST_COMM_TIME_SIZE				4			//<! size of last communication time in bytes
 
+#define ACTIVE_SD_ADDR					0X9490
+#define ACTIVE_SD_SIZE					1
+
+
 #define DEFAULT_BEACON_INTERVAL_TIME 	20			//<! how many seconds between two beacons [sec]
 #define MAX_BEACON_INTERVAL				60			// beacon every 1 minute
-#define MIN_BEACON_INTERVAL				10			// beacon every 10 secinds
+#define MIN_BEACON_INTERVAL				10			// beacon every 10 seconds
 
 #endif /* FRAM_FLIGHTPARAMETERS_H_ */

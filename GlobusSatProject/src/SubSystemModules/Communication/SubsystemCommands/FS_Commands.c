@@ -100,23 +100,19 @@ int CMD_Get_TLM_Info(sat_packet_t *cmd)
 }
 int CMD_Switch_SD_Card(sat_packet_t *cmd)
 {
-	unsigned short change_to_SD_card;
+	char change_to_SD_card,current_SD_card;
 	memcpy(&change_to_SD_card,cmd->data,sizeof(change_to_SD_card));
-	unsigned short current_SD_card = f_getdrive();
+	FRAM_read((unsigned char*)&current_SD_card,ACTIVE_SD_ADDR,ACTIVE_SD_SIZE);
 	if(current_SD_card == change_to_SD_card)
 	{
 		return E_IS_INITIALIZED;
 	}
+	int err = FRAM_write((unsigned char*)&change_to_SD_card,ACTIVE_SD_ADDR, ACTIVE_SD_SIZE);
 	//TODO check after 2nd SD is added
-	int err = hcc_mem_init();
-	DeInitializeFS(current_SD_card);
-	hcc_mem_init();
-	fs_init();
-	f_enterFS();
-	err = f_initvolume( 0, atmel_mcipdc_initfunc, change_to_SD_card );
-
-	if (err != E_NO_SS_ERR){
-		//printf("f_initvolume secondary error:%d\n",err);
+	if(E_NO_SS_ERR == err)
+	{
+		restart();
+		vTaskDelay(10000);
 	}
 	return err;
 }

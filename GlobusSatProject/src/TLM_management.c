@@ -32,11 +32,6 @@
 #include <satellite-subsystems/IsisAntS.h>
 #include <satellite-subsystems/isis_eps_driver.h>
 
-#define SKIP_FILE_TIME_SEC 1000000
-#define SD_CARD_DRIVER_PRI 0
-#define SD_CARD_DRIVER_SEC 1
-#define FIRST_TIME -1
-#define _POSIX_SOURCE
 
 static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
 
@@ -230,26 +225,22 @@ FileSystemResult InitializeFS(Boolean first_time)
 
 	// Tell the OS (freeRTOS) about our FS
 	err = f_enterFS();
+
 	if (err != E_NO_SS_ERR){
 		//printf("f_enterFS error:",err);
+	}
+	int active_SD;
+	if (E_NO_SS_ERR != FRAM_read((unsigned char*)&active_SD,ACTIVE_SD_ADDR,ACTIVE_SD_SIZE)){
+		active_SD = SD_CARD_DRIVER_PRI;
 	}
 
 	// Initialize the volume of SD card 0 (A)
 	// TODO should we also init the volume of SD card 1 (B)???
 	// TODO: why drive 1 is not working when we test it?
-	err=f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_PRI );
-	if (err != E_NO_SS_ERR){
-		// erro init SD 0 so de-itnit and init SD 1
-		//printf("f_initvolume primary error:%d\n",err);
-		DeInitializeFS(SD_CARD_DRIVER_PRI);
-		hcc_mem_init();
-		fs_init();
-		f_enterFS();
-		err=f_initvolume( 0, atmel_mcipdc_initfunc, SD_CARD_DRIVER_SEC );
-		if (err != E_NO_SS_ERR){
-			//printf("f_initvolume secondary error:%d\n",err);
-		}
-	}
+
+	err=f_initvolume( 0, atmel_mcipdc_initfunc, active_SD );
+
+
 
 	//In the first time the SD on. if there is file on the SD delete it.
 	if(first_time) delete_allTMFilesFromSD();

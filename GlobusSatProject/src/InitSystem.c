@@ -91,9 +91,13 @@ void WriteDefaultValuesToFRAM()
 	FRAM_write((unsigned char*) &num_of_resets,
 	DEL_OLD_FILES_NUM_DAYS_ADDR, DEL_OLD_FILES_NUM_DAYS_SIZE);
 
+	char temp = SD_CARD_DRIVER_PRI;
+	FRAM_write((unsigned char*) &temp, ACTIVE_SD_ADDR, ACTIVE_SD_SIZE);
+
 	Boolean flag = FALSE;
 	FRAM_write((unsigned char*) &flag,
 			STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);
+
 
 	ResetGroundCommWDT();
 
@@ -102,7 +106,13 @@ void WriteDefaultValuesToFRAM()
 
 int StartFRAM()
 {
-	return logError(FRAM_start() ,"StartFRAM");
+	int err = logError(FRAM_start() ,"StartFRAM");
+	if (err != E_NO_SS_ERR) return err;
+	Boolean first_activation = isFirstActivation();
+	if (first_activation){
+		WriteDefaultValuesToFRAM();
+	}
+	return E_NO_SS_ERR;
 }
 
 int StartI2C()
