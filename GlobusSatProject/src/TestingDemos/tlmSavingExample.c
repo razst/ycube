@@ -49,7 +49,7 @@ int addNum(int num) //add item to the array in the correct posiotion
 	return 0;
 }
 
-int move(int num) //advance the index acordding to the arr size
+int moveTemp(int num) //advance the index acordding to the arr size
 {
 	num++;
 	if (num == SIZE)

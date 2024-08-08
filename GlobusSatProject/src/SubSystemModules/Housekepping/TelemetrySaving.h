@@ -1,15 +1,31 @@
 #include <stdio.h>
 #include "utils.h"
-#include "errors.h" //error?
 #include "TelemetryFiles.h"
+#include "TelemetryCollector.h"
+
+
+typedef struct logDataInRam
+{
+	unsigned long date;
+	logData_t logData;
+} logDataInRam;
+
+typedef struct wodDataInRam
+{
+	unsigned long date;
+	WOD_Telemetry_t wodData;
+} wodDataInRam;
 
 #define SIZE 10
 
-logData_t logArr[SIZE];
+logDataInRam logArr[SIZE];
 int logIndex = 0;
 
-int zeroingArrs();
+wodDataInRam wodArr[SIZE];
+int wodIndex = 0;
+
+int resetArrs();
 
 int saveTlmToRam(void* data, int length, tlm_type_t type);
 
-int getTlm(tlm_type_t type, int count, void* address);
+int getTlm(void* address, int count, tlm_type_t type);
