@@ -369,7 +369,7 @@ int write2File(void* data, tlm_type_t tlmType){
 		fp = f_open(file_name, "a");
 		if (!fp)
 		{
-			printf("error 2 openning %s file!\n", file_name);
+			printf("error 2 opening %s file!\n", file_name);
 			return -1;
 		}
 	}

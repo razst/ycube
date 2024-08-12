@@ -3,6 +3,7 @@
 #define TELEMETRYTESTINGDEMO_H_
 
 #include "GlobalStandards.h"
+#include "SubSystemModules/Housekepping/RAMTelemetry.h"
 
 Boolean MainTelemetryTestBench();
 

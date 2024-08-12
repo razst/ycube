@@ -28,6 +28,5 @@
 #define E_COMMAND_NACKED    	-35 ///< A command sent did not get acknowledged.
 #define E_COMMS_ERROR           -36 ///< Communication with component failed.
 #define E_COMPARISON_ERROR      -37 ///< Input data and output data were not equal.
-#define E_TYPE_ERROR     		-38 ///< Unsupported type.
 
 #endif /* ERRORS_H_ */
