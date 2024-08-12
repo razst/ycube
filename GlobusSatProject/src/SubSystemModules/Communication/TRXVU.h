@@ -91,6 +91,10 @@ int SetRSSITransponder(short rssiValue);
  * turn on the transponder
  */
 int turnOnTransponder();
+/**
+ * turn off the transponder
+ */
+int turnOffTransponder();
 
 Boolean CheckDumpAbort();
 

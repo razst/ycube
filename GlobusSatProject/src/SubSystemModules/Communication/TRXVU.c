@@ -181,12 +181,7 @@ void checkTransponderFinish(){
 
 	// check if it is time to turn off the transponder...
 	if (getTransponderEndTime() != 0 && getTransponderEndTime() < curr_tick_time){
-		setTransponderEndTime(0);
-		char data[2] = {0, 0};
-		data[0] = 0x38;
-		data[1] = trxvu_transponder_off;
-		I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
-		logError(INFO_MSG,"transponder off");
+		turnOffTransponder();
 	}
 }
 
@@ -214,7 +209,18 @@ int turnOnTransponder(){
 	if (logError(I2C_write(I2C_TRXVU_TC_ADDR, data, 2),"TRXVU-turnOnTransponder") != E_NO_SS_ERR) return -1;
 
 	logError(INFO_MSG,"transponder on");
-	return 0;
+	return E_NO_SS_ERR;
+}
+
+
+int turnOffTransponder(){
+	setTransponderEndTime(0);
+	char data[2] = {0, 0};
+	data[0] = 0x38;
+	data[1] = trxvu_transponder_off;
+	if (logError(I2C_write(I2C_TRXVU_TC_ADDR, data, 2),"TRXVU-turnOffTransponder") != E_NO_SS_ERR) return -1;
+	logError(INFO_MSG,"transponder off");
+	return E_NO_SS_ERR;
 }
 
 int SetRSSITransponder(short rssiValue)
