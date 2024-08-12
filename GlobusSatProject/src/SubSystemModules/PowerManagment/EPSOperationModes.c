@@ -18,6 +18,7 @@ Boolean g_low_volt_flag = FALSE; // set to true if in low voltage
 
 int EnterFullMode()
 {
+
 	if(state == FullMode){
 		return 0;
 	}
@@ -28,12 +29,20 @@ int EnterFullMode()
 
 int EnterCruiseMode()
 {
+	int err =0;
 	if(state == CruiseMode){
 		return 0;
 	}
 	state = CruiseMode;
+
+	char data[2] = {0,0};
+	data[0] = 0x38;
+	data[1] = 0x01;//nominal
+
+	err = I2C_write(I2C_TRXVU_TC_ADDR, data, 2);
+	setTransponderEndTime(0);
 	EpsSetLowVoltageFlag(FALSE);
-	return 0;
+	return err;
 }
 
 int EnterSafeMode()
