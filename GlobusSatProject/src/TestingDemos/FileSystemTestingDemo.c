@@ -10,25 +10,7 @@
 #include <TLM_management.h>
 #include "SubSystemModules/Communication/SPL.h"
 
-int FormatSD()
-{
-	//todo make this func work it is not finished also get rid of tmp=provided example by the manual
-	int drivenum;
-	//long fattype;
-	int ret;
-	drivenum = f_getdrive();
-	// tmp = cfc_initfunc;
-	f_init();
-	f_enterFS();
-	//f_initvolume(drivenum,atmel_mcipdc_initfunc, F_AUTO_ASSIGN);
-	ret = f_format(drivenum, F_FAT32_MEDIA);
-	if (ret){
-		printf("Unable to format CFC: Error %d",ret);}
-	else
-		{printf("cfc formated");}
-	// add de-init??? return error
-	return ret;
-}
+
 Boolean TestlistFiels(){
 	F_FIND find;
 	int c=0;
@@ -1012,8 +994,8 @@ int showFreeSapce(){
 
 int SwitchSDCardTest()
 {
-	printf("pls enter which SD card to switch to (i.e 0 or 1 )\n");
 	unsigned short SD_name;
+	printf("pls enter which SD card to switch to (i.e 0 or 1 )\n");
 	scanf("%hu", &SD_name);
 	sat_packet_t cmd;
 	cmd.ID = 1;
@@ -1025,6 +1007,27 @@ int SwitchSDCardTest()
 	err = ActUponCommand(&cmd);
 	printf("result: %d", err);
 	return TRUE;
+}
+int FormatSDTest()
+{
+	unsigned short permission;
+	printf("pls note this is a dangerous command for formats the SD card to continue press 1 press anything else to return\n");
+	scanf("%hu",&permission);
+	if(permission == 1)
+	{
+		sat_packet_t cmd;
+		cmd.ID = 1;
+		cmd.cmd_type = telemetry_cmd_type;
+		cmd.cmd_subtype = FORMAT_SD_CARD;
+		cmd.length = 2;
+		int err;
+		err = ActUponCommand(&cmd);
+		printf("%d\n",err);
+		return err;
+	}
+	printf("abandoned\n");
+	return TRUE;
+
 }
 
 Boolean selectAndExecuteFSTest(){
@@ -1123,6 +1126,9 @@ Boolean selectAndExecuteFSTest(){
 		break;
 	case 20:
 		offerMoreTests = SwitchSDCardTest();
+		break;
+	case 21:
+		offerMoreTests = FormatSDTest();
 		break;
 	default:
 		break;

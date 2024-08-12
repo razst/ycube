@@ -32,4 +32,6 @@ int CMD_Get_TLM_Info(sat_packet_t *cmd);
 
 int CMD_Switch_SD_Card(sat_packet_t *cmd);
 
+int CMD_Format_SD_Card(sat_packet_t *cmd);
+
 #endif /* FS_COMMANDS_H_ */

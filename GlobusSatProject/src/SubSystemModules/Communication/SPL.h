@@ -112,7 +112,8 @@ typedef enum __attribute__ ((__packed__)) telemetry_subtypes_t
 	GET_IMAGE_INFO		= 0xE1,
 	GET_IMAGE_DATA		= 0xE2,
 	GET_TLM_INFO        = 0xE3,
-	SWITCH_SD_CARD      = 0xE4
+	SWITCH_SD_CARD      = 0xE4,
+	FORMAT_SD_CARD      = 0xE5
 
 }telemetry_subtypes_t;
 

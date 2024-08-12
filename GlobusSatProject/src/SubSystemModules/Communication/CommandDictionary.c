@@ -189,6 +189,9 @@ int telemetry_command_router(sat_packet_t *cmd)
 	case SWITCH_SD_CARD:
 		err = CMD_Switch_SD_Card(cmd);
 		break;
+	case FORMAT_SD_CARD:
+		err = CMD_Format_SD_Card(cmd);
+		break;
 
 	default:
 		err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
