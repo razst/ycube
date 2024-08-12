@@ -18,6 +18,7 @@ Boolean g_low_volt_flag = FALSE; // set to true if in low voltage
 
 int EnterFullMode()
 {
+
 	if(state == FullMode){
 		return 0;
 	}
@@ -32,7 +33,8 @@ int EnterCruiseMode()
 		return 0;
 	}
 	state = CruiseMode;
-	EpsSetLowVoltageFlag(FALSE);
+	turnOffTransponder();
+
 	return 0;
 }
 

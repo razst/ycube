@@ -116,6 +116,12 @@ int CMD_Switch_SD_Card(sat_packet_t *cmd)
 	}
 	return err;
 }
+int CMD_Format_SD_Card(sat_packet_t *cmd)
+{
+	int drivenum;
+	drivenum = f_getdrive();
+	return logError(f_format(drivenum, F_FAT32_MEDIA),"Format SD");
+}
 
 int CMD_FreeSpace(sat_packet_t *cmd)
 {

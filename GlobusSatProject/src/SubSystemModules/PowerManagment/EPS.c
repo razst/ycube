@@ -65,6 +65,7 @@ int EPS_Init()
 
 int EPS_Conditioning()
 {
+
 	voltage_t curr_voltage = 0;
 
 	GetBatteryVoltage(&curr_voltage);
@@ -88,6 +89,7 @@ int EPS_Conditioning()
 				EnterFullMode();
 			}else if(filtered_voltage > eps_threshold_voltages.fields.Vup_cruise){
 				EnterCruiseMode();
+
 			}else if(filtered_voltage > eps_threshold_voltages.fields.Vup_safe){
 				EnterSafeMode();
 			}
