@@ -100,6 +100,7 @@ int CMD_Get_TLM_Info(sat_packet_t *cmd)
 }
 int CMD_Switch_SD_Card(sat_packet_t *cmd)
 {
+
 	char change_to_SD_card,current_SD_card;
 	memcpy(&change_to_SD_card,cmd->data,sizeof(change_to_SD_card));
 	FRAM_read((unsigned char*)&current_SD_card,ACTIVE_SD_ADDR,ACTIVE_SD_SIZE);
@@ -111,6 +112,9 @@ int CMD_Switch_SD_Card(sat_packet_t *cmd)
 	//TODO check after 2nd SD is added
 	if(E_NO_SS_ERR == err)
 	{
+		Boolean8bit reset_flag = TRUE_8BIT;
+		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
+		vTaskDelay(10);
 		restart();
 		vTaskDelay(10000);
 	}
