@@ -1019,7 +1019,7 @@ int FormatSDTest()
 		cmd.ID = 1;
 		cmd.cmd_type = telemetry_cmd_type;
 		cmd.cmd_subtype = FORMAT_SD_CARD;
-		cmd.length = 2;
+		cmd.length = 0;
 		int err;
 		err = ActUponCommand(&cmd);
 		printf("%d\n",err);
