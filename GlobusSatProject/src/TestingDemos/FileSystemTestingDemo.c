@@ -1057,10 +1057,11 @@ Boolean selectAndExecuteFSTest(){
 	printf("\t 18) get extra data test (min max month) \n\r");
 	printf("\t 19) Show free space info\n\r");
 	printf("\t 20) Switch SD card\n\r");
+	printf("\t 21) Format SD card\n\r");
 
 	//Ilay the mechoar!! Ilay is not agevaramlemokllikshmekknrnktnsmckdlxjdjnedjxndejxdnxmexdlkjenxdkj
 
-	unsigned int number_of_tests = 20;
+	unsigned int number_of_tests = 21;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
