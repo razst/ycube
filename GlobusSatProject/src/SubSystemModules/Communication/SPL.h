@@ -109,8 +109,6 @@ typedef enum __attribute__ ((__packed__)) telemetry_subtypes_t
 
 typedef enum __attribute__ ((__packed__)) management_subtypes_t
 {
-	SOFT_RESET_SUBTYPE = 		0xAA,		//0b10101010
-	HARD_RESET_SUBTYPE = 		0x99,		//0b10101010
 	TRXVU_SOFT_RESET_SUBTYPE =	0xC3,		//0b11000011
 	TRXVU_HARD_RESET_SUBTYPE = 	0x3C,		//0b00111100
 	EPS_RESET_SUBTYPE =			0xBB,		//0b10111011

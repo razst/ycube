@@ -8,7 +8,6 @@
 typedef enum __attribute__ ((__packed__)) reset_type_t
 {
 	reset_software,
-	reset_hardware,
 	reset_eps,
 	reset_trxvu_hard,
 	reset_trxvu_soft,
