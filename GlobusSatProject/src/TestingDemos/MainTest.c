@@ -43,7 +43,7 @@ Boolean selectAndExecuteTest()
 	printf("\t 3) TRXVU Testing\n\r");
 	printf("\t 4) Commands Handeling Testing\n\r");
 	printf("\t 5) Managment Testing\n\r");
-	printf("\t 6) TLM - File System Testing\n\r");
+	printf("\t 6) File System Testing\n\r");
 
 
 

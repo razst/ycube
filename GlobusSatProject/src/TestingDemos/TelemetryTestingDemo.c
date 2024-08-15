@@ -15,6 +15,14 @@ Boolean singleTlmTest()
 
 	logDataInRam log;
 	amount = getTlm(&log, 1, tlm_log);
+
+	if (amount!=1){
+		printf("Error: amount should be 1\n", amount);
+	}
+	if (amount!=1){
+		printf("Error: amount should be 1\n", amount);
+	}
+
 	printf("Got %d datas\n", amount);
 	printf("error: %d\nmessage: %s\n", log.logData.error, log.logData.msg);
 
