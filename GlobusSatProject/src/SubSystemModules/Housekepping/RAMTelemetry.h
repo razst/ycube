@@ -25,13 +25,6 @@ typedef struct wodDataInRam
 
 
 
-logDataInRam logArr[TLM_RAM_SIZE];
-int logIndex = 0;
-
-wodDataInRam wodArr[TLM_RAM_SIZE];
-int wodIndex = 0;
-
-
 /*!
  * set all TLM date to 0.
  * @return Error code

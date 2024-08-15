@@ -1,5 +1,12 @@
 #include "RAMTelemetry.h"
 
+logDataInRam logArr[TLM_RAM_SIZE];
+int logIndex = 0;
+
+wodDataInRam wodArr[TLM_RAM_SIZE];
+int wodIndex = 0;
+
+
 int resetArrs() {
 	for (int i = 0; i < TLM_RAM_SIZE; i++) {
 		logArr[i].date = 0;
