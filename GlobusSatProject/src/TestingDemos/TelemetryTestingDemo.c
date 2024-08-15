@@ -1,69 +1,162 @@
 #include "TelemetryTestingDemo.h"
 
+//get number of packets and save it in RAM with modified data
+void savePacketsInRam(int amount, tlm_type_t type)
+{
+	switch (type)
+	{
+	case tlm_log:
+		for(int i = 1; i <= amount; i++)
+		{
+
+			logData_t data;
+			data.error = i;
+			sprintf(data.msg ,"hello%d", i);
+
+			printf("saving log %d:\nError code: %d\nMessage: %s\n", i, data.error, data.msg);
+			saveTlmToRam(&data, sizeof(data), type);
+		}
+		break;
+
+	case tlm_wod:
+		for(int i = 1; i <= amount; i++)
+		{
+			WOD_Telemetry_t data;
+			data.free_memory = i;
+
+			saveTlmToRam(&data, sizeof(data), type);
+		}
+		break;
+	}
+
+}
+
+//get a packet and check if it is as we expected according to the parameter
+Boolean checkPacket(logData_t* data, int number)
+{
+	Boolean flag = TRUE;
+	char str[10];
+	if (data->error != number)
+	{
+		printf("Error: error code wasn't as expected\n");
+		flag = FALSE;
+	}
+	sprintf(str, "hello%d", number);
+	if (strcmp(data->msg, str) != 0)
+	{
+		printf("Error: error msg wasn't as expected\n");
+		flag = FALSE;
+	}
+
+	return flag;
+}
+
+//test to save 1 WOD packet and get it
+Boolean singleTlmWodTest()
+{
+	int amount;
+	Boolean flag = TRUE;
+	wodDataInRam data_recieved;
+
+	savePacketsInRam(1, tlm_wod);
+
+	amount = getTlm(&data_recieved, 1, tlm_wod);
+
+	printf("Got %d datas\nFree memory: %d\n\n", amount, data_recieved.wodData.free_memory);
+
+	if (amount != 1)
+	{
+		printf("Error: amount should be 1\n");
+		flag = FALSE;
+	}
+	if (data_recieved.wodData.free_memory != 1)
+	{
+		printf("Error: free memory wasn't as expected\n");
+		flag = FALSE;
+	}
+
+	return flag;
+}
+
+//test to save 1 LOG packet and get it
 Boolean singleTlmTest()
 {
 	int amount;
-	logData_t data1;
-	data1.error = 1;
-	char str[6] = "hello";
-	memcpy(&data1.msg, str, sizeof(str));
-	printf("saving single log:\n");
-	printf("error: %d\n", data1.error);
-	printf("message: %s\n", data1.msg);
+	logDataInRam data_recieved;
+	Boolean flag = TRUE;
 
-	saveTlmToRam(&data1, sizeof(data1), tlm_log);
+	savePacketsInRam(1, tlm_log);
 
-	logDataInRam log;
-	amount = getTlm(&log, 1, tlm_log);
+	amount = getTlm(&data_recieved, 1, tlm_log);
 
-	if (amount!=1){
-		printf("Error: amount should be 1\n", amount);
-	}
-	if (amount!=1){
-		printf("Error: amount should be 1\n", amount);
+	printf("Got %d datas\nError: %d\nMessage: %s\n\n", amount, data_recieved.logData.error, data_recieved.logData.msg);
+
+	if (amount != 1)
+	{
+		printf("Error: amount should be 1\n");
+		flag = FALSE;
 	}
 
-	printf("Got %d datas\n", amount);
-	printf("error: %d\nmessage: %s\n", log.logData.error, log.logData.msg);
-
-	return data1.error == log.logData.error;
+	return checkPacket(&data_recieved.logData, 1) && flag;
 }
 
-Boolean multipleTlmTest()
+//test to save multiple LOG packets according to the parameter
+Boolean saveNGetMultipleTlmTest(int amount)
 {
-	logData_t arr[10];
-	logData_t arr2[10];
-	Boolean flg = TRUE;
-
-	for(int i = 0; i < 10; i++)
+	if(amount > TLM_RAM_SIZE * 4)
 	{
-		arr[i].error = i+1;
-		sprintf(arr[i].msg ,"hello%d", i+1);
-
-		printf("saving log %d:\n", i+1);
-		printf("error: %d\n", arr[i].error);
-		printf("message: %s\n", arr[i].msg);
-
-		saveTlmToRam(&arr[i], sizeof(arr[i]), tlm_log);
+		return FALSE;
 	}
 
-	getTlm(arr2, 10, tlm_log);
-	for(int i = 0; i < 10; i++)
-	{
-		printf("log %d:\n", i+1);
-		printf("error: %d\n", arr2[i].error);
-		printf("message: %s\n\n", arr2[i].msg);
+	int count;
 
-		flg = flg && (arr[i].error == arr2[i].error);
+	logDataInRam arr[TLM_RAM_SIZE * 4]; //for all cases
+
+	printf("try saving %d packets\n", amount);
+	Boolean flag = TRUE;
+
+	savePacketsInRam(amount, tlm_log);
+
+	count = getTlm(arr, amount, tlm_log);
+	printf("Get %d datas\n", count);
+
+	//check counts of data recieved:
+	if (amount <= TLM_RAM_SIZE && count != amount)
+	{
+		printf("Error: amount should be %d\n", amount);
+		flag = FALSE;
+	}
+	else if(amount > TLM_RAM_SIZE && count != TLM_RAM_SIZE)
+	{
+		printf("Error: amount should be %d\n", TLM_RAM_SIZE);
+		flag = FALSE;
 	}
 
+	//check content of packets:
+	for(int i = 0; i < amount; i++)
+	{
+		printf("packet %d\nError code: %d\nMessage: %s\n\n", i+1, arr[i].logData.error, arr[i].logData.msg);
 
-	return flg;
+		flag = flag && checkPacket(&arr[i].logData, i+1);
+	}
+
+	return flag;
 }
 
+//main function to call all the tests
 Boolean tlmTest()
 {
-	printf("\nSingle data test:\n\n");
+	printf("WOD single packet test:\n\n");
+	if(singleTlmWodTest())
+	{
+		printf("single WOD Test passed!\n");
+	}
+	else
+	{
+		printf("single WOD Test failed!\n");
+	}
+
+	printf("\nLOG TESTS:\n\nSingle data test:\n\n");
 
 	if(singleTlmTest())
 	{
@@ -74,14 +167,37 @@ Boolean tlmTest()
 		printf("single Test failed!\n");
 	}
 
-	printf("\nMultiple data test:\n\n");
-	if(multipleTlmTest())
+	printf("\nTLM_RAM_SIZE: %d\nTest for half:\n\n", TLM_RAM_SIZE);
+
+	if(saveNGetMultipleTlmTest(TLM_RAM_SIZE/2))
 	{
-		printf("multiple Test passed!\n");
+		printf("Half ram size Test passed!\n");
 	}
 	else
 	{
-		printf("multiple Test failed!\n");
+		printf("Half ram size Test failed!\n");
+	}
+
+	printf("\nTLM_RAM_SIZE: %d\nTest for ram size:\n\n", TLM_RAM_SIZE);
+
+	if(saveNGetMultipleTlmTest(TLM_RAM_SIZE))
+	{
+		printf("Ram size Test passed!\n");
+	}
+	else
+	{
+		printf("Ram size Test failed!\n");
+	}
+
+	printf("\nTLM_RAM_SIZE: %d\nTest for 3 times ram size:\n\n", TLM_RAM_SIZE);
+
+	if(saveNGetMultipleTlmTest(TLM_RAM_SIZE*3))
+	{
+		printf("3 * ram size Test passed!\n");
+	}
+	else
+	{
+		printf("3 * ram size Test failed!\n");
 	}
 
 
@@ -98,6 +214,8 @@ Boolean tlmTest()
 	{
 		printf("Reset test failed!\n");
 	}
+
+	//TODO - add test for finding range of TLM
 }
 
 Boolean MainTelemetryTestBench()
