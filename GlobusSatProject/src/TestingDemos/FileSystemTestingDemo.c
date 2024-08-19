@@ -455,7 +455,7 @@ void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
 
 	if (!target)
 	{
-		printLastError();
+		//printLastError();
 		printf("Unable to open file %s, try creating directory:\n",file_name);
 
 		//get directory name
@@ -467,7 +467,7 @@ void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
 		if (err != 0)
 		{
 			printf("error creating directory %s\n", dir_name);
-			printLastError();
+			//printLastError();
 			return ;
 		}
 
@@ -475,14 +475,14 @@ void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
 		if (!target)
 		{
 			printf("error 2 openning %s file!\n", file_name);
-			printLastError();
+			//printLastError();
 			return ;
 		}
 	}
 
 
 	source = f_open(sourceFile, "r");
-	printLastError();
+	//printLastError();
 
 	if (!source)
 	{
@@ -497,17 +497,17 @@ void copyTLMFile(tlm_type_t tlmType, Time date, char sourceFile[]){
 	while(1)
 	{
 		int readElemnts = f_read(&buffer , sizeof(int)+size , NUM_ELEMENTS_READ_AT_ONCE, source);
-		printLastError();
+		//printLastError();
 		if(!readElemnts) break;
 		f_write(&buffer , sizeof(int)+size ,readElemnts, target );
-		printLastError();
+		//printLastError();
 	}// end loop...
 
 	/* close the file*/
 	f_close (source);
-	printLastError();
+	//printLastError();
 	f_close (target);
-	printLastError();
+	//printLastError();
 	return ;
 }
 
@@ -790,15 +790,17 @@ Boolean TestTRXVUTLM(){
 }
 
 Boolean FullSDTest(){
-
-	//delete the file
-	Time theDay;
-	theDay.year = 27;
-	theDay.date = 1;
-	theDay.month = 1;
-/* copy files ... */
-	for(int Y=30; Y<=32 ; Y++){
-		theDay.year =Y;
+	int yearToDel;
+		printf("year to copy to\n");
+		scanf("%i",&yearToDel);
+		//delete the file
+		Time theDay;
+		theDay.year = yearToDel;
+		theDay.date = 1;
+		theDay.month = 1;
+	/* copy files ... */
+		for(int Y=30; Y<=32 ; Y++){
+			//theDay.year =Y;
 		printf("year=%d\n",theDay.year);
 		for(int M=1; M<=12 ; M++){
 			theDay.month=M;

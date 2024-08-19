@@ -1,5 +1,6 @@
 #include "RAMTelemetry.h"
 
+
 //array to save log data
 logDataInRam logArr[TLM_RAM_SIZE];
 //index for the current saving place in array
@@ -10,8 +11,7 @@ wodDataInRam wodArr[TLM_RAM_SIZE];
 //index for the current saving place in array
 int wodIndex = 0;
 
-
-int resetArrs() {
+int resetRamTlm() {
 	for (int i = 0; i < TLM_RAM_SIZE; i++) {
 		logArr[i].date = 0;
 		wodArr[i].date = 0;
@@ -93,7 +93,7 @@ dataRange getRange(tlm_type_t type)
 
 	int index;
 	void* arr;
-	int length;
+	int typeLength;
 	time_unix time;
 
 	switch (type)
@@ -101,34 +101,32 @@ dataRange getRange(tlm_type_t type)
 	case tlm_log:
 		index = logIndex;
 		arr = logArr;
-		length = sizeof(logDataInRam);
+		typeLength = sizeof(logDataInRam);
 		break;
 
 	case tlm_wod:
 		index = wodIndex;
 		arr = wodArr;
-		length = sizeof(wodDataInRam);
+		typeLength = sizeof(wodDataInRam);
 		break;
 	}
 
+	range.min = 0;
+	range.max = 0;
+
+
 	for (int i = 0; i < TLM_RAM_SIZE; i++)
 	{
-		if(!flag)
+		time_unix date;
+		memcpy(&date, arr + i*typeLength, sizeof(time_unix));
+		if((date < range.min || range.min == 0) && date != 0)
 		{
-			memcpy(&time, &arr[index], sizeof(time_unix));
-			if(time != 0)
-			{
-				flag = TRUE;
-				range.min = time;
-			}
+			range.min = date;
 		}
-
-		if(i = TLM_RAM_SIZE - 1)
+		if(date > range.max && date != 0)
 		{
-			memcpy(&range.max, &arr[index], sizeof(time_unix));
+			range.max = date;
 		}
-
-		index = advace(index);
 	}
 	return range;
 }

@@ -30,6 +30,9 @@ typedef struct dataRange
 	time_unix max;
 } dataRange;
 
+
+
+
 /*!
  * return range of tlm saved
  * @param type he type of TLM. @see tlm_type_t enum
@@ -41,7 +44,7 @@ dataRange getRange(tlm_type_t type);
  * set all TLM date to 0.
  * @return Error code
  */
-int resetArrs();
+int resetRamTlm();
 
 
 /*!

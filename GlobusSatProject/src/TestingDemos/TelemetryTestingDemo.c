@@ -78,8 +78,11 @@ Boolean singleTlmWodTest()
 	return flag;
 }
 
+
+
+
 //test to save 1 LOG packet and get it
-Boolean singleTlmTest()
+Boolean singleTLMLogTest()
 {
 	int amount;
 	logDataInRam data_recieved;
@@ -98,6 +101,20 @@ Boolean singleTlmTest()
 	}
 
 	return checkPacket(&data_recieved.logData, 1) && flag;
+}
+
+Boolean singleTlmLogTestHelp()
+{
+	Boolean flag = singleTLMLogTest();
+	if(flag)
+	{
+		printf("test successful");
+	}
+	else
+	{
+		printf("test failed");
+	}
+	return TRUE;
 }
 
 //test to save multiple LOG packets according to the parameter
@@ -143,6 +160,45 @@ Boolean saveNGetMultipleTlmTest(int amount)
 	return flag;
 }
 
+Boolean getWodMinMaxTest()
+{
+	resetRamTlm();
+	dataRange range = getRange(tlm_wod);
+	if(range.max != 0 || range.min != 0)
+	{
+		printf("reset failed\n");
+	}
+	else
+	{
+		printf("reset passed\n");
+	}
+
+	time_unix min_date;
+	Time_getUnixEpoch(&min_date);
+	savePacketsInRam(3, tlm_wod);
+
+	vTaskDelay(2000);
+
+	time_unix max_date;
+	Time_getUnixEpoch(&max_date);
+	savePacketsInRam(3, tlm_wod);
+
+	time_unix maxRange = getRange(tlm_wod).max;
+	time_unix minRange = getRange(tlm_wod).min;
+	if(abs(minRange-min_date) > 1 || abs(maxRange-max_date) > 1)
+	{
+		printf("min max test failed\n");
+		printf("Range min: %lu  Min date: %lu\nRange max: %lu  max date: %lu\n",
+				minRange, min_date, maxRange, max_date);
+	}
+	else
+	{
+		printf("min max test passed\n");
+	}
+
+	return TRUE;
+}
+
 //main function to call all the tests
 Boolean tlmTest()
 {
@@ -158,7 +214,7 @@ Boolean tlmTest()
 
 	printf("\nLOG TESTS:\n\nSingle data test:\n\n");
 
-	if(singleTlmTest())
+	if(singleTLMLogTest())
 	{
 		printf("single Test passed!\n");
 	}
@@ -202,7 +258,7 @@ Boolean tlmTest()
 
 
 	printf("\nReset test:\n\n");
-	resetArrs();
+	resetRamTlm();
 
 	logDataInRam log;
 	int amount = getTlm(&log, 1, tlm_log);
@@ -228,8 +284,10 @@ Boolean MainTelemetryTestBench()
 		printf( "\n\r Select a test to perform: \n\r");
 		printf("\t 0) Return to main menu \n\r");
 		printf("\t 1) tlm in RAM full test \n\r");
+		printf("\t 2) single tlm in ram test \n\r");
+		printf("\t 3) min max dates wod in ram test \n\r");
 
-		unsigned int number_of_tests = 1;
+		unsigned int number_of_tests = 3;
 		while(UTIL_DbguGetIntegerMinMax(&choice, 0, number_of_tests) == 0);
 
 			switch(choice) {
@@ -238,6 +296,12 @@ Boolean MainTelemetryTestBench()
 				break;
 			case 1:
 				offerMoreTests = tlmTest();
+				break;
+			case 2:
+				offerMoreTests = singleTlmLogTestHelp();
+				break;
+			case 3:
+				offerMoreTests = getWodMinMaxTest();
 				break;
 			}
 	}

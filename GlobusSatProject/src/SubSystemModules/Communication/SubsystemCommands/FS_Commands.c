@@ -124,7 +124,13 @@ int CMD_Format_SD_Card(sat_packet_t *cmd)
 {
 	int drivenum;
 	drivenum = f_getdrive();
-	return logError(f_format(drivenum, F_FAT32_MEDIA),"Format SD");
+	logError(f_format(drivenum, F_FAT32_MEDIA),"Format SD");
+	Boolean8bit reset_flag = TRUE_8BIT;
+	FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
+	vTaskDelay(10);
+	restart();
+	vTaskDelay(10000);
+	return 0;
 }
 
 int CMD_FreeSpace(sat_packet_t *cmd)
