@@ -183,18 +183,17 @@ Boolean getWodMinMaxTest()
 	Time_getUnixEpoch(&max_date);
 	savePacketsInRam(3, tlm_wod);
 
-	time_unix maxRange = getRange(tlm_wod).max;
-	time_unix minRange = getRange(tlm_wod).min;
-	if(abs(minRange-min_date) > 1 || abs(maxRange-max_date) > 1)
+	dataRange range = getRange(tlm_wod);
+	if(abs(range.min-min_date) > 1 || abs(range.max-max_date) > 1)
 	{
 		printf("min max test failed\n");
-		printf("Range min: %lu  Min date: %lu\nRange max: %lu  max date: %lu\n",
-				minRange, min_date, maxRange, max_date);
 	}
 	else
 	{
 		printf("min max test passed\n");
 	}
+	printf("Range min: %lu  Min date: %lu\nRange max: %lu  max date: %lu\n",
+			range.min, min_date, range.max, max_date);
 
 	return TRUE;
 }
