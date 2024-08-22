@@ -799,13 +799,13 @@ Boolean FullSDTest(){
 		theDay.date = 1;
 		theDay.month = 1;
 	/* copy files ... */
-		for(int Y=30; Y<=32 ; Y++){
-			//theDay.year =Y;
+		for(int Y=yearToDel; Y<=yearToDel + 1 ; Y++){
+			theDay.year =Y;
 		printf("year=%d\n",theDay.year);
 		for(int M=1; M<=12 ; M++){
 			theDay.month=M;
 			printf("month=%d\n",theDay.month);
-			for(int i=1; i<=29; i++){
+			for(int i=1; i<=30; i++){
 				theDay.date = i;
 				printf("day=%d\n",theDay.date);
 				copyTLMFile(tlm_wod,theDay,"TLM/2801/280101.WOD");

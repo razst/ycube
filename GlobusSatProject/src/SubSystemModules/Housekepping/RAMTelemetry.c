@@ -20,7 +20,7 @@ int resetRamTlm() {
 	return 0;
 }
 
-int advance(int num) //advance the index acordding to the arr size
+int inc(int num) //advance the index acordding to the arr size
 {
 	num++;
 	if (num == TLM_RAM_SIZE) {
@@ -29,18 +29,29 @@ int advance(int num) //advance the index acordding to the arr size
 	return num;
 }
 
+
+int dec(int num) //advance the index acordding to the arr size
+{
+	num--;
+	if (num < 0) {
+		num = TLM_RAM_SIZE-1;
+	}
+	return num;
+}
+
+
 int saveTlmToRam(void* data, int length, tlm_type_t type) {
 	switch (type) {
 	case tlm_log:
 		Time_getUnixEpoch(&logArr[logIndex].date);
 		memcpy(&logArr[logIndex].logData, data, length);
-		logIndex = advance(logIndex);
+		logIndex = inc(logIndex);
 		break;
 
 	case tlm_wod:
 		Time_getUnixEpoch(&wodArr[wodIndex].date);
 		memcpy(&wodArr[wodIndex].wodData, data, length);
-		wodIndex = advance(wodIndex);
+		wodIndex = inc(wodIndex);
 		break;
 
 	default:
@@ -75,13 +86,13 @@ int getTlm(void* address, int count, tlm_type_t type) {
 
 	for (int i = 0; i < TLM_RAM_SIZE && filledCount < count; i++)
 	{
-		memcpy(&time, &arr[index], sizeof(time_unix));
+		memcpy(&time, arr + index * length, sizeof(time_unix));
 		if (time != 0)
 		{
-			memcpy(address + i * length, &arr[index], length);
+			memcpy(address + filledCount * length, arr + index * length, length);
 			filledCount++;
 		}
-		index = advance(index);
+		index = dec(index);
 	}
 	return filledCount;
 }
