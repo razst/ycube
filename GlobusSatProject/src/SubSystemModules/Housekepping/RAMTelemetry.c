@@ -86,13 +86,13 @@ int getTlm(void* address, int count, tlm_type_t type) {
 
 	for (int i = 0; i < TLM_RAM_SIZE && filledCount < count; i++)
 	{
+		index = dec(index);
 		memcpy(&time, arr + index * length, sizeof(time_unix));
 		if (time != 0)
 		{
 			memcpy(address + filledCount * length, arr + index * length, length);
 			filledCount++;
 		}
-		index = dec(index);
 	}
 	return filledCount;
 }

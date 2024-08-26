@@ -150,11 +150,13 @@ Boolean saveNGetMultipleTlmTest(int amount)
 	}
 
 	//check content of packets:
-	for(int i = 0; i < amount; i++)
+	int i2 = amount;
+	for(int i = 0; i < count; i++)
 	{
 		printf("packet %d\nError code: %d\nMessage: %s\n\n", i+1, arr[i].logData.error, arr[i].logData.msg);
-
-		flag = flag && checkPacket(&arr[i].logData, i+1);
+		printf("i2: %d\n", i2);
+		flag = flag && checkPacket(&arr[i].logData, i2);
+		i2--;
 	}
 
 	return flag;
@@ -243,6 +245,8 @@ Boolean tlmTest()
 	{
 		printf("Ram size Test failed!\n");
 	}
+
+
 
 	printf("\nTLM_RAM_SIZE: %d\nTest for 3 times ram size:\n\n", TLM_RAM_SIZE);
 

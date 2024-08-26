@@ -976,6 +976,7 @@ int GetExtraData()
 	cmd.length = sizeof(TLM_Info_Data_t);
 	int err;
 	err = ActUponCommand(&cmd);
+
 	return err;
 }
 
@@ -1032,6 +1033,27 @@ int FormatSDTest()
 
 }
 
+int showFreeSpaceHeap(){
+
+	long arr[1000] = {0};
+
+	size_t free_space_heap1 = xPortGetFreeHeapSize();
+	printf("before: %lu\n",free_space_heap1);
+
+	int *p = (int)malloc(1000*sizeof(int));
+
+	size_t free_space_heap2 = xPortGetFreeHeapSize();
+	printf("after: %lu\n",free_space_heap2);
+
+	printf("mem alloc: %lu\n",free_space_heap1-free_space_heap2);
+
+	free(p);
+	return E_NO_SS_ERR;
+
+
+}
+
+
 Boolean selectAndExecuteFSTest(){
 
 	unsigned int selection = 0;
@@ -1057,13 +1079,14 @@ Boolean selectAndExecuteFSTest(){
 	printf("\t 16) delete files by year\n\r");
 	printf("\t 17) write file \n\r");
 	printf("\t 18) get extra data test (min max month) \n\r");
-	printf("\t 19) Show free space info\n\r");
+	printf("\t 19) Show free space SD card info \n\r");
 	printf("\t 20) Switch SD card\n\r");
 	printf("\t 21) Format SD card\n\r");
+	printf("\t 22) show free space heap\n\r");
 
 	//Ilay the mechoar!! Ilay is not agevaramlemokllikshmekknrnktnsmckdlxjdjnedjxndejxdnxmexdlkjenxdkj
 
-	unsigned int number_of_tests = 21;
+	unsigned int number_of_tests = 22;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -1132,6 +1155,9 @@ Boolean selectAndExecuteFSTest(){
 		break;
 	case 21:
 		offerMoreTests = FormatSDTest();
+		break;
+	case 22:
+		offerMoreTests = showFreeSpaceHeap();
 		break;
 	default:
 		break;
