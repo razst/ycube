@@ -156,7 +156,7 @@ time_unix GetGsWdtKickTime()
 unsigned short* findMinMaxDate(){
 
 	char* path = "TLM/*.*";
-	unsigned short minMaxMonth[2] = { 3000, 0 };
+	unsigned short minMaxMonth[2] = { 99999, 0 };
 	F_FIND find;
 	if (!f_findfirst(path,&find)) {
 			do {

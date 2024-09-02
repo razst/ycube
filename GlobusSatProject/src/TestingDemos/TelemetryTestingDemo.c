@@ -162,6 +162,50 @@ Boolean saveNGetMultipleTlmTest(int amount)
 	return flag;
 }
 
+Boolean saveMultipleNGetSomeTlmTest(int saveAmount, int getAmount)
+{
+	if(saveAmount > TLM_RAM_SIZE * 4)
+	{
+		return FALSE;
+	}
+
+	int count;
+
+	logDataInRam arr[TLM_RAM_SIZE * 4]; //for all cases
+
+	printf("try saving %d packets\n", saveAmount);
+	Boolean flag = TRUE;
+
+	savePacketsInRam(saveAmount, tlm_log);
+
+	count = getTlm(arr, getAmount, tlm_log);
+	printf("Get %d datas\n", count);
+
+	//check counts of data recieved:
+	if (getAmount <= TLM_RAM_SIZE && count != getAmount)
+	{
+		printf("Error: getAmount should be %d\n", getAmount);
+		flag = FALSE;
+	}
+	else if(getAmount > TLM_RAM_SIZE && count != TLM_RAM_SIZE)
+	{
+		printf("Error: amount should be %d\n", TLM_RAM_SIZE);
+		flag = FALSE;
+	}
+
+	//check content of packets:
+	int i2 = saveAmount;
+	for(int i = 0; i < count; i++)
+	{
+		printf("packet %d\nError code: %d\nMessage: %s\n\n", i+1, arr[i].logData.error, arr[i].logData.msg);
+		flag = flag && checkPacket(&arr[i].logData, i2);
+		i2--;
+	}
+
+	return flag;
+}
+
+
 Boolean getWodMinMaxTest()
 {
 	resetRamTlm();
@@ -260,6 +304,18 @@ Boolean tlmTest()
 	}
 
 
+	printf("\nTLM_RAM_SIZE: %d\nTest for 2 times ram size and get 5:\n\n", TLM_RAM_SIZE);
+
+	if(saveMultipleNGetSomeTlmTest(TLM_RAM_SIZE*2, 5))
+	{
+		printf("2 * ram size and get 5 Test passed!\n");
+	}
+	else
+	{
+		printf("2 * ram size and get 5 Test failed!\n");
+	}
+
+
 	printf("\nReset test:\n\n");
 	resetRamTlm();
 
@@ -277,6 +333,36 @@ Boolean tlmTest()
 	//TODO - add test for finding range of TLM
 }
 
+
+Boolean saveNGetLog()
+{
+	time_t date = 1643151600;
+	int err[] = {420, 69};
+	Boolean flag = TRUE;
+	Time_setUnixEpoch(date);
+	logError(69, "nice");
+	Time_setUnixEpoch(date+10);
+	logError(420, "wow");
+
+	logDataInRam data[2];
+	int count = getTlm(&data, 2, tlm_log);
+	for(int i = 0; i < 2; i++){
+		printf("error: %d\n", data[i].logData.error);
+		printf("massage: %s\n", data[i].logData.msg);
+		flag = (flag && data[i].logData.error == err[i]);
+	}
+
+	if (flag)
+	{
+		printf("test passed");
+	}
+	else
+	{
+		printf("test failed");
+	}
+	return TRUE;
+}
+
 Boolean MainTelemetryTestBench()
 {
 	Boolean offerMoreTests = TRUE;
@@ -289,8 +375,9 @@ Boolean MainTelemetryTestBench()
 		printf("\t 1) tlm in RAM full test \n\r");
 		printf("\t 2) single tlm in ram test \n\r");
 		printf("\t 3) min max dates wod in ram test \n\r");
+		printf("\t 4) save log in files and ram test \n\r");
 
-		unsigned int number_of_tests = 3;
+		unsigned int number_of_tests = 4;
 		while(UTIL_DbguGetIntegerMinMax(&choice, 0, number_of_tests) == 0);
 
 			switch(choice) {
@@ -305,6 +392,9 @@ Boolean MainTelemetryTestBench()
 				break;
 			case 3:
 				offerMoreTests = getWodMinMaxTest();
+				break;
+			case 4:
+				offerMoreTests = saveNGetLog();
 				break;
 			}
 	}

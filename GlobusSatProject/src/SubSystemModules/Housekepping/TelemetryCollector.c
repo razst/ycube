@@ -250,6 +250,7 @@ void TelemetrySaveWOD()
 	WOD_Telemetry_t wod = { 0 };
 	GetCurrentWODTelemetry(&wod);
 	write2File(&wod , tlm_wod);
+	saveTlmToRam(&wod, sizeof(wod), tlm_wod);
 }
 
 void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)

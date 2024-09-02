@@ -243,7 +243,7 @@ FileSystemResult InitializeFS(Boolean first_time)
 
 
 	//In the first time the SD on. if there is file on the SD delete it.
-	if(first_time) delete_allTMFilesFromSD();
+//	if(first_time) delete_allTMFilesFromSD(); no need to delete
 
 	//Createing 2 main directories (TLM and IMG)
 	err = f_mkdir(FS_TLM_DIR);

@@ -412,7 +412,7 @@ int createSingleDayTLM()
 
 		//TLM/2801/280101.WOD;
 		for(int i = 0; i < 60*60*24; i += 10){
-			printf("working on hour: %d out of 24 hours\n",i);
+			printf("working on second: %d out of %d seconds\n",i,60*60*24);
 			Time_setUnixEpoch(curtime + i);
 			TelemetrySaveWOD();
 			printLastError();
@@ -799,13 +799,14 @@ Boolean FullSDTest(){
 		theDay.date = 1;
 		theDay.month = 1;
 	/* copy files ... */
-		for(int Y=yearToDel; Y<=yearToDel + 1 ; Y++){
+		for(int Y=yearToDel; Y<=yearToDel; Y++){
 			theDay.year =Y;
 		printf("year=%d\n",theDay.year);
 		for(int M=1; M<=12 ; M++){
 			theDay.month=M;
 			printf("month=%d\n",theDay.month);
 			for(int i=1; i<=30; i++){
+//				DeleteOldFiels(MIN_FREE_SPACE); // make sure we don't have less than 300 MB free
 				theDay.date = i;
 				printf("day=%d\n",theDay.date);
 				copyTLMFile(tlm_wod,theDay,"TLM/2801/280101.WOD");
@@ -985,7 +986,7 @@ int showFreeSapce(){
 	FN_SPACE space = { 0 };
 	int drivenum = f_getdrive();
 
-	if (logError(f_getfreespace(drivenum, &space) ,"DeleteOldFiels-f_getfreespace")) return -1;
+	if (logError(f_getfreespace(drivenum, &space) ,"f_getfreespace")) return -1;
 	printf("total space : %d\n", space.total);
 	printf("used space  : %d\n", space.used);
 	printf("free space  : %d\n", space.free);
