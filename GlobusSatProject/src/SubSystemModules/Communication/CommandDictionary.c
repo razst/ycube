@@ -30,6 +30,10 @@ int trxvu_command_router(sat_packet_t *cmd)
 		err = CMD_StartDump(cmd);
 		break;
 
+	case DUMP_RAM_TLM:
+		err = CMD_DumpRamTLM(cmd);
+		break;
+
 	case ABORT_DUMP_SUBTYPE:
 		err = CMD_SendDumpAbortRequest(cmd);
 		break;

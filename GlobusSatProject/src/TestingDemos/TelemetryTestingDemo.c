@@ -1,4 +1,5 @@
 #include "TelemetryTestingDemo.h"
+#ifdef TESTING
 
 //get number of packets and save it in RAM with modified data
 void savePacketsInRam(int amount, tlm_type_t type)
@@ -117,17 +118,18 @@ Boolean singleTlmLogTestHelp()
 	return TRUE;
 }
 
+
 //test to save multiple LOG packets according to the parameter
 Boolean saveNGetMultipleTlmTest(int amount)
 {
+
+	static logDataInRam arr[TLM_RAM_SIZE * 4]; //for all cases
 	if(amount > TLM_RAM_SIZE * 4)
 	{
 		return FALSE;
 	}
 
 	int count;
-
-	logDataInRam arr[TLM_RAM_SIZE * 4]; //for all cases
 
 	printf("try saving %d packets\n", amount);
 	Boolean flag = TRUE;
@@ -161,6 +163,7 @@ Boolean saveNGetMultipleTlmTest(int amount)
 
 	return flag;
 }
+
 
 Boolean saveMultipleNGetSomeTlmTest(int saveAmount, int getAmount)
 {
@@ -362,7 +365,10 @@ Boolean saveNGetLog()
 	}
 	return TRUE;
 }
-
+int PrintStaticSize(){
+	printf("not worke yet\n");
+	return E_NO_SS_ERR;
+}
 Boolean MainTelemetryTestBench()
 {
 	Boolean offerMoreTests = TRUE;
@@ -376,8 +382,9 @@ Boolean MainTelemetryTestBench()
 		printf("\t 2) single tlm in ram test \n\r");
 		printf("\t 3) min max dates wod in ram test \n\r");
 		printf("\t 4) save log in files and ram test \n\r");
+		printf("\t 5) print size of static \n\r");
 
-		unsigned int number_of_tests = 4;
+		unsigned int number_of_tests = 5;
 		while(UTIL_DbguGetIntegerMinMax(&choice, 0, number_of_tests) == 0);
 
 			switch(choice) {
@@ -396,7 +403,12 @@ Boolean MainTelemetryTestBench()
 			case 4:
 				offerMoreTests = saveNGetLog();
 				break;
+			case 5:
+				offerMoreTests = PrintStaticSize();
+				break;
 			}
 	}
 	return FALSE;
 }
+
+#endif

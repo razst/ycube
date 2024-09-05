@@ -401,6 +401,9 @@ int CMD_AntCancelDeployment(sat_packet_t *cmd)
 	}
 	return err;
 }
+int CMD_DumpRamTLM(sat_packet_t *cmd)
+{
 
+}
 
 

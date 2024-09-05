@@ -7,7 +7,7 @@
 #include "TelemetryCollector.h"
 #include <hal/errors.h>
 
-#define TLM_RAM_SIZE 10
+#define TLM_RAM_SIZE 10000
 
 // struct for saving log TLM data in RAM
 typedef struct logDataInRam
