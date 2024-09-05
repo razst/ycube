@@ -44,7 +44,7 @@ dataRange getRange(tlm_type_t type);
  * set all TLM date to 0.
  * @return Error code
  */
-int resetRamTlm();
+int ResetRamTlm();
 
 
 /*!

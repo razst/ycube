@@ -235,7 +235,7 @@ int InitSubsystems()
 
 	WakeupFromResetCMD();
 
-	resetRamTlm();
+	ResetRamTlm();
 
 	logError(INFO_MSG ,"Sat Started");
 

@@ -11,7 +11,7 @@ wodDataInRam wodArr[TLM_RAM_SIZE];
 //index for the current saving place in array
 int wodIndex = 0;
 
-int resetRamTlm() {
+int ResetRamTlm() {
 	for (int i = 0; i < TLM_RAM_SIZE; i++) {
 		logArr[i].date = 0;
 		wodArr[i].date = 0;

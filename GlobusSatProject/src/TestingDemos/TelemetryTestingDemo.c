@@ -208,7 +208,7 @@ Boolean saveMultipleNGetSomeTlmTest(int saveAmount, int getAmount)
 
 Boolean getWodMinMaxTest()
 {
-	resetRamTlm();
+	ResetRamTlm();
 	dataRange range = getRange(tlm_wod);
 	if(range.max != 0 || range.min != 0)
 	{
@@ -317,7 +317,7 @@ Boolean tlmTest()
 
 
 	printf("\nReset test:\n\n");
-	resetRamTlm();
+	ResetRamTlm();
 
 	logDataInRam log;
 	int amount = getTlm(&log, 1, tlm_log);
@@ -336,7 +336,7 @@ Boolean tlmTest()
 
 Boolean saveNGetLog()
 {
-	time_t date = 1643151600;
+	time_t date = 1643151600; // 25.1.2022
 	int err[] = {420, 69};
 	Boolean flag = TRUE;
 	Time_setUnixEpoch(date);
@@ -347,18 +347,18 @@ Boolean saveNGetLog()
 	logDataInRam data[2];
 	int count = getTlm(&data, 2, tlm_log);
 	for(int i = 0; i < 2; i++){
-		printf("error: %d\n", data[i].logData.error);
-		printf("massage: %s\n", data[i].logData.msg);
+		printf("got log error id: %d\n", data[i].logData.error);
+		printf("got log massage: %s\n", data[i].logData.msg);
 		flag = (flag && data[i].logData.error == err[i]);
 	}
 
 	if (flag)
 	{
-		printf("test passed");
+		printf("test passed !!!");
 	}
 	else
 	{
-		printf("test failed");
+		printf("test failed !!!");
 	}
 	return TRUE;
 }
