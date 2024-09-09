@@ -7,12 +7,14 @@
 #include "GlobalStandards.h"
 #include "TRXVU_Commands.h"
 #include "TLM_management.h"
+#include "SubSystemModules/Housekepping/RAMTelemetry.h"
 
 
 extern xTaskHandle xDumpHandle;			                //task handle for dump task
 extern xSemaphoreHandle xDumpLock;                      // this global lock is defined once in TRXVU.c
 
 static dump_arguments_t dmp_pckt;
+static dump_ram_arguments_t dmp_ram_pckt;
 
 void DumpTask(void *args) {
 	if (args == NULL) {
@@ -84,6 +86,7 @@ void DumpRamTask(void *args) {
 		break;
 	}
 
+	int sentCount=-1;
 
 	for(int i = 0; i < numOfElements; i++)
 	{
@@ -96,15 +99,17 @@ void DumpRamTask(void *args) {
 						subtype, task_args->cmd.ID, &dump_tlm);
 
 		TransmitSplPacket(&dump_tlm, NULL);
-		numOfElements++;
+		sentCount++;
 		if(CheckDumpAbort()){
 			stopDump = TRUE;
 			break;
 		}
 	}
-
-
-
+	if (sentCount<0){
+		FinishDump(task_args, NULL, ACK_ERROR_MSG, &sentCount, sizeof(sentCount));
+	}else{
+		FinishDump(task_args, NULL, ACK_DUMP_FINISHED, &sentCount, sizeof(sentCount));
+	}
 
 	vTaskDelete(NULL); // kill the dump task
 }
@@ -473,30 +478,18 @@ int CMD_DumpRamTLM(sat_packet_t *cmd)
 
 	//dmp_pckt.cmd.ID = cmd->ID;
 	// copy all cmd data...
-	AssembleCommand(&cmd->data,cmd->length,cmd->cmd_type,cmd->cmd_subtype,cmd->ID, &dmp_pckt.cmd);
+	AssembleCommand(&cmd->data,cmd->length,cmd->cmd_type,cmd->cmd_subtype,cmd->ID, &dmp_ram_pckt.cmd);
 
-	memcpy(&dmp_pckt.dump_type, cmd->data, sizeof(dmp_pckt.dump_type));
-	offset += sizeof(dmp_pckt.dump_type);
+	memcpy(&dmp_ram_pckt.dump_type, cmd->data, sizeof(dmp_ram_pckt.dump_type));
+	offset += sizeof(dmp_ram_pckt.dump_type);
 
-	memcpy(&dmp_pckt.t_start, cmd->data + offset, sizeof(dmp_pckt.t_start));
-	offset += sizeof(dmp_pckt.t_start);
-
-	memcpy(&dmp_pckt.t_end, cmd->data + offset, sizeof(dmp_pckt.t_end));
-	offset += sizeof(dmp_pckt.t_end);
-
-	// check for invalid dump parametrs
-	if (dmp_pckt.t_start>=dmp_pckt.t_end){
-		return E_INVALID_PARAMETERS; // exit with error
-	}
-
-	memcpy(&dmp_pckt.resulotion, cmd->data + offset, sizeof(dmp_pckt.resulotion));
-
+	memcpy(&dmp_ram_pckt.count, cmd->data + offset, sizeof(dmp_ram_pckt.count));
 
 	if (xSemaphoreTake(xDumpLock,SECONDS_TO_TICKS(WAIT_TIME_SEM_DUMP)) != pdTRUE) {
 		return E_GET_SEMAPHORE_FAILED;
 	}
 	xTaskCreate(DumpRamTask, (const signed char* const )"DumpRamTask", 2000,
-			&dmp_pckt, configMAX_PRIORITIES - 2, &xDumpHandle);
+			&dmp_ram_pckt, configMAX_PRIORITIES - 2, &xDumpHandle);
 
 	SendAckPacket(ACK_DUMP_START, cmd,NULL,0);
 

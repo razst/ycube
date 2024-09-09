@@ -11,6 +11,7 @@
 #include "SatCommandHandler.h"
 #include "utils.h"
 #include <hal/Timing/Time.h>
+#include "SubSystemModules/Housekepping/TelemetryFiles.h"
 
 
 #define MAX_MUTE_TIME 		(60*60*24) 	///< max mute duration will be 90 minutes = 60 *90 [sec]
