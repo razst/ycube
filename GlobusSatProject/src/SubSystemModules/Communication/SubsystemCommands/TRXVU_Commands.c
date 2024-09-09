@@ -51,6 +51,64 @@ void DumpTask(void *args) {
 
 }
 
+
+void DumpRamTask(void *args) {
+	if (args == NULL) {
+		FinishDump(NULL, NULL, ACK_DUMP_ABORT, NULL, 0);
+		return;
+	}
+
+	dump_ram_arguments_t *task_args = (dump_ram_arguments_t *) args;
+
+	SendAckPacket(ACK_DUMP_START, &task_args->cmd, NULL, 0);
+
+	stopDump = FALSE;
+
+	int numOfElements = 0;
+
+	void* dump_data;
+	int cell_length = 0;
+	tlm_type_t subtype;
+
+	switch(task_args->dump_type)
+	{
+	case tlm_log:
+		numOfElements = getTlm(dump_data, task_args->count, tlm_log);
+		cell_length = sizeof(logDataInRam);
+		subtype = tlm_log;
+		break;
+	case tlm_wod:
+		numOfElements = getTlm(dump_data, task_args->count, tlm_wod);
+		cell_length = sizeof(wodDataInRam);
+		subtype = tlm_wod;
+		break;
+	}
+
+
+	for(int i = 0; i < numOfElements; i++)
+	{
+		sat_packet_t dump_tlm = { 0 };
+
+		char element[cell_length];
+		memcpy(element, dump_data + i*cell_length, cell_length);
+
+		AssembleCommand((unsigned char*)element, cell_length, task_args->cmd.cmd_type,
+						subtype, task_args->cmd.ID, &dump_tlm);
+
+		TransmitSplPacket(&dump_tlm, NULL);
+		numOfElements++;
+		if(CheckDumpAbort()){
+			stopDump = TRUE;
+			break;
+		}
+	}
+
+
+
+
+	vTaskDelete(NULL); // kill the dump task
+}
+
 int CMD_AntennaDeploy(sat_packet_t *cmd)
 {
 
@@ -83,12 +141,12 @@ int CMD_AntennaDeploy(sat_packet_t *cmd)
 int CMD_StartDump(sat_packet_t *cmd)
 {
 	if (NULL == cmd) {
+
 		return -1;
 	}
 
 
-
-	//dump_arguments_t *dmp_pckt = malloc(sizeof(*dmp_pckt));
+//dump_arguments_t *dmp_pckt = malloc(sizeof(*dmp_pckt));
 	unsigned int offset = 0;
 
 	//dmp_pckt.cmd.ID = cmd->ID;
@@ -401,9 +459,48 @@ int CMD_AntCancelDeployment(sat_packet_t *cmd)
 	}
 	return err;
 }
+
 int CMD_DumpRamTLM(sat_packet_t *cmd)
 {
+	if (NULL == cmd) {
 
+			return -1;
+		}
+
+
+	//dump_arguments_t *dmp_pckt = malloc(sizeof(*dmp_pckt));
+	unsigned int offset = 0;
+
+	//dmp_pckt.cmd.ID = cmd->ID;
+	// copy all cmd data...
+	AssembleCommand(&cmd->data,cmd->length,cmd->cmd_type,cmd->cmd_subtype,cmd->ID, &dmp_pckt.cmd);
+
+	memcpy(&dmp_pckt.dump_type, cmd->data, sizeof(dmp_pckt.dump_type));
+	offset += sizeof(dmp_pckt.dump_type);
+
+	memcpy(&dmp_pckt.t_start, cmd->data + offset, sizeof(dmp_pckt.t_start));
+	offset += sizeof(dmp_pckt.t_start);
+
+	memcpy(&dmp_pckt.t_end, cmd->data + offset, sizeof(dmp_pckt.t_end));
+	offset += sizeof(dmp_pckt.t_end);
+
+	// check for invalid dump parametrs
+	if (dmp_pckt.t_start>=dmp_pckt.t_end){
+		return E_INVALID_PARAMETERS; // exit with error
+	}
+
+	memcpy(&dmp_pckt.resulotion, cmd->data + offset, sizeof(dmp_pckt.resulotion));
+
+
+	if (xSemaphoreTake(xDumpLock,SECONDS_TO_TICKS(WAIT_TIME_SEM_DUMP)) != pdTRUE) {
+		return E_GET_SEMAPHORE_FAILED;
+	}
+	xTaskCreate(DumpRamTask, (const signed char* const )"DumpRamTask", 2000,
+			&dmp_pckt, configMAX_PRIORITIES - 2, &xDumpHandle);
+
+	SendAckPacket(ACK_DUMP_START, cmd,NULL,0);
+
+	return 0;
 }
 
 
