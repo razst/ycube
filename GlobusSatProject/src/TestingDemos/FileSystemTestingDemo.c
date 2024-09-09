@@ -1059,7 +1059,10 @@ Boolean selectAndExecuteFSTest(){
 
 	unsigned int selection = 0;
 	Boolean offerMoreTests = TRUE;
+	char current_SD_card;
+	FRAM_read((unsigned char*)&current_SD_card,ACTIVE_SD_ADDR,ACTIVE_SD_SIZE);
 
+	printf( "\n\r Working on SD card number: %d\n\r",current_SD_card);
 	printf( "\n\r Select a test to perform: \n\r");
 	printf("\t 0) Return to main menu \n\r");
 	printf("\t 1) List files \n\r");
