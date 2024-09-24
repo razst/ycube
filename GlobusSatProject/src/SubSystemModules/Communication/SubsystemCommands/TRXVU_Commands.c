@@ -8,6 +8,7 @@
 #include "TRXVU_Commands.h"
 #include "TLM_management.h"
 #include "SubSystemModules/Housekepping/RAMTelemetry.h"
+#include "HashSecuredCMD.h"
 
 
 extern xTaskHandle xDumpHandle;			                //task handle for dump task
@@ -495,5 +496,45 @@ int CMD_DumpRamTLM(sat_packet_t *cmd)
 
 	return 0;
 }
+/* DO NOT DELETE
+  *BYTE Hash256(char* text, BYTE* outputHash)
+{
+    BYTE buf[SHA256_BLOCK_SIZE];
+    SHA256_CTX ctx;
+
+    // Initialize SHA256 context
+    sha256_init(&ctx);
+
+    // Hash the user input (text)
+    sha256_update(&ctx, (BYTE*)text, strlen(text));
+    sha256_final(&ctx, buf);
+
+    // Copy the hash into the provided output buffer
+    memcpy(outputHash, buf, SHA256_BLOCK_SIZE);
+}
+
+}
+int CMD_Hash256()
+{
+	unsigned short id, code;
+	char* tobeHashed[8];
+	//add in fram the or find in fram the id of the message first first if not add
+	//id = FRAM_read((unsigned char*)&current_SD_card,ACTIVE_SD_ADDR,ACTIVE_SD_SIZE);
+	sprintf(tobeHashed, "%hu%hu", id, code);
+	//maybe tobeHashed has to be translated before hashing?
+	char* hashed[64] = Hash256(tobeHashed);
+	//check if this hash meets standard
+	//If(hashed == satHash&& satId > id)
+	//{
+	//cont(assembleCMD)
+	//}
+	//Else
+	//{return error (new error of 420 password incorrect or impossible sat id=> hash error)
+	//splsend(err);
+	}
+*/
+}
+}
+
 
 
