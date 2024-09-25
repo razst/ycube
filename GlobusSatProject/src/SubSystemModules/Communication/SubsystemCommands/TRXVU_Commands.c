@@ -8,7 +8,7 @@
 #include "TRXVU_Commands.h"
 #include "TLM_management.h"
 #include "SubSystemModules/Housekepping/RAMTelemetry.h"
-#include "HashSecuredCMD.h"
+#include "SubSystemModules/Communication/HashSecuredCMD.h"
 
 
 extern xTaskHandle xDumpHandle;			                //task handle for dump task
@@ -100,6 +100,13 @@ void DumpRamTask(void *args) {
 						subtype, task_args->cmd.ID, &dump_tlm);
 
 		TransmitSplPacket(&dump_tlm, NULL);
+		#ifdef TESTING
+		printf("ID: %d\n", &dump_tlm.ID);
+		printf("Subtype: %s\n", &dump_tlm.cmd_subtype);
+		printf("Type: %s\n", &dump_tlm.cmd_type);
+		printf("Length: %hu\n", &dump_tlm.length);
+		printf("Data: %s\n", &dump_tlm.data);
+		#endif
 		sentCount++;
 		if(CheckDumpAbort()){
 			stopDump = TRUE;
@@ -496,8 +503,8 @@ int CMD_DumpRamTLM(sat_packet_t *cmd)
 
 	return 0;
 }
-/* DO NOT DELETE
-  *BYTE Hash256(char* text, BYTE* outputHash)
+/*
+int Hash256(char* text, BYTE* outputHash)
 {
     BYTE buf[SHA256_BLOCK_SIZE];
     SHA256_CTX ctx;
@@ -511,30 +518,27 @@ int CMD_DumpRamTLM(sat_packet_t *cmd)
 
     // Copy the hash into the provided output buffer
     memcpy(outputHash, buf, SHA256_BLOCK_SIZE);
+
+    return E_NO_SS_ERR;
 }
 
-}
-int CMD_Hash256()
+
+Boolean CMD_Hash256(sat_packet_t *cmd)
 {
-	unsigned short id, code;
-	char* tobeHashed[8];
-	//add in fram the or find in fram the id of the message first first if not add
-	//id = FRAM_read((unsigned char*)&current_SD_card,ACTIVE_SD_ADDR,ACTIVE_SD_SIZE);
-	sprintf(tobeHashed, "%hu%hu", id, code);
-	//maybe tobeHashed has to be translated before hashing?
-	char* hashed[64] = Hash256(tobeHashed);
-	//check if this hash meets standard
-	//If(hashed == satHash&& satId > id)
-	//{
-	//cont(assembleCMD)
-	//}
-	//Else
-	//{return error (new error of 420 password incorrect or impossible sat id=> hash error)
-	//splsend(err);
-	}
+	int id, code;
+	unsigned int lastid;
+	char check[64];
+	code = 0;
+	char plsHashMe[20];
+	snprintf(plsHashMe, sizeof(plsHashMe), "%d%d", cmd->ID, code);
+	lastid= FRAM_read((unsigned char*)&lastid,CMD_ID_ADDR,CMD_ID_SIZE);//add last id to F-ram
+	BYTE* hashed[64];
+	int err = hash256(plsHashMe,hashed);
+	//check = memcpy(cmd->data); make work and add the correct length to get the hash that was sent
+	if((strcmp(&hashed,&check) == 1 )&& cmd.ID > lastid)
+		return TRUE;
+	else return FALSE;
+}
+
 */
-}
-}
-
-
 

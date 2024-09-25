@@ -400,6 +400,19 @@ Boolean TestSetTrxvuBitrate()
 	return TRUE;
 }
 
+Boolean  dumpRamTest()
+{
+	sat_packet_t cmd;
+	cmd.ID = 8;
+	cmd.cmd_subtype = DUMP_RAM_TLM;
+	cmd.cmd_type = trxvu_cmd_type;
+	unsigned char data[10] = "hii";
+	memcpy(cmd.data, data, sizeof(data));
+	cmd.length = sizeof(cmd.data);
+	ActUponCommand(&cmd);
+
+	return TRUE;
+}
 Boolean TestGetTrxvuBitrate()
 {
 	int err = 0;
@@ -475,7 +488,7 @@ Boolean selectAndExecuteTrxvuDemoTest()
 	printf("\t 18) Check Transmition Allowed\n\r");
 	printf("\t 19) Loop Transmition of SPL\n\r");
 
-	unsigned int number_of_tests = 19;
+	unsigned int number_of_tests = 20;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -538,6 +551,9 @@ Boolean selectAndExecuteTrxvuDemoTest()
 		break;
 	case 19:
 		offerMoreTests = TestLoopSPL();
+		break;
+	case 20:
+		offerMoreTests = dumpRamTest();
 		break;
 	default:
 		break;

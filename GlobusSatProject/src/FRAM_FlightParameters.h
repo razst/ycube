@@ -90,6 +90,8 @@
 #define ACTIVE_SD_ADDR					0X9490
 #define ACTIVE_SD_SIZE					1
 
+#define CMD_ID_ADDR						0x9500
+#define CMD_ID_SIZE						4
 
 #define DEFAULT_BEACON_INTERVAL_TIME 	20			//<! how many seconds between two beacons [sec]
 #define MAX_BEACON_INTERVAL				60			// beacon every 1 minute
