@@ -20,7 +20,7 @@
 #include "SubSystemModules/Communication/AckHandler.h"
 #include "SubSystemModules/Communication/SPL.h"
 #include "SubSystemModules/Communication/SatCommandHandler.h"
-
+#include "SubSystemModules/Communication/HashSecuredCMD.h"
 
 Boolean TestInitTrxvu()
 {
@@ -400,6 +400,20 @@ Boolean TestSetTrxvuBitrate()
 	return TRUE;
 }
 
+
+Boolean testSecuredCMD(){
+
+	BYTE text1[] = {"hello"};
+	BYTE buf[SHA256_BLOCK_SIZE];
+
+	SHA256_CTX ctx;
+	sha256_init(&ctx);
+	sha256_update(&ctx, text1, strlen(text1));
+	sha256_final(&ctx, buf);
+	return TRUE;
+}
+
+
 Boolean  dumpRamTest()
 {
 	sat_packet_t cmd;
@@ -487,6 +501,8 @@ Boolean selectAndExecuteTrxvuDemoTest()
 	printf("\t 17) Restore to default beacon inervals\n\r");
 	printf("\t 18) Check Transmition Allowed\n\r");
 	printf("\t 19) Loop Transmition of SPL\n\r");
+	printf("\t 20) Dump RAM\n\r");
+	printf("\t 21) Secured CMD\n\r");
 
 	unsigned int number_of_tests = 20;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
@@ -554,6 +570,9 @@ Boolean selectAndExecuteTrxvuDemoTest()
 		break;
 	case 20:
 		offerMoreTests = dumpRamTest();
+		break;
+	case 21:
+		offerMoreTests = testSecuredCMD();
 		break;
 	default:
 		break;
