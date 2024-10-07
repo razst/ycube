@@ -45,6 +45,8 @@ Boolean selectAndExecuteTest()
 	printf("\t 5) Managment Testing\n\r");
 	printf("\t 6) File System Testing\n\r");
 
+//	restart();
+//	vTaskDelay(10000);
 
 
 	while (UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);

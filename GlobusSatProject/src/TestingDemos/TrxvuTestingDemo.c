@@ -405,11 +405,21 @@ Boolean testSecuredCMD(){
 
 	BYTE text1[] = {"hello"};
 	BYTE buf[SHA256_BLOCK_SIZE];
-
+	BYTE* outputHash;
+	// const char text1[] = "hello";
 	SHA256_CTX ctx;
 	sha256_init(&ctx);
 	sha256_update(&ctx, text1, strlen(text1));
 	sha256_final(&ctx, buf);
+	memcpy(outputHash, buf, SHA256_BLOCK_SIZE);
+
+    /*printf("SHA-256 Hash: ");
+    for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
+        printf("%02x", outputHash[i]); // Print each byte in hex
+    }
+    printf("\n");
+
+    free(outputHash); // Free the allocated memorys*/
 	return TRUE;
 }
 
@@ -504,7 +514,7 @@ Boolean selectAndExecuteTrxvuDemoTest()
 	printf("\t 20) Dump RAM\n\r");
 	printf("\t 21) Secured CMD\n\r");
 
-	unsigned int number_of_tests = 20;
+	unsigned int number_of_tests = 21;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
