@@ -401,27 +401,42 @@ Boolean TestSetTrxvuBitrate()
 }
 
 
-Boolean testSecuredCMD(){
+#define MAX_INPUT_SIZE 1024  // Maximum size of input string
+Boolean testSecuredCMD() {
+    char input[MAX_INPUT_SIZE];
+    BYTE buf[SHA256_BLOCK_SIZE];
+    SHA256_CTX ctx;
 
-	BYTE text1[] = {"hello"};
-	BYTE buf[SHA256_BLOCK_SIZE];
-	BYTE* outputHash;
-	// const char text1[] = "hello";
-	SHA256_CTX ctx;
-	sha256_init(&ctx);
-	sha256_update(&ctx, text1, strlen(text1));
-	sha256_final(&ctx, buf);
-	memcpy(outputHash, buf, SHA256_BLOCK_SIZE);
+    // Get user input
+    printf("Enter a string to hash: \n");
 
-    /*printf("SHA-256 Hash: ");
+    // Use scanf to get the input (with a width specifier to avoid overflow)
+    scanf("%1023s", input);  // Reads up to MAX_INPUT_SIZE - 1 to prevent overflow
+
+    // Remove newline character if present (scanf stops at whitespace, so this part may not be necessary)
+    size_t len = strlen(input);
+    if (len > 0 && input[len - 1] == '\n') {
+        input[len - 1] = '\0';
+    }
+
+    // Initialize SHA256 context
+    sha256_init(&ctx);
+
+    // Hash the user input
+    sha256_update(&ctx, (BYTE*)input, strlen(input));
+    sha256_final(&ctx, buf);
+
+    // Print the resulting hash
+    printf("SHA-256 hash: ");
     for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
-        printf("%02x", outputHash[i]); // Print each byte in hex
+        printf("%02x", buf[i]);
     }
     printf("\n");
 
-    free(outputHash); // Free the allocated memorys*/
-	return TRUE;
+    return TRUE;
 }
+
+
 
 
 Boolean  dumpRamTest()
