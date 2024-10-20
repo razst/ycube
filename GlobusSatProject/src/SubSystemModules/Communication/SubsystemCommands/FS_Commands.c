@@ -5,6 +5,7 @@
 #include <hcc/api_fat.h>
 #include "TLM_management.h"
 #include <hcc/api_mdriver_atmel_mcipdc.h>
+#include "SubSystemModules/Housekepping/RAMTelemetry.h"
 
 
 
@@ -93,6 +94,11 @@ int CMD_Get_TLM_Info(sat_packet_t *cmd)
 		data.bad = space.bad;
 		data.minFileDate = minMaxDate[0];
 		data.maxFileDate = minMaxDate[1];
+
+		dataRange ramData = getRange(tlm_log);
+		data.minRamDate = ramData.min;
+		data.maxRamDate = ramData.max;
+
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*)&data, sizeof(data));
 	}
 	return err;
