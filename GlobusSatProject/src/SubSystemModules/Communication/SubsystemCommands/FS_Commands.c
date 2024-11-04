@@ -99,6 +99,10 @@ int CMD_Get_TLM_Info(sat_packet_t *cmd)
 		data.minRamDate = ramData.min;
 		data.maxRamDate = ramData.max;
 
+#ifdef TESTING
+		printf("\n\nTLM INFO:\nSD Data:\nTotal: %lu\nUsed: %lu\nFree: %lu\nBad: %lu\nMin file date: %hu\nMax file date: %hu\nMin ram date: %lu\nMax ram date: %lu", data.total, data.used, data.free, data.bad, data.minFileDate, data.maxFileDate, data.minRamDate, data.maxRamDate);
+#endif
+
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*)&data, sizeof(data));
 	}
 	return err;
