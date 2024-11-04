@@ -95,13 +95,19 @@ int CMD_Get_TLM_Info(sat_packet_t *cmd)
 		data.minFileDate = minMaxDate[0];
 		data.maxFileDate = minMaxDate[1];
 
-		dataRange ramData = getRange(tlm_log);
-		data.minRamDate = ramData.min;
-		data.maxRamDate = ramData.max;
+		dataRange ramDataLog = getRange(tlm_log);
+		data.minLogRamDate = ramDataLog.min;
+		data.maxLogRamDate = ramDataLog.max;
 
-#ifdef TESTING
-		printf("\n\nTLM INFO:\nSD Data:\nTotal: %lu\nUsed: %lu\nFree: %lu\nBad: %lu\nMin file date: %hu\nMax file date: %hu\nMin ram date: %lu\nMax ram date: %lu", data.total, data.used, data.free, data.bad, data.minFileDate, data.maxFileDate, data.minRamDate, data.maxRamDate);
-#endif
+
+		dataRange ramDataWod = getRange(tlm_wod);
+		data.minWodRamDate = ramDataWod.min;
+		data.maxWodRamDate = ramDataWod.max;
+
+		#ifdef TESTING
+				printf("\n\nTLM INFO:\nSD Data:\nTotal: %lu\nUsed: %lu\nFree: %lu\nBad: %lu\nMin file date: %hu\nMax file date: %hu\nLOG:\nMin ram date: %lu\nMax ram date: %lu\n\nWOD:\nMin ram date: %lu\nMax ram date: %lu\n", data.total, data.used, data.free, data.bad, data.minFileDate, data.maxFileDate, data.minLogRamDate, data.maxLogRamDate, data.minWodRamDate, data.maxWodRamDate);
+		#endif
+
 
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*)&data, sizeof(data));
 	}

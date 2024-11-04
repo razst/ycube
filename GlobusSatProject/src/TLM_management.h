@@ -71,8 +71,11 @@ typedef struct
 	  unsigned short minFileDate;
 	  unsigned short  maxFileDate;
 
-	  time_unix minRamDate;
-	  time_unix maxRamDate;
+	  time_unix minLogRamDate;
+	  time_unix maxLogRamDate;
+
+	  time_unix minWodRamDate;
+	  time_unix maxWodRamDate;
 }TLM_Info_Data_t;
 
 
