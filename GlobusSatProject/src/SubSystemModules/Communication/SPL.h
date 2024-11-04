@@ -78,7 +78,8 @@ typedef enum __attribute__ ((__packed__)) trxvu_subtypes_t
 	ANT_DEPLOY = 				0xB9,	//0b10110111 *
 	ANT_STOP_REDEPLOY = 		0xC0,
 	PING = 						0xC2,
-	DUMP_RAM_TLM =              0xC3
+	DUMP_RAM_TLM =              0xC3,
+	SecuredCMD =                0xC4
 
 }trxvu_subtypes_t;
 

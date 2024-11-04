@@ -118,6 +118,10 @@ int trxvu_command_router(sat_packet_t *cmd)
 		err = CMD_StopReDeployment(cmd);
 		break;
 
+	case SecuredCMD:
+		err = Dummy_CMD_Hash256(cmd);
+		break;
+
 	default:
 		err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
 		break;

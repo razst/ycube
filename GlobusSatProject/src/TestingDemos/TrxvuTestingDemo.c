@@ -400,6 +400,19 @@ Boolean TestSetTrxvuBitrate()
 	return TRUE;
 }
 
+Boolean TestForDummy_sat_packet()
+{
+	sat_packet_t cmd;
+		cmd.ID = 1;
+		cmd.cmd_type = trxvu_cmd_type;
+		cmd.cmd_subtype = SecuredCMD;
+		cmd.length = sizeof(int);
+
+		int err;
+		err = ActUponCommand(&cmd);
+
+		return err;
+}
 
 #define MAX_INPUT_SIZE 1024  // Maximum size of input string
 Boolean testSecuredCMD() {
@@ -436,6 +449,89 @@ Boolean testSecuredCMD() {
     return TRUE;
 }
 
+int Hash256(char* text, BYTE* outputHash)
+{
+    BYTE buf[SHA256_BLOCK_SIZE];
+    SHA256_CTX ctx;
+
+    // Initialize SHA256 context
+    sha256_init(&ctx);
+
+    // Hash the user input (text)
+    sha256_update(&ctx, (BYTE*)text, strlen(text));
+    sha256_final(&ctx, buf);
+
+    // Copy the hash into the provided output buffer
+    memcpy(outputHash, buf, SHA256_BLOCK_SIZE);
+
+    return E_NO_SS_ERR;
+}
+
+Boolean Dummy_CMD_Hash256(sat_packet_t *cmd)
+{
+	unsigned int code , err;
+	unsigned int lastid;
+	char plsHashMe[40];
+	code = 1111;//dummy- TODO add code to fram
+
+	//lastid = FRAM_read((unsigned char*)&lastid,CMD_ID_ADDR,CMD_ID_SIZE);//add last id to F-ram
+	//FRAM_write((unsigned char*)cmd->ID,CMD_ID_ADDR,CMD_ID_SIZE);
+
+	if (lastid == NULL)
+	{lastid = 1;}
+
+	if(cmd -> ID <= lastid)
+		{ return FALSE; }
+
+	snprintf(plsHashMe, sizeof(plsHashMe), "%d%d", cmd->ID, code);
+
+	BYTE* hashed[32];
+		err = Hash256(plsHashMe,hashed);
+
+		 // Print the resulting hash (testing)
+		    printf("SHA-256 hash: ");
+		    for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
+		        printf("%02x", hashed[i]);
+		    }
+		    printf("\n");
+		 return TRUE;
+
+}
+Boolean CMD_Hash256(sat_packet_t *cmd)
+{
+	int code;
+	int err;
+	unsigned int lastid;
+	char checkthis[32];
+	char plsHashMe[40]; //this is a combination of id + "" + code that gets put through hash algorithm
+	code = 1111; // bc i dont actually have the code right now so as a dummy
+
+	lastid = FRAM_read((unsigned char*)&lastid,CMD_ID_ADDR,CMD_ID_SIZE);//add last id to F-ram
+		FRAM_write((unsigned char*)cmd->ID,CMD_ID_ADDR,CMD_ID_SIZE);
+
+	if(cmd -> ID <= lastid)
+	{ return FALSE; }
+
+	// FRAM read (code) for when there is a code to read it from the fram
+	if(!(snprintf(plsHashMe, sizeof(plsHashMe), "%d%d", cmd->ID, code) == E_NO_SS_ERR))  //note the extra places in the pls hash me may change the hash making it invalid
+	{return FALSE;}
+
+	BYTE* hashed[32];
+	err = hash256(plsHashMe,hashed);
+
+    // Print the resulting hash (testing)
+    printf("SHA-256 hash: ");
+    for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
+        printf("%02x", hashed[i]);
+    }
+    printf("\n");
+    return TRUE;//testing
+	//check = memcpy(cmd->data); make work and add the correct length to get the hash that was sent
+	/*if((strcmp(&hashed,&checkthis) == 1 ))
+		printf("succsess!");//for test
+		return TRUE;
+	else return FALSE;*/
+}
 
 
 
@@ -529,7 +625,7 @@ Boolean selectAndExecuteTrxvuDemoTest()
 	printf("\t 20) Dump RAM\n\r");
 	printf("\t 21) Secured CMD\n\r");
 
-	unsigned int number_of_tests = 21;
+	unsigned int number_of_tests = 22;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -598,6 +694,9 @@ Boolean selectAndExecuteTrxvuDemoTest()
 		break;
 	case 21:
 		offerMoreTests = testSecuredCMD();
+		break;
+	case 22:
+		offerMoreTests = TestForDummy_sat_packet();
 		break;
 	default:
 		break;
