@@ -469,32 +469,45 @@ int Hash256(char* text, BYTE* outputHash)
 
 Boolean Dummy_CMD_Hash256(sat_packet_t *cmd)
 {
-	unsigned int code , err;
-	unsigned int lastid;
-	char plsHashMe[40];
-	code = 1111;//dummy- TODO add code to fram
+	    unsigned int code = 23;  // Dummy code
+	    unsigned int lastid = 1;
+	    unsigned int err;
+		char plsHashMe[50];
+		char code_to_str[50];
+		//combine lastid(as str) into plshashme
+		sprintf(plsHashMe, "%u", lastid);
 
+		// turn code into str
+		sprintf(code_to_str, "%u", code);
+
+		//add (passcode)
+		strcat(plsHashMe, code_to_str);
+
+		// Initialize buffer for hashed output
+	    BYTE hashed[SHA256_BLOCK_SIZE];
+
+	    // Hash the combined string
+	    err = Hash256(plsHashMe, hashed);
+	    if (err != 0) {
+	        return FALSE;
+	    }
+
+	    // Print hash for testing
+	    printf("SHA-256 hash: ");
+	    for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
+	        printf("%02x", hashed[i]);
+	    }
+	    printf("\n");
+
+	    return TRUE;
+
+
+	//add all frams to init systems
+	//if imput is too big return error
 	//lastid = FRAM_read((unsigned char*)&lastid,CMD_ID_ADDR,CMD_ID_SIZE);//add last id to F-ram
 	//FRAM_write((unsigned char*)cmd->ID,CMD_ID_ADDR,CMD_ID_SIZE);
+//add after lastid is add to fram
 
-	if (lastid == NULL)
-	{lastid = 1;}
-
-	if(cmd -> ID <= lastid)
-		{ return FALSE; }
-
-	snprintf(plsHashMe, sizeof(plsHashMe), "%d%d", cmd->ID, code);
-
-	BYTE* hashed[32];
-		err = Hash256(plsHashMe,hashed);
-
-		 // Print the resulting hash (testing)
-		    printf("SHA-256 hash: ");
-		    for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
-		        printf("%02x", hashed[i]);
-		    }
-		    printf("\n");
-		 return TRUE;
 
 }
 Boolean CMD_Hash256(sat_packet_t *cmd)
@@ -623,7 +636,8 @@ Boolean selectAndExecuteTrxvuDemoTest()
 	printf("\t 18) Check Transmition Allowed\n\r");
 	printf("\t 19) Loop Transmition of SPL\n\r");
 	printf("\t 20) Dump RAM\n\r");
-	printf("\t 21) Secured CMD\n\r");
+	printf("\t 21) haash test for Secured CMD\n\r");
+	printf("\t 22) dummy Secured CMD\n\r");
 
 	unsigned int number_of_tests = 22;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
