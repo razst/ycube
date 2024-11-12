@@ -476,6 +476,7 @@ Boolean Dummy_CMD_Hash256(sat_packet_t *cmd)
 		char plsHashMe[50];
 		char code_to_str[50];
 
+
 		currId = cmd->ID;
 
 		//get code from FRAM
@@ -483,7 +484,14 @@ Boolean Dummy_CMD_Hash256(sat_packet_t *cmd)
 
 		//get the last id from FRAM and save it into var lastid then add new id to the FRAM (as new lastid)
 		FRAM_read((unsigned char*)&lastid, CMD_ID_ADDR, CMD_ID_SIZE);
-		FRAM_write((unsigned char*)currId, CMD_ID_ADDR, CMD_ID_SIZE);
+		FRAM_write((unsigned char*)&currId, CMD_ID_ADDR, CMD_ID_SIZE);
+
+		//check if curr ID is bigger than lastid
+		if(currId <= lastid)
+		{
+			//send back error?
+			return FALSE;
+		}
 
 		//combine lastid(as str) into plshashme
 		sprintf(plsHashMe, "%u", lastid);
@@ -512,44 +520,47 @@ Boolean Dummy_CMD_Hash256(sat_packet_t *cmd)
 
 	    return TRUE;
 
-
-	//add all frams to init systems
 	//if imput is too big return error
-	//lastid = FRAM_read((unsigned char*)&lastid,CMD_ID_ADDR,CMD_ID_SIZE);//add last id to F-ram
-	//FRAM_write((unsigned char*)cmd->ID,CMD_ID_ADDR,CMD_ID_SIZE);
-//add after lastid is add to fram
-
-
 }
 Boolean CMD_Hash256(sat_packet_t *cmd)
 {
-	int code;
-	int err;
-	unsigned int lastid;
-	char checkthis[32];
-	char plsHashMe[40]; //this is a combination of id + "" + code that gets put through hash algorithm
-	code = 1111; // bc i dont actually have the code right now so as a dummy
+		unsigned int code, lastid, currId, err;
+		char plsHashMe[50];
+		char code_to_str[50];
 
-	lastid = FRAM_read((unsigned char*)&lastid,CMD_ID_ADDR,CMD_ID_SIZE);//add last id to F-ram
-		FRAM_write((unsigned char*)cmd->ID,CMD_ID_ADDR,CMD_ID_SIZE);
+		currId = cmd->ID;
 
-	if(cmd -> ID <= lastid)
-	{ return FALSE; }
+		//get code from FRAM
+		FRAM_read((unsigned char*)&code, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
 
-	// FRAM read (code) for when there is a code to read it from the fram
-	if(!(snprintf(plsHashMe, sizeof(plsHashMe), "%d%d", cmd->ID, code) == E_NO_SS_ERR))  //note the extra places in the pls hash me may change the hash making it invalid
-	{return FALSE;}
+		//get the last id from FRAM and save it into var lastid then add new id to the FRAM (as new lastid)
+		FRAM_read((unsigned char*)&lastid, CMD_ID_ADDR, CMD_ID_SIZE);
+		FRAM_write((unsigned char*)&currId, CMD_ID_ADDR, CMD_ID_SIZE);
 
-	BYTE* hashed[32];
-	err = hash256(plsHashMe,hashed);
+		//check if curr ID is bigger than lastid
+		if(currId <= lastid)
+		{
+			return E_UNAUTHORIZED;
+		}
 
-    // Print the resulting hash (testing)
-    printf("SHA-256 hash: ");
-    for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
-        printf("%02x", hashed[i]);
-    }
-    printf("\n");
-    return TRUE;//testing
+		//combine lastid(as str) into plshashme
+		sprintf(plsHashMe, "%u", lastid);
+		
+		// turn code into str
+		sprintf(code_to_str, "%u", code);
+
+		//add (passcode)
+		strcat(plsHashMe, code_to_str);
+
+		// Initialize buffer for hashed output
+	    BYTE hashed[SHA256_BLOCK_SIZE];
+
+	    // Hash the combined string
+	    err = Hash256(plsHashMe, hashed);
+	    if (err != 0) {
+	        return FALSE;
+	    }
+
 	//check = memcpy(cmd->data); make work and add the correct length to get the hash that was sent
 	/*if((strcmp(&hashed,&checkthis) == 1 ))
 		printf("succsess!");//for test
