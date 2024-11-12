@@ -24,6 +24,7 @@
 #define SD_CARD_DRIVER_SEC 1
 #define FIRST_TIME -1
 #define _POSIX_SOURCE
+#define If_ID_is_Empty 1
 
 
 #define FS_TLM_DIR	"TLM"

@@ -94,6 +94,9 @@ void WriteDefaultValuesToFRAM()
 	char temp = SD_CARD_DRIVER_PRI;
 	FRAM_write((unsigned char*) &temp, ACTIVE_SD_ADDR, ACTIVE_SD_SIZE);
 
+	unsigned int IDtemp = If_ID_is_Empty;
+	FRAM_write((unsigned char*)&IDtemp, CMD_ID_ADDR, CMD_ID_SIZE);
+	
 	Boolean flag = FALSE;
 	FRAM_write((unsigned char*) &flag,
 			STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);

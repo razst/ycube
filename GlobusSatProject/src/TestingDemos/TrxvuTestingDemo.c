@@ -470,10 +470,21 @@ int Hash256(char* text, BYTE* outputHash)
 Boolean Dummy_CMD_Hash256(sat_packet_t *cmd)
 {
 	    unsigned int code = 23;  // Dummy code
-	    unsigned int lastid = 1;
+	    unsigned int lastid;
+		unsigned int currId;
 	    unsigned int err;
 		char plsHashMe[50];
 		char code_to_str[50];
+
+		currId = cmd->ID;
+
+		//get code from FRAM
+		FRAM_read((unsigned char*)&code, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+
+		//get the last id from FRAM and save it into var lastid then add new id to the FRAM (as new lastid)
+		FRAM_read((unsigned char*)&lastid, CMD_ID_ADDR, CMD_ID_SIZE);
+		FRAM_write((unsigned char*)currId, CMD_ID_ADDR, CMD_ID_SIZE);
+
 		//combine lastid(as str) into plshashme
 		sprintf(plsHashMe, "%u", lastid);
 
