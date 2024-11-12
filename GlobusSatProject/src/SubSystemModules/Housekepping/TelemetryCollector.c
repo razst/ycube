@@ -45,6 +45,15 @@ void InitSavePeriodTimes(){
 	FRAM_read((unsigned char*) &tlm_save_periods[tlm_wod], WOD_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
 	//printf("tlm_wod period value:%d \n",tlm_save_periods[tlm_wod]);
 
+	FRAM_read((unsigned char*) &tlm_save_periods[tlm_radfet], RADFET_SAVE_TLM_PERIOD_ADDR , sizeof(time_unix));
+	//printf("tlm_wod period value:%d \n",tlm_save_periods[tlm_radfet]);
+
+	FRAM_read((unsigned char*) &tlm_save_periods[tlm_sel], SEL_SAVE_TLM_PERIOD_ADDR , sizeof(time_unix));
+	//printf("tlm_wod period value:%d \n",tlm_save_periods[tlm_sel]);
+
+	FRAM_read((unsigned char*) &tlm_save_periods[tlm_seu], SEU_SAVE_TLM_PERIOD_ADDR , sizeof(time_unix));
+	//printf("tlm_wod period value:%d \n",tlm_save_periods[tlm_seu]);
+
 }
 
 
@@ -85,6 +94,18 @@ int CMD_SetTLMPeriodTimes(sat_packet_t *cmd){
 	case tlm_wod:
 		err=FRAM_write((unsigned char *)&value, WOD_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
 		tlm_save_periods[tlm_wod] = value;
+		break;
+	case tlm_radfet:
+		err=FRAM_write((unsigned char *)&value, RADFET_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+		tlm_save_periods[tlm_radfet] = value;
+		break;
+	case tlm_sel:
+		err=FRAM_write((unsigned char *)&value, SEL_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+		tlm_save_periods[tlm_sel] = value;
+		break;
+	case tlm_seu:
+		err=FRAM_write((unsigned char *)&value, SEU_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+		tlm_save_periods[tlm_seu] = value;
 		break;
 
 	default:
@@ -139,6 +160,28 @@ void TelemetryCollectorLogic()
 		}
 	}
 
+
+
+	if (CheckExecutionTime(tlm_last_save_time[tlm_radfet],tlm_save_periods[tlm_radfet])){
+		TelemetrySaveRADFET();
+		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
+			tlm_last_save_time[tlm_radfet] = curr;
+		}
+	}
+
+	if (CheckExecutionTime(tlm_last_save_time[tlm_sel],tlm_save_periods[tlm_sel])){
+		TelemetrySaveSEL();
+		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
+			tlm_last_save_time[tlm_sel] = curr;
+		}
+	}
+
+	if (CheckExecutionTime(tlm_last_save_time[tlm_seu],tlm_save_periods[tlm_seu])){
+		TelemetrySaveSEU();
+		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
+			tlm_last_save_time[tlm_seu] = curr;
+		}
+	}
 
 }
 
@@ -251,6 +294,25 @@ void TelemetrySaveWOD()
 	GetCurrentWODTelemetry(&wod);
 	write2File(&wod , tlm_wod);
 	saveTlmToRam(&wod, sizeof(wod), tlm_wod);
+}
+
+void TelemetrySaveRADFET()
+{
+	//TODO - implement
+/*	think(for all payload tlm) how to wait
+	for the payload to finish calculate
+	since it takes time, create a task \ implement the read
+	for data in another way/place
+	*/
+
+}
+void TelemetrySaveSEL()
+{
+	//TODO - implement
+}
+void TelemetrySaveSEU()
+{
+	//TODO - implement
 }
 
 void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)

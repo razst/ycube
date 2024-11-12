@@ -7,7 +7,7 @@
 #include <satellite-subsystems/IsisSolarPanelv2.h>
 #include "SubSystemModules/PowerManagment/EPS.h"
 
-#define NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS 5
+#define NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS 8
 
 
 typedef struct __attribute__ ((__packed__)) WOD_Telemetry_t

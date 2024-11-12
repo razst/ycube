@@ -66,6 +66,17 @@
 #define NUMBER_OF_CMD_RESETS_ADDR		0x160		//<! counts how many restarts did the satellite endure from ground command
 #define NUMBER_OF_CMD_RESETS_SIZE		4			//<! size of the parameter in bytes
 
+
+#define DEFAULT_RADFET_SAVE_TLM_TIME	900			//<! save RADFET TLM every 15 minutes (15*60)
+#define RADFET_SAVE_TLM_PERIOD_ADDR		0x164		//<! address where the save tlm period will be
+
+#define DEFAULT_SEL_SAVE_TLM_TIME		20			//<! save SEL TLM every 20 seconds
+#define SEL_SAVE_TLM_PERIOD_ADDR		0x168		//<! address where the save tlm period will be
+
+#define DEFAULT_SEU_SAVE_TLM_TIME		20			//<! save SEU TLM every 20 seconds
+#define SEU_SAVE_TLM_PERIOD_ADDR		0x172		//<! address where the save tlm period will be
+
+
 #define DELAYED_CMD_FRAME_COUNT_ADDR	0X200		//<! Address where amount of frames in delayed buffer is held
 #define DELAYED_CMD_FRAME_COUNT_SIZE	1			//<! number of bytes describing the frame count of delayed buffer
 
