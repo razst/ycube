@@ -522,50 +522,60 @@ Boolean Dummy_CMD_Hash256(sat_packet_t *cmd)
 
 	//if imput is too big return error
 }
+#define Max_Hash_size 8
 Boolean CMD_Hash256(sat_packet_t *cmd)
 {
-		unsigned int code, lastid, currId, err;
-		char plsHashMe[50];
-		char code_to_str[50];
+	unsigned int code, lastid, currId, err;
+	char plsHashMe[50];
+	char code_to_str[50];
+	char cmpHash[Max_Hash_size],temp[Max_Hash_size];
+	currId = cmd->ID;
 
-		currId = cmd->ID;
+	//get code from FRAM
+	FRAM_read((unsigned char*)&code, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
 
-		//get code from FRAM
-		FRAM_read((unsigned char*)&code, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+	//get the last id from FRAM and save it into var lastid then add new id to the FRAM (as new lastid)
+	FRAM_read((unsigned char*)&lastid, CMD_ID_ADDR, CMD_ID_SIZE);
+	FRAM_write((unsigned char*)&currId, CMD_ID_ADDR, CMD_ID_SIZE);
 
-		//get the last id from FRAM and save it into var lastid then add new id to the FRAM (as new lastid)
-		FRAM_read((unsigned char*)&lastid, CMD_ID_ADDR, CMD_ID_SIZE);
-		FRAM_write((unsigned char*)&currId, CMD_ID_ADDR, CMD_ID_SIZE);
+	//check if curr ID is bigger than lastid
+	if(currId <= lastid)
+	{
+		return E_UNAUTHORIZED;
+	}
 
-		//check if curr ID is bigger than lastid
-		if(currId <= lastid)
-		{
-			return E_UNAUTHORIZED;
-		}
+	//combine lastid(as str) into plshashme
+	sprintf(plsHashMe, "%u", lastid);
 
-		//combine lastid(as str) into plshashme
-		sprintf(plsHashMe, "%u", lastid);
-		
-		// turn code into str
-		sprintf(code_to_str, "%u", code);
+	// turn code into str
+	sprintf(code_to_str, "%u", code);
 
-		//add (passcode)
-		strcat(plsHashMe, code_to_str);
+	//add (passcode)
+	strcat(plsHashMe, code_to_str);
 
-		// Initialize buffer for hashed output
-	    BYTE hashed[SHA256_BLOCK_SIZE];
+	// Initialize buffer for hashed output
+	BYTE hashed[SHA256_BLOCK_SIZE];
 
-	    // Hash the combined string
-	    err = Hash256(plsHashMe, hashed);
-	    if (err != 0) {
-	        return FALSE;
-	    }
+	// Hash the combined string
+	err = Hash256(plsHashMe, hashed);
+	if (err != E_NO_SS_ERR) {
+		return FALSE;
+	}
+	//cpy first 8 bytes to temp 
+	memcpy(&temp, &hashed, Max_Hash_size);
 
-	//check = memcpy(cmd->data); make work and add the correct length to get the hash that was sent
-	/*if((strcmp(&hashed,&checkthis) == 1 ))
+	//cpy first 8 bytes of the data
+	memcpy(&cmpHash, cmd -> data, Max_Hash_size);
+
+	//cmp hash from command centre to internal hash
+	if(memcmp(temp, cmpHash, Max_Hash_size) == 0)
+	{	
 		printf("succsess!");//for test
 		return TRUE;
-	else return FALSE;*/
+	}
+	else
+		return E_UNAUTHORIZED;
+
 }
 
 
