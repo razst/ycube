@@ -59,6 +59,35 @@ int EnterCriticalMode()
 	return 0;
 }
 
+int PayloadOperations(int status)
+{
+	uint8_t index = (unsigned char)PAYLOAD_SWITCH;
+	isis_eps__outputbuschannelon__from_t response;
+	int err;
+	switch(status)
+	{
+	case 0: ;//turn on
+
+		isis_eps__outputbuschannelon__to_t param_struct_0;
+		param_struct_0.fields.obc_idx = PAYLOAD_SWITCH;
+		err = isis_eps__outputbuschannelon__tmtc(index, &param_struct_0, &response);
+		break;
+	case 1: ;//turn off
+
+		isis_eps__outputbuschanneloff__to_t param_struct_1;
+		param_struct_1.fields.obc_idx = PAYLOAD_SWITCH;
+		err = isis_eps__outputbuschanneloff__tmtc(index, &param_struct_1, &response);
+		break;
+	case 2: //restart
+		/*
+		PayloadOperations(1);
+		PayloadOperations(0);*/
+		break;
+	}
+	return 0;
+}
+
+
 
 EpsState_t GetSystemState()
 {

@@ -16,6 +16,8 @@
 #define SYSTEM6 	 0x40	//!< channel state when 'SYSTEM6' is on
 #define SYSTEM7 	 0x80	//!< channel state when 'SYSTEM7' is on
 
+#define PAYLOAD_SWITCH 3
+
 typedef enum{
 	FullMode,
 	CruiseMode,
@@ -59,6 +61,12 @@ int EnterCriticalMode();
  * 			errors according to <hal/errors.h>
  */
 int SetEPS_Channels(channel_t channel);
+
+/*!
+ * @brief turn on/off payload according to the status(0 - turn on, 1 - turn off, 2 - restart)
+ * @return	0 on success
+ */
+int PayloadOperations(int status);
 
 /*!
  * returns the current system state according to the EpsState_t enumeration
