@@ -406,7 +406,23 @@ Boolean TestForDummy_sat_packet()
 		cmd.ID = 1;
 		cmd.cmd_type = trxvu_cmd_type;
 		cmd.cmd_subtype = SecuredCMD;
-		cmd.length = sizeof(int);
+		cmd.length = sizeof(Max_Hash_size);
+		cmd.data = "42e3c9ed";
+		int err;
+		char code[5];
+		code = "abc";
+		FRAM_write((unsigned char*)&code, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+		err = Dummy_CMD_Hash256(&cmd);
+		return err;
+}
+Boolean Secured_CMD_TEST()
+{
+	sat_packet_t cmd;
+		cmd.ID = 1;
+		cmd.cmd_type = trxvu_cmd_type;
+		cmd.cmd_subtype = SecuredCMD;
+		cmd.length = sizeof(Max_Hash_size);
+		cmd.data = "42e3c9ed";
 
 		int err;
 		err = ActUponCommand(&cmd);
@@ -522,7 +538,7 @@ Boolean Dummy_CMD_Hash256(sat_packet_t *cmd)
 
 	//if imput is too big return error
 }
-#define Max_Hash_size 8
+
 Boolean CMD_Hash256(sat_packet_t *cmd)
 {
 	unsigned int code, lastid, currId, err;

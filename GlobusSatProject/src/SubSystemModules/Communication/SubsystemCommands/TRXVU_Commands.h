@@ -68,5 +68,7 @@ int CMD_AntennaDeploy(sat_packet_t *cmd);
 
 int CMD_StopReDeployment(sat_packet_t *cmd);
 
+
+
 #endif
 /*COMMANDS_H_ */
