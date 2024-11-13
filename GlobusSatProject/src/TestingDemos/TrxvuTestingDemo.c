@@ -400,35 +400,7 @@ Boolean TestSetTrxvuBitrate()
 	return TRUE;
 }
 
-Boolean TestForDummy_sat_packet()
-{
-	sat_packet_t cmd;
-		cmd.ID = 1;
-		cmd.cmd_type = trxvu_cmd_type;
-		cmd.cmd_subtype = SecuredCMD;
-		cmd.length = sizeof(Max_Hash_size);
-		cmd.data = "42e3c9ed";
-		int err;
-		char code[5];
-		code = "abc";
-		FRAM_write((unsigned char*)&code, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
-		err = Dummy_CMD_Hash256(&cmd);
-		return err;
-}
-Boolean Secured_CMD_TEST()
-{
-	sat_packet_t cmd;
-		cmd.ID = 1;
-		cmd.cmd_type = trxvu_cmd_type;
-		cmd.cmd_subtype = SecuredCMD;
-		cmd.length = sizeof(Max_Hash_size);
-		cmd.data = "42e3c9ed";
 
-		int err;
-		err = ActUponCommand(&cmd);
-
-		return err;
-}
 
 #define MAX_INPUT_SIZE 1024  // Maximum size of input string
 Boolean testSecuredCMD() {
@@ -586,12 +558,51 @@ Boolean CMD_Hash256(sat_packet_t *cmd)
 	//cmp hash from command centre to internal hash
 	if(memcmp(temp, cmpHash, Max_Hash_size) == 0)
 	{	
-		printf("succsess!");//for test
+		printf("succsess!\n");//for test
 		return TRUE;
 	}
 	else
 		return E_UNAUTHORIZED;
 
+}
+Boolean TestForDummy_sat_packet()
+{
+	sat_packet_t cmd;
+		char passcode[5];
+		char hash[Max_Hash_size];
+		cmd.ID = 1;
+		cmd.cmd_type = trxvu_cmd_type;
+		cmd.cmd_subtype = SecuredCMD;
+		cmd.length = sizeof(Max_Hash_size);
+		sprintf(passcode, "%s", "abc");
+		sprintf(hash, "%s", "42e3c9ed");
+		memcpy(&cmd.data, &passcode, sizeof(passcode));
+		int err;
+		FRAM_write((unsigned char*)&passcode, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+		err = Dummy_CMD_Hash256(&cmd);
+		return err;
+}
+Boolean Secured_CMD_TEST()
+{
+	sat_packet_t cmd;
+		unsigned int passcode;
+		char hash[Max_Hash_size];
+		unsigned int id;
+		id = 1;
+		cmd.ID = 2;
+		cmd.cmd_type = trxvu_cmd_type;
+		cmd.cmd_subtype = SecuredCMD;
+		cmd.length = sizeof(Max_Hash_size);
+		//sprintf(passcode, "%s", "11");
+		passcode = 11;
+		sprintf(hash, "%s", "093434a3");
+		memcpy(&cmd.data, &hash, sizeof(hash));
+		FRAM_write((unsigned char*)&id, CMD_ID_ADDR, CMD_ID_SIZE);
+		FRAM_write((unsigned char* )&passcode, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+		int err;
+		err = ActUponCommand(&cmd);
+
+		return err;
 }
 
 
@@ -686,8 +697,9 @@ Boolean selectAndExecuteTrxvuDemoTest()
 	printf("\t 20) Dump RAM\n\r");
 	printf("\t 21) haash test for Secured CMD\n\r");
 	printf("\t 22) dummy Secured CMD\n\r");
+	printf("\t 23) Secured CMD test \n\r");
 
-	unsigned int number_of_tests = 22;
+	unsigned int number_of_tests = 23;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -759,6 +771,9 @@ Boolean selectAndExecuteTrxvuDemoTest()
 		break;
 	case 22:
 		offerMoreTests = TestForDummy_sat_packet();
+		break;
+	case 23:
+		offerMoreTests = Secured_CMD_TEST();
 		break;
 	default:
 		break;

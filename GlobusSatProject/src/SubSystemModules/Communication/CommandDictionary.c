@@ -119,7 +119,7 @@ int trxvu_command_router(sat_packet_t *cmd)
 		break;
 
 	case SecuredCMD:
-		err = Dummy_CMD_Hash256(cmd);
+		err = CMD_Hash256(cmd);
 		break;
 
 	default:
