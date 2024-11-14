@@ -109,6 +109,9 @@ void WriteDefaultValuesToFRAM()
 	unsigned int IDtemp = If_ID_is_Empty;
 	FRAM_write((unsigned char*)&IDtemp, CMD_ID_ADDR, CMD_ID_SIZE);
 	
+	//a default code to avoid errors (=1)
+	FRAM_write((unsigned char*)&IDtemp, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+
 	Boolean flag = FALSE;
 	FRAM_write((unsigned char*) &flag,
 			STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);

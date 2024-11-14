@@ -513,58 +513,69 @@ Boolean Dummy_CMD_Hash256(sat_packet_t *cmd)
 
 Boolean CMD_Hash256(sat_packet_t *cmd)
 {
-	unsigned int code, lastid, currId, err;
-	char plsHashMe[50];
-	char code_to_str[50];
-	char cmpHash[Max_Hash_size],temp[Max_Hash_size];
-	currId = cmd->ID;
+unsigned int code, lastid, currId;
+    char plsHashMe[50];
+    char code_to_str[50];
+    char cmpHash[Max_Hash_size], temp[Max_Hash_size];
+    currId = cmd->ID;
 
-	//get code from FRAM
-	FRAM_read((unsigned char*)&code, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+    //get code from FRAM
+    FRAM_read((unsigned char*)&code, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
 
-	//get the last id from FRAM and save it into var lastid then add new id to the FRAM (as new lastid)
-	FRAM_read((unsigned char*)&lastid, CMD_ID_ADDR, CMD_ID_SIZE);
-	FRAM_write((unsigned char*)&currId, CMD_ID_ADDR, CMD_ID_SIZE);
+    //get the last id from FRAM and save it into var lastid then add new id to the FRAM (as new lastid)
+    FRAM_read((unsigned char*)&lastid, CMD_ID_ADDR, CMD_ID_SIZE);
+    FRAM_write((unsigned char*)&currId, CMD_ID_ADDR, CMD_ID_SIZE);
 
-	//check if curr ID is bigger than lastid
-	if(currId <= lastid)
-	{
-		return E_UNAUTHORIZED;
-	}
+    //check if curr ID is bigger than lastid
+    if(currId <= lastid)
+    {
+        return E_UNAUTHORIZED;
+    }
 
-	//combine lastid(as str) into plshashme
-	sprintf(plsHashMe, "%u", lastid);
+    //combine lastid(as str) into plshashme
+    sprintf(plsHashMe, "%u", currId);
 
-	// turn code into str
-	sprintf(code_to_str, "%u", code);
+    // turn code into str
+    sprintf(code_to_str, "%u", code);
 
-	//add (passcode)
-	strcat(plsHashMe, code_to_str);
+    //add (passcode)
+    strcat(plsHashMe, code_to_str);
 
-	// Initialize buffer for hashed output
-	BYTE hashed[SHA256_BLOCK_SIZE];
+    // Initialize buffer for hashed output
+    BYTE hashed[SHA256_BLOCK_SIZE];
 
-	// Hash the combined string
-	err = Hash256(plsHashMe, hashed);
-	if (err != E_NO_SS_ERR) {
-		return FALSE;
-	}
-	//cpy first 8 bytes to temp 
-	memcpy(&temp, &hashed, Max_Hash_size);
+    // Hash the combined string
+    int err = Hash256(plsHashMe, hashed);
+    if (err != E_NO_SS_ERR) {
+//add to log?
+        return FALSE;
+    }
+     
+    //cpy byte by byte to temp (size of otherhashed = 8 bytes *2 (all bytes are saved by twos(bc its in hex))+1 for null)
+    char otherhashed[Max_Hash_size * 2 + 1]; // Array to store 8 bytes in hex, plus a null terminator
 
-	//cpy first 8 bytes of the data
-	memcpy(&cmpHash, cmd -> data, Max_Hash_size);
+    for (int i = 0; i < Max_Hash_size; i++) {
+        sprintf(&otherhashed[i * 2], "%02x", hashed[i]);
+    }
+    otherhashed[16] = '\0'; // Add Null
 
-	//cmp hash from command centre to internal hash
-	if(memcmp(temp, cmpHash, Max_Hash_size) == 0)
-	{	
-		printf("succsess!\n");//for test
-		return TRUE;
-	}
-	else
-		return E_UNAUTHORIZED;
+    //cpy first 8 bytes to temp 
+    memcpy(temp, otherhashed, Max_Hash_size);
+
+    //cpy first 8 bytes of the data
+    memcpy(cmpHash, cmd -> data, Max_Hash_size);
+
+    //cmp hash from command centre to internal hash
+    if(memcmp(temp, cmpHash, Max_Hash_size) == 0)
+    {   
+        printf("success!\n");//for test
+        return TRUE;
+    }
+    else
+        return E_UNAUTHORIZED;
 
 }
+/*
 Boolean TestForDummy_sat_packet()
 {
 	sat_packet_t cmd;
@@ -581,29 +592,28 @@ Boolean TestForDummy_sat_packet()
 		FRAM_write((unsigned char*)&passcode, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
 		err = Dummy_CMD_Hash256(&cmd);
 		return err;
-}
+}*/
 Boolean Secured_CMD_TEST()
 {
 	sat_packet_t cmd;
-		unsigned int passcode;
-		char hash[Max_Hash_size];
-		unsigned int id;
-		id = 1;
-		cmd.ID = 2;
-		cmd.cmd_type = trxvu_cmd_type;
-		cmd.cmd_subtype = SecuredCMD;
-		cmd.length = sizeof(Max_Hash_size);
-		//sprintf(passcode, "%s", "11");
-		passcode = 11;
-		sprintf(hash, "%s", "093434a3");
-		memcpy(&cmd.data, &hash, sizeof(hash));
-		FRAM_write((unsigned char*)&id, CMD_ID_ADDR, CMD_ID_SIZE);
-		FRAM_write((unsigned char* )&passcode, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
-		int err;
-		err = ActUponCommand(&cmd);
+	//unsigned int passcode;
+	char hash[Max_Hash_size+1];
+	cmd.ID = 2;
+	cmd.cmd_type = trxvu_cmd_type;
+	cmd.cmd_subtype = SecuredCMD;
+	cmd.length = Max_Hash_size * 20;
+	unsigned int one = 1;
+	sprintf(hash, "%s", "6f4b6612");
+	memcpy(&cmd.data, &hash, Max_Hash_size);
+	FRAM_write((unsigned char*)&one, CMD_ID_ADDR, CMD_ID_SIZE);
+	FRAM_write((unsigned char*)&one, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+	int err;
+	err = ActUponCommand(&cmd);
 
-		return err;
+	return err;
 }
+
+
 
 
 
