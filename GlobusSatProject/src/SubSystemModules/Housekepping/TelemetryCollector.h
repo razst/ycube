@@ -6,6 +6,7 @@
 #include "TLM_management.h"
 #include <satellite-subsystems/IsisSolarPanelv2.h>
 #include "SubSystemModules/PowerManagment/EPS.h"
+#include "Payload.h"
 
 #define NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS 8
 
@@ -77,6 +78,21 @@ void TelemetrySaveSolarPanels();
  *  @brief saves current WOD telemetry into file
  */
 void TelemetrySaveWOD();
+
+/*!
+ *  @brief saves current RADFET telemetry into file
+ */
+void TelemetrySaveRADFET();
+
+/*!
+ *  @brief saves current SEL telemetry into file
+ */
+void TelemetrySaveSEL();
+
+/*!
+ *  @brief saves current SEU telemetry into file
+ */
+void TelemetrySaveSEU();
 
 /*!
  * @brief Gets all necessary telemetry and arranges it into a WOD structure

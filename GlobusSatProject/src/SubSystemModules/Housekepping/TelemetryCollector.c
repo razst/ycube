@@ -160,8 +160,6 @@ void TelemetryCollectorLogic()
 		}
 	}
 
-
-
 	if (CheckExecutionTime(tlm_last_save_time[tlm_radfet],tlm_save_periods[tlm_radfet])){
 		TelemetrySaveRADFET();
 		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
@@ -298,21 +296,28 @@ void TelemetrySaveWOD()
 
 void TelemetrySaveRADFET()
 {
-	//TODO - implement
-/*	think(for all payload tlm) how to wait
-	for the payload to finish calculate
-	since it takes time, create a task \ implement the read
-	for data in another way/place
-	*/
+	radfet_data radfet = { 0 };
+	get_radfet_data(&radfet); //create task? or create inside the get data function
+
+	//write to file
+	//save to RAM
 
 }
 void TelemetrySaveSEL()
 {
-	//TODO - implement
+	pic32_sel_data sel = { 0 };
+	get_sel_data(&sel); //create task? or create inside the get data function
+
+	//write to file
+	//save to RAM (?)
 }
 void TelemetrySaveSEU()
 {
-	//TODO - implement
+	pic32_seu_data seu = { 0 };
+	get_seu_data(&seu); //create task? or create inside the get data function
+
+	//write to file
+	//save to RAM (?)
 }
 
 void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
