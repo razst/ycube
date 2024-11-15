@@ -71,20 +71,33 @@ int PayloadOperations(int status)
 		isis_eps__outputbuschannelon__to_t param_struct_0;
 		param_struct_0.fields.obc_idx = PAYLOAD_SWITCH;
 		err = isis_eps__outputbuschannelon__tmtc(index, &param_struct_0, &response);
+
+		//TODO - check response?
+
+		//increase the number of sw3 resets
+		unsigned int num_of_resets = 0;
+		FRAM_read((unsigned char*) &num_of_resets,
+		NUMBER_OF_SW3_RESETS_ADDR, NUMBER_OF_SW3_RESETS_SIZE);
+		num_of_resets++;
+
+		FRAM_write((unsigned char*) &num_of_resets,
+		NUMBER_OF_SW3_RESETS_ADDR, NUMBER_OF_SW3_RESETS_SIZE);
 		break;
 	case 1: ;//turn off
 
 		isis_eps__outputbuschanneloff__to_t param_struct_1;
 		param_struct_1.fields.obc_idx = PAYLOAD_SWITCH;
 		err = isis_eps__outputbuschanneloff__tmtc(index, &param_struct_1, &response);
+
+		//TODO - check response?
 		break;
-	case 2: //restart
+	case 2: ;//restart
 		/*
-		PayloadOperations(1);
-		PayloadOperations(0);*/
+		err = PayloadOperations(1);
+		err = PayloadOperations(0);*/
 		break;
 	}
-	return 0;
+	return err;
 }
 
 

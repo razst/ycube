@@ -103,6 +103,9 @@ void WriteDefaultValuesToFRAM()
 	FRAM_write((unsigned char*) &num_of_resets,
 	DEL_OLD_FILES_NUM_DAYS_ADDR, DEL_OLD_FILES_NUM_DAYS_SIZE);
 
+	FRAM_write((unsigned char*) &num_of_resets,
+	NUMBER_OF_SW3_RESETS_ADDR, NUMBER_OF_SW3_RESETS_SIZE);
+
 	char temp = SD_CARD_DRIVER_PRI;
 	FRAM_write((unsigned char*) &temp, ACTIVE_SD_ADDR, ACTIVE_SD_SIZE);
 

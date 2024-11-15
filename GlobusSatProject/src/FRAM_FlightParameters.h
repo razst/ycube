@@ -76,6 +76,9 @@
 #define DEFAULT_SEU_SAVE_TLM_TIME		20			//<! save SEU TLM every 20 seconds
 #define SEU_SAVE_TLM_PERIOD_ADDR		0x172		//<! address where the save tlm period will be
 
+#define NUMBER_OF_SW3_RESETS_ADDR		0x176		//<! counts how many restarts did the payload/sw3 endure from ground command
+#define NUMBER_OF_SW3_RESETS_SIZE		4			//<! size of the parameter in bytes
+
 
 #define DELAYED_CMD_FRAME_COUNT_ADDR	0X200		//<! Address where amount of frames in delayed buffer is held
 #define DELAYED_CMD_FRAME_COUNT_SIZE	1			//<! number of bytes describing the frame count of delayed buffer
