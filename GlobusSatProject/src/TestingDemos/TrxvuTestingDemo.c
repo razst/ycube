@@ -780,7 +780,7 @@ Boolean selectAndExecuteTrxvuDemoTest()
 		offerMoreTests = testSecuredCMD();
 		break;
 	case 22:
-		offerMoreTests = TestForDummy_sat_packet();
+		//offerMoreTests = TestForDummy_sat_packet();
 		break;
 	case 23:
 		offerMoreTests = Secured_CMD_TEST();

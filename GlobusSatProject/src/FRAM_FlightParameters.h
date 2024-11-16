@@ -107,7 +107,7 @@
 #define CMD_ID_ADDR						0x9500
 #define CMD_ID_SIZE						4
 
-#define CMD_Passcode_ADDR               0x9510
+#define CMD_Passcode_ADDR               0x9610
 #define CMD_Passcode_SIZE               4
 
 #define DEFAULT_BEACON_INTERVAL_TIME 	20			//<! how many seconds between two beacons [sec]
