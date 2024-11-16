@@ -563,11 +563,11 @@ unsigned int code, lastid, currId;
     //cpy first 8 bytes of the data
     memcpy(cmpHash, cmd -> data, Max_Hash_size);
 
-	if(cmd.length < Max_Hash_size)
+	if(cmd -> length < Max_Hash_size)
 		return E_MEM_ALLOC;
 
 	//fix cmd.data
-	cmd.length = cmd.length - Max_Hash_size;//8 bytes are removed from the data this must be reflected in the length
+	cmd -> length = cmd -> length - Max_Hash_size;//8 bytes are removed from the data this must be reflected in the length
 	memmove(cmd->data, cmd->data + Max_Hash_size,cmd->length - Max_Hash_size);
 	
     //cmp hash from command centre to internal hash
@@ -603,13 +603,13 @@ Boolean Secured_CMD_TEST()
 {
 	sat_packet_t cmd;
 	//unsigned int passcode;
-	char hash[Max_Hash_size+1];
+	char hash[Max_Hash_size+9];
 	cmd.ID = 2;
 	cmd.cmd_type = trxvu_cmd_type;
 	cmd.cmd_subtype = SecuredCMD;
 	cmd.length = Max_Hash_size * 20;
 	unsigned int one = 1;
-	sprintf(hash, "%s", "6f4b6612");
+	sprintf(hash, "%s", "6f4b6612123456789");
 	memcpy(&cmd.data, &hash, Max_Hash_size);
 	FRAM_write((unsigned char*)&one, CMD_ID_ADDR, CMD_ID_SIZE);
 	FRAM_write((unsigned char*)&one, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
