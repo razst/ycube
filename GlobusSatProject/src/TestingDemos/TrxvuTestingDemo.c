@@ -97,8 +97,6 @@ Boolean TestTrxvuLogic()
 	return TRUE;
 }
 
-
-
 Boolean TestCheckTransmitionAllowed()
 {
 	char msg[10]  = {0};
@@ -547,7 +545,7 @@ unsigned int code, lastid, currId;
     // Hash the combined string
     int err = Hash256(plsHashMe, hashed);
     if (err != E_NO_SS_ERR) {
-//add to log?
+	//add to log?
         return FALSE;
     }
      
@@ -565,6 +563,13 @@ unsigned int code, lastid, currId;
     //cpy first 8 bytes of the data
     memcpy(cmpHash, cmd -> data, Max_Hash_size);
 
+	if(cmd.length < Max_Hash_size)
+		return E_MEM_ALLOC;
+
+	//fix cmd.data
+	cmd.length = cmd.length - Max_Hash_size;//8 bytes are removed from the data this must be reflected in the length
+	memmove(cmd->data, cmd->data + Max_Hash_size,cmd->length - Max_Hash_size);
+	
     //cmp hash from command centre to internal hash
     if(memcmp(temp, cmpHash, Max_Hash_size) == 0)
     {   
@@ -593,6 +598,7 @@ Boolean TestForDummy_sat_packet()
 		err = Dummy_CMD_Hash256(&cmd);
 		return err;
 }*/
+
 Boolean Secured_CMD_TEST()
 {
 	sat_packet_t cmd;
@@ -613,10 +619,6 @@ Boolean Secured_CMD_TEST()
 	return err;
 }
 
-
-
-
-
 Boolean  dumpRamTest()
 {
 	sat_packet_t cmd;
@@ -630,6 +632,7 @@ Boolean  dumpRamTest()
 
 	return TRUE;
 }
+
 Boolean TestGetTrxvuBitrate()
 {
 	int err = 0;
