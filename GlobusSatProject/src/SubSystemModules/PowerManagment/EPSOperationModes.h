@@ -16,7 +16,7 @@
 #define SYSTEM6 	 0x40	//!< channel state when 'SYSTEM6' is on
 #define SYSTEM7 	 0x80	//!< channel state when 'SYSTEM7' is on
 
-#define PAYLOAD_SWITCH 3
+#define PAYLOAD_SWITCH 3 // remove
 
 typedef enum{
 	FullMode,

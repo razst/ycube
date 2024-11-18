@@ -6,16 +6,16 @@
  */
 #include "Payload.h"
 
-SoreqResult payloadRead(int size,unsigned char* buffer)
+SoreqResult payloadRead(int size,unsigned char* buffer) // replace size, buffer
 {
-	unsigned char wtd_and_read[] = {GET_LAST_DATA};
+	unsigned char wtd_and_read[] = {GET_LAST_DATA}; // do we need array??
 	int err=0;
 
 	int i=0;
 	do
 	{
 		err = I2C_write(PAYLOAD_I2C_ADDRESS, wtd_and_read ,1);
-		if(err != 0)
+		if(err != 0)// ERR_
 		{
 			return PAYLOAD_I2C_Write_Error;
 		}
@@ -33,13 +33,13 @@ SoreqResult payloadRead(int size,unsigned char* buffer)
 	return PAYLOAD_TIMEOUT;
 }
 
-SoreqResult payloadSendCommand(char opcode, int size, unsigned char* buffer,int delay)
+SoreqResult payloadSendCommand(char opcode, int size, unsigned char* buffer,int delay) // buffer before size
 {
 	time_unix curr_time = 0;
 	Time_getUnixEpoch(&curr_time);
 
 	int err = I2C_write(PAYLOAD_I2C_ADDRESS, &opcode, 1);
-	if(err != 0)
+	if(err != 0) // ERR_
 	{
 		return PAYLOAD_I2C_Write_Error;
 	}

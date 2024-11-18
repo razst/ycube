@@ -21,7 +21,7 @@
 #include <hal/Utility/util.h>
 #include "GlobalStandards.h"
 
-#define SOREQ_I2C_ADDRESS 0x55
+#define SOREQ_I2C_ADDRESS 0x55 // remove
 #define PAYLOAD_I2C_ADDRESS 0x55
 
 #define READ_DELAY 200
@@ -29,18 +29,18 @@
 
 //OPcodes
 #define CLEAR_WDT 				0x3F
-#define SOFE_RESET 				0xF8
+#define SOFE_RESET 				0xF8 // T
 #define READ_PIC32_RESETS 		0x66
 #define READ_PIC32_UPSETS 		0x47
 #define READ_RADFET_VOLTAGES 	0x33 // ADC state
-#define READ__RADFET_TEMP 		0x77 // ADC state
+#define READ__RADFET_TEMP 		0x77 // ADC state // __
 #define DEBUGGING				0x32
 #define GET_LAST_DATA			0x45 // in tau-1
 
 
 typedef enum {
     PAYLOAD_SUCCESS, PAYLOAD_I2C_Write_Error, PAYLOAD_I2C_Read_Error, PAYLOAD_TIMEOUT
-} SoreqResult;
+} SoreqResult; // rename T
 
 typedef struct __attribute__ ((__packed__)) radfet_data
 {

@@ -33,15 +33,15 @@ typedef enum {
 // don't change the position of these
 
 	//NOTICE - MOVED BY 3!
-	tlm_tx_revc_NO_USE, // 5
+	tlm_tx_revc_NO_USE, // 8
 	tlm_rx,
 	tlm_rx_revc_NO_USE,
 	tlm_rx_frame,
-	tlm_eps_raw_mb_NOT_USED, // 9
+	tlm_eps_raw_mb_NOT_USED, // 12
 	tlm_eps_eng_mb_NOT_USED,
 	tlm_eps_raw_cdb_NOT_USED,
 	tlm_eps_eng_cdb_NOT_USED,
-	tlm_log, //13
+	tlm_log, //16
 	tlm_eps_raw_cdb,
 }tlm_type_t;
 #endif /* TELEMETRYFILES_H_ */

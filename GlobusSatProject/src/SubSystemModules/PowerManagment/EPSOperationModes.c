@@ -59,6 +59,7 @@ int EnterCriticalMode()
 	return 0;
 }
 
+// call this func from EnterFullMode and all others...
 int PayloadOperations(int status)
 {
 	uint8_t index = (unsigned char)PAYLOAD_SWITCH;
@@ -69,7 +70,7 @@ int PayloadOperations(int status)
 	case 0: ;//turn on
 
 		isis_eps__outputbuschannelon__to_t param_struct_0;
-		param_struct_0.fields.obc_idx = PAYLOAD_SWITCH;
+		param_struct_0.fields.obc_idx = PAYLOAD_SWITCH; // change to CONST
 		err = isis_eps__outputbuschannelon__tmtc(index, &param_struct_0, &response);
 
 		//TODO - check response?
@@ -86,14 +87,15 @@ int PayloadOperations(int status)
 	case 1: ;//turn off
 
 		isis_eps__outputbuschanneloff__to_t param_struct_1;
-		param_struct_1.fields.obc_idx = PAYLOAD_SWITCH;
+		param_struct_1.fields.obc_idx = PAYLOAD_SWITCH; // change to CONST
 		err = isis_eps__outputbuschanneloff__tmtc(index, &param_struct_1, &response);
 
 		//TODO - check response?
 		break;
-	case 2: ;//restart
+	case 2: ;//restart yes!
 		/*
 		err = PayloadOperations(1);
+		delay // 10
 		err = PayloadOperations(0);*/
 		break;
 	}
