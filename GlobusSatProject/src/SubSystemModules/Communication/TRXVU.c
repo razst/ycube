@@ -205,7 +205,7 @@ int turnOnTransponder(){
 	// first set the RSSI from value in FRAM
 	SetRSSITransponder(getTransponderRSSIFromFRAM());
 	vTaskDelay(100);// make sure RSSI was set
-	// than turn on the trasnponder
+	// then turn on the transponder
 	if (logError(I2C_write(I2C_TRXVU_TC_ADDR, data, 2),"TRXVU-turnOnTransponder") != E_NO_SS_ERR) return -1;
 
 	logError(INFO_MSG,"transponder on");
@@ -226,23 +226,23 @@ int turnOffTransponder(){
 int SetRSSITransponder(short rssiValue)
 {
 	//sends I2C command
-	char data[1+sizeof(short)] = {0};
+	char data[1 + sizeof(short)] = {0};
 
 	data[0] = 0x52;
-	memcpy(data+1,&rssiValue,sizeof(rssiValue));
+	memcpy(data + 1,&rssiValue,sizeof(rssiValue));
 
 	return logError(I2C_write(I2C_TRXVU_TC_ADDR, data, sizeof(data)),"TRXVU-SetRSSITransponder");
 }
 
 int TRX_Logic() {
 	int err = 0;
-	int cmdFound=-1;
+	int cmdFound = -1;
 	// check if we have frames (data) waiting in the TRXVU
 	int frameCount = GetNumberOfFramesInBuffer();
 	sat_packet_t cmd = { 0 }; // holds the SPL command data
 
 	if (frameCount > 0) {
-		// we have data that came from grand station
+		// we have data that came from ground station
 		cmdFound = GetOnlineCommand(&cmd);
 	}
 
@@ -315,14 +315,12 @@ Boolean CheckTransmitionAllowed() {
 
 	if (curr_tick_time < getMuteEndTime()) return FALSE;
 
-
 	// check that we can take the tx Semaphore
 	if(pdTRUE == xSemaphoreTake(xIsTransmitting,WAIT_TIME_SEM_TX)){
 		xSemaphoreGive(xIsTransmitting);
 		return TRUE;
 	}
 	return FALSE;
-
 }
 
 void FinishDump(sat_packet_t *cmd,unsigned char *buffer, ack_subtype_t acktype,
@@ -353,7 +351,6 @@ void FinishDump(sat_packet_t *cmd,unsigned char *buffer, ack_subtype_t acktype,
 	}
 }
 
-
 void AbortDump(sat_packet_t *cmd)
 {
 	FinishDump(cmd,NULL,ACK_DUMP_ABORT,NULL,0);
@@ -383,31 +380,25 @@ Boolean CheckDumpAbort() {
 	return FALSE;
 }
 
-
-
-
 int BeaconLogic(Boolean forceTX) {
-
+	
+	int err = 0;
+	//should be or???
 	if(!forceTX && !CheckTransmitionAllowed()){
 		return E_CANT_TRANSMIT;
 	}
 
-	int err = 0;
 	if (!forceTX && !CheckExecutionTime(g_prev_beacon_time, g_beacon_interval_time)) {
 		return E_TOO_EARLY_4_BEACON;
 	}
 
 	WOD_Telemetry_t wod = { 0 };
 	GetCurrentWODTelemetry(&wod);
-
-
 	sat_packet_t cmd = { 0 };
 
 	if (logError(AssembleCommand((unsigned char*) &wod, sizeof(wod), trxvu_cmd_type,BEACON_SUBTYPE, BEACON_SPL_ID, &cmd), "BeaconLogic-AssembleCommand") ) return -1;
-
 	// set the current time as the previous beacon time
 	if (logError(Time_getUnixEpoch(&g_prev_beacon_time),"BeaconLogic-Time_getUnixEpoch") ) return -1;
-
 
 	if (logError(TransmitSplPacket(&cmd, NULL),"BeaconLogic-TransmitSplPacket") ) return -1;
 	// make sure we switch back to 9600 if we used 1200 in the beacon

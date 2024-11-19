@@ -455,58 +455,106 @@ int Hash256(char* text, BYTE* outputHash)
 
 Boolean Dummy_CMD_Hash256(sat_packet_t *cmd)
 {
-	    unsigned int code = 23;  // Dummy code
-	    unsigned int lastid;
-		unsigned int currId;
-	    unsigned int err;
-		char plsHashMe[50];
-		char code_to_str[50];
+unsigned int code, lastid, currId;
+char plsHashMe[50];
+char code_to_str[50];
+char cmpHash[Max_Hash_size], temp[Max_Hash_size];
+currId = cmd->ID;
 
+// Debug print: Initial command ID
+printf("DEBUG: Initial cmd->ID = %u\n", currId);
 
-		currId = cmd->ID;
+// Get code from FRAM
+FRAM_read((unsigned char*)&code, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+// Debug print: Passcode from FRAM
+printf("DEBUG: Passcode read from FRAM = %u\n", code);
 
-		//get code from FRAM
-		FRAM_read((unsigned char*)&code, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+// Get the last ID from FRAM and save it into variable `lastid`
+FRAM_read((unsigned char*)&lastid, CMD_ID_ADDR, CMD_ID_SIZE);
+// Debug print: Last ID from FRAM
+printf("DEBUG: Last ID read from FRAM = %u\n", lastid);
 
-		//get the last id from FRAM and save it into var lastid then add new id to the FRAM (as new lastid)
-		FRAM_read((unsigned char*)&lastid, CMD_ID_ADDR, CMD_ID_SIZE);
-		FRAM_write((unsigned char*)&currId, CMD_ID_ADDR, CMD_ID_SIZE);
+// Write new ID to FRAM as the last ID
+FRAM_write((unsigned char*)&currId, CMD_ID_ADDR, CMD_ID_SIZE);
 
-		//check if curr ID is bigger than lastid
-		if(currId <= lastid)
-		{
-			//send back error?
-			return FALSE;
-		}
+// Check if the current ID is bigger than the last ID
+if (currId <= lastid) {
+    printf("DEBUG: Current ID is not greater than last ID. Authorization failed.\n");
+    return E_UNAUTHORIZED;
+}
 
-		//combine lastid(as str) into plshashme
-		sprintf(plsHashMe, "%u", lastid);
+// Combine `lastid` (as a string) into `plsHashMe`
+sprintf(plsHashMe, "%u", currId);
+// Debug print: Combined string in `plsHashMe`
+printf("DEBUG: Combined string (plsHashMe) = %s\n", plsHashMe);
 
-		// turn code into str
-		sprintf(code_to_str, "%u", code);
+// Turn `code` into a string
+sprintf(code_to_str, "%u", code);
+// Debug print: Passcode as string
+printf("DEBUG: Passcode as string (code_to_str) = %s\n", code_to_str);
 
-		//add (passcode)
-		strcat(plsHashMe, code_to_str);
+// Append passcode to `plsHashMe`
+strcat(plsHashMe, code_to_str);
+// Debug print: Final string to hash
+printf("DEBUG: Final string to hash (plsHashMe) = %s\n", plsHashMe);
 
-		// Initialize buffer for hashed output
-	    BYTE hashed[SHA256_BLOCK_SIZE];
+// Initialize buffer for hashed output
+BYTE hashed[SHA256_BLOCK_SIZE];
 
-	    // Hash the combined string
-	    err = Hash256(plsHashMe, hashed);
-	    if (err != 0) {
-	        return FALSE;
-	    }
+// Hash the combined string
+int err = Hash256(plsHashMe, hashed);
+if (err != E_NO_SS_ERR) {
+    printf("DEBUG: Hashing failed with error code %d\n", err);
+    return FALSE;
+}
 
-	    // Print hash for testing
-	    printf("SHA-256 hash: ");
-	    for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
-	        printf("%02x", hashed[i]);
-	    }
-	    printf("\n");
+// Debug print: Hashed output
+printf("DEBUG: Hashed output = ");
+for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
+    printf("%02x", hashed[i]);
+}
+printf("\n");
 
-	    return TRUE;
+// Copy byte-by-byte to `temp` and convert to hex string
+char otherhashed[Max_Hash_size * 2 + 1]; // Array to store 8 bytes in hex, plus a null terminator
+for (int i = 0; i < Max_Hash_size; i++) {
+    sprintf(&otherhashed[i * 2], "%02x", hashed[i]);
+}
+otherhashed[16] = '\0'; // Add null terminator
 
-	//if imput is too big return error
+// Debug print: Hexadecimal representation of the hash
+printf("DEBUG: Hexadecimal hash (otherhashed) = %s\n", otherhashed);
+
+// Copy the first 8 bytes to `temp`
+memcpy(temp, otherhashed, Max_Hash_size);
+// Debug print: Temp hash for comparison
+printf("DEBUG: Temp hash for comparison = %s\n", temp);
+
+// Copy the first 8 bytes of the data
+memcpy(cmpHash, cmd->data, Max_Hash_size);
+// Debug print: Command hash to compare
+printf("DEBUG: Command hash to compare (cmpHash) = %s\n", cmpHash);
+
+if (cmd->length < Max_Hash_size) {
+    printf("DEBUG: Command data length is less than the hash size. Memory allocation error.\n");
+    return E_MEM_ALLOC;
+}
+
+// Adjust command data
+cmd->length -= Max_Hash_size; // 8 bytes are removed from the data; reflect this in the length
+memmove(cmd->data, cmd->data + Max_Hash_size, cmd->length);
+// Debug print: Adjusted command data length
+printf("DEBUG: Adjusted command data length = %u\n", cmd->length);
+
+// Compare hashes
+if (memcmp(temp, cmpHash, Max_Hash_size) == 0) {
+    printf("DEBUG: Hashes match! Success!\n");
+    return TRUE;
+} else {
+    printf("DEBUG: Hashes do not match. Authorization failed.\n");
+    return E_UNAUTHORIZED;
+}
+
 }
 
 Boolean CMD_Hash256(sat_packet_t *cmd)
@@ -527,7 +575,7 @@ unsigned int code, lastid, currId;
     //check if curr ID is bigger than lastid
     if(currId <= lastid)
     {
-        return E_UNAUTHORIZED;
+        return E_UNAUTHORIZED;//bc bool FALSE needed?
     }
 
     //combine lastid(as str) into plshashme
@@ -580,34 +628,35 @@ unsigned int code, lastid, currId;
         return E_UNAUTHORIZED;
 
 }
-/*
+
 Boolean TestForDummy_sat_packet()
 {
 	sat_packet_t cmd;
-		char passcode[5];
-		char hash[Max_Hash_size];
-		cmd.ID = 1;
-		cmd.cmd_type = trxvu_cmd_type;
-		cmd.cmd_subtype = SecuredCMD;
-		cmd.length = sizeof(Max_Hash_size);
-		sprintf(passcode, "%s", "abc");
-		sprintf(hash, "%s", "42e3c9ed");
-		memcpy(&cmd.data, &passcode, sizeof(passcode));
-		int err;
-		FRAM_write((unsigned char*)&passcode, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
-		err = Dummy_CMD_Hash256(&cmd);
-		return err;
-}*/
+	int err;
+	unsigned int passcode = 1;
+	char hash[Max_Hash_size + 9];
+	cmd.ID = 2;
+	cmd.cmd_type = trxvu_cmd_type;
+	cmd.cmd_subtype = SecuredCMD;
+	cmd.length = Max_Hash_size * 5;
+	unsigned int one = 1;
+	sprintf(hash, "%s", "6f4b6612123456789");
+	memcpy(&cmd.data, &hash, Max_Hash_size);
+	FRAM_write((unsigned char*)&one, CMD_ID_ADDR, CMD_ID_SIZE);
+	FRAM_write((unsigned char*)&passcode, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+	err = Dummy_CMD_Hash256(&cmd);
+	return err;
+}
 
 Boolean Secured_CMD_TEST()
 {
 	sat_packet_t cmd;
 	//unsigned int passcode;
-	char hash[Max_Hash_size+9];
+	char hash[Max_Hash_size + 9]; //9 added for breathing space
 	cmd.ID = 2;
 	cmd.cmd_type = trxvu_cmd_type;
 	cmd.cmd_subtype = SecuredCMD;
-	cmd.length = Max_Hash_size * 20;
+	cmd.length = Max_Hash_size * 5;//* 5 added bc I keep switching the hash (makes it easyer)
 	unsigned int one = 1;
 	sprintf(hash, "%s", "6f4b6612123456789");
 	memcpy(&cmd.data, &hash, Max_Hash_size);
@@ -783,7 +832,7 @@ Boolean selectAndExecuteTrxvuDemoTest()
 		offerMoreTests = testSecuredCMD();
 		break;
 	case 22:
-		//offerMoreTests = TestForDummy_sat_packet();
+		offerMoreTests = TestForDummy_sat_packet();
 		break;
 	case 23:
 		offerMoreTests = Secured_CMD_TEST();
