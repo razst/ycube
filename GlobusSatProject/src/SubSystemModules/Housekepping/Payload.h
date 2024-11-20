@@ -21,26 +21,30 @@
 #include <hal/Utility/util.h>
 #include "GlobalStandards.h"
 
-#define SOREQ_I2C_ADDRESS 0x55 // remove
 #define PAYLOAD_I2C_ADDRESS 0x55
-
-#define READ_DELAY 200
-#define TIMEOUT 4000
 
 //OPcodes
 #define CLEAR_WDT 				0x3F
-#define SOFE_RESET 				0xF8 // T
+#define SOFT_RESET 				0xF8
 #define READ_PIC32_RESETS 		0x66
 #define READ_PIC32_UPSETS 		0x47
 #define READ_RADFET_VOLTAGES 	0x33 // ADC state
-#define READ__RADFET_TEMP 		0x77 // ADC state // __
+#define READ_RADFET_TEMP 		0x77 // ADC state
 #define DEBUGGING				0x32
 #define GET_LAST_DATA			0x45 // in tau-1
+
+//calculation time in payload (ms)
+#define RADFET_CALC_TIME		2000	//extra - 200
+#define RADFET_TMP_CALC_TIME	1000	//extra - 100
+#define SEU_CALC_TIME			200		//extra - 20
+#define SEL_CALC_TIME			20		//extra - 5
+
+#define EXTRA_TRIES		20
 
 
 typedef enum {
     PAYLOAD_SUCCESS, PAYLOAD_I2C_Write_Error, PAYLOAD_I2C_Read_Error, PAYLOAD_TIMEOUT
-} SoreqResult; // rename T
+} PayloadResult;
 
 typedef struct __attribute__ ((__packed__)) radfet_data
 {
@@ -72,17 +76,17 @@ typedef struct __attribute__ ((__packed__)) pic32_seu_data
 
 /*!
  * read the data of teh last task
- * @param size of recieved data, buffer to restore the data
+ * @param buffer to restore the data, size of recieved data, delay time(ms) if the data isn't ready
  * @return result status
  */
-SoreqResult payloadRead(int size,unsigned char* buffer);
+PayloadResult payloadRead(unsigned char* buffer, int size, int delay);
 
 /*!
  * send command to be executed, then call payloadRead to get results
- * @param opcode to the executed command, size of recieved data, buffer to restore the data, delay time to wait for response
+ * @param opcode to the executed command, buffer to restore the data, size of recieved data, delay time(ms) to wait for response
  * @return result status
  */
-SoreqResult payloadSendCommand(char opcode, int size, unsigned char* buffer,int delay);
+PayloadResult payloadSendCommand(char opcode, unsigned char* buffer, int size, int delay);
 
 /*!
  * execute radfet commands

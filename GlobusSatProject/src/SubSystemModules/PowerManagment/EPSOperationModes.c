@@ -24,6 +24,7 @@ int EnterFullMode()
 	}
 	state = FullMode;
 	EpsSetLowVoltageFlag(FALSE);
+	PayloadOperations(TurnOn);
 	return 0;
 }
 
@@ -34,6 +35,7 @@ int EnterCruiseMode()
 	}
 	state = CruiseMode;
 	turnOffTransponder();
+	PayloadOperations(TurnOff);
 
 	return 0;
 }
@@ -45,6 +47,7 @@ int EnterSafeMode()
 	}
 	state = SafeMode;
 	EpsSetLowVoltageFlag(FALSE);
+	PayloadOperations(TurnOff);
 	return 0;
 }
 
@@ -56,24 +59,25 @@ int EnterCriticalMode()
 
 	state = CriticalMode;
 	EpsSetLowVoltageFlag(TRUE);
+	PayloadOperations(TurnOff);
 	return 0;
 }
 
-// call this func from EnterFullMode and all others...
-int PayloadOperations(int status)
+int PayloadOperations(PayloadOperation status)
 {
 	uint8_t index = (unsigned char)PAYLOAD_SWITCH;
 	isis_eps__outputbuschannelon__from_t response;
-	int err;
+	int err = 0;
+
 	switch(status)
 	{
-	case 0: ;//turn on
+	case TurnOn: ;
 
 		isis_eps__outputbuschannelon__to_t param_struct_0;
-		param_struct_0.fields.obc_idx = PAYLOAD_SWITCH; // change to CONST
-		err = isis_eps__outputbuschannelon__tmtc(index, &param_struct_0, &response);
+		param_struct_0.fields.obc_idx = PAYLOAD_SWITCH;
+		//err = isis_eps__outputbuschannelon__tmtc(index, &param_struct_0, &response);
 
-		//TODO - check response?
+		//TODO - check response
 
 		//increase the number of sw3 resets
 		unsigned int num_of_resets = 0;
@@ -84,19 +88,22 @@ int PayloadOperations(int status)
 		FRAM_write((unsigned char*) &num_of_resets,
 		NUMBER_OF_SW3_RESETS_ADDR, NUMBER_OF_SW3_RESETS_SIZE);
 		break;
-	case 1: ;//turn off
+
+	case TurnOff: ;
 
 		isis_eps__outputbuschanneloff__to_t param_struct_1;
 		param_struct_1.fields.obc_idx = PAYLOAD_SWITCH; // change to CONST
-		err = isis_eps__outputbuschanneloff__tmtc(index, &param_struct_1, &response);
+		//err = isis_eps__outputbuschanneloff__tmtc(index, &param_struct_1, &response);
 
-		//TODO - check response?
+		//TODO - check response
+
 		break;
-	case 2: ;//restart yes!
-		/*
+
+	case Restart: ;
+
 		err = PayloadOperations(1);
-		delay // 10
-		err = PayloadOperations(0);*/
+		vTaskDelay(10);
+		err = PayloadOperations(0);
 		break;
 	}
 	return err;

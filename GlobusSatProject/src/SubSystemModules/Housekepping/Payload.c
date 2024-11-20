@@ -1,45 +1,39 @@
-/*
- * Payload.c
- *
- *  Created on: 15 бреб 2024
- *      Author: Magshimim
- */
 #include "Payload.h"
 
-SoreqResult payloadRead(int size,unsigned char* buffer) // replace size, buffer
+PayloadResult payloadRead(unsigned char* buffer, int size, int delay)
 {
-	unsigned char wtd_and_read[] = {GET_LAST_DATA}; // do we need array??
-	int err=0;
+	int err = 0;
 
-	int i=0;
-	do
+	for(int i = 0; i < EXTRA_TRIES; i++)
 	{
-		err = I2C_write(PAYLOAD_I2C_ADDRESS, wtd_and_read ,1);
-		if(err != 0)// ERR_
+		err = I2C_write(PAYLOAD_I2C_ADDRESS, GET_LAST_DATA ,1);
+		if(err != E_NO_SS_ERR)
 		{
 			return PAYLOAD_I2C_Write_Error;
 		}
-		vTaskDelay(READ_DELAY);
-		err = I2C_read(SOREQ_I2C_ADDRESS, buffer, size);
-		if(err != 0)
+
+		err = I2C_read(PAYLOAD_I2C_ADDRESS, buffer, size);
+		if(err != E_NO_SS_ERR)
 		{
 			return PAYLOAD_I2C_Read_Error;
 		}
+
 		if(buffer[3] == 0)
 		{
 			return PAYLOAD_SUCCESS;
 		}
-	} while(TIMEOUT/READ_DELAY > i++);
+
+		vTaskDelay(delay);
+	}
+
 	return PAYLOAD_TIMEOUT;
 }
 
-SoreqResult payloadSendCommand(char opcode, int size, unsigned char* buffer,int delay) // buffer before size
+PayloadResult payloadSendCommand(char opcode, unsigned char* buffer, int size, int delay)
 {
-	time_unix curr_time = 0;
-	Time_getUnixEpoch(&curr_time);
 
 	int err = I2C_write(PAYLOAD_I2C_ADDRESS, &opcode, 1);
-	if(err != 0) // ERR_
+	if(err != E_NO_SS_ERR)
 	{
 		return PAYLOAD_I2C_Write_Error;
 	}
@@ -47,9 +41,9 @@ SoreqResult payloadSendCommand(char opcode, int size, unsigned char* buffer,int 
 	{
 		vTaskDelay(delay);
 	}
-	SoreqResult res =  payloadRead(size, buffer);
 
-	return res;
+	return payloadRead(buffer, size, (delay < 100) ? 5 : delay / 10);
+	//maybe check type recieved here
 }
 
 void get_radfet_data(radfet_data* radfet)
@@ -58,6 +52,10 @@ void get_radfet_data(radfet_data* radfet)
 	{
 		return;
 	}
+
+	time_unix curr_time = 0;
+	Time_getUnixEpoch(&curr_time);
+
 }
 void get_sel_data(pic32_sel_data* sel)
 {
@@ -65,6 +63,10 @@ void get_sel_data(pic32_sel_data* sel)
 	{
 		return;
 	}
+
+	time_unix curr_time = 0;
+	Time_getUnixEpoch(&curr_time);
+
 }
 void get_seu_data(pic32_seu_data* seu)
 {
@@ -72,4 +74,8 @@ void get_seu_data(pic32_seu_data* seu)
 	{
 		return;
 	}
+
+	time_unix curr_time = 0;
+	Time_getUnixEpoch(&curr_time);
+
 }

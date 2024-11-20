@@ -5,6 +5,7 @@
 #include "GlobalStandards.h"
 
 
+
 #define CHANNELS_OFF 0x00 	//!< channel state when all systems are off
 #define CHNNELS_ON	 0XFF	//!< channel
 #define SYSTEM0		 0x01	//!< channel state when 'SYSTEM0' is on
@@ -16,7 +17,13 @@
 #define SYSTEM6 	 0x40	//!< channel state when 'SYSTEM6' is on
 #define SYSTEM7 	 0x80	//!< channel state when 'SYSTEM7' is on
 
-#define PAYLOAD_SWITCH 3 // remove
+#define PAYLOAD_SWITCH isis_eps__imeps_channel__channel_5v_sw3// remove
+
+typedef enum{
+	TurnOn,
+	TurnOff,
+	Restart
+}PayloadOperation;
 
 typedef enum{
 	FullMode,
@@ -66,7 +73,7 @@ int SetEPS_Channels(channel_t channel);
  * @brief turn on/off payload according to the status(0 - turn on, 1 - turn off, 2 - restart)
  * @return	0 on success
  */
-int PayloadOperations(int status);
+int PayloadOperations(PayloadOperation status);
 
 /*!
  * returns the current system state according to the EpsState_t enumeration
