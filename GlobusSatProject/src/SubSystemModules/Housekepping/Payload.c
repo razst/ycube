@@ -1,4 +1,5 @@
 #include "Payload.h"
+Boolean state_changed = FALSE;
 
 PayloadResult payloadRead(unsigned char* buffer, int size, int delay)
 {
@@ -66,6 +67,10 @@ void get_sel_data(pic32_sel_data* sel)
 
 	time_unix curr_time = 0;
 	Time_getUnixEpoch(&curr_time);
+
+	pic32_sel_data data = {0};
+	data.battery_state_changed = state_changed;
+	state_changed = FALSE;
 
 }
 void get_seu_data(pic32_seu_data* seu)

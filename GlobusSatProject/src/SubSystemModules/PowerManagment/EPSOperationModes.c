@@ -3,7 +3,6 @@
 #include "GlobalStandards.h"
 #include <utils.h>
 
-
 #ifdef ISISEPS
 	#include <satellite-subsystems/isis_eps_driver.h>
 #endif
@@ -11,6 +10,7 @@
 	#include <satellite-subsystems/GomEPS.h>
 #endif
 
+#include "SubSystemModules/Housekepping/Payload.h"
 
 channel_t g_system_state;
 EpsState_t state;
@@ -23,6 +23,7 @@ int EnterFullMode()
 		return 0;
 	}
 	state = FullMode;
+	state_changed = TRUE;
 	EpsSetLowVoltageFlag(FALSE);
 	PayloadOperations(TurnOn);
 	return 0;
@@ -34,6 +35,7 @@ int EnterCruiseMode()
 		return 0;
 	}
 	state = CruiseMode;
+	state_changed = TRUE;
 	turnOffTransponder();
 	PayloadOperations(TurnOff);
 
@@ -46,6 +48,7 @@ int EnterSafeMode()
 		return 0;
 	}
 	state = SafeMode;
+	state_changed = TRUE;
 	EpsSetLowVoltageFlag(FALSE);
 	PayloadOperations(TurnOff);
 	return 0;
@@ -58,6 +61,7 @@ int EnterCriticalMode()
 	}
 
 	state = CriticalMode;
+	state_changed = TRUE;
 	EpsSetLowVoltageFlag(TRUE);
 	PayloadOperations(TurnOff);
 	return 0;
@@ -108,8 +112,6 @@ int PayloadOperations(PayloadOperation status)
 	}
 	return err;
 }
-
-
 
 EpsState_t GetSystemState()
 {

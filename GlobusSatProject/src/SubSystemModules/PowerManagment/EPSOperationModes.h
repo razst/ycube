@@ -4,8 +4,6 @@
 
 #include "GlobalStandards.h"
 
-
-
 #define CHANNELS_OFF 0x00 	//!< channel state when all systems are off
 #define CHNNELS_ON	 0XFF	//!< channel
 #define SYSTEM0		 0x01	//!< channel state when 'SYSTEM0' is on

@@ -41,6 +41,7 @@
 
 #define EXTRA_TRIES		20
 
+extern Boolean state_changed;
 
 typedef enum {
     PAYLOAD_SUCCESS, PAYLOAD_I2C_Write_Error, PAYLOAD_I2C_Read_Error, PAYLOAD_TIMEOUT
