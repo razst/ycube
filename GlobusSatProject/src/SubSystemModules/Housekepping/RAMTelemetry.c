@@ -11,10 +11,28 @@ wodDataInRam wodArr[TLM_RAM_SIZE];
 //index for the current saving place in array
 int wodIndex = 0;
 
+//array to save radfet data
+radfetDataInRam radfetArr[TLM_RAM_SIZE];
+//index for the current saving place in array
+int radfetIndex = 0;
+
+//array to save sel data
+selDataInRam selArr[TLM_RAM_SIZE];
+//index for the current saving place in array
+int selIndex = 0;
+
+//array to save seu data
+seuDataInRam seuArr[TLM_RAM_SIZE];
+//index for the current saving place in array
+int seuIndex = 0;
+
 int ResetRamTlm() {
 	for (int i = 0; i < TLM_RAM_SIZE; i++) {
 		logArr[i].date = 0;
 		wodArr[i].date = 0;
+		radfetArr[i].date = 0;
+		selArr[i].date = 0;
+		seuArr[i].date = 0;
 		//zeroing the other arrays
 	}
 	return 0;
@@ -41,7 +59,8 @@ int dec(int num) //advance the index acordding to the arr size
 
 
 int saveTlmToRam(void* data, int length, tlm_type_t type) {
-	switch (type) {
+	switch (type)
+	{
 	case tlm_log:
 		Time_getUnixEpoch(&logArr[logIndex].date);
 		memcpy(&logArr[logIndex].logData, data, length);
@@ -54,13 +73,32 @@ int saveTlmToRam(void* data, int length, tlm_type_t type) {
 		wodIndex = inc(wodIndex);
 		break;
 
+	case tlm_radfet:
+		Time_getUnixEpoch(&radfetArr[radfetIndex].date);
+		memcpy(&radfetArr[radfetIndex].radfetData, data, length);
+		radfetIndex = inc(radfetIndex);
+		break;
+
+	case tlm_sel:
+		Time_getUnixEpoch(&selArr[selIndex].date);
+		memcpy(&selArr[selIndex].selData, data, length);
+		selIndex = inc(selIndex);
+		break;
+
+	case tlm_seu:
+		Time_getUnixEpoch(&seuArr[seuIndex].date);
+		memcpy(&seuArr[seuIndex].seuData, data, length);
+		seuIndex = inc(seuIndex);
+		break;
+
 	default:
 		return INVALID_TLM_TYPE;
 	}
 	return E_NO_SS_ERR;
 }
 
-int getTlm(void* address, int count, tlm_type_t type) {
+int getTlm(void* address, int count, tlm_type_t type)
+{
 	int filledCount = 0;
 	int index;
 	void* arr;
@@ -78,6 +116,24 @@ int getTlm(void* address, int count, tlm_type_t type) {
 		index = wodIndex;
 		arr = wodArr;
 		length = sizeof(wodDataInRam);
+		break;
+
+	case tlm_radfet:
+		index = radfetIndex;
+		arr = radfetArr;
+		length = sizeof(radfetDataInRam);
+		break;
+
+	case tlm_sel:
+		index = selIndex;
+		arr = selArr;
+		length = sizeof(selDataInRam);
+		break;
+
+	case tlm_seu:
+		index = seuIndex;
+		arr = seuArr;
+		length = sizeof(seuDataInRam);
 		break;
 
 	default:
@@ -119,6 +175,24 @@ dataRange getRange(tlm_type_t type)
 		index = wodIndex;
 		arr = wodArr;
 		typeLength = sizeof(wodDataInRam);
+		break;
+
+	case tlm_radfet:
+		index = radfetIndex;
+		arr = radfetArr;
+		typeLength = sizeof(radfetDataInRam);
+		break;
+
+	case tlm_sel:
+		index = selIndex;
+		arr = selArr;
+		typeLength = sizeof(selDataInRam);
+		break;
+
+	case tlm_seu:
+		index = seuIndex;
+		arr = seuArr;
+		typeLength = sizeof(seuDataInRam);
 		break;
 	}
 

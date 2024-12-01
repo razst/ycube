@@ -25,6 +25,7 @@
 #include <string.h>
 #include <time.h>
 #include "SubSystemModules/Communication/TRXVU.h"
+#include "SubSystemModules/Housekepping/Payload.h"
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -326,6 +327,18 @@ void getTlmTypeInfo(tlm_type_t tlmType, char* endFileName, int* structSize){
 	else if (tlmType==tlm_log){
 		memcpy(endFileName,END_FILENAME_LOGS,sizeof(END_FILENAME_LOGS));
 		*structSize = sizeof(logData_t);
+	}
+	else if (tlmType==tlm_radfet){
+		memcpy(endFileName,END_FILENAME_RADFET_TLM,sizeof(END_FILENAME_RADFET_TLM));
+		*structSize = sizeof(radfet_data);
+	}
+	else if (tlmType==tlm_sel){
+		memcpy(endFileName,END_FILENAME_SEL_TLM,sizeof(END_FILENAME_SEL_TLM));
+		*structSize = sizeof(pic32_sel_data);
+	}
+	else if (tlmType==tlm_seu){
+		memcpy(endFileName,END_FILENAME_SEU_TLM,sizeof(END_FILENAME_SEU_TLM));
+		*structSize = sizeof(pic32_seu_data);
 	}
 
 }
