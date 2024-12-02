@@ -7,7 +7,7 @@
 #include <hal/Timing/Time.h>
 
 #ifdef ISISEPS
-	#include <satellite-subsystems/isis_eps_driver.h>
+	#include <satellite-subsystems/isismepsv2_ivid5_piu.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
@@ -36,39 +36,39 @@ Boolean TestInitTrxvu()
 Boolean TestInitTrxvuWithDifferentFrameLengths()
 {
 
-	ISIStrxvuI2CAddress myTRXVUAddress;
-	ISIStrxvuFrameLengths myTRXVUBuffers;
-	ISIStrxvuBitrate myTRXVUBitrates;
-
-	int retValInt = 0;
-	unsigned int bytes = 0;
-	printf("please enter size of Tx packet in bytes(0 for default):\n");
-	while(UTIL_DbguGetIntegerMinMax((unsigned int*)&bytes,0,1000) == 0);
-	if(bytes == 0){
-		myTRXVUBuffers.maxAX25frameLengthTX = 235;
-	}else
-		myTRXVUBuffers.maxAX25frameLengthTX = bytes;
-
-	printf("please enter size of Rx packet in bytes(0 for default):\n");
-	while(UTIL_DbguGetIntegerMinMax((unsigned int*)&bytes,0,1000) == 0);
-	if(bytes == 0){
-		myTRXVUBuffers.maxAX25frameLengthRX = 200;
-	}else
-		myTRXVUBuffers.maxAX25frameLengthRX = bytes;
-
-
-	myTRXVUAddress.addressVu_rc = I2C_TRXVU_RC_ADDR;
-	myTRXVUAddress.addressVu_tc = I2C_TRXVU_TC_ADDR;
-
-	myTRXVUBitrates = trxvu_bitrate_9600;
-
-	retValInt = IsisTrxvu_initialize(&myTRXVUAddress, &myTRXVUBuffers,
-			&myTRXVUBitrates, 1);
-	if (retValInt != 0) {
-		printf("error in Trxvi Init = %d\n",retValInt);
-		return retValInt;
-	}
-	vTaskDelay(100);
+//	ISIStrxvuI2CAddress myTRXVUAddress;
+//	ISIStrxvuFrameLengths myTRXVUBuffers;
+//	ISIStrxvuBitrate myTRXVUBitrates;
+//
+//	int retValInt = 0;
+//	unsigned int bytes = 0;
+//	printf("please enter size of Tx packet in bytes(0 for default):\n");
+//	while(UTIL_DbguGetIntegerMinMax((unsigned int*)&bytes,0,1000) == 0);
+//	if(bytes == 0){
+//		myTRXVUBuffers.maxAX25frameLengthTX = 235;
+//	}else
+//		myTRXVUBuffers.maxAX25frameLengthTX = bytes;
+//
+//	printf("please enter size of Rx packet in bytes(0 for default):\n");
+//	while(UTIL_DbguGetIntegerMinMax((unsigned int*)&bytes,0,1000) == 0);
+//	if(bytes == 0){
+//		myTRXVUBuffers.maxAX25frameLengthRX = 200;
+//	}else
+//		myTRXVUBuffers.maxAX25frameLengthRX = bytes;
+//
+//
+//	myTRXVUAddress.addressVu_rc = I2C_TRXVU_RC_ADDR;
+//	myTRXVUAddress.addressVu_tc = I2C_TRXVU_TC_ADDR;
+//
+//	myTRXVUBitrates = trxvu_bitrate_9600;
+//
+//	retValInt = IsisTrxvu_initialize(&myTRXVUAddress, &myTRXVUBuffers,
+//			&myTRXVUBitrates, 1);
+//	if (retValInt != 0) {
+//		printf("error in Trxvi Init = %d\n",retValInt);
+//		return retValInt;
+//	}
+//	vTaskDelay(100);
 
 	return TRUE;
 }
@@ -180,14 +180,14 @@ Boolean TestTransmitSplPacket()
 		Time_getUnixEpoch(&curr_time);
 
 		time_unix end_time = MINUTES_TO_SECONDS(minutes) + curr_time;
-		ISIStrxvuTxTelemetry tlm;
-		IsisTrxvu_tcGetLastTxTelemetry(ISIS_TRXVU_I2C_BUS_INDEX,&tlm);
+		isis_vu_e__get_tx_telemetry_last__from_t tlm;
+		isis_vu_e__get_tx_telemetry_last(ISIS_TRXVU_I2C_BUS_INDEX,&tlm);
 		while(end_time > curr_time)
 		{
-			IsisTrxvu_tcGetLastTxTelemetry(ISIS_TRXVU_I2C_BUS_INDEX,&tlm);
-			if(tlm.fields.board_temp >=60)
+			isis_vu_e__get_tx_telemetry_last(ISIS_TRXVU_I2C_BUS_INDEX,&tlm);
+			if(tlm.fields.temp_board >=60)
 				break;
-			printf("board temperature: %d\n",tlm.fields.board_temp);
+			printf("board temperature: %d\n",tlm.fields.temp_board);
 			Time_getUnixEpoch(&curr_time);
 
 			TransmitSplPacket(&packet,NULL);
@@ -366,7 +366,7 @@ Boolean TestGetNumberOfFramesInBuffer()
 Boolean TestSetTrxvuBitrate()
 {
 	int err = 0;
-	ISIStrxvuBitrate bitrate = 0;
+	isis_vu_e__bitrate_t bitrate = 0;
 	unsigned int index = 0;
 	printf("Choose bitrate:\n \t(0)Cancel\n\t(1) = 1200\n\t(2) = 2400\n\t(3) = 4800\n\t(4) = 9600\n");
 
@@ -377,20 +377,20 @@ Boolean TestSetTrxvuBitrate()
 	case 0:
 		break;
 	case 1:
-		bitrate = trxvu_bitrate_1200;
+		bitrate = isis_vu_e__bitrate__1200bps;
 		break;
 	case 2:
-		bitrate = trxvu_bitrate_2400;
+		bitrate = isis_vu_e__bitrate__2400bps;
 			break;
 	case 3:
-		bitrate = trxvu_bitrate_4800;
+		bitrate = isis_vu_e__bitrate__4800bps;
 			break;
 	case 4:
-		bitrate = trxvu_bitrate_9600;
+		bitrate = isis_vu_e__bitrate__9600bps;
 			break;
 	}
 
-	err = IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,bitrate);
+	err = isis_vu_e__set_bitrate(ISIS_TRXVU_I2C_BUS_INDEX,bitrate);
 	if(0 != err){
 		printf("error in 'IsisTrxvu_tcSetAx25Bitrate' = %d",err);
 		return TRUE;
@@ -684,28 +684,28 @@ Boolean  dumpRamTest()
 
 Boolean TestGetTrxvuBitrate()
 {
-	int err = 0;
-	ISIStrxvuBitrateStatus bitrate = 0;
-	//err = GetTrxvuBitrate(&bitrate);
-	if(0 != err){
-		printf("error in 'GetTrxvuBitrate' = %d\n",err);
-		return TRUE;
-	}
-	switch(bitrate)
-	{
-	case trxvu_bitratestatus_1200:
-		printf("bitrate is 'trxvu_bitratestatus_1200'\n");
-		break;
-	case trxvu_bitratestatus_2400:
-		printf("bitrate is 'trxvu_bitratestatus_2400'\n");
-			break;
-	case trxvu_bitratestatus_4800:
-		printf("bitrate is 'trxvu_bitratestatus_4800'\n");
-			break;
-	case trxvu_bitratestatus_9600:
-		printf("bitrate is 'trxvu_bitratestatus_9600'\n");
-			break;
-	}
+//	int err = 0;
+//	ISIStrxvuBitrateStatus bitrate = 0;
+//	//err = GetTrxvuBitrate(&bitrate);
+//	if(0 != err){
+//		printf("error in 'GetTrxvuBitrate' = %d\n",err);
+//		return TRUE;
+//	}
+//	switch(bitrate)
+//	{
+//	case trxvu_bitratestatus_1200:
+//		printf("bitrate is 'trxvu_bitratestatus_1200'\n");
+//		break;
+//	case trxvu_bitratestatus_2400:
+//		printf("bitrate is 'trxvu_bitratestatus_2400'\n");
+//			break;
+//	case trxvu_bitratestatus_4800:
+//		printf("bitrate is 'trxvu_bitratestatus_4800'\n");
+//			break;
+//	case trxvu_bitratestatus_9600:
+//		printf("bitrate is 'trxvu_bitratestatus_9600'\n");
+//			break;
+//	}
 	return TRUE;
 }
 

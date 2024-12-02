@@ -6,7 +6,7 @@
 #include <hal/Timing/Time.h>
 #include "TestingConfigurations.h"
 #ifdef ISISEPS
-	#include <satellite-subsystems/isis_eps_driver.h>
+	#include <satellite-subsystems/isismepsv2_ivid5_piu.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
@@ -14,8 +14,8 @@
 
 #include "GlobalStandards.h"
 
-#include <satellite-subsystems/IsisTRXVU.h>
-#include <satellite-subsystems/IsisAntS.h>
+#include <satellite-subsystems/isis_vu_e.h>
+#include <satellite-subsystems/isis_ants_rev2.h>
 
 #include <hcc/api_fat.h>
 
@@ -210,10 +210,11 @@ void CheckDeployAnt(){
 }
 
 int HardResetMCU(){
-	isis_eps__reset__to_t cmd_t;
-	isis_eps__reset__from_t cmd_f;
-	cmd_t.fields.rst_key = RESET_KEY;
-//	logError(isis_eps__reset__tmtc(EPS_I2C_BUS_INDEX, &cmd_t, &cmd_f),"CMD_ResetComponent-isis_eps__reset__tmtc");
+//	isis_eps__reset__to_t cmd_t;
+//	isis_eps__reset__from_t cmd_f;
+//	cmd_t.fields.rst_key = RESET_KEY;
+	isismepsv2_ivid5_piu__replyheader_t reply;
+	logError(isismepsv2_ivid5_piu__reset(EPS_I2C_BUS_INDEX, &reply),"CMD_ResetComponent-isis_eps__reset__tmtc");
 }
 
 void Maintenance()
@@ -227,7 +228,9 @@ void Maintenance()
 		logError(INFO_MSG,"Maintenance-WDTKick, going to restart systems");
 		ResetGroundCommWDT(); // to make sure we don't get into endless restart loop
 		// hard reset the TRXVU
-		logError(IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX),"Maintenance-IsisTrxvu_hardReset");
+		logError(isis_vu_e__reset_hw_tx(ISIS_TRXVU_I2C_BUS_INDEX),"Maintenance-IsisTrxvu_hardReset tx");
+		vTaskDelay(1 / portTICK_RATE_MS);
+		logError(isis_vu_e__reset_hw_rx(ISIS_TRXVU_I2C_BUS_INDEX),"Maintenance-IsisTrxvu_hardReset rx");
 		vTaskDelay(500);
 		SaveSatTimeInFRAM(MOST_UPDATED_SAT_TIME_ADDR,MOST_UPDATED_SAT_TIME_SIZE);// store the most updated sat time
 		HardResetMCU();

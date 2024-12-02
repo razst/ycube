@@ -1,4 +1,4 @@
-#include <satellite-subsystems/IsisAntS.h>
+#include <satellite-subsystems/isis_ants_rev2.h>
 
 
 #include "SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h"

@@ -28,9 +28,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include <satellite-subsystems/IsisTRXVU.h>
-#include <satellite-subsystems/IsisAntS.h>
-#include <satellite-subsystems/isis_eps_driver.h>
+#include <satellite-subsystems/isis_vu_e.h>
+#include <satellite-subsystems/isis_ants_rev2.h>
+#include <satellite-subsystems/isismepsv2_ivid5_piu.h>
 
 
 static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
@@ -285,35 +285,31 @@ void getTlmTypeInfo(tlm_type_t tlmType, char* endFileName, int* structSize){
 
 	if (tlmType==tlm_tx){
 		memcpy(endFileName,END_FILE_NAME_TX,sizeof(END_FILE_NAME_TX));
-		*structSize = sizeof(ISIStrxvuTxTelemetry);
+		*structSize = sizeof(isis_vu_e__get_tx_telemetry__from_t);
 	}
 	else if (tlmType==tlm_rx){
 		memcpy(endFileName,END_FILE_NAME_RX,sizeof(END_FILE_NAME_RX));
-		*structSize = sizeof(ISIStrxvuRxTelemetry);
-	}
-	else if (tlmType==tlm_rx_frame){
-		memcpy(endFileName,END_FILE_NAME_RX_FRAME,sizeof(END_FILE_NAME_RX_FRAME));
-		*structSize = sizeof(ISIStrxvuRxFrame);
+		*structSize = sizeof(isis_vu_e__get_rx_telemetry__from_t);
 	}
 	else if (tlmType==tlm_antenna){
 		memcpy(endFileName,END_FILE_NAME_ANTENNA,sizeof(END_FILE_NAME_ANTENNA));
-		*structSize = sizeof(ISISantsTelemetry);
+		*structSize = sizeof(isis_ants_rev2__get_all_telemetry__from_t);
 	}
 	else if (tlmType==tlm_eps_raw_mb_NOT_USED){
 		memcpy(endFileName,END_FILENAME_EPS_RAW_MB_TLM,sizeof(END_FILENAME_EPS_RAW_MB_TLM));
-		*structSize = sizeof(isis_eps__gethousekeepingraw__from_t);
+		*structSize = sizeof(isismepsv2_ivid5_piu__gethousekeepingraw__from_t);
 	}
 	else if (tlmType==tlm_eps_raw_cdb_NOT_USED){
 		memcpy(endFileName,END_FILENAME_EPS_RAW_CDB_TLM,sizeof(END_FILENAME_EPS_RAW_CDB_TLM));
-		*structSize = sizeof(isis_eps__gethousekeepingrawincdb__from_t);
+		*structSize = sizeof(isismepsv2_ivid5_piu__gethousekeepingrawincdb__from_t);
 	}
 	else if (tlmType==tlm_eps){
 		memcpy(endFileName,END_FILENAME_EPS_TLM,sizeof(END_FILENAME_EPS_TLM));
-		*structSize = sizeof(isis_eps__gethousekeepingeng__from_t);
+		*structSize = sizeof(isismepsv2_ivid5_piu__gethousekeepingeng__from_t);
 	}
 	else if (tlmType==tlm_eps_eng_cdb_NOT_USED){
 		memcpy(endFileName,END_FILENAME_EPS_ENG_CDB_TLM,sizeof(END_FILENAME_EPS_ENG_CDB_TLM));
-		*structSize = sizeof(isis_eps__gethousekeepingengincdb__from_t);
+		*structSize = sizeof(isismepsv2_ivid5_piu__gethousekeepingengincdb__from_t);
 	}
 	else if (tlmType==tlm_wod){
 		memcpy(endFileName,END_FILENAME_WOD_TLM,sizeof(END_FILENAME_WOD_TLM));
@@ -459,30 +455,30 @@ void printTLM(void* element, tlm_type_t tlmType){
 		//printf("number_of_cmd_resets: %d\n ",data.num_of_cmd_resets);
 
 	}else if (tlmType==tlm_tx){
-		ISIStrxvuTxTelemetry data;
+		isis_vu_e__get_tx_telemetry__from_t data;
 		offset += (sizeof(unsigned short) * 7);// skip 7 unsigned short fields
-		memcpy(&data.fields.pa_temp,element+offset,sizeof(data.fields.pa_temp));
-		offset += sizeof(data.fields.pa_temp);
+		memcpy(&data.fields.temp_pa,element+offset,sizeof(data.fields.temp_pa));
+		offset += sizeof(data.fields.temp_pa);
 		//printf("pa_temp: %d\n ",data.fields.pa_temp);
 
-		memcpy(&data.fields.board_temp,element+offset,sizeof(data.fields.board_temp));
-		offset += sizeof(data.fields.board_temp);
+		memcpy(&data.fields.temp_board,element+offset,sizeof(data.fields.temp_board));
+		offset += sizeof(data.fields.temp_board);
 		//printf("board_temp: %d\n ",data.fields.board_temp);
 	}
 	else if (tlmType==tlm_rx){
-		ISIStrxvuRxTelemetry data;
+		isis_vu_e__get_rx_telemetry__from_t data;
 		offset += (sizeof(unsigned short) * 1);// skip 1 unsigned short fields
-		memcpy(&data.fields.rx_rssi,element+offset,sizeof(data.fields.rx_rssi));
-		offset += sizeof(data.fields.rx_rssi);
+		memcpy(&data.fields.rssi,element+offset,sizeof(data.fields.rssi));
+		offset += sizeof(data.fields.rssi);
 		//printf("rx_rssi: %d\n ",data.fields.rx_rssi);
 
-		memcpy(&data.fields.bus_volt,element+offset,sizeof(data.fields.bus_volt));
-		offset += sizeof(data.fields.bus_volt);
+		memcpy(&data.fields.voltage,element+offset,sizeof(data.fields.voltage));
+		offset += sizeof(data.fields.voltage);
 		//printf("bus_volt: %d\n ",data.fields.bus_volt);
 	}
 	else if (tlmType==tlm_eps_raw_cdb){
-		isis_eps__gethousekeepingrawincdb__from_t data;
-			offset += (sizeof(isis_eps__replyheader_t));// skip 1 unsigned short fields
+		isismepsv2_ivid5_piu__gethousekeepingrawincdb__from_t data;
+			offset += (sizeof(isismepsv2_ivid5_piu__replyheader_t));// skip 1 unsigned short fields
 			offset += (sizeof(uint8_t));// skip 1 unsigned short fields
 			memcpy(&data.fields.volt_brdsup ,element+offset,sizeof(data.fields.volt_brdsup));
 			offset += sizeof(data.fields.volt_brdsup);

@@ -13,14 +13,14 @@
 #include "SubSystemModules/Maintenance/Maintenance.h"
 #include "InitSystem.h"
 #include "TLM_management.h"
-#include <satellite-subsystems/IsisAntS.h>
+#include <satellite-subsystems/isis_ants_rev2.h>
 #include <SubSystemModules/Housekepping/TelemetryCollector.h>
 
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
 #endif
 #ifdef ISISEPS
-	#include <satellite-subsystems/isis_eps_driver.h>
+	#include <satellite-subsystems/isismepsv2_ivid5_piu.h>
 #endif
 #define I2c_SPEED_Hz 100000
 #define I2c_Timeout 10
@@ -210,8 +210,8 @@ int DeploySystem()
 		TelemetryCollectorLogic();
 
 		// reset WDT
-		isis_eps__watchdog__from_t eps_cmd;
-//		isis_eps__watchdog__tm(EPS_I2C_BUS_INDEX, &eps_cmd);
+		isismepsv2_ivid5_piu__replyheader_t res;
+		isismepsv2_ivid5_piu__resetwatchdog(EPS_I2C_BUS_INDEX,&res);
 
 	}
 	logError(INFO_MSG,"Deploy wait loop - DONE");

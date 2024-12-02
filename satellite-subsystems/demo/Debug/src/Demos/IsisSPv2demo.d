@@ -1,17 +1,15 @@
 src/Demos/IsisSPv2demo.d: ../src/Demos/IsisSPv2demo.c \
- ../src/Demos/IsisSPdemo.h \
- C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/boolean.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/..//satellite-subsystems/include/satellite-subsystems/IsisSolarPanelv2.h \
+ C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/peripherals/pio/pio.h \
+ C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/boards/ISIS_OBC_G20/board.h \
+ C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/boards/ISIS_OBC_G20/at91sam9g20/AT91SAM9G20.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/Drivers/SPI.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/commons.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/freertos/include/freertos/FreeRTOS.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/freertos/include/freertos/projdefs.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/freertos/include/freertos/FreeRTOSConfig.h \
- C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/boards/ISIS_OBC_G20/board.h \
- C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/boards/ISIS_OBC_G20/at91sam9g20/AT91SAM9G20.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/utility/trace.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/peripherals/dbgu/dbgu.h \
- C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/peripherals/pio/pio.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/utility/assert.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/freertos/include/freertos/portable.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/freertos/include/freertos/portable/GCC/ARM9_AT91SAM9G20/portmacro.h \
@@ -24,14 +22,17 @@ src/Demos/IsisSPv2demo.d: ../src/Demos/IsisSPv2demo.c \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/utility/exithandler.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/peripherals/cp15/cp15.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/Timing/WatchDogTimer.h \
+ C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/boolean.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/Utility/util.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/errors.h
 
-../src/Demos/IsisSPdemo.h:
-
-C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/boolean.h:
-
 C:/ISIS/workspace/ycube/satellite-subsystems/demo/..//satellite-subsystems/include/satellite-subsystems/IsisSolarPanelv2.h:
+
+C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/peripherals/pio/pio.h:
+
+C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/boards/ISIS_OBC_G20/board.h:
+
+C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/boards/ISIS_OBC_G20/at91sam9g20/AT91SAM9G20.h:
 
 C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/Drivers/SPI.h:
 
@@ -43,15 +44,9 @@ C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/freertos/include/fr
 
 C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/freertos/include/freertos/FreeRTOSConfig.h:
 
-C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/boards/ISIS_OBC_G20/board.h:
-
-C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/boards/ISIS_OBC_G20/at91sam9g20/AT91SAM9G20.h:
-
 C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/utility/trace.h:
 
 C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/peripherals/dbgu/dbgu.h:
-
-C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/peripherals/pio/pio.h:
 
 C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/utility/assert.h:
 
@@ -76,6 +71,8 @@ C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/u
 C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/peripherals/cp15/cp15.h:
 
 C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/Timing/WatchDogTimer.h:
+
+C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/boolean.h:
 
 C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/Utility/util.h:
 

@@ -2,12 +2,14 @@
 #include <satellite-subsystems/IsisSolarPanelv2.h>
 #include <hal/errors.h>
 #include <utils.h>
+#include <freertos/task.h>
 #include <string.h>
 #include "SubSystemModules/Communication/AckHandler.h"
+#include "SubSystemModules/Communication/TRXVU.h"
 
 #include "EPS.h"
 #ifdef ISISEPS
-	#include <satellite-subsystems/isis_eps_driver.h>
+	#include <satellite-subsystems/isismepsv2_ivid5_piu.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
@@ -23,7 +25,7 @@ EpsThreshVolt_t eps_threshold_voltages = {.raw = DEFAULT_EPS_THRESHOLD_VOLTAGES}
 
 int GetBatteryVoltage(voltage_t *vbatt)
 {
-	isis_eps__gethousekeepingengincdb__from_t hk_tlm;
+	isismepsv2_ivid5_piu__gethousekeepingengincdb__from_t hk_tlm;
 
 //	if(logError(isis_eps__gethousekeepingengincdb__tm(EPS_I2C_BUS_INDEX, &hk_tlm) ,"GetBatteryVoltage-isis_eps__gethousekeepingengincdb__tm"))return -1;
 
@@ -35,12 +37,19 @@ int GetBatteryVoltage(voltage_t *vbatt)
 int EPS_Init()
 {
 
-	ISIS_EPS_t i2c_address[1];
-	i2c_address[0].i2cAddr = EPS_I2C_ADDR;
-//	if(logError(ISIS_EPS_Init(&i2c_address , 1),"EPS_Init-ISIS_EPS_Init")) return -1;
+
+	// Init EPS
+	ISISMEPSV2_IVID5_PIU_t subsystem[1]; // One instance to be initialised.
+	subsystem[0].i2cAddr = EPS_I2C_ADDR; // I2C address defined to 0x20.
+
+	if(logError(ISISMEPSV2_IVID5_PIU_Init( subsystem, 1),"EPS_Init-ISIS_EPS_Init")) return -1;
 
 
-	if(logError(IsisSolarPanelv2_initialize(slave0_spi) ,"EPS_Init-IsisSolarPanelv2_initialize")) return -1;
+	// Init solar panels
+
+	Pin solarpanelv2_pins[2] = {_SOLAR_PIN_RESET, _SOLAR_PIN_INT};
+
+	if(logError(IsisSolarPanelv2_initialize(slave0_spi,&solarpanelv2_pins[0], &solarpanelv2_pins[1]) ,"EPS_Init-IsisSolarPanelv2_initialize")) return -1;
 //	IsisSolarPanelv2_sleep(); cheek
 
 
@@ -177,83 +186,77 @@ int RestoreDefaultThresholdVoltages()
 	return 0;
 }
 
+// TODO check the code and output of this function!
 int CMDGetHeaterValues(sat_packet_t *cmd){
-	isis_eps__getparameter__to_t to;
-	isis_eps__getparameter__from_t from;
+	isismepsv2_ivid5_piu__getconfigurationparameter__from_t from;
 	HeaterValues values;
 	int err;
 	// get current LOTHR_BAT_HEATER values
-	/*
-	to.fields.par_id=0x3000;
-	err = isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+
+	err = isismepsv2_ivid5_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3000, &from);
 	memcpy(&values.value.H1_MIN,from.fields.par_val,sizeof(int16_t));
 	vTaskDelay(4000);
-	to.fields.par_id=0x3001;
-	err = isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+	err = isismepsv2_ivid5_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3001, &from);
 	memcpy(&values.value.H2_MIN,from.fields.par_val,sizeof(int16_t));
 	vTaskDelay(4000);
-	to.fields.par_id=0x3002;
-	err = isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+	err = isismepsv2_ivid5_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3002, &from);
 	memcpy(&values.value.H3_MIN,from.fields.par_val,sizeof(int16_t));
 
 	// get current HITHR_BAT_HEATER value
 	vTaskDelay(4000); //
-	to.fields.par_id=0x3003;
-	err += isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+	err += isismepsv2_ivid5_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3003, &from);
 	memcpy(&values.value.H1_MAX,from.fields.par_val,sizeof(int16_t));
 	vTaskDelay(4000); //
-	to.fields.par_id=0x3004;
-	err += isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+	err += isismepsv2_ivid5_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3004, &from);
 	memcpy(&values.value.H2_MAX,from.fields.par_val,sizeof(int16_t));
 	vTaskDelay(4000); //
-	to.fields.par_id=0x3005;
-	err += isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
+	err += isismepsv2_ivid5_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3005, &from);
 	memcpy(&values.value.H3_MAX,from.fields.par_val,sizeof(int16_t));
 
 	if (err == E_NO_SS_ERR){
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &values, sizeof(values));
 	}
-*/
+
 	return err;
 }
 
-
+// TODO check the code and output of this function!
 int CMDSetHeaterValues(sat_packet_t *cmd){
 	int err;
-	isis_eps__setparameter__to_t setTo;
-	isis_eps__setparameter__from_t setFrom;
+	isismepsv2_ivid5_piu__setconfigurationparameter__to_t setTo;
+	isismepsv2_ivid5_piu__setconfigurationparameter__from_t setFrom;
 	int16_t min;
 	int16_t max;
 	memcpy(&min,&cmd->data,sizeof(int16_t));
 	memcpy(&max,&cmd->data[2],sizeof(int16_t));
-/*
+
 	// set all min values
 	memcpy(&setTo.fields.par_val[0],&min,sizeof(int16_t));
 	setTo.fields.par_id = 0x3000;
-	err = isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	err = isismepsv2_ivid5_piu__setconfigurationparameter(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
 	vTaskDelay(4000); //
 	setTo.fields.par_id = 0x3001;
-	err += isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	err += isismepsv2_ivid5_piu__setconfigurationparameter(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
 	vTaskDelay(4000); //
 	setTo.fields.par_id = 0x3002;
-	err += isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	err += isismepsv2_ivid5_piu__setconfigurationparameter(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
 
 	// set all max values
 	memcpy(&setTo.fields.par_val[0],&max,sizeof(int16_t));
 	vTaskDelay(4000); //
 	setTo.fields.par_id = 0x3003;
-	err += isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	err += isismepsv2_ivid5_piu__setconfigurationparameter(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
 	vTaskDelay(4000); //
 	setTo.fields.par_id = 0x3004;
-	err += isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	err += isismepsv2_ivid5_piu__setconfigurationparameter(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
 	vTaskDelay(4000); //
 	setTo.fields.par_id = 0x3005;
-	err += isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	err += isismepsv2_ivid5_piu__setconfigurationparameter(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
 
 	if (err == E_NO_SS_ERR){
 		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
 	}
-*/
+
 	return err;
 }
 

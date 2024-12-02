@@ -26,7 +26,9 @@ src/Demos/IsisMTQv2demo.d: ../src/Demos/IsisMTQv2demo.c \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/Drivers/I2C.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/Drivers/LED.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/errors.h \
- C:/ISIS/workspace/ycube/satellite-subsystems/demo/..//satellite-subsystems/include/satellite-subsystems/IsisMTQv2.h \
+ C:/ISIS/workspace/ycube/satellite-subsystems/demo/..//satellite-subsystems/include/satellite-subsystems/isis_mtq_v2.h \
+ C:/ISIS/workspace/ycube/satellite-subsystems/demo/..//satellite-subsystems/include/satellite-subsystems/isis_mtq_v2_types.h \
+ C:/ISIS/workspace/ycube/satellite-subsystems/demo/..//satellite-subsystems/include/satellite-subsystems/common_types.h \
  C:\ISIS\workspace\ycube\satellite-subsystems\demo\src/Demos/common.h
 
 ../src/Demos/IsisMTQv2demo.h:
@@ -83,6 +85,10 @@ C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/Dri
 
 C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/errors.h:
 
-C:/ISIS/workspace/ycube/satellite-subsystems/demo/..//satellite-subsystems/include/satellite-subsystems/IsisMTQv2.h:
+C:/ISIS/workspace/ycube/satellite-subsystems/demo/..//satellite-subsystems/include/satellite-subsystems/isis_mtq_v2.h:
+
+C:/ISIS/workspace/ycube/satellite-subsystems/demo/..//satellite-subsystems/include/satellite-subsystems/isis_mtq_v2_types.h:
+
+C:/ISIS/workspace/ycube/satellite-subsystems/demo/..//satellite-subsystems/include/satellite-subsystems/common_types.h:
 
 C:\ISIS\workspace\ycube\satellite-subsystems\demo\src/Demos/common.h:

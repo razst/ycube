@@ -8,8 +8,8 @@
 #include "SubSystemModules/Communication/SatCommandHandler.h"
 
 
-#include <satellite-subsystems/IsisTRXVU.h>
-#include <satellite-subsystems/IsisAntS.h>
+#include <satellite-subsystems/isis_vu_e.h>
+#include <satellite-subsystems/isis_ants_rev2.h>
 
 
 #include <hcc/api_fat.h>
@@ -179,31 +179,19 @@ int CMD_GetSatUptime(sat_packet_t *cmd)
 
 int CMD_SoftTRXVU_ComponenetReset(sat_packet_t *cmd)
 {
-	if (cmd == NULL || cmd->data == NULL)
-	{
-		return E_INPUT_POINTER_NULL;
-	}
-
 	int err = 0;
-	ISIStrxvuComponent component;
-	memcpy(&component, cmd->data, sizeof(component));
-
-	err = IsisTrxvu_componentSoftReset(ISIS_TRXVU_I2C_BUS_INDEX, component);
+	err = isis_vu_e__reset_wdg_rx(ISIS_TRXVU_I2C_BUS_INDEX);
+	vTaskDelay(1 / portTICK_RATE_MS);
+	err += isis_vu_e__reset_wdg_tx(ISIS_TRXVU_I2C_BUS_INDEX);
 	return err;
 }
 
 int CMD_HardTRXVU_ComponenetReset(sat_packet_t *cmd)
 {
-	if (cmd == NULL || cmd->data == NULL)
-	{
-		return E_INPUT_POINTER_NULL;
-	}
-
 	int err = 0;
-	ISIStrxvuComponent component;
-	memcpy(&component, cmd->data, sizeof(component));
-
-	err = IsisTrxvu_componentHardReset(ISIS_TRXVU_I2C_BUS_INDEX, component);
+	err = isis_vu_e__reset_rx(ISIS_TRXVU_I2C_BUS_INDEX);
+	vTaskDelay(1 / portTICK_RATE_MS);
+	err += isis_vu_e__reset_tx(ISIS_TRXVU_I2C_BUS_INDEX);
 	return err;
 }
 
@@ -235,14 +223,18 @@ int CMD_ResetComponent(sat_packet_t *cmd)
 	case reset_trxvu_hard:
 		SendAckPacket(ACK_TRXVU_HARD_RESET, cmd, NULL, 0);
 		setTransponderEndTime(0);
-		logError(IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_hardReset");
+		logError(isis_vu_e__reset_hw_rx(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_softReset rx");
+		vTaskDelay(1 / portTICK_RATE_MS);
+		logError(isis_vu_e__reset_hw_tx(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_softReset tx");
 		vTaskDelay(100);
 		break;
 
 	case reset_trxvu_soft:
 		SendAckPacket(ACK_TRXVU_SOFT_RESET, cmd, NULL, 0);
 		setTransponderEndTime(0);
-		logError(IsisTrxvu_softReset(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_softReset");
+		logError(isis_vu_e__reset_wdg_rx(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_softReset rx");
+		vTaskDelay(1 / portTICK_RATE_MS);
+		logError(isis_vu_e__reset_wdg_tx(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_softReset tx");
 		vTaskDelay(100);
 		break;
 
@@ -257,14 +249,14 @@ int CMD_ResetComponent(sat_packet_t *cmd)
 		break;
 
 	case reset_ant_SideA:
-		err = logError(IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA),"CMD_ResetComponent-IsisAntS_reset");
+		err = logError(isis_ants_rev2__reset(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisAntS_reset");
 		if (err == E_NO_SS_ERR) SendAckPacket(ACK_ANTS_RESET, cmd, (unsigned char*) &err, sizeof(err));
 		break;
 
-	case reset_ant_SideB:
-		err=logError(IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB),"CMD_ResetComponent-IsisAntS_reset");
-		if (err == E_NO_SS_ERR) SendAckPacket(ACK_ANTS_RESET, cmd, (unsigned char*) &err, sizeof(err));
-		break;
+//	case reset_ant_SideB:
+//		err=logError(IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB),"CMD_ResetComponent-IsisAntS_reset");
+//		if (err == E_NO_SS_ERR) SendAckPacket(ACK_ANTS_RESET, cmd, (unsigned char*) &err, sizeof(err));
+//		break;
 
 	default:
 		SendAckPacket(ACK_UNKNOWN_SUBTYPE, cmd, NULL, 0);

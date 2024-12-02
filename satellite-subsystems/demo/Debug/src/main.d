@@ -1,12 +1,9 @@
-src/main.d: ../src/main.c ../src/Demos/IsisAntSdemo.h \
+src/main.d: ../src/main.c ../src/Demos/isis_ants_demo.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/boolean.h \
- ../src/Demos/isis_ants2_demo.h ../src/Demos/GomEPSdemo.h \
- ../src/Demos/IsisSPdemo.h ../src/Demos/IsisSPv2demo.h \
- ../src/Demos/IsisTRXUVdemo.h ../src/Demos/IsisTRXVUdemo.h \
- ../src/Demos/IsisMTQv1demo.h ../src/Demos/IsisMTQv2demo.h \
- ../src/Demos/cspaceADCSdemo.h ../src/Demos/ScsGeckoDemo.h \
- ../src/Demos/IsisHSTxSdemo.h ../src/Demos/isis_eps_demo.h \
- ../src/Demos/tausat2_pdhudemo.h \
+ ../src/Demos/isis_ants2_demo.h ../src/Demos/IsisSPv2demo.h \
+ ../src/Demos/IsisHSTXS_V2demo.h ../src/Demos/isisRXSrevCdemo.h \
+ ../src/Demos/IsisMTQv2demo.h ../src/Demos/IsisTRXVUrevDdemo.h \
+ ../src/Demos/IsisTRXVUrevEdemo.h ../src/Demos/IsisAOCSdemo.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/..//satellite-subsystems/include/satellite-subsystems/version/version.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/utility/exithandler.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/commons.h \
@@ -17,6 +14,8 @@ src/main.d: ../src/main.c ../src/Demos/IsisAntSdemo.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/peripherals/pio/pio.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/peripherals/cp15/cp15.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/peripherals/pio/pio_it.h \
+ C:\ISIS\workspace\ycube\satellite-subsystems\demo\src/Demos/isismeps_ivid5_pdu_demo.h \
+ C:\ISIS\workspace\ycube\satellite-subsystems\demo\src/Demos/isismeps_ivid5_piu_demo.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/freertos/include/freertos/FreeRTOS.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/freertos/include/freertos/projdefs.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/freertos/include/freertos/FreeRTOSConfig.h \
@@ -36,35 +35,25 @@ src/main.d: ../src/main.c ../src/Demos/IsisAntSdemo.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/Drivers/SPI.h \
  C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/version/version.h
 
-../src/Demos/IsisAntSdemo.h:
+../src/Demos/isis_ants_demo.h:
 
 C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/hal/include/hal/boolean.h:
 
 ../src/Demos/isis_ants2_demo.h:
 
-../src/Demos/GomEPSdemo.h:
-
-../src/Demos/IsisSPdemo.h:
-
 ../src/Demos/IsisSPv2demo.h:
 
-../src/Demos/IsisTRXUVdemo.h:
+../src/Demos/IsisHSTXS_V2demo.h:
 
-../src/Demos/IsisTRXVUdemo.h:
-
-../src/Demos/IsisMTQv1demo.h:
+../src/Demos/isisRXSrevCdemo.h:
 
 ../src/Demos/IsisMTQv2demo.h:
 
-../src/Demos/cspaceADCSdemo.h:
+../src/Demos/IsisTRXVUrevDdemo.h:
 
-../src/Demos/ScsGeckoDemo.h:
+../src/Demos/IsisTRXVUrevEdemo.h:
 
-../src/Demos/IsisHSTxSdemo.h:
-
-../src/Demos/isis_eps_demo.h:
-
-../src/Demos/tausat2_pdhudemo.h:
+../src/Demos/IsisAOCSdemo.h:
 
 C:/ISIS/workspace/ycube/satellite-subsystems/demo/..//satellite-subsystems/include/satellite-subsystems/version/version.h:
 
@@ -85,6 +74,10 @@ C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/p
 C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/peripherals/cp15/cp15.h:
 
 C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/at91/include/at91/peripherals/pio/pio_it.h:
+
+C:\ISIS\workspace\ycube\satellite-subsystems\demo\src/Demos/isismeps_ivid5_pdu_demo.h:
+
+C:\ISIS\workspace\ycube\satellite-subsystems\demo\src/Demos/isismeps_ivid5_piu_demo.h:
 
 C:/ISIS/workspace/ycube/satellite-subsystems/demo/../..//hal/freertos/include/freertos/FreeRTOS.h:
 

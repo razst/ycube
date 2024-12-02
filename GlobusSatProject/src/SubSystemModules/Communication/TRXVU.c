@@ -5,8 +5,8 @@
 #include <hal/Timing/Time.h>
 #include <hal/errors.h>
 
-#include <satellite-subsystems/IsisTRXVU.h>
-#include <satellite-subsystems/IsisAntS.h>
+#include <satellite-subsystems/isis_vu_e.h>
+#include <satellite-subsystems/isis_ants_rev2.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -128,32 +128,29 @@ void InitSemaphores()
 
 
 int InitTrxvu() {
-	ISIStrxvuI2CAddress myTRXVUAddress;
-	ISIStrxvuFrameLengths myTRXVUFramesLenght;
 
 
-	//Buffer definition
-	myTRXVUFramesLenght.maxAX25frameLengthTX = SIZE_TXFRAME;//SIZE_TXFRAME;
-	myTRXVUFramesLenght.maxAX25frameLengthRX = SIZE_RXFRAME;
+	// *** init TRXVU ***
+    // Definition of I2C and TRXUV
+    ISIS_VU_E_t myTRXVU[1];
 
 	//I2C addresses defined
-	myTRXVUAddress.addressVu_rc = I2C_TRXVU_RC_ADDR;
-	myTRXVUAddress.addressVu_tc = I2C_TRXVU_TC_ADDR;
+    myTRXVU[0].rxAddr = I2C_TRXVU_RC_ADDR;
+    myTRXVU[0].txAddr = I2C_TRXVU_TC_ADDR;
 
+	//Buffer definition
+    myTRXVU[0].maxSendBufferLength = SIZE_TXFRAME;
+    myTRXVU[0].maxReceiveBufferLength = SIZE_RXFRAME;
 
-	//Bitrate definition
-	ISIStrxvuBitrate myTRXVUBitrates;
-	myTRXVUBitrates = trxvu_bitrate_9600;
-	if (logError(IsisTrxvu_initialize(&myTRXVUAddress, &myTRXVUFramesLenght,&myTRXVUBitrates, 1) ,"InitTrxvu-IsisTrxvu_initialize") ) return -1;
+	if (logError(ISIS_VU_E_Init(myTRXVU, 1) ,"InitTrxvu-IsisTrxvu_initialize") ) return -1;
+	if (logError(isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps) ,"isis_vu_e__set_bitrate") ) return -1;
 
 	vTaskDelay(1000); // wait a little
 
-	ISISantsI2Caddress myAntennaAddress;
-	myAntennaAddress.addressSideA = ANTS_I2C_SIDE_A_ADDR;
-	myAntennaAddress.addressSideB = ANTS_I2C_SIDE_B_ADDR;
-
-	//Initialize the AntS system
-	if (logError(IsisAntS_initialize(&myAntennaAddress, 1),"InitTrxvu-IsisAntS_initialize")) return -1;
+	// *** init ANts ****
+	ISIS_ANTS_REV2_t myAntennaAddress;
+	myAntennaAddress.i2cAddr = ANTS_I2C_SIDE_A_ADDR;
+	if (logError(ISIS_ANTS_REV2_Init(&myAntennaAddress, 1),"InitTrxvu-IsisAntS_initialize")) return -1;
 
 	InitTxModule();
 	InitBeaconParams();
@@ -171,7 +168,7 @@ void checkIdleFinish(){
 	// check if it is time to turn off the idle...
 	if (g_idle_end_time !=0 && g_idle_end_time < curr_tick_time){
 		g_idle_end_time = 0;
-		SetIdleState(trxvu_idle_state_off,0);
+		SetIdleState(isis_vu_e__onoff__off,0);
 	}
 }
 
@@ -262,8 +259,8 @@ int TRX_Logic() {
 }
 
 int GetNumberOfFramesInBuffer() {
-	unsigned short frameCounter = 0;
-	if (logError(IsisTrxvu_rcGetFrameCount(0, &frameCounter) ,"TRX_Logic-IsisTrxvu_rcGetFrameCount")) return -1;
+	uint16_t frameCounter = 0;
+	if (logError(isis_vu_e__get_frame_count(0, &frameCounter) ,"TRX_Logic-IsisTrxvu_rcGetFrameCount")) return -1;
 
 	return frameCounter;
 }
@@ -276,23 +273,23 @@ int GetOnlineCommand(sat_packet_t *cmd)
 	}
 	int err = 0;
 
-	unsigned short frameCount = 0;
+	uint16_t frameCount = 0;
 	unsigned char receivedFrameData[MAX_COMMAND_DATA_LENGTH];
 
-	if (logError(IsisTrxvu_rcGetFrameCount(0, &frameCount) ,"GetOnlineCommand-IsisTrxvu_rcGetFrameCount")) return -1;
+	if (logError(isis_vu_e__get_frame_count(0, &frameCount) ,"GetOnlineCommand-IsisTrxvu_rcGetFrameCount")) return -1;
 
 	if (frameCount==0) {
 		return no_command_found;
 	}
 
-	ISIStrxvuRxFrame rxFrameCmd = { 0, 0, 0,
+	isis_vu_e__get_frame__from_t rxFrameCmd = { 0, 0, 0,
 			(unsigned char*) receivedFrameData }; // for getting raw data from Rx, nullify values
 
-	if (logError(IsisTrxvu_rcGetCommandFrame(0, &rxFrameCmd) ,"GetOnlineCommand-IsisTrxvu_rcGetCommandFrame")) return -1;
+	if (logError(isis_vu_e__get_frame(0, &rxFrameCmd) ,"GetOnlineCommand-IsisTrxvu_rcGetCommandFrame")) return -1;
 
 	// log frame info
 	char buffer [80];
-	sprintf (buffer, "Frame info: doppler: %d length: %d rssi: %d", rxFrameCmd.rx_doppler,rxFrameCmd.rx_length,rxFrameCmd.rx_rssi);
+	sprintf (buffer, "Frame info: doppler: %d length: %d rssi: %d", rxFrameCmd.doppler ,rxFrameCmd.length,rxFrameCmd.rssi);
 	logError(INFO_MSG ,buffer);
 
 	if (logError(ParseDataToCommand(receivedFrameData,cmd),"GetOnlineCommand-ParseDataToCommand")) return -1;
@@ -401,15 +398,13 @@ int BeaconLogic(Boolean forceTX) {
 	if (logError(Time_getUnixEpoch(&g_prev_beacon_time),"BeaconLogic-Time_getUnixEpoch") ) return -1;
 
 	if (logError(TransmitSplPacket(&cmd, NULL),"BeaconLogic-TransmitSplPacket") ) return -1;
-	// make sure we switch back to 9600 if we used 1200 in the beacon
-	if (logError(IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, trxvu_bitrate_9600),"BeaconLogic-IsisTrxvu_tcSetAx25Bitrate") ) return -1;
 
 	//printf("***************** beacon sent *****************\n");
 	return 0;
 }
 
 
-int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
+int SetIdleState(isis_vu_e__onoff_t state, time_unix duration){
 
 	if (duration > MAX_IDLE_TIME) {
 		logError(TRXVU_IDLE_TOO_LONG ,"SetIdleState");
@@ -419,17 +414,17 @@ int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
 	// get current unix time
 	time_unix curr_tick_time = 0;
 	Time_getUnixEpoch(&curr_tick_time);
-	if (state == trxvu_idle_state_on && curr_tick_time < getMuteEndTime()) return TRXVU_IDEL_WHILE_MUTE;
+	if (state == isis_vu_e__onoff__on && curr_tick_time < getMuteEndTime()) return TRXVU_IDEL_WHILE_MUTE;
 
-	if (state == trxvu_idle_state_on && curr_tick_time < getTransponderEndTime()) return TRXVU_IDLE_WHILE_TRANSPONDER;
+	if (state == isis_vu_e__onoff__on && curr_tick_time < getTransponderEndTime()) return TRXVU_IDLE_WHILE_TRANSPONDER;
 
-	int err = logError(IsisTrxvu_tcSetIdlestate(ISIS_TRXVU_I2C_BUS_INDEX, state) ,"SetIdleState-IsisTrxvu_tcSetIdlestate");
+	int err = logError(isis_vu_e__set_idle_state(ISIS_TRXVU_I2C_BUS_INDEX, state) ,"SetIdleState-IsisTrxvu_tcSetIdlestate");
 
-	if (err == E_NO_SS_ERR && state == trxvu_idle_state_on){
+	if (err == E_NO_SS_ERR && state == isis_vu_e__onoff__on){
 		logError(INFO_MSG,"Idel ON\n");
 		// set idle end time
 		g_idle_end_time = curr_tick_time + duration;
-	} else if (err == E_NO_SS_ERR && state == trxvu_idle_state_off){
+	} else if (err == E_NO_SS_ERR && state == isis_vu_e__onoff__off){
 		logError(INFO_MSG,"Idel OFF\n");
 	}
 	return err;
@@ -494,9 +489,8 @@ int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
 		return E_GET_SEMAPHORE_FAILED;
 	}
 
-	int avail=0;
-	err = IsisTrxvu_tcSendAX25DefClSign(ISIS_TRXVU_I2C_BUS_INDEX,
-			(unsigned char*) packet, data_length, &avail);
+	uint8_t avail=0;
+	err = isis_vu_e__send_frame(ISIS_TRXVU_I2C_BUS_INDEX,(unsigned char*) packet, data_length, &avail);
 
 	////printf("avial TRXVU:%d\n",avail);
 

@@ -1,29 +1,29 @@
 /*
  * main.c
  *      Author: Akhil
+ *     	Updated: 20/10/2023
+ *     	Author: OBAR
  */
 
-#include "Demos/IsisAntSdemo.h"
+#include "Demos/isis_ants_demo.h"
 #include "Demos/isis_ants2_demo.h"
-#include "Demos/GomEPSdemo.h"
-#include "Demos/IsisSPdemo.h"
 #include "Demos/IsisSPv2demo.h"
-#include "Demos/IsisTRXUVdemo.h"
-#include "Demos/IsisTRXVUdemo.h"
-#include "Demos/IsisMTQv1demo.h"
+#include "Demos/IsisHSTXS_V2demo.h"
+#include "Demos/isisRXSrevCdemo.h"
 #include "Demos/IsisMTQv2demo.h"
-#include "Demos/cspaceADCSdemo.h"
-#include "Demos/ScsGeckoDemo.h"
-#include "Demos/IsisHSTxSdemo.h"
-#include "Demos/isis_eps_demo.h"
-#include "Demos/tausat2_pdhudemo.h"
+#include "Demos/IsisTRXVUrevDdemo.h"
+#include "Demos/IsisTRXVUrevEdemo.h"
+#include "Demos/IsisAOCSdemo.h"
 #include <satellite-subsystems/version/version.h>
 
 #include <at91/utility/exithandler.h>
 #include <at91/commons.h>
 #include <at91/utility/trace.h>
 #include <at91/peripherals/cp15/cp15.h>
+#include <at91/peripherals/dbgu/dbgu.h>
 #include <at91/peripherals/pio/pio_it.h>
+#include <Demos/isismeps_ivid5_pdu_demo.h>
+#include <Demos/isismeps_ivid5_piu_demo.h>
 
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
@@ -63,45 +63,62 @@ Boolean selectAndExecuteTest()
 	Boolean offerMoreTests = TRUE;
 
 	//Initialize the I2C
-	int retValInt = I2C_start(100000, 10);
+	int retValInt = I2C_start(200000, 10);
 	if(retValInt != 0)
 	{
 		TRACE_FATAL("\n\r I2C_start_Master for demo: %d! \n\r", retValInt);
 	}
 
 	printf( "\n\r Select the device to be tested to perform: \n\r");
-	printf("\t 1) TRXVU test \n\r");
-	printf("\t 2) HSTxS Test \n\r");
-	printf("\t 3) AntS test \n\r");
-	printf("\t 4) Solar Panels V2 test \n\r");
-	printf("\t 5) MTQv2 test \n\r");
-	printf("\t 6) ISIS EPS Test \n\r");
-	printf("\t 7) TAUSAT2 PDHU test\n\r");
+	printf("\t 1) TRXVU rev. D test \n\r");
+	printf("\t 2) TRXVU rev. E test \n\r");
+	printf("\t 3) HSTxS V2 test \n\r");
+	printf("\t 4) RXS rev. C test \n\r");
+	printf("\t 5) AntS test \n\r");
+	printf("\t 6) AntS rev. 2 test \n\r");
+	printf("\t 7) Solar Panels V2 test \n\r");
+	printf("\t 8) MTQv2 test \n\r");
+	printf("\t 9) ISIS PDU iMEPS test \n\r");
+	printf("\t 10) ISIS PIU iCEPS Test \n\r");
+	printf("\t 11) ISIS AOCS test \n\r");
 
-	while(UTIL_DbguGetIntegerMinMax(&selection, 1, 7) == 0);
+
+	while(UTIL_DbguGetIntegerMinMax(&selection, 1, 11) == 0);
 
 	switch(selection)
 	{
 		case 1:
-			offerMoreTests = TRXVUtest();
+			offerMoreTests = TRXVUrevDtest();
 			break;
 		case 2:
-			offerMoreTests = HSTxStest();
+			offerMoreTests = TRXVUrevEtest();
 			break;
 		case 3:
-			offerMoreTests = AntStest();
+			offerMoreTests = IsisHSTxSV2demoMain();
 			break;
 		case 4:
-			offerMoreTests = SolarPanelv2test();
+			offerMoreTests = RXSrevCtest();
 			break;
 		case 5:
+			offerMoreTests = AntStest();
+			break;
+        case 6:
+            offerMoreTests = AntS2test();
+            break;
+		case 7:
+			offerMoreTests = SolarPanelv2test();
+			break;
+		case 8:
 			offerMoreTests = IsisMTQv2test();
 			break;
-		case 6:
-			offerMoreTests = isis_eps__test();
+		case 9:
+			offerMoreTests = isismepsv2_ivid5_pdu__test();
 			break;
-		case 7:
-			offerMoreTests = TAUSAT2PdhuDemoMain();
+		case 10:
+			offerMoreTests = isismepsv2_ivid5_piu__test();
+			break;
+		case 11:
+			offerMoreTests = isis_aocs_demo();
 			break;
 
 		default:
@@ -141,7 +158,7 @@ int main()
 	unsigned int i;
 	xTaskHandle taskMainHandle;
 
-	TRACE_CONFIGURE_ISP(DBGU_STANDARD, 115200, BOARD_MCK);
+	TRACE_CONFIGURE(DBGU_STANDARD, 115200, BOARD_MCK);
 	// Enable the Instruction cache of the ARM9 core. Keep the MMU and Data Cache disabled.
 	CP15_Enable_I_Cache();
 

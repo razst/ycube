@@ -1,4 +1,4 @@
-#include <satellite-subsystems/IsisTRXVU.h>
+#include <satellite-subsystems/isis_vu_e.h>
 #include <hal/Timing/Time.h>
 #include <string.h>
 #include <stdlib.h>

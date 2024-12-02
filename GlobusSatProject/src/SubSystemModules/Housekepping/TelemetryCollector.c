@@ -3,15 +3,15 @@
 #include "GlobalStandards.h"
 
 #ifdef ISISEPS
-	#include <satellite-subsystems/isis_eps_driver.h>
+	#include <satellite-subsystems/isismepsv2_ivid5_piu.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
 #endif
 #include <hal/Drivers/ADC.h>
 
-#include <satellite-subsystems/IsisTRXVU.h>
-#include <satellite-subsystems/IsisAntS.h>
+#include <satellite-subsystems/isis_vu_e.h>
+#include <satellite-subsystems/isis_ants_rev2.h>
 #include <satellite-subsystems/IsisSolarPanelv2.h>
 #include <hal/Timing/Time.h>
 #include "utils.h"
@@ -185,12 +185,13 @@ void TelemetryCollectorLogic()
 
 void TelemetrySaveEPS()
 {
-	isis_eps__gethousekeepingeng__from_t tlm_mb_eng;
 
-//	if (logError(isis_eps__gethousekeepingeng__tm(EPS_I2C_BUS_INDEX, &tlm_mb_eng) ,"TelemetrySaveEPS-isis_eps__gethousekeepingeng__tm") == 0)
-//	{
-//		write2File(&tlm_mb_eng , tlm_eps);
-//	}
+	isismepsv2_ivid5_piu__gethousekeepingeng__from_t response;
+
+	if (logError(isismepsv2_ivid5_piu__gethousekeepingeng(EPS_I2C_BUS_INDEX,&response) ,"TelemetrySaveEPS-isis_eps__gethousekeepingeng__tm") == 0)
+	{
+		write2File(&response , tlm_eps);
+	}
 
 
 	/* to save space & time, we only store tlm_eps_eng_mb
@@ -219,36 +220,31 @@ void TelemetrySaveEPS()
 void TelemetrySaveTRXVU()
 {
 
-		ISIStrxvuTxTelemetry tx_tlm;
+		isis_vu_e__get_tx_telemetry__from_t tx_tlm;
 
-		if (logError(IsisTrxvu_tcGetTelemetryAll(ISIS_TRXVU_I2C_BUS_INDEX, &tx_tlm) ,"TelemetrySaveTRXVU-IsisTrxvu_tcGetTelemetryAll")== 0)
+		if (logError(isis_vu_e__get_tx_telemetry(ISIS_TRXVU_I2C_BUS_INDEX, &tx_tlm) ,"TelemetrySaveTRXVU-IsisTrxvu_tcGetTelemetryAll")== 0)
 		{
 			write2File(&tx_tlm , tlm_tx);
 		}
 
 
-		ISIStrxvuRxTelemetry rx_tlm;
+		isis_vu_e__get_rx_telemetry__from_t rx_tlm;
 
-		if (logError(IsisTrxvu_rcGetTelemetryAll(ISIS_TRXVU_I2C_BUS_INDEX, &rx_tlm) ,"TelemetrySaveTRXVU-IsisTrxvu_rcGetTelemetryAll") == 0)
+		if (logError(isis_vu_e__get_rx_telemetry(ISIS_TRXVU_I2C_BUS_INDEX, &rx_tlm) ,"TelemetrySaveTRXVU-IsisTrxvu_rcGetTelemetryAll") == 0)
 		{
 			write2File(&rx_tlm , tlm_rx);
 		}
 
-	}
+}
 
-	void TelemetrySaveANT()
-	{
-		int err = 0;
-		ISISantsTelemetry ant_tlmA, ant_tlmB;
-		if(logError(IsisAntS_getAlltelemetry(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA,
-				&ant_tlmA) ,"TelemetrySaveANT-IsisAntS_getAlltelemetry-A" )==0){
-			write2File(&ant_tlmA , tlm_antenna);
-		}
-		if(logError(IsisAntS_getAlltelemetry(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB,
-				&ant_tlmB),"TelemetrySaveANT-IsisAntS_getAlltelemetry-B") == 0){
-			write2File(&ant_tlmB , tlm_antenna);
-		}
+void TelemetrySaveANT()
+{
+	int err = 0;
+	isis_ants_rev2__get_all_telemetry__from_t ant_tlm;
+	if(logError(isis_ants_rev2__get_all_telemetry(ISIS_TRXVU_I2C_BUS_INDEX,&ant_tlm) ,"TelemetrySaveANT-IsisAntS_getAlltelemetry-A" )==0){
+		write2File(&ant_tlm , tlm_antenna);
 	}
+}
 
 void TelemetrySaveSolarPanels()
 {
@@ -344,11 +340,11 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 	time_unix current_time = 0;
 	Time_getUnixEpoch(&current_time);
 	wod->sat_time = current_time;
-	isis_eps__gethousekeepingeng__from_t hk_tlm;
-	isis_eps__gethousekeepingengincdb__from_t hk_tlm_cdb;
+	isismepsv2_ivid5_piu__gethousekeepingengincdb__from_t hk_tlm_cdb;
+	isismepsv2_ivid5_piu__gethousekeepingeng__from_t hk_tlm;
 
-//	err =  isis_eps__gethousekeepingengincdb__tm(EPS_I2C_BUS_INDEX, &hk_tlm_cdb);
-//	err += isis_eps__gethousekeepingeng__tm(EPS_I2C_BUS_INDEX, &hk_tlm);
+	err =  isismepsv2_ivid5_piu__gethousekeepingeng(EPS_I2C_BUS_INDEX, &hk_tlm);
+	err += isismepsv2_ivid5_piu__gethousekeepingengincdb(EPS_I2C_BUS_INDEX, &hk_tlm_cdb);
 
 	if(err == 0){
 
@@ -392,7 +388,6 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 		wod->photo_diodes[i] = ADC_ConvertRaw10bitToMillivolt( adcSamples[i] ); // convert to mV data
 		////printf("PD%d : %u mV\n\r", i, wod->photo_diodes[i]);
 	}
-
-
 }
+
 

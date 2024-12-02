@@ -38,6 +38,11 @@
 #define DEFAULT_EPS_THRESHOLD_VOLTAGES 	{(voltage_t)6500, (voltage_t)7100, (voltage_t)7300,	 \
 										  (voltage_t)6600, (voltage_t)7200, (voltage_t)7400}
 
+
+#define _SOLAR_PIN_RESET PIN_GPIO08
+#define _SOLAR_PIN_INT   PIN_GPIO00
+
+
 typedef enum __attribute__ ((__packed__)){
 	INDEX_DOWN_SAFE,
 	INDEX_DOWN_CRUISE,

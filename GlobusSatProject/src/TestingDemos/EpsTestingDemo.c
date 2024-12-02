@@ -11,7 +11,7 @@
 #include <stdlib.h>
 
 #ifdef ISISEPS
-	#include <satellite-subsystems/isis_eps_driver.h>
+	#include <satellite-subsystems/isismepsv2_ivid5_piu.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
@@ -223,23 +223,23 @@ Boolean TestRestoreDefaultThresholdVoltages()
 
 Boolean GetHeaterValues(){
 
-	isis_eps__getparameter__to_t to;
-	isis_eps__getparameter__from_t from;
+	isismepsv2_ivid5_piu__setconfigurationparameter__to_t setTo;
+	isismepsv2_ivid5_piu__setconfigurationparameter__from_t setFrom;
 	int16_t heatValue;
 
 	// get current LOTHR_BAT_HEATER value
-	to.fields.par_id=0x3000;
-	//isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
-	memcpy(&heatValue,from.fields.par_val,sizeof(int16_t));
+	setTo.fields.par_id = 0x3000;
+	isismepsv2_ivid5_piu__setconfigurationparameter(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	memcpy(&heatValue,setFrom.fields.par_val,sizeof(int16_t));
 	printf("LOW THR_BAT_HEATER value = %d\n",heatValue);
 
 	vTaskDelay(4000); //
 
 	heatValue = 0;
 	// get current HITHR_BAT_HEATER value
-	to.fields.par_id=0x3003;
-//	isis_eps__getparameter__tmtc(EPS_I2C_BUS_INDEX, &to, &from);
-	memcpy(&heatValue,from.fields.par_val,sizeof(int16_t));
+	setTo.fields.par_id = 0x3003;
+	isismepsv2_ivid5_piu__setconfigurationparameter(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	memcpy(&heatValue,setFrom.fields.par_val,sizeof(int16_t));
 	printf("HIGH THR_BAT_HEATER value = %d\n",heatValue);
 
 	return TRUE;
@@ -248,34 +248,34 @@ Boolean GetHeaterValues(){
 
 Boolean SetHeaterValues(){
 
-	printf("Please state heater LOW value:\n");
-
-	int value = 0;
-	while(UTIL_DbguGetInteger((int*)&value) == 0);
-
-	int16_t heatValue = value;
-
-	// set LOTHR_BAT_HEATER to new value
-	isis_eps__setparameter__to_t setTo;
-	isis_eps__setparameter__from_t setFrom;
-	setTo.fields.par_id = 0x3000;
-	memcpy(&setTo.fields.par_val[0],&heatValue,sizeof(int16_t));
-	int err = 0;//isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
-	printf("error = %d\n",err);
-
-
-	printf("Please state heater HIGH value:\n");
-
-	while(UTIL_DbguGetInteger((int*)&value) == 0);
-
-	heatValue = value;
-
-	// set LOTHR_BAT_HEATER to new value
-	setTo.fields.par_id = 0x3003;
-	memcpy(&setTo.fields.par_val[0],&heatValue,sizeof(int16_t));
-//	err = isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
-	printf("error = %d\n",err);
-
+//	printf("Please state heater LOW value:\n");
+//
+//	int value = 0;
+//	while(UTIL_DbguGetInteger((int*)&value) == 0);
+//
+//	int16_t heatValue = value;
+//
+//	// set LOTHR_BAT_HEATER to new value
+//	isis_eps__setparameter__to_t setTo;
+//	isis_eps__setparameter__from_t setFrom;
+//	setTo.fields.par_id = 0x3000;
+//	memcpy(&setTo.fields.par_val[0],&heatValue,sizeof(int16_t));
+//	int err = 0;//isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+//	printf("error = %d\n",err);
+//
+//
+//	printf("Please state heater HIGH value:\n");
+//
+//	while(UTIL_DbguGetInteger((int*)&value) == 0);
+//
+//	heatValue = value;
+//
+//	// set LOTHR_BAT_HEATER to new value
+//	setTo.fields.par_id = 0x3003;
+//	memcpy(&setTo.fields.par_val[0],&heatValue,sizeof(int16_t));
+////	err = isis_eps__setparameter__tmtc(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+//	printf("error = %d\n",err);
+//
 
 
 	return TRUE;

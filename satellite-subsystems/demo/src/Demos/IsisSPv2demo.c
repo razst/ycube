@@ -1,4 +1,8 @@
-#include "IsisSPdemo.h"
+/*
+ * isisSPv2demo.c
+ * 	Updated: Oct. 2023
+ * 	Author: OBAR
+ */
 
 #include <satellite-subsystems/IsisSolarPanelv2.h>
 
@@ -19,9 +23,9 @@
 
 #include <stdint.h>
 
-Boolean SolarPanelv2_Temperature()
+static Boolean SolarPanelv2_Temperature(void)
 {
-	int error;
+	IsisSolarPanelv2_Error_t error;
 	int panel;
 	uint8_t status = 0;
 	int32_t paneltemp = 0;
@@ -52,7 +56,7 @@ Boolean SolarPanelv2_Temperature()
 	return TRUE;
 }
 
-Boolean selectAndExecuteSolarPanelsv2DemoTest()
+Boolean selectAndExecuteSolarPanelsv2DemoTest(void)
 {
 	int selection = 0;
 	Boolean offerMoreTests = TRUE;
@@ -79,7 +83,7 @@ Boolean selectAndExecuteSolarPanelsv2DemoTest()
 	return offerMoreTests;
 }
 
-void SolarPanelsv2_mainDemo()
+void SolarPanelsv2_mainDemo(void)
 {
 	Boolean offerMoreTests = FALSE;
 
@@ -94,21 +98,31 @@ void SolarPanelsv2_mainDemo()
 	}
 }
 
+#define _PIN_RESET PIN_GPIO08
+#define _PIN_INT   PIN_GPIO00
 
-Boolean SolarPanelv2test()
+Boolean SolarPanelv2test(void)
 {
-	int retValInt = 0;
+	IsisSolarPanelv2_Error_t error = ISIS_SOLAR_PANEL_ERR_NONE;
 
-	retValInt = IsisSolarPanelv2_initialize(slave0_spi);
+	Pin solarpanelv2_pins[2] = {_PIN_RESET, _PIN_INT};
+
+	int retValInt = SPI_start(bus1_spi, slave0_spi);
 	if(retValInt != 0)
 	{
-		TRACE_WARNING("\n\r IsisSolarPaneltest: IsisSolarPanelv2_initialize returned %d! \n\r", retValInt);
+		TRACE_WARNING("\n\r SPI_start for SolarPanel v2 demo: %d! \n\r", retValInt);
 	}
 
-	retValInt = IsisSolarPanelv2_sleep();
-	if(retValInt != 0)
+	error = IsisSolarPanelv2_initialize(slave0_spi, &solarpanelv2_pins[0], &solarpanelv2_pins[1]);
+	if(error != ISIS_SOLAR_PANEL_ERR_NONE)
 	{
-		TRACE_WARNING("\n\r IsisSolarPaneltest: IsisSolarPanelv2_sleep returned %d! \n\r", retValInt);
+		TRACE_WARNING("\n\r IsisSolarPaneltest: IsisSolarPanelv2_initialize returned %d! \n\r", error);
+	}
+
+	error = IsisSolarPanelv2_sleep();
+	if(error != ISIS_SOLAR_PANEL_ERR_NONE)
+	{
+		TRACE_WARNING("\n\r IsisSolarPaneltest: IsisSolarPanelv2_sleep returned %d! \n\r", error);
 	}
 
 	SolarPanelsv2_mainDemo();
