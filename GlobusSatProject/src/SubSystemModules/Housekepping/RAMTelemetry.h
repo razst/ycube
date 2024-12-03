@@ -23,15 +23,33 @@ typedef struct wodDataInRam
 	WOD_Telemetry_t wodData;
 } wodDataInRam;
 
+// struct for saving RADFET TLM data in RAM
+typedef struct radfetDataInRam
+{
+	time_unix date;
+	radfet_data radfetData;
+} radfetDataInRam;
+
+// struct for saving SEL TLM data in RAM
+typedef struct selDataInRam
+{
+	time_unix date;
+	pic32_sel_data selData;
+} selDataInRam;
+
+// struct for saving SEU TLM data in RAM
+typedef struct seuDataInRam
+{
+	time_unix date;
+	pic32_seu_data seuData;
+} seuDataInRam;
+
 // struct for tlm range
 typedef struct dataRange
 {
 	time_unix min;
 	time_unix max;
 } dataRange;
-
-
-
 
 /*!
  * return range of tlm saved

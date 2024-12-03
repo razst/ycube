@@ -17,6 +17,10 @@
 #define	END_FILENAME_SOLAR_PANELS_TLM	"slr"
 #define	END_FILENAME_LOGS				"log"
 
+#define	END_FILENAME_RADFET_TLM			"rad"
+#define	END_FILENAME_SEL_TLM			"sel"
+#define	END_FILENAME_SEU_TLM			"seu"
+
 
 
 typedef enum {

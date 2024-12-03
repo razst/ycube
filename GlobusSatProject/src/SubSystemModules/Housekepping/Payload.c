@@ -53,9 +53,14 @@ void get_radfet_data(radfet_data* radfet)
 	{
 		return;
 	}
+	//RADFET
+	time_unix curr_time1 = 0;
+	Time_getUnixEpoch(&curr_time1);
 
-	time_unix curr_time = 0;
-	Time_getUnixEpoch(&curr_time);
+
+	//TEMPERTURE
+	time_unix curr_time2 = 0;
+	Time_getUnixEpoch(&curr_time2);
 
 }
 void get_sel_data(pic32_sel_data* sel)
@@ -64,11 +69,18 @@ void get_sel_data(pic32_sel_data* sel)
 	{
 		return;
 	}
-
 	time_unix curr_time = 0;
 	Time_getUnixEpoch(&curr_time);
 
+
 	pic32_sel_data data = {0};
+
+	FRAM_read((unsigned char*)&data.sat_reset_count,
+	NUMBER_OF_CMD_RESETS_ADDR, NUMBER_OF_CMD_RESETS_SIZE);
+
+	FRAM_read((unsigned char*)&data.eps_reset_count,
+	NUMBER_OF_SW3_RESETS_ADDR, NUMBER_OF_SW3_RESETS_SIZE);
+
 	data.battery_state_changed = state_changed;
 	state_changed = FALSE;
 

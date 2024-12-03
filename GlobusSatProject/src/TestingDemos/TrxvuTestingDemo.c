@@ -539,7 +539,14 @@ if (cmd->length < Max_Hash_size) {
     printf("DEBUG: Command data length is less than the hash size. Memory allocation error.\n");
     return E_MEM_ALLOC;
 }
-
+cmd->data[9]=8;
+cmd->data[10]=8;
+cmd->data[11]=8;
+cmd->data[12]=8;
+cmd->data[13]=8;
+cmd->data[14]=8;
+cmd->data[15]=8;
+cmd->data[16]=8;
 // Adjust command data
 cmd->length -= Max_Hash_size; // 8 bytes are removed from the data; reflect this in the length
 memmove(cmd->data, cmd->data + Max_Hash_size, cmd->length);
@@ -564,6 +571,10 @@ unsigned int code, lastid, currId;
     char code_to_str[50];
     char cmpHash[Max_Hash_size], temp[Max_Hash_size];
     currId = cmd->ID;
+
+	if (cmd == NULL || cmd->data == NULL) {
+		return E_INPUT_POINTER_NULL;
+	}
 
     //get code from FRAM
     FRAM_read((unsigned char*)&code, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
@@ -638,9 +649,9 @@ Boolean TestForDummy_sat_packet()
 	cmd.ID = 2;
 	cmd.cmd_type = trxvu_cmd_type;
 	cmd.cmd_subtype = SecuredCMD;
-	cmd.length = Max_Hash_size * 5;
+	cmd.length = Max_Hash_size * 2;
 	unsigned int one = 1;
-	sprintf(hash, "%s", "6f4b6612123456789");
+	sprintf(hash, "%s", "6f4b661212345678");
 	memcpy(&cmd.data, &hash, Max_Hash_size);
 	FRAM_write((unsigned char*)&one, CMD_ID_ADDR, CMD_ID_SIZE);
 	FRAM_write((unsigned char*)&passcode, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
@@ -656,9 +667,9 @@ Boolean Secured_CMD_TEST()
 	cmd.ID = 2;
 	cmd.cmd_type = trxvu_cmd_type;
 	cmd.cmd_subtype = SecuredCMD;
-	cmd.length = Max_Hash_size * 5;//* 5 added bc I keep switching the hash (makes it easyer)
+	cmd.length = Max_Hash_size * 2;//* 2 added bc I keep switching the hash (makes it easyer)
 	unsigned int one = 1;
-	sprintf(hash, "%s", "6f4b6612123456789");
+	sprintf(hash, "%s", "6f4b661212345678");
 	memcpy(&cmd.data, &hash, Max_Hash_size);
 	FRAM_write((unsigned char*)&one, CMD_ID_ADDR, CMD_ID_SIZE);
 	FRAM_write((unsigned char*)&one, CMD_Passcode_ADDR, CMD_Passcode_SIZE);

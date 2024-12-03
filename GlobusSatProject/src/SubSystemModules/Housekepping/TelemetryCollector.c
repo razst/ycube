@@ -295,25 +295,24 @@ void TelemetrySaveRADFET()
 	radfet_data radfet = { 0 };
 	get_radfet_data(&radfet); //create task? or create inside the get data function
 
-	//write to file
-	//save to RAM
-
+	write2File(&radfet , tlm_radfet);
+	saveTlmToRam(&radfet, sizeof(radfet), tlm_radfet);
 }
 void TelemetrySaveSEL()
 {
 	pic32_sel_data sel = { 0 };
 	get_sel_data(&sel); //create task? or create inside the get data function
 
-	//write to file
-	//save to RAM (?)
+	write2File(&sel , tlm_sel);
+	saveTlmToRam(&sel, sizeof(sel), tlm_sel);
 }
 void TelemetrySaveSEU()
 {
 	pic32_seu_data seu = { 0 };
 	get_seu_data(&seu); //create task? or create inside the get data function
 
-	//write to file
-	//save to RAM (?)
+	write2File(&seu , tlm_seu);
+	saveTlmToRam(&seu, sizeof(seu), tlm_seu);
 }
 
 void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
