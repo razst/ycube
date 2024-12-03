@@ -126,6 +126,77 @@ int CMD_getDataImage(sat_packet_t *cmd){
 
 		}
 }
+/*
+ * chat gpt tries to write a send to satellite cmd but does it work?
+int CMD_sendImageToSatellite(sat_packet_t *cmd) {
+    FILE *f_source;  // Use standard file handling if FreeRTOS+FAT isn't available
+    char imageFileName[5];
+    unsigned short chunkID = 0;
+    unsigned short totalChunks;
+    char buffer[IMG_CHUNK_SIZE] = {0};
+    short imageID;
+    long size;
+
+    // Extract imageID from the command
+    memcpy(&imageID, &cmd->data, sizeof(short));
+    sprintf(imageFileName, "%d.JPG", imageID);
+
+    // Open the image file using standard file handling
+    f_source = fopen(imageFileName, "rb");
+    if (f_source == NULL) {
+        // Unable to open file
+        return -1;
+    }
+
+    // Calculate file size
+    fseek(f_source, 0, SEEK_END);
+    size = ftell(f_source);
+    rewind(f_source);
+
+    // Calculate total chunks
+    totalChunks = size / IMG_CHUNK_SIZE;
+    if (size % IMG_CHUNK_SIZE != 0) {
+        totalChunks++;
+    }
+
+    // Start sending chunks
+    while (chunkID < totalChunks) {
+        // Read next chunk
+        int readSize = fread(buffer, 1, IMG_CHUNK_SIZE, f_source);
+        if (readSize == 0) {
+            // Error reading file
+            fclose(f_source);
+            return -1;
+        }
+
+        // Prepare the image data packet
+        imageData_t data;
+        data.chunkID = chunkID;
+        memcpy(data.data, buffer, readSize);
+
+        // Send the chunk
+        if (TransmitDataAsSPL_Packet(cmd, (unsigned char*)&data, sizeof(data)) != 0) {
+            // Error transmitting data
+            fclose(f_source);
+            return -1;
+        }
+
+        // Wait for acknowledgment (example: pseudo function `WaitForAck`)
+        if (!WaitForAck(chunkID)) {
+            // Acknowledgment failed
+            fclose(f_source);
+            return -1;
+        }
+
+        // Move to the next chunk
+        chunkID++;
+    }
+
+    // Close the file and return success
+    fclose(f_source);
+    return 0;
+}
+*/
 
 
 void delete_allTMFilesFromSD()

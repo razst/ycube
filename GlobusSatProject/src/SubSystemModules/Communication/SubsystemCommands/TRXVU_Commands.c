@@ -131,8 +131,6 @@ int CMD_AntennaDeploy(sat_packet_t *cmd)
 //		vTaskDelay(SECONDS_TO_TICKS(10));
 //	}
 
-
-
 	int err = logError(IsisAntS_setArmStatus(ISIS_TRXVU_I2C_BUS_INDEX , isisants_sideA, isisants_arm) ,"CMD_AntennaDeploy-IsisAntS_setArmStatus-A");
 	if (err == E_NO_SS_ERR)
 		logError(IsisAntS_autoDeployment(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideA,ANTENNA_DEPLOYMENT_TIMEOUT) ,"CMD_AntennaDeploy-IsisAntS_autoDeployment-A");
