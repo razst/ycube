@@ -6,7 +6,7 @@
 #include <hal/Timing/Time.h>
 #include "TestingConfigurations.h"
 #ifdef ISISEPS
-	#include <satellite-subsystems/isismepsv2_ivid5_piu.h>
+	#include <satellite-subsystems/isismepsv2_ivid7_piu.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
@@ -213,8 +213,8 @@ int HardResetMCU(){
 //	isis_eps__reset__to_t cmd_t;
 //	isis_eps__reset__from_t cmd_f;
 //	cmd_t.fields.rst_key = RESET_KEY;
-	isismepsv2_ivid5_piu__replyheader_t reply;
-	logError(isismepsv2_ivid5_piu__reset(EPS_I2C_BUS_INDEX, &reply),"CMD_ResetComponent-isis_eps__reset__tmtc");
+	isismepsv2_ivid7_piu__replyheader_t reply;
+	logError(isismepsv2_ivid7_piu__reset(EPS_I2C_BUS_INDEX, &reply),"CMD_ResetComponent-isis_eps__reset__tmtc");
 }
 
 void Maintenance()

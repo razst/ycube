@@ -7,7 +7,7 @@
 #include <hal/Timing/Time.h>
 
 #ifdef ISISEPS
-	#include <satellite-subsystems/isismepsv2_ivid5_piu.h>
+	#include <satellite-subsystems/isismepsv2_ivid7_piu.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
@@ -480,7 +480,7 @@ FRAM_write((unsigned char*)&currId, CMD_ID_ADDR, CMD_ID_SIZE);
 // Check if the current ID is bigger than the last ID
 if (currId <= lastid) {
     printf("DEBUG: Current ID is not greater than last ID. Authorization failed.\n");
-    return E_UNAUTHORIZED;
+    return -1;//TODO E_UNAUTHORIZED;
 }
 
 // Combine `lastid` (as a string) into `plsHashMe`
@@ -559,7 +559,7 @@ if (memcmp(temp, cmpHash, Max_Hash_size) == 0) {
     return TRUE;
 } else {
     printf("DEBUG: Hashes do not match. Authorization failed.\n");
-    return E_UNAUTHORIZED;
+    return -1;//TODO E_UNAUTHORIZED;
 }
 
 }
@@ -586,7 +586,7 @@ unsigned int code, lastid, currId;
     //check if curr ID is bigger than lastid
     if(currId <= lastid)
     {
-        return E_UNAUTHORIZED;//bc bool FALSE needed?
+        return -1;//TODO E_UNAUTHORIZED;//bc bool FALSE needed?
     }
 
     //combine lastid(as str) into plshashme
@@ -636,7 +636,7 @@ unsigned int code, lastid, currId;
         return TRUE;
     }
     else
-        return E_UNAUTHORIZED;
+        return -1;//TODO E_UNAUTHORIZED;
 
 }
 

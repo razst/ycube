@@ -20,7 +20,7 @@
 	#include <satellite-subsystems/GomEPS.h>
 #endif
 #ifdef ISISEPS
-	#include <satellite-subsystems/isismepsv2_ivid5_piu.h>
+	#include <satellite-subsystems/isismepsv2_ivid7_piu.h>
 #endif
 #define I2c_SPEED_Hz 100000
 #define I2c_Timeout 10
@@ -210,8 +210,8 @@ int DeploySystem()
 		TelemetryCollectorLogic();
 
 		// reset WDT
-		isismepsv2_ivid5_piu__replyheader_t res;
-		isismepsv2_ivid5_piu__resetwatchdog(EPS_I2C_BUS_INDEX,&res);
+		isismepsv2_ivid7_piu__replyheader_t res;
+		isismepsv2_ivid7_piu__resetwatchdog(EPS_I2C_BUS_INDEX,&res);
 
 	}
 	logError(INFO_MSG,"Deploy wait loop - DONE");

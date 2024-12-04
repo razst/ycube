@@ -4,7 +4,7 @@
 #include <utils.h>
 
 #ifdef ISISEPS
-	#include <satellite-subsystems/isismepsv2_ivid5_piu.h>
+	#include <satellite-subsystems/isismepsv2_ivid7_piu.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>

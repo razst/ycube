@@ -3,7 +3,7 @@
 #include "GlobalStandards.h"
 
 #ifdef ISISEPS
-	#include <satellite-subsystems/isismepsv2_ivid5_piu.h>
+	#include <satellite-subsystems/isismepsv2_ivid7_piu.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
@@ -186,9 +186,9 @@ void TelemetryCollectorLogic()
 void TelemetrySaveEPS()
 {
 
-	isismepsv2_ivid5_piu__gethousekeepingeng__from_t response;
+	isismepsv2_ivid7_piu__gethousekeepingeng__from_t response;
 
-	if (logError(isismepsv2_ivid5_piu__gethousekeepingeng(EPS_I2C_BUS_INDEX,&response) ,"TelemetrySaveEPS-isis_eps__gethousekeepingeng__tm") == 0)
+	if (logError(isismepsv2_ivid7_piu__gethousekeepingeng(EPS_I2C_BUS_INDEX,&response) ,"TelemetrySaveEPS-isis_eps__gethousekeepingeng__tm") == 0)
 	{
 		write2File(&response , tlm_eps);
 	}
@@ -339,11 +339,11 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 	time_unix current_time = 0;
 	Time_getUnixEpoch(&current_time);
 	wod->sat_time = current_time;
-	isismepsv2_ivid5_piu__gethousekeepingengincdb__from_t hk_tlm_cdb;
-	isismepsv2_ivid5_piu__gethousekeepingeng__from_t hk_tlm;
+	isismepsv2_ivid7_piu__gethousekeepingengincdb__from_t hk_tlm_cdb;
+	isismepsv2_ivid7_piu__gethousekeepingeng__from_t hk_tlm;
 
-	err =  isismepsv2_ivid5_piu__gethousekeepingeng(EPS_I2C_BUS_INDEX, &hk_tlm);
-	err += isismepsv2_ivid5_piu__gethousekeepingengincdb(EPS_I2C_BUS_INDEX, &hk_tlm_cdb);
+	err =  isismepsv2_ivid7_piu__gethousekeepingeng(EPS_I2C_BUS_INDEX, &hk_tlm);
+	err += isismepsv2_ivid7_piu__gethousekeepingengincdb(EPS_I2C_BUS_INDEX, &hk_tlm_cdb);
 
 	if(err == 0){
 

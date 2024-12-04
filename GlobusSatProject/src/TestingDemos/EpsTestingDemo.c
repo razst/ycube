@@ -11,7 +11,7 @@
 #include <stdlib.h>
 
 #ifdef ISISEPS
-	#include <satellite-subsystems/isismepsv2_ivid5_piu.h>
+	#include <satellite-subsystems/isismepsv2_ivid7_piu.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
@@ -223,13 +223,13 @@ Boolean TestRestoreDefaultThresholdVoltages()
 
 Boolean GetHeaterValues(){
 
-	isismepsv2_ivid5_piu__setconfigurationparameter__to_t setTo;
-	isismepsv2_ivid5_piu__setconfigurationparameter__from_t setFrom;
+	isismepsv2_ivid7_piu__setconfigurationparameter__to_t setTo;
+	isismepsv2_ivid7_piu__setconfigurationparameter__from_t setFrom;
 	int16_t heatValue;
 
 	// get current LOTHR_BAT_HEATER value
 	setTo.fields.par_id = 0x3000;
-	isismepsv2_ivid5_piu__setconfigurationparameter(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	isismepsv2_ivid7_piu__setconfigurationparameter(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
 	memcpy(&heatValue,setFrom.fields.par_val,sizeof(int16_t));
 	printf("LOW THR_BAT_HEATER value = %d\n",heatValue);
 
@@ -238,7 +238,7 @@ Boolean GetHeaterValues(){
 	heatValue = 0;
 	// get current HITHR_BAT_HEATER value
 	setTo.fields.par_id = 0x3003;
-	isismepsv2_ivid5_piu__setconfigurationparameter(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
+	isismepsv2_ivid7_piu__setconfigurationparameter(EPS_I2C_BUS_INDEX,&setTo, &setFrom);
 	memcpy(&heatValue,setFrom.fields.par_val,sizeof(int16_t));
 	printf("HIGH THR_BAT_HEATER value = %d\n",heatValue);
 

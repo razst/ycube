@@ -31,7 +31,7 @@
 
 #include <satellite-subsystems/isis_vu_e.h>
 #include <satellite-subsystems/isis_ants_rev2.h>
-#include <satellite-subsystems/isismepsv2_ivid5_piu.h>
+#include <satellite-subsystems/isismepsv2_ivid7_piu.h>
 
 
 static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
@@ -369,19 +369,19 @@ void getTlmTypeInfo(tlm_type_t tlmType, char* endFileName, int* structSize){
 	}
 	else if (tlmType==tlm_eps_raw_mb_NOT_USED){
 		memcpy(endFileName,END_FILENAME_EPS_RAW_MB_TLM,sizeof(END_FILENAME_EPS_RAW_MB_TLM));
-		*structSize = sizeof(isismepsv2_ivid5_piu__gethousekeepingraw__from_t);
+		*structSize = sizeof(isismepsv2_ivid7_piu__gethousekeepingraw__from_t);
 	}
 	else if (tlmType==tlm_eps_raw_cdb_NOT_USED){
 		memcpy(endFileName,END_FILENAME_EPS_RAW_CDB_TLM,sizeof(END_FILENAME_EPS_RAW_CDB_TLM));
-		*structSize = sizeof(isismepsv2_ivid5_piu__gethousekeepingrawincdb__from_t);
+		*structSize = sizeof(isismepsv2_ivid7_piu__gethousekeepingrawincdb__from_t);
 	}
 	else if (tlmType==tlm_eps){
 		memcpy(endFileName,END_FILENAME_EPS_TLM,sizeof(END_FILENAME_EPS_TLM));
-		*structSize = sizeof(isismepsv2_ivid5_piu__gethousekeepingeng__from_t);
+		*structSize = sizeof(isismepsv2_ivid7_piu__gethousekeepingeng__from_t);
 	}
 	else if (tlmType==tlm_eps_eng_cdb_NOT_USED){
 		memcpy(endFileName,END_FILENAME_EPS_ENG_CDB_TLM,sizeof(END_FILENAME_EPS_ENG_CDB_TLM));
-		*structSize = sizeof(isismepsv2_ivid5_piu__gethousekeepingengincdb__from_t);
+		*structSize = sizeof(isismepsv2_ivid7_piu__gethousekeepingengincdb__from_t);
 	}
 	else if (tlmType==tlm_wod){
 		memcpy(endFileName,END_FILENAME_WOD_TLM,sizeof(END_FILENAME_WOD_TLM));
@@ -561,8 +561,8 @@ void printTLM(void* element, tlm_type_t tlmType){
 		//printf("bus_volt: %d\n ",data.fields.bus_volt);
 	}
 	else if (tlmType==tlm_eps_raw_cdb){
-		isismepsv2_ivid5_piu__gethousekeepingrawincdb__from_t data;
-			offset += (sizeof(isismepsv2_ivid5_piu__replyheader_t));// skip 1 unsigned short fields
+		isismepsv2_ivid7_piu__gethousekeepingrawincdb__from_t data;
+			offset += (sizeof(isismepsv2_ivid7_piu__replyheader_t));// skip 1 unsigned short fields
 			offset += (sizeof(uint8_t));// skip 1 unsigned short fields
 			memcpy(&data.fields.volt_brdsup ,element+offset,sizeof(data.fields.volt_brdsup));
 			offset += sizeof(data.fields.volt_brdsup);

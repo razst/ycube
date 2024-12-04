@@ -1,7 +1,7 @@
 #include "GlobalStandards.h"
 
 #ifdef ISISEPS
-	#include <satellite-subsystems/isismepsv2_ivid5_piu.h>
+	#include <satellite-subsystems/isismepsv2_ivid7_piu.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
@@ -79,8 +79,8 @@ int CMD_EPS_NOP(sat_packet_t *cmd)
 
 int CMD_EPS_ResetWDT(sat_packet_t *cmd)
 {
-	isismepsv2_ivid5_piu__replyheader_t res;
-	int err = isismepsv2_ivid5_piu__resetwatchdog(EPS_I2C_BUS_INDEX,&res);
+	isismepsv2_ivid7_piu__replyheader_t res;
+	int err = isismepsv2_ivid7_piu__resetwatchdog(EPS_I2C_BUS_INDEX,&res);
 	if (err == E_NO_SS_ERR)
 	{
 		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
