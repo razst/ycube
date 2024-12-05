@@ -75,24 +75,27 @@ Boolean TestInitTrxvuWithDifferentFrameLengths()
 
 Boolean TestTrxvuLogic()
 {
-	printf("\nPlease insert number of minutes to test(0 to 10)\n");
-	int minutes = 0;
+	int times = 0;
+	int sleep = 0;
 	int err = 0;
-	while(UTIL_DbguGetIntegerMinMax((unsigned int*)&minutes,0,10) == 0);
+	printf("\nPlease insert number of times to run(0 to 1000)\n");
+	while(UTIL_DbguGetIntegerMinMax((unsigned int*)&times,0,1000) == 0);
 
-	portTickType curr_time = xTaskGetTickCount();
-	portTickType end_time = MINUTES_TO_TICKS(minutes) + curr_time;
+	printf("\nPlease sleep tick time (100 to 100,000)\n");
+	while(UTIL_DbguGetIntegerMinMax((unsigned int*)&sleep,100,100000) == 0);
 
-	while(end_time - curr_time > 0)
+	err = isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps);
+
+	while(times > 0)
 	{
-		curr_time = xTaskGetTickCount();
+		times--;
 
 		err = TRX_Logic();
 		if(0 != err){
 			printf("error in TRX_Logic = %d\n exiting\n",err);
 			return TRUE;
 		}
-		vTaskDelay(500);
+		vTaskDelay(sleep);
 	}
 	return TRUE;
 }
@@ -258,7 +261,7 @@ Boolean TestChooseDefaultBeaconCycle()
 	printf("Please state new beacon interval in seconds(0 to cancel; min 5, max 60):\n");
 
 	unsigned int seconds = 0;
-	while(UTIL_DbguGetIntegerMinMax(&seconds,0,60) == 0);
+	while(UTIL_DbguGetIntegerMinMax(&seconds,5,60) == 0);
 	if(0 == seconds){
 		return TRUE;
 	}
@@ -763,7 +766,7 @@ Boolean selectAndExecuteTrxvuDemoTest()
 	printf("\t 13) Set Trxvu Bitrate\n\r");
 	printf("\t 14) Get Trxvu Bitrate\n\r");
 	printf("\t 15) Transmit Data As SPL Packet\n\r");
-	printf("\t 16) Choose to default beacon inervals\n\r");
+	printf("\t 16) Change beacon inervals\n\r");
 	printf("\t 17) Restore to default beacon inervals\n\r");
 	printf("\t 18) Check Transmition Allowed\n\r");
 	printf("\t 19) Loop Transmition of SPL\n\r");

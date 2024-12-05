@@ -490,6 +490,7 @@ int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
 	}
 
 	uint8_t avail=0;
+//	err = isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps);
 	err = isis_vu_e__send_frame(ISIS_TRXVU_I2C_BUS_INDEX,(unsigned char*) packet, data_length, &avail);
 
 	////printf("avial TRXVU:%d\n",avail);
