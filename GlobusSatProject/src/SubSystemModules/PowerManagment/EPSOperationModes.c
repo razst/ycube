@@ -11,6 +11,8 @@
 #endif
 
 #include "SubSystemModules/Housekepping/Payload.h"
+#include <satellite-subsystems/common_types.h>
+
 
 channel_t g_system_state;
 EpsState_t state;
@@ -69,9 +71,8 @@ int EnterCriticalMode()
 
 int PayloadOperations(PayloadOperation status)
 {
-	return 0; //TODO update to latest eps driver
 
-	uint8_t index = (unsigned char)PAYLOAD_SWITCH;
+	uint8_t index = 0;
 	isismepsv2_ivid5_piu__replyheader_t response;
 	int err = 0;
 
@@ -82,6 +83,10 @@ int PayloadOperations(PayloadOperation status)
 		err = isismepsv2_ivid5_piu__outputbuschannelon(index, PAYLOAD_SWITCH, &response);
 
 		//TODO - check response
+		if(err != driver_error_none)
+		{
+			return err;
+		}
 
 		//increase the number of sw3 resets
 		unsigned int num_of_resets = 0;
@@ -95,9 +100,13 @@ int PayloadOperations(PayloadOperation status)
 
 	case TurnOff: ;
 
-	err = isismepsv2_ivid5_piu__outputbuschanneloff(index, PAYLOAD_SWITCH, &response);
+		err = isismepsv2_ivid5_piu__outputbuschanneloff(index, PAYLOAD_SWITCH, &response);
 
 		//TODO - check response
+		if(err != driver_error_none)
+		{
+			return err;
+		}
 
 		break;
 

@@ -106,4 +106,12 @@ void get_sel_data(pic32_sel_data* sel);
  * @param[out] output pic32_seu_data
  */
 void get_seu_data(pic32_seu_data* seu);
+
+
+/*!
+ * swap byte order
+ * @param[in] number to convert(int)
+ * @return converted number(int)
+ */
+int changeIntIndian(int num);
 #endif /* PAYLOAD_H_ */
