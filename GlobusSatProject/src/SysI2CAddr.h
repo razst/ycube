@@ -12,6 +12,7 @@
 
 #define I2C_TRXVU_TC_ADDR 0x61		//!< I2C address of the transceiver
 #define I2C_TRXVU_RC_ADDR 0x60		//!< I2C address of the receiver
+#define TIMEOUT_UPBOUND			10
 
 #define EPS_I2C_BUS_INDEX 0			//!< index of the EPS I2C
 #define EPS_I2C_ADDR 0x20			//!< I2C address of the EPS

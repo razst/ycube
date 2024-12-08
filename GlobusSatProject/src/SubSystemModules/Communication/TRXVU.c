@@ -260,8 +260,17 @@ int TRX_Logic() {
 }
 
 int GetNumberOfFramesInBuffer() {
-	uint16_t frameCounter = 0;
-	if (logError(isis_vu_e__get_frame_count(0, &frameCounter) ,"TRX_Logic-IsisTrxvu_rcGetFrameCount")) return -1;
+	unsigned short frameCounter = 0;
+	unsigned int timeoutCounter = 0;
+
+	while(timeoutCounter < 4*TIMEOUT_UPBOUND && frameCounter==0)
+	{
+		if (logError(isis_vu_e__get_frame_count(0, &frameCounter) ,"TRX_Logic-IsisTrxvu_rcGetFrameCount")) return -1;
+
+		timeoutCounter++;
+
+		vTaskDelay(10 / portTICK_RATE_MS);
+	}
 
 	return frameCounter;
 }
