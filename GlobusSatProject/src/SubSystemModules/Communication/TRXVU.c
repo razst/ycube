@@ -240,6 +240,7 @@ int TRX_Logic() {
 
 	if (frameCount > 0) {
 		// we have data that came from ground station
+		printf("Got new frame ...%d\r\n",frameCount);
 		cmdFound = GetOnlineCommand(&cmd);
 	}
 

@@ -35,7 +35,15 @@ void taskMain()
 
 	InitSubsystems();
 
+	int c=0,j=0;
 	while (TRUE) {
+		c++;
+		if (c==1000){
+			printf("in main loop ...%d\r\n",j);
+			j++;
+			c=0;
+		}
+
 		EPS_Conditioning();
 
 		TRX_Logic();
@@ -43,6 +51,7 @@ void taskMain()
 		TelemetryCollectorLogic();
 
 		Maintenance();
+
 
 		vTaskDelay(10);
 	}
@@ -55,7 +64,7 @@ int main()
 
 		xTaskHandle taskMainHandle;
 
-		TRACE_CONFIGURE_ISP(DBGU_STANDARD, 2000000, BOARD_MCK);
+		TRACE_CONFIGURE_ISP(DBGU_STANDARD, 115200, BOARD_MCK);
 		// Enable the Instruction cache of the ARM9 core. Keep the MMU and Data Cache disabled.
 		CP15_Enable_I_Cache();
 
