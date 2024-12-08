@@ -15,7 +15,7 @@
 #define SYSTEM6 	 0x40	//!< channel state when 'SYSTEM6' is on
 #define SYSTEM7 	 0x80	//!< channel state when 'SYSTEM7' is on
 
-#define PAYLOAD_SWITCH isis_eps__imeps_channel__channel_5v_sw3// remove
+#define PAYLOAD_SWITCH isismepsv2_ivid5_piu__eps_channel__channel_5v_sw3
 
 typedef enum{
 	TurnOn,
