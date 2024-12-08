@@ -303,6 +303,10 @@ int GetOnlineCommand(sat_packet_t *cmd)
 	logError(INFO_MSG ,buffer);
 
 	if (logError(ParseDataToCommand(receivedFrameData,cmd),"GetOnlineCommand-ParseDataToCommand")) return -1;
+	// remove the last frame
+	vTaskDelay(10 / portTICK_RATE_MS);
+	logError(isis_vu_e__remove_frame(0),"isis_vu_e__remove_frame");
+	vTaskDelay(10 / portTICK_RATE_MS);
 
 
 	return command_found;
