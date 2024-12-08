@@ -139,8 +139,8 @@ int InitTrxvu() {
     myTRXVU[0].txAddr = I2C_TRXVU_TC_ADDR;
 
 	//Buffer definition
-    myTRXVU[0].maxSendBufferLength = SIZE_TXFRAME;
-    myTRXVU[0].maxReceiveBufferLength = SIZE_RXFRAME;
+    myTRXVU[0].maxSendBufferLength = MAX_COMMAND_DATA_LENGTH;
+    myTRXVU[0].maxReceiveBufferLength = MAX_COMMAND_DATA_LENGTH;
 
 	if (logError(ISIS_VU_E_Init(myTRXVU, 1) ,"InitTrxvu-IsisTrxvu_initialize") ) return -1;
 	if (logError(isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps) ,"isis_vu_e__set_bitrate") ) return -1;

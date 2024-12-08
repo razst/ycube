@@ -1,4 +1,4 @@
-09:49:49 **** Build of configuration Debug for project satellite-subsystems-demo ****
+20:07:35 **** Build of configuration Debug for project satellite-subsystems-demo ****
 make -r -k all 
 Building file: ../src/Demos/IsisAOCSdemo.c
 Invoking: Cross ARM C Compiler
@@ -95,5 +95,5 @@ arm-none-eabi-size --format=berkeley "satellite-subsystems-demo.elf"
 Finished building: satellite-subsystems-demo.siz
  
 
-09:49:53 Build Finished (took 4s.211ms)
+20:07:39 Build Finished (took 4s.84ms)
 

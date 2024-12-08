@@ -5,7 +5,7 @@
 #include "GlobalStandards.h"
 #include "SatCommandHandler.h"
 
-#define MAX_COMMAND_DATA_LENGTH 200 ///< maximum AX25 data field available for downlink
+#define MAX_COMMAND_DATA_LENGTH 235///< maximum AX25 data field available for downlink
 #define IMG_CHUNK_SIZE 50 //190 // leave room for chunk number and more
 
 #define FRAM_MAX_ADDRESS 539216400
