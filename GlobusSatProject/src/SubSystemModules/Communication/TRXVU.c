@@ -129,7 +129,6 @@ void InitSemaphores()
 
 int InitTrxvu() {
 
-
 	// *** init TRXVU ***
     // Definition of I2C and TRXUV
     ISIS_VU_E_t myTRXVU[1];
@@ -142,9 +141,11 @@ int InitTrxvu() {
     myTRXVU[0].maxSendBufferLength = MAX_COMMAND_DATA_LENGTH;
     myTRXVU[0].maxReceiveBufferLength = MAX_COMMAND_DATA_LENGTH;
 
+	//uint32_t freq = 436.400;
 	if (logError(ISIS_VU_E_Init(myTRXVU, 1) ,"InitTrxvu-IsisTrxvu_initialize") ) return -1;
 	if (logError(isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps) ,"isis_vu_e__set_bitrate") ) return -1;
-
+	//if (logError(isis_vu_e__set_tx_freq(I2C_TRXVU_TC_ADDR, freq),"isis_vu_e__tx_freq") ) return -1;
+	
 	vTaskDelay(1000); // wait a little
 
 	// *** init ANts ****
