@@ -636,6 +636,7 @@ unsigned int code, lastid, currId;
     if(memcmp(temp, cmpHash, Max_Hash_size) == 0)
     {   
         printf("success!\n");//for test
+		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
         return TRUE;
     }
     else

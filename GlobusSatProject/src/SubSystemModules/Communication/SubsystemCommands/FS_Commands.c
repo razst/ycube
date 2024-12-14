@@ -108,7 +108,7 @@ int CMD_Get_TLM_Info(sat_packet_t *cmd)
 				printf("\n\nTLM INFO:\nSD Data:\nTotal: %lu\nUsed: %lu\nFree: %lu\nBad: %lu\nMin file date: %hu\nMax file date: %hu\nLOG:\nMin ram date: %lu\nMax ram date: %lu\n\nWOD:\nMin ram date: %lu\nMax ram date: %lu\n", data.total, data.used, data.free, data.bad, data.minFileDate, data.maxFileDate, data.minLogRamDate, data.maxLogRamDate, data.minWodRamDate, data.maxWodRamDate);
 		#endif
 
-
+		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*)&data, sizeof(data));
 	}
 	return err;
@@ -130,6 +130,7 @@ int CMD_Switch_SD_Card(sat_packet_t *cmd)
 	{
 		Boolean8bit reset_flag = TRUE_8BIT;
 		FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
+		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
 		vTaskDelay(10);
 		restart();
 		vTaskDelay(10000);
@@ -144,6 +145,7 @@ int CMD_Format_SD_Card(sat_packet_t *cmd)
 	Boolean8bit reset_flag = TRUE_8BIT;
 	FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
 	vTaskDelay(10);
+	SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
 	restart();
 	vTaskDelay(10000);
 	return 0;
