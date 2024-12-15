@@ -1,93 +1,5 @@
-20:07:35 **** Build of configuration Debug for project satellite-subsystems-demo ****
+08:00:22 **** Build of configuration Debug for project satellite-subsystems-demo ****
 make -r -k all 
-Building file: ../src/Demos/IsisAOCSdemo.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"src/Demos/IsisAOCSdemo.d" -MT"src/Demos/IsisAOCSdemo.d" -c -o "src/Demos/IsisAOCSdemo.o" "../src/Demos/IsisAOCSdemo.c"
-In file included from C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include/satellite-subsystems/isis_aocs.h:15:0,
-                 from ../src/Demos/IsisAOCSdemo.c:25:
-C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include/satellite-subsystems/isis_aocs_types.h:4954:5: note: offset of packed bit-field 'scg_state' has changed in GCC 4.4
-C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include/satellite-subsystems/isis_aocs_types.h:4954:5: note: offset of packed bit-field 'thr_state' has changed in GCC 4.4
-Finished building: ../src/Demos/IsisAOCSdemo.c
- 
-Building file: ../src/Demos/IsisHSTXS_V2demo.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"src/Demos/IsisHSTXS_V2demo.d" -MT"src/Demos/IsisHSTXS_V2demo.d" -c -o "src/Demos/IsisHSTXS_V2demo.o" "../src/Demos/IsisHSTXS_V2demo.c"
-Finished building: ../src/Demos/IsisHSTXS_V2demo.c
- 
-Building file: ../src/Demos/IsisMTQv2demo.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"src/Demos/IsisMTQv2demo.d" -MT"src/Demos/IsisMTQv2demo.d" -c -o "src/Demos/IsisMTQv2demo.o" "../src/Demos/IsisMTQv2demo.c"
-Finished building: ../src/Demos/IsisMTQv2demo.c
- 
-Building file: ../src/Demos/IsisSPv2demo.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"src/Demos/IsisSPv2demo.d" -MT"src/Demos/IsisSPv2demo.d" -c -o "src/Demos/IsisSPv2demo.o" "../src/Demos/IsisSPv2demo.c"
-Finished building: ../src/Demos/IsisSPv2demo.c
- 
-Building file: ../src/Demos/IsisTRXVUrevDdemo.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"src/Demos/IsisTRXVUrevDdemo.d" -MT"src/Demos/IsisTRXVUrevDdemo.d" -c -o "src/Demos/IsisTRXVUrevDdemo.o" "../src/Demos/IsisTRXVUrevDdemo.c"
-Finished building: ../src/Demos/IsisTRXVUrevDdemo.c
- 
-Building file: ../src/Demos/IsisTRXVUrevEdemo.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"src/Demos/IsisTRXVUrevEdemo.d" -MT"src/Demos/IsisTRXVUrevEdemo.d" -c -o "src/Demos/IsisTRXVUrevEdemo.o" "../src/Demos/IsisTRXVUrevEdemo.c"
-Finished building: ../src/Demos/IsisTRXVUrevEdemo.c
- 
-Building file: ../src/Demos/common.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"src/Demos/common.d" -MT"src/Demos/common.d" -c -o "src/Demos/common.o" "../src/Demos/common.c"
-Finished building: ../src/Demos/common.c
- 
-Building file: ../src/Demos/input.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"src/Demos/input.d" -MT"src/Demos/input.d" -c -o "src/Demos/input.o" "../src/Demos/input.c"
-Finished building: ../src/Demos/input.c
- 
-Building file: ../src/Demos/isisRXSrevCdemo.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"src/Demos/isisRXSrevCdemo.d" -MT"src/Demos/isisRXSrevCdemo.d" -c -o "src/Demos/isisRXSrevCdemo.o" "../src/Demos/isisRXSrevCdemo.c"
-Finished building: ../src/Demos/isisRXSrevCdemo.c
- 
-Building file: ../src/Demos/isis_ants2_demo.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"src/Demos/isis_ants2_demo.d" -MT"src/Demos/isis_ants2_demo.d" -c -o "src/Demos/isis_ants2_demo.o" "../src/Demos/isis_ants2_demo.c"
-Finished building: ../src/Demos/isis_ants2_demo.c
- 
-Building file: ../src/Demos/isis_ants_demo.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"src/Demos/isis_ants_demo.d" -MT"src/Demos/isis_ants_demo.d" -c -o "src/Demos/isis_ants_demo.o" "../src/Demos/isis_ants_demo.c"
-Finished building: ../src/Demos/isis_ants_demo.c
- 
-Building file: ../src/Demos/isismeps_ivid5_pdu_demo.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"src/Demos/isismeps_ivid5_pdu_demo.d" -MT"src/Demos/isismeps_ivid5_pdu_demo.d" -c -o "src/Demos/isismeps_ivid5_pdu_demo.o" "../src/Demos/isismeps_ivid5_pdu_demo.c"
-Finished building: ../src/Demos/isismeps_ivid5_pdu_demo.c
- 
-Building file: ../src/Demos/isismeps_ivid5_piu_demo.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"src/Demos/isismeps_ivid5_piu_demo.d" -MT"src/Demos/isismeps_ivid5_piu_demo.d" -c -o "src/Demos/isismeps_ivid5_piu_demo.o" "../src/Demos/isismeps_ivid5_piu_demo.c"
-Finished building: ../src/Demos/isismeps_ivid5_piu_demo.c
- 
-Building file: ../src/Demos/trxvu_frame_ready.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"src/Demos/trxvu_frame_ready.d" -MT"src/Demos/trxvu_frame_ready.d" -c -o "src/Demos/trxvu_frame_ready.o" "../src/Demos/trxvu_frame_ready.c"
-Finished building: ../src/Demos/trxvu_frame_ready.c
- 
-Building file: ../src/main.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:\ISIS\workspace_ycube\satellite-subsystems\demo\src" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/include" -MMD -MP -MF"src/main.d" -MT"src/main.d" -c -o "src/main.o" "../src/main.c"
-Finished building: ../src/main.c
- 
-Building target: satellite-subsystems-demo.elf
-Invoking: Cross ARM C Linker
-arm-none-eabi-gcc -mcpu=arm926ej-s -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -T C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hal/lib" -L"C:/ISIS/workspace_ycube/satellite-subsystems/demo/../..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/satellite-subsystems/demo/..//satellite-subsystems/lib" -Wl,-Map,"satellite-subsystems-demo.map" -lc -o "satellite-subsystems-demo.elf"  ./src/Demos/IsisAOCSdemo.o ./src/Demos/IsisHSTXS_V2demo.o ./src/Demos/IsisMTQv2demo.o ./src/Demos/IsisSPv2demo.o ./src/Demos/IsisTRXVUrevDdemo.o ./src/Demos/IsisTRXVUrevEdemo.o ./src/Demos/common.o ./src/Demos/input.o ./src/Demos/isisRXSrevCdemo.o ./src/Demos/isis_ants2_demo.o ./src/Demos/isis_ants_demo.o ./src/Demos/isismeps_ivid5_pdu_demo.o ./src/Demos/isismeps_ivid5_piu_demo.o ./src/Demos/trxvu_frame_ready.o  ./src/main.o   -lSatelliteSubsystemsD -lm -lHCCD -lHALD -lFreeRTOSD -lAt91D
-Finished building target: satellite-subsystems-demo.elf
- 
-Invoking: Cross ARM GNU Create Flash Image
-arm-none-eabi-objcopy -O binary "satellite-subsystems-demo.elf"  "satellite-subsystems-demo.bin"
-Finished building: satellite-subsystems-demo.bin
- 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "satellite-subsystems-demo.elf"
    text	   data	    bss	    dec	    hex	filename
@@ -95,5 +7,5 @@ arm-none-eabi-size --format=berkeley "satellite-subsystems-demo.elf"
 Finished building: satellite-subsystems-demo.siz
  
 
-20:07:39 Build Finished (took 4s.84ms)
+08:00:23 Build Finished (took 1s.219ms)
 

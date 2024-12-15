@@ -138,20 +138,20 @@ void TelemetryCollectorLogic()
 			tlm_last_save_time[tlm_tx] = curr;
 		}
 	}
-
-	if (CheckExecutionTime(tlm_last_save_time[tlm_antenna],tlm_save_periods[tlm_antenna])){
-		TelemetrySaveANT();
-		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
-			tlm_last_save_time[tlm_antenna] = curr;
-		}
-	}
-
-	if (CheckExecutionTime(tlm_last_save_time[tlm_solar],tlm_save_periods[tlm_solar])){
-		TelemetrySaveSolarPanels();
-		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
-			tlm_last_save_time[tlm_solar] = curr;
-		}
-	}
+//TODO: remove this comment
+	//if (CheckExecutionTime(tlm_last_save_time[tlm_antenna],tlm_save_periods[tlm_antenna])){
+//		TelemetrySaveANT();
+//		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
+//			tlm_last_save_time[tlm_antenna] = curr;
+//		}
+//	}
+//TODO remove this comment
+//	if (CheckExecutionTime(tlm_last_save_time[tlm_solar],tlm_save_periods[tlm_solar])){
+//		TelemetrySaveSolarPanels();
+//		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
+//			tlm_last_save_time[tlm_solar] = curr;
+//		}
+//	}
 
 	if (CheckExecutionTime(tlm_last_save_time[tlm_wod],tlm_save_periods[tlm_wod])){
 		TelemetrySaveWOD();
