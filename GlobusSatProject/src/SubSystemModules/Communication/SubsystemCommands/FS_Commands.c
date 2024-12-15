@@ -139,16 +139,19 @@ int CMD_Switch_SD_Card(sat_packet_t *cmd)
 }
 int CMD_Format_SD_Card(sat_packet_t *cmd)
 {
-	int drivenum;
+	int drivenum, err;
 	drivenum = f_getdrive();
-	logError(f_format(drivenum, F_FAT32_MEDIA),"Format SD");
+	err = logError(f_format(drivenum, F_FAT32_MEDIA),"Format SD");
+	if(E_NO_SS_ERR == err)
+	{
 	Boolean8bit reset_flag = TRUE_8BIT;
 	FRAM_write(&reset_flag, RESET_CMD_FLAG_ADDR, RESET_CMD_FLAG_SIZE);
 	vTaskDelay(10);
 	SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
 	restart();
 	vTaskDelay(10000);
-	return 0;
+	}
+	return err;
 }
 
 int CMD_FreeSpace(sat_packet_t *cmd)

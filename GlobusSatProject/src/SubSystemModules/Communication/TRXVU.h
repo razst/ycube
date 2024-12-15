@@ -20,6 +20,8 @@
 
 #define BEACON_SPL_ID	0x02FFFFFF
 
+#define TX_FREQUENCY = 436.400;
+
 #define MIN_TRXVU_BUFF 5
 #define DEFAULT_RSSI_VALUE 10
 
