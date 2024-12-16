@@ -41,6 +41,9 @@
 
 #define EXTRA_TRIES		20
 
+#define ADC_TO_VOLTAGE(R) ((2 * 4.096 * (R)) / (2 << 23))
+#define VOLTAGE_TO_TEMPERATURE(V) (100 * ((V) * (5 / 2.0) - 2.73))
+
 extern Boolean state_changed;
 
 typedef enum {
@@ -51,11 +54,13 @@ typedef struct __attribute__ ((__packed__)) radfet_data
 {
 	time_unix radfet_time;
 
-	//readfet 1&2 readout
+	int radfet1;		/**< ADC conversion result for RADFET 1 */
+	int radfet2;		/**< ADC conversion result for RADFET 2 */
 
 	time_unix temp_time;
 
-	//temperture readout
+	double temperature;				/**< Temperature measurement in degrees Celsius */
+
 } radfet_data;
 
 typedef struct __attribute__ ((__packed__)) pic32_sel_data

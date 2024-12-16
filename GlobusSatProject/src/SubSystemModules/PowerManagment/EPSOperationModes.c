@@ -82,7 +82,6 @@ int PayloadOperations(PayloadOperation status)
 
 		err = isismepsv2_ivid5_piu__outputbuschannelon(index, PAYLOAD_SWITCH, &response);
 
-		//TODO - check response
 		if(err != driver_error_none)
 		{
 			return err;
@@ -102,7 +101,6 @@ int PayloadOperations(PayloadOperation status)
 
 		err = isismepsv2_ivid5_piu__outputbuschanneloff(index, PAYLOAD_SWITCH, &response);
 
-		//TODO - check response
 		if(err != driver_error_none)
 		{
 			return err;
