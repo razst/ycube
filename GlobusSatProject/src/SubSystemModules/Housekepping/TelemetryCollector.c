@@ -292,24 +292,39 @@ void TelemetrySaveWOD()
 
 void TelemetrySaveRADFET()
 {
+	if (GetSystemState() != FullMode)
+	{
+		return;
+	}
+
 	radfet_data radfet = { 0 };
-	get_radfet_data(&radfet); //create task? or create inside the get data function
+	get_radfet_data(&radfet);
 
 	write2File(&radfet , tlm_radfet);
 	saveTlmToRam(&radfet, sizeof(radfet), tlm_radfet);
 }
 void TelemetrySaveSEL()
 {
+	if (GetSystemState() != FullMode)
+	{
+		return;
+	}
+
 	pic32_sel_data sel = { 0 };
-	get_sel_data(&sel); //create task? or create inside the get data function
+	get_sel_data(&sel);
 
 	write2File(&sel , tlm_sel);
 	saveTlmToRam(&sel, sizeof(sel), tlm_sel);
 }
 void TelemetrySaveSEU()
 {
+	if (GetSystemState() != FullMode)
+	{
+		return;
+	}
+
 	pic32_seu_data seu = { 0 };
-	get_seu_data(&seu); //create task? or create inside the get data function
+	get_seu_data(&seu);
 
 	write2File(&seu , tlm_seu);
 	saveTlmToRam(&seu, sizeof(seu), tlm_seu);
