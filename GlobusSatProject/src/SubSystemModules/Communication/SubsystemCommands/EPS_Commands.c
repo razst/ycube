@@ -93,7 +93,7 @@ int CMD_Payload_Operations (sat_packet_t *cmd)
 	int err;
 	PayloadOperation status;
 
-	memcpy(state,cmd -> data,1);
+	memcpy(&state,cmd -> data,1);
 	switch(state)
 	{
 		case 1:
