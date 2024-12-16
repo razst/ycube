@@ -153,6 +153,9 @@ int eps_command_router(sat_packet_t *cmd)
 	case RESET_EPS_WDT:
 		err = CMD_EPS_ResetWDT(cmd);
 		break;
+	case PAYLOAD_OPERATIONS:
+		err = CMD_Payload_Operations(cmd);
+		break;
 	default:
 		SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
 		break;

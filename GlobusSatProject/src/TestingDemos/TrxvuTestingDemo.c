@@ -589,7 +589,7 @@ unsigned int code, lastid, currId;
     //check if curr ID is bigger than lastid
     if(currId <= lastid)
     {
-        return -1;//TODO E_UNAUTHORIZED;//bc bool FALSE needed?
+        return E_UNAUTHORIZED;//;//bc bool FALSE needed?
     }
 
     //combine lastid(as str) into plshashme
@@ -637,10 +637,10 @@ unsigned int code, lastid, currId;
     {   
         printf("success!\n");//for test
 		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
-        return TRUE;
+        return E_NO_SS_ERR;
     }
     else
-        return -1;//TODO E_UNAUTHORIZED;
+        return E_UNAUTHORIZED;
 
 }
 

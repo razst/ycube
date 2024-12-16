@@ -71,7 +71,6 @@ int EnterCriticalMode()
 
 int PayloadOperations(PayloadOperation status)
 {
-
 	uint8_t index = 0;
 	isismepsv2_ivid5_piu__replyheader_t response;
 	int err = 0;

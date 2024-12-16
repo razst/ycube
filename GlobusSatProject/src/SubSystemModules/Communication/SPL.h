@@ -89,7 +89,8 @@ typedef enum __attribute__ ((__packed__)) eps_subtypes_t
 	UPDATE_ALPHA 		= 0x01,
     GET_HEATER_VALUES 	= 0x02,
     SET_HEATER_VALUES 	= 0x03,
-    RESET_EPS_WDT	 	= 0x04
+    RESET_EPS_WDT	 	= 0x04,
+	PAYLOAD_OPERATIONS  = 0x05
 }eps_subtypes_t;
 
 

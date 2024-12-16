@@ -27,6 +27,7 @@
 #define INVALID_IMG_TYPE			-209
 #define INFO_MSG				-210
 #define PAYLOAD_TIMEOUT				-211
+#define E_UNAUTHORIZED          -240 ///< Passcode or id incorrect 
 
 
 

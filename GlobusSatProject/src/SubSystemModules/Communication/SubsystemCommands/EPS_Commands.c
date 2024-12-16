@@ -87,6 +87,32 @@ int CMD_EPS_ResetWDT(sat_packet_t *cmd)
 	}
 	return err;
 }
+int CMD_Payload_Operations (sat_packet_t *cmd)
+{
+	char state;
+	int err;
+	PayloadOperation status;
+
+	memcpy(state,cmd -> data,1);
+	switch(state)
+	{
+		case 1:
+			status = TurnOn;
+			break;
+		case 2:
+			status = TurnOff;
+			break;
+		case 3:
+			status = Restart;
+			break;
+		default:
+			return E_PARAM_OUTOFBOUNDS;
+			break;
+	}
+	
+	err = PayloadOperations(status);
+	return err;
+}
 
 int CMD_EPS_SetChannels(sat_packet_t *cmd)
 {
