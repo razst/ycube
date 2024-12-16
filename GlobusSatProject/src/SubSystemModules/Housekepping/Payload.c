@@ -1,27 +1,17 @@
 #include "Payload.h"
 Boolean state_changed = FALSE;
 
-PayloadResult payloadRead(unsigned char* buffer, int size, int delay)
+int payloadRead(unsigned char* buffer, int size, int delay)
 {
-	int err = 0;
-
 	for(int i = 0; i < EXTRA_TRIES; i++)
 	{
-		err = I2C_write(PAYLOAD_I2C_ADDRESS, GET_LAST_DATA ,1);
-		if(err != E_NO_SS_ERR)
-		{
-			return PAYLOAD_I2C_Write_Error;
-		}
+		if(!logError(I2C_write(PAYLOAD_I2C_ADDRESS, GET_LAST_DATA ,1), "I2C write to payload")){return -1;}
 
-		err = I2C_read(PAYLOAD_I2C_ADDRESS, buffer, size);
-		if(err != E_NO_SS_ERR)
-		{
-			return PAYLOAD_I2C_Read_Error;
-		}
+		if(!logError(I2C_read(PAYLOAD_I2C_ADDRESS, buffer, size), "I2C read from payload")){return -1;}
 
 		if(buffer[3] == 0)
 		{
-			return PAYLOAD_SUCCESS;
+			return 0;
 		}
 
 		vTaskDelay(delay);
@@ -30,13 +20,10 @@ PayloadResult payloadRead(unsigned char* buffer, int size, int delay)
 	return PAYLOAD_TIMEOUT;
 }
 
-PayloadResult payloadSendCommand(char opcode, unsigned char* buffer, int size, int delay)
+int payloadSendCommand(char opcode, unsigned char* buffer, int size, int delay)
 {
-	int err = I2C_write(PAYLOAD_I2C_ADDRESS, &opcode, 1);
-	if(err != E_NO_SS_ERR)
-	{
-		return PAYLOAD_I2C_Write_Error;
-	}
+	if(!logError(I2C_write(PAYLOAD_I2C_ADDRESS, &opcode, 1), "I2C write to payload")){return -1;}
+
 	if(delay > 0)
 	{
 		vTaskDelay(delay);
@@ -54,7 +41,6 @@ void get_radfet_data(radfet_data* radfet)
 
 	char buffer_rad[12];
 	char buffer_tmp[8];
-	PayloadResult res;
 	int temp_adc;
 
 	//RADFET
@@ -62,9 +48,7 @@ void get_radfet_data(radfet_data* radfet)
 	Time_getUnixEpoch(&curr_time1);
 	radfet->radfet_time = curr_time1;
 
-	res = payloadSendCommand(READ_RADFET_VOLTAGES, buffer_rad, sizeof(buffer_rad), RADFET_CALC_TIME);
-	if(res != PAYLOAD_SUCCESS)
-	{return;}
+	if(!logError(payloadSendCommand(READ_RADFET_VOLTAGES, buffer_rad, sizeof(buffer_rad), RADFET_CALC_TIME), "Payload send cmd - radfet")){return;}
 
 	memcpy(&radfet->radfet1, buffer_rad + 4, 4);
 	memcpy(&radfet->radfet2, buffer_rad + 8, 4);
@@ -76,9 +60,8 @@ void get_radfet_data(radfet_data* radfet)
 	Time_getUnixEpoch(&curr_time2);
 	radfet->temp_time = curr_time2;
 
-	res = payloadSendCommand(READ_RADFET_TEMP, buffer_tmp, sizeof(buffer_tmp), RADFET_TMP_CALC_TIME);
-	if(res != PAYLOAD_SUCCESS)
-	{return;}
+	if(!logError(payloadSendCommand(READ_RADFET_TEMP, buffer_tmp, sizeof(buffer_tmp), RADFET_TMP_CALC_TIME), "Payload send cmd - radfet temp")){return;}
+
 
 	memcpy(&temp_adc, buffer_tmp + 4, 4);
 	temp_adc = changeIntIndian(temp_adc);
@@ -99,17 +82,14 @@ void get_sel_data(pic32_sel_data* sel)
 	}
 
 	char buffer[12];
-	PayloadResult res;
 	int* latchups;
 
 	time_unix curr_time = 0;
 	Time_getUnixEpoch(&curr_time);
 	sel->time = curr_time;
 
-	res = payloadSendCommand(READ_PIC32_RESETS, buffer, sizeof(buffer), SEL_CALC_TIME);
+	if(!logError(payloadSendCommand(READ_PIC32_RESETS, buffer, sizeof(buffer), SEL_CALC_TIME), "Payload send cmd - sel")){return;}
 
-	if(res != PAYLOAD_SUCCESS)
-	{return;}
 
 	memcpy(latchups, buffer+4, 4);
 	if(*latchups == 0) //backup
@@ -138,23 +118,20 @@ void get_seu_data(pic32_seu_data* seu)
 	}
 
 	char buffer[8];
-	PayloadResult res;
 
 	time_unix curr_time = 0;
 	Time_getUnixEpoch(&curr_time);
-
-	res = payloadSendCommand(READ_PIC32_UPSETS, buffer, sizeof(buffer), SEU_CALC_TIME);
 	seu->time = curr_time;
 
-	if(res != PAYLOAD_SUCCESS)
-	{return;}
+	if(!logError(payloadSendCommand(READ_PIC32_UPSETS, buffer, sizeof(buffer), SEU_CALC_TIME), "Payload send cmd - sel")){return;}
+
 
 	memcpy(&seu->bitFlips_count, buffer + 4, 4);
 	seu->bitFlips_count = changeIntIndian(seu->bitFlips_count);
 
 }
 
-int changeIntIndian(int num) //TODO make sure we actually need this
+int changeIntIndian(int num)
 {
 	return	((num>>24)&0xff)	|	// move byte 3 to byte 0
 			((num<<8)&0xff0000)	|	// move byte 1 to byte 2

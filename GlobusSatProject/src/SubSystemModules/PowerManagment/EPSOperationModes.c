@@ -15,7 +15,7 @@
 
 
 channel_t g_system_state;
-EpsState_t state;
+EpsState_t state = CriticalMode;
 Boolean g_low_volt_flag = FALSE; // set to true if in low voltage
 
 int EnterFullMode()
@@ -80,12 +80,7 @@ int PayloadOperations(PayloadOperation status)
 	{
 	case TurnOn: ;
 
-		err = isismepsv2_ivid5_piu__outputbuschannelon(index, PAYLOAD_SWITCH, &response);
-
-		if(err != driver_error_none)
-		{
-			return err;
-		}
+		if(!logError(isismepsv2_ivid5_piu__outputbuschannelon(index, PAYLOAD_SWITCH, &response), "Turn on payload channel")){return -1;}
 
 		//increase the number of sw3 resets
 		unsigned int num_of_resets = 0;
@@ -99,20 +94,14 @@ int PayloadOperations(PayloadOperation status)
 
 	case TurnOff: ;
 
-		err = isismepsv2_ivid5_piu__outputbuschanneloff(index, PAYLOAD_SWITCH, &response);
-
-		if(err != driver_error_none)
-		{
-			return err;
-		}
-
+		if(logError(isismepsv2_ivid5_piu__outputbuschanneloff(index, PAYLOAD_SWITCH, &response), "Turn off payload channel")){return -1;}
 		break;
 
 	case Restart: ;
 
-		err = PayloadOperations(1);
+		err = PayloadOperations(TurnOff);
 		vTaskDelay(10);
-		err = PayloadOperations(0);
+		err = PayloadOperations(TurnOn);
 		break;
 	}
 	return err;

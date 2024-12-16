@@ -20,6 +20,7 @@
 #include "hal/Drivers/I2C.h"
 #include <hal/Utility/util.h>
 #include "GlobalStandards.h"
+#include "utils.h"
 
 #define PAYLOAD_I2C_ADDRESS 0x55
 
@@ -45,10 +46,6 @@
 #define VOLTAGE_TO_TEMPERATURE(V) (100 * ((V) * (5 / 2.0) - 2.73))
 
 extern Boolean state_changed;
-
-typedef enum {
-    PAYLOAD_SUCCESS, PAYLOAD_I2C_Write_Error, PAYLOAD_I2C_Read_Error, PAYLOAD_TIMEOUT
-} PayloadResult;
 
 typedef struct __attribute__ ((__packed__)) radfet_data
 {
@@ -85,14 +82,14 @@ typedef struct __attribute__ ((__packed__)) pic32_seu_data
  * @param buffer to restore the data, size of recieved data, delay time(ms) if the data isn't ready
  * @return result status
  */
-PayloadResult payloadRead(unsigned char* buffer, int size, int delay);
+int payloadRead(unsigned char* buffer, int size, int delay);
 
 /*!
  * send command to be executed, then call payloadRead to get results
  * @param opcode to the executed command, buffer to restore the data, size of recieved data, delay time(ms) to wait for response
  * @return result status
  */
-PayloadResult payloadSendCommand(char opcode, unsigned char* buffer, int size, int delay);
+int payloadSendCommand(char opcode, unsigned char* buffer, int size, int delay);
 
 /*!
  * execute radfet commands

@@ -26,6 +26,7 @@
 #define INVALID_TLM_TYPE			-208
 #define INVALID_IMG_TYPE			-209
 #define INFO_MSG				-210
+#define PAYLOAD_TIMEOUT				-211
 
 
 
