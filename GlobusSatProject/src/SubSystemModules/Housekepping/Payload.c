@@ -32,11 +32,11 @@ int payloadSendCommand(char opcode, unsigned char* buffer, int size, int delay)
 	return payloadRead(buffer, size, (delay < 100) ? 5 : delay / 10);
 }
 
-void get_radfet_data(radfet_data* radfet)
+int get_radfet_data(radfet_data* radfet)
 {
 	if (radfet == NULL)
 	{
-		return;
+		return E_NOT_INITIALIZED;
 	}
 
 	char buffer_rad[12];
@@ -48,7 +48,7 @@ void get_radfet_data(radfet_data* radfet)
 	Time_getUnixEpoch(&curr_time1);
 	radfet->radfet_time = curr_time1;
 
-	if(!logError(payloadSendCommand(READ_RADFET_VOLTAGES, buffer_rad, sizeof(buffer_rad), RADFET_CALC_TIME), "Payload send cmd - radfet")){return;}
+	if(!logError(payloadSendCommand(READ_RADFET_VOLTAGES, buffer_rad, sizeof(buffer_rad), RADFET_CALC_TIME), "Payload send cmd - radfet")){return -1;}
 
 	memcpy(&radfet->radfet1, buffer_rad + 4, 4);
 	memcpy(&radfet->radfet2, buffer_rad + 8, 4);
@@ -60,8 +60,7 @@ void get_radfet_data(radfet_data* radfet)
 	Time_getUnixEpoch(&curr_time2);
 	radfet->temp_time = curr_time2;
 
-	if(!logError(payloadSendCommand(READ_RADFET_TEMP, buffer_tmp, sizeof(buffer_tmp), RADFET_TMP_CALC_TIME), "Payload send cmd - radfet temp")){return;}
-
+	if(!logError(payloadSendCommand(READ_RADFET_TEMP, buffer_tmp, sizeof(buffer_tmp), RADFET_TMP_CALC_TIME), "Payload send cmd - radfet temp")){return -1;}
 
 	memcpy(&temp_adc, buffer_tmp + 4, 4);
 	temp_adc = changeIntIndian(temp_adc);
@@ -72,13 +71,15 @@ void get_radfet_data(radfet_data* radfet)
 	double temperature = VOLTAGE_TO_TEMPERATURE(voltage); // Convert voltage to temperature
 
 	radfet->temperature = temperature;
+
+	return E_NO_SS_ERR;
 }
 
-void get_sel_data(pic32_sel_data* sel)
+int get_sel_data(pic32_sel_data* sel)
 {
 	if (sel == NULL)
 	{
-		return;
+		return E_NOT_INITIALIZED;
 	}
 
 	char buffer[12];
@@ -88,8 +89,7 @@ void get_sel_data(pic32_sel_data* sel)
 	Time_getUnixEpoch(&curr_time);
 	sel->time = curr_time;
 
-	if(!logError(payloadSendCommand(READ_PIC32_RESETS, buffer, sizeof(buffer), SEL_CALC_TIME), "Payload send cmd - sel")){return;}
-
+	if(!logError(payloadSendCommand(READ_PIC32_RESETS, buffer, sizeof(buffer), SEL_CALC_TIME), "Payload send cmd - sel")){return -1;}
 
 	memcpy(latchups, buffer+4, 4);
 	if(*latchups == 0) //backup
@@ -109,12 +109,14 @@ void get_sel_data(pic32_sel_data* sel)
 	sel->battery_state_changed = state_changed;
 	state_changed = FALSE;
 
+	return E_NO_SS_ERR;
 }
-void get_seu_data(pic32_seu_data* seu)
+
+int get_seu_data(pic32_seu_data* seu)
 {
 	if (seu == NULL)
 	{
-		return;
+		return E_NOT_INITIALIZED;
 	}
 
 	char buffer[8];
@@ -123,12 +125,12 @@ void get_seu_data(pic32_seu_data* seu)
 	Time_getUnixEpoch(&curr_time);
 	seu->time = curr_time;
 
-	if(!logError(payloadSendCommand(READ_PIC32_UPSETS, buffer, sizeof(buffer), SEU_CALC_TIME), "Payload send cmd - sel")){return;}
-
+	if(!logError(payloadSendCommand(READ_PIC32_UPSETS, buffer, sizeof(buffer), SEU_CALC_TIME), "Payload send cmd - sel")){return -1;}
 
 	memcpy(&seu->bitFlips_count, buffer + 4, 4);
 	seu->bitFlips_count = changeIntIndian(seu->bitFlips_count);
 
+	return E_NO_SS_ERR;
 }
 
 int changeIntIndian(int num)

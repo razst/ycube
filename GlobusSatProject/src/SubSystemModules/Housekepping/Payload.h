@@ -95,19 +95,19 @@ int payloadSendCommand(char opcode, unsigned char* buffer, int size, int delay);
  * execute radfet commands
  * @param[out] output radfet_data
  */
-void get_radfet_data(radfet_data* radfet);
+int get_radfet_data(radfet_data* radfet);
 
 /*!
  * execute sel commands
  * @param[out] output pic32_sel_data
  */
-void get_sel_data(pic32_sel_data* sel);
+int get_sel_data(pic32_sel_data* sel);
 
 /*!
  * execute seu commands
  * @param[out] output pic32_seu_data
  */
-void get_seu_data(pic32_seu_data* seu);
+int get_seu_data(pic32_seu_data* seu);
 
 
 /*!
