@@ -292,7 +292,7 @@ void TelemetrySaveWOD()
 
 void TelemetrySaveRADFET()
 {
-	if (GetSystemState() != FullMode)
+	if (GetSystemState() != FullMode) // TODO: check if ch 4 is on
 	{
 		return;
 	}
