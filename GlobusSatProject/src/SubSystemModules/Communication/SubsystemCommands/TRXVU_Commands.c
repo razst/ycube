@@ -73,39 +73,32 @@ void DumpRamTask(void *args) {
 	int cell_length = 0;
 	tlm_type_t tlm_type;
 
-//	switch(task_args->dump_type)
-//	{
-//	case tlm_log:
-//		logDataInRam log_dump_data[task_args->count];
-//		dump_data = log_dump_data;
-//		cell_length = sizeof(logDataInRam);
-//		tlm_type = tlm_log;
-//		break;
-//	case tlm_wod:
-//		wodDataInRam wod_dump_data[task_args->count];
-//		dump_data = wod_dump_data;
-//		cell_length = sizeof(wodDataInRam);
-//		tlm_type = tlm_wod;
-//		break;
-//	case tlm_radfet:
-//		radfetDataInRam radfet_dump_data[task_args->count];
-//		dump_data = radfet_dump_data;
-//		cell_length = sizeof(radfetDataInRam);
-//		tlm_type = tlm_radfet;
-//		break;
-//	case tlm_seu:
-//		seuDataInRam seu_dump_data[task_args->count];
-//		dump_data = seu_dump_data;
-//		cell_length = sizeof(seuDataInRam);
-//		tlm_type = tlm_seu;
-//		break;
-//	case tlm_sel:
-//		selDataInRam sel_dump_data[task_args->count];
-//		dump_data = sel_dump_data;
-//		cell_length = sizeof(selDataInRam);
-//		tlm_type = tlm_sel;
-//		break;
-//	}
+	switch(task_args->dump_type)
+	{
+	case tlm_log:
+		cell_length = sizeof(logDataInRam);
+		tlm_type = tlm_log;
+		break;
+	case tlm_wod:
+		cell_length = sizeof(wodDataInRam);
+		tlm_type = tlm_wod;
+		break;
+	case tlm_radfet:
+		cell_length = sizeof(radfetDataInRam);
+		tlm_type = tlm_radfet;
+		break;
+	case tlm_seu:
+		cell_length = sizeof(seuDataInRam);
+		tlm_type = tlm_seu;
+		break;
+	case tlm_sel:
+		cell_length = sizeof(selDataInRam);
+		tlm_type = tlm_sel;
+		break;
+	}
+
+	char data[task_args->count * cell_length];
+	dump_data = data;
 
 	numOfElements = getTlm(dump_data, task_args->count, tlm_type);
 
