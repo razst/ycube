@@ -292,7 +292,7 @@ void TelemetrySaveWOD()
 
 void TelemetrySaveRADFET()
 {
-	if (GetSystemState() != FullMode) // TODO: check if ch 4 is on
+	if (!DoesPayloadChannelOn())
 	{
 		return;
 	}
@@ -306,7 +306,7 @@ void TelemetrySaveRADFET()
 }
 void TelemetrySaveSEL()
 {
-	if (GetSystemState() != FullMode)
+	if (!DoesPayloadChannelOn())
 	{
 		return;
 	}
@@ -320,7 +320,7 @@ void TelemetrySaveSEL()
 }
 void TelemetrySaveSEU()
 {
-	if (GetSystemState() != FullMode)
+	if (!DoesPayloadChannelOn())
 	{
 		return;
 	}

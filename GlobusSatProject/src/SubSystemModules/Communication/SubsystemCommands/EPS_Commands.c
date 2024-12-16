@@ -92,17 +92,20 @@ int CMD_Payload_Operations (sat_packet_t *cmd)
 	char state;
 	int err;
 	PayloadOperation status;
+	Boolean isOn = DoesPayloadChannelOn();
 
 	memcpy(&state,cmd -> data,1);
 	switch(state)
 	{
 		case 1:
+			if(isOn){return PAYLOAD_FALSE_OPERATION;}
 			status = TurnOn;
 			break;
 		case 2:
+			if(!isOn){return PAYLOAD_FALSE_OPERATION;}
 			status = TurnOff;
 			break;
-		case 3:
+		case 3://quest - allow this when the channel is off?
 			status = Restart;
 			break;
 		default:

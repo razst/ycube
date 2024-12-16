@@ -85,6 +85,12 @@ EpsState_t GetSystemState();
  */
 channel_t GetSystemChannelState();
 
+/*
+ * check if channel 4 is on
+ * @return boolean
+ */
+Boolean DoesPayloadChannelOn();
+
 Boolean EpsGetLowVoltageFlag();
 
 void EpsSetLowVoltageFlag(Boolean low_volt_flag);

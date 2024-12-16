@@ -106,6 +106,22 @@ int PayloadOperations(PayloadOperation status)
 	return err;
 }
 
+Boolean DoesPayloadChannelOn()
+{
+	uint8_t index = 0;
+	isismepsv2_ivid5_piu__gethousekeepingeng__from_t response;
+
+	if(!logError(isismepsv2_ivid5_piu__gethousekeepingeng(index, &response), "get Housekeeping Data - check for payload channel")){return FALSE;}
+
+	//TODO - how much should we check? when there is no power there it can still show some numbers so change 0 to smth
+	if(response.fields.vip_obc04.fields.volt > 0 && response.fields.vip_obc04.fields.current > 0 && response.fields.vip_obc04.fields.power > 0)
+	{
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
 EpsState_t GetSystemState()
 {
 	return state;
