@@ -80,18 +80,18 @@ int CMD_FRAM_WriteAndTransmitt(sat_packet_t *cmd)
 	}
 	int err = 0;
 	unsigned int addr = 0;
-	unsigned short length = cmd->length;
+	unsigned short length = cmd->data[sizeof(addr)];
 	unsigned char *data = cmd->data;
 
 	memcpy(&addr, cmd->data, sizeof(addr));
 
-	err = FRAM_write(data + sizeof(addr), addr, length - sizeof(addr));
+	err = FRAM_write(data + sizeof(addr) + sizeof(length), addr, length);
 	if (err != E_NO_SS_ERR){
 		return err;
 	}
-	err = FRAM_read(data, addr, length - sizeof(addr));
+	err = FRAM_read(data, addr, length);
 	if (err == E_NO_SS_ERR){
-		TransmitDataAsSPL_Packet(cmd, data, length - sizeof(addr));
+		TransmitDataAsSPL_Packet(cmd, data, length);
 	}
 	return err;
 }
