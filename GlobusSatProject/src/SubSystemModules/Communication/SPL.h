@@ -47,7 +47,8 @@ typedef enum __attribute__ ((__packed__)) ack_subtype_t
 	ACK_PING = 						0xAA,
 	ACK_UNKNOWN_SUBTYPE = 			0xBB,				//when the given subtype is unknown
 	ACK_DELETE_TLM = 				0xC0,					// after deleting TLM file(s)
-	ACK_ERROR_MSG = 				0XFF 					// send this ACK when error has occurred
+	ACK_AUTHORIZED = 				0xC1,					//secured cmd success
+	ACK_ERROR_MSG = 				0XFF				// send this ACK when error has occurred
 }ack_subtype_t;
 
 

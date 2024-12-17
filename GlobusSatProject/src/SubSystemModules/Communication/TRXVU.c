@@ -485,6 +485,101 @@ int TransmitDataAsSPL_Packet(sat_packet_t *cmd, unsigned char *data,
 
 }
 
+char error_hash[8] = {0};
+Boolean CMD_Hash256(sat_packet_t *cmd)
+{
+unsigned int code, lastid, currId;
+    char plsHashMe[50];
+    char code_to_str[50];
+    char cmpHash[Max_Hash_size], temp[Max_Hash_size];
+	
+    currId = cmd->ID;
+
+	if (cmd == NULL || cmd->data == NULL) {
+		return E_INPUT_POINTER_NULL;
+	}
+
+    //get code from FRAM
+    FRAM_read((unsigned char*)&code, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+
+    //get the last id from FRAM and save it into var lastid then add new id to the FRAM (as new lastid)
+    FRAM_read((unsigned char*)&lastid, CMD_ID_ADDR, CMD_ID_SIZE);
+    FRAM_write((unsigned char*)&currId, CMD_ID_ADDR, CMD_ID_SIZE);
+
+    //check if curr ID is bigger than lastid
+    if(currId <= lastid)
+    {
+        return E_UNAUTHORIZED;//bc bool FALSE needed?
+    }
+
+    //combine lastid(as str) into plshashme
+    sprintf(plsHashMe, "%u", currId);
+
+    // turn code into str
+    sprintf(code_to_str, "%u", code);
+
+    //add (passcode)
+    strcat(plsHashMe, code_to_str);
+
+    // Initialize buffer for hashed output
+    BYTE hashed[SHA256_BLOCK_SIZE];
+
+    // Hash the combined string
+    int err = Hash256(plsHashMe, hashed);
+    if (err != E_NO_SS_ERR) {
+	//add to log?
+        return FALSE;
+    }
+     
+    //cpy byte by byte to temp (size of otherhashed = 8 bytes *2 (all bytes are saved by twos(bc its in hex))+1 for null)
+    char otherhashed[Max_Hash_size * 2 + 1]; // Array to store 8 bytes in hex, plus a null terminator
+
+    for (int i = 0; i < Max_Hash_size; i++) {
+        sprintf(&otherhashed[i * 2], "%02x", hashed[i]);
+    }
+    otherhashed[16] = '\0'; // Add Null
+
+    //cpy first 8 bytes to temp 
+    memcpy(temp, otherhashed, Max_Hash_size);
+
+	//add temp to globle var 
+	memcpy(error_hash, temp, Max_Hash_size);
+    //cpy first 8 bytes of the data
+    memcpy(cmpHash, cmd -> data, Max_Hash_size);
+
+	if(cmd -> length < Max_Hash_size)
+		return E_MEM_ALLOC;
+
+	//fix cmd.data
+	cmd -> length = cmd -> length - Max_Hash_size;//8 bytes are removed from the data this must be reflected in the length
+	memmove(cmd->data, cmd->data + Max_Hash_size,cmd->length - Max_Hash_size);
+	
+    //cmp hash from command centre to internal hash
+    if(memcmp(temp, cmpHash, Max_Hash_size) == 0)
+    {   
+        printf("success!\n");//for test
+		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
+        return E_NO_SS_ERR;
+    }
+    else
+	{
+		return E_UNAUTHORIZED;
+	}
+}
+int CMD_Secure_Ping(sat_packet_t *cmd)
+{
+	int err;
+	err = CMD_Hash256(cmd);
+	if (err == E_NO_SS_ERR)
+	{
+		SendAckPacket(ACK_AUTHORIZED, cmd,error_hash,0);
+	}
+	else
+	{
+		SendAckPacket(ACK_ERROR_MSG, cmd,error_hash,0);
+	}
+}
+
 int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
 	if (!CheckTransmitionAllowed()) {
 		return E_CANT_TRANSMIT;
