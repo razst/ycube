@@ -11,6 +11,7 @@
 #include "SubSystemModules/Communication/TRXVU.h"
 #include "SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h"
 #include "SubSystemModules/Maintenance/Maintenance.h"
+#include "SubSystemModules/Housekepping/RAMTelemetry.h"
 #include "InitSystem.h"
 #include "TLM_management.h"
 #include <satellite-subsystems/isis_ants_rev2.h>

@@ -4,7 +4,8 @@
 #include <utils.h>
 
 #ifdef ISISEPS
-	#include <satellite-subsystems/isismepsv2_ivid5_piu_types.h>
+	#include <satellite-subsystems/isismepsv2_ivid7_piu.h>
+	#include <satellite-subsystems/isismepsv2_ivid7_piu_types.h>
 #endif
 #ifdef GOMEPS
 	#include <satellite-subsystems/GomEPS.h>
@@ -15,7 +16,7 @@
 
 
 channel_t g_system_state;
-EpsState_t state = CriticalMode;
+EpsState_t state;// = CriticalMode;
 Boolean g_low_volt_flag = FALSE; // set to true if in low voltage
 
 int EnterFullMode()
@@ -71,15 +72,15 @@ int EnterCriticalMode()
 
 int PayloadOperations(PayloadOperation status)
 {
+	return 0; // TODO
 	uint8_t index = 0;
-	isismepsv2_ivid5_piu__replyheader_t response;
+	isismepsv2_ivid7_piu__replyheader_t response;
 	int err = 0;
 
 	switch(status)
 	{
 	case TurnOn: ;
-
-		if(!logError(isismepsv2_ivid5_piu__outputbuschannelon(index, PAYLOAD_SWITCH, &response), "Turn on payload channel")){return -1;}
+		if(logError(isismepsv2_ivid7_piu__outputbuschannelon(index, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw3, &response), "Turn on payload channel")){return -1;}
 
 		//increase the number of sw3 resets
 		unsigned int num_of_resets = 0;
@@ -92,8 +93,8 @@ int PayloadOperations(PayloadOperation status)
 		break;
 
 	case TurnOff: ;
+		if(logError(isismepsv2_ivid7_piu__outputbuschanneloff(index, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw3, &response), "Turn off payload channel")){return -1;}
 
-		if(logError(isismepsv2_ivid5_piu__outputbuschanneloff(index, PAYLOAD_SWITCH, &response), "Turn off payload channel")){return -1;}
 		break;
 
 	case Restart: ;
@@ -109,9 +110,9 @@ int PayloadOperations(PayloadOperation status)
 Boolean DoesPayloadChannelOn()
 {
 	uint8_t index = 0;
-	isismepsv2_ivid5_piu__gethousekeepingeng__from_t response;
+	isismepsv2_ivid7_piu__gethousekeepingeng__from_t response;
 
-	if(!logError(isismepsv2_ivid5_piu__gethousekeepingeng(index, &response), "get Housekeeping Data - check for payload channel")){return FALSE;}
+	if(!logError(isismepsv2_ivid7_piu__gethousekeepingeng(index, &response), "get Housekeeping Data - check for payload channel")){return FALSE;}
 
 	//TODO - how much should we check? when there is no power there it can still show some numbers so change 0 to smth
 	if(response.fields.vip_obc04.fields.volt > 0 && response.fields.vip_obc04.fields.current > 0 && response.fields.vip_obc04.fields.power > 0)
