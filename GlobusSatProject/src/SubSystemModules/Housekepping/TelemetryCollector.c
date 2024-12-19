@@ -299,7 +299,7 @@ void TelemetrySaveRADFET()
 
 	radfet_data radfet = { 0 };
 
-	if(!get_radfet_data(&radfet)){return;}
+	if(get_radfet_data(&radfet)){return;}
 
 	printf("radfet data:\r\n");
 	printf("time=%d\r\n",radfet.radfet_time);
@@ -319,7 +319,7 @@ void TelemetrySaveSEL()
 
 	pic32_sel_data sel = { 0 };
 
-	if(!get_sel_data(&sel)){return;}
+	if(get_sel_data(&sel)){return;}
 
 	printf("SEL data:\r\n");
 	printf("battery_state_changed=%d\r\n",sel.battery_state_changed);
@@ -340,7 +340,7 @@ void TelemetrySaveSEU()
 
 	pic32_seu_data seu = { 0 };
 
-	if(!get_seu_data(&seu)){return;}
+	if(get_seu_data(&seu)){return;}
 
 	printf("SEL data:\r\n");
 	printf("bitFlips_count=%d\r\n",seu.bitFlips_count);
