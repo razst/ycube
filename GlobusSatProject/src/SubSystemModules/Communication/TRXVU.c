@@ -488,7 +488,8 @@ int TransmitDataAsSPL_Packet(sat_packet_t *cmd, unsigned char *data,
 char error_hash[8] = {0};
 Boolean CMD_Hash256(sat_packet_t *cmd)
 {
-unsigned int code, lastid, currId;
+	/*
+	unsigned int code, lastid, currId;
     char plsHashMe[50];
     char code_to_str[50];
     char cmpHash[Max_Hash_size], temp[Max_Hash_size];
@@ -564,7 +565,7 @@ unsigned int code, lastid, currId;
     else
 	{
 		return E_UNAUTHORIZED;
-	}
+	}*/
 }
 int CMD_Secure_Ping(sat_packet_t *cmd)
 {
