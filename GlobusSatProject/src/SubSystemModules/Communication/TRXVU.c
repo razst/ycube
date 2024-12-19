@@ -144,6 +144,7 @@ int InitTrxvu() {
 	if (logError(ISIS_VU_E_Init(myTRXVU, 1) ,"InitTrxvu-IsisTrxvu_initialize") ) return -1;
 	if (logError(isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps) ,"isis_vu_e__set_bitrate") ) return -1;
 	if (logError(isis_vu_e__set_tx_freq(0, TX_FREQUENCY),"isis_vu_e__tx_freq") ) return -1;
+	if (logError(isis_vu_e__set_tx_pll_powerout(0, 0xCFEF),"isis_vu_e__set_tx_pll_powerout") ) return -1;
 	
 	vTaskDelay(1000); // wait a little
 
