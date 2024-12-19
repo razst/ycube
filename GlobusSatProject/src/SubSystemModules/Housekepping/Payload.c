@@ -5,9 +5,9 @@ int payloadRead(unsigned char* buffer, int size, int delay)
 {
 	for(int i = 0; i < EXTRA_TRIES; i++)
 	{
-		if(!logError(I2C_write(PAYLOAD_I2C_ADDRESS, GET_LAST_DATA ,1), "I2C write to payload")){return -1;}
+		if(logError(I2C_write(PAYLOAD_I2C_ADDRESS, GET_LAST_DATA ,1), "I2C write to payload")){return -1;}
 
-		if(!logError(I2C_read(PAYLOAD_I2C_ADDRESS, buffer, size), "I2C read from payload")){return -1;}
+		if(logError(I2C_read(PAYLOAD_I2C_ADDRESS, buffer, size), "I2C read from payload")){return -1;}
 
 		if(buffer[3] == 0)
 		{
@@ -22,7 +22,7 @@ int payloadRead(unsigned char* buffer, int size, int delay)
 
 int payloadSendCommand(char opcode, unsigned char* buffer, int size, int delay)
 {
-	if(!logError(I2C_write(PAYLOAD_I2C_ADDRESS, &opcode, 1), "I2C write to payload")){return -1;}
+	if(logError(I2C_write(PAYLOAD_I2C_ADDRESS, &opcode, 1), "I2C write to payload")){return -1;}
 
 	if(delay > 0)
 	{
@@ -48,7 +48,7 @@ int get_radfet_data(radfet_data* radfet)
 	Time_getUnixEpoch(&curr_time1);
 	radfet->radfet_time = curr_time1;
 
-	if(!logError(payloadSendCommand(READ_RADFET_VOLTAGES, buffer_rad, sizeof(buffer_rad), RADFET_CALC_TIME), "Payload send cmd - radfet")){return -1;}
+	if(logError(payloadSendCommand(READ_RADFET_VOLTAGES, buffer_rad, sizeof(buffer_rad), RADFET_CALC_TIME), "Payload send cmd - radfet")){return -1;}
 
 	memcpy(&radfet->radfet1, buffer_rad + 4, 4);
 	memcpy(&radfet->radfet2, buffer_rad + 8, 4);
@@ -60,7 +60,7 @@ int get_radfet_data(radfet_data* radfet)
 	Time_getUnixEpoch(&curr_time2);
 	radfet->temp_time = curr_time2;
 
-	if(!logError(payloadSendCommand(READ_RADFET_TEMP, buffer_tmp, sizeof(buffer_tmp), RADFET_TMP_CALC_TIME), "Payload send cmd - radfet temp")){return -1;}
+	if(logError(payloadSendCommand(READ_RADFET_TEMP, buffer_tmp, sizeof(buffer_tmp), RADFET_TMP_CALC_TIME), "Payload send cmd - radfet temp")){return -1;}
 
 	memcpy(&temp_adc, buffer_tmp + 4, 4);
 	temp_adc = changeIntIndian(temp_adc);
@@ -89,7 +89,7 @@ int get_sel_data(pic32_sel_data* sel)
 	Time_getUnixEpoch(&curr_time);
 	sel->time = curr_time;
 
-	if(!logError(payloadSendCommand(READ_PIC32_RESETS, buffer, sizeof(buffer), SEL_CALC_TIME), "Payload send cmd - sel")){return -1;}
+	if(logError(payloadSendCommand(READ_PIC32_RESETS, buffer, sizeof(buffer), SEL_CALC_TIME), "Payload send cmd - sel")){return -1;}
 
 	memcpy(latchups, buffer+4, 4);
 	if(*latchups == 0) //backup
@@ -125,7 +125,7 @@ int get_seu_data(pic32_seu_data* seu)
 	Time_getUnixEpoch(&curr_time);
 	seu->time = curr_time;
 
-	if(!logError(payloadSendCommand(READ_PIC32_UPSETS, buffer, sizeof(buffer), SEU_CALC_TIME), "Payload send cmd - sel")){return -1;}
+	if(logError(payloadSendCommand(READ_PIC32_UPSETS, buffer, sizeof(buffer), SEU_CALC_TIME), "Payload send cmd - sel")){return -1;}
 
 	memcpy(&seu->bitFlips_count, buffer + 4, 4);
 	seu->bitFlips_count = changeIntIndian(seu->bitFlips_count);

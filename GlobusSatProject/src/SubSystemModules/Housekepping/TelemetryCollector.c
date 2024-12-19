@@ -301,6 +301,12 @@ void TelemetrySaveRADFET()
 
 	if(!get_radfet_data(&radfet)){return;}
 
+	printf("radfet data:\r\n");
+	printf("time=%d\r\n",radfet.radfet_time);
+	printf("value1=%d\r\n",radfet.radfet1);
+	printf("value2=%d\r\n",radfet.radfet2);
+	printf("temp time=%d\r\n",radfet.temp_time);
+	printf("temperature=%d\r\n",radfet.temperature);
 	write2File(&radfet , tlm_radfet);
 	saveTlmToRam(&radfet, sizeof(radfet), tlm_radfet);
 }
@@ -315,6 +321,13 @@ void TelemetrySaveSEL()
 
 	if(!get_sel_data(&sel)){return;}
 
+	printf("SEL data:\r\n");
+	printf("battery_state_changed=%d\r\n",sel.battery_state_changed);
+	printf("eps_reset_count=%d\r\n",sel.eps_reset_count);
+	printf("latchUp_count=%d\r\n",sel.latchUp_count);
+	printf("sat_reset_count=%d\r\n",sel.sat_reset_count);
+	printf("time=%d\r\n",sel.time);
+
 	write2File(&sel , tlm_sel);
 	saveTlmToRam(&sel, sizeof(sel), tlm_sel);
 }
@@ -328,6 +341,11 @@ void TelemetrySaveSEU()
 	pic32_seu_data seu = { 0 };
 
 	if(!get_seu_data(&seu)){return;}
+
+	printf("SEL data:\r\n");
+	printf("bitFlips_count=%d\r\n",seu.bitFlips_count);
+	printf("time=%d\r\n",seu.time);
+
 
 	write2File(&seu , tlm_seu);
 	saveTlmToRam(&seu, sizeof(seu), tlm_seu);
