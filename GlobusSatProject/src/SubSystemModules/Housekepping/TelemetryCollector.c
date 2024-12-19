@@ -292,6 +292,7 @@ void TelemetrySaveWOD()
 
 void TelemetrySaveRADFET()
 {
+	int err;
 	if (!DoesPayloadChannelOn())
 	{
 		return;
@@ -299,7 +300,7 @@ void TelemetrySaveRADFET()
 
 	radfet_data radfet = { 0 };
 
-	if(get_radfet_data(&radfet)){return;}
+	if((err = get_radfet_data(&radfet))){printf("Error - %d", err);return;}
 
 	printf("radfet data:\r\n");
 	printf("time=%d\r\n",radfet.radfet_time);
@@ -312,6 +313,8 @@ void TelemetrySaveRADFET()
 }
 void TelemetrySaveSEL()
 {
+	int err;
+
 	if (!DoesPayloadChannelOn())
 	{
 		return;
@@ -319,7 +322,7 @@ void TelemetrySaveSEL()
 
 	pic32_sel_data sel = { 0 };
 
-	if(get_sel_data(&sel)){return;}
+	if((err = get_sel_data(&sel))){printf("Error - %d", err);return;}
 
 	printf("SEL data:\r\n");
 	printf("battery_state_changed=%d\r\n",sel.battery_state_changed);
@@ -333,6 +336,7 @@ void TelemetrySaveSEL()
 }
 void TelemetrySaveSEU()
 {
+	int err;
 	if (!DoesPayloadChannelOn())
 	{
 		return;
@@ -340,7 +344,7 @@ void TelemetrySaveSEU()
 
 	pic32_seu_data seu = { 0 };
 
-	if(get_seu_data(&seu)){return;}
+	if((err = get_seu_data(&seu))){printf("Error - %d", err);return;}
 
 	printf("SEL data:\r\n");
 	printf("bitFlips_count=%d\r\n",seu.bitFlips_count);
