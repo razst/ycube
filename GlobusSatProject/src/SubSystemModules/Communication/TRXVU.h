@@ -25,6 +25,8 @@
 #define MIN_TRXVU_BUFF 5
 #define DEFAULT_RSSI_VALUE 10
 
+#define Max_Hash_size 8
+
 typedef struct __attribute__ ((__packed__))
 {
 	sat_packet_t cmd;

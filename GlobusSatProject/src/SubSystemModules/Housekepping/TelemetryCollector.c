@@ -294,6 +294,7 @@ void TelemetrySaveWOD()
 
 void TelemetrySaveRADFET()
 {
+	int err;
 	if (!DoesPayloadChannelOn())
 	{
 		return;
@@ -315,12 +316,15 @@ void TelemetrySaveRADFET()
         printf("payloadReadEnvironment: ERROR (%d)\n", result);
         return;
     }
+	//if((err = get_radfet_data(&radfet))){printf("Error - %d", err);return;}
 
 	write2File(&radfet , tlm_radfet);
 	saveTlmToRam(&radfet, sizeof(radfet), tlm_radfet);
 }
 void TelemetrySaveSEL()
 {
+	int err;
+
 	if (!DoesPayloadChannelOn())
 	{
 		return;
@@ -328,7 +332,7 @@ void TelemetrySaveSEL()
 
 	pic32_sel_data sel = { 0 };
 
-	if(!get_sel_data(&sel)){return;}
+	if((err = get_sel_data(&sel))){printf("Error - %d", err);return;}
 
 	printf("SEL data:\r\n");
 	printf("battery_state_changed=%d\r\n",sel.battery_state_changed);
@@ -342,6 +346,7 @@ void TelemetrySaveSEL()
 }
 void TelemetrySaveSEU()
 {
+	int err;
 	if (!DoesPayloadChannelOn())
 	{
 		return;
@@ -359,6 +364,7 @@ void TelemetrySaveSEU()
         printf("payloadReadEvents: ERROR (%d)\n", result);
         return ;
     }
+	//if((err = get_seu_data(&seu))){printf("Error - %d", err);return;}
 
 //	write2File(&event_data , tlm_seu);
 //	saveTlmToRam(&event_data, sizeof(event_data), tlm_seu);

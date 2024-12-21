@@ -25,6 +25,8 @@
 #include <hal/Utility/util.h>
 #endif
 
+#include "HashSecuredCMD.h"
+
 
 time_unix 		g_idle_end_time = 1;				// time at which the idel will end
 
@@ -489,7 +491,7 @@ int TransmitDataAsSPL_Packet(sat_packet_t *cmd, unsigned char *data,
 char error_hash[8] = {0};
 Boolean CMD_Hash256(sat_packet_t *cmd)
 {
-	/*
+
 	unsigned int code, lastid, currId;
     char plsHashMe[50];
     char code_to_str[50];
@@ -566,7 +568,7 @@ Boolean CMD_Hash256(sat_packet_t *cmd)
     else
 	{
 		return E_UNAUTHORIZED;
-	}*/
+	}
 }
 int CMD_Secure_Ping(sat_packet_t *cmd)
 {
@@ -574,11 +576,11 @@ int CMD_Secure_Ping(sat_packet_t *cmd)
 	err = CMD_Hash256(cmd);
 	if (err == E_NO_SS_ERR)
 	{
-		SendAckPacket(ACK_AUTHORIZED, cmd,error_hash,0);
+		SendAckPacket(ACK_AUTHORIZED, cmd, error_hash, sizeof(error_hash));
 	}
 	else
 	{
-		SendAckPacket(ACK_ERROR_MSG, cmd,error_hash,0);
+		SendAckPacket(ACK_ERROR_MSG, cmd, (unsigned char*) &err, sizeof(err));
 	}
 }
 
