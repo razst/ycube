@@ -20,6 +20,7 @@ SUBDIRS := \
 src \
 src/TestingDemos \
 src/SubSystemModules/PowerManagment \
+src/SubSystemModules/Payload \
 src/SubSystemModules/Maintenance \
 src/SubSystemModules/Housekepping \
 src/SubSystemModules/Communication \

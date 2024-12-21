@@ -24,6 +24,8 @@
 #include "FRAM_FlightParameters.h"
 #include "SubSystemModules/Maintenance/Maintenance.h"
 #include "SubSystemModules/Communication/AckHandler.h"
+#include "SubSystemModules/Payload/payload_drivers.h"
+#include "SubSystemModules/Housekepping/Payload_NOT_IN_USE.h"
 
 static time_unix tlm_save_periods[NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS] = {0};
 static time_unix tlm_last_save_time[NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS]= {0};
@@ -167,12 +169,12 @@ void TelemetryCollectorLogic()
 		}
 	}
 
-	if (CheckExecutionTime(tlm_last_save_time[tlm_sel],tlm_save_periods[tlm_sel])){
-		TelemetrySaveSEL();
-		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
-			tlm_last_save_time[tlm_sel] = curr;
-		}
-	}
+//	if (CheckExecutionTime(tlm_last_save_time[tlm_sel],tlm_save_periods[tlm_sel])){
+//		TelemetrySaveSEL();
+//		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
+//			tlm_last_save_time[tlm_sel] = curr;
+//		}
+//	}
 
 	if (CheckExecutionTime(tlm_last_save_time[tlm_seu],tlm_save_periods[tlm_seu])){
 		TelemetrySaveSEU();
@@ -297,16 +299,23 @@ void TelemetrySaveRADFET()
 		return;
 	}
 
-	radfet_data radfet = { 0 };
+    PayloadEnvironmentData radfet;
+    SoreqResult result = payloadReadEnvironment(&radfet);
 
-	if(!get_radfet_data(&radfet)){return;}
+    if (result == PAYLOAD_SUCCESS) {
+        printf("payloadReadEnvironment: SUCCESS\n");
+        printf("  RADFET Voltage 1: %d (0x%X)\n",
+        		radfet.adc_conversion_radfet1,
+        		radfet.adc_conversion_radfet1);
+        printf("  RADFET Voltage 2: %d (0x%X)\n",
+        		radfet.adc_conversion_radfet2,
+        		radfet.adc_conversion_radfet2);
+        printf("  Temperature: %lf\n", radfet.temperature);
+    } else {
+        printf("payloadReadEnvironment: ERROR (%d)\n", result);
+        return;
+    }
 
-	printf("radfet data:\r\n");
-	printf("time=%d\r\n",radfet.radfet_time);
-	printf("value1=%d\r\n",radfet.radfet1);
-	printf("value2=%d\r\n",radfet.radfet2);
-	printf("temp time=%d\r\n",radfet.temp_time);
-	printf("temperature=%d\r\n",radfet.temperature);
 	write2File(&radfet , tlm_radfet);
 	saveTlmToRam(&radfet, sizeof(radfet), tlm_radfet);
 }
@@ -338,17 +347,21 @@ void TelemetrySaveSEU()
 		return;
 	}
 
-	pic32_seu_data seu = { 0 };
 
-	if(!get_seu_data(&seu)){return;}
+    PayloadEventData event_data;
+    SoreqResult result = payloadReadEvents(&event_data);
+    if (result == PAYLOAD_SUCCESS) {
+        printf("payloadReadEvents: SUCCESS\n");
+        printf("  SEL Count: %d\n", event_data.sel_count);
+        printf("  SEU Count: %d\n", event_data.seu_count);
+        return ;
+    } else {
+        printf("payloadReadEvents: ERROR (%d)\n", result);
+        return ;
+    }
 
-	printf("SEL data:\r\n");
-	printf("bitFlips_count=%d\r\n",seu.bitFlips_count);
-	printf("time=%d\r\n",seu.time);
-
-
-	write2File(&seu , tlm_seu);
-	saveTlmToRam(&seu, sizeof(seu), tlm_seu);
+//	write2File(&event_data , tlm_seu);
+//	saveTlmToRam(&event_data, sizeof(event_data), tlm_seu);
 }
 
 void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)

@@ -11,7 +11,7 @@
 	#include <satellite-subsystems/GomEPS.h>
 #endif
 
-#include "SubSystemModules/Housekepping/Payload.h"
+#include "SubSystemModules/Housekepping/Payload_NOT_IN_USE.h"
 #include "SubSystemModules/Communication/TRXVU.h"
 #include <satellite-subsystems/common_types.h>
 
@@ -73,7 +73,7 @@ int EnterCriticalMode()
 
 int PayloadOperations(PayloadOperation status)
 {
-	return 0; // TODO
+	return 0; // TODO remove and turn on / off the payload
 	uint8_t index = 0;
 	isismepsv2_ivid7_piu__replyheader_t response;
 	int err = 0;

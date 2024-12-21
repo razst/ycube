@@ -6,6 +6,8 @@
 #include "TelemetryFiles.h"
 #include "TelemetryCollector.h"
 #include <hal/errors.h>
+#include "SubSystemModules/Payload/payload_drivers.h"
+#include "SubSystemModules/Housekepping/Payload_NOT_IN_USE.h"
 
 #define TLM_RAM_SIZE 10000
 
@@ -27,7 +29,7 @@ typedef struct wodDataInRam
 typedef struct radfetDataInRam
 {
 	time_unix date;
-	radfet_data radfetData;
+	PayloadEnvironmentData radfetData;
 } radfetDataInRam;
 
 // struct for saving SEL TLM data in RAM

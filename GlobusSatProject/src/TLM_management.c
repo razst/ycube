@@ -25,13 +25,14 @@
 #include <string.h>
 #include <time.h>
 #include "SubSystemModules/Communication/TRXVU.h"
-#include "SubSystemModules/Housekepping/Payload.h"
 #include <stdlib.h>
 #include <unistd.h>
 
 #include <satellite-subsystems/isis_vu_e.h>
 #include <satellite-subsystems/isis_ants_rev2.h>
 #include <satellite-subsystems/isismepsv2_ivid7_piu.h>
+#include "SubSystemModules/Payload/payload_drivers.h"
+#include "SubSystemModules/Housekepping/Payload_NOT_IN_USE.h"
 
 
 static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
@@ -397,7 +398,7 @@ void getTlmTypeInfo(tlm_type_t tlmType, char* endFileName, int* structSize){
 	}
 	else if (tlmType==tlm_radfet){
 		memcpy(endFileName,END_FILENAME_RADFET_TLM,sizeof(END_FILENAME_RADFET_TLM));
-		*structSize = sizeof(radfet_data);
+		*structSize = sizeof(PayloadEnvironmentData);
 	}
 	else if (tlmType==tlm_sel){
 		memcpy(endFileName,END_FILENAME_SEL_TLM,sizeof(END_FILENAME_SEL_TLM));

@@ -1,7 +1,7 @@
-#include "Payload.h"
+#include "Payload_NOT_IN_USE.h"
 Boolean state_changed = FALSE;
 
-int payloadRead(unsigned char* buffer, int size, int delay)
+int payloadRead_(unsigned char* buffer, int size, int delay)
 {
 	for(int i = 0; i < EXTRA_TRIES; i++)
 	{
@@ -20,7 +20,7 @@ int payloadRead(unsigned char* buffer, int size, int delay)
 	return PAYLOAD_TIMEOUT;
 }
 
-int payloadSendCommand(char opcode, unsigned char* buffer, int size, int delay)
+int payloadSendCommand_(char opcode, unsigned char* buffer, int size, int delay)
 {
 	if(logError(I2C_write(PAYLOAD_I2C_ADDRESS, &opcode, 1), "I2C write to payload")){return -1;}
 
@@ -29,10 +29,10 @@ int payloadSendCommand(char opcode, unsigned char* buffer, int size, int delay)
 		vTaskDelay(delay);
 	}
 
-	return payloadRead(buffer, size, (delay < 100) ? 5 : delay / 10);
+	return payloadRead_(buffer, size, (delay < 100) ? 5 : delay / 10);
 }
 
-int get_radfet_data(radfet_data* radfet)
+int get_radfet_data(radfet_data_* radfet)
 {
 	if (radfet == NULL)
 	{

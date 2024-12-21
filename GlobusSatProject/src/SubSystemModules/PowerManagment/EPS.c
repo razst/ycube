@@ -68,10 +68,10 @@ int EPS_Init()
 
 	EPS_Conditioning();
 
-	// TODO remove
+	// TODO turn on payload  - remove from here
 	isismepsv2_ivid7_piu__replyheader_t response;
 	logError(isismepsv2_ivid7_piu__outputbuschannelon(0, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw3, &response), "Turn on payload channel");
-
+	printf("Payload power ON \r\n");
 
 	return 0;
 }

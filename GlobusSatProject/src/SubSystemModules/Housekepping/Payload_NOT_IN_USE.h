@@ -58,7 +58,7 @@ typedef struct __attribute__ ((__packed__)) radfet_data
 
 	double temperature;				/**< Temperature measurement in degrees Celsius */
 
-} radfet_data;
+} radfet_data_;
 
 typedef struct __attribute__ ((__packed__)) pic32_sel_data
 {
@@ -82,20 +82,20 @@ typedef struct __attribute__ ((__packed__)) pic32_seu_data
  * @param buffer to restore the data, size of recieved data, delay time(ms) if the data isn't ready
  * @return result status
  */
-int payloadRead(unsigned char* buffer, int size, int delay);
+int payloadRead_(unsigned char* buffer, int size, int delay);
 
 /*!
  * send command to be executed, then call payloadRead to get results
  * @param opcode to the executed command, buffer to restore the data, size of recieved data, delay time(ms) to wait for response
  * @return result status
  */
-int payloadSendCommand(char opcode, unsigned char* buffer, int size, int delay);
+int payloadSendCommand_(char opcode, unsigned char* buffer, int size, int delay);
 
 /*!
  * execute radfet commands
  * @param[out] output radfet_data
  */
-int get_radfet_data(radfet_data* radfet);
+int get_radfet_data(radfet_data_* radfet);
 
 /*!
  * execute sel commands
