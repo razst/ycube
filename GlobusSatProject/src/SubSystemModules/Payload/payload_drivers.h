@@ -54,8 +54,13 @@ typedef struct {
  * @brief Structure to hold SEU and SEL event readings.
  */
 typedef struct {
+	time_unix time;
     int seu_count; /**< Count of Single Event Upsets (SEUs) */
     int sel_count; /**< Count of Single Event Latchups (SELs) */
+
+    //data for Latchups
+    unsigned int sat_reset_count;
+    unsigned int eps_reset_count;
 } PayloadEventData;
 
 /**

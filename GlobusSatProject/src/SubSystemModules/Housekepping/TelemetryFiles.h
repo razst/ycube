@@ -18,8 +18,7 @@
 #define	END_FILENAME_LOGS				"log"
 
 #define	END_FILENAME_RADFET_TLM			"rad"
-#define	END_FILENAME_SEL_TLM			"sel"
-#define	END_FILENAME_SEU_TLM			"seu"
+#define	END_FILENAME_EVENTS_TLM			"sev"
 
 
 
@@ -32,8 +31,8 @@ typedef enum {
 	tlm_wod,
 
 	tlm_radfet,
-	tlm_sel,
-	tlm_seu,
+	tlm_sel_NO_USE,
+	tlm_events,
 // don't change the position of these
 
 	//NOTICE - MOVED BY 3!

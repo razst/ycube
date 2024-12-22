@@ -73,12 +73,8 @@ void WriteDefaultValuesToFRAM()
 	FRAM_write((unsigned char*) &tlm_save_period, RADFET_SAVE_TLM_PERIOD_ADDR,
 			sizeof(tlm_save_period));
 
-	tlm_save_period = DEFAULT_SEL_SAVE_TLM_TIME;
-	FRAM_write((unsigned char*) &tlm_save_period, SEL_SAVE_TLM_PERIOD_ADDR,
-			sizeof(tlm_save_period));
-
-	tlm_save_period = DEFAULT_SEU_SAVE_TLM_TIME;
-	FRAM_write((unsigned char*) &tlm_save_period, SEU_SAVE_TLM_PERIOD_ADDR,
+	tlm_save_period = DEFAULT_PAYLOAD_EVENTS_SAVE_TLM_TIME;
+	FRAM_write((unsigned char*) &tlm_save_period, PAYLOAD_EVENTS_SAVE_TLM_PERIOD_ADDR,
 			sizeof(tlm_save_period));
 
 	time_unix beacon_interval = 0;

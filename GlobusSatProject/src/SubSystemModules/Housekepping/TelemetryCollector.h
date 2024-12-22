@@ -85,14 +85,9 @@ void TelemetrySaveWOD();
 void TelemetrySaveRADFET();
 
 /*!
- *  @brief saves current SEL telemetry into file
+ *  @brief saves current payload events telemetry into file
  */
-void TelemetrySaveSEL();
-
-/*!
- *  @brief saves current SEU telemetry into file
- */
-void TelemetrySaveSEU();
+void TelemetrySavePayloadEvents();
 
 /*!
  * @brief Gets all necessary telemetry and arranges it into a WOD structure

@@ -87,13 +87,9 @@ void DumpRamTask(void *args) {
 		cell_length = sizeof(radfetDataInRam);
 		tlm_type = tlm_radfet;
 		break;
-	case tlm_seu:
-		cell_length = sizeof(seuDataInRam);
-		tlm_type = tlm_seu;
-		break;
-	case tlm_sel:
-		cell_length = sizeof(selDataInRam);
-		tlm_type = tlm_sel;
+	case tlm_events:
+		cell_length = sizeof(eventsDataInRam);
+		tlm_type = tlm_events;
 		break;
 	}
 

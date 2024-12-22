@@ -32,19 +32,14 @@ typedef struct radfetDataInRam
 	PayloadEnvironmentData radfetData;
 } radfetDataInRam;
 
-// struct for saving SEL TLM data in RAM
-typedef struct selDataInRam
-{
-	time_unix date;
-	pic32_sel_data selData;
-} selDataInRam;
 
-// struct for saving SEU TLM data in RAM
-typedef struct seuDataInRam
+
+// struct for saving payload events TLM data in RAM
+typedef struct eventsDataInRam
 {
 	time_unix date;
-	pic32_seu_data seuData;
-} seuDataInRam;
+	PayloadEventData eventsData;
+} eventsDataInRam;
 
 // struct for tlm range
 typedef struct dataRange

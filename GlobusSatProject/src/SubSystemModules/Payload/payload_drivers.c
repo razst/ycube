@@ -75,6 +75,8 @@ SoreqResult payloadReadEvents(PayloadEventData *event_data) {
     unsigned char buffer[12];
     SoreqResult res;
 
+	Time_getUnixEpoch(&event_data->time);
+
     // Read SEL count
     if ((res = payloadSendCommand(READ_PIC32_SEL, sizeof(buffer), buffer, 10 / portTICK_RATE_MS)) != PAYLOAD_SUCCESS)
         return res;
@@ -87,6 +89,12 @@ SoreqResult payloadReadEvents(PayloadEventData *event_data) {
         return res;
     memcpy(&event_data->seu_count, buffer + 4, 4);
     CHANGE_ENDIAN(event_data->seu_count);
+
+    FRAM_read((unsigned char*)&event_data->sat_reset_count,
+    		NUMBER_OF_CMD_RESETS_ADDR, NUMBER_OF_CMD_RESETS_SIZE);
+
+    FRAM_read((unsigned char*)&event_data->eps_reset_count,
+    		NUMBER_OF_SW3_RESETS_ADDR, NUMBER_OF_SW3_RESETS_SIZE);
 
     return PAYLOAD_SUCCESS;
 }

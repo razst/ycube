@@ -27,7 +27,6 @@ int EnterFullMode()
 		return 0;
 	}
 	state = FullMode;
-	state_changed = TRUE;
 	EpsSetLowVoltageFlag(FALSE);
 	PayloadOperations(TurnOn);
 	return 0;
@@ -39,7 +38,6 @@ int EnterCruiseMode()
 		return 0;
 	}
 	state = CruiseMode;
-	state_changed = TRUE;
 	turnOffTransponder();
 	PayloadOperations(TurnOff);
 
@@ -52,7 +50,6 @@ int EnterSafeMode()
 		return 0;
 	}
 	state = SafeMode;
-	state_changed = TRUE;
 	EpsSetLowVoltageFlag(FALSE);
 	PayloadOperations(TurnOff);
 	return 0;
@@ -65,7 +62,6 @@ int EnterCriticalMode()
 	}
 
 	state = CriticalMode;
-	state_changed = TRUE;
 	EpsSetLowVoltageFlag(TRUE);
 	PayloadOperations(TurnOff);
 	return 0;
@@ -73,7 +69,7 @@ int EnterCriticalMode()
 
 int PayloadOperations(PayloadOperation status)
 {
-	return 0; // TODO remove and turn on / off the payload
+	Boolean isOn = DoesPayloadChannelOn();
 	uint8_t index = 0;
 	isismepsv2_ivid7_piu__replyheader_t response;
 	int err = 0;
@@ -81,6 +77,7 @@ int PayloadOperations(PayloadOperation status)
 	switch(status)
 	{
 	case TurnOn: ;
+		if(isOn){return PAYLOAD_FALSE_OPERATION;}
 		if(logError(isismepsv2_ivid7_piu__outputbuschannelon(index, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw3, &response), "Turn on payload channel")){return -1;}
 
 		//increase the number of sw3 resets
@@ -94,11 +91,12 @@ int PayloadOperations(PayloadOperation status)
 		break;
 
 	case TurnOff: ;
+		if(!isOn){return PAYLOAD_FALSE_OPERATION;}
 		if(logError(isismepsv2_ivid7_piu__outputbuschanneloff(index, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw3, &response), "Turn off payload channel")){return -1;}
 
 		break;
 
-	case Restart: ;
+	case Restart: ; //quest - allow this when the channel is off?
 
 		err = PayloadOperations(TurnOff);
 		vTaskDelay(10);

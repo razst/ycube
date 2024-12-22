@@ -48,13 +48,10 @@ void InitSavePeriodTimes(){
 	//printf("tlm_wod period value:%d \n",tlm_save_periods[tlm_wod]);
 
 	FRAM_read((unsigned char*) &tlm_save_periods[tlm_radfet], RADFET_SAVE_TLM_PERIOD_ADDR , sizeof(time_unix));
-	//printf("tlm_wod period value:%d \n",tlm_save_periods[tlm_radfet]);
+	//printf("tlm_radfet period value:%d \n",tlm_save_periods[tlm_radfet]);
 
-	FRAM_read((unsigned char*) &tlm_save_periods[tlm_sel], SEL_SAVE_TLM_PERIOD_ADDR , sizeof(time_unix));
-	//printf("tlm_wod period value:%d \n",tlm_save_periods[tlm_sel]);
-
-	FRAM_read((unsigned char*) &tlm_save_periods[tlm_seu], SEU_SAVE_TLM_PERIOD_ADDR , sizeof(time_unix));
-	//printf("tlm_wod period value:%d \n",tlm_save_periods[tlm_seu]);
+	FRAM_read((unsigned char*) &tlm_save_periods[tlm_events], PAYLOAD_EVENTS_SAVE_TLM_PERIOD_ADDR , sizeof(time_unix));
+	//printf("tlm_events period value:%d \n",tlm_save_periods[tlm_events]);
 
 }
 
@@ -101,13 +98,9 @@ int CMD_SetTLMPeriodTimes(sat_packet_t *cmd){
 		err=FRAM_write((unsigned char *)&value, RADFET_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
 		tlm_save_periods[tlm_radfet] = value;
 		break;
-	case tlm_sel:
-		err=FRAM_write((unsigned char *)&value, SEL_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
-		tlm_save_periods[tlm_sel] = value;
-		break;
-	case tlm_seu:
-		err=FRAM_write((unsigned char *)&value, SEU_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
-		tlm_save_periods[tlm_seu] = value;
+	case tlm_events:
+		err=FRAM_write((unsigned char *)&value, PAYLOAD_EVENTS_SAVE_TLM_PERIOD_ADDR, sizeof(time_unix));
+		tlm_save_periods[tlm_events] = value;
 		break;
 
 	default:
@@ -169,17 +162,10 @@ void TelemetryCollectorLogic()
 		}
 	}
 
-//	if (CheckExecutionTime(tlm_last_save_time[tlm_sel],tlm_save_periods[tlm_sel])){
-//		TelemetrySaveSEL();
-//		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
-//			tlm_last_save_time[tlm_sel] = curr;
-//		}
-//	}
-
-	if (CheckExecutionTime(tlm_last_save_time[tlm_seu],tlm_save_periods[tlm_seu])){
-		TelemetrySaveSEU();
+	if (CheckExecutionTime(tlm_last_save_time[tlm_events],tlm_save_periods[tlm_events])){
+		TelemetrySavePayloadEvents();
 		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){
-			tlm_last_save_time[tlm_seu] = curr;
+			tlm_last_save_time[tlm_events] = curr;
 		}
 	}
 
@@ -316,35 +302,12 @@ void TelemetrySaveRADFET()
         printf("payloadReadEnvironment: ERROR (%d)\n", result);
         return;
     }
-	//if((err = get_radfet_data(&radfet))){printf("Error - %d", err);return;}
 
 	write2File(&radfet , tlm_radfet);
 	saveTlmToRam(&radfet, sizeof(radfet), tlm_radfet);
 }
-void TelemetrySaveSEL()
-{
-	int err;
 
-	if (!DoesPayloadChannelOn())
-	{
-		return;
-	}
-
-	pic32_sel_data sel = { 0 };
-
-	if((err = get_sel_data(&sel))){printf("Error - %d", err);return;}
-
-	printf("SEL data:\r\n");
-	printf("battery_state_changed=%d\r\n",sel.battery_state_changed);
-	printf("eps_reset_count=%d\r\n",sel.eps_reset_count);
-	printf("latchUp_count=%d\r\n",sel.latchUp_count);
-	printf("sat_reset_count=%d\r\n",sel.sat_reset_count);
-	printf("time=%d\r\n",sel.time);
-
-	write2File(&sel , tlm_sel);
-	saveTlmToRam(&sel, sizeof(sel), tlm_sel);
-}
-void TelemetrySaveSEU()
+void TelemetrySavePayloadEvents()
 {
 	int err;
 	if (!DoesPayloadChannelOn())
@@ -357,17 +320,20 @@ void TelemetrySaveSEU()
     SoreqResult result = payloadReadEvents(&event_data);
     if (result == PAYLOAD_SUCCESS) {
         printf("payloadReadEvents: SUCCESS\n");
+
+		printf("time=%d\r\n",event_data.time);
         printf("  SEL Count: %d\n", event_data.sel_count);
         printf("  SEU Count: %d\n", event_data.seu_count);
-        return ;
+
+		printf("eps_reset_count=%d\r\n",event_data.eps_reset_count);
+		printf("sat_reset_count=%d\r\n",event_data.sat_reset_count);
     } else {
         printf("payloadReadEvents: ERROR (%d)\n", result);
         return ;
     }
-	//if((err = get_seu_data(&seu))){printf("Error - %d", err);return;}
 
-//	write2File(&event_data , tlm_seu);
-//	saveTlmToRam(&event_data, sizeof(event_data), tlm_seu);
+	write2File(&event_data , tlm_events);
+	saveTlmToRam(&event_data, sizeof(event_data), tlm_events);
 }
 
 void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)

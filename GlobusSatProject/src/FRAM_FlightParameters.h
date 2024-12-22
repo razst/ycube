@@ -70,11 +70,8 @@
 #define DEFAULT_RADFET_SAVE_TLM_TIME	900			//<! save RADFET TLM every 15 minutes (15*60)
 #define RADFET_SAVE_TLM_PERIOD_ADDR		0x164		//<! address where the save tlm period will be
 
-#define DEFAULT_SEL_SAVE_TLM_TIME		20			//<! save SEL TLM every 20 seconds
-#define SEL_SAVE_TLM_PERIOD_ADDR		0x168		//<! address where the save tlm period will be
-
-#define DEFAULT_SEU_SAVE_TLM_TIME		20			//<! save SEU TLM every 20 seconds
-#define SEU_SAVE_TLM_PERIOD_ADDR		0x172		//<! address where the save tlm period will be
+#define DEFAULT_PAYLOAD_EVENTS_SAVE_TLM_TIME		20			//<! save events TLM every 20 seconds
+#define PAYLOAD_EVENTS_SAVE_TLM_PERIOD_ADDR			0x172		//<! address where the save tlm period will be
 
 #define NUMBER_OF_SW3_RESETS_ADDR		0x176		//<! counts how many restarts did the payload/sw3 endure from ground command
 #define NUMBER_OF_SW3_RESETS_SIZE		4			//<! size of the parameter in bytes

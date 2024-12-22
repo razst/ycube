@@ -400,12 +400,8 @@ void getTlmTypeInfo(tlm_type_t tlmType, char* endFileName, int* structSize){
 		memcpy(endFileName,END_FILENAME_RADFET_TLM,sizeof(END_FILENAME_RADFET_TLM));
 		*structSize = sizeof(PayloadEnvironmentData);
 	}
-	else if (tlmType==tlm_sel){
-		memcpy(endFileName,END_FILENAME_SEL_TLM,sizeof(END_FILENAME_SEL_TLM));
-		*structSize = sizeof(pic32_sel_data);
-	}
-	else if (tlmType==tlm_seu){
-		memcpy(endFileName,END_FILENAME_SEU_TLM,sizeof(END_FILENAME_SEU_TLM));
+	else if (tlmType==tlm_events){
+		memcpy(endFileName,END_FILENAME_EVENTS_TLM,sizeof(END_FILENAME_EVENTS_TLM));
 		*structSize = sizeof(pic32_seu_data);
 	}
 
