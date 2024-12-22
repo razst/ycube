@@ -116,6 +116,8 @@ void WriteDefaultValuesToFRAM()
 	FRAM_write((unsigned char*) &flag,
 			STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);
 
+			FRAM_write((unsigned char*)&flag,Has_Sat_Reset_ADDR,Has_Sat_Reset_SIZE);
+
 
 	ResetGroundCommWDT();
 

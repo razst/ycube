@@ -27,7 +27,7 @@ int EnterFullMode()
 	}
 	state = FullMode;
 	EpsSetLowVoltageFlag(FALSE);
-	Payload_Safety()
+	Payload_Safety();
 	//PayloadOperations(TurnOn);
 	return 0;
 }
@@ -130,6 +130,8 @@ int Payload_Safety()
 }
 void Payload_Safety_IN_Maintenance()
 {
+	Boolean Has_Sat_Reset;
+	FRAM_read((unsigned char*)&Has_Sat_Reset,Has_Sat_Reset_ADDR,Has_Sat_Reset_SIZE);
 	/*time_unix current_time = 0;
 	Time_getUnixEpoch(&current_time);*/
 	//if uptime > 1 min 
