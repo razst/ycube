@@ -26,7 +26,7 @@ typedef struct wodDataInRam
 } wodDataInRam;
 
 // struct for saving RADFET TLM data in RAM
-typedef struct radfetDataInRam
+typedef struct __attribute__ ((__packed__)) radfetDataInRam
 {
 	time_unix date;
 	PayloadEnvironmentData radfetData;
@@ -35,7 +35,7 @@ typedef struct radfetDataInRam
 
 
 // struct for saving payload events TLM data in RAM
-typedef struct eventsDataInRam
+typedef struct __attribute__ ((__packed__)) eventsDataInRam
 {
 	time_unix date;
 	PayloadEventData eventsData;

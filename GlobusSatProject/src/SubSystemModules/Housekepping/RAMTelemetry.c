@@ -54,13 +54,6 @@ int dec(int num) //advance the index acordding to the arr size
 
 int saveTlmToRam(void* data, int length, tlm_type_t type) {
 
-	int l = sizeof(radfetDataInRam);
-	printf("radfetDataInRam=%d",l);
-	l = sizeof(time_unix);
-	printf("time_unix=%d",l);
-	l = sizeof(PayloadEnvironmentData);
-	printf("PayloadEnvironmentData=%d",l);
-
 	switch (type)
 	{
 	case tlm_log:

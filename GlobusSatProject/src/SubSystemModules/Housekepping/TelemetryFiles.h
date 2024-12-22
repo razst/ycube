@@ -30,7 +30,7 @@ typedef enum {
 	tlm_solar,
 	tlm_wod,
 
-	tlm_radfet,
+	tlm_radfet, //5
 	tlm_sel_NO_USE,
 	tlm_events,
 // don't change the position of these
