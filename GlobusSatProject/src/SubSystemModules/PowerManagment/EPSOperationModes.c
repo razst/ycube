@@ -99,7 +99,7 @@ int PayloadOperations(PayloadOperation status)
 	case Restart: ; //quest - allow this when the channel is off?
 
 		err = PayloadOperations(TurnOff);
-		vTaskDelay(10);
+		vTaskDelay(900);
 		err = PayloadOperations(TurnOn);
 		break;
 	}
