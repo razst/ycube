@@ -102,7 +102,7 @@ void DumpRamTask(void *args) {
 
 	numOfElements = getTlm(dump_data, task_args->count, tlm_type);
 
-	int sentCount=-1;
+	int sentCount = 0;
 
 	for(int i = 0; i < numOfElements; i++)
 	{
@@ -111,7 +111,7 @@ void DumpRamTask(void *args) {
 		char element[cell_length];
 		memcpy(element, dump_data + i*cell_length, cell_length);
 
-		AssembleCommand((unsigned char*)element, cell_length, task_args->cmd.cmd_type,
+		AssembleCommand((unsigned char*)element, cell_length, dump_type,
 						tlm_type, task_args->cmd.ID, &dump_tlm);
 
 		TransmitSplPacket(&dump_tlm, NULL);
@@ -128,7 +128,7 @@ void DumpRamTask(void *args) {
 			break;
 		}
 	}
-	if (sentCount<0){
+	if (sentCount < task_args->count){
 		FinishDump(task_args, NULL, ACK_ERROR_MSG, &sentCount, sizeof(sentCount));
 	}else{
 		FinishDump(task_args, NULL, ACK_DUMP_FINISHED, &sentCount, sizeof(sentCount));
