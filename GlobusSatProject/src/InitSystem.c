@@ -117,6 +117,8 @@ void WriteDefaultValuesToFRAM()
 			STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);
 
 			FRAM_write((unsigned char*)&flag,Has_Sat_Reset_ADDR,Has_Sat_Reset_SIZE);
+			//flag = TRUE;//for testing
+			FRAM_write((unsigned char*)&flag,Payload_IS_Dead_ADDR,Payload_IS_Dead_SIZE);
 
 
 	ResetGroundCommWDT();

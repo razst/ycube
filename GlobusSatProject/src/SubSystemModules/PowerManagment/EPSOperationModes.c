@@ -21,15 +21,15 @@ Boolean g_low_volt_flag = FALSE; // set to true if in low voltage
 
 int EnterFullMode()
 {
-
-	if(state == FullMode){
+	int err;
+	/*if(state == FullMode){
 		return 0;
-	}
+	}*/
 	state = FullMode;
 	EpsSetLowVoltageFlag(FALSE);
-	Payload_Safety();
+	err = Payload_Safety();
 	//PayloadOperations(TurnOn);
-	return 0;
+	return err;
 }
 
 int EnterCruiseMode()
@@ -116,12 +116,12 @@ int Payload_Safety()
 		if (Has_Sat_Reset == TRUE)
 		{
 			PayloadState = TRUE;
-			FRAM_write(&PayloadState,Payload_IS_Dead_ADDR,Payload_IS_Dead_SIZE);
+			FRAM_write((unsigned char*)&PayloadState,Payload_IS_Dead_ADDR,Payload_IS_Dead_SIZE);
 		}
 		else 
 		{
 			Has_Sat_Reset = TRUE;
-			FRAM_write(&Has_Sat_Reset,Has_Sat_Reset_ADDR,Has_Sat_Reset_SIZE);
+			FRAM_write((unsigned char*)&Has_Sat_Reset,Has_Sat_Reset_ADDR,Has_Sat_Reset_SIZE);
 			PayloadOperations(TurnOn);
 			return E_NO_SS_ERR;
 		}

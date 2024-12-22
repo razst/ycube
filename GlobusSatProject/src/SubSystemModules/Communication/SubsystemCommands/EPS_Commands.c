@@ -87,6 +87,18 @@ int CMD_EPS_ResetWDT(sat_packet_t *cmd)
 	}
 	return err;
 }
+int CMD_Connect_Payload(sat_packet_t *cmd)
+{
+	Boolean PayloadState;
+	FRAM_read((unsigned char*)&PayloadState,Payload_IS_Dead_ADDR,Payload_IS_Dead_SIZE);
+	if(PayloadState == TRUE)
+	{
+		PayloadState = FALSE;
+		FRAM_write((unsigned char*)&PayloadState,Payload_IS_Dead_ADDR,Payload_IS_Dead_SIZE);
+		return E_NO_SS_ERR;
+	}
+	return -1;
+}
 int CMD_Payload_Operations (sat_packet_t *cmd)
 {
 	char state;

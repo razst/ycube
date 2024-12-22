@@ -156,6 +156,9 @@ int eps_command_router(sat_packet_t *cmd)
 	case PAYLOAD_OPERATIONS:
 		err = CMD_Payload_Operations(cmd);
 		break;
+	case CONNECT_PAYLOAD:
+		err = CMD_Connect_Payload(cmd);
+		break;
 	default:
 		SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
 		break;

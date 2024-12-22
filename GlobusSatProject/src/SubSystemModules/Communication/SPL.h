@@ -91,7 +91,8 @@ typedef enum __attribute__ ((__packed__)) eps_subtypes_t
     GET_HEATER_VALUES 	= 0x02,
     SET_HEATER_VALUES 	= 0x03,
     RESET_EPS_WDT	 	= 0x04,
-	PAYLOAD_OPERATIONS  = 0x05
+	PAYLOAD_OPERATIONS  = 0x05,
+	CONNECT_PAYLOAD     = 0x06
 }eps_subtypes_t;
 
 
