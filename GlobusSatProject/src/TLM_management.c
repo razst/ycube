@@ -32,7 +32,6 @@
 #include <satellite-subsystems/isis_ants_rev2.h>
 #include <satellite-subsystems/isismepsv2_ivid7_piu.h>
 #include "SubSystemModules/Payload/payload_drivers.h"
-#include "SubSystemModules/Housekepping/Payload_NOT_IN_USE.h"
 
 
 static char buffer[ MAX_COMMAND_DATA_LENGTH * NUM_ELEMENTS_READ_AT_ONCE]; // buffer for data coming from SD (time+size of data struct)
@@ -402,7 +401,7 @@ void getTlmTypeInfo(tlm_type_t tlmType, char* endFileName, int* structSize){
 	}
 	else if (tlmType==tlm_events){
 		memcpy(endFileName,END_FILENAME_EVENTS_TLM,sizeof(END_FILENAME_EVENTS_TLM));
-		*structSize = sizeof(pic32_seu_data);
+		*structSize = sizeof(PayloadEventData);
 	}
 
 }

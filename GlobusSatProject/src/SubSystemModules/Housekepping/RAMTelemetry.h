@@ -7,7 +7,6 @@
 #include "TelemetryCollector.h"
 #include <hal/errors.h>
 #include "SubSystemModules/Payload/payload_drivers.h"
-#include "SubSystemModules/Housekepping/Payload_NOT_IN_USE.h"
 
 #define TLM_RAM_SIZE 10000
 

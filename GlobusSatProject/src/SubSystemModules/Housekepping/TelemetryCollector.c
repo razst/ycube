@@ -25,7 +25,6 @@
 #include "SubSystemModules/Maintenance/Maintenance.h"
 #include "SubSystemModules/Communication/AckHandler.h"
 #include "SubSystemModules/Payload/payload_drivers.h"
-#include "SubSystemModules/Housekepping/Payload_NOT_IN_USE.h"
 
 static time_unix tlm_save_periods[NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS] = {0};
 static time_unix tlm_last_save_time[NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS]= {0};

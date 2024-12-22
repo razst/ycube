@@ -11,7 +11,6 @@
 	#include <satellite-subsystems/GomEPS.h>
 #endif
 
-#include "SubSystemModules/Housekepping/Payload_NOT_IN_USE.h"
 #include "SubSystemModules/Communication/TRXVU.h"
 #include <satellite-subsystems/common_types.h>
 
