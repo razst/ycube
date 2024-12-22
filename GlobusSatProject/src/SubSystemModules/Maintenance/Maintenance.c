@@ -239,5 +239,7 @@ void Maintenance()
 	DeleteOldFiels(MIN_FREE_SPACE);
 
 	CheckDeployAnt();
+
+	Payload_Safety_IN_Maintenance();
 }
 

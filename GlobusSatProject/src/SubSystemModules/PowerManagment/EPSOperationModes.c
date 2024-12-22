@@ -27,7 +27,8 @@ int EnterFullMode()
 	}
 	state = FullMode;
 	EpsSetLowVoltageFlag(FALSE);
-	PayloadOperations(TurnOn);
+	Payload_Safety()
+	//PayloadOperations(TurnOn);
 	return 0;
 }
 
@@ -104,7 +105,40 @@ int PayloadOperations(PayloadOperation status)
 	}
 	return err;
 }
-
+int Payload_Safety()
+{
+	Boolean PayloadState;
+	Boolean Has_Sat_Reset;
+	FRAM_read((unsigned char*)&PayloadState,Payload_IS_Dead_ADDR,Payload_IS_Dead_SIZE);
+	if(PayloadState != TRUE)
+	{
+		FRAM_read((unsigned char*)&Has_Sat_Reset,Has_Sat_Reset_ADDR,Has_Sat_Reset_SIZE);
+		if (Has_Sat_Reset == TRUE)
+		{
+			PayloadState = TRUE;
+			FRAM_write(&PayloadState,Payload_IS_Dead_ADDR,Payload_IS_Dead_SIZE);
+		}
+		else 
+		{
+			Has_Sat_Reset = TRUE;
+			FRAM_write(&Has_Sat_Reset,Has_Sat_Reset_ADDR,Has_Sat_Reset_SIZE);
+			PayloadOperations(TurnOn);
+			return E_NO_SS_ERR;
+		}
+	}
+	else return -1;
+}
+void Payload_Safety_IN_Maintenance()
+{
+	/*time_unix current_time = 0;
+	Time_getUnixEpoch(&current_time);*/
+	//if uptime > 1 min 
+	if(Time_getUptimeSeconds() > 60)
+	{
+		Has_Sat_Reset = FALSE;
+		FRAM_write(&Has_Sat_Reset,Has_Sat_Reset_ADDR,Has_Sat_Reset_SIZE);
+	}
+}
 Boolean DoesPayloadChannelOn()
 {
 	uint8_t index = 0;
