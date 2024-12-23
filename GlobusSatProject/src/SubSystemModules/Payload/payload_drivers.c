@@ -91,7 +91,7 @@ SoreqResult payloadReadEvents(PayloadEventData *event_data) {
     CHANGE_ENDIAN(event_data->seu_count);
 
     FRAM_read((unsigned char*)&event_data->sat_reset_count,
-    		NUMBER_OF_CMD_RESETS_ADDR, NUMBER_OF_CMD_RESETS_SIZE);
+    		NUMBER_OF_RESETS_ADDR, NUMBER_OF_RESETS_SIZE);
 
     FRAM_read((unsigned char*)&event_data->eps_reset_count,
     		NUMBER_OF_SW3_RESETS_ADDR, NUMBER_OF_SW3_RESETS_SIZE);
