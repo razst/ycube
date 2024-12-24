@@ -407,6 +407,9 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 		wod->photo_diodes[i] = ADC_ConvertRaw10bitToMillivolt( adcSamples[i] ); // convert to mV data
 		////printf("PD%d : %u mV\n\r", i, wod->photo_diodes[i]);
 	}
+
+	char name[MAX_NAME_SIZE];
+	GetRandomName(wod->name);
 }
 
 
