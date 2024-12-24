@@ -38,13 +38,6 @@ typedef struct __attribute__ ((__packed__))
 	int resulotion;
 } dump_arguments_t;
 
-typedef struct __attribute__ ((__packed__))
-{
-	sat_packet_t cmd;
-	tlm_type_t dump_type;
-	int count;
-} dump_ram_arguments_t;
-
 typedef enum __attribute__ ((__packed__)) _ISIStrxvuTransponderMode
 {
     trxvu_transponder_off = 0x01,

@@ -408,8 +408,8 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 		////printf("PD%d : %u mV\n\r", i, wod->photo_diodes[i]);
 	}
 
-	char name[MAX_NAME_SIZE];
-	GetRandomName(wod->name);
+//	char name[MAX_NAME_SIZE];
+//	GetRandomName(wod->name);
 }
 
 

@@ -68,67 +68,12 @@ void DumpRamTask(void *args) {
 
 	stopDump = FALSE;
 
-	int numOfElements = 0;
+	int numOfElements = getTlm(task_args);
 
-	void* dump_data;
-	int cell_length = 0;
-	tlm_type_t tlm_type;
-
-	switch(task_args->dump_type)
-	{
-	case tlm_log:
-		cell_length = sizeof(logDataInRam);
-		tlm_type = tlm_log;
-		break;
-	case tlm_wod:
-		cell_length = sizeof(wodDataInRam);
-		tlm_type = tlm_wod;
-		break;
-	case tlm_radfet:
-		cell_length = sizeof(radfetDataInRam);
-		tlm_type = tlm_radfet;
-		break;
-	case tlm_events:
-		cell_length = sizeof(eventsDataInRam);
-		tlm_type = tlm_events;
-		break;
-	}
-
-	char data[task_args->count * cell_length];
-	dump_data = data;
-
-	numOfElements = getTlm(dump_data, task_args->count, tlm_type);
-
-	int sentCount = 0;
-
-	for(int i = 0; i < numOfElements; i++)
-	{
-		sat_packet_t dump_tlm = { 0 };
-
-		char element[cell_length];
-		memcpy(element, dump_data + i*cell_length, cell_length);
-
-		AssembleCommand((unsigned char*)element, cell_length, dump_type,
-						tlm_type, task_args->cmd.ID, &dump_tlm);
-
-		TransmitSplPacket(&dump_tlm, NULL);
-		#ifdef TESTING
-		printf("ID: %d\n", &dump_tlm.ID);
-		printf("Subtype: %s\n", &dump_tlm.cmd_subtype);
-		printf("Type: %s\n", &dump_tlm.cmd_type);
-		printf("Length: %hu\n", &dump_tlm.length);
-		printf("Data: %s\n", &dump_tlm.data);
-		#endif
-		sentCount++;
-		if(CheckDumpAbort()){
-			stopDump = TRUE;
-			break;
-		}
-	}
-	if (sentCount < task_args->count){
-		FinishDump(task_args, NULL, ACK_ERROR_MSG, &sentCount, sizeof(sentCount));
+	if (numOfElements < task_args->count){
+		FinishDump(task_args, NULL, ACK_ERROR_MSG, &numOfElements, sizeof(numOfElements));
 	}else{
-		FinishDump(task_args, NULL, ACK_DUMP_FINISHED, &sentCount, sizeof(sentCount));
+		FinishDump(task_args, NULL, ACK_DUMP_FINISHED, &numOfElements, sizeof(numOfElements));
 	}
 
 	vTaskDelete(NULL); // kill the dump task

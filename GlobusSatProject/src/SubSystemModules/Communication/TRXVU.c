@@ -304,12 +304,12 @@ int GetOnlineCommand(sat_packet_t *cmd)
 	char buffer [80];
 	sprintf (buffer, "Frame info: doppler: %d length: %d rssi: %d", rxFrameCmd.doppler ,rxFrameCmd.length,rxFrameCmd.rssi);
 	logError(INFO_MSG ,buffer);
-
-	if (logError(ParseDataToCommand(receivedFrameData,cmd),"GetOnlineCommand-ParseDataToCommand")) return -1;
 	// remove the last frame
 	vTaskDelay(10 / portTICK_RATE_MS);
 	logError(isis_vu_e__remove_frame(0),"isis_vu_e__remove_frame");
 	vTaskDelay(10 / portTICK_RATE_MS);
+
+	if (logError(ParseDataToCommand(receivedFrameData,cmd),"GetOnlineCommand-ParseDataToCommand")) return -1;
 
 
 	return command_found;
@@ -410,9 +410,15 @@ int BeaconLogic(Boolean forceTX) {
 	GetCurrentWODTelemetry(&wod);
 	sat_packet_t cmd = { 0 };
 
+
 	if (logError(AssembleCommand((unsigned char*) &wod, sizeof(wod), trxvu_cmd_type,BEACON_SUBTYPE, BEACON_SPL_ID, &cmd), "BeaconLogic-AssembleCommand") ) return -1;
 	// set the current time as the previous beacon time
 	if (logError(Time_getUnixEpoch(&g_prev_beacon_time),"BeaconLogic-Time_getUnixEpoch") ) return -1;
+
+	// update TX config as it gets override after WDT of the TX
+	if (logError(isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps) ,"isis_vu_e__set_bitrate") ) return -1;
+	if (logError(isis_vu_e__set_tx_freq(0, TX_FREQUENCY),"isis_vu_e__tx_freq") ) return -1;
+	if (logError(isis_vu_e__set_tx_pll_powerout(0, 0xCFEF),"isis_vu_e__set_tx_pll_powerout") ) return -1;
 
 	if (logError(TransmitSplPacket(&cmd, NULL),"BeaconLogic-TransmitSplPacket") ) return -1;
 
@@ -597,6 +603,7 @@ int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
 	if (xSemaphoreTake(xIsTransmitting,SECONDS_TO_TICKS(WAIT_TIME_SEM_TX)) != pdTRUE) {
 		return E_GET_SEMAPHORE_FAILED;
 	}
+
 
 	uint8_t avail=0;
 //	err = isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps);

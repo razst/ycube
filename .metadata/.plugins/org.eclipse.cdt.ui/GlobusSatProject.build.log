@@ -1,11 +1,1034 @@
-13:55:07 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+17:06:00 **** Incremental Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
+Building file: ../src/TestingDemos/CommandsTestingDemo.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/TestingDemos/CommandsTestingDemo.d" -MT"src/TestingDemos/CommandsTestingDemo.d" -c -o "src/TestingDemos/CommandsTestingDemo.o" "../src/TestingDemos/CommandsTestingDemo.c"
+../src/TestingDemos/CommandsTestingDemo.c: In function 'TestActUponCommand':
+../src/TestingDemos/CommandsTestingDemo.c:18:2: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/CommandsTestingDemo.c:11:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+../src/TestingDemos/CommandsTestingDemo.c: In function 'TestAssmbleCommand':
+../src/TestingDemos/CommandsTestingDemo.c:47:15: warning: unused variable 'id' [-Wunused-variable]
+../src/TestingDemos/CommandsTestingDemo.c:46:16: warning: unused variable 'subtype' [-Wunused-variable]
+../src/TestingDemos/CommandsTestingDemo.c:45:16: warning: unused variable 'type' [-Wunused-variable]
+../src/TestingDemos/CommandsTestingDemo.c:44:17: warning: unused variable 'length' [-Wunused-variable]
+../src/TestingDemos/CommandsTestingDemo.c: In function 'TestDeleteDelayedCommandByIndex':
+../src/TestingDemos/CommandsTestingDemo.c:133:2: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/CommandsTestingDemo.c:11:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+../src/TestingDemos/CommandsTestingDemo.c: In function 'selectAndExecuteCommandsDemoTest':
+../src/TestingDemos/CommandsTestingDemo.c:217:2: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/CommandsTestingDemo.c:11:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+Finished building: ../src/TestingDemos/CommandsTestingDemo.c
+ 
+Building file: ../src/TestingDemos/EpsTestingDemo.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/TestingDemos/EpsTestingDemo.d" -MT"src/TestingDemos/EpsTestingDemo.d" -c -o "src/TestingDemos/EpsTestingDemo.o" "../src/TestingDemos/EpsTestingDemo.c"
+../src/TestingDemos/EpsTestingDemo.c: In function 'TestEpsConditioning':
+../src/TestingDemos/EpsTestingDemo.c:24:2: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/EpsTestingDemo.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+../src/TestingDemos/EpsTestingDemo.c: In function 'TestUpdateThreshVoltages':
+../src/TestingDemos/EpsTestingDemo.c:96:2: warning: passing argument 1 of 'UpdateThresholdVoltages' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/EpsTestingDemo.c:9:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/PowerManagment/EPS.h:107:5: note: expected 'union EpsThreshVolt_t *' but argument is of type 'voltage_t *'
+../src/TestingDemos/EpsTestingDemo.c:102:2: warning: passing argument 1 of 'GetThresholdVoltages' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/EpsTestingDemo.c:9:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/PowerManagment/EPS.h:116:5: note: expected 'union EpsThreshVolt_t *' but argument is of type 'voltage_t *'
+../src/TestingDemos/EpsTestingDemo.c: In function 'TestGetThreshVoltages':
+../src/TestingDemos/EpsTestingDemo.c:120:2: warning: passing argument 1 of 'GetThresholdVoltages' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/EpsTestingDemo.c:9:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/PowerManagment/EPS.h:116:5: note: expected 'union EpsThreshVolt_t *' but argument is of type 'voltage_t *'
+../src/TestingDemos/EpsTestingDemo.c: In function 'TestRestoreDefaultThresholdVoltages':
+../src/TestingDemos/EpsTestingDemo.c:196:2: warning: passing argument 1 of 'GetThresholdVoltages' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/EpsTestingDemo.c:9:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/PowerManagment/EPS.h:116:5: note: expected 'union EpsThreshVolt_t *' but argument is of type 'voltage_t *'
+../src/TestingDemos/EpsTestingDemo.c:211:2: warning: passing argument 1 of 'GetThresholdVoltages' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/EpsTestingDemo.c:9:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/PowerManagment/EPS.h:116:5: note: expected 'union EpsThreshVolt_t *' but argument is of type 'voltage_t *'
+../src/TestingDemos/EpsTestingDemo.c: In function 'GetHeaterValues':
+../src/TestingDemos/EpsTestingDemo.c:233:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
+../src/TestingDemos/EpsTestingDemo.c:233:2: warning: incompatible implicit declaration of built-in function 'memcpy' [enabled by default]
+../src/TestingDemos/EpsTestingDemo.c: In function 'selectAndExecuteEpsDemoTest':
+../src/TestingDemos/EpsTestingDemo.c:305:2: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/EpsTestingDemo.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+Finished building: ../src/TestingDemos/EpsTestingDemo.c
+ 
+Building file: ../src/TestingDemos/FileSystemTestingDemo.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/TestingDemos/FileSystemTestingDemo.d" -MT"src/TestingDemos/FileSystemTestingDemo.d" -c -o "src/TestingDemos/FileSystemTestingDemo.o" "../src/TestingDemos/FileSystemTestingDemo.c"
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'TestlistFiels':
+../src/TestingDemos/FileSystemTestingDemo.c:21:4: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:21:4: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:29:5: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/FileSystemTestingDemo.c:33:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'TestListFiles':
+../src/TestingDemos/FileSystemTestingDemo.c:49:6: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:51:5: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:57:6: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:57:6: warning: incompatible implicit declaration of built-in function 'memcpy' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:57:6: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:57:25: warning: incompatible implicit declaration of built-in function 'strlen' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:58:6: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:58:6: warning: incompatible implicit declaration of built-in function 'sprintf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:62:6: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'TestListAllFiles':
+../src/TestingDemos/FileSystemTestingDemo.c:74:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:75:2: warning: implicit declaration of function 'scanf' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:75:2: warning: incompatible implicit declaration of built-in function 'scanf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:75:2: warning: format '%s' expects argument of type 'char *', but argument 2 has type 'char (*)[20]' [-Wformat]
+../src/TestingDemos/FileSystemTestingDemo.c:76:2: warning: implicit declaration of function 'strcmp' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:76:29: warning: incompatible implicit declaration of built-in function 'sprintf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:77:29: warning: incompatible implicit declaration of built-in function 'sprintf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:77:2: warning: zero-length gnu_printf format string [-Wformat-zero-length]
+../src/TestingDemos/FileSystemTestingDemo.c:79:2: warning: incompatible implicit declaration of built-in function 'sprintf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:72:9: warning: unused variable 'find' [-Wunused-variable]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'TestReadWODFile':
+../src/TestingDemos/FileSystemTestingDemo.c:95:6: warning: unused variable 'numOfElementsSent' [-Wunused-variable]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'TestLOGTLM':
+../src/TestingDemos/FileSystemTestingDemo.c:106:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/FileSystemTestingDemo.c:4:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/FileSystemTestingDemo.c:121:2: warning: implicit declaration of function 'strcpy' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:121:2: warning: incompatible implicit declaration of built-in function 'strcpy' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:125:2: warning: implicit declaration of function 'vTaskDelay' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:132:6: warning: unused variable 'numOfElementsSent' [-Wunused-variable]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'TestEPSTLM':
+../src/TestingDemos/FileSystemTestingDemo.c:144:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/FileSystemTestingDemo.c:4:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/FileSystemTestingDemo.c:158:2: warning: implicit declaration of function 'TelemetrySaveEPS' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:160:6: warning: unused variable 'numOfElementsSent' [-Wunused-variable]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'TestReadTimeRangeTLMRes':
+../src/TestingDemos/FileSystemTestingDemo.c:172:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/FileSystemTestingDemo.c:4:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/FileSystemTestingDemo.c:189:3: warning: incompatible implicit declaration of built-in function 'strcpy' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:196:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'TestReadTimeRangeTLM':
+../src/TestingDemos/FileSystemTestingDemo.c:227:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/FileSystemTestingDemo.c:4:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/FileSystemTestingDemo.c:244:3: warning: incompatible implicit declaration of built-in function 'strcpy' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:253:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'GenerateWODTLM':
+../src/TestingDemos/FileSystemTestingDemo.c:270:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/FileSystemTestingDemo.c:4:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/FileSystemTestingDemo.c:284:2: warning: implicit declaration of function 'TelemetrySaveWOD' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:293:6: warning: unused variable 'numOfElementsSent' [-Wunused-variable]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'DeleteOldFiles':
+../src/TestingDemos/FileSystemTestingDemo.c:306:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:306:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/FileSystemTestingDemo.c:308:2: warning: incompatible implicit declaration of built-in function 'scanf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:313:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'CreateFiles4DeleteTest':
+../src/TestingDemos/FileSystemTestingDemo.c:321:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/FileSystemTestingDemo.c:4:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/FileSystemTestingDemo.c:334:7: warning: unused variable 'err' [-Wunused-variable]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'CreateFiles4DeleteTest2':
+../src/TestingDemos/FileSystemTestingDemo.c:358:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/FileSystemTestingDemo.c:4:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/FileSystemTestingDemo.c:364:7: warning: variable 'theDay' set but not used [-Wunused-but-set-variable]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'createSingleDayTLM':
+../src/TestingDemos/FileSystemTestingDemo.c:406:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/FileSystemTestingDemo.c:4:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/FileSystemTestingDemo.c:415:4: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:418:4: warning: implicit declaration of function 'printLastError' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:420:4: warning: implicit declaration of function 'TelemetrySaveTRXVU' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:421:4: warning: implicit declaration of function 'TelemetrySaveANT' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:422:4: warning: implicit declaration of function 'TelemetrySaveSolarPanels' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c: At top level:
+../src/TestingDemos/FileSystemTestingDemo.c:430:6: warning: conflicting types for 'printLastError' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:418:4: note: previous implicit declaration of 'printLastError' was here
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'printLastError':
+../src/TestingDemos/FileSystemTestingDemo.c:435:3: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'copyTLMFile':
+../src/TestingDemos/FileSystemTestingDemo.c:450:2: warning: implicit declaration of function 'getTlmTypeInfo' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:451:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/FileSystemTestingDemo.c:8:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:105:6: note: expected 'char *' but argument is of type 'char (*)[20]'
+../src/TestingDemos/FileSystemTestingDemo.c:459:3: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:463:3: warning: implicit declaration of function 'strncpy' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:463:3: warning: incompatible implicit declaration of built-in function 'strncpy' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:489:3: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:495:12: warning: unused variable 'lastSentTime' [-Wunused-variable]
+../src/TestingDemos/FileSystemTestingDemo.c:494:12: warning: unused variable 'currTime' [-Wunused-variable]
+../src/TestingDemos/FileSystemTestingDemo.c:493:6: warning: unused variable 'numOfElementsSent' [-Wunused-variable]
+../src/TestingDemos/FileSystemTestingDemo.c:492:7: warning: unused variable 'element' [-Wunused-variable]
+../src/TestingDemos/FileSystemTestingDemo.c:443:15: warning: unused variable 'offset' [-Wunused-variable]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'copyFile':
+../src/TestingDemos/FileSystemTestingDemo.c:523:3: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:531:3: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:534:2: warning: comparison is always true due to limited range of data type [-Wtype-limits]
+../src/TestingDemos/FileSystemTestingDemo.c:536:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'TestWODTLM':
+../src/TestingDemos/FileSystemTestingDemo.c:548:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/FileSystemTestingDemo.c:4:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/FileSystemTestingDemo.c:564:6: warning: unused variable 'numOfElementsSent' [-Wunused-variable]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'TestDeleteFiels':
+../src/TestingDemos/FileSystemTestingDemo.c:576:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/FileSystemTestingDemo.c:4:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/FileSystemTestingDemo.c:597:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:600:2: warning: incompatible implicit declaration of built-in function 'strcpy' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:630:5: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/FileSystemTestingDemo.c:658:5: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'TestReadMultiFiels':
+../src/TestingDemos/FileSystemTestingDemo.c:679:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/FileSystemTestingDemo.c:4:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/FileSystemTestingDemo.c:699:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:702:2: warning: incompatible implicit declaration of built-in function 'strcpy' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:742:5: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/FileSystemTestingDemo.c:751:6: warning: unused variable 'numOfElementsSent' [-Wunused-variable]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'TestTRXVUTLM':
+../src/TestingDemos/FileSystemTestingDemo.c:763:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/FileSystemTestingDemo.c:4:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/FileSystemTestingDemo.c:781:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:782:6: warning: variable 'numOfElementsSent' set but not used [-Wunused-but-set-variable]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'FullSDTest':
+../src/TestingDemos/FileSystemTestingDemo.c:794:3: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:795:3: warning: incompatible implicit declaration of built-in function 'scanf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'LogErrorRateTest':
+../src/TestingDemos/FileSystemTestingDemo.c:868:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:887:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/FileSystemTestingDemo.c:8:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:105:6: note: expected 'char *' but argument is of type 'char (*)[20]'
+../src/TestingDemos/FileSystemTestingDemo.c:888:2: warning: implicit declaration of function 'writeFileOnScreen' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'deleteMonth':
+../src/TestingDemos/FileSystemTestingDemo.c:909:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:910:2: warning: incompatible implicit declaration of built-in function 'scanf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'deleteYear':
+../src/TestingDemos/FileSystemTestingDemo.c:919:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:920:2: warning: incompatible implicit declaration of built-in function 'scanf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'readFileTest':
+../src/TestingDemos/FileSystemTestingDemo.c:934:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:935:2: warning: incompatible implicit declaration of built-in function 'scanf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c: At top level:
+../src/TestingDemos/FileSystemTestingDemo.c:941:6: warning: conflicting types for 'writeFileOnScreen' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:888:2: note: previous implicit declaration of 'writeFileOnScreen' was here
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'writeFileOnScreen':
+../src/TestingDemos/FileSystemTestingDemo.c:948:5: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'showFreeSapce':
+../src/TestingDemos/FileSystemTestingDemo.c:990:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:990:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/FileSystemTestingDemo.c:991:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/FileSystemTestingDemo.c:992:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/FileSystemTestingDemo.c:993:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'SwitchSDCardTest':
+../src/TestingDemos/FileSystemTestingDemo.c:1002:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:1003:2: warning: incompatible implicit declaration of built-in function 'scanf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:1009:2: warning: incompatible implicit declaration of built-in function 'memcpy' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'FormatSDTest':
+../src/TestingDemos/FileSystemTestingDemo.c:1018:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:1019:2: warning: incompatible implicit declaration of built-in function 'scanf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'showFreeSpaceHeap':
+../src/TestingDemos/FileSystemTestingDemo.c:1041:2: warning: implicit declaration of function 'xPortGetFreeHeapSize' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:1042:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:1042:2: warning: format '%lu' expects argument of type 'long unsigned int', but argument 2 has type 'size_t' [-Wformat]
+../src/TestingDemos/FileSystemTestingDemo.c:1044:2: warning: implicit declaration of function 'malloc' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:1044:16: warning: incompatible implicit declaration of built-in function 'malloc' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:1044:11: warning: initialization makes pointer from integer without a cast [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:1047:2: warning: format '%lu' expects argument of type 'long unsigned int', but argument 2 has type 'size_t' [-Wformat]
+../src/TestingDemos/FileSystemTestingDemo.c:1049:2: warning: format '%lu' expects argument of type 'long unsigned int', but argument 2 has type 'size_t' [-Wformat]
+../src/TestingDemos/FileSystemTestingDemo.c:1051:2: warning: implicit declaration of function 'free' [-Wimplicit-function-declaration]
+../src/TestingDemos/FileSystemTestingDemo.c:1051:2: warning: incompatible implicit declaration of built-in function 'free' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:1039:7: warning: unused variable 'arr' [-Wunused-variable]
+../src/TestingDemos/FileSystemTestingDemo.c: In function 'selectAndExecuteFSTest':
+../src/TestingDemos/FileSystemTestingDemo.c:1065:2: warning: incompatible implicit declaration of built-in function 'printf' [enabled by default]
+../src/TestingDemos/FileSystemTestingDemo.c:1094:2: warning: implicit declaration of function 'UTIL_DbguGetIntegerMinMax' [-Wimplicit-function-declaration]
+In file included from ../src/TestingDemos/FileSystemTestingDemo.c:8:0:
+../src/TestingDemos/FileSystemTestingDemo.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:83:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/TestingDemos/FileSystemTestingDemo.c
+ 
+Building file: ../src/TestingDemos/MainTest.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/TestingDemos/MainTest.d" -MT"src/TestingDemos/MainTest.d" -c -o "src/TestingDemos/MainTest.o" "../src/TestingDemos/MainTest.c"
+../src/TestingDemos/MainTest.c: In function 'selectAndExecuteTest':
+../src/TestingDemos/MainTest.c:52:2: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/MainTest.c:8:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:6:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/RAMTelemetry.h:7,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/TestingDemos/TelemetryTestingDemo.h:6,
+                 from ../src/TestingDemos/MainTest.h:10,
+                 from ../src/TestingDemos/MainTest.c:1:
+../src/TestingDemos/MainTest.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:83:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/TestingDemos/MainTest.c
+ 
+Building file: ../src/TestingDemos/MaintenanceTestingDemo.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/TestingDemos/MaintenanceTestingDemo.d" -MT"src/TestingDemos/MaintenanceTestingDemo.d" -c -o "src/TestingDemos/MaintenanceTestingDemo.o" "../src/TestingDemos/MaintenanceTestingDemo.c"
+../src/TestingDemos/MaintenanceTestingDemo.c: In function 'printSDINfo':
+../src/TestingDemos/MaintenanceTestingDemo.c:22:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/MaintenanceTestingDemo.c:22:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/MaintenanceTestingDemo.c:23:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/MaintenanceTestingDemo.c:23:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/MaintenanceTestingDemo.c:24:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/MaintenanceTestingDemo.c:24:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/MaintenanceTestingDemo.c:25:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/MaintenanceTestingDemo.c:25:2: warning: format '%d' expects argument of type 'int', but argument 2 has type 'long unsigned int' [-Wformat]
+../src/TestingDemos/MaintenanceTestingDemo.c: In function 'TestResetGroundCommWDT':
+../src/TestingDemos/MaintenanceTestingDemo.c:67:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/MaintenanceTestingDemo.c:9:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/MaintenanceTestingDemo.c: In function 'TestMaintenanceMainLoop':
+../src/TestingDemos/MaintenanceTestingDemo.c:95:3: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/MaintenanceTestingDemo.c:8:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+../src/TestingDemos/MaintenanceTestingDemo.c: In function 'selectAndExecuteMaintenanceDemoTest':
+../src/TestingDemos/MaintenanceTestingDemo.c:155:2: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/MaintenanceTestingDemo.c:8:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+Finished building: ../src/TestingDemos/MaintenanceTestingDemo.c
+ 
+Building file: ../src/TestingDemos/TelemetryTestingDemo.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/TestingDemos/TelemetryTestingDemo.d" -MT"src/TestingDemos/TelemetryTestingDemo.d" -c -o "src/TestingDemos/TelemetryTestingDemo.o" "../src/TestingDemos/TelemetryTestingDemo.c"
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:6:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/RAMTelemetry.h:7,
+                 from ../src/TestingDemos/TelemetryTestingDemo.h:6,
+                 from ../src/TestingDemos/TelemetryTestingDemo.c:1:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:83:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/TestingDemos/TelemetryTestingDemo.c
+ 
+Building file: ../src/TestingDemos/TrxvuTestingDemo.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/TestingDemos/TrxvuTestingDemo.d" -MT"src/TestingDemos/TrxvuTestingDemo.d" -c -o "src/TestingDemos/TrxvuTestingDemo.o" "../src/TestingDemos/TrxvuTestingDemo.c"
+../src/TestingDemos/TrxvuTestingDemo.c: In function 'TestTrxvuLogic':
+../src/TestingDemos/TrxvuTestingDemo.c:82:2: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/TrxvuTestingDemo.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+../src/TestingDemos/TrxvuTestingDemo.c:85:2: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/TrxvuTestingDemo.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+../src/TestingDemos/TrxvuTestingDemo.c: In function 'TestTransmitSplPacket':
+../src/TestingDemos/TrxvuTestingDemo.c:180:3: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/TrxvuTestingDemo.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+../src/TestingDemos/TrxvuTestingDemo.c:183:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/TrxvuTestingDemo.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/TrxvuTestingDemo.c:194:4: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/TrxvuTestingDemo.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/TrxvuTestingDemo.c: In function 'TestDumpTelemetry':
+../src/TestingDemos/TrxvuTestingDemo.c:225:2: warning: implicit declaration of function 'CMD_StartDump' [-Wimplicit-function-declaration]
+../src/TestingDemos/TrxvuTestingDemo.c: In function 'TestChooseDefaultBeaconCycle':
+../src/TestingDemos/TrxvuTestingDemo.c:264:2: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/TrxvuTestingDemo.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+../src/TestingDemos/TrxvuTestingDemo.c: In function 'TestBeaconLogic':
+../src/TestingDemos/TrxvuTestingDemo.c:289:2: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/TrxvuTestingDemo.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+../src/TestingDemos/TrxvuTestingDemo.c:292:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/TrxvuTestingDemo.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/TrxvuTestingDemo.c:298:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/TrxvuTestingDemo.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/TrxvuTestingDemo.c: In function 'TestMuteTrxvu':
+../src/TestingDemos/TrxvuTestingDemo.c:315:2: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/TrxvuTestingDemo.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+../src/TestingDemos/TrxvuTestingDemo.c:324:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/TestingDemos/TrxvuTestingDemo.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/TestingDemos/TrxvuTestingDemo.c: In function 'TestSetTrxvuBitrate':
+../src/TestingDemos/TrxvuTestingDemo.c:376:2: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/TrxvuTestingDemo.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+../src/TestingDemos/TrxvuTestingDemo.c: In function 'Dummy_CMD_Hash256':
+../src/TestingDemos/TrxvuTestingDemo.c:487:1: warning: implicit declaration of function 'Hash256' [-Wimplicit-function-declaration]
+../src/TestingDemos/TrxvuTestingDemo.c: In function 'selectAndExecuteTrxvuDemoTest':
+../src/TestingDemos/TrxvuTestingDemo.c:682:2: warning: pointer targets in passing argument 1 of 'UTIL_DbguGetIntegerMinMax' differ in signedness [-Wpointer-sign]
+In file included from ../src/TestingDemos/TrxvuTestingDemo.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Utility/util.h:78:22: note: expected 'int *' but argument is of type 'unsigned int *'
+Finished building: ../src/TestingDemos/TrxvuTestingDemo.c
+ 
+Building file: ../src/SubSystemModules/PowerManagment/EPS.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/PowerManagment/EPS.d" -MT"src/SubSystemModules/PowerManagment/EPS.d" -c -o "src/SubSystemModules/PowerManagment/EPS.o" "../src/SubSystemModules/PowerManagment/EPS.c"
+Finished building: ../src/SubSystemModules/PowerManagment/EPS.c
+ 
+Building file: ../src/SubSystemModules/PowerManagment/EPSOperationModes.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/PowerManagment/EPSOperationModes.d" -MT"src/SubSystemModules/PowerManagment/EPSOperationModes.d" -c -o "src/SubSystemModules/PowerManagment/EPSOperationModes.o" "../src/SubSystemModules/PowerManagment/EPSOperationModes.c"
+../src/SubSystemModules/PowerManagment/EPSOperationModes.c: In function 'EnterFullMode':
+../src/SubSystemModules/PowerManagment/EPSOperationModes.c:30:2: warning: implicit declaration of function 'Payload_Safety' [-Wimplicit-function-declaration]
+../src/SubSystemModules/PowerManagment/EPSOperationModes.c: In function 'Payload_Safety':
+../src/SubSystemModules/PowerManagment/EPSOperationModes.c:112:2: warning: passing argument 1 of 'FRAM_read' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/FRAM_FlightParameters.h:11:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:9,
+                 from ../src/SubSystemModules/PowerManagment/EPSOperationModes.h:5,
+                 from ../src/SubSystemModules/PowerManagment/EPSOperationModes.c:2:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Storage/FRAM.h:57:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/PowerManagment/EPSOperationModes.c:113:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/SubSystemModules/PowerManagment/EPSOperationModes.c:115:3: warning: passing argument 1 of 'FRAM_read' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/FRAM_FlightParameters.h:11:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:9,
+                 from ../src/SubSystemModules/PowerManagment/EPSOperationModes.h:5,
+                 from ../src/SubSystemModules/PowerManagment/EPSOperationModes.c:2:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Storage/FRAM.h:57:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/PowerManagment/EPSOperationModes.c:116:21: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/SubSystemModules/PowerManagment/EPSOperationModes.c:119:4: warning: passing argument 1 of 'FRAM_write' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/FRAM_FlightParameters.h:11:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:9,
+                 from ../src/SubSystemModules/PowerManagment/EPSOperationModes.h:5,
+                 from ../src/SubSystemModules/PowerManagment/EPSOperationModes.c:2:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Storage/FRAM.h:48:5: note: expected 'const unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/PowerManagment/EPSOperationModes.c:124:4: warning: passing argument 1 of 'FRAM_write' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/FRAM_FlightParameters.h:11:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:9,
+                 from ../src/SubSystemModules/PowerManagment/EPSOperationModes.h:5,
+                 from ../src/SubSystemModules/PowerManagment/EPSOperationModes.c:2:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Storage/FRAM.h:48:5: note: expected 'const unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/PowerManagment/EPSOperationModes.c: In function 'Payload_Safety_IN_Maintenance':
+../src/SubSystemModules/PowerManagment/EPSOperationModes.c:141:3: warning: passing argument 1 of 'FRAM_write' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/FRAM_FlightParameters.h:11:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:9,
+                 from ../src/SubSystemModules/PowerManagment/EPSOperationModes.h:5,
+                 from ../src/SubSystemModules/PowerManagment/EPSOperationModes.c:2:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Storage/FRAM.h:48:5: note: expected 'const unsigned char *' but argument is of type 'Boolean *'
+Finished building: ../src/SubSystemModules/PowerManagment/EPSOperationModes.c
+ 
+Building file: ../src/SubSystemModules/Payload/payload_drivers.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Payload/payload_drivers.d" -MT"src/SubSystemModules/Payload/payload_drivers.d" -c -o "src/SubSystemModules/Payload/payload_drivers.o" "../src/SubSystemModules/Payload/payload_drivers.c"
+../src/SubSystemModules/Payload/payload_drivers.c: In function 'payloadInit':
+../src/SubSystemModules/Payload/payload_drivers.c:15:5: warning: implicit declaration of function 'payloadTurnOn' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Payload/payload_drivers.c: In function 'payloadRead':
+../src/SubSystemModules/Payload/payload_drivers.c:26:5: warning: large integer implicitly truncated to unsigned type [-Woverflow]
+../src/SubSystemModules/Payload/payload_drivers.c: In function 'payloadReadEnvironment':
+../src/SubSystemModules/Payload/payload_drivers.c:44:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Payload/payload_drivers.c:4:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Payload/payload_drivers.c:56:5: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Payload/payload_drivers.c:4:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Payload/payload_drivers.c: In function 'payloadReadEvents':
+../src/SubSystemModules/Payload/payload_drivers.c:78:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Payload/payload_drivers.c:4:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+Finished building: ../src/SubSystemModules/Payload/payload_drivers.c
+ 
+Building file: ../src/SubSystemModules/Maintenance/Maintenance.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Maintenance/Maintenance.d" -MT"src/SubSystemModules/Maintenance/Maintenance.d" -c -o "src/SubSystemModules/Maintenance/Maintenance.o" "../src/SubSystemModules/Maintenance/Maintenance.c"
+../src/SubSystemModules/Maintenance/Maintenance.c: In function 'CheckExecutionTime':
+../src/SubSystemModules/Maintenance/Maintenance.c:35:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Maintenance/Maintenance.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Maintenance/Maintenance.c: In function 'SaveSatTimeInFRAM':
+../src/SubSystemModules/Maintenance/Maintenance.c:57:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Maintenance/Maintenance.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Maintenance/Maintenance.c: In function 'WakeupFromResetCMD':
+../src/SubSystemModules/Maintenance/Maintenance.c:93:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Maintenance/Maintenance.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Maintenance/Maintenance.c: In function 'IsGroundCommunicationWDTKick':
+../src/SubSystemModules/Maintenance/Maintenance.c:126:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Maintenance/Maintenance.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Maintenance/Maintenance.c: In function 'findMinMaxDate':
+../src/SubSystemModules/Maintenance/Maintenance.c:159:2: warning: large integer implicitly truncated to unsigned type [-Woverflow]
+../src/SubSystemModules/Maintenance/Maintenance.c:166:6: warning: implicit declaration of function 'atoi' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Maintenance/Maintenance.c:174:2: warning: function returns address of local variable [enabled by default]
+../src/SubSystemModules/Maintenance/Maintenance.c: In function 'DeleteOldFiels':
+../src/SubSystemModules/Maintenance/Maintenance.c:188:17: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/SubSystemModules/Maintenance/Maintenance.c: In function 'CheckDeployAnt':
+../src/SubSystemModules/Maintenance/Maintenance.c:202:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Maintenance/Maintenance.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Maintenance/Maintenance.c:207:3: warning: implicit declaration of function 'CMD_AntennaDeploy' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Maintenance/Maintenance.c:208:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Maintenance/Maintenance.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Maintenance/Maintenance.c: In function 'Maintenance':
+../src/SubSystemModules/Maintenance/Maintenance.c:243:2: warning: implicit declaration of function 'Payload_Safety_IN_Maintenance' [-Wimplicit-function-declaration]
+In file included from ../src/SubSystemModules/Maintenance/Maintenance.c:24:0:
+../src/SubSystemModules/Maintenance/Maintenance.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:83:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+../src/SubSystemModules/Maintenance/Maintenance.c: In function 'HardResetMCU':
+../src/SubSystemModules/Maintenance/Maintenance.c:218:1: warning: control reaches end of non-void function [-Wreturn-type]
+Finished building: ../src/SubSystemModules/Maintenance/Maintenance.c
+ 
+Building file: ../src/SubSystemModules/Housekepping/RAMTelemetry.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Housekepping/RAMTelemetry.d" -MT"src/SubSystemModules/Housekepping/RAMTelemetry.d" -c -o "src/SubSystemModules/Housekepping/RAMTelemetry.o" "../src/SubSystemModules/Housekepping/RAMTelemetry.c"
+../src/SubSystemModules/Housekepping/RAMTelemetry.c: In function 'saveTlmToRam':
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:61:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
+                 from ../src/SubSystemModules/Housekepping/RAMTelemetry.h:5,
+                 from ../src/SubSystemModules/Housekepping/RAMTelemetry.c:1:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:62:3: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:62:3: warning: incompatible implicit declaration of built-in function 'memcpy' [enabled by default]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:67:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
+                 from ../src/SubSystemModules/Housekepping/RAMTelemetry.h:5,
+                 from ../src/SubSystemModules/Housekepping/RAMTelemetry.c:1:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:73:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
+                 from ../src/SubSystemModules/Housekepping/RAMTelemetry.h:5,
+                 from ../src/SubSystemModules/Housekepping/RAMTelemetry.c:1:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:79:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
+                 from ../src/SubSystemModules/Housekepping/RAMTelemetry.h:5,
+                 from ../src/SubSystemModules/Housekepping/RAMTelemetry.c:1:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/RAMTelemetry.c: In function 'getTlm':
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:130:3: warning: incompatible implicit declaration of built-in function 'memcpy' [enabled by default]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c: In function 'getRange':
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:174:2: warning: enumeration value 'tlm_eps' not handled in switch [-Wswitch]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:174:2: warning: enumeration value 'tlm_tx' not handled in switch [-Wswitch]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:174:2: warning: enumeration value 'tlm_antenna' not handled in switch [-Wswitch]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:174:2: warning: enumeration value 'tlm_solar' not handled in switch [-Wswitch]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:174:2: warning: enumeration value 'tlm_sel_NO_USE' not handled in switch [-Wswitch]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:174:2: warning: enumeration value 'tlm_tx_revc_NO_USE' not handled in switch [-Wswitch]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:174:2: warning: enumeration value 'tlm_rx' not handled in switch [-Wswitch]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:174:2: warning: enumeration value 'tlm_rx_revc_NO_USE' not handled in switch [-Wswitch]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:174:2: warning: enumeration value 'tlm_rx_frame' not handled in switch [-Wswitch]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:174:2: warning: enumeration value 'tlm_eps_raw_mb_NOT_USED' not handled in switch [-Wswitch]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:174:2: warning: enumeration value 'tlm_eps_eng_mb_NOT_USED' not handled in switch [-Wswitch]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:174:2: warning: enumeration value 'tlm_eps_raw_cdb_NOT_USED' not handled in switch [-Wswitch]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:174:2: warning: enumeration value 'tlm_eps_eng_cdb_NOT_USED' not handled in switch [-Wswitch]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:174:2: warning: enumeration value 'tlm_eps_raw_cdb' not handled in switch [-Wswitch]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:208:3: warning: incompatible implicit declaration of built-in function 'memcpy' [enabled by default]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:172:12: warning: unused variable 'time' [-Wunused-variable]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:169:6: warning: variable 'index' set but not used [-Wunused-but-set-variable]
+../src/SubSystemModules/Housekepping/RAMTelemetry.c:167:10: warning: unused variable 'flag' [-Wunused-variable]
+Finished building: ../src/SubSystemModules/Housekepping/RAMTelemetry.c
+ 
+Building file: ../src/SubSystemModules/Housekepping/TelemetryCollector.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Housekepping/TelemetryCollector.d" -MT"src/SubSystemModules/Housekepping/TelemetryCollector.d" -c -o "src/SubSystemModules/Housekepping/TelemetryCollector.o" "../src/SubSystemModules/Housekepping/TelemetryCollector.c"
+../src/SubSystemModules/Housekepping/TelemetryCollector.c: In function 'CMD_GetTLMPeriodTimes':
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:61:2: warning: implicit declaration of function 'TransmitDataAsSPL_Packet' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c: In function 'TelemetryCollectorLogic':
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:123:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:16:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:131:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:16:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:152:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:16:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:159:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:16:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:166:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:16:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/TelemetryCollector.c: In function 'TelemetrySaveANT':
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:229:6: warning: unused variable 'err' [-Wunused-variable]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c: In function 'TelemetrySaveWOD':
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:277:2: warning: implicit declaration of function 'saveTlmToRam' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c: In function 'TelemetrySaveRADFET':
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:282:6: warning: unused variable 'err' [-Wunused-variable]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c: In function 'TelemetrySavePayloadEvents':
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:323:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'time_unix' [-Wformat]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:323:3: warning: format '%d' expects argument of type 'int', but argument 2 has type 'time_unix' [-Wformat]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:311:6: warning: unused variable 'err' [-Wunused-variable]
+../src/SubSystemModules/Housekepping/TelemetryCollector.c: In function 'GetCurrentWODTelemetry':
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:360:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:16:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:393:2: warning: passing argument 1 of 'FRAM_read' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/FRAM_FlightParameters.h:11:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:9,
+                 from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:3:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Storage/FRAM.h:57:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Housekepping/TelemetryCollector.c:395:2: warning: passing argument 1 of 'FRAM_read' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/FRAM_FlightParameters.h:11:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:9,
+                 from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:3:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Storage/FRAM.h:57:5: note: expected 'unsigned char *' but argument is of type 'int *'
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.h:6:0,
+                 from ../src/SubSystemModules/Housekepping/TelemetryCollector.c:21:
+../src/SubSystemModules/Housekepping/TelemetryCollector.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:83:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/SubSystemModules/Housekepping/TelemetryCollector.c
+ 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_UpdateThresholdVoltages':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:20:47: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_GetThresholdVoltages':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:25:44: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_UpdateSmoothingFactor':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:30:45: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_RestoreDefaultAlpha':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:35:43: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_RestoreDefaultThresholdVoltages':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:40:55: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_GetSmoothingFactor':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:45:42: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_EnterCruiseMode':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:50:39: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_EnterFullMode':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:55:37: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_EnterCriticalMode':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:60:41: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_EnterSafeMode':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:65:37: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_GetCurrentMode':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:70:38: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_EPS_NOP':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:75:31: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_Connect_Payload':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:90:39: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_EPS_SetChannels':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:129:39: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_SetChannels3V3_On':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:134:41: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_SetChannels3V3_Off':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:139:42: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_SetChannels5V_On':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:144:40: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_SetChannels5V_Off':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:149:41: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_GetEpsParameter':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:154:39: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_SetEpsParemeter':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:159:39: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_ResetParameter':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:164:38: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_ResetConfig':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:169:35: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_LoadConfig':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:174:34: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_SaveConfig':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:179:34: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_SolarPanelWake':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:184:38: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_SolarPanelSleep':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:189:39: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c: In function 'CMD_GetSolarPanelState':
+../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c:194:42: warning: unused parameter 'cmd' [-Wunused-parameter]
+Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.c
+ 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_DeleteTLM':
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:21:2: warning: passing argument 1 of 'AssembleCommand' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.h:4:0,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:1:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/SatCommandHandler.h:58:5: note: expected 'unsigned char *' but argument is of type 'unsigned char (*)[235]'
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:23:2: warning: implicit declaration of function 'memcpy' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:23:2: warning: incompatible implicit declaration of built-in function 'memcpy' [enabled by default]
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:38:2: warning: passing argument 2 of 'SendAckPacket' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:10:0,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:4:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/AckHandler.h:19:5: note: expected 'struct sat_packet_t *' but argument is of type 'struct sat_packet_t **'
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:38:2: warning: passing argument 3 of 'SendAckPacket' makes pointer from integer without a cast [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:10:0,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:4:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/AckHandler.h:19:5: note: expected 'unsigned char *' but argument is of type 'int'
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_DeleteFileByTime':
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:43:40: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_DeleteFilesOfType':
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:48:41: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_GetNumOfFilesInTimeRange':
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:60:48: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_GetNumOfFilesByType':
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:65:43: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_Get_TLM_Info':
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:88:2: warning: implicit declaration of function 'findMinMaxDate' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:88:31: warning: initialization makes pointer from integer without a cast [enabled by default]
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_Switch_SD_Card':
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:121:2: warning: incompatible implicit declaration of built-in function 'memcpy' [enabled by default]
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_FreeSpace':
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:157:33: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_GetFileLengthByTime':
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:162:43: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_GetTimeOfLastElementInFile':
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:167:50: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: In function 'CMD_GetTimeOfFirstElement':
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:172:45: warning: unused parameter 'cmd' [-Wunused-parameter]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c:3:0:
+../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:83:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.c
+ 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_FRAM_ReadAndTransmitt':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:69:3: warning: passing argument 2 of 'TransmitDataAsSPL_Packet' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:21:0:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:194:5: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_GetSatTime':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:162:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:7:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_SoftTRXVU_ComponenetReset':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:180:49: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_HardTRXVU_ComponenetReset':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:192:2: warning: implicit declaration of function 'isis_vu_e__reset_rx' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:194:2: warning: implicit declaration of function 'isis_vu_e__reset_tx' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:189:49: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: In function 'CMD_ResetComponent':
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:225:3: warning: implicit declaration of function 'setTransponderEndTime' [-Wimplicit-function-declaration]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c:20:0:
+../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:83:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.c
+ 
+Building file: ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d" -MT"src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.d" -c -o "src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o" "../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c"
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'DumpTask':
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:29:2: warning: implicit declaration of function 'f_enterFS' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:50:3: warning: passing argument 1 of 'FinishDump' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5:0,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:132:6: note: expected 'struct sat_packet_t *' but argument is of type 'struct dump_arguments_t *'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:50:3: warning: passing argument 4 of 'FinishDump' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5:0,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:132:6: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:52:3: warning: passing argument 1 of 'FinishDump' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5:0,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:132:6: note: expected 'struct sat_packet_t *' but argument is of type 'struct dump_arguments_t *'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:52:3: warning: passing argument 4 of 'FinishDump' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5:0,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:132:6: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'DumpRamTask':
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:74:3: warning: passing argument 1 of 'FinishDump' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5:0,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:132:6: note: expected 'struct sat_packet_t *' but argument is of type 'struct dump_ram_arguments_t *'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:74:3: warning: passing argument 4 of 'FinishDump' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5:0,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:132:6: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:76:3: warning: passing argument 1 of 'FinishDump' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5:0,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:132:6: note: expected 'struct sat_packet_t *' but argument is of type 'struct dump_ram_arguments_t *'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:76:3: warning: passing argument 4 of 'FinishDump' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5:0,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:132:6: note: expected 'unsigned char *' but argument is of type 'int *'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_StartDump':
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:119:2: warning: passing argument 1 of 'AssembleCommand' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/AckHandler.h:5:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:10,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/SatCommandHandler.h:58:5: note: expected 'unsigned char *' but argument is of type 'unsigned char (*)[235]'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_SetTransponder':
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:178:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/utils.h:12:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:12,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:185:3: warning: implicit declaration of function 'setTransponderEndTime' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_MuteTRXVU':
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:228:2: warning: implicit declaration of function 'I2C_write' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_SecurePing':
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:358:2: warning: implicit declaration of function 'CMD_Hash256' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_DumpRamTLM':
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:447:2: warning: passing argument 1 of 'AssembleCommand' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/AckHandler.h:5:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/TRXVU.h:10,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h:5,
+                 from ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:8:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Communication/SatCommandHandler.h:58:5: note: expected 'unsigned char *' but argument is of type 'unsigned char (*)[235]'
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_SecurePing':
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:368:1: warning: control reaches end of non-void function [-Wreturn-type]
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c: In function 'CMD_TrasmitBeacon':
+../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c:286:1: warning: control reaches end of non-void function [-Wreturn-type]
+Finished building: ../src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.c
+ 
+Building file: ../src/SubSystemModules/Communication/AckHandler.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/AckHandler.d" -MT"src/SubSystemModules/Communication/AckHandler.d" -c -o "src/SubSystemModules/Communication/AckHandler.o" "../src/SubSystemModules/Communication/AckHandler.c"
+Finished building: ../src/SubSystemModules/Communication/AckHandler.c
+ 
+Building file: ../src/SubSystemModules/Communication/CommandDictionary.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/CommandDictionary.d" -MT"src/SubSystemModules/Communication/CommandDictionary.d" -c -o "src/SubSystemModules/Communication/CommandDictionary.o" "../src/SubSystemModules/Communication/CommandDictionary.c"
+../src/SubSystemModules/Communication/CommandDictionary.c: In function 'trxvu_command_router':
+../src/SubSystemModules/Communication/CommandDictionary.c:34:3: warning: implicit declaration of function 'CMD_DumpRamTLM' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/CommandDictionary.c:122:3: warning: implicit declaration of function 'CMD_SecurePing' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/CommandDictionary.c:18:15: warning: unused variable 'delayed_cmd' [-Wunused-variable]
+../src/SubSystemModules/Communication/CommandDictionary.c: In function 'eps_command_router':
+../src/SubSystemModules/Communication/CommandDictionary.c:157:3: warning: implicit declaration of function 'CMD_Payload_Operations' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/CommandDictionary.c:160:3: warning: implicit declaration of function 'CMD_Connect_Payload' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/CommandDictionary.c: In function 'filesystem_command_router':
+../src/SubSystemModules/Communication/CommandDictionary.c:265:45: warning: unused parameter 'cmd' [-Wunused-parameter]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:6:0,
+                 from ../src/SubSystemModules/Communication/CommandDictionary.c:9:
+../src/SubSystemModules/Communication/CommandDictionary.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:83:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/SubSystemModules/Communication/CommandDictionary.c
+ 
+Building file: ../src/SubSystemModules/Communication/HashSecuredCMD.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/HashSecuredCMD.d" -MT"src/SubSystemModules/Communication/HashSecuredCMD.d" -c -o "src/SubSystemModules/Communication/HashSecuredCMD.o" "../src/SubSystemModules/Communication/HashSecuredCMD.c"
+../src/SubSystemModules/Communication/HashSecuredCMD.c: In function 'sha256_final':
+../src/SubSystemModules/Communication/HashSecuredCMD.c:133:3: warning: implicit declaration of function 'memset' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/HashSecuredCMD.c:133:3: warning: incompatible implicit declaration of built-in function 'memset' [enabled by default]
+Finished building: ../src/SubSystemModules/Communication/HashSecuredCMD.c
+ 
+Building file: ../src/SubSystemModules/Communication/SatCommandHandler.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/SatCommandHandler.d" -MT"src/SubSystemModules/Communication/SatCommandHandler.d" -c -o "src/SubSystemModules/Communication/SatCommandHandler.o" "../src/SubSystemModules/Communication/SatCommandHandler.c"
+../src/SubSystemModules/Communication/SatCommandHandler.c: In function 'isDelayedCommandDue':
+../src/SubSystemModules/Communication/SatCommandHandler.c:101:39: warning: unused parameter 'cmd_time' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SatCommandHandler.c:101:58: warning: unused parameter 'expired' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SatCommandHandler.c: In function 'GetDelayedCommand':
+../src/SubSystemModules/Communication/SatCommandHandler.c:107:37: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SatCommandHandler.c: In function 'AddDelayedCommand':
+../src/SubSystemModules/Communication/SatCommandHandler.c:112:37: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SatCommandHandler.c: In function 'GetDelayedCommandByIndex':
+../src/SubSystemModules/Communication/SatCommandHandler.c:126:43: warning: unused parameter 'index' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SatCommandHandler.c:126:64: warning: unused parameter 'cmd' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SatCommandHandler.c: In function 'DeleteDelayedCommandByIndex':
+../src/SubSystemModules/Communication/SatCommandHandler.c:131:46: warning: unused parameter 'index' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SatCommandHandler.c: In function 'ClearDelayedCMD_FromBuffer':
+../src/SubSystemModules/Communication/SatCommandHandler.c:141:45: warning: unused parameter 'start_addr' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SatCommandHandler.c:141:70: warning: unused parameter 'end_addr' [-Wunused-parameter]
+../src/SubSystemModules/Communication/SatCommandHandler.c: In function 'ActUponCommand':
+../src/SubSystemModules/Communication/SatCommandHandler.c:156:2: warning: implicit declaration of function 'sprintf' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SatCommandHandler.c:156:2: warning: incompatible implicit declaration of built-in function 'sprintf' [enabled by default]
+../src/SubSystemModules/Communication/SatCommandHandler.c:162:3: warning: implicit declaration of function 'trxvu_command_router' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SatCommandHandler.c:165:3: warning: implicit declaration of function 'eps_command_router' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SatCommandHandler.c:168:3: warning: implicit declaration of function 'telemetry_command_router' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SatCommandHandler.c:171:3: warning: implicit declaration of function 'filesystem_command_router' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/SatCommandHandler.c:174:3: warning: implicit declaration of function 'managment_command_router' [-Wimplicit-function-declaration]
+Finished building: ../src/SubSystemModules/Communication/SatCommandHandler.c
+ 
+Building file: ../src/SubSystemModules/Communication/TRXVU.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/SubSystemModules/Communication/TRXVU.d" -MT"src/SubSystemModules/Communication/TRXVU.d" -c -o "src/SubSystemModules/Communication/TRXVU.o" "../src/SubSystemModules/Communication/TRXVU.c"
+../src/SubSystemModules/Communication/TRXVU.c: In function 'InitTrxvu':
+../src/SubSystemModules/Communication/TRXVU.c:161:2: warning: implicit declaration of function 'checkTransponderStart' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/TRXVU.c: In function 'checkIdleFinish':
+../src/SubSystemModules/Communication/TRXVU.c:169:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/TRXVU.c: In function 'checkTransponderFinish':
+../src/SubSystemModules/Communication/TRXVU.c:180:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/TRXVU.c: At top level:
+../src/SubSystemModules/Communication/TRXVU.c:188:6: warning: conflicting types for 'checkTransponderStart' [enabled by default]
+../src/SubSystemModules/Communication/TRXVU.c:161:2: note: previous implicit declaration of 'checkTransponderStart' was here
+../src/SubSystemModules/Communication/TRXVU.c: In function 'checkTransponderStart':
+../src/SubSystemModules/Communication/TRXVU.c:190:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/TRXVU.c: In function 'turnOnTransponder':
+../src/SubSystemModules/Communication/TRXVU.c:209:2: warning: implicit declaration of function 'I2C_write' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/TRXVU.c: In function 'GetOnlineCommand':
+../src/SubSystemModules/Communication/TRXVU.c:287:6: warning: unused variable 'err' [-Wunused-variable]
+../src/SubSystemModules/Communication/TRXVU.c: In function 'CheckTransmitionAllowed':
+../src/SubSystemModules/Communication/TRXVU.c:328:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/TRXVU.c: In function 'FinishDump':
+../src/SubSystemModules/Communication/TRXVU.c:357:2: warning: implicit declaration of function 'f_releaseFS' [-Wimplicit-function-declaration]
+../src/SubSystemModules/Communication/TRXVU.c: In function 'BeaconLogic':
+../src/SubSystemModules/Communication/TRXVU.c:416:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/TRXVU.c:399:6: warning: unused variable 'err' [-Wunused-variable]
+../src/SubSystemModules/Communication/TRXVU.c: In function 'SetIdleState':
+../src/SubSystemModules/Communication/TRXVU.c:439:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/TRXVU.c: In function 'muteTRXVU':
+../src/SubSystemModules/Communication/TRXVU.c:465:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/SubSystemModules/Communication/TRXVU.c:5:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/SubSystemModules/Communication/TRXVU.c: In function 'TransmitSplPacket':
+../src/SubSystemModules/Communication/TRXVU.c:589:50: warning: unused parameter 'avalFrames' [-Wunused-parameter]
+In file included from ../src/SubSystemModules/Communication/TRXVU.c:19:0:
+../src/SubSystemModules/Communication/TRXVU.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:83:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/SubSystemModules/Communication/TRXVU.c
+ 
+Building file: ../src/InitSystem.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/InitSystem.d" -MT"src/InitSystem.d" -c -o "src/InitSystem.o" "../src/InitSystem.c"
+../src/InitSystem.c: In function 'DeploySystem':
+../src/InitSystem.c:195:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/InitSystem.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/InitSystem.c:205:3: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/InitSystem.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+../src/InitSystem.c:226:2: warning: passing argument 1 of 'Time_getUnixEpoch' from incompatible pointer type [enabled by default]
+In file included from ../src/InitSystem.c:6:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/Timing/Time.h:145:5: note: expected 'unsigned int *' but argument is of type 'time_unix *'
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.h:6:0,
+                 from ../src/SubSystemModules/Housekepping/RAMTelemetry.h:7,
+                 from ../src/InitSystem.c:14:
+../src/InitSystem.c: At top level:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:83:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/InitSystem.c
+ 
+Building file: ../src/TLM_management.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/TLM_management.d" -MT"src/TLM_management.d" -c -o "src/TLM_management.o" "../src/TLM_management.c"
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:5:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:4,
+                 from ../src/TLM_management.c:17:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/boolean.h:36:0: warning: "TRUE" redefined [enabled by default]
+In file included from C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_hcc_mem.h:31:0,
+                 from ../src/TLM_management.c:15:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/../psp/include/psp_types.h:59:0: note: this is the location of the previous definition
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/GlobalStandards.h:5:0,
+                 from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:4,
+                 from ../src/TLM_management.c:17:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include/hal/boolean.h:37:0: warning: "FALSE" redefined [enabled by default]
+In file included from C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_hcc_mem.h:31:0,
+                 from ../src/TLM_management.c:15:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/../psp/include/psp_types.h:56:0: note: this is the location of the previous definition
+../src/TLM_management.c: In function 'CMD_getInfoImage':
+../src/TLM_management.c:50:13: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:63:2: warning: passing argument 1 of 'fm_seek' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:616:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:64:2: warning: passing argument 1 of 'fm_tell' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:618:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:65:2: warning: passing argument 1 of 'fm_rewind' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:621:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:66:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c: In function 'CMD_getDataImage':
+../src/TLM_management.c:89:12: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:97:3: warning: passing argument 1 of 'fm_seek' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:616:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:98:3: warning: passing argument 1 of 'fm_tell' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:618:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:99:3: warning: passing argument 1 of 'fm_rewind' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:621:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:113:4: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:116:11: warning: implicit declaration of function 'f_puts' [-Wimplicit-function-declaration]
+../src/TLM_management.c: In function 'deleteTLMFile':
+../src/TLM_management.c:240:2: warning: implicit declaration of function 'getTlmTypeInfo' [-Wimplicit-function-declaration]
+../src/TLM_management.c:242:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+In file included from C:\ISIS\workspace_ycube\GlobusSatProject\src/SubSystemModules/Housekepping/TelemetryCollector.h:6:0,
+                 from ../src/TLM_management.c:17:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:105:6: note: expected 'char *' but argument is of type 'char (*)[20]'
+../src/TLM_management.c: In function 'deleteTLMbyMonth':
+../src/TLM_management.c:254:2: warning: implicit declaration of function 'deleteDirectory' [-Wimplicit-function-declaration]
+../src/TLM_management.c: In function 'InitializeFS':
+../src/TLM_management.c:280:39: warning: unused parameter 'first_time' [-Wunused-parameter]
+../src/TLM_management.c: At top level:
+../src/TLM_management.c:356:6: warning: conflicting types for 'getTlmTypeInfo' [enabled by default]
+../src/TLM_management.c:240:2: note: previous implicit declaration of 'getTlmTypeInfo' was here
+../src/TLM_management.c: In function 'write2File':
+../src/TLM_management.c:424:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:338:6: note: expected 'char *' but argument is of type 'char (*)[20]'
+../src/TLM_management.c: In function 'printTLM':
+../src/TLM_management.c:464:21: warning: unused parameter 'element' [-Wunused-parameter]
+../src/TLM_management.c:464:41: warning: unused parameter 'tlmType' [-Wunused-parameter]
+../src/TLM_management.c: In function 'readTLMFile':
+../src/TLM_management.c:586:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:338:6: note: expected 'char *' but argument is of type 'char (*)[20]'
+../src/TLM_management.c:588:5: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:609:3: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:621:32: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:647:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:591:6: warning: unused variable 'err' [-Wunused-variable]
+../src/TLM_management.c: In function 'readTLMFileTimeRange':
+../src/TLM_management.c:686:2: warning: passing argument 2 of 'calculateFileName' from incompatible pointer type [enabled by default]
+../src/TLM_management.c:338:6: note: expected 'char *' but argument is of type 'char (*)[20]'
+../src/TLM_management.c:687:5: warning: assignment from incompatible pointer type [enabled by default]
+../src/TLM_management.c:704:2: warning: passing argument 4 of 'fm_read' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:613:6: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:708:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:708:46: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:708:90: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:728:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../src/TLM_management.c:734:2: warning: passing argument 1 of 'fm_close' from incompatible pointer type [enabled by default]
+In file included from ../src/TLM_management.c:14:0:
+C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include/hcc/api_fat.h:603:5: note: expected 'struct FN_FILE *' but argument is of type 'struct FILE *'
+../src/TLM_management.c:690:6: warning: unused variable 'err' [-Wunused-variable]
+../src/TLM_management.c: In function 'CMD_getDataImage':
+../src/TLM_management.c:128:1: warning: control reaches end of non-void function [-Wreturn-type]
+../src/TLM_management.c: In function 'CMD_getInfoImage':
+../src/TLM_management.c:78:1: warning: control reaches end of non-void function [-Wreturn-type]
+Finished building: ../src/TLM_management.c
+ 
+Building file: ../src/main.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/main.d" -MT"src/main.d" -c -o "src/main.o" "../src/main.c"
+In file included from ../src/SubSystemModules/Housekepping/TelemetryCollector.h:6:0,
+                 from ../src/main.c:22:
+C:\ISIS\workspace_ycube\GlobusSatProject\src/TLM_management.h:83:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/main.c
+ 
+Building file: ../src/utils.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -Dsdram -Dat91sam9g20 -DTRACE_LEVEL=5 -DDEBUG=1 -D'BASE_REVISION_NUMBER=' -D'BASE_REVISION_HASH_SHORT=' -D'BASE_REVISION_HASH=' -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/include" -I"C:\ISIS\workspace_ycube\GlobusSatProject\src" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/include" -I"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/include" -MMD -MP -MF"src/utils.d" -MT"src/utils.d" -c -o "src/utils.o" "../src/utils.c"
+../src/utils.c: In function 'timeU2time':
+../src/utils.c:22:2: warning: pointer targets in passing argument 1 of 'localtime' differ in signedness [-Wpointer-sign]
+In file included from ../src/TLM_management.h:15:0,
+                 from ../src/utils.c:12:
+c:\isis\application\toolchain\bin\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/include/time.h:54:12: note: expected 'const time_t *' but argument is of type 'time_unix *'
+../src/utils.c:20:16: warning: unused variable 'buf' [-Wunused-variable]
+../src/utils.c: In function 'logError':
+../src/utils.c:40:7: warning: implicit declaration of function 'abs' [-Wimplicit-function-declaration]
+../src/utils.c:58:4: warning: implicit declaration of function 'saveTlmToRam' [-Wimplicit-function-declaration]
+In file included from ../src/utils.c:12:0:
+../src/utils.c: At top level:
+../src/TLM_management.h:83:16: warning: 'stopDump' defined but not used [-Wunused-variable]
+Finished building: ../src/utils.c
+ 
+Building target: GlobusSatProject.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=arm926ej-s -std=c99 -O0 -fmessage-length=0 -ffunction-sections -Wall -Wextra  -g -std=c99 -T C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/linker-scripts/sdram.lds -nostartfiles -Xlinker --gc-sections -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/at91/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//satellite-subsystems/satellite-subsystems/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hcc/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/freertos/lib" -L"C:/ISIS/workspace_ycube/GlobusSatProject/..//hal/hal/lib" -Wl,-Map,"GlobusSatProject.map" -lc -u _printf_float -u _scanf_float -o "GlobusSatProject.elf"  ./src/TestingDemos/CommandsTestingDemo.o ./src/TestingDemos/EpsTestingDemo.o ./src/TestingDemos/FileSystemTestingDemo.o ./src/TestingDemos/MainTest.o ./src/TestingDemos/MaintenanceTestingDemo.o ./src/TestingDemos/TelemetryTestingDemo.o ./src/TestingDemos/TrxvuTestingDemo.o  ./src/SubSystemModules/PowerManagment/EPS.o ./src/SubSystemModules/PowerManagment/EPSOperationModes.o  ./src/SubSystemModules/Payload/payload_drivers.o  ./src/SubSystemModules/Maintenance/Maintenance.o  ./src/SubSystemModules/Housekepping/RAMTelemetry.o ./src/SubSystemModules/Housekepping/TelemetryCollector.o  ./src/SubSystemModules/Communication/SubsystemCommands/EPS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/FS_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/Maintanence_Commands.o ./src/SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.o  ./src/SubSystemModules/Communication/AckHandler.o ./src/SubSystemModules/Communication/CommandDictionary.o ./src/SubSystemModules/Communication/HashSecuredCMD.o ./src/SubSystemModules/Communication/SatCommandHandler.o ./src/SubSystemModules/Communication/TRXVU.o  ./src/InitSystem.o ./src/TLM_management.o ./src/main.o ./src/utils.o   -lHALD -lHCCD -lSatelliteSubsystemsD -lFreeRTOSD -lAt91D
+Finished building target: GlobusSatProject.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O binary "GlobusSatProject.elf"  "GlobusSatProject.bin"
+Finished building: GlobusSatProject.bin
+ 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 270832	     12	3079000	3349844	 331d54	GlobusSatProject.elf
+ 270768	     12	3079000	3349780	 331d14	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  
 
-13:55:07 Build Finished (took 249ms)
+17:06:08 Build Finished (took 7s.871ms)
 

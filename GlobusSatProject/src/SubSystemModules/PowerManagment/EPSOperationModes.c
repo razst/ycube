@@ -78,7 +78,7 @@ int PayloadOperations(PayloadOperation status)
 	{
 	case TurnOn: ;
 		if(isOn){return PAYLOAD_FALSE_OPERATION;}
-//		if(logError(isismepsv2_ivid7_piu__outputbuschannelon(index, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw3, &response), "Turn on payload channel")){return -1;}
+		if(logError(isismepsv2_ivid7_piu__outputbuschannelon(index, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw3, &response), "Turn on payload channel")){return -1;}
 
 		//increase the number of sw3 resets
 		unsigned int num_of_resets = 0;

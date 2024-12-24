@@ -1,5 +1,6 @@
 #include "RAMTelemetry.h"
-
+#include "SubSystemModules/Communication/SPL.h"
+#include "SubSystemModules/Communication/TRXVU.h"
 
 //array to save log data
 logDataInRam logArr[TLM_RAM_SIZE];
@@ -86,7 +87,7 @@ int saveTlmToRam(void* data, int length, tlm_type_t type) {
 	return E_NO_SS_ERR;
 }
 
-int getTlm(void* address, int count, tlm_type_t type)
+int getTlm(dump_ram_arguments_t *task_args)
 {
 	int filledCount = 0;
 	int index;
@@ -94,7 +95,7 @@ int getTlm(void* address, int count, tlm_type_t type)
 	int length;
 	time_unix time;
 
-	switch (type) {
+	switch (task_args->dump_type) {
 	case tlm_log:
 		index = logIndex;
 		arr = logArr;
@@ -123,19 +124,38 @@ int getTlm(void* address, int count, tlm_type_t type)
 		return -1;
 	}
 
-	printf("count asked: %d\n", count);
-	printf("arr address: %p\narr last address: %p\n\n", arr, arr + (TLM_RAM_SIZE - 1) * length);
-
-	for (int i = 0; i < TLM_RAM_SIZE && filledCount < count; i++)
+	for (int i = 0; i < TLM_RAM_SIZE && filledCount < task_args->count; i++)
 	{
 		index = dec(index);
-		//printf("current index: %d\n", index);
 		memcpy(&time, arr + index * length, sizeof(time_unix));
 		if (time != 0)
 		{
-//			printf("data added\n");
-			memcpy(address + filledCount * length, arr + index * length, length);
+			sat_packet_t dump_tlm = { 0 };
+
+			char element[length];
+			memcpy(element, arr + index * length, length);
+
+			AssembleCommand((unsigned char*)element, length, dump_type,
+					task_args->dump_type, task_args->cmd.ID, &dump_tlm);
+
+			int err = TransmitSplPacket(&dump_tlm, NULL);
+			if (E_CANT_TRANSMIT == err){
+				printf("unable to tx i=%d, filledCount=%d\n\r",i,filledCount);
+			}
 			filledCount++;
+			#ifdef TESTING
+			printf("ID: %d\n", &dump_tlm.ID);
+			printf("Subtype: %s\n", &dump_tlm.cmd_subtype);
+			printf("Type: %s\n", &dump_tlm.cmd_type);
+			printf("Length: %hu\n", &dump_tlm.length);
+			printf("Data: %s\n", &dump_tlm.data);
+			#endif
+			//sentCount++;
+			if(CheckDumpAbort())
+			{
+				stopDump = TRUE;
+				break;
+			}
 		}
 	}
 	return filledCount;

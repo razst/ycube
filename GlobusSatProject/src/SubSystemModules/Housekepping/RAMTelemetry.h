@@ -47,6 +47,13 @@ typedef struct dataRange
 	time_unix max;
 } dataRange;
 
+typedef struct __attribute__ ((__packed__))
+{
+	sat_packet_t cmd;
+	tlm_type_t dump_type;
+	int count;
+} dump_ram_arguments_t;
+
 /*!
  * return range of tlm saved
  * @param type he type of TLM. @see tlm_type_t enum
@@ -77,6 +84,6 @@ int saveTlmToRam(void* data, int length, tlm_type_t type);
  * @param type the type of TLM. @see tlm_type_t enum
  * @return number of packets found
  */
-int getTlm(void* address, int count, tlm_type_t type);
+int getTlm(dump_ram_arguments_t *task_args);
 
 #endif
