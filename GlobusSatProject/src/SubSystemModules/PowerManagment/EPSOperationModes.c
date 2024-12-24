@@ -21,15 +21,14 @@ Boolean g_low_volt_flag = FALSE; // set to true if in low voltage
 
 int EnterFullMode()
 {
-	int err;
 	/*if(state == FullMode){
 		return 0;
-	}*/
+	}*/   //fix
 	state = FullMode;
 	EpsSetLowVoltageFlag(FALSE);
-	err = Payload_Safety();
+	logError(Payload_Safety(),"Payload safety"); //TODO change?
 	//PayloadOperations(TurnOn);
-	return err;
+	return 0;
 }
 
 int EnterCruiseMode()
@@ -107,26 +106,28 @@ int PayloadOperations(PayloadOperation status)
 }
 int Payload_Safety()
 {
-	int PayloadState;
-	int Has_Sat_Reset;
-	FRAM_read(&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
-	if(PayloadState != TRUE)
+	char PayloadState;
+	char Has_Sat_Reset;
+	FRAM_read((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
+	if(PayloadState == 1)//change to !=
 	{
-		FRAM_read(&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
-		if (Has_Sat_Reset == TRUE)
+		FRAM_read((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
+		if (Has_Sat_Reset == 1)
 		{
-			PayloadState = TRUE;
-			FRAM_write(&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
+			PayloadState = 1;
+			FRAM_write((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
+			return E_NO_SS_ERR;//add & change err
 		}
 		else 
 		{
-			Has_Sat_Reset = TRUE;
-			FRAM_write(&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
+			Has_Sat_Reset = 1;
+			FRAM_write((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
+			FRAM_read((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
 			PayloadOperations(TurnOn);
 			return E_NO_SS_ERR;
 		}
 	}
-	return -1;
+	return -1;//add error Payload is dead
 }
 void Payload_Safety_IN_Maintenance()
 {
@@ -135,10 +136,10 @@ void Payload_Safety_IN_Maintenance()
 	/*time_unix current_time = 0;
 	Time_getUnixEpoch(&current_time);*/
 	//if uptime > 1 min 
-	if(Time_getUptimeSeconds() > 60)
+	if(Time_getUptimeSeconds() > 1)
 	{
-		Has_Sat_Reset = FALSE;
-		FRAM_write(&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
+		Has_Sat_Reset = 0;
+		FRAM_write((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
 	}
 }
 Boolean DoesPayloadChannelOn()

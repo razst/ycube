@@ -111,10 +111,10 @@
 #define MAX_BEACON_INTERVAL				60			// beacon every 1 minute
 #define MIN_BEACON_INTERVAL				10			// beacon every 10 seconds
 
-#define PAYLOAD_IS_DEAD_ADDR            0x9620
+#define PAYLOAD_IS_DEAD_ADDR            0x300
 #define PAYLOAD_IS_DEAD_SIZE            1
 
-#define HAS_SAT_RESET_ADDR              0x9630
+#define HAS_SAT_RESET_ADDR              0x310
 #define HAS_SAT_RESET_SIZE              1
 
 #endif /* FRAM_FLIGHTPARAMETERS_H_ */
