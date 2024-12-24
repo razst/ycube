@@ -123,12 +123,17 @@ int getTlm(void* address, int count, tlm_type_t type)
 		return -1;
 	}
 
+	printf("count asked: %d\n", count);
+	printf("arr address: %p\narr last address: %p\n\n", arr, arr + (TLM_RAM_SIZE - 1) * length);
+
 	for (int i = 0; i < TLM_RAM_SIZE && filledCount <= count; i++)
 	{
 		index = dec(index);
+		printf("current index: %d\n", index);
 		memcpy(&time, arr + index * length, sizeof(time_unix));
 		if (time != 0)
 		{
+			printf("data added\n");
 			memcpy(address + filledCount * length, arr + index * length, length);
 			filledCount++;
 		}
