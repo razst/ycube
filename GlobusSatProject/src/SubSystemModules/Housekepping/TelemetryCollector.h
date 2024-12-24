@@ -6,6 +6,7 @@
 #include "TLM_management.h"
 #include <satellite-subsystems/IsisSolarPanelv2.h>
 #include "SubSystemModules/PowerManagment/EPS.h"
+#include "SubSystemModules/Housekepping/NamesLogic.h"
 
 #define NUM_OF_SUBSYSTEMS_SAVE_FUNCTIONS 8
 
@@ -30,7 +31,7 @@ typedef struct __attribute__ ((__packed__)) WOD_Telemetry_t
 	time_unix sat_uptime;			///< Sat uptime
 	unsigned int photo_diodes[5]; 			// photo diodes
 	unsigned int num_of_cmd_resets;///< counts the number of resets the satellite has gone through due to ground station command [#]
-//	char name[MAX_NAME_SIZE];
+	char name[MAX_NAME_SIZE];
 } WOD_Telemetry_t;
 
 
