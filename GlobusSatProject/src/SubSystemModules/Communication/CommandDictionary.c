@@ -118,8 +118,8 @@ int trxvu_command_router(sat_packet_t *cmd)
 		err = CMD_StopReDeployment(cmd);
 		break;
 
-	case SecuredCMD:
-		err = CMD_Secure_Ping(cmd);
+	case SECURED_CMD:
+		err = CMD_SecurePing(cmd);
 		break;
 
 	default:

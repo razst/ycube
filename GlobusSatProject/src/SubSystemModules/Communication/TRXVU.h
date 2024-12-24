@@ -25,6 +25,7 @@
 #define MIN_TRXVU_BUFF 5
 #define DEFAULT_RSSI_VALUE 10
 
+#define MAX_INPUT_SIZE 1024  // Maximum size of input string (hash)
 #define Max_Hash_size 8
 
 typedef struct __attribute__ ((__packed__))

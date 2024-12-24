@@ -110,15 +110,15 @@ void WriteDefaultValuesToFRAM()
 	FRAM_write((unsigned char*)&IDtemp, CMD_ID_ADDR, CMD_ID_SIZE);
 	
 	//a default code to avoid errors (=1)
-	FRAM_write((unsigned char*)&IDtemp, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+	FRAM_write((unsigned char*)&IDtemp, CMD_PASSWORD_ADDR, CMD_PASSWORD_SIZE);
 
 	Boolean flag = FALSE;
 	FRAM_write((unsigned char*) &flag,
 			STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);
 
-			FRAM_write((unsigned char*)&flag,Has_Sat_Reset_ADDR,Has_Sat_Reset_SIZE);
+			FRAM_write((unsigned char*)&flag,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
 			//flag = TRUE;//for testing
-			FRAM_write((unsigned char*)&flag,Payload_IS_Dead_ADDR,Payload_IS_Dead_SIZE);
+			FRAM_write((unsigned char*)&flag,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 
 
 	ResetGroundCommWDT();

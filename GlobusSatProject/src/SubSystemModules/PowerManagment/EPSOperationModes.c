@@ -109,19 +109,19 @@ int Payload_Safety()
 {
 	Boolean PayloadState;
 	Boolean Has_Sat_Reset;
-	FRAM_read((unsigned char*)&PayloadState,Payload_IS_Dead_ADDR,Payload_IS_Dead_SIZE);
+	FRAM_read((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 	if(PayloadState != TRUE)
 	{
-		FRAM_read((unsigned char*)&Has_Sat_Reset,Has_Sat_Reset_ADDR,Has_Sat_Reset_SIZE);
+		FRAM_read((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
 		if (Has_Sat_Reset == TRUE)
 		{
 			PayloadState = TRUE;
-			FRAM_write((unsigned char*)&PayloadState,Payload_IS_Dead_ADDR,Payload_IS_Dead_SIZE);
+			FRAM_write((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 		}
 		else 
 		{
 			Has_Sat_Reset = TRUE;
-			FRAM_write((unsigned char*)&Has_Sat_Reset,Has_Sat_Reset_ADDR,Has_Sat_Reset_SIZE);
+			FRAM_write((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
 			PayloadOperations(TurnOn);
 			return E_NO_SS_ERR;
 		}
@@ -131,14 +131,14 @@ int Payload_Safety()
 void Payload_Safety_IN_Maintenance()
 {
 	Boolean Has_Sat_Reset;
-	FRAM_read((unsigned char*)&Has_Sat_Reset,Has_Sat_Reset_ADDR,Has_Sat_Reset_SIZE);
+	FRAM_read((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
 	/*time_unix current_time = 0;
 	Time_getUnixEpoch(&current_time);*/
 	//if uptime > 1 min 
 	if(Time_getUptimeSeconds() > 60)
 	{
 		Has_Sat_Reset = FALSE;
-		FRAM_write(&Has_Sat_Reset,Has_Sat_Reset_ADDR,Has_Sat_Reset_SIZE);
+		FRAM_write(&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
 	}
 }
 Boolean DoesPayloadChannelOn()

@@ -104,17 +104,17 @@
 #define CMD_ID_ADDR						0x9500
 #define CMD_ID_SIZE						4
 
-#define CMD_Passcode_ADDR               0x9610
-#define CMD_Passcode_SIZE               4
+#define CMD_PASSWORD_ADDR               0x9610
+#define CMD_PASSWORD_SIZE               4
 
 #define DEFAULT_BEACON_INTERVAL_TIME 	20			//<! how many seconds between two beacons [sec]
 #define MAX_BEACON_INTERVAL				60			// beacon every 1 minute
 #define MIN_BEACON_INTERVAL				10			// beacon every 10 seconds
 
-#define Payload_IS_Dead_ADDR            0x9620
-#define Payload_IS_Dead_SIZE            sizeof(Boolean)
+#define PAYLOAD_IS_DEAD_ADDR            0x9620
+#define PAYLOAD_IS_DEAD_SIZE            sizeof(Boolean)
 
-#define Has_Sat_Reset_ADDR              0x9630
-#define Has_Sat_Reset_SIZE              sizeof(Boolean)
+#define HAS_SAT_RESET_ADDR              0x9630
+#define HAS_SAT_RESET_SIZE              sizeof(Boolean)
 
 #endif /* FRAM_FLIGHTPARAMETERS_H_ */

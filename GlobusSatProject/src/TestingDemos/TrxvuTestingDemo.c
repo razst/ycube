@@ -401,9 +401,6 @@ Boolean TestSetTrxvuBitrate()
 	return TRUE;
 }
 
-
-
-#define MAX_INPUT_SIZE 1024  // Maximum size of input string
 Boolean testSecuredCMD() {
     char input[MAX_INPUT_SIZE];
     BYTE buf[SHA256_BLOCK_SIZE];
@@ -438,24 +435,6 @@ Boolean testSecuredCMD() {
     return TRUE;
 }
 
-int Hash256(char* text, BYTE* outputHash)
-{
-    BYTE buf[SHA256_BLOCK_SIZE];
-    SHA256_CTX ctx;
-
-    // Initialize SHA256 context
-    sha256_init(&ctx);
-
-    // Hash the user input (text)
-    sha256_update(&ctx, (BYTE*)text, strlen(text));
-    sha256_final(&ctx, buf);
-
-    // Copy the hash into the provided output buffer
-    memcpy(outputHash, buf, SHA256_BLOCK_SIZE);
-
-    return E_NO_SS_ERR;
-}
-
 Boolean Dummy_CMD_Hash256(sat_packet_t *cmd)
 {
 unsigned int code, lastid, currId;
@@ -468,7 +447,7 @@ currId = cmd->ID;
 printf("DEBUG: Initial cmd->ID = %u\n", currId);
 
 // Get code from FRAM
-FRAM_read((unsigned char*)&code, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+FRAM_read((unsigned char*)&code, CMD_PASSWORD_ADDR, CMD_PASSWORD_SIZE);
 // Debug print: Passcode from FRAM
 printf("DEBUG: Passcode read from FRAM = %u\n", code);
 
@@ -575,13 +554,13 @@ Boolean TestForDummy_sat_packet()
 	char hash[Max_Hash_size + 9];
 	cmd.ID = 2;
 	cmd.cmd_type = trxvu_cmd_type;
-	cmd.cmd_subtype = SecuredCMD;
+	cmd.cmd_subtype = 0xC4;
 	cmd.length = Max_Hash_size * 2;
 	unsigned int one = 1;
 	sprintf(hash, "%s", "6f4b661212345678");
 	memcpy(&cmd.data, &hash, Max_Hash_size);
 	FRAM_write((unsigned char*)&one, CMD_ID_ADDR, CMD_ID_SIZE);
-	FRAM_write((unsigned char*)&passcode, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+	FRAM_write((unsigned char*)&passcode,  CMD_PASSWORD_ADDR, CMD_PASSWORD_SIZE);
 	err = Dummy_CMD_Hash256(&cmd);
 	return err;
 }
@@ -593,13 +572,13 @@ Boolean Secured_CMD_TEST()
 	char hash[Max_Hash_size + 9]; //9 added for breathing space
 	cmd.ID = 2;
 	cmd.cmd_type = trxvu_cmd_type;
-	cmd.cmd_subtype = SecuredCMD;
+	cmd.cmd_subtype = 0xC4;
 	cmd.length = Max_Hash_size * 2;//* 2 added bc I keep switching the hash (makes it easyer)
 	unsigned int one = 1;
 	sprintf(hash, "%s", "6f4b661212345678");
 	memcpy(&cmd.data, &hash, Max_Hash_size);
 	FRAM_write((unsigned char*)&one, CMD_ID_ADDR, CMD_ID_SIZE);
-	FRAM_write((unsigned char*)&one, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+	FRAM_write((unsigned char*)&one,  CMD_PASSWORD_ADDR, CMD_PASSWORD_SIZE);
 	int err;
 	err = ActUponCommand(&cmd);
 

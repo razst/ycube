@@ -405,6 +405,21 @@ int CMD_GetNumOfOnlineCommands(sat_packet_t *cmd)
 	return err;
 }
 
+int CMD_SecurePing(sat_packet_t *cmd)
+{
+	int err;
+	err = CMD_Hash256(cmd);
+	if (err == E_NO_SS_ERR)
+	{
+		SendAckPacket(ACK_AUTHORIZED, cmd, error_hash, sizeof(error_hash));
+	}
+	else
+	{
+		SendAckPacket(ACK_ERROR_MSG, cmd, (unsigned char*) &err, sizeof(err));
+		SendAckPacket(ACK_ERROR_MSG, cmd, error_hash, sizeof(error_hash));
+	}
+}
+
 //TODO no support for this cmd in new diriver
 int CMD_AntSetArmStatus(sat_packet_t *cmd)
 {

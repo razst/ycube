@@ -487,11 +487,25 @@ int TransmitDataAsSPL_Packet(sat_packet_t *cmd, unsigned char *data,
 	return err;
 
 }
+void Hash256(char* text, BYTE* outputHash)
+{
+    BYTE buf[SHA256_BLOCK_SIZE];
+    SHA256_CTX ctx;
+
+    // Initialize SHA256 context
+    sha256_init(&ctx);
+
+    // Hash the user input (text)
+    sha256_update(&ctx, (BYTE*)text, strlen(text));
+    sha256_final(&ctx, buf);
+
+    // Copy the hash into the provided output buffer
+    memcpy(outputHash, buf, SHA256_BLOCK_SIZE);
+}
 
 char error_hash[8] = {0};
-Boolean CMD_Hash256(sat_packet_t *cmd)
+int CMD_Hash256(sat_packet_t *cmd)
 {
-
 	unsigned int code, lastid, currId;
     char plsHashMe[50];
     char code_to_str[50];
@@ -504,7 +518,7 @@ Boolean CMD_Hash256(sat_packet_t *cmd)
 	}
 
     //get code from FRAM
-    FRAM_read((unsigned char*)&code, CMD_Passcode_ADDR, CMD_Passcode_SIZE);
+    FRAM_read((unsigned char*)&code, CMD_PASSWORD_ADDR, CMD_PASSWORD_SIZE);
 
     //get the last id from FRAM and save it into var lastid then add new id to the FRAM (as new lastid)
     FRAM_read((unsigned char*)&lastid, CMD_ID_ADDR, CMD_ID_SIZE);
@@ -529,12 +543,8 @@ Boolean CMD_Hash256(sat_packet_t *cmd)
     BYTE hashed[SHA256_BLOCK_SIZE];
 
     // Hash the combined string
-    int err = Hash256(plsHashMe, hashed);
-    if (err != E_NO_SS_ERR) {
-	//add to log?
-        return FALSE;
-    }
-     
+    Hash256(plsHashMe, hashed);
+
     //cpy byte by byte to temp (size of otherhashed = 8 bytes *2 (all bytes are saved by twos(bc its in hex))+1 for null)
     char otherhashed[Max_Hash_size * 2 + 1]; // Array to store 8 bytes in hex, plus a null terminator
 
@@ -568,19 +578,6 @@ Boolean CMD_Hash256(sat_packet_t *cmd)
     else
 	{
 		return E_UNAUTHORIZED;
-	}
-}
-int CMD_Secure_Ping(sat_packet_t *cmd)
-{
-	int err;
-	err = CMD_Hash256(cmd);
-	if (err == E_NO_SS_ERR)
-	{
-		SendAckPacket(ACK_AUTHORIZED, cmd, error_hash, sizeof(error_hash));
-	}
-	else
-	{
-		SendAckPacket(ACK_ERROR_MSG, cmd, (unsigned char*) &err, sizeof(err));
 	}
 }
 

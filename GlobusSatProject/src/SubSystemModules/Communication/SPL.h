@@ -80,7 +80,7 @@ typedef enum __attribute__ ((__packed__)) trxvu_subtypes_t
 	ANT_STOP_REDEPLOY = 		0xC0,
 	PING = 						0xC2,
 	DUMP_RAM_TLM =              0xC3,
-	SecuredCMD =                0xC4
+	SECURED_CMD =               0xC4
 
 }trxvu_subtypes_t;
 
