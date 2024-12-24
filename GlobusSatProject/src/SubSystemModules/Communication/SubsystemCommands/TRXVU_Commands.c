@@ -9,6 +9,7 @@
 #include "TLM_management.h"
 #include "SubSystemModules/Housekepping/RAMTelemetry.h"
 #include "SubSystemModules/Communication/HashSecuredCMD.h"
+#include "SubSystemModules/Communication/TRXVU.h"
 
 
 extern xTaskHandle xDumpHandle;			                //task handle for dump task
@@ -408,19 +409,20 @@ int CMD_GetNumOfOnlineCommands(sat_packet_t *cmd)
 int CMD_SecurePing(sat_packet_t *cmd)
 {
 	int err;
+
 	err = CMD_Hash256(cmd);
 	if (err == E_NO_SS_ERR)
 	{
-		SendAckPacket(ACK_AUTHORIZED, cmd, error_hash, sizeof(error_hash));
+		SendAckPacket(ACK_AUTHORIZED, cmd, NULL, 0);
 	}
 	else
 	{
 		SendAckPacket(ACK_ERROR_MSG, cmd, (unsigned char*) &err, sizeof(err));
-		SendAckPacket(ACK_ERROR_MSG, cmd, error_hash, sizeof(error_hash));
+		//SendAckPacket(ACK_ERROR_MSG, cmd, &error_hash, sizeof(error_hash));
 	}
 }
 
-//TODO no support for this cmd in new diriver
+//TODO no support for this cmd in new driver
 int CMD_AntSetArmStatus(sat_packet_t *cmd)
 {
 //	if (cmd == NULL || cmd->data == NULL) {

@@ -502,7 +502,6 @@ void Hash256(char* text, BYTE* outputHash)
     // Copy the hash into the provided output buffer
     memcpy(outputHash, buf, SHA256_BLOCK_SIZE);
 }
-
 char error_hash[8] = {0};
 int CMD_Hash256(sat_packet_t *cmd)
 {
