@@ -107,26 +107,26 @@ int PayloadOperations(PayloadOperation status)
 }
 int Payload_Safety()
 {
-	Boolean PayloadState;
-	Boolean Has_Sat_Reset;
-	FRAM_read((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
+	int PayloadState;
+	int Has_Sat_Reset;
+	FRAM_read(&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 	if(PayloadState != TRUE)
 	{
-		FRAM_read((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
+		FRAM_read(&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
 		if (Has_Sat_Reset == TRUE)
 		{
 			PayloadState = TRUE;
-			FRAM_write((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
+			FRAM_write(&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 		}
 		else 
 		{
 			Has_Sat_Reset = TRUE;
-			FRAM_write((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
+			FRAM_write(&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
 			PayloadOperations(TurnOn);
 			return E_NO_SS_ERR;
 		}
 	}
-	else return -1;
+	return -1;
 }
 void Payload_Safety_IN_Maintenance()
 {

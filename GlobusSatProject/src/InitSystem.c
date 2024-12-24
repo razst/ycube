@@ -115,10 +115,11 @@ void WriteDefaultValuesToFRAM()
 	Boolean flag = FALSE;
 	FRAM_write((unsigned char*) &flag,
 			STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);
-
-			FRAM_write((unsigned char*)&flag,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
+	int resetFlag;
+	resetFlag = 0;
+			FRAM_write((unsigned char*)&resetFlag,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
 			//flag = TRUE;//for testing
-			FRAM_write((unsigned char*)&flag,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
+			FRAM_write((unsigned char*)&resetFlag,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 
 
 	ResetGroundCommWDT();
