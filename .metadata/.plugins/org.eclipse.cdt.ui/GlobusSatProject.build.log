@@ -1,11 +1,11 @@
-07:56:34 **** Incremental Build of configuration Debug for project GlobusSatProject ****
+13:55:07 **** Incremental Build of configuration Debug for project GlobusSatProject ****
 make -r -k all 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "GlobusSatProject.elf"
    text	   data	    bss	    dec	    hex	filename
- 272048	     12	3039012	3311072	 3285e0	GlobusSatProject.elf
+ 270832	     12	3079000	3349844	 331d54	GlobusSatProject.elf
 Finished building: GlobusSatProject.siz
  
 
-07:56:34 Build Finished (took 248ms)
+13:55:07 Build Finished (took 249ms)
 
