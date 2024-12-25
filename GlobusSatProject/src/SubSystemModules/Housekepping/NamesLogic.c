@@ -1,7 +1,7 @@
 #include "SubSystemModules/Housekepping/NamesLogic.h"
 #include "GlobalStandards.h"
 
-void GetRandomName(char buffer[MAX_NAME_SIZE])
+void GetRandomName(char *buffer)
 {
 	time_unix time;
 	Time_getUnixEpoch(&time);

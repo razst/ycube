@@ -8,4 +8,4 @@
 char names[NAMES_COUNT][MAX_NAME_SIZE] = {"ishay", "uriel", "nave", "raz", "dror"};
 #endif /* NAMESLOGIC_H_ */
 
-void GetRandomName(char buffer[MAX_NAME_SIZE]);
+void GetRandomName(char *buffer);
