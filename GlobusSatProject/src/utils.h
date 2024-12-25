@@ -28,6 +28,7 @@
 #define INFO_MSG						-210
 #define PAYLOAD_TIMEOUT					-211
 #define PAYLOAD_FALSE_OPERATION			-212
+#define PAYLOAD_IS_DEAD			-213
 #define E_UNAUTHORIZED					-240 ///< Passcode or id incorrect
 
 

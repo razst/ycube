@@ -87,17 +87,24 @@ int CMD_EPS_ResetWDT(sat_packet_t *cmd)
 	}
 	return err;
 }
-int CMD_Connect_Payload(sat_packet_t *cmd)
+int CMD_Change_Payload_State_INFRAM(sat_packet_t *cmd)
 {
-	Boolean PayloadState;
+	char PayloadState;
 	FRAM_read((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
-	if(PayloadState == TRUE)
+	if(PayloadState == 1)
 	{
-		PayloadState = FALSE;
+		PayloadState = 0;
 		FRAM_write((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
-		return E_NO_SS_ERR;
 	}
-	return -1;
+	else
+	{
+		PayloadState = 1;
+		FRAM_write((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
+	}
+
+	SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
+
+	return E_NO_SS_ERR;
 }
 int CMD_Payload_Operations (sat_packet_t *cmd)
 {
@@ -123,6 +130,11 @@ int CMD_Payload_Operations (sat_packet_t *cmd)
 	}
 	
 	err = PayloadOperations(status, FALSE);
+	if(!err)
+	{
+		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
+
+	}
 	return err;
 }
 

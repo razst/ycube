@@ -21,13 +21,15 @@ Boolean g_low_volt_flag = FALSE; // set to true if in low voltage
 
 int EnterFullMode()
 {
-	/*if(state == FullMode){
+	if(state == FullMode){
 		return 0;
-	}*/   //fix
+	}  //fix?
+	char PayloadState;
+	FRAM_read((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 	state = FullMode;
 	EpsSetLowVoltageFlag(FALSE);
-	logError(Payload_Safety(),"Payload safety"); //TODO change?
-	//PayloadOperations(TurnOn);
+	//logError(Payload_Safety(),"Payload safety"); //TODO change?
+	if (PayloadState != 1){PayloadOperations(TurnOn,FALSE);}
 	return 0;
 }
 
@@ -77,6 +79,11 @@ int PayloadOperations(PayloadOperation status, Boolean forceOn)
 	{
 	case TurnOn: ;
 		if(!forceOn && isOn){return PAYLOAD_FALSE_OPERATION;}
+
+		char PayloadState;
+		FRAM_read((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
+		if(PayloadState == 1){return PAYLOAD_IS_DEAD;}
+
 		if(logError(isismepsv2_ivid7_piu__outputbuschannelon(index, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw3, &response), "Turn on payload channel")){return -1;}
 
 		//increase the number of sw3 resets
@@ -106,40 +113,46 @@ int PayloadOperations(PayloadOperation status, Boolean forceOn)
 }
 int Payload_Safety()
 {
+
 	char PayloadState;
+
+	//for testing
+	/*PayloadState = 0;
+	FRAM_write((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);*/
+
 	char Has_Sat_Reset;
 	FRAM_read((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
-	if(PayloadState == 1)//change to !=
+	if(PayloadState != 1)
 	{
 		FRAM_read((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
 		if (Has_Sat_Reset == 1)
 		{
 			PayloadState = 1;
 			FRAM_write((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
-			return E_NO_SS_ERR;//add & change err
+			return PAYLOAD_IS_DEAD;
 		}
 		else 
 		{
 			Has_Sat_Reset = 1;
 			FRAM_write((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
-			FRAM_read((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
 			PayloadOperations(TurnOn, FALSE);
 			return E_NO_SS_ERR;
 		}
 	}
-	return -1;//add error Payload is dead
+	return PAYLOAD_IS_DEAD;//add error Payload is dead + turn off payload?
 }
 void Payload_Safety_IN_Maintenance()
 {
-	Boolean Has_Sat_Reset;
+	char Has_Sat_Reset, check = 5;
 	FRAM_read((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
-	/*time_unix current_time = 0;
-	Time_getUnixEpoch(&current_time);*/
+
 	//if uptime > 1 min 
-	if(Time_getUptimeSeconds() > 1)
+	if(Has_Sat_Reset == 1 && Time_getUptimeSeconds() > 30)
 	{
 		Has_Sat_Reset = 0;
 		FRAM_write((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
+		FRAM_read((unsigned char*)&check,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
+		//printf("HAS SAT RESET AFTER WRITING 0 = %d\n", check);
 	}
 }
 Boolean DoesPayloadChannelOn()
