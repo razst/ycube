@@ -67,9 +67,10 @@ int SetEPS_Channels(channel_t channel);
 
 /*!
  * @brief turn on/off payload according to the status(0 - turn on, 1 - turn off, 2 - restart)
+ * forceOn shuld we force on even when we think its already on
  * @return	0 on success
  */
-int PayloadOperations(PayloadOperation status);
+int PayloadOperations(PayloadOperation status, Boolean forceOn);
 
 /*!
  * returns the current system state according to the EpsState_t enumeration

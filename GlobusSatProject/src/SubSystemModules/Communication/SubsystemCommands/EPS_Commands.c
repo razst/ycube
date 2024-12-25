@@ -122,7 +122,7 @@ int CMD_Payload_Operations (sat_packet_t *cmd)
 			break;
 	}
 	
-	err = PayloadOperations(status);
+	err = PayloadOperations(status, FALSE);
 	return err;
 }
 

@@ -38,7 +38,7 @@ int EnterCruiseMode()
 	}
 	state = CruiseMode;
 	turnOffTransponder();
-	PayloadOperations(TurnOff);
+	PayloadOperations(TurnOff, FALSE);
 
 	return 0;
 }
@@ -50,7 +50,7 @@ int EnterSafeMode()
 	}
 	state = SafeMode;
 	EpsSetLowVoltageFlag(FALSE);
-	PayloadOperations(TurnOff);
+	PayloadOperations(TurnOff, FALSE);
 	return 0;
 }
 
@@ -62,11 +62,11 @@ int EnterCriticalMode()
 
 	state = CriticalMode;
 	EpsSetLowVoltageFlag(TRUE);
-	PayloadOperations(TurnOff);
+	PayloadOperations(TurnOff, FALSE);
 	return 0;
 }
 
-int PayloadOperations(PayloadOperation status)
+int PayloadOperations(PayloadOperation status, Boolean forceOn)
 {
 	Boolean isOn = DoesPayloadChannelOn();
 	uint8_t index = 0;
@@ -76,7 +76,7 @@ int PayloadOperations(PayloadOperation status)
 	switch(status)
 	{
 	case TurnOn: ;
-		if(isOn){return PAYLOAD_FALSE_OPERATION;}
+		if(!forceOn && isOn){return PAYLOAD_FALSE_OPERATION;}
 		if(logError(isismepsv2_ivid7_piu__outputbuschannelon(index, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw3, &response), "Turn on payload channel")){return -1;}
 
 		//increase the number of sw3 resets
@@ -97,9 +97,9 @@ int PayloadOperations(PayloadOperation status)
 
 	case Restart: ; //quest - allow this when the channel is off?
 
-		err = PayloadOperations(TurnOff);
-		vTaskDelay(900);
-		err = PayloadOperations(TurnOn);
+		err = PayloadOperations(TurnOff, FALSE);
+		vTaskDelay(10);
+		err = PayloadOperations(TurnOn, TRUE);
 		break;
 	}
 	return err;
@@ -123,7 +123,7 @@ int Payload_Safety()
 			Has_Sat_Reset = 1;
 			FRAM_write((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
 			FRAM_read((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
-			PayloadOperations(TurnOn);
+			PayloadOperations(TurnOn, FALSE);
 			return E_NO_SS_ERR;
 		}
 	}
