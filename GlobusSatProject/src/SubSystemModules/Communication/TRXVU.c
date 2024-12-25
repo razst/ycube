@@ -144,10 +144,9 @@ int InitTrxvu() {
     myTRXVU[0].maxReceiveBufferLength = MAX_COMMAND_DATA_LENGTH;
 
 	if (logError(ISIS_VU_E_Init(myTRXVU, 1) ,"InitTrxvu-IsisTrxvu_initialize") ) return -1;
-	if (logError(isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps) ,"isis_vu_e__set_bitrate") ) return -1;
-	if (logError(isis_vu_e__set_tx_freq(0, TX_FREQUENCY),"isis_vu_e__tx_freq") ) return -1;
-	if (logError(isis_vu_e__set_tx_pll_powerout(0, 0xCFEF),"isis_vu_e__set_tx_pll_powerout") ) return -1;
 	
+	if(ChangeTxConfigValues()){return -1;}
+
 	vTaskDelay(1000); // wait a little
 
 	// *** init ANts ****
@@ -416,9 +415,7 @@ int BeaconLogic(Boolean forceTX) {
 	if (logError(Time_getUnixEpoch(&g_prev_beacon_time),"BeaconLogic-Time_getUnixEpoch") ) return -1;
 
 	// update TX config as it gets override after WDT of the TX
-	if (logError(isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps) ,"isis_vu_e__set_bitrate") ) return -1;
-	if (logError(isis_vu_e__set_tx_freq(0, TX_FREQUENCY),"isis_vu_e__tx_freq") ) return -1;
-	if (logError(isis_vu_e__set_tx_pll_powerout(0, 0xCFEF),"isis_vu_e__set_tx_pll_powerout") ) return -1;
+	if(ChangeTxConfigValues()){return -1;}
 
 	if (logError(TransmitSplPacket(&cmd, NULL),"BeaconLogic-TransmitSplPacket") ) return -1;
 
@@ -634,5 +631,12 @@ int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
 
 	return err;
 
+}
+
+int ChangeTxConfigValues()
+{
+	if (logError(isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps) ,"isis_vu_e__set_bitrate") ) return -1;
+		if (logError(isis_vu_e__set_tx_freq(0, TX_FREQUENCY),"isis_vu_e__tx_freq") ) return -1;
+		if (logError(isis_vu_e__set_tx_pll_powerout(0, 0xCFEF),"isis_vu_e__set_tx_pll_powerout") ) return -1;
 }
 
