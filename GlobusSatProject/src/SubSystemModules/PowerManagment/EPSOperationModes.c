@@ -23,13 +23,10 @@ int EnterFullMode()
 {
 	if(state == FullMode){
 		return 0;
-	}  //fix?
-	char PayloadState;
-	FRAM_read((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
+	}
 	state = FullMode;
 	EpsSetLowVoltageFlag(FALSE);
-	//logError(Payload_Safety(),"Payload safety"); //TODO change?
-	if (PayloadState != 1){PayloadOperations(TurnOn,FALSE);}
+	PayloadOperations(TurnOn,FALSE);
 	return 0;
 }
 
@@ -122,10 +119,10 @@ int Payload_Safety()
 
 	char Has_Sat_Reset;
 	FRAM_read((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
-	if(PayloadState != 1)
+	if(PayloadState == 0) // 0 - payload enable , 1 - payload disable
 	{
 		FRAM_read((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
-		if (Has_Sat_Reset == 1)
+		if (Has_Sat_Reset == 1) // we have a problem, we had a sat reset in less than 30 sec
 		{
 			PayloadState = 1;
 			FRAM_write((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
@@ -139,20 +136,18 @@ int Payload_Safety()
 			return E_NO_SS_ERR;
 		}
 	}
-	return PAYLOAD_IS_DEAD;//add error Payload is dead + turn off payload?
+	return PAYLOAD_IS_DEAD;
 }
 void Payload_Safety_IN_Maintenance()
 {
-	char Has_Sat_Reset, check = 5;
+	char Has_Sat_Reset;
 	FRAM_read((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
 
-	//if uptime > 1 min 
-	if(Has_Sat_Reset == 1 && Time_getUptimeSeconds() > 30)
+	//if uptime > SAFE_PAYLOAD_WAIT_TIME sec
+	if(Has_Sat_Reset == 1 && Time_getUptimeSeconds() > SAFE_PAYLOAD_WAIT_TIME)
 	{
 		Has_Sat_Reset = 0;
 		FRAM_write((unsigned char*)&Has_Sat_Reset,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
-		FRAM_read((unsigned char*)&check,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
-		//printf("HAS SAT RESET AFTER WRITING 0 = %d\n", check);
 	}
 }
 Boolean DoesPayloadChannelOn()

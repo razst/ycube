@@ -407,6 +407,7 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 		wod->photo_diodes[i] = ADC_ConvertRaw10bitToMillivolt( adcSamples[i] ); // convert to mV data
 		////printf("PD%d : %u mV\n\r", i, wod->photo_diodes[i]);
 	}
+	FRAM_read((unsigned char*)&wod->isPayloadDisable,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 
 	GetRandomName(wod->name);
 }

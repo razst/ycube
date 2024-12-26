@@ -1,10 +1,10 @@
 #include "GlobalStandards.h"
 
 #ifdef ISISEPS
-	#include <satellite-subsystems/isismepsv2_ivid7_piu.h>
+#include <satellite-subsystems/isismepsv2_ivid7_piu.h>
 #endif
 #ifdef GOMEPS
-	#include <satellite-subsystems/GomEPS.h>
+#include <satellite-subsystems/GomEPS.h>
 #endif
 
 
@@ -87,21 +87,29 @@ int CMD_EPS_ResetWDT(sat_packet_t *cmd)
 	}
 	return err;
 }
+
+// in cmd we get the state.
+// state = 1 - enable the payload - PAYLOAD_IS_DEAD = 0
+// state = 2 - disable the payload - PAYLOAD_IS_DEAD = 1
 int CMD_Change_Payload_State_INFRAM(sat_packet_t *cmd)
 {
-	char PayloadState;
-	FRAM_read((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
-	if(PayloadState == 1)
+	char PayloadState, state;
+
+	memcpy(&state,cmd -> data,1);
+	switch(state)
 	{
+	case 1:
 		PayloadState = 0;
-		FRAM_write((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
-	}
-	else
-	{
+		break;
+	case 2:
 		PayloadState = 1;
-		FRAM_write((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
+		break;
+	default:
+		return E_PARAM_OUTOFBOUNDS;
+		break;
 	}
 
+	FRAM_write((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 	SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
 
 	return E_NO_SS_ERR;
@@ -115,20 +123,20 @@ int CMD_Payload_Operations (sat_packet_t *cmd)
 	memcpy(&state,cmd -> data,1);
 	switch(state)
 	{
-		case 1:
-			status = TurnOn;
-			break;
-		case 2:
-			status = TurnOff;
-			break;
-		case 3:
-			status = Restart;
-			break;
-		default:
-			return E_PARAM_OUTOFBOUNDS;
-			break;
+	case 1:
+		status = TurnOn;
+		break;
+	case 2:
+		status = TurnOff;
+		break;
+	case 3:
+		status = Restart;
+		break;
+	default:
+		return E_PARAM_OUTOFBOUNDS;
+		break;
 	}
-	
+
 	err = PayloadOperations(status, FALSE);
 	if(!err)
 	{

@@ -156,7 +156,7 @@ int eps_command_router(sat_packet_t *cmd)
 	case PAYLOAD_OPERATIONS:
 		err = CMD_Payload_Operations(cmd);
 		break;
-	case CONNECT_PAYLOAD:
+	case ENABLE_PAYLOAD:
 		err = CMD_Change_Payload_State_INFRAM(cmd);
 		break;
 	default:

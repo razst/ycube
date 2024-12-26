@@ -65,6 +65,7 @@ int EPS_Init()
 	prev_avg = 0;
 	GetBatteryVoltage(&prev_avg);
 
+	logError(Payload_Safety(),"Payload_Safety");
 
 	EPS_Conditioning();
 
