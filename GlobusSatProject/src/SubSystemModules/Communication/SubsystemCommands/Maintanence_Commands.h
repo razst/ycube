@@ -41,7 +41,7 @@ int CMD_SoftTRXVU_ComponenetReset(sat_packet_t *cmd);
 
 int CMD_HardTRXVU_ComponenetReset(sat_packet_t *cmd);
 
-
+int CMD_GetDevInfo(sat_packet_t *cmd);
 
 
 /*!

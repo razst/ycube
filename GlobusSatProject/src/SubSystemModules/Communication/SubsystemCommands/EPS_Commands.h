@@ -58,4 +58,8 @@ int CMD_SolarPanelSleep(sat_packet_t *cmd);
 
 int CMD_GetSolarPanelState(sat_packet_t *cmd);
 
+int CMD_Change_Payload_State_INFRAM(sat_packet_t *cmd);
+
+int CMD_Payload_Operations (sat_packet_t *cmd);
+
 #endif /* EPS_COMMANDS_H_ */

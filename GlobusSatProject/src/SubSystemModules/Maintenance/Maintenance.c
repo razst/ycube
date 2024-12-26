@@ -219,7 +219,6 @@ int HardResetMCU(){
 
 void Maintenance()
 {
-	char PayloadState;
 	SaveSatTimeInFRAM(MOST_UPDATED_SAT_TIME_ADDR,MOST_UPDATED_SAT_TIME_SIZE);
 
 	//logError(IsFS_Corrupted());-> we send corrupted bytes over beacon, no need to log in error file all the time
@@ -228,7 +227,7 @@ void Maintenance()
 	if (IsGroundCommunicationWDTKick()){
 		logError(INFO_MSG,"Maintenance-WDTKick, going to restart systems");
 		ResetGroundCommWDT(); // to make sure we don't get into endless restart loop
-		PayloadState = 1;//disable payload
+		char PayloadState = 1;//disable payload
 		FRAM_write((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 		// hard reset the TRXVU
 		logError(isis_vu_e__reset_hw_tx(ISIS_TRXVU_I2C_BUS_INDEX),"Maintenance-IsisTrxvu_hardReset tx");

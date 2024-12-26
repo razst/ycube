@@ -251,7 +251,7 @@ int managment_command_router(sat_packet_t *cmd)
 		err = CMD_GetSatUptime(cmd);
 		break;
 	case GET_DEV_INFO:
-		err = GetDevInfo(cmd);
+		err = CMD_GetDevInfo(cmd);
 		break;
 
 	default:
