@@ -167,6 +167,11 @@ int CMD_GetSatTime(sat_packet_t *cmd)
 
 	return err;
 }
+int GetDevInfo(sat_packet_t *cmd)
+{
+	char message[150] = "Written and developed by: Ishay Dayan, Nave Adany, Uriel Adler, Dror Cohen, David Raviv, Mentor: Raz Steinmetz";
+	TransmitDataAsSPL_Packet(cmd, (unsigned char*)&message, sizeof(message));
+}
 
 int CMD_GetSatUptime(sat_packet_t *cmd)
 {

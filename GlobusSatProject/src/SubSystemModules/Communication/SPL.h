@@ -124,7 +124,8 @@ typedef enum __attribute__ ((__packed__)) management_subtypes_t
 	FRAM_WRITE_AND_TRANSMIT =   0xE0,       //0b11100000
 	FRAM_READ_AND_TRANSMIT =    0xE1,
 	FRAM_RESTART =    			0xE2,
-	GET_SAT_UPTIME =    		0xE3
+	GET_SAT_UPTIME =    		0xE3,
+	GET_DEV_INFO =              0xE4
 }management_subtypes_t;
 //-----------------
 

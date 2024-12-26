@@ -250,6 +250,9 @@ int managment_command_router(sat_packet_t *cmd)
 	case GET_SAT_UPTIME:
 		err = CMD_GetSatUptime(cmd);
 		break;
+	case GET_DEV_INFO:
+		err = GetDevInfo(cmd);
+		break;
 
 	default:
 		err = SendAckPacket(ACK_UNKNOWN_SUBTYPE,cmd,NULL,0);
