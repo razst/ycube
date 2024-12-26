@@ -104,6 +104,16 @@ int CMD_Get_TLM_Info(sat_packet_t *cmd)
 		data.minWodRamDate = ramDataWod.min;
 		data.maxWodRamDate = ramDataWod.max;
 
+
+		dataRange ramDataRadfet = getRange(tlm_radfet);
+		data.minRadfetRamDate = ramDataRadfet.min;
+		data.maxRadfetRamDate = ramDataRadfet.max;
+
+
+		dataRange ramDataEvents = getRange(tlm_events);
+		data.minEventsRamDate = ramDataEvents.min;
+		data.maxEventsRamDate = ramDataEvents.max;
+
 		#ifdef TESTING
 				printf("\n\nTLM INFO:\nSD Data:\nTotal: %lu\nUsed: %lu\nFree: %lu\nBad: %lu\nMin file date: %hu\nMax file date: %hu\nLOG:\nMin ram date: %lu\nMax ram date: %lu\n\nWOD:\nMin ram date: %lu\nMax ram date: %lu\n", data.total, data.used, data.free, data.bad, data.minFileDate, data.maxFileDate, data.minLogRamDate, data.maxLogRamDate, data.minWodRamDate, data.maxWodRamDate);
 		#endif

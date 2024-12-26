@@ -77,6 +77,12 @@ typedef struct
 
 	  time_unix minWodRamDate;
 	  time_unix maxWodRamDate;
+
+	  time_unix minRadfetRamDate;
+	  time_unix maxRadfetRamDate;
+
+	  time_unix minEventsRamDate;
+	  time_unix maxEventsRamDate;
 }TLM_Info_Data_t;
 
 
