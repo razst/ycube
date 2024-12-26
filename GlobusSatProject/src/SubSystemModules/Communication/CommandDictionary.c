@@ -38,9 +38,9 @@ int trxvu_command_router(sat_packet_t *cmd)
 		err = CMD_SendDumpAbortRequest(cmd);
 		break;
 
-	case FORCE_ABORT_DUMP_SUBTYPE:
-		err = CMD_ForceDumpAbort(cmd);
-		break;
+//	case FORCE_ABORT_DUMP_SUBTYPE: TODO: when sending this cmd, the sat hangs, so we comment this out
+//		err = CMD_ForceDumpAbort(cmd);
+//		break;
 
 	case SET_TRANSPONDER:
 		err = CMD_SetTransponder(cmd);
