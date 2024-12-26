@@ -8,7 +8,7 @@
 #include <hal/errors.h>
 #include "SubSystemModules/Payload/payload_drivers.h"
 
-#define TLM_RAM_SIZE 10000
+#define TLM_RAM_SIZE 5000
 
 // struct for saving log TLM data in RAM
 typedef struct logDataInRam
