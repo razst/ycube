@@ -409,7 +409,7 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 	}
 	FRAM_read((unsigned char*)&wod->isPayloadDisable,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 
-	GetRandomName(wod->name);
+	GetRandomName(wod->inMemoryOf);
 }
 
 

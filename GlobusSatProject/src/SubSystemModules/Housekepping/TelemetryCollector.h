@@ -32,7 +32,7 @@ typedef struct __attribute__ ((__packed__)) WOD_Telemetry_t
 	unsigned int photo_diodes[5]; 			// photo diodes
 	unsigned int num_of_cmd_resets;///< counts the number of resets the satellite has gone through due to ground station command [#]
 	char isPayloadDisable;
-	char name[MAX_NAME_SIZE];
+	char inMemoryOf[MAX_NAME_SIZE];
 } WOD_Telemetry_t;
 
 
