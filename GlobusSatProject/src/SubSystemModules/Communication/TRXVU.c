@@ -508,7 +508,7 @@ void Hash256(char* text, BYTE* outputHash)
 char error_hash[8] = {0};
 int CMD_Hash256(sat_packet_t *cmd)
 {
-	unsigned int code, lastid, currId;
+	unsigned int lastid, currId, code;
     char plsHashMe[50];
     char code_to_str[50];
     char cmpHash[Max_Hash_size], temp[Max_Hash_size];
@@ -550,13 +550,13 @@ int CMD_Hash256(sat_packet_t *cmd)
     //cpy byte by byte to temp (size of otherhashed = 8 bytes *2 (all bytes are saved by twos(bc its in hex))+1 for null)
     char otherhashed[Max_Hash_size * 2 + 1]; // Array to store 8 bytes in hex, plus a null terminator
 
-    for (int i = 0; i < Max_Hash_size; i++) {
+    /*for (int i = 0; i < Max_Hash_size; i++) {
         sprintf(&otherhashed[i * 2], "%02x", hashed[i]);
     }
-    otherhashed[16] = '\0'; // Add Null
+    otherhashed[16] = '\0'; // Add Null*/
 
     //cpy first 8 bytes to temp 
-    memcpy(temp, otherhashed, Max_Hash_size);
+    memcpy(temp, hashed, Max_Hash_size);
 
 	//add temp to globle var 
 	memcpy(error_hash, temp, Max_Hash_size);

@@ -28,7 +28,7 @@ int GetBatteryVoltage(voltage_t *vbatt)
 {
 	isismepsv2_ivid7_piu__gethousekeepingengincdb__from_t hk_tlm;
 
-//	if(logError(isis_eps__gethousekeepingengincdb__tm(EPS_I2C_BUS_INDEX, &hk_tlm) ,"GetBatteryVoltage-isis_eps__gethousekeepingengincdb__tm"))return -1;
+	if(logError(isismepsv2_ivid7_piu__gethousekeepingengincdb(EPS_I2C_BUS_INDEX, &hk_tlm) ,"GetBatteryVoltage-isis_eps__gethousekeepingengincdb__tm"))return -1;
 
 	*vbatt = hk_tlm.fields.batt_input.fields.volt;
 
