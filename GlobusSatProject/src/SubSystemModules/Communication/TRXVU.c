@@ -568,7 +568,8 @@ int CMD_Hash256(sat_packet_t *cmd)
 
 	//fix cmd.data
 	cmd -> length = cmd -> length - Max_Hash_size;//8 bytes are removed from the data this must be reflected in the length
-	memmove(cmd->data, cmd->data + Max_Hash_size,cmd->length - Max_Hash_size);
+	//note: the memove is crucial to the command though can be changed to memcpy this is so the command that comes after can use the cmd. data correctly (taken out bc of error) 
+	//memmove(cmd->data, cmd->data + Max_Hash_size,cmd->length - Max_Hash_size);
 	
     //cmp hash from command centre to internal hash
     if(memcmp(temp, cmpHash, Max_Hash_size) == 0)
