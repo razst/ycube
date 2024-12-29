@@ -9,6 +9,7 @@
 #include "GlobalStandards.h"
 #include "SubSystemModules/PowerManagment/EPS.h"
 #include "SubSystemModules/Communication/TRXVU.h"
+#include "SubSystemModules/Communication/HashSecuredCMD.h"
 #include "SubSystemModules/Communication/SubsystemCommands/TRXVU_Commands.h"
 #include "SubSystemModules/Maintenance/Maintenance.h"
 #include "SubSystemModules/Housekepping/RAMTelemetry.h"
@@ -109,8 +110,8 @@ void WriteDefaultValuesToFRAM()
 	unsigned int IDtemp = If_ID_is_Empty;
 	FRAM_write((unsigned char*)&IDtemp, CMD_ID_ADDR, CMD_ID_SIZE);
 	
-	//a default code to avoid errors (=1)
-	FRAM_write((unsigned char*)&IDtemp, CMD_PASSWORD_ADDR, CMD_PASSWORD_SIZE);
+	unsigned int password = SECURED_CMD_PASS;
+	FRAM_write((unsigned char*)&password, CMD_PASSWORD_ADDR, CMD_PASSWORD_SIZE);
 
 	Boolean flag = FALSE;
 	FRAM_write((unsigned char*) &flag,
@@ -259,6 +260,10 @@ int InitSubsystems()
 	WakeupFromResetCMD();
 
 	ResetRamTlm();
+
+	// TODO remove !
+	unsigned int password = SECURED_CMD_PASS;
+	FRAM_write((unsigned char*)&password, CMD_PASSWORD_ADDR, CMD_PASSWORD_SIZE);
 
 	logError(INFO_MSG ,"Sat Started");
 

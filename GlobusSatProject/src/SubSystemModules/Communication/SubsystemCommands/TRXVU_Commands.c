@@ -365,6 +365,7 @@ int CMD_SecurePing(sat_packet_t *cmd)
 		SendAckPacket(ACK_ERROR_MSG, cmd, (unsigned char*) &err, sizeof(err));
 		//SendAckPacket(ACK_ERROR_MSG, cmd, &error_hash, sizeof(error_hash));
 	}
+	return err;
 }
 
 //TODO no support for this cmd in new driver
