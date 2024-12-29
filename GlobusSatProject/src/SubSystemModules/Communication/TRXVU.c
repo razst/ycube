@@ -6,7 +6,8 @@
 #include <hal/errors.h>
 
 #include <satellite-subsystems/isis_vu_e.h>
-#include <satellite-subsystems/isis_ants_rev2.h>
+#include <satellite-subsystems/isis_ants.h>
+#include <satellite-subsystems/isis_ants_types.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -150,9 +151,9 @@ int InitTrxvu() {
 	vTaskDelay(1000); // wait a little
 
 	// *** init ANts ****
-	ISIS_ANTS_REV2_t myAntennaAddress;
+	ISIS_ANTS_t myAntennaAddress;
 	myAntennaAddress.i2cAddr = ANTS_I2C_SIDE_A_ADDR;
-	if (logError(ISIS_ANTS_REV2_Init(&myAntennaAddress, 1),"InitTrxvu-IsisAntS_initialize")) return -1;
+	if (logError(ISIS_ANTS_Init(&myAntennaAddress, 1),"InitTrxvu-IsisAntS_initialize")) return -1;
 
 	InitTxModule();
 	InitBeaconParams();

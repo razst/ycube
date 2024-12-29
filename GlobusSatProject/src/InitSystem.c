@@ -14,7 +14,7 @@
 #include "SubSystemModules/Housekepping/RAMTelemetry.h"
 #include "InitSystem.h"
 #include "TLM_management.h"
-#include <satellite-subsystems/isis_ants_rev2.h>
+#include <satellite-subsystems/isis_ants.h>
 #include <SubSystemModules/Housekepping/TelemetryCollector.h>
 
 #ifdef GOMEPS

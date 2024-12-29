@@ -29,7 +29,7 @@
 #include <unistd.h>
 
 #include <satellite-subsystems/isis_vu_e.h>
-#include <satellite-subsystems/isis_ants_rev2.h>
+#include <satellite-subsystems/isis_ants.h>
 #include <satellite-subsystems/isismepsv2_ivid7_piu.h>
 #include "SubSystemModules/Payload/payload_drivers.h"
 
@@ -365,7 +365,7 @@ void getTlmTypeInfo(tlm_type_t tlmType, char* endFileName, int* structSize){
 	}
 	else if (tlmType==tlm_antenna){
 		memcpy(endFileName,END_FILE_NAME_ANTENNA,sizeof(END_FILE_NAME_ANTENNA));
-		*structSize = sizeof(isis_ants_rev2__get_all_telemetry__from_t);
+		*structSize = sizeof(isis_ants__get_all_telemetry__from_t);
 	}
 	else if (tlmType==tlm_eps_raw_mb_NOT_USED){
 		memcpy(endFileName,END_FILENAME_EPS_RAW_MB_TLM,sizeof(END_FILENAME_EPS_RAW_MB_TLM));

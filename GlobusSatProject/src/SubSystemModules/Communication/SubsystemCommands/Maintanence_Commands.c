@@ -9,7 +9,7 @@
 
 
 #include <satellite-subsystems/isis_vu_e.h>
-#include <satellite-subsystems/isis_ants_rev2.h>
+#include <satellite-subsystems/isis_ants.h>
 
 
 #include <hcc/api_fat.h>
@@ -255,7 +255,7 @@ int CMD_ResetComponent(sat_packet_t *cmd)
 		break;
 
 	case reset_ant_SideA:
-		err = logError(isis_ants_rev2__reset(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisAntS_reset");
+		err = logError(isis_ants__reset(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisAntS_reset");
 		if (err == E_NO_SS_ERR) SendAckPacket(ACK_ANTS_RESET, cmd, (unsigned char*) &err, sizeof(err));
 		break;
 
