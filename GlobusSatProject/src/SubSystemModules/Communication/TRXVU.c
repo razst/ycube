@@ -640,6 +640,7 @@ int ChangeTrxvuConfigValues()
 	if (logError(isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps) ,"isis_vu_e__set_bitrate") ) return -1;
 		if (logError(isis_vu_e__set_tx_freq(0, TX_FREQUENCY),"isis_vu_e__tx_freq") ) return -1;
 		if (logError(isis_vu_e__set_tx_pll_powerout(0, 0xCFEF),"isis_vu_e__set_tx_pll_powerout") ) return -1;
-		if (logError(isis_vu_e__set_rx_freq(0, RX_FREQUENCY);,"isis_vu_e__rx_freq") ) return -1;
+		if (logError(isis_vu_e__set_rx_freq(0, RX_FREQUENCY), "isis_vu_e__rx_freq") ) return -1;
+	return E_NO_SS_ERR;
 }
 
