@@ -3,12 +3,13 @@
 hebrewLetters = {'א' : "AL", 'ב' : "BE", 'ג' : "GI", 'ד' : "DA", 'ה' : "HE", 'ו' : "VA", 'ז' : "ZA", 'ח' : "CH",
                  'ט' : "TE", 'י' : "YO", 'ך' : "FKA", 'כ' : "KA", 'ל' : "LA", 'ם' : "FME", 'מ' : "ME", 'ן' : "FNU",
                  'נ' : "NU", 'ס' : "SA", 'ע' : "AI", 'ף' : "FPE", 'פ' : "PE", 'ץ' : "FTS", 'צ' : "TS", 'ק' : "KU",
-                 'ר' : "RE", 'ש' : "SH", 'ת' : "TA", ' ' : "SP"}
+                 'ר' : "RE", 'ש' : "SH", 'ת' : "TA", ' ' : "SP", '(' : "OPR", ')' : "CPR", "'" : "APH", '-' : "DSH",
+                 '"' : "QUO"}
 
 
 def readNamesFile(fromFilePath: str, toFilePath : str):
     namesFile = open(fromFilePath, mode="r", encoding="utf-8")
-    cArrayFile = open(toFilePath, mode="w")
+    cArrayFile = open(toFilePath, mode="w", encoding="utf-8")
 
     allNames = namesFile.readlines()
 
@@ -47,16 +48,8 @@ def readNamesFile(fromFilePath: str, toFilePath : str):
     cArrayFile.close()
 
 
-def generateNNames(filePath : str, count : int):
-    file = open(filePath, mode="w", encoding="utf-8")
-    name = "name"
-    for i in range(count):
-        pass
-
-
-
 def main():
-    readNamesFile("names", "cArray")
+    readNamesFile("InMemoeryOfNames.txt", "cArrayInMemoryOfNames.txt")
 
 
 main()

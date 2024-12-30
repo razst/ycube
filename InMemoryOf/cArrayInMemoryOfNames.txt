@@ -1,45 +1,3 @@
-#include "SubSystemModules/Housekepping/NamesLogic.h"
-#include "GlobalStandards.h"
-
-
-enum hebrewLetter // The second byte of each hebrew character as encoded with unicode. Add 0x05 before in order to use it
-{
-	AL  = 0xD0,
-	BE  = 0xD1,
-	GI  = 0xD2,
-	DA  = 0xD3,
-	HE  = 0xD4,
-	VA  = 0xD5,
-	ZA  = 0xD6,
-	CH  = 0xD7,
-	TE  = 0xD8,
-	YO  = 0xD9,
-	FKA = 0xDA,
-	KA  = 0xDB,
-	LA  = 0xDC,
-	FME = 0xDD,
-	ME  = 0xDE,
-	FNU = 0xDF,
-	NU  = 0xE0,
-	SA  = 0xE1,
-	AI  = 0xE2,
-	FPE = 0xE3,
-	PE  = 0xE4,
-	FTS = 0xE5,
-	TS  = 0xE6,
-	KU  = 0xE7,
-	RE  = 0xE8,
-	SH  = 0xE9,
-	TA  = 0xEA,
-	SP  = 0xF0,
-	OPR = 0xF1,
-	CPR = 0xF2,
-	APH = 0xF3,
-	DSH = 0xF4,
-	QUO = 0xF5,
-};
-
-char beacon_names[NAMES_COUNT][MAX_NAME_SIZE] =
 {
 {YO,VA,BE,LA,SP,SH,HE,FME},{HE,VA,DA,SP,SH,RE,YO,YO,BE,ME,FNU},{AI,ME,YO,TA,SP,LA,VA,YO},{HE,LA,LA,SP,DA,YO,NU,RE},{NU,TA,NU,AL,LA,SP,PE,SA,CH},
 {AL,YO,LA,YO,YO,SP,GI,BE,RE,YO,AL,LA,SP,AL,TE,DA,GI,YO},{AL,LA,KA,SA,NU,DA,RE,SP,AL,NU,VA,SA,VA,BE},{ME,VA,SH,YO,KU,VA,SP,OPR,ME,KU,SA,YO,FME,CPR,SP,RE,VA,ZA,NU,VA,VA,LA,DA},{AI,YO,DA,VA,SP,ZA,APH,NU,VA},{AI,ME,RE,YO,SP,KA,HE,FNU},
@@ -387,16 +345,7 @@ char beacon_names[NAMES_COUNT][MAX_NAME_SIZE] =
 {YO,VA,SA,YO,SP,SH,RE,AI,BE,YO},{LA,YO,AL,FNU,SP,SH,RE,AI,BE,YO},{NU,VA,YO,HE,SP,SH,RE,AI,BE,YO},{AI,YO,DA,FNU,SP,SH,TA,YO,VA,YO},{PE,DA,AL,FME,SP,TA,APH,AL,PE,HE},
 {DA,VA,RE,SP,TA,AL,RE},{BE,RE,SP,TA,VA,ME,RE},{AL,BE,YO,DA,FNU,SP,GI,ME,LA,YO,AL,LA,SP,TA,VA,RE,GI,APH,ME,FNU},{DA,VA,DA,YO,SP,OPR,DA,VA,DA,CPR,SP,TA,VA,RE,GI,APH,ME,FNU},{SH,HE,FME,SP,LA,YO,HE,SP,TA,VA,RE,GI,APH,ME,FNU},
 {NU,YO,BE,SP,TA,LA,SP,TS,VA,RE},{AL,VA,RE,SP,TA,AI,SA,HE},{GI,YO,LA,SP,TA,AI,SA,HE}
-};
-
-
-
-
-void GetRandomName(char *buffer)
-{
-	time_unix time;
-	Time_getUnixEpoch(&time);
-	int index = time % NAMES_COUNT;
-
-	memcpy(buffer, beacon_names[index], MAX_NAME_SIZE);
 }
+Longest Name: 30
+Names Count: 1728
+Unsupported Chars: {'׳': 3, 'ֹ': 2}
