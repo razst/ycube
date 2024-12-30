@@ -151,9 +151,20 @@ int InitTrxvu() {
 	vTaskDelay(1000); // wait a little
 
 	// *** init ANts ****
-	ISIS_ANTS_t myAntennaAddress;
+	// turn on 5V SW2 for ANTs
+	uint8_t index = 0;
+	isismepsv2_ivid7_piu__replyheader_t response;
+	logError(isismepsv2_ivid7_piu__outputbuschannelon(index, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw2, &response), "Turn on ANT channel");
+	vTaskDelay(100); // wait a little
+
+    ISIS_ANTS_t myAntennaAddress[2];
+    //Primary
+	myAntennaAddress[0].i2cAddr = ANTS_I2C_SIDE_A_ADDR;
+	//Secondary
+	myAntennaAddress[1].i2cAddr = ANTS_I2C_SIDE_B_ADDR;
+
 	myAntennaAddress.i2cAddr = ANTS_I2C_SIDE_A_ADDR;
-	int err = ISIS_ANTS_Init(&myAntennaAddress, 1);
+	int err = ISIS_ANTS_Init(myAntennaAddress, 2);
 	if (logError(err,"InitTrxvu-IsisAntS_initialize")) return -1;
 
 	InitTxModule();
