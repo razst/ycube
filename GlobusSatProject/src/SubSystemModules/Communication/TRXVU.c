@@ -153,7 +153,8 @@ int InitTrxvu() {
 	// *** init ANts ****
 	ISIS_ANTS_t myAntennaAddress;
 	myAntennaAddress.i2cAddr = ANTS_I2C_SIDE_A_ADDR;
-	if (logError(ISIS_ANTS_Init(&myAntennaAddress, 1),"InitTrxvu-IsisAntS_initialize")) return -1;
+	int err = ISIS_ANTS_Init(&myAntennaAddress, 1);
+	if (logError(err,"InitTrxvu-IsisAntS_initialize")) return -1;
 
 	InitTxModule();
 	InitBeaconParams();

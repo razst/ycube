@@ -83,7 +83,7 @@ int EPS_Conditioning()
 
 	voltage_t filtered_voltage = 0;					// the currently filtered voltage; y[i]
 	filtered_voltage = GetFilterdVoltage(curr_voltage);
-
+	printf("filtered_voltage =%d  curr_voltage=%d \n\r",filtered_voltage,curr_voltage);
 	if(filtered_voltage < prev_avg){
 		if(filtered_voltage  <  eps_threshold_voltages.fields.Vdown_safe ){
 			 EnterCriticalMode();
