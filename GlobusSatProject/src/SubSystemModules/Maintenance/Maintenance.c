@@ -192,6 +192,7 @@ int DeleteOldFiels(int minFreeSpace){
 	return E_NO_SS_ERR;
 }
 
+// every DEPLOY_INTRAVAL time, we call for ANT deploy - forever - just in case and to make sure we have open ANTS
 void CheckDeployAnt(){
 
 	Boolean flag;
