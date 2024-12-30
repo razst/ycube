@@ -8,6 +8,9 @@
 #include <satellite-subsystems/isis_vu_e.h>
 #include <satellite-subsystems/isis_ants.h>
 #include <satellite-subsystems/isis_ants_types.h>
+#include <satellite-subsystems/isismepsv2_ivid7_piu.h>
+#include <satellite-subsystems/isismepsv2_ivid7_piu_types.h>
+
 
 #include <stdlib.h>
 #include <string.h>
@@ -163,7 +166,6 @@ int InitTrxvu() {
 	//Secondary
 	myAntennaAddress[1].i2cAddr = ANTS_I2C_SIDE_B_ADDR;
 
-	myAntennaAddress.i2cAddr = ANTS_I2C_SIDE_A_ADDR;
 	int err = ISIS_ANTS_Init(myAntennaAddress, 2);
 	if (logError(err,"InitTrxvu-IsisAntS_initialize")) return -1;
 
