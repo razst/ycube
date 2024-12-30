@@ -261,10 +261,6 @@ int InitSubsystems()
 
 	ResetRamTlm();
 
-	// TODO remove !
-	unsigned int password = SECURED_CMD_PASS;
-	FRAM_write((unsigned char*)&password, CMD_PASSWORD_ADDR, CMD_PASSWORD_SIZE);
-
 	logError(INFO_MSG ,"Sat Started");
 
 	vTaskDelay(1000); // rest a little before we start working
