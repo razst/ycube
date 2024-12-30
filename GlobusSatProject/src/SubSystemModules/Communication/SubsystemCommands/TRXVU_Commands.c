@@ -82,7 +82,7 @@ void DumpRamTask(void *args) {
 int CMD_AntennaDeploy(sat_packet_t *cmd)
 {
 
-	for (int i=0; i<20;i++)
+	for (int i=0; i<10;i++)
 	{
 		printf("******* REMARK - ANT DEPLOY - ANT DEPLOY - ANT DEPLOY - ANT DEPLOY\n");
 		vTaskDelay(SECONDS_TO_TICKS(10));
