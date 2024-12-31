@@ -97,7 +97,7 @@ int CMD_AntennaDeploy(sat_packet_t *cmd)
 		logError(isis_ants__start_auto_deploy(0, ANTENNA_DEPLOYMENT_TIMEOUT) ,"CMD_AntennaDeploy-IsisAntS_autoDeployment-A");
 
 	// arm & deploy ANT 1
-	int err = logError(isis_ants__arm(1) ,"CMD_AntennaDeploy-IsisAntS_setArmStatus-B");
+	err = logError(isis_ants__arm(1) ,"CMD_AntennaDeploy-IsisAntS_setArmStatus-B");
 	if (err == E_NO_SS_ERR)
 		logError(isis_ants__start_auto_deploy(1, ANTENNA_DEPLOYMENT_TIMEOUT) ,"CMD_AntennaDeploy-IsisAntS_autoDeployment-B");
 
