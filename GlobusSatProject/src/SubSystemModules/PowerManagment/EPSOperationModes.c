@@ -21,9 +21,9 @@ Boolean g_low_volt_flag = FALSE; // set to true if in low voltage
 
 int EnterFullMode()
 {
-	if(state == FullMode){
-		return 0;
-	}
+//	if(state == FullMode){
+//		return 0;
+//	}
 	state = FullMode;
 	EpsSetLowVoltageFlag(FALSE);
 	PayloadOperations(TurnOn,FALSE);
@@ -32,9 +32,9 @@ int EnterFullMode()
 
 int EnterCruiseMode()
 {
-	if(state == CruiseMode){
-		return 0;
-	}
+//	if(state == CruiseMode){
+//		return 0;
+//	}
 	state = CruiseMode;
 	turnOffTransponder();
 	PayloadOperations(TurnOff, FALSE);
@@ -44,10 +44,11 @@ int EnterCruiseMode()
 
 int EnterSafeMode()
 {
-	if(state == SafeMode){
-		return 0;
-	}
+//	if(state == SafeMode){
+//		return 0;
+//	}
 	state = SafeMode;
+	turnOffTransponder();
 	EpsSetLowVoltageFlag(FALSE);
 	PayloadOperations(TurnOff, FALSE);
 	return 0;
@@ -55,11 +56,12 @@ int EnterSafeMode()
 
 int EnterCriticalMode()
 {
-	if(state == CriticalMode){
-		return 0;
-	}
+//	if(state == CriticalMode){
+//		return 0;
+//	}
 
 	state = CriticalMode;
+	turnOffTransponder();
 	EpsSetLowVoltageFlag(TRUE);
 	PayloadOperations(TurnOff, FALSE);
 	return 0;
@@ -126,6 +128,7 @@ int Payload_Safety()
 		{
 			PayloadState = 1;
 			FRAM_write((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
+			PayloadOperations(TurnOff, FALSE);
 			return PAYLOAD_IS_DEAD;
 		}
 		else 
@@ -136,6 +139,7 @@ int Payload_Safety()
 			return E_NO_SS_ERR;
 		}
 	}
+	PayloadOperations(TurnOff, FALSE);
 	return PAYLOAD_IS_DEAD;
 }
 void Payload_Safety_IN_Maintenance()

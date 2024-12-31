@@ -95,7 +95,7 @@ int EPS_Conditioning()
 			 EnterFullMode();
 		 }
 
-		}else if(filtered_voltage > prev_avg){
+		}else {
 			if(filtered_voltage > eps_threshold_voltages.fields.Vup_full){
 				EnterFullMode();
 			}else if(filtered_voltage > eps_threshold_voltages.fields.Vup_cruise){
