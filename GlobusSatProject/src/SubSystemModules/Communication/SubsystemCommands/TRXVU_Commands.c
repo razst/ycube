@@ -92,20 +92,20 @@ int CMD_AntennaDeploy(sat_packet_t *cmd)
 
 	// TODO RBF
 	// arm & deploy ANT 0
-	int err = logError(isis_ants__arm(0) ,"CMD_AntennaDeploy-IsisAntS_setArmStatus-A");
-	if (err == E_NO_SS_ERR)
-		logError(isis_ants__start_auto_deploy(0, ANTENNA_DEPLOYMENT_TIMEOUT) ,"CMD_AntennaDeploy-IsisAntS_autoDeployment-A");
-
-	// arm & deploy ANT 1
-	err = logError(isis_ants__arm(1) ,"CMD_AntennaDeploy-IsisAntS_setArmStatus-B");
-	if (err == E_NO_SS_ERR)
-		logError(isis_ants__start_auto_deploy(1, ANTENNA_DEPLOYMENT_TIMEOUT) ,"CMD_AntennaDeploy-IsisAntS_autoDeployment-B");
-
-	if (err == E_NO_SS_ERR){
-		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
-	}
-
-	return err;
+//	int err = logError(isis_ants__arm(0) ,"CMD_AntennaDeploy-IsisAntS_setArmStatus-A");
+//	if (err == E_NO_SS_ERR)
+//		logError(isis_ants__start_auto_deploy(0, ANTENNA_DEPLOYMENT_TIMEOUT) ,"CMD_AntennaDeploy-IsisAntS_autoDeployment-A");
+//
+//	// arm & deploy ANT 1
+//	err = logError(isis_ants__arm(1) ,"CMD_AntennaDeploy-IsisAntS_setArmStatus-B");
+//	if (err == E_NO_SS_ERR)
+//		logError(isis_ants__start_auto_deploy(1, ANTENNA_DEPLOYMENT_TIMEOUT) ,"CMD_AntennaDeploy-IsisAntS_autoDeployment-B");
+//
+//	if (err == E_NO_SS_ERR){
+//		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
+//	}
+//
+//	return err;
 
 }
 
