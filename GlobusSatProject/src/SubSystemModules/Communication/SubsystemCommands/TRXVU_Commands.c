@@ -87,12 +87,19 @@ int CMD_AntennaDeploy(sat_packet_t *cmd)
 		printf("******* REMARK - ANT DEPLOY - ANT DEPLOY - ANT DEPLOY - ANT DEPLOY\n");
 		vTaskDelay(SECONDS_TO_TICKS(10));
 	}
+	return E_NO_SS_ERR;
 
 
-// TODO RBF
-//	int err = logError(isis_ants__arm(ISIS_TRXVU_I2C_BUS_INDEX) ,"CMD_AntennaDeploy-IsisAntS_setArmStatus-A");
+	// TODO RBF
+	// arm & deploy ANT 0
+//	int err = logError(isis_ants__arm(0) ,"CMD_AntennaDeploy-IsisAntS_setArmStatus-A");
 //	if (err == E_NO_SS_ERR)
-//		logError(isis_ants__start_auto_deploy(ISIS_TRXVU_I2C_BUS_INDEX, ANTENNA_DEPLOYMENT_TIMEOUT) ,"CMD_AntennaDeploy-IsisAntS_autoDeployment-A");
+//		logError(isis_ants__start_auto_deploy(0, ANTENNA_DEPLOYMENT_TIMEOUT) ,"CMD_AntennaDeploy-IsisAntS_autoDeployment-A");
+//
+//	// arm & deploy ANT 1
+//	err = logError(isis_ants__arm(1) ,"CMD_AntennaDeploy-IsisAntS_setArmStatus-B");
+//	if (err == E_NO_SS_ERR)
+//		logError(isis_ants__start_auto_deploy(1, ANTENNA_DEPLOYMENT_TIMEOUT) ,"CMD_AntennaDeploy-IsisAntS_autoDeployment-B");
 //
 //	if (err == E_NO_SS_ERR){
 //		SendAckPacket(ACK_COMD_EXEC,cmd,NULL,0);
@@ -390,7 +397,8 @@ int CMD_AntGetArmStatus(sat_packet_t *cmd)
 	int err = 0;
 	isis_ants__get_status__from_t status;
 
-	err = isis_ants__get_status(ISIS_TRXVU_I2C_BUS_INDEX, &status);
+	// TODO add ANT 1
+	err = isis_ants__get_status(0, &status);
 	if (err == E_NO_SS_ERR){
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &status, sizeof(status));
 	}
@@ -402,7 +410,8 @@ int CMD_AntGetUptime(sat_packet_t *cmd)
 {
 	int err = 0;
 	uint32_t uptime = 0;
-	err = isis_ants__get_uptime(ISIS_TRXVU_I2C_BUS_INDEX, (uint32_t*) &uptime);
+	// TODO add ANT 1
+	err = isis_ants__get_uptime(0, (uint32_t*) &uptime);
 	if (err == E_NO_SS_ERR){
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &uptime, sizeof(uptime));
 	}
@@ -414,7 +423,8 @@ int CMD_StopReDeployment(sat_packet_t *cmd){
 	int err = 0;
 	FRAM_write((unsigned char*) &flag,STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);
 
-	err = isis_ants__disarm(ISIS_TRXVU_I2C_BUS_INDEX );
+	err = isis_ants__disarm(0);
+	err = isis_ants__disarm(1);
 
 	if (err == E_NO_SS_ERR){
 		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
@@ -425,7 +435,9 @@ int CMD_StopReDeployment(sat_packet_t *cmd){
 int CMD_AntCancelDeployment(sat_packet_t *cmd)
 {
 	int err = 0;
-	err = isis_ants__cancel_deploy(ISIS_TRXVU_I2C_BUS_INDEX);
+	err = isis_ants__cancel_deploy(0);
+	err = isis_ants__cancel_deploy(1);
+
 	if (err == E_NO_SS_ERR){
 		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
 	}
