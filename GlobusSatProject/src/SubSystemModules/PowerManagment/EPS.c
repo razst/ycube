@@ -106,6 +106,7 @@ int EPS_Conditioning()
 			}
 		prev_avg = filtered_voltage;
 		}
+	printf("state=%d\n\r",GetSystemState());
 	return 0;
 }
 
