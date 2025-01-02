@@ -199,6 +199,7 @@ int DeploySystem()
 	// wait 30 min + log telm
 	while (seconds_since_deploy < MINUTES_TO_SECONDS(MIN_2_WAIT_BEFORE_DEPLOY)) { // RBF to 30 min
 		logError(INFO_MSG,"Deploy wait loop start");
+		printf("deploy loop, sec since deploy=%d \n\r",seconds_since_deploy);
 		// wait 10 sec and update timer in FRAM
 		vTaskDelay(SECONDS_TO_TICKS(10));
 
