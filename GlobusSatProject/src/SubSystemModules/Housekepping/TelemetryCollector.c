@@ -409,6 +409,32 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 	}
 	FRAM_read((unsigned char*)&wod->isPayloadDisable,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 
+
+	isis_vu_e__get_tx_telemetry__from_t tx_tlm;
+	err = isis_vu_e__get_tx_telemetry(ISIS_TRXVU_I2C_BUS_INDEX, &tx_tlm);
+	if(err == E_NO_SS_ERR)
+	{
+		wod->tx_forward_power = tx_tlm.fields.forward_power;
+		wod->tx_reflected_power = tx_tlm.fields.reflected_power;
+		wod->pa_temp = tx_tlm.fields.temp_pa;
+		wod->board_temp = tx_tlm.fields.temp_board;
+	}
+
+	isis_vu_e__get_rx_telemetry__from_t rx_tlm;
+	isis_vu_e__get_rx_telemetry(ISIS_TRXVU_I2C_BUS_INDEX, &rx_tlm);
+	if(err == E_NO_SS_ERR)
+	{
+		wod->rx_doppler = rx_tlm.fields.doppler;
+		wod->rx_rssi = rx_tlm.fields.rssi;
+	}
+
+	isismepsv2_ivid7_piu__gethousekeepingeng__from_t eps_tlm;
+	err = isismepsv2_ivid7_piu__gethousekeepingeng(EPS_I2C_BUS_INDEX,&eps_tlm);
+	if(err == E_NO_SS_ERR)
+	{
+		wod->payload_current = eps_tlm.fields.vip_obc04.fields.current;
+		wod->payload_volt = eps_tlm.fields.vip_obc04.fields.volt;
+	}
 	GetRandomName(wod->inMemoryOf);
 }
 

@@ -21,6 +21,8 @@ typedef struct __attribute__ ((__packed__)) WOD_Telemetry_t
 	current_t electric_current;		///< the up-to-date electric current of the battery [mA]
 	current_t current_3V3;			///< the up-to-date 3.3 Volt bus current of the battery [mA]
 	current_t current_5V;			///< the up-to-date 5 Volt bus current of the battery [mA]
+    int16_t payload_volt;		 	///< the payload 5V channel current
+    int16_t payload_current;		///< the payload 5V channel volt
 	temp_t mcu_temp; 				/*!< Measured temperature provided by a sensor internal to the MCU in raw form */
 	temp_t bat_temp; 				/*!< 2 cell battery pack: not used 4 cell battery pack: Battery pack temperature on the front of the battery pack. */
 	int32_t solar_panels[NUMBER_OF_SOLAR_PANELS]; // temp of each solar panel
@@ -32,6 +34,12 @@ typedef struct __attribute__ ((__packed__)) WOD_Telemetry_t
 	unsigned int photo_diodes[5]; 			// photo diodes
 	unsigned int num_of_cmd_resets;///< counts the number of resets the satellite has gone through due to ground station command [#]
 	char isPayloadDisable;
+	int16_t rx_doppler; /*!< Raw measurement value of the instantaneous Doppler offset of the signal at the receiver port. \note conversion: eng. value = -38.1469726563 * raw + 0*/
+	int16_t rx_rssi; /*!< This field contains the measured Received Signal Strength Indicator (RSSI) at the reception time \note conversion: eng. value = -0.5 * raw + -22*/
+    uint16_t tx_reflected_power; /*!< Raw measurement value of the instantaneous RF reflected power at the transmitter port. \note conversion: eng. value = 0.00005887 * raw<sup>2</sup> */
+    uint16_t tx_forward_power; /*!< Raw measurement value of the instantaneous RF forward power at the transmitter port. \note conversion: eng. value = 0.00005887 * raw<sup>2</sup> */
+    uint16_t pa_temp; /*!< Raw measurement value of the power amplifier temperature. \note conversion: eng. value = -0.07669 * raw + 195.6037*/
+    uint16_t board_temp; /*!< Raw measurement of board temperature \note conversion: eng. value = -0.07669 * raw + 195.6037*/
 	char inMemoryOf[MAX_NAME_SIZE];
 } WOD_Telemetry_t;
 
