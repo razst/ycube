@@ -255,14 +255,14 @@ int CMD_ResetComponent(sat_packet_t *cmd)
 		break;
 
 	case reset_ant_SideA:
-		err = logError(isis_ants__reset(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisAntS_reset");
+		err = logError(isis_ants__reset(0),"CMD_ResetComponent-IsisAntS_reset A");
 		if (err == E_NO_SS_ERR) SendAckPacket(ACK_ANTS_RESET, cmd, (unsigned char*) &err, sizeof(err));
 		break;
 
-//	case reset_ant_SideB:
-//		err=logError(IsisAntS_reset(ISIS_TRXVU_I2C_BUS_INDEX, isisants_sideB),"CMD_ResetComponent-IsisAntS_reset");
-//		if (err == E_NO_SS_ERR) SendAckPacket(ACK_ANTS_RESET, cmd, (unsigned char*) &err, sizeof(err));
-//		break;
+	case reset_ant_SideB:
+		err = logError(isis_ants__reset(1),"CMD_ResetComponent-IsisAntS_reset B");
+		if (err == E_NO_SS_ERR) SendAckPacket(ACK_ANTS_RESET, cmd, (unsigned char*) &err, sizeof(err));
+		break;
 
 	default:
 		SendAckPacket(ACK_UNKNOWN_SUBTYPE, cmd, NULL, 0);

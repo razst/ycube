@@ -226,9 +226,8 @@ void TelemetrySaveTRXVU()
 
 void TelemetrySaveANT()
 {
-	int err = 0;
 	isis_ants__get_all_telemetry__from_t ant_tlm;
-	if(logError(isis_ants__get_all_telemetry(ISIS_TRXVU_I2C_BUS_INDEX,&ant_tlm) ,"TelemetrySaveANT-IsisAntS_getAlltelemetry-A" )==0){
+	if(logError(isis_ants__get_all_telemetry(0,&ant_tlm) ,"TelemetrySaveANT-IsisAntS_getAlltelemetry-A" )==0){
 		write2File(&ant_tlm , tlm_antenna);
 	}
 }
