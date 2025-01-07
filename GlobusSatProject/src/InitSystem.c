@@ -107,7 +107,7 @@ void WriteDefaultValuesToFRAM()
 	char temp = SD_CARD_DRIVER_PRI;
 	FRAM_write((unsigned char*) &temp, ACTIVE_SD_ADDR, ACTIVE_SD_SIZE);
 
-	unsigned int IDtemp = If_ID_is_Empty;
+	unsigned int IDtemp = If_ID_is_Empty; // the LAST SPL id - used for secure CMD / HASH functions
 	FRAM_write((unsigned char*)&IDtemp, CMD_ID_ADDR, CMD_ID_SIZE);
 	
 	unsigned int password = SECURED_CMD_PASS;
@@ -117,10 +117,9 @@ void WriteDefaultValuesToFRAM()
 	FRAM_write((unsigned char*) &flag,
 			STOP_REDEPOLOY_FLAG_ADDR, STOP_REDEPOLOY_FLAG_SIZE);
 	char resetFlag;
-		resetFlag = 0;
-			FRAM_write((unsigned char*)&resetFlag,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
-			//flag = TRUE;//for testing
-			FRAM_write((unsigned char*)&resetFlag,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
+	resetFlag = 0;
+	FRAM_write((unsigned char*)&resetFlag,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
+	FRAM_write((unsigned char*)&resetFlag,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 
 
 	ResetGroundCommWDT();
