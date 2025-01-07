@@ -31,21 +31,17 @@ int CMD_GenericI2C(sat_packet_t *cmd)
 		return E_INPUT_POINTER_NULL;
 	}
 	int err = 0;
-	unsigned char slaveAddr = 0;
-	unsigned int size = 0;
-	unsigned char *i2c_data = malloc(size);
+	unsigned int slaveAddr = 0;
+	unsigned int length = cmd->data[sizeof(slaveAddr)];
+	unsigned char *data = cmd->data;
 
-	memcpy(&slaveAddr,cmd->data,sizeof(slaveAddr));
-	memcpy(&size,cmd->data + sizeof(slaveAddr),sizeof(size));
+	memcpy(&slaveAddr, cmd->data, sizeof(slaveAddr));
 
-	unsigned int offset = sizeof(slaveAddr) + sizeof(size);
-	//err = I2C_write((unsigned int)slaveAddr,cmd->data + offset, cmd->length);
-	err = I2C_write((unsigned int)slaveAddr,cmd->data + offset, (cmd->length - offset));
-	err = I2C_read((unsigned int)slaveAddr,i2c_data,size);
+	err = I2C_write(slaveAddr,data + sizeof(slaveAddr) + sizeof(length), length);
+
 	if (err == E_NO_SS_ERR){
-		TransmitDataAsSPL_Packet(cmd, i2c_data, size);
+		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
 	}
-	free(i2c_data);
 
 	return err;
 }
