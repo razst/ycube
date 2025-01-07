@@ -135,7 +135,7 @@ int CMD_Switch_SD_Card(sat_packet_t *cmd)
 		return E_IS_INITIALIZED;
 	}
 	int err = FRAM_write((unsigned char*)&change_to_SD_card,ACTIVE_SD_ADDR, ACTIVE_SD_SIZE);
-	//TODO check after 2nd SD is added
+
 	if(E_NO_SS_ERR == err)
 	{
 		Boolean8bit reset_flag = TRUE_8BIT;

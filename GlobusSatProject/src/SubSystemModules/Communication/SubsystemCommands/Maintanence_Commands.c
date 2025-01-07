@@ -24,7 +24,6 @@
 #include "Maintanence_Commands.h"
 
 // data in SPL should be: slaveaddr,size of data to get back from the I2C command ,data to sent to I2C
-// TODO: how to test this function??
 int CMD_GenericI2C(sat_packet_t *cmd)
 {
 	if(cmd == NULL || cmd->data == NULL){

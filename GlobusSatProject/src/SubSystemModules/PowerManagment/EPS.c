@@ -189,7 +189,7 @@ int RestoreDefaultThresholdVoltages()
 	return 0;
 }
 
-// TODO check the code and output of this function!
+
 int CMDGetHeaterValues(sat_packet_t *cmd){
 	isismepsv2_ivid7_piu__getconfigurationparameter__from_t from;
 	HeaterValues values;
@@ -223,7 +223,7 @@ int CMDGetHeaterValues(sat_packet_t *cmd){
 	return err;
 }
 
-// TODO check the code and output of this function!
+
 int CMDSetHeaterValues(sat_packet_t *cmd){
 	int err;
 	isismepsv2_ivid7_piu__setconfigurationparameter__to_t setTo;

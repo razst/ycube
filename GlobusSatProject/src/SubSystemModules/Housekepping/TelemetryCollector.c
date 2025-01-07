@@ -132,7 +132,6 @@ void TelemetryCollectorLogic()
 			tlm_last_save_time[tlm_tx] = curr;
 		}
 	}
-//TODO: remove this comment
 	if (CheckExecutionTime(tlm_last_save_time[tlm_antenna],tlm_save_periods[tlm_antenna])){
 		TelemetrySaveANT();
 		if (logError(Time_getUnixEpoch(&curr),"TelemetryCollectorLogic-Time_getUnixEpoch") == 0 ){

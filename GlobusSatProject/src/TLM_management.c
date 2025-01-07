@@ -69,7 +69,7 @@ int CMD_getInfoImage(sat_packet_t *cmd){
 		numChunk++;
 	}
 	imageInfo_t data;
-	data.imageID = imageType; // TODO: change for image type 6 (heat map)
+	data.imageID = imageType;
 	data.imageType = imageType;
 	memcpy(&data.numberChunks,&numChunk, sizeof(numChunk));
 	TransmitDataAsSPL_Packet(cmd, (unsigned char*) &data,
@@ -201,8 +201,6 @@ int CMD_sendImageToSatellite(sat_packet_t *cmd) {
 
 void delete_allTMFilesFromSD()
 {
-	// TODO make sure we don't delete the image file
-
 	int c = 100;
 	F_FIND find;
 	if (!f_findfirst("A:/*.*",&find))
@@ -307,9 +305,6 @@ FileSystemResult InitializeFS(Boolean first_time)
 	}
 
 	// Initialize the volume of SD card 0 (A)
-	// TODO should we also init the volume of SD card 1 (B)???
-	// TODO: why drive 1 is not working when we test it?
-
 	err=f_initvolume( 0, atmel_mcipdc_initfunc, active_SD );
 
 

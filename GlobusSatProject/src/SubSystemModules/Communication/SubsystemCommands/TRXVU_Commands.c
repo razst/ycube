@@ -375,7 +375,7 @@ int CMD_SecurePing(sat_packet_t *cmd)
 	return err;
 }
 
-//TODO no support for this cmd in new driver
+//Note no support for this cmd in new driver
 int CMD_AntSetArmStatus(sat_packet_t *cmd)
 {
 //	if (cmd == NULL || cmd->data == NULL) {
@@ -397,7 +397,6 @@ int CMD_AntGetArmStatus(sat_packet_t *cmd)
 	int err = 0;
 	isis_ants__get_status__from_t status;
 
-	// TODO add ANT 1
 	err = isis_ants__get_status(0, &status);
 	if (err == E_NO_SS_ERR){
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &status, sizeof(status));
@@ -410,7 +409,6 @@ int CMD_AntGetUptime(sat_packet_t *cmd)
 {
 	int err = 0;
 	uint32_t uptime = 0;
-	// TODO add ANT 1
 	err = isis_ants__get_uptime(0, (uint32_t*) &uptime);
 	if (err == E_NO_SS_ERR){
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &uptime, sizeof(uptime));
