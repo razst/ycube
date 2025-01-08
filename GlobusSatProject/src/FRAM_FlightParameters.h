@@ -51,16 +51,16 @@
 #define DEFAULT_EPS_SAVE_TLM_TIME		5			//<! save EPS TLM every 5 seconds
 #define EPS_SAVE_TLM_PERIOD_ADDR		0x130		//<! address where the save tlm period will be
 
-#define DEFAULT_TRXVU_SAVE_TLM_TIME		5			//<! save TRXVU TLM every 5 seconds
+#define DEFAULT_TRXVU_SAVE_TLM_TIME		30			//<! save TRXVU TLM every 5 seconds
 #define TRXVU_SAVE_TLM_PERIOD_ADDR		0x134		//<! address where the save tlm period will be
 
 #define DEFAULT_ANT_SAVE_TLM_TIME		900			//<! save antenna TLM every 15 min
 #define ANT_SAVE_TLM_PERIOD_ADDR		0x138		//<! address where the save tlm period will be
 
-#define DEFAULT_SOLAR_SAVE_TLM_TIME		5			//<! save solar panel TLM every 5 seconds
+#define DEFAULT_SOLAR_SAVE_TLM_TIME		30			//<! save solar panel TLM every 5 seconds
 #define SOLAR_SAVE_TLM_PERIOD_ADDR		0x142		//<! address where the save tlm period will be
 
-#define DEFAULT_WOD_SAVE_TLM_TIME		5			//<! save WOD TLM every 5 seconds
+#define DEFAULT_WOD_SAVE_TLM_TIME		30			//<! save WOD TLM every 5 seconds
 #define WOD_SAVE_TLM_PERIOD_ADDR		0x146		//<! address where the save tlm period will be
 
 #define NUMBER_OF_CMD_RESETS_ADDR		0x160		//<! counts how many restarts did the satellite endure from ground command
