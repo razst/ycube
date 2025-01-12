@@ -1,0 +1,12 @@
+1. start sat
+2. run satellite-subsystems-demo
+3. choose (12) Enable first activation and reset sec since deploy
+4. Hard restart sat
+5. notice deploy loop messages (this will also reset all fram values)
+6. run satellite-subsystems-demo
+7. choose (13) Disable first activation
+8. Hard restart sat
+9. let sat run for a while, test beacon ... etc
+10. run satellite-subsystems-demo
+11. choose (12) Enable first activation and reset sec since deploy
+12. shutdown sat
