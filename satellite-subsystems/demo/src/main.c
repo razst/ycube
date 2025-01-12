@@ -15,7 +15,6 @@
 #include "Demos/IsisTRXVUrevEdemo.h"
 #include "Demos/IsisAOCSdemo.h"
 #include <satellite-subsystems/version/version.h>
-
 #include <at91/utility/exithandler.h>
 #include <at91/commons.h>
 #include <at91/utility/trace.h>
@@ -57,6 +56,45 @@
 	#define MAIN_TRACE_FATAL		TRACE_FATAL
 #endif
 
+
+Boolean first_act_test(Boolean the_flag)
+{
+	FRAM_start();
+	int value = the_flag;
+	Boolean flag;
+	FRAM_read((unsigned char*) &flag, 0x42,4);
+	printf("first activation value before:%d \n",flag);
+
+	FRAM_write((unsigned char*) &value,0x42, 4);
+
+	FRAM_read((unsigned char*) &flag, 0x42,4);
+	printf("first activation value after:%d \n",flag);
+
+	// stop redeploy
+	FRAM_read((unsigned char*) &flag, 0x30,4);
+	printf(" stop redeploy flag value before:%d \n",flag);
+	flag = TRUE;
+	FRAM_write((unsigned char*) &flag,0x30, 4);
+
+	FRAM_read((unsigned char*) &flag, 0x30,4);
+	printf("stop redeploy flag value after:%d \n",flag);
+
+
+
+	//------- seconds since deploy
+	if (the_flag){
+		FRAM_read((unsigned char*) &value, 0x09,4);
+		printf(" sec since deploy activation value before:%d \n",value);
+		value = 0;
+
+		FRAM_write((unsigned char*) &value,0x09, 4);
+
+		FRAM_read((unsigned char*) &value, 0x09,4);
+		printf("sec since deploy value after:%d \n",value);
+	}
+	return TRUE;
+}
+
 Boolean selectAndExecuteTest()
 {
 	int selection = 0;
@@ -81,9 +119,11 @@ Boolean selectAndExecuteTest()
 	printf("\t 9) ISIS PDU iMEPS test \n\r");
 	printf("\t 10) ISIS PIU iCEPS Test \n\r");
 	printf("\t 11) ISIS AOCS test \n\r");
+	printf("\t 12) Enable first activation and reset sec since deploy\n\r");
+	printf("\t 13) Disable first activation \n\r");
 
 
-	while(UTIL_DbguGetIntegerMinMax(&selection, 1, 11) == 0);
+	while(UTIL_DbguGetIntegerMinMax(&selection, 1, 13) == 0);
 
 	switch(selection)
 	{
@@ -119,6 +159,12 @@ Boolean selectAndExecuteTest()
 			break;
 		case 11:
 			offerMoreTests = isis_aocs_demo();
+			break;
+		case 12:
+			offerMoreTests = first_act_test(TRUE);
+			break;
+		case 13:
+			offerMoreTests = first_act_test(FALSE);
 			break;
 
 		default:

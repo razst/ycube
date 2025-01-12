@@ -35,13 +35,13 @@ void taskMain()
 
 	InitSubsystems();
 
-	printf("Sat started !\r\n");
+	printf("Sat started git ver b2fe400\r\n");
 
 	int c=0,j=0;
 	while (TRUE) {
 		c++;
 		if (c==10){
-			printf("in main loop ...%d\r\n",j);
+//			printf("in main loop ...%d\r\n",j);
 			j++;
 			c=0;
 		}
