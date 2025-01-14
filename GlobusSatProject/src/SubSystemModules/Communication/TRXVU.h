@@ -18,7 +18,7 @@
 #define MAX_IDLE_TIME 		(2400) 	///< max IDLE duration will be 20 minutes = 120 *20 [sec]
 #define MIN_BEACON_INTRAVL	5 // min of 5 sec between beacons
 
-#define BEACON_SPL_ID	0x0CFFFFFF
+#define BEACON_SPL_ID	0x13FFFFFF
 
 #define TX_FREQUENCY  436400
 #define RX_FREQUENCY  145970

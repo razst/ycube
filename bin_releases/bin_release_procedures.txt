@@ -11,3 +11,7 @@
 11. run satellite-subsystems-demo
 12. choose (12) Enable first activation and reset sec since deploy
 13. shutdown sat
+
+Release notes:
+Ver1- first release
+Ver2- remove payload_is_dead flag from write default fram values
