@@ -155,7 +155,7 @@ Boolean selectAndExecuteTest()
 	printf("\t 9) ISIS PDU iMEPS test \n\r");
 	printf("\t 10) ISIS PIU iCEPS Test \n\r");
 	printf("\t 11) ISIS AOCS test \n\r");
-	printf("\t 12) Enable first activation and reset sec since deploy\n\r");
+	printf("\t 12) ABF:Enable first activation, reset sec since deploy, disable payload\n\r");
 	printf("\t 13) Disable first activation \n\r");
 	printf("\t 14) Enable payload is dead \n\r");
 	printf("\t 15) Disable payload is dead \n\r");

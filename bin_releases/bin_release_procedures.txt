@@ -1,6 +1,6 @@
 1. start sat
 2. run satellite-subsystems-demo
-3. choose (12) Enable first activation and reset sec since deploy
+3. choose (12) ABF:Enable first activation, reset sec since deploy, disable payload 
 4. burn bin for the specific sat
 5. Hard restart sat
 6. notice deploy loop messages (this will also reset all fram values)
@@ -9,7 +9,7 @@
 9. Hard restart sat
 10. let sat run for a while, test beacon ... etc
 11. run satellite-subsystems-demo
-12. choose (12) Enable first activation and reset sec since deploy
+12. choose (12) ABF:Enable first activation, reset sec since deploy, disable payload
 13. shutdown sat
 
 Release notes:
