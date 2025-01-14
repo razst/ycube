@@ -23,6 +23,7 @@
 #include <at91/peripherals/pio/pio_it.h>
 #include <Demos/isismeps_ivid5_pdu_demo.h>
 #include <Demos/isismeps_ivid5_piu_demo.h>
+#include <hal/Timing/Time.h>
 
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
@@ -57,6 +58,8 @@
 #endif
 
 
+#define UNIX_SECS_FROM_Y1970_TO_Y2000	946681200				///< number of seconds from 1 JAN 1970 to 1 JAN 2000
+
 Boolean first_act_test(Boolean the_flag)
 {
 	FRAM_start();
@@ -82,6 +85,17 @@ Boolean first_act_test(Boolean the_flag)
 
 
 	if (the_flag){
+
+		//------- time
+
+		unsigned long int the_time = 0;
+		FRAM_read((unsigned char*) &the_time, 0x54,4);
+		printf(" the_time value before:%d \n",the_time);
+		the_time = UNIX_SECS_FROM_Y1970_TO_Y2000;
+		FRAM_write((unsigned char*) &the_time,0x54, 4);
+		FRAM_read((unsigned char*) &the_time, 0x54,4);
+		printf("the_time deploy value after:%d \n",the_time);
+
 		//------- seconds since deploy
 		FRAM_read((unsigned char*) &value, 0x09,4);
 		printf(" sec since deploy activation value before:%d \n",value);
