@@ -12,7 +12,7 @@
 
 //<! how many command can be saved in the buffer
 #define MAX_NUM_OF_DELAYED_CMD (100)
-#define YCUBE_SAT_ID	19
+#define YCUBE_SAT_ID	12
 #define ALL_SAT_ID 		10
 
 
