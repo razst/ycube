@@ -81,19 +81,55 @@ Boolean first_act_test(Boolean the_flag)
 
 
 
-	//------- seconds since deploy
 	if (the_flag){
+		//------- seconds since deploy
 		FRAM_read((unsigned char*) &value, 0x09,4);
 		printf(" sec since deploy activation value before:%d \n",value);
 		value = 0;
-
 		FRAM_write((unsigned char*) &value,0x09, 4);
-
 		FRAM_read((unsigned char*) &value, 0x09,4);
 		printf("sec since deploy value after:%d \n",value);
+
+		//------- PAYLOAD_IS_DEAD_ADDR
+		char PayloadState;
+		FRAM_read((unsigned char*) &PayloadState, 0x300,1);
+		printf("PAYLOAD_IS_DEAD_ADDR flag value before:%d \n",PayloadState);
+		PayloadState = 1;
+		FRAM_write((unsigned char*) &PayloadState,0x300, 1);
+		FRAM_read((unsigned char*) &PayloadState, 0x300,1);
+		printf("PAYLOAD_IS_DEAD_ADDR flag value after:%d \n",PayloadState);
 	}
 	return TRUE;
 }
+
+
+Boolean set_payload_is_dead(Boolean the_flag)
+{
+	FRAM_start();
+
+	if (the_flag){
+		//------- PAYLOAD_IS_DEAD_ADDR
+		char PayloadState;
+		FRAM_read((unsigned char*) &PayloadState, 0x300,1);
+		printf("PAYLOAD_IS_DEAD_ADDR flag value before:%d \n",PayloadState);
+		PayloadState = 1;
+		FRAM_write((unsigned char*) &PayloadState,0x300, 1);
+		FRAM_read((unsigned char*) &PayloadState, 0x300,1);
+		printf("PAYLOAD_IS_DEAD_ADDR flag value after:%d \n",PayloadState);
+	}else{
+		//------- PAYLOAD_IS_DEAD_ADDR
+		char PayloadState;
+		FRAM_read((unsigned char*) &PayloadState, 0x300,1);
+		printf("PAYLOAD_IS_DEAD_ADDR flag value before:%d \n",PayloadState);
+		PayloadState = 0;
+		FRAM_write((unsigned char*) &PayloadState,0x300, 1);
+		FRAM_read((unsigned char*) &PayloadState, 0x300,1);
+		printf("PAYLOAD_IS_DEAD_ADDR flag value after:%d \n",PayloadState);
+	}
+	return TRUE;
+}
+
+
 
 Boolean selectAndExecuteTest()
 {
@@ -121,9 +157,11 @@ Boolean selectAndExecuteTest()
 	printf("\t 11) ISIS AOCS test \n\r");
 	printf("\t 12) Enable first activation and reset sec since deploy\n\r");
 	printf("\t 13) Disable first activation \n\r");
+	printf("\t 14) Enable payload is dead \n\r");
+	printf("\t 15) Disable payload is dead \n\r");
 
 
-	while(UTIL_DbguGetIntegerMinMax(&selection, 1, 13) == 0);
+	while(UTIL_DbguGetIntegerMinMax(&selection, 1, 15) == 0);
 
 	switch(selection)
 	{
@@ -165,6 +203,12 @@ Boolean selectAndExecuteTest()
 			break;
 		case 13:
 			offerMoreTests = first_act_test(FALSE);
+			break;
+		case 14:
+			offerMoreTests = set_payload_is_dead(TRUE);
+			break;
+		case 15:
+			offerMoreTests = set_payload_is_dead(FALSE);
 			break;
 
 		default:

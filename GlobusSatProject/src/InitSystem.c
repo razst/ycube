@@ -119,7 +119,7 @@ void WriteDefaultValuesToFRAM()
 	char resetFlag;
 	resetFlag = 0;
 	FRAM_write((unsigned char*)&resetFlag,HAS_SAT_RESET_ADDR,HAS_SAT_RESET_SIZE);
-	FRAM_write((unsigned char*)&resetFlag,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
+//	FRAM_write((unsigned char*)&resetFlag,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 
 
 	ResetGroundCommWDT();
