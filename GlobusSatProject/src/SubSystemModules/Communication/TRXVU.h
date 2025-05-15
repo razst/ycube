@@ -5,7 +5,7 @@
 #include <freertos/semphr.h>
 #include <freertos/task.h>
 
-#include <satellite-subsystems/isis_vu_e.h>
+#include <satellite-subsystems/IsisTRXVU.h>
 #include "GlobalStandards.h"
 #include "AckHandler.h"
 #include "SatCommandHandler.h"
@@ -145,7 +145,7 @@ int BeaconLogic(Boolean forceTX);
  * @return	0 in successful
  * 			-1 in failure
  */
-int SetIdleState(isis_vu_e__onoff_t state, time_unix duration);
+int SetIdleState(ISIStrxvuIdleState state, time_unix duration);
 
 /*!
  * @brief	mutes the TRXVU for a specified time frame
