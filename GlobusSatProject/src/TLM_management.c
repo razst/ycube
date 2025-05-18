@@ -28,7 +28,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include <satellite-subsystems/isis_vu_e.h>
+#include <satellite-subsystems/IsisTRXVU.h>
 #include <satellite-subsystems/isis_ants.h>
 #include <satellite-subsystems/isismepsv2_ivid7_piu.h>
 #include "SubSystemModules/Payload/payload_drivers.h"

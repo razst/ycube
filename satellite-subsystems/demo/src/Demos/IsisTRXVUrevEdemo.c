@@ -25,7 +25,7 @@
 #include <hal/boolean.h>
 #include <hal/errors.h>
 
-#include <satellite-subsystems/isis_vu_e.h>
+#include <satellite-subsystems/IsisTRXVU.h>
 
 #include <stddef.h>
 #include <stdlib.h>

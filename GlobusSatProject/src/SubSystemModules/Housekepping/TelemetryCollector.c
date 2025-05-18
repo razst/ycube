@@ -10,7 +10,7 @@
 #endif
 #include <hal/Drivers/ADC.h>
 
-#include <satellite-subsystems/isis_vu_e.h>
+#include <satellite-subsystems/IsisTRXVU.h>
 #include <satellite-subsystems/isis_ants.h>
 #include <satellite-subsystems/IsisSolarPanelv2.h>
 #include <hal/Timing/Time.h>

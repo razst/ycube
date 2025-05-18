@@ -8,7 +8,7 @@
 #include "SubSystemModules/Communication/SatCommandHandler.h"
 
 
-#include <satellite-subsystems/isis_vu_e.h>
+#include <satellite-subsystems/IsisTRXVU.h>
 #include <satellite-subsystems/isis_ants.h>
 
 

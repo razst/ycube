@@ -14,7 +14,7 @@
 
 #include "GlobalStandards.h"
 
-#include <satellite-subsystems/isis_vu_e.h>
+#include <satellite-subsystems/IsisTRXVU.h>
 #include <satellite-subsystems/isis_ants_rev2.h>
 
 #include <hcc/api_fat.h>

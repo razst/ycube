@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include <satellite-subsystems/isis_vu_e.h>
+#include <satellite-subsystems/IsisTRXVU.h>
 #include <satellite-subsystems/isis_ants.h>
 
 #include "GlobalStandards.h"
