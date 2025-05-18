@@ -184,7 +184,7 @@ int CMD_SetTransponder(sat_packet_t *cmd)
 		time_unix curr_tick_time = 0;
 		Time_getUnixEpoch(&curr_tick_time);
 		if (curr_tick_time < getMuteEndTime()) return TRXVU_TRANSPONDER_WHILE_MUTE;
-		SetIdleState(isis_vu_e__onoff__off, 0);
+		SetIdleState(trxvu_idle_state_off, 0);
 		memcpy(&duration,cmd->data + sizeof(char),sizeof(duration));
 		if(duration > MAX_TRANS_TIME) return TRXVU_TRANSPONDER_TOO_LONG;
 
@@ -225,7 +225,7 @@ int CMD_MuteTRXVU(sat_packet_t *cmd)
 {
 
 	// turn off Idle
-	SetIdleState(isis_vu_e__onoff__off, 0);
+	SetIdleState(trxvu_idle_state_off, 0);
 
 	// turn off the transponder
 	setTransponderEndTime(0);
@@ -249,7 +249,7 @@ int CMD_SetIdleState(sat_packet_t *cmd)
 	char state;
 	memcpy(&state,cmd->data,sizeof(state));
 	time_unix duaration = 0;
-	if (state == isis_vu_e__onoff__on){
+	if (state == trxvu_idle_state_on){
 		memcpy(&duaration,cmd->data+sizeof(state),sizeof(duaration));
 	}
 
@@ -273,11 +273,11 @@ int CMD_UnMuteTRXVU(sat_packet_t *cmd)
 int CMD_GetBaudRate(sat_packet_t *cmd)
 {
 	//ISIStrxvuBitrateStatus bitrate;
-	isis_vu_e__state__from_t trxvu_state;
-	int err = isis_vu_e__state(ISIS_TRXVU_I2C_BUS_INDEX, &trxvu_state);
+	ISIStrxvuTransmitterState trxvu_state;
+	int err = IsisTrxvu_tcGetState(ISIS_TRXVU_I2C_BUS_INDEX, &trxvu_state);
 
 	if (err == E_NO_SS_ERR){
-		int bitrate = trxvu_state.fields.bitrate; //isn't bitrate a char?
+		int bitrate = trxvu_state.fields.transmitter_bitrate;
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &bitrate, sizeof(bitrate));
 	}
 
@@ -311,9 +311,9 @@ int CMD_GetBeaconInterval(sat_packet_t *cmd)
 
 int CMD_SetBaudRate(sat_packet_t *cmd)
 {
-	isis_vu_e__bitrate_t bitrate;
-	bitrate = (isis_vu_e__bitrate_t) cmd->data[0];
-	int err = isis_vu_e__set_bitrate(ISIS_TRXVU_I2C_BUS_INDEX, bitrate);
+	ISIStrxvuBitrateStatus bitrate;
+	bitrate = (ISIStrxvuBitrateStatus) cmd->data[0];
+	int err = IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX, bitrate);
 	if (err == E_NO_SS_ERR){
 		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
 	}
@@ -324,8 +324,8 @@ int CMD_SetBaudRate(sat_packet_t *cmd)
 int CMD_GetTxUptime(sat_packet_t *cmd)
 {
 	int err = 0;
-	uint32_t uptime = 0;
-	err = isis_vu_e__tx_uptime(ISIS_TRXVU_I2C_BUS_INDEX,(uint32_t*) &uptime);
+	time_unix uptime = 0;
+	err = IsisTrxvu_tcGetUptime(ISIS_TRXVU_I2C_BUS_INDEX, (unsigned int*)&uptime);
 	if (err == E_NO_SS_ERR){
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*)&uptime, sizeof(uptime));
 	}
@@ -336,8 +336,8 @@ int CMD_GetTxUptime(sat_packet_t *cmd)
 int CMD_GetRxUptime(sat_packet_t *cmd)
 {
 	int err = 0;
-	uint32_t uptime = 0;
-	err = isis_vu_e__rx_uptime(ISIS_TRXVU_I2C_BUS_INDEX,(uint32_t*) &uptime);
+	time_unix uptime = 0;
+	err = IsisTrxvu_rcGetUptime(ISIS_TRXVU_I2C_BUS_INDEX,(unsigned int*) &uptime);
 	if (err == E_NO_SS_ERR){
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &uptime, sizeof(uptime));
 	}
@@ -349,8 +349,8 @@ int CMD_GetRxUptime(sat_packet_t *cmd)
 int CMD_GetNumOfOnlineCommands(sat_packet_t *cmd)
 {
 	int err = 0;
-	uint16_t temp = 0;
-	err = isis_vu_e__get_frame_count(ISIS_TRXVU_I2C_BUS_INDEX, &temp);
+	unsigned short int temp = 0;
+	err = IsisTrxvu_rcGetFrameCount(ISIS_TRXVU_I2C_BUS_INDEX, &temp);
 	if (err == E_NO_SS_ERR){
 		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &temp, sizeof(temp));
 	}
