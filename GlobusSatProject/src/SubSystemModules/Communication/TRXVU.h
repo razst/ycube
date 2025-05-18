@@ -145,7 +145,9 @@ int BeaconLogic(Boolean forceTX);
  * @return	0 in successful
  * 			-1 in failure
  */
-int SetIdleState(ISIStrxvuIdleState state, time_unix duration);
+=======
+int SetIdleState(trxvu_idle_statet state, time_unix duration);
+>>>>>>> Stashed changes
 
 /*!
  * @brief	mutes the TRXVU for a specified time frame
