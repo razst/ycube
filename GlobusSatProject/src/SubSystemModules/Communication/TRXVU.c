@@ -5,15 +5,12 @@
 #include <hal/Timing/Time.h>
 #include <hal/errors.h>
 
-<<<<<<< Updated upstream
 #include <satellite-subsystems/IsisTRXVU.h>
 #include <satellite-subsystems/isis_ants.h>
 #include <satellite-subsystems/isis_ants_types.h>
 #include <satellite-subsystems/isismepsv2_ivid7_piu.h>
 #include <satellite-subsystems/isismepsv2_ivid7_piu_types.h>
 
-=======
->>>>>>> Stashed changes
 
 #include <stdlib.h>
 #include <string.h>
@@ -138,23 +135,6 @@ void InitSemaphores()
 
 int InitTrxvu() {
 
-<<<<<<< Updated upstream
-	// *** init TRXVU ***
-    // Definition of I2C and TRXUV
-    ISIS_VU_E_t myTRXVU[1];
-
-	//I2C addresses defined
-    myTRXVU[0].rxAddr = I2C_TRXVU_RC_ADDR;
-    myTRXVU[0].txAddr = I2C_TRXVU_TC_ADDR;
-
-	//Buffer definition
-    myTRXVU[0].maxSendBufferLength = MAX_COMMAND_DATA_LENGTH;
-    myTRXVU[0].maxReceiveBufferLength = MAX_COMMAND_DATA_LENGTH;
-
-	if (logError(ISIS_VU_E_Init(myTRXVU, 1) ,"InitTrxvu-IsisTrxvu_initialize") ) return -1;
-	
-	if(ChangeTrxvuConfigValues()){return -1;}
-=======
 	ISIStrxvuI2CAddress myTRXVUAddress;
 	ISIStrxvuFrameLengths myTRXVUFramesLenght;
 
@@ -163,27 +143,20 @@ int InitTrxvu() {
 	myTRXVUFramesLenght.maxAX25frameLengthTX = SIZE_TXFRAME;//SIZE_TXFRAME;
 	myTRXVUFramesLenght.maxAX25frameLengthRX = SIZE_RXFRAME;
 
-	/*** init TRXVU *** NEW
-    // Definition of I2C and TRXUV
-    ISIS_VU_E_t myTRXVU[1];*/
-
 	//I2C addresses defined
 	myTRXVUAddress.addressVu_rc = I2C_TRXVU_RC_ADDR;
 	myTRXVUAddress.addressVu_tc = I2C_TRXVU_TC_ADDR;
-    /*myTRXVU[0].rxAddr = I2C_TRXVU_RC_ADDR;
-    myTRXVU[0].txAddr = I2C_TRXVU_TC_ADDR;*/
 
 	//Buffer definition
-    /*myTRXVU[0].maxSendBufferLength = SIZE_TXFRAME;
-    myTRXVU[0].maxReceiveBufferLength = SIZE_RXFRAME;*/
+    myTRXVU[0].maxSendBufferLength = MAX_COMMAND_DATA_LENGTH;
+    myTRXVU[0].maxReceiveBufferLength = MAX_COMMAND_DATA_LENGTH;
+
 	//Bitrate definition
 	ISIStrxvuBitrate myTRXVUBitrates;
 	myTRXVUBitrates = trxvu_bitrate_9600;
 	if (logError(IsisTrxvu_initialize(&myTRXVUAddress, &myTRXVUFramesLenght,&myTRXVUBitrates, 1) ,"InitTrxvu-IsisTrxvu_initialize") ) return -1;
-
-	/*if (logError(ISIS_VU_E_Init(myTRXVU, 1) ,"InitTrxvu-IsisTrxvu_initialize") ) return -1;
-	if (logError(isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps) ,"isis_vu_e__set_bitrate") ) return -1;*/
->>>>>>> Stashed changes
+	
+	if(ChangeTrxvuConfigValues()){return -1;}
 
 	vTaskDelay(1000); // wait a little
 
@@ -312,21 +285,17 @@ int TRX_Logic() {
 
 int GetNumberOfFramesInBuffer() {
 	unsigned short frameCounter = 0;
-<<<<<<< Updated upstream
 	unsigned int timeoutCounter = 0;
 
 	while(timeoutCounter < 4*TIMEOUT_UPBOUND && frameCounter==0)
 	{
-		if (logError(isis_vu_e__get_frame_count(0, &frameCounter) ,"TRX_Logic-IsisTrxvu_rcGetFrameCount")) return -1;
+		if (logError(IsisTrxvu_rcGetFrameCount(0, &frameCounter) ,"TRX_Logic-IsisTrxvu_rcGetFrameCount")) return -1;
 
 		timeoutCounter++;
 
 		vTaskDelay(10 / portTICK_RATE_MS);
 	}
 
-=======
-	if (logError(IsisTrxvu_rcGetFrameCount(0, &frameCounter) ,"TRX_Logic-IsisTrxvu_rcGetFrameCount")) return -1;
->>>>>>> Stashed changes
 	return frameCounter;
 }
 
@@ -350,7 +319,7 @@ int GetOnlineCommand(sat_packet_t *cmd)
 	ISIStrxvuRxFrame rxFrameCmd = { 0, 0, 0,
 			(unsigned char*) receivedFrameData }; // for getting raw data from Rx, nullify values
 
-	if (logError(IsisTrxvu_rcGetCommandFrame(0, &rxFrameCmd) ,"GetOnlineCommand-IsisTrxvu_rcGetCommandFrame")) return -1;
+	if (logError(isis_vu_e__get_frame(0, &rxFrameCmd) ,"GetOnlineCommand-IsisTrxvu_rcGetCommandFrame")) return -1;
 
 	// log frame info
 	char buffer [80];
@@ -499,7 +468,7 @@ int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
 		logError(INFO_MSG,"Idel ON\n");
 		// set idle end time
 		g_idle_end_time = curr_tick_time + duration;
-	} else if (err == E_NO_SS_ERR && state == trxvu_idle_state_off){
+	} else if (err == E_NO_SS_ERR && state == isis_vu_e__onoff__off){
 		logError(INFO_MSG,"Idel OFF\n");
 	}
 	return err;
@@ -657,15 +626,9 @@ int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
 		return E_GET_SEMAPHORE_FAILED;
 	}
 
-<<<<<<< Updated upstream
 
-	uint8_t avail=0;
-//	err = isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps);
-	err = isis_vu_e__send_frame(ISIS_TRXVU_I2C_BUS_INDEX,(unsigned char*) packet, data_length, &avail);
-=======
-int avail=0;
+	int avail=0;
 	err = IsisTrxvu_tcSendAX25DefClSign(ISIS_TRXVU_I2C_BUS_INDEX,(unsigned char*) packet, data_length, &avail);
->>>>>>> Stashed changes
 
 	////printf("avial TRXVU:%d\n",avail);
 
@@ -696,8 +659,7 @@ int avail=0;
 
 int ChangeTrxvuConfigValues()
 {
-	if (logError(isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps) ,"isis_vu_e__set_bitrate") ) return -1;
-		if (logError(isis_vu_e__set_tx_freq(0, TX_FREQUENCY),"isis_vu_e__tx_freq") ) return -1;
+	if (logError(isis_vu_e__set_tx_freq(0, TX_FREQUENCY),"isis_vu_e__tx_freq") ) return -1;
 		if (logError(isis_vu_e__set_tx_pll_powerout(0, 0xCFEF),"isis_vu_e__set_tx_pll_powerout") ) return -1;
 		if (logError(isis_vu_e__set_rx_freq(0, RX_FREQUENCY), "isis_vu_e__rx_freq") ) return -1;
 		if (logError(isis_vu_e__set_transponder_in_freq(0, RX_FREQUENCY), "isis_vu_e__set_transponder_in_freq") ) return -1;
