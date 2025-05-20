@@ -224,18 +224,14 @@ int CMD_ResetComponent(sat_packet_t *cmd)
 	case reset_trxvu_hard:
 		SendAckPacket(ACK_TRXVU_HARD_RESET, cmd, NULL, 0);
 		setTransponderEndTime(0);
-		logError(isis_vu_e__reset_hw_rx(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_softReset rx");
-		vTaskDelay(1 / portTICK_RATE_MS);
-		logError(isis_vu_e__reset_hw_tx(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_softReset tx");
+		logError(IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_softReset rx");
 		vTaskDelay(100);
 		break;
 
 	case reset_trxvu_soft:
 		SendAckPacket(ACK_TRXVU_SOFT_RESET, cmd, NULL, 0);
 		setTransponderEndTime(0);
-		logError(isis_vu_e__reset_wdg_rx(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_softReset rx");
-		vTaskDelay(1 / portTICK_RATE_MS);
-		logError(isis_vu_e__reset_wdg_tx(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_softReset tx");
+		logError(IsisTrxvu_softReset(ISIS_TRXVU_I2C_BUS_INDEX),"CMD_ResetComponent-IsisTrxvu_softReset rx");
 		vTaskDelay(100);
 		break;
 
@@ -249,15 +245,15 @@ int CMD_ResetComponent(sat_packet_t *cmd)
 		if (err == E_NO_SS_ERR) SendAckPacket(ACK_FS_RESET, cmd, (unsigned char*) &err, sizeof(err));
 		break;
 
-	case reset_ant_SideA:
-		err = logError(isis_ants__reset(0),"CMD_ResetComponent-IsisAntS_reset A");
-		if (err == E_NO_SS_ERR) SendAckPacket(ACK_ANTS_RESET, cmd, (unsigned char*) &err, sizeof(err));
-		break;
-
-	case reset_ant_SideB:
-		err = logError(isis_ants__reset(1),"CMD_ResetComponent-IsisAntS_reset B");
-		if (err == E_NO_SS_ERR) SendAckPacket(ACK_ANTS_RESET, cmd, (unsigned char*) &err, sizeof(err));
-		break;
+//	case reset_ant_SideA:
+//		err = logError(isis_ants__reset(0),"CMD_ResetComponent-IsisAntS_reset A");
+//		if (err == E_NO_SS_ERR) SendAckPacket(ACK_ANTS_RESET, cmd, (unsigned char*) &err, sizeof(err));
+//		break;
+//
+//	case reset_ant_SideB:
+//		err = logError(isis_ants__reset(1),"CMD_ResetComponent-IsisAntS_reset B");
+//		if (err == E_NO_SS_ERR) SendAckPacket(ACK_ANTS_RESET, cmd, (unsigned char*) &err, sizeof(err));
+//		break;
 
 	default:
 		SendAckPacket(ACK_UNKNOWN_SUBTYPE, cmd, NULL, 0);

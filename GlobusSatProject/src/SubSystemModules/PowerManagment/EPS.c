@@ -28,9 +28,9 @@ int GetBatteryVoltage(voltage_t *vbatt)
 {
 	isismepsv2_ivid7_piu__gethousekeepingengincdb__from_t hk_tlm;
 
-	if(logError(isismepsv2_ivid7_piu__gethousekeepingengincdb(EPS_I2C_BUS_INDEX, &hk_tlm) ,"GetBatteryVoltage-isis_eps__gethousekeepingengincdb__tm"))return -1;
+//	if(logError(isismepsv2_ivid7_piu__gethousekeepingengincdb(EPS_I2C_BUS_INDEX, &hk_tlm) ,"GetBatteryVoltage-isis_eps__gethousekeepingengincdb__tm"))return -1;
 
-	*vbatt = hk_tlm.fields.batt_input.fields.volt;
+//	*vbatt = hk_tlm.fields.batt_input.fields.volt;
 
 	return 0;
 }
@@ -38,95 +38,97 @@ int GetBatteryVoltage(voltage_t *vbatt)
 int EPS_Init()
 {
 
-
+	return E_NO_SS_ERR;
 	// Init EPS
-	ISISMEPSV2_IVID7_PIU_t subsystem[1]; // One instance to be initialised.
-	subsystem[0].i2cAddr = EPS_I2C_ADDR; // I2C address defined to 0x20.
+//	ISISMEPSV2_IVID7_PIU_t subsystem[1]; // One instance to be initialised.
+//	subsystem[0].i2cAddr = EPS_I2C_ADDR; // I2C address defined to 0x20.
 
-	if(logError(ISISMEPSV2_IVID7_PIU_Init( subsystem, 1),"EPS_Init-ISIS_EPS_Init")) return -1;
+//	if(logError(ISISMEPSV2_IVID7_PIU_Init( subsystem, 1),"EPS_Init-ISIS_EPS_Init")) return -1;
 
 
 	// Init solar panels
 
-	Pin solarpanelv2_pins[2] = {_SOLAR_PIN_RESET, _SOLAR_PIN_INT};
+//	Pin solarpanelv2_pins[2] = {_SOLAR_PIN_RESET, _SOLAR_PIN_INT};
 
-	if(logError(IsisSolarPanelv2_initialize(slave0_spi,&solarpanelv2_pins[0], &solarpanelv2_pins[1]) ,"EPS_Init-IsisSolarPanelv2_initialize")) return -1;
+//	if(logError(IsisSolarPanelv2_initialize(slave0_spi,&solarpanelv2_pins[0], &solarpanelv2_pins[1]) ,"EPS_Init-IsisSolarPanelv2_initialize")) return -1;
 //	IsisSolarPanelv2_sleep(); cheek
 
 
-	if(GetThresholdVoltages(&eps_threshold_voltages)) return -1;
+//	if(GetThresholdVoltages(&eps_threshold_voltages)) return -1;
+
+//
+//	if(GetAlpha(&alpha)){
+//		alpha = DEFAULT_ALPHA_VALUE;
+//	}
 
 
-	if(GetAlpha(&alpha)){
-		alpha = DEFAULT_ALPHA_VALUE;
-	}
+//	prev_avg = 0;
+//	GetBatteryVoltage(&prev_avg);
+//
+//	logError(Payload_Safety(),"Payload_Safety");
+//
+//	EPS_Conditioning();
 
-
-	prev_avg = 0;
-	GetBatteryVoltage(&prev_avg);
-
-	logError(Payload_Safety(),"Payload_Safety");
-
-	EPS_Conditioning();
-
-	return 0;
+//	return 0;
 }
 
 #define GetFilterdVoltage(curr_voltage) (voltage_t) (alpha * curr_voltage + (1 - alpha) * prev_avg)
 
 int EPS_Conditioning()
 {
-
-	voltage_t curr_voltage = 0;
-
-	GetBatteryVoltage(&curr_voltage);
-
-	voltage_t filtered_voltage = 0;					// the currently filtered voltage; y[i]
-	filtered_voltage = GetFilterdVoltage(curr_voltage);
-//	printf("filtered_voltage =%d  curr_voltage=%d \n\r",filtered_voltage,curr_voltage);
-	if(filtered_voltage < prev_avg){
-		if(filtered_voltage  <  eps_threshold_voltages.fields.Vdown_safe ){
-			 EnterCriticalMode();
-		 }else if(filtered_voltage < eps_threshold_voltages.fields.Vdown_cruise){
-			 EnterSafeMode();
-		 }else if(filtered_voltage < eps_threshold_voltages.fields.Vdown_full){
-			 EnterCruiseMode();
-		 }else if(filtered_voltage > eps_threshold_voltages.fields.Vup_full){
-			 EnterFullMode();
-		 }
-
-		}else {
-			if(filtered_voltage > eps_threshold_voltages.fields.Vup_full){
-				EnterFullMode();
-			}else if(filtered_voltage > eps_threshold_voltages.fields.Vup_cruise){
-				EnterCruiseMode();
-
-			}else if(filtered_voltage > eps_threshold_voltages.fields.Vup_safe){
-				EnterSafeMode();
-			}
-		prev_avg = filtered_voltage;
-		}
-//	printf("state=%d\n\r",GetSystemState());
 	return 0;
+//	voltage_t curr_voltage = 0;
+//
+//	GetBatteryVoltage(&curr_voltage);
+//
+//	voltage_t filtered_voltage = 0;					// the currently filtered voltage; y[i]
+//	filtered_voltage = GetFilterdVoltage(curr_voltage);
+////	printf("filtered_voltage =%d  curr_voltage=%d \n\r",filtered_voltage,curr_voltage);
+//	if(filtered_voltage < prev_avg){
+//		if(filtered_voltage  <  eps_threshold_voltages.fields.Vdown_safe ){
+//			 EnterCriticalMode();
+//		 }else if(filtered_voltage < eps_threshold_voltages.fields.Vdown_cruise){
+//			 EnterSafeMode();
+//		 }else if(filtered_voltage < eps_threshold_voltages.fields.Vdown_full){
+//			 EnterCruiseMode();
+//		 }else if(filtered_voltage > eps_threshold_voltages.fields.Vup_full){
+//			 EnterFullMode();
+//		 }
+//
+//		}else {
+//			if(filtered_voltage > eps_threshold_voltages.fields.Vup_full){
+//				EnterFullMode();
+//			}else if(filtered_voltage > eps_threshold_voltages.fields.Vup_cruise){
+//				EnterCruiseMode();
+//
+//			}else if(filtered_voltage > eps_threshold_voltages.fields.Vup_safe){
+//				EnterSafeMode();
+//			}
+//		prev_avg = filtered_voltage;
+//		}
+////	printf("state=%d\n\r",GetSystemState());
+//	return 0;
 }
 
 int UpdateAlpha(sat_packet_t *cmd)
 {
-	float new_alpha = *(float*)cmd->data;
-	if(new_alpha < 0 || new_alpha > 1){
-		return logError(-2 , "UpdateAlpha");
-	}
-
-	int err = logError(FRAM_write((unsigned char*) &new_alpha , EPS_ALPHA_FILTER_VALUE_ADDR , EPS_ALPHA_FILTER_VALUE_SIZE) ,"UpdateAlpha-FRAM_write");
-	if (err == E_NO_SS_ERR){
-		GetAlpha(&alpha);
-		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
-	}
-	return err;
+	return 0;
+//	float new_alpha = *(float*)cmd->data;
+//	if(new_alpha < 0 || new_alpha > 1){
+//		return logError(-2 , "UpdateAlpha");
+//	}
+//
+//	int err = logError(FRAM_write((unsigned char*) &new_alpha , EPS_ALPHA_FILTER_VALUE_ADDR , EPS_ALPHA_FILTER_VALUE_SIZE) ,"UpdateAlpha-FRAM_write");
+//	if (err == E_NO_SS_ERR){
+//		GetAlpha(&alpha);
+//		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
+//	}
+//	return err;
 }
 
 int UpdateThresholdVoltages(EpsThreshVolt_t *thresh_volts)
 {
+
 	if(NULL == thresh_volts){
 		return logError(E_INPUT_POINTER_NULL ,"UpdateThresholdVoltages");
 	}
@@ -191,40 +193,43 @@ int RestoreDefaultThresholdVoltages()
 
 
 int CMDGetHeaterValues(sat_packet_t *cmd){
-	isismepsv2_ivid7_piu__getconfigurationparameter__from_t from;
-	HeaterValues values;
-	int err;
+	return 1;
+	//	isismepsv2_ivid7_piu__getconfigurationparameter__from_t from;
+//	HeaterValues values;
+//	int err;
 	// get current LOTHR_BAT_HEATER values
 
-	err = isismepsv2_ivid7_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3000, &from);
-	memcpy(&values.value.H1_MIN,from.fields.par_val,sizeof(int16_t));
-	vTaskDelay(4000);
-	err = isismepsv2_ivid7_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3001, &from);
-	memcpy(&values.value.H2_MIN,from.fields.par_val,sizeof(int16_t));
-	vTaskDelay(4000);
-	err = isismepsv2_ivid7_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3002, &from);
-	memcpy(&values.value.H3_MIN,from.fields.par_val,sizeof(int16_t));
-
-	// get current HITHR_BAT_HEATER value
-	vTaskDelay(4000); //
-	err += isismepsv2_ivid7_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3003, &from);
-	memcpy(&values.value.H1_MAX,from.fields.par_val,sizeof(int16_t));
-	vTaskDelay(4000); //
-	err += isismepsv2_ivid7_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3004, &from);
-	memcpy(&values.value.H2_MAX,from.fields.par_val,sizeof(int16_t));
-	vTaskDelay(4000); //
-	err += isismepsv2_ivid7_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3005, &from);
-	memcpy(&values.value.H3_MAX,from.fields.par_val,sizeof(int16_t));
-
-	if (err == E_NO_SS_ERR){
-		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &values, sizeof(values));
-	}
-
-	return err;
+//	err = isismepsv2_ivid7_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3000, &from);
+//	memcpy(&values.value.H1_MIN,from.fields.par_val,sizeof(int16_t));
+//	vTaskDelay(4000);
+//	err = isismepsv2_ivid7_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3001, &from);
+//	memcpy(&values.value.H2_MIN,from.fields.par_val,sizeof(int16_t));
+//	vTaskDelay(4000);
+//	err = isismepsv2_ivid7_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3002, &from);
+//	memcpy(&values.value.H3_MIN,from.fields.par_val,sizeof(int16_t));
+//
+//	// get current HITHR_BAT_HEATER value
+//	vTaskDelay(4000); //
+//	err += isismepsv2_ivid7_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3003, &from);
+//	memcpy(&values.value.H1_MAX,from.fields.par_val,sizeof(int16_t));
+//	vTaskDelay(4000); //
+//	err += isismepsv2_ivid7_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3004, &from);
+//	memcpy(&values.value.H2_MAX,from.fields.par_val,sizeof(int16_t));
+//	vTaskDelay(4000); //
+//	err += isismepsv2_ivid7_piu__getconfigurationparameter(EPS_I2C_BUS_INDEX, 0x3005, &from);
+//	memcpy(&values.value.H3_MAX,from.fields.par_val,sizeof(int16_t));
+//
+//	if (err == E_NO_SS_ERR){
+//		TransmitDataAsSPL_Packet(cmd, (unsigned char*) &values, sizeof(values));
+//	}
+//
+//	return err;
 }
 
 
 int CMDSetHeaterValues(sat_packet_t *cmd){
+	return 1;
+	/*
 	int err;
 	isismepsv2_ivid7_piu__setconfigurationparameter__to_t setTo;
 	isismepsv2_ivid7_piu__setconfigurationparameter__from_t setFrom;
@@ -260,6 +265,6 @@ int CMDSetHeaterValues(sat_packet_t *cmd){
 		SendAckPacket(ACK_COMD_EXEC, cmd, NULL, 0);
 	}
 
-	return err;
+	return err;*/
 }
 

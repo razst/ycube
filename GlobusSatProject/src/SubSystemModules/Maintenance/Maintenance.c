@@ -14,8 +14,8 @@
 
 #include "GlobalStandards.h"
 
-#include <satellite-subsystems/IsisTRXVU.h>
-#include <satellite-subsystems/isis_ants_rev2.h>
+#include <satellite-subsystems/IsisTRXVU.h>//old driver
+#include <satellite-subsystems/isis_ants_rev2.h>//new driver
 
 #include <hcc/api_fat.h>
 
@@ -214,8 +214,8 @@ int HardResetMCU(){
 //	isis_eps__reset__to_t cmd_t;
 //	isis_eps__reset__from_t cmd_f;
 //	cmd_t.fields.rst_key = RESET_KEY;
-	isismepsv2_ivid7_piu__replyheader_t reply;
-	logError(isismepsv2_ivid7_piu__reset(EPS_I2C_BUS_INDEX, &reply),"CMD_ResetComponent-isis_eps__reset__tmtc");
+//	isismepsv2_ivid7_piu__replyheader_t reply;
+//	logError(isismepsv2_ivid7_piu__reset(EPS_I2C_BUS_INDEX, &reply),"CMD_ResetComponent-isis_eps__reset__tmtc");
 }
 
 void Maintenance()
@@ -231,9 +231,7 @@ void Maintenance()
 		char PayloadState = 1;//disable payload
 		FRAM_write((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 		// hard reset the TRXVU
-		logError(isis_vu_e__reset_hw_tx(ISIS_TRXVU_I2C_BUS_INDEX),"Maintenance-IsisTrxvu_hardReset tx");
-		vTaskDelay(1 / portTICK_RATE_MS);
-		logError(isis_vu_e__reset_hw_rx(ISIS_TRXVU_I2C_BUS_INDEX),"Maintenance-IsisTrxvu_hardReset rx");
+		logError(IsisTrxvu_hardReset(ISIS_TRXVU_I2C_BUS_INDEX),"Maintenance-IsisTrxvu_hardReset tx");
 		vTaskDelay(500);
 		SaveSatTimeInFRAM(MOST_UPDATED_SAT_TIME_ADDR,MOST_UPDATED_SAT_TIME_SIZE);// store the most updated sat time
 		HardResetMCU();

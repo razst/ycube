@@ -164,7 +164,7 @@ int InitTrxvu() {
 	// turn on 5V SW2 for ANTs
 	uint8_t index = 0;
 	isismepsv2_ivid7_piu__replyheader_t response;
-	logError(isismepsv2_ivid7_piu__outputbuschannelon(index, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw2, &response), "Turn on ANT channel");
+//	logError(isismepsv2_ivid7_piu__outputbuschannelon(index, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw2, &response), "Turn on ANT channel");
 	vTaskDelay(100); // wait a little
 
     ISIS_ANTS_t myAntennaAddress[2];
@@ -173,7 +173,7 @@ int InitTrxvu() {
 	//Secondary
 	myAntennaAddress[1].i2cAddr = ANTS_I2C_SIDE_B_ADDR;
 
-	int err = ISIS_ANTS_Init(myAntennaAddress, 2);
+	int err = 0;//ISIS_ANTS_Init(myAntennaAddress, 2);
 	if (logError(err,"InitTrxvu-IsisAntS_initialize")) return -1;
 
 	InitTxModule();
@@ -318,16 +318,12 @@ int GetOnlineCommand(sat_packet_t *cmd)
 
 	ISIStrxvuRxFrame rxFrameCmd = { 0, 0, 0,
 			(unsigned char*) receivedFrameData }; // for getting raw data from Rx, nullify values
-
-	if (logError(isis_vu_e__get_frame(0, &rxFrameCmd) ,"GetOnlineCommand-IsisTrxvu_rcGetCommandFrame")) return -1;
-
+	//add this i guess int IsisTrxuv_imcGetCommandFrame(unsigned char index, ISIStrxuvRxFrame* rxframe);
+	if (logError(IsisTrxvu_rcGetCommandFrame(0, &rxFrameCmd) ,"GetOnlineCommand-IsisTrxvu_rcGetCommandFrame")) return -1;
 	// log frame info
 	char buffer [80];
 	sprintf (buffer, "Frame info: doppler: %d length: %d rssi: %d", rxFrameCmd.rx_doppler,rxFrameCmd.rx_length,rxFrameCmd.rx_rssi);
 	logError(INFO_MSG ,buffer);
-	// remove the last frame
-	vTaskDelay(10 / portTICK_RATE_MS);
-	logError(isis_vu_e__remove_frame(0),"isis_vu_e__remove_frame");
 	vTaskDelay(10 / portTICK_RATE_MS);
 
 	if (logError(ParseDataToCommand(receivedFrameData,cmd),"GetOnlineCommand-ParseDataToCommand")) return -1;
@@ -659,10 +655,6 @@ int TransmitSplPacket(sat_packet_t *packet, int *avalFrames) {
 
 int ChangeTrxvuConfigValues()
 {
-	if (logError(isis_vu_e__set_tx_freq(0, TX_FREQUENCY),"isis_vu_e__tx_freq") ) return -1;
-		if (logError(isis_vu_e__set_tx_pll_powerout(0, 0xCFEF),"isis_vu_e__set_tx_pll_powerout") ) return -1;
-		if (logError(isis_vu_e__set_rx_freq(0, RX_FREQUENCY), "isis_vu_e__rx_freq") ) return -1;
-		if (logError(isis_vu_e__set_transponder_in_freq(0, RX_FREQUENCY), "isis_vu_e__set_transponder_in_freq") ) return -1;
 
 	return E_NO_SS_ERR;
 }

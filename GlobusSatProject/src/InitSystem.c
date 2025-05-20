@@ -214,7 +214,7 @@ int DeploySystem()
 
 		// reset WDT
 		isismepsv2_ivid7_piu__replyheader_t res;
-		isismepsv2_ivid7_piu__resetwatchdog(EPS_I2C_BUS_INDEX,&res);
+//		isismepsv2_ivid7_piu__resetwatchdog(EPS_I2C_BUS_INDEX,&res);
 
 	}
 	logError(INFO_MSG,"Deploy wait loop - DONE");

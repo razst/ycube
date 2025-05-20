@@ -174,10 +174,10 @@ void TelemetrySaveEPS()
 
 	isismepsv2_ivid7_piu__gethousekeepingeng__from_t response;
 
-	if (logError(isismepsv2_ivid7_piu__gethousekeepingeng(EPS_I2C_BUS_INDEX,&response) ,"TelemetrySaveEPS-isis_eps__gethousekeepingeng__tm") == 0)
-	{
-		write2File(&response , tlm_eps);
-	}
+//	if (logError(isismepsv2_ivid7_piu__gethousekeepingeng(EPS_I2C_BUS_INDEX,&response) ,"TelemetrySaveEPS-isis_eps__gethousekeepingeng__tm") == 0)
+//	{
+//		write2File(&response , tlm_eps);
+//	}
 
 
 	/* to save space & time, we only store tlm_eps_eng_mb
@@ -360,32 +360,32 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 	isismepsv2_ivid7_piu__gethousekeepingengincdb__from_t hk_tlm_cdb;
 	isismepsv2_ivid7_piu__gethousekeepingeng__from_t hk_tlm;
 
-	err =  isismepsv2_ivid7_piu__gethousekeepingeng(EPS_I2C_BUS_INDEX, &hk_tlm);
-	err += isismepsv2_ivid7_piu__gethousekeepingengincdb(EPS_I2C_BUS_INDEX, &hk_tlm_cdb);
-
-	if(err == 0){
-
-		wod->electric_current = hk_tlm.fields.vip_obc00.fields.current;
-		wod->vbat = hk_tlm_cdb.fields.dist_input.fields.volt;
-		wod->current_3V3 = hk_tlm.fields.vip_obc05.fields.current;
-		wod->current_5V = hk_tlm.fields.vip_obc01.fields.current;
-		wod->volt_3V3 = hk_tlm.fields.vip_obc05.fields.volt;
-		wod->volt_5V = hk_tlm.fields.vip_obc01.fields.volt;
-		wod->mcu_temp = hk_tlm.fields.temp;
-		wod->bat_temp = hk_tlm.fields.temp3;
-		wod->mcu_temp = hk_tlm.fields.temp;
-		wod->charging_power = hk_tlm_cdb.fields.batt_input.fields.volt;
-		wod->consumed_power = hk_tlm_cdb.fields.dist_input.fields.power;
-		// set all solar panels temp values
-		uint8_t status;
-		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_0,&wod->solar_panels[0],&status);
-		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_1,&wod->solar_panels[1],&status);
-		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_2,&wod->solar_panels[2],&status);
-		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_3,&wod->solar_panels[3],&status);
-		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_4,&wod->solar_panels[4],&status);
-		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_5,&wod->solar_panels[5],&status);
-	}else
-		logError(err ,"GetCurrentWODTelemetry");
+//	err =  isismepsv2_ivid7_piu__gethousekeepingeng(EPS_I2C_BUS_INDEX, &hk_tlm);
+//	err += isismepsv2_ivid7_piu__gethousekeepingengincdb(EPS_I2C_BUS_INDEX, &hk_tlm_cdb);
+//
+//	if(err == 0){
+//
+//		wod->electric_current = hk_tlm.fields.vip_obc00.fields.current;
+//		wod->vbat = hk_tlm_cdb.fields.dist_input.fields.volt;
+//		wod->current_3V3 = hk_tlm.fields.vip_obc05.fields.current;
+//		wod->current_5V = hk_tlm.fields.vip_obc01.fields.current;
+//		wod->volt_3V3 = hk_tlm.fields.vip_obc05.fields.volt;
+//		wod->volt_5V = hk_tlm.fields.vip_obc01.fields.volt;
+//		wod->mcu_temp = hk_tlm.fields.temp;
+//		wod->bat_temp = hk_tlm.fields.temp3;
+//		wod->mcu_temp = hk_tlm.fields.temp;
+//		wod->charging_power = hk_tlm_cdb.fields.batt_input.fields.volt;
+//		wod->consumed_power = hk_tlm_cdb.fields.dist_input.fields.power;
+//		// set all solar panels temp values
+//		uint8_t status;
+//		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_0,&wod->solar_panels[0],&status);
+//		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_1,&wod->solar_panels[1],&status);
+//		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_2,&wod->solar_panels[2],&status);
+//		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_3,&wod->solar_panels[3],&status);
+//		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_4,&wod->solar_panels[4],&status);
+//		IsisSolarPanelv2_getTemperature(ISIS_SOLAR_PANEL_5,&wod->solar_panels[5],&status);
+//	}else
+//		logError(err ,"GetCurrentWODTelemetry");
 
 	int reset=0;
 	err = FRAM_read(&reset,NUMBER_OF_RESETS_ADDR, NUMBER_OF_RESETS_SIZE);
@@ -426,13 +426,13 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 //		wod->rx_rssi = rx_tlm.fields.rssi;
 //	}
 
-	isismepsv2_ivid7_piu__gethousekeepingeng__from_t eps_tlm;
-	err = isismepsv2_ivid7_piu__gethousekeepingeng(EPS_I2C_BUS_INDEX,&eps_tlm);
-	if(err == E_NO_SS_ERR)
-	{
-		wod->payload_current = eps_tlm.fields.vip_obc04.fields.current;
-		wod->payload_volt = eps_tlm.fields.vip_obc04.fields.volt;
-	}
+//	isismepsv2_ivid7_piu__gethousekeepingeng__from_t eps_tlm;
+//	err = isismepsv2_ivid7_piu__gethousekeepingeng(EPS_I2C_BUS_INDEX,&eps_tlm);
+//	if(err == E_NO_SS_ERR)
+//	{
+//		wod->payload_current = eps_tlm.fields.vip_obc04.fields.current;
+//		wod->payload_volt = eps_tlm.fields.vip_obc04.fields.volt;
+//	}
 	GetRandomName(wod->inMemoryOf);
 }
 

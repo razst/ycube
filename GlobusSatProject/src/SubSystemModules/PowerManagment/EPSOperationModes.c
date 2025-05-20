@@ -83,7 +83,7 @@ int PayloadOperations(PayloadOperation status, Boolean forceOn)
 		FRAM_read((unsigned char*)&PayloadState,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 		if(PayloadState == 1){return PAYLOAD_IS_DEAD;}
 
-		if(logError(isismepsv2_ivid7_piu__outputbuschannelon(index, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw3, &response), "Turn on payload channel")){return -1;}
+//		if(logError(isismepsv2_ivid7_piu__outputbuschannelon(index, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw3, &response), "Turn on payload channel")){return -1;}
 
 		//increase the number of sw3 resets
 		unsigned int num_of_resets = 0;
@@ -97,7 +97,7 @@ int PayloadOperations(PayloadOperation status, Boolean forceOn)
 
 	case TurnOff: ;
 		if(!isOn){return PAYLOAD_FALSE_OPERATION;}
-		if(logError(isismepsv2_ivid7_piu__outputbuschanneloff(index, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw3, &response), "Turn off payload channel")){return -1;}
+//		if(logError(isismepsv2_ivid7_piu__outputbuschanneloff(index, isismepsv2_ivid7_piu__imeps_channel__channel_5v_sw3, &response), "Turn off payload channel")){return -1;}
 
 		break;
 
@@ -156,15 +156,16 @@ void Payload_Safety_IN_Maintenance()
 }
 Boolean DoesPayloadChannelOn()
 {
+	return FALSE;
 	uint8_t index = 0;
 	isismepsv2_ivid7_piu__gethousekeepingeng__from_t response;
 
-	if(logError(isismepsv2_ivid7_piu__gethousekeepingeng(index, &response), "get Housekeeping Data - check for payload channel")){return FALSE;}
+//	if(logError(isismepsv2_ivid7_piu__gethousekeepingeng(index, &response), "get Housekeeping Data - check for payload channel")){return FALSE;}
 
-	if(response.fields.vip_obc04.fields.volt > 0 && response.fields.vip_obc04.fields.current > 0 && response.fields.vip_obc04.fields.power > 0)
-	{
-		return TRUE;
-	}
+//	if(response.fields.vip_obc04.fields.volt > 0 && response.fields.vip_obc04.fields.current > 0 && response.fields.vip_obc04.fields.power > 0)
+//	{
+//		return TRUE;
+//	}
 
 	return FALSE;
 }
