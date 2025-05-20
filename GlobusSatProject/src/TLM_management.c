@@ -530,38 +530,38 @@ void printTLM(void* element, tlm_type_t tlmType){
 		//printf("number_of_cmd_resets: %d\n ",data.num_of_cmd_resets);
 
 	}else if (tlmType==tlm_tx){
-		isis_vu_e__get_tx_telemetry__from_t data;
-		offset += (sizeof(unsigned short) * 7);// skip 7 unsigned short fields
-		memcpy(&data.fields.temp_pa,element+offset,sizeof(data.fields.temp_pa));
-		offset += sizeof(data.fields.temp_pa);
-		//printf("pa_temp: %d\n ",data.fields.pa_temp);
-
-		memcpy(&data.fields.temp_board,element+offset,sizeof(data.fields.temp_board));
-		offset += sizeof(data.fields.temp_board);
-		//printf("board_temp: %d\n ",data.fields.board_temp);
+//		isis_vu_e__get_tx_telemetry__from_t data;
+//		offset += (sizeof(unsigned short) * 7);// skip 7 unsigned short fields
+//		memcpy(&data.fields.temp_pa,element+offset,sizeof(data.fields.temp_pa));
+//		offset += sizeof(data.fields.temp_pa);
+//		//printf("pa_temp: %d\n ",data.fields.pa_temp);
+//
+//		memcpy(&data.fields.temp_board,element+offset,sizeof(data.fields.temp_board));
+//		offset += sizeof(data.fields.temp_board);
+//		//printf("board_temp: %d\n ",data.fields.board_temp);
 	}
 	else if (tlmType==tlm_rx){
-		isis_vu_e__get_rx_telemetry__from_t data;
-		offset += (sizeof(unsigned short) * 1);// skip 1 unsigned short fields
-		memcpy(&data.fields.rssi,element+offset,sizeof(data.fields.rssi));
-		offset += sizeof(data.fields.rssi);
-		//printf("rx_rssi: %d\n ",data.fields.rx_rssi);
-
-		memcpy(&data.fields.voltage,element+offset,sizeof(data.fields.voltage));
-		offset += sizeof(data.fields.voltage);
-		//printf("bus_volt: %d\n ",data.fields.bus_volt);
+//		isis_vu_e__get_rx_telemetry__from_t data;
+//		offset += (sizeof(unsigned short) * 1);// skip 1 unsigned short fields
+//		memcpy(&data.fields.rssi,element+offset,sizeof(data.fields.rssi));
+//		offset += sizeof(data.fields.rssi);
+//		//printf("rx_rssi: %d\n ",data.fields.rx_rssi);
+//
+//		memcpy(&data.fields.voltage,element+offset,sizeof(data.fields.voltage));
+//		offset += sizeof(data.fields.voltage);
+//		//printf("bus_volt: %d\n ",data.fields.bus_volt);
 	}
 	else if (tlmType==tlm_eps_raw_cdb){
-		isismepsv2_ivid7_piu__gethousekeepingrawincdb__from_t data;
-			offset += (sizeof(isismepsv2_ivid7_piu__replyheader_t));// skip 1 unsigned short fields
-			offset += (sizeof(uint8_t));// skip 1 unsigned short fields
-			memcpy(&data.fields.volt_brdsup ,element+offset,sizeof(data.fields.volt_brdsup));
-			offset += sizeof(data.fields.volt_brdsup);
-			//printf("volt_brdsup: %d\n ",data.fields.volt_brdsup);
-
-			memcpy(&data.fields.temp,element+offset,sizeof(data.fields.temp));
-			offset += sizeof(data.fields.temp);
-			//printf("temp: %d\n ",data.fields.temp);
+//		isismepsv2_ivid7_piu__gethousekeepingrawincdb__from_t data;
+//			offset += (sizeof(isismepsv2_ivid7_piu__replyheader_t));// skip 1 unsigned short fields
+//			offset += (sizeof(uint8_t));// skip 1 unsigned short fields
+//			memcpy(&data.fields.volt_brdsup ,element+offset,sizeof(data.fields.volt_brdsup));
+//			offset += sizeof(data.fields.volt_brdsup);
+//			//printf("volt_brdsup: %d\n ",data.fields.volt_brdsup);
+//
+//			memcpy(&data.fields.temp,element+offset,sizeof(data.fields.temp));
+//			offset += sizeof(data.fields.temp);
+//			//printf("temp: %d\n ",data.fields.temp);
 		}
 #endif
 }

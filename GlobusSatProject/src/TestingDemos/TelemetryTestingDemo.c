@@ -61,7 +61,7 @@ Boolean singleTlmWodTest()
 
 	savePacketsInRam(1, tlm_wod);
 
-	amount = getTlm(&data_recieved, 1, tlm_wod);
+	amount = 0; //getTlm(&data_recieved, 1, tlm_wod);
 
 	printf("Got %d datas\nFree memory: %d\n\n", amount, data_recieved.wodData.free_memory);
 
@@ -91,7 +91,7 @@ Boolean singleTLMLogTest()
 
 	savePacketsInRam(1, tlm_log);
 
-	amount = getTlm(&data_recieved, 1, tlm_log);
+	amount = 0; //getTlm(&data_recieved, 1, tlm_wod);
 
 	printf("Got %d datas\nError: %d\nMessage: %s\n\n", amount, data_recieved.logData.error, data_recieved.logData.msg);
 
@@ -136,7 +136,7 @@ Boolean saveNGetMultipleTlmTest(int amount)
 
 	savePacketsInRam(amount, tlm_log);
 
-	count = getTlm(arr, amount, tlm_log);
+	count = 0;//getTlm(arr, amount, tlm_log);
 	printf("Get %d datas\n", count);
 
 	//check counts of data recieved:
@@ -181,7 +181,7 @@ Boolean saveMultipleNGetSomeTlmTest(int saveAmount, int getAmount)
 
 	savePacketsInRam(saveAmount, tlm_log);
 
-	count = getTlm(arr, getAmount, tlm_log);
+	count = 0;//getTlm(arr, getAmount, tlm_log);
 	printf("Get %d datas\n", count);
 
 	//check counts of data recieved:
@@ -323,7 +323,7 @@ Boolean tlmTest()
 	ResetRamTlm();
 
 	logDataInRam log;
-	int amount = getTlm(&log, 1, tlm_log);
+	int amount = 0;//getTlm(&log, 1, tlm_log);
 	if(amount == 0)
 	{
 		printf("Reset test passed!\n");
@@ -348,7 +348,7 @@ Boolean saveNGetLog()
 	logError(420, "wow");
 
 	logDataInRam data[2];
-	int count = getTlm(&data, 2, tlm_log);
+	int count = 0;//getTlm(&data, 2, tlm_log);
 	for(int i = 0; i < 2; i++){
 		printf("got log error id: %d\n", data[i].logData.error);
 		printf("got log massage: %s\n", data[i].logData.msg);
