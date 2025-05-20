@@ -148,8 +148,8 @@ int InitTrxvu() {
 	myTRXVUAddress.addressVu_tc = I2C_TRXVU_TC_ADDR;
 
 	//Buffer definition
-    myTRXVU[0].maxSendBufferLength = MAX_COMMAND_DATA_LENGTH;
-    myTRXVU[0].maxReceiveBufferLength = MAX_COMMAND_DATA_LENGTH;
+//    myTRXVU[0].maxSendBufferLength = MAX_COMMAND_DATA_LENGTH;
+//    myTRXVU[0].maxReceiveBufferLength = MAX_COMMAND_DATA_LENGTH;
 
 	//Bitrate definition
 	ISIStrxvuBitrate myTRXVUBitrates;
@@ -468,7 +468,7 @@ int SetIdleState(ISIStrxvuIdleState state, time_unix duration){
 		logError(INFO_MSG,"Idel ON\n");
 		// set idle end time
 		g_idle_end_time = curr_tick_time + duration;
-	} else if (err == E_NO_SS_ERR && state == isis_vu_e__onoff__off){
+	} else if (err == E_NO_SS_ERR && state == trxvu_idle_state_off){
 		logError(INFO_MSG,"Idel OFF\n");
 	}
 	return err;

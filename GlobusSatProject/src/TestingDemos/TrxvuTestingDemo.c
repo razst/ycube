@@ -84,7 +84,7 @@ Boolean TestTrxvuLogic()
 	printf("\nPlease sleep tick time (100 to 100,000)\n");
 	while(UTIL_DbguGetIntegerMinMax((unsigned int*)&sleep,100,100000) == 0);
 
-	err = isis_vu_e__set_bitrate(0, isis_vu_e__bitrate__9600bps);
+	err = IsisTrxvu_tcSetAx25Bitrate(0, trxvu_bitrate_9600);
 
 	while(times > 0)
 	{
@@ -183,14 +183,14 @@ Boolean TestTransmitSplPacket()
 		Time_getUnixEpoch(&curr_time);
 
 		time_unix end_time = MINUTES_TO_SECONDS(minutes) + curr_time;
-		isis_vu_e__get_tx_telemetry_last__from_t tlm;
-		isis_vu_e__get_tx_telemetry_last(ISIS_TRXVU_I2C_BUS_INDEX,&tlm);
+		ISIStrxvuTxTelemetry  tlm;
+		IsisTrxvu_tcGetLastTxTelemetry(ISIS_TRXVU_I2C_BUS_INDEX,&tlm);
 		while(end_time > curr_time)
 		{
-			isis_vu_e__get_tx_telemetry_last(ISIS_TRXVU_I2C_BUS_INDEX,&tlm);
-			if(tlm.fields.temp_board >=60)
+			IsisTrxvu_tcGetLastTxTelemetry(ISIS_TRXVU_I2C_BUS_INDEX,&tlm);
+			if(tlm.fields.board_temp >=60)
 				break;
-			printf("board temperature: %d\n",tlm.fields.temp_board);
+			printf("board temperature: %d\n",tlm.fields.board_temp);
 			Time_getUnixEpoch(&curr_time);
 
 			TransmitSplPacket(&packet,NULL);
@@ -369,7 +369,7 @@ Boolean TestGetNumberOfFramesInBuffer()
 Boolean TestSetTrxvuBitrate()
 {
 	int err = 0;
-	isis_vu_e__bitrate_t bitrate = 0;
+	ISIStrxvuBitrate  bitrate = 0;
 	unsigned int index = 0;
 	printf("Choose bitrate:\n \t(0)Cancel\n\t(1) = 1200\n\t(2) = 2400\n\t(3) = 4800\n\t(4) = 9600\n");
 
@@ -380,20 +380,20 @@ Boolean TestSetTrxvuBitrate()
 	case 0:
 		break;
 	case 1:
-		bitrate = isis_vu_e__bitrate__1200bps;
+		bitrate = trxvu_bitrate_1200;
 		break;
 	case 2:
-		bitrate = isis_vu_e__bitrate__2400bps;
+		bitrate = trxvu_bitrate_2400;
 			break;
 	case 3:
-		bitrate = isis_vu_e__bitrate__4800bps;
+		bitrate = trxvu_bitrate_4800;
 			break;
 	case 4:
-		bitrate = isis_vu_e__bitrate__9600bps;
+		bitrate = trxvu_bitrate_9600;
 			break;
 	}
 
-	err = isis_vu_e__set_bitrate(ISIS_TRXVU_I2C_BUS_INDEX,bitrate);
+	err = IsisTrxvu_tcSetAx25Bitrate(ISIS_TRXVU_I2C_BUS_INDEX,bitrate);
 	if(0 != err){
 		printf("error in 'IsisTrxvu_tcSetAx25Bitrate' = %d",err);
 		return TRUE;

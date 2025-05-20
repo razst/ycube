@@ -206,17 +206,17 @@ void TelemetrySaveEPS()
 void TelemetrySaveTRXVU()
 {
 
-		isis_vu_e__get_tx_telemetry__from_t tx_tlm;
+		ISIStrxvuTxTelemetry tx_tlm;
 
-		if (logError(isis_vu_e__get_tx_telemetry(ISIS_TRXVU_I2C_BUS_INDEX, &tx_tlm) ,"TelemetrySaveTRXVU-IsisTrxvu_tcGetTelemetryAll")== 0)
+		if (logError(IsisTrxvu_tcGetTelemetryAll(ISIS_TRXVU_I2C_BUS_INDEX, &tx_tlm) ,"TelemetrySaveTRXVU-IsisTrxvu_tcGetTelemetryAll")== 0)
 		{
 			write2File(&tx_tlm , tlm_tx);
 		}
 
 
-		isis_vu_e__get_rx_telemetry__from_t rx_tlm;
+		ISIStrxvuRxTelemetry  rx_tlm;
 
-		if (logError(isis_vu_e__get_rx_telemetry(ISIS_TRXVU_I2C_BUS_INDEX, &rx_tlm) ,"TelemetrySaveTRXVU-IsisTrxvu_rcGetTelemetryAll") == 0)
+		if (logError(IsisTrxvu_rcGetTelemetryAll(ISIS_TRXVU_I2C_BUS_INDEX, &rx_tlm) ,"TelemetrySaveTRXVU-IsisTrxvu_rcGetTelemetryAll") == 0)
 		{
 			write2File(&rx_tlm , tlm_rx);
 		}
@@ -225,10 +225,10 @@ void TelemetrySaveTRXVU()
 
 void TelemetrySaveANT()
 {
-	isis_ants__get_all_telemetry__from_t ant_tlm;
-	if(logError(isis_ants__get_all_telemetry(0,&ant_tlm) ,"TelemetrySaveANT-IsisAntS_getAlltelemetry-A" )==0){
-		write2File(&ant_tlm , tlm_antenna);
-	}
+//	isis_ants__get_all_telemetry__from_t ant_tlm;
+//	if(logError(isis_ants__get_all_telemetry(0,&ant_tlm) ,"TelemetrySaveANT-IsisAntS_getAlltelemetry-A" )==0){
+//		write2File(&ant_tlm , tlm_antenna);
+//	}
 }
 
 void TelemetrySaveSolarPanels()
@@ -286,7 +286,7 @@ void TelemetrySaveRADFET()
     PayloadEnvironmentData radfet;
     SoreqResult result = payloadReadEnvironment(&radfet);
 
-    if (result == PAYLOAD_SUCCESS) {
+    if (result == 1) { //TODO update to enum
         printf("payloadReadEnvironment: SUCCESS\n");
         printf("  RADFET Voltage 1: %d (0x%X)\n",
         		radfet.adc_conversion_radfet1,
@@ -315,7 +315,7 @@ void TelemetrySavePayloadEvents()
 
     PayloadEventData event_data;
     SoreqResult result = payloadReadEvents(&event_data);
-    if (result == PAYLOAD_SUCCESS) {
+    if (result == 1) { // TODO update to enum
         printf("payloadReadEvents: SUCCESS\n");
 
 		printf("time=%d\r\n",event_data.time);
@@ -408,23 +408,23 @@ void GetCurrentWODTelemetry(WOD_Telemetry_t *wod)
 	FRAM_read((unsigned char*)&wod->isPayloadDisable,PAYLOAD_IS_DEAD_ADDR,PAYLOAD_IS_DEAD_SIZE);
 
 
-	isis_vu_e__get_tx_telemetry__from_t tx_tlm;
-	err = isis_vu_e__get_tx_telemetry(ISIS_TRXVU_I2C_BUS_INDEX, &tx_tlm);
+	ISIStrxvuTxTelemetry  tx_tlm;
+	err = IsisTrxvu_tcGetTelemetryAll(ISIS_TRXVU_I2C_BUS_INDEX, &tx_tlm);
 	if(err == E_NO_SS_ERR)
 	{
-		wod->tx_forward_power = tx_tlm.fields.forward_power;
-		wod->tx_reflected_power = tx_tlm.fields.reflected_power;
-		wod->pa_temp = tx_tlm.fields.temp_pa;
-		wod->board_temp = tx_tlm.fields.temp_board;
+//		wod->tx_forward_power = tx_tlm.fields.forward_power;
+//		wod->tx_reflected_power = tx_tlm.fields.reflected_power;
+//		wod->pa_temp = tx_tlm.fields.temp_pa;
+//		wod->board_temp = tx_tlm.fields.temp_board;
 	}
 
-	isis_vu_e__get_rx_telemetry__from_t rx_tlm;
-	isis_vu_e__get_rx_telemetry(ISIS_TRXVU_I2C_BUS_INDEX, &rx_tlm);
-	if(err == E_NO_SS_ERR)
-	{
-		wod->rx_doppler = rx_tlm.fields.doppler;
-		wod->rx_rssi = rx_tlm.fields.rssi;
-	}
+//	isis_vu_e__get_rx_telemetry__from_t rx_tlm;
+//	isis_vu_e__get_rx_telemetry(ISIS_TRXVU_I2C_BUS_INDEX, &rx_tlm);
+//	if(err == E_NO_SS_ERR)
+//	{
+//		wod->rx_doppler = rx_tlm.fields.doppler;
+//		wod->rx_rssi = rx_tlm.fields.rssi;
+//	}
 
 	isismepsv2_ivid7_piu__gethousekeepingeng__from_t eps_tlm;
 	err = isismepsv2_ivid7_piu__gethousekeepingeng(EPS_I2C_BUS_INDEX,&eps_tlm);

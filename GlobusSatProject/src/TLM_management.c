@@ -352,11 +352,11 @@ void getTlmTypeInfo(tlm_type_t tlmType, char* endFileName, int* structSize){
 
 	if (tlmType==tlm_tx){
 		memcpy(endFileName,END_FILE_NAME_TX,sizeof(END_FILE_NAME_TX));
-		*structSize = sizeof(isis_vu_e__get_tx_telemetry__from_t);
+		*structSize = sizeof(ISIStrxvuTxTelemetry );
 	}
 	else if (tlmType==tlm_rx){
 		memcpy(endFileName,END_FILE_NAME_RX,sizeof(END_FILE_NAME_RX));
-		*structSize = sizeof(isis_vu_e__get_rx_telemetry__from_t);
+		*structSize = sizeof(ISIStrxvuRxTelemetry );
 	}
 	else if (tlmType==tlm_antenna){
 		memcpy(endFileName,END_FILE_NAME_ANTENNA,sizeof(END_FILE_NAME_ANTENNA));
