@@ -21,7 +21,8 @@
 #define SIZE_RXFRAME 200
 #define SIZE_TXFRAME 235
 
-#define BEACON_SPL_ID	0x0CFFFFFF
+//#define BEACON_SPL_ID	0x0CFFFFFF changed to sat id 13 so we won't interfere with real sat 12 from space
+#define BEACON_SPL_ID	0x0DFFFFFF
 
 #define TX_FREQUENCY  436400
 #define RX_FREQUENCY  145970
