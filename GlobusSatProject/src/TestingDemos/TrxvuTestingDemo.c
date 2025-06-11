@@ -625,7 +625,41 @@ Boolean TestGetTrxvuBitrate()
 //	}
 	return TRUE;
 }
+int PingCMDTest()
+{
+	SendAckPacket(ACK_PING, cmd,NULL,0);
+	return TRUE;
+}
 
+int CMDTestGetBeaconInterval()
+{
+	sat_packet_t cmd;
+	cmd.ID = 1;
+	cmd.cmd_type = trxvu_cmd_type;
+	cmd.cmd_subtype = GET_BEACON_INTERVAL;
+	cmd.length = 0;
+	int err;
+	err = ActUponCommand(&cmd);
+	printf("result: %d", err);
+	return TRUE;
+}
+int CMDTestSetBeaconInterval()
+{
+	unsigned short Interval;
+	printf("pls enter how much time should pass between beacons in sec (between 1-20 anything else will cancel)");
+	scanf("%hu", &Interval);
+	if(!(Interval > 1 && Interval < 20)){return FALSE;}
+	sat_packet_t cmd;
+	cmd.ID = 1;
+	cmd.cmd_type = trxvu_cmd_type;
+	cmd.cmd_subtype = SET_BEACON_INTERVAL;
+	cmd.length = sizeof(Interval);
+	memcpy(&cmd.data, &Interval, sizeof(Interval));
+	int err;
+	err = ActUponCommand(&cmd);
+	printf("result: %d", err);
+	return TRUE;
+}
 Boolean TestTransmitDataAsSPL_Packet()
 {
 	sat_packet_t cmd = {0};
@@ -677,8 +711,12 @@ Boolean selectAndExecuteTrxvuDemoTest()
 	printf("\t 21) haash test for Secured CMD\n\r");
 	printf("\t 22) dummy Secured CMD\n\r");
 	printf("\t 23) Secured CMD test \n\r");
+	printf("\t 24) Ping cmd\n\r");
+	printf("\t 25) Get beacon intervals\n\r");
+	printf("\t 26) Set beacon intervals\n\r");
+	printf("\t 27) idle mode cmd\n\r");
 
-	unsigned int number_of_tests = 23;
+	unsigned int number_of_tests = 27;
 	while(UTIL_DbguGetIntegerMinMax(&selection, 0, number_of_tests) == 0);
 
 	switch(selection) {
@@ -753,6 +791,18 @@ Boolean selectAndExecuteTrxvuDemoTest()
 		break;
 	case 23:
 		offerMoreTests = Secured_CMD_TEST();
+		break;
+	case 24:
+		offerMoreTests = PingCMDTest();
+		break;
+	case 25:
+		offerMoreTests = CMDTestGetBeaconInterval();
+		break;
+	case 26:
+		offerMoreTests = CMDTestSetBeaconInterval();
+		break;
+	case 27:
+		offerMoreTests = FALSE;
 		break;
 	default:
 		break;
