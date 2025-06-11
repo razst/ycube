@@ -568,17 +568,38 @@ Boolean TestForDummy_sat_packet()
 Boolean Secured_CMD_TEST()
 {
 	sat_packet_t cmd;
-	//unsigned int passcode;
-	char hash[Max_Hash_size + 9]; //9 added for breathing space
-	cmd.ID = 2;
+	//typedef unsigned char BYTE;  // For clarity
+
+    char pass[100];        // Buffer for input password string
+    unsigned char first8[8];
+    unsigned char hashed[SHA256_BLOCK_SIZE];
+
+    printf("What is the password? \n");
+    scanf("%99s", pass);    // Read a string safely, max 99 chars + '\0'
+
+    strcat(pass, "1");      // Append character '1' to the password string
+
+    Hash256((BYTE*)pass, hashed);  // Hash the password string
+
+    memcpy(first8, hashed, 8);     // Copy first 8 bytes of hash
+
+    // Just printing the first8 bytes as hex for confirmation
+    printf("First 8 bytes of hash: ");
+    for (int i = 0; i < 8; i++) {
+        printf("%02x ", first8[i]);
+    }
+    printf("\n");
+	
+	cmd.ID = 1;
 	cmd.cmd_type = trxvu_cmd_type;
-	cmd.cmd_subtype = 0xC4;
-	cmd.length = Max_Hash_size * 2;//* 2 added bc I keep switching the hash (makes it easyer)
-	unsigned int one = 1;
-	sprintf(hash, "%s", "6f4b661212345678");
-	memcpy(&cmd.data, &hash, Max_Hash_size);
+	cmd.cmd_subtype = 0xC4;//secured cmd
+	cmd.length = Max_Hash_size ;//
+	unsigned int one = 0;
+	unsigned int password = 1111;
+
+	memcpy(cmd.data, first8, Max_Hash_size);
 	FRAM_write((unsigned char*)&one, CMD_ID_ADDR, CMD_ID_SIZE);
-	FRAM_write((unsigned char*)&one,  CMD_PASSWORD_ADDR, CMD_PASSWORD_SIZE);
+	FRAM_write((unsigned char*)&password,  CMD_PASSWORD_ADDR, CMD_PASSWORD_SIZE);
 	int err;
 	err = ActUponCommand(&cmd);
 
