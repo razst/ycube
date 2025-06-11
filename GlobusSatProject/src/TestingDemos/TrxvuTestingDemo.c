@@ -627,6 +627,11 @@ Boolean TestGetTrxvuBitrate()
 }
 int PingCMDTest()
 {
+	sat_packet_t cmd;
+	cmd.ID = 1;
+	cmd.cmd_type = trxvu_cmd_type;
+	cmd.cmd_subtype = PING;
+	cmd.length = 0;
 	SendAckPacket(ACK_PING, cmd,NULL,0);
 	return TRUE;
 }
