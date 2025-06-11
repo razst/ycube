@@ -625,6 +625,12 @@ Boolean TestGetTrxvuBitrate()
 //	}
 	return TRUE;
 }
+
+Boolean P(sat_packet_t *cmd)
+{
+SendAckPacket(ACK_PING, cmd,NULL,0);
+return TRUE;
+}
 int PingCMDTest()
 {
 	sat_packet_t cmd;
@@ -632,7 +638,7 @@ int PingCMDTest()
 	cmd.cmd_type = trxvu_cmd_type;
 	cmd.cmd_subtype = PING;
 	cmd.length = 0;
-	SendAckPacket(ACK_PING, cmd,NULL,0);
+	P(&cmd);
 	return TRUE;
 }
 
@@ -651,9 +657,9 @@ int CMDTestGetBeaconInterval()
 int CMDTestSetBeaconInterval()
 {
 	unsigned short Interval;
-	printf("pls enter how much time should pass between beacons in sec (between 1-20 anything else will cancel)");
+	printf("pls enter how much time should pass between beacons in sec (between 1-20 anything else will cancel)\n");
 	scanf("%hu", &Interval);
-	if(!(Interval > 1 && Interval < 20)){return FALSE;}
+	if (Interval < 1 || Interval > 20) { return FALSE; }
 	sat_packet_t cmd;
 	cmd.ID = 1;
 	cmd.cmd_type = trxvu_cmd_type;
